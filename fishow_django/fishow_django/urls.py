@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
-urlpatterns = (
+urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('api-auth/', include('rest_framework.urls')),
@@ -25,4 +25,4 @@ urlpatterns = (
     path('api/rest-auth/registration/', include('rest_auth.registrations.urls')),
     # url(r'^rest-auth/', include('rest_auth.urls')),
     # url(r'^rest-auth/registration/', include('rest_auth.registration.urls'))
-)
+]
