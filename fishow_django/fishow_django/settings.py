@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
     'rest_auth',
     'rest_auth.registration',
-
+    'bootstrap4',
     'crispy_forms',
     'users'
 ]
@@ -124,7 +124,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_URL = 'accounts/login/'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
