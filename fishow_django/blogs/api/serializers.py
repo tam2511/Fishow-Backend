@@ -23,6 +23,8 @@ class CommentSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         return instance.voters.filter(pk=request.user.pk).exists()
 
+    def get_comments_slug(self, instance):
+        return instance.blog.slug
 
 class BlogSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
