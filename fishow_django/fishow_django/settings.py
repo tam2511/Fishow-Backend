@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'bootstrap4',
     'crispy_forms',
-    'users'
+    'users',
+    'blogs'
 ]
 
 MIDDLEWARE = [
