@@ -27,3 +27,12 @@ class CommentCreateAPIView(generics.CreateAPIView):
         kwarg_slug = self.kwargs.get("slug")
         blog = get_object_or_404(Blog, slug=kwarg_slug)
         serializer.save(author=request_user, blog=blog)
+
+
+class CommentListAPIView(generics.ListAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        kwarg_slug = self.kwargs.get("slug")
+        return Comment.objects.filter(blog__slug=kwarg_slug).order_by("-created_at")
