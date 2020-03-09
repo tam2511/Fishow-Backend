@@ -6,5 +6,8 @@ router = DefaultRouter()
 router.register(r"blogs", qv.BlogViewSet)
 
 urlpatterns = [
-    path("", include(router.urls))
+    path("", include(router.urls)),
+    path("blogs/<slug:slug>/comments/",
+         qv.CommentCreateAPIView.as_view(),
+         name="create-comments")
 ]

@@ -7,20 +7,24 @@ class CommentSerializer(serializers.ModelSerializer):
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     user_has_voted = serializers.SerializerMethodField()
+    comments_slug = serializers.SerializerMethodField()
 
     class Meta:
         model = Comments
         exclude = ['blog', 'voters', 'updated_at']
 
     def get_created_at(self, instance):
-        return instance.created_at.strftime("%B %d %Y")
+        return instance.created_at.strftime("%B %d, %Y")
 
-    def get_created_count(self, instance):
+    def get_likes_count(self, instance):
         return instance.voters.count()
 
     def get_user_has_voted(self, instance):
         request = self.context.get("request")
         return instance.voters.filter(pk=request.user.pk).exists()
+
+    def get_comments_slug(self, instance):
+        return instance.comments.slug
 
 
 class BlogSerializer(serializers.ModelSerializer):
@@ -35,7 +39,7 @@ class BlogSerializer(serializers.ModelSerializer):
         exclude = ['updated_at']
 
     def get_created_at(self, instance):
-        return instance.created_at.strftime("%B %d %Y")
+        return instance.created_at.strftime("%B %d, %Y")
 
     def get_comments_count(self, instance):
         return instance.comments.count()
