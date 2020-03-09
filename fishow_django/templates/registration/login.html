@@ -1,13 +1,15 @@
 {% extends 'auth_layout.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h1>Login</h1>
+
+<h1>Fishow Django-REST-VUE</h1>
 <div class="login-from-container">
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class="btn btn-sm btn-outline-primary">Login</button>
     </form>
+    <p class="mt-2">Or <a href="{% url 'django_registration_register' %}">Create an Account</a></p>
 </div>
 
 {% endblock %}
