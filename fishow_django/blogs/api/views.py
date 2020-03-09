@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from blogs.api.serializers import BlogSerializer, CommentSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly
-from blogs.models import Blog, Comments
+from blogs.models import Blog, Comment
 
 
 class BlogViewSet(viewsets.ModelViewSet):
@@ -18,7 +18,7 @@ class BlogViewSet(viewsets.ModelViewSet):
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
-    queryset = Comments.objects.all()
+    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
 

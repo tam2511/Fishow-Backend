@@ -17,7 +17,7 @@ class Blog(models.Model):
         return self.content
 
 
-class Comments(models.Model):
+class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     body = models.TextField()

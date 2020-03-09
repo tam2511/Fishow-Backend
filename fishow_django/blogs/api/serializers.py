@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from blogs.models import Blog, Comments
+from blogs.models import Blog, Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -10,7 +10,7 @@ class CommentSerializer(serializers.ModelSerializer):
     comments_slug = serializers.SerializerMethodField()
 
     class Meta:
-        model = Comments
+        model = Comment
         exclude = ['blog', 'voters', 'updated_at']
 
     def get_created_at(self, instance):
@@ -22,9 +22,6 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_user_has_voted(self, instance):
         request = self.context.get("request")
         return instance.voters.filter(pk=request.user.pk).exists()
-
-    def get_comments_slug(self, instance):
-        return instance.comments.slug
 
 
 class BlogSerializer(serializers.ModelSerializer):
