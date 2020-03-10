@@ -3,7 +3,7 @@
         <div class="rd-navbar-main-container container">
             <!-- RD Navbar Brand-->
             <div class="rd-navbar-brand">
-                <router-link class="brand fishow_logo" to="./">Fishow</router-link>
+                <router-link class="brand fishow_logo" to="/">Fishow</router-link>
             </div>
             <!-- RD Navbar Nav-->
             <ul class="rd-navbar-nav">

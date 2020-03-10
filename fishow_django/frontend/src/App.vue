@@ -18,7 +18,10 @@
 </script>
 
 <style lang="scss">
-
+@import "assets/css/style.css";
+@import "assets/css/customStyles.css";
+@import "assets/css/bootstrap.css";
+@import "assets/css/fishowStyles.css";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
