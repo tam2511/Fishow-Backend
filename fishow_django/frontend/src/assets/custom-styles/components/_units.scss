@@ -1,0 +1,86 @@
+/*
+*
+* Responsive units
+*/
+
+
+@include unit-responsive($grid-breakpoints, 20px, 30px);
+
+//
+// Unit Spacing
+//
+.unit-spacing-xs {
+  @include unit-spacing($grid-breakpoints, 7px, 15px)
+}
+
+.unit-spacing-lg {
+  @include unit-responsive($grid-breakpoints, 30px, 30px);
+}
+
+.unit-bordered {
+  @include spacingX(30px);
+
+  > * {
+    position: relative;
+    vertical-align: middle;
+    min-width: 100px;
+
+    &:not(:last-child) {
+      &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        max-height: 45px;
+        top: 50%;
+        transform: translate3d(0, -50%, 0);
+        right: 0;
+        width: 1px;
+        background: $gray-800;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .unit-left {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0;
+
+    > * + * { margin-left: 15px; }
+  }
+
+  p {
+    display: inline;
+    width: auto;
+  }
+
+  .brand {
+    max-width: 87px;
+  }
+
+  // Medium ≥768px
+  @include media-breakpoint-between(md, lg) {
+    .brand {
+      max-width: 60px;
+    }
+  }
+}
+
+// Medium ≥768px
+@include media-breakpoint-up(xl) {
+  .unit-bordered {
+    @include spacingX(60px);
+  }
+}
+
+%context-dark {
+  .unit-bordered {
+    > * {
+      &:not(:last-child) {
+        &::after {
+          background: rgba($white, .16);
+        }
+      }
+    }
+  }
+}

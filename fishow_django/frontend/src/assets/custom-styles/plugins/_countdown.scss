@@ -1,0 +1,220 @@
+//
+// Countdown
+//
+
+
+//
+// Sport of Contents:
+//
+// Countdown Classic
+// Countdown Bordered
+//
+
+
+
+.countdown-section {
+  .countdown-amount {
+  }
+
+  .countdown-period {
+  }
+}
+
+//
+// Countdown Classic
+//
+
+.countdown-classic {
+  white-space: nowrap;
+
+  .countdown-section {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+    min-width: 65px;
+    text-align: center;
+
+    &:not(:first-child) {
+      &::before {
+        display: inline-block;
+        content: '';
+        position: absolute;
+        top: 48%;
+        left: -3px;
+        background-image: url(jetbrains://web-storm/navigate/reference?project=vue-project&path=icebox/src/images/dot.svg);
+        background-repeat: no-repeat;
+        background-position: 50%;
+        height: 21px;
+        width: 7px;
+        transform: translate3d(0, -45%, 0);
+        color: $gray-9;
+      }
+    }
+  }
+
+  .countdown-amount,
+  .countdown-period {
+    display: block;
+    font-family: $font-family-sec;
+    text-transform: uppercase;
+  }
+
+  .countdown-amount {
+    font-size: 27px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: .1em;
+    color: $primary;
+  }
+
+  .countdown-period {
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: .025em;
+  }
+}
+
+.countdown-classic-sm {
+
+  .countdown-section {
+
+    padding: 0 5px;
+    min-width: 60px;
+
+    &:not(:first-child) {
+      &::before {
+        background-size: 6px 15px;
+      }
+    }
+  }
+
+  .countdown-amount {
+    font-size: 20px;
+  }
+
+  .countdown-period {
+    font-size: 9px;
+    letter-spacing: .075em;
+  }
+}
+
+// Medium ≥576px
+@include media-breakpoint-up(sm) {
+
+  .countdown-classic {
+
+    .countdown-section {
+      padding: 0 15px;
+    }
+  }
+
+  .countdown-classic-sm {
+
+    .countdown-section {
+      padding: 0 10px;
+    }
+  }
+}
+
+// Extra large ≥1200px
+@include media-breakpoint-up(xl) {
+
+  .countdown-classic {
+
+    .countdown-section {
+      min-width: 78px;
+    }
+
+    .countdown-amount {
+      font-size: 33px;
+    }
+  }
+
+  .countdown-classic-sm {
+
+    .countdown-section {
+      min-width: 60px;
+    }
+
+    .countdown-amount {
+      font-size: 24px;
+    }
+  }
+}
+
+//
+// Countdown Bordered
+//
+
+.countdown-bordered {
+  display: inline-block;
+  white-space: nowrap;
+  margin-left: -14px;
+  margin-right: -16px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+
+  .countdown-section {
+    display: inline-block;
+    padding: 0 16px 0 10px;
+    text-align: center;
+
+    &:not(:first-child) {
+      border-left: 1px solid $gray-3;
+    }
+  }
+
+  .countdown-amount,
+  .countdown-period {
+    display: block;
+  }
+
+  .countdown-amount {
+    color: $gray-800;
+    min-width: 30px;
+    padding-right: 8px;
+  }
+}
+
+// Small <576px
+@include media-breakpoint-down(xs) {
+  .countdown-bordered {
+    .countdown-period {
+      font-size: 14px;
+      margin-top: 3px;
+    }
+  }
+}
+
+// Medium ≥576px
+@include media-breakpoint-up(sm) {
+
+  .countdown-bordered {
+    .countdown-amount,
+    .countdown-period {
+      display: inline-block;
+    }
+  }
+}
+
+// Large ≥992px
+@include media-breakpoint-up(lg) {
+
+  .countdown-bordered {
+    margin-left: -20px;
+    margin-right: -22px;
+    font-size: 18px;
+
+    .countdown-section {
+      padding: 0 22px 0 16px;
+    }
+
+    .countdown-amount {
+      min-width: 34px;
+    }
+  }
+}

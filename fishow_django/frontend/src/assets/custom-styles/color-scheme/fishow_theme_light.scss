@@ -1,0 +1,25 @@
+$color-base-default: #FFFFFF;
+$color-base-accent: #ffcc00;
+$color-base-border: #000000;
+
+$color-base-base: #000000;
+$color-base-secondary: rgba(0,0,0, 0.6);
+$color-base-additional: rgba(0,0,0, 0.3);
+$color-base-path: #3f90dc;
+
+.fishow_theme_light {
+
+  /* Цвета блоков */
+  --color-bg-default:  #FFFFFF; /* Цвет дефолта */
+  --color-bg-accent: #ffcc00; /* Цвет акцентный */
+  --color-bg-border: #000000; /* Цвет границ */
+
+  /* Цвета текста */
+  --color-typo-primary: #3f90dc; /* Цвет основного текста */
+  --color-typo-secondary: rgba(0,0,0, 0.6); /* Цвет второстепенного текста */
+  --color-typo-additional:  rgba(0,0,0, 0.3); /* Цвет брендового текста */
+  --color-link: #0077ff; /* Цвет основной ссылки */
+  --color-link-hover: color(#0077ff l(-7%));
+  --color-typo-ghost: color(#0077ff a(30%));
+
+}

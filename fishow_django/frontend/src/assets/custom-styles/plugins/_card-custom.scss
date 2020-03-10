@@ -1,0 +1,560 @@
+//
+// Cards custom styles
+// 
+
+// Light
+//
+$accordion-corporate-color: $gray-700;
+$accordion-corporate-background: $white;
+$accordion-corporate-border: #dedede;
+$accordion-corporate-content-color: $body-color;
+$accordion-corporate-arrow-color: $white;
+$accordion-corporate-arrow-background: $primary;
+$accordion-corporate-shadow: -1px 2px 5px 0px rgba(#444953, 0.12);
+$accordion-corporate-border-radius: 6px;
+$accordion-corporate-header-padding: 21px 82px 21px 32px;
+$accordion-corporate-content-padding: 25px 44px 25px nth($accordion-corporate-header-padding, 4);
+
+// Card groups
+.card-group-custom {
+  margin-bottom: 0;
+
+  .card-header + .collapse > .card-body,
+  .card-header + .collapse > .list-group {
+    border-top: 0;
+  }
+
+  .card + .card {
+    margin-top: 0;
+    border-top: 1px solid $gray-1;
+  }
+}
+
+.card-group-custom.card-group-corporate {
+  .card + .card {
+    margin-top: 30px;
+  }
+}
+
+.card-custom {
+  display: block;
+  margin: 0;
+  background: inherit;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  a {
+    display: block;
+  }
+
+  // Card heading
+  .card-header {
+    padding: 0;
+    border-bottom: 0;
+    border-top-radius: 0;
+  }
+
+  // Card contents
+  .card-body {
+    padding: 0;
+    border: 0;
+  }
+}
+
+// Card corporate
+.card-corporate {
+  text-align: left;
+  box-shadow: $accordion-corporate-shadow;
+  .card-title {
+    margin-bottom: 0;
+  }
+  .card-title a,
+  .card-body {
+    background: $accordion-corporate-background;
+  }
+
+  .card-title a {
+    position: relative;
+    z-index: 1;
+    padding: $accordion-corporate-header-padding;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: 0;
+    color: $accordion-corporate-color;
+    transition: 1.3s all ease;
+    border-radius: $accordion-corporate-border-radius $accordion-corporate-border-radius 0 0;
+    border-bottom: 1px solid $accordion-corporate-border;
+
+    // Open state
+    .card-arrow {
+      &:after {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    // Collapsed state
+    &.collapsed {
+      border-radius: $accordion-corporate-border-radius;
+      border-bottom-width: 0;
+
+      .card-arrow {
+        border-radius: 0 $accordion-corporate-border-radius $accordion-corporate-border-radius 0;
+        &:after {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  // Card arrow
+  .card-arrow {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    right: -1px;
+    z-index: 2;
+    width: 70px;
+    background: $accordion-corporate-arrow-background;
+    border-radius: 0 $accordion-corporate-border-radius 0 0;
+    transition: .33s all ease;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      z-index: 4;
+      transform: translateY(-50%);
+      background: $accordion-corporate-arrow-color;
+    }
+
+    &::before {
+      width: 14px;
+      height: 2px;
+      right: 28px;
+    }
+
+    &::after {
+      width: 2px;
+      height: 14px;
+      right: 34px;
+    }
+  }
+
+  .collapse {
+    position: relative;
+    z-index: 1;
+    color: $accordion-corporate-content-color;
+    border-radius: 0 0 $accordion-corporate-border-radius $accordion-corporate-border-radius;
+  }
+
+  .card-body {
+    padding: $accordion-corporate-content-padding;
+  }
+
+  // Media queries
+  @include media-breakpoint-down(md) {
+    .card-title a,
+    .card-body {
+      padding-left: 25px;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .card-title a {
+      font-size: 18px;
+    }
+  }
+}
+
+.card-standing {
+  text-align: center;
+  font-family: $font-family-sec;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: $gray-800;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $gray-1;
+
+  .card-body {
+
+    > div:first-child {
+      padding-top: 0;
+    }
+  }
+
+  .card-header {
+    background: transparent;
+  }
+}
+
+.card-standing-inline {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.card-standing-aside-right {
+  width: 100%;
+}
+
+.card-custom {
+  padding-left: 30px;
+  background: $white;
+  transition: all 200ms ease-in-out;
+
+  &.active {
+    background: $gray-7;
+  }
+}
+
+.card-standing-caption {
+  position: relative;
+  padding-left: 30px;
+  color: $white;
+  background: $primary;
+
+  .card-standing-position {
+    top: 50%;
+    padding-left: 3px;
+    transform: translateY(-50%);
+  }
+}
+
+.card-standing-caption-aside {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 13px 5px 13px 0;
+
+  > * {
+    padding: 0 3px;
+  }
+}
+
+.card-standing-team-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 15px 5px 15px 0;
+
+  > * {
+    padding: 0 3px;
+  }
+
+  .card-standing-diff {
+    color: $primary;
+  }
+
+  .card-standing-points,
+  .card-standing-number {
+    font-weight: 400;
+  }
+}
+
+.card-standing-team-details {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 18px 3px 18px 0;
+
+  > * {
+    padding: 0 5px;
+  }
+}
+
+.card-standing-divider {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 18px;
+  border-top: 1px solid $gray-200;
+}
+
+.card-standing-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 30px;
+  padding: 0 5px;
+}
+
+.card-standing-team,
+.card-standing-game-status {
+  width: 27%;
+}
+
+.card-standing-game-status {
+  padding-left: 5px;
+}
+
+.card-standing-number {
+  width: 11%;
+}
+
+.card-standing-points {
+  width: 14%;
+}
+
+.card-standing-diff {
+  width: 12%;
+}
+
+.card-standing-team {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 3px;
+}
+
+.card-standing-team-figure {
+  text-align: center;
+  min-width: 45px;
+
+  img {
+    height: auto;
+    max-width: 45px;
+  }
+}
+
+.card-standing-team-title {
+  margin-top: 5px;
+}
+
+.card-standing-game-status,
+.card-standing-team-country {
+  font-size: 0.86em;
+  color: $gray-500;
+}
+
+.card-standing-toogle {
+  height: 26px;
+  width: 26px;
+  font-size: 16px;
+  line-height: 26px;
+  color: $gray-800;
+  background: $white;
+  border-radius: 4px;
+  transition-duration: 200ms;
+
+  &:hover {
+    color: $primary;
+  }
+
+  &.collapsed {
+    background: $gray-7;
+
+    &::before {
+      content: '\e145';
+    }
+  }
+}
+
+.card-standing-index {
+  counter-reset: article;
+
+  article {
+
+    .card-standing-counter {
+      &:before {
+        content: counter(article, decimal-leading-zero);
+        counter-increment: article;
+      }
+    }
+  }
+}
+
+.card-standing-counter {
+  font-size: 1.1em;
+  line-height: 1;
+  letter-spacing: .025em;
+  color: $gray-9;
+  padding: 20px 3px 20px;
+}
+
+// Small <576px
+@include media-breakpoint-down(xs) {
+  .card-standing-team-name {
+    font-size: .86em;
+  }
+}
+
+// Medium ≥576px
+@include media-breakpoint-up(sm) {
+
+  .card-custom,
+  .card-standing-caption {
+    padding-left: 40px;
+  }
+
+  .card-standing {
+    font-size: 14px;
+    letter-spacing: .1em;
+  }
+
+  .card-standing-caption {
+
+    .card-standing-position {
+      padding-left: 20px;
+    }
+  }
+
+  .card-standing-caption-aside {
+    padding-right: 10px;
+
+    > * {
+      padding: 0 5px;
+    }
+  }
+
+  .card-standing-team-item {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 10px;
+
+    > * {
+      padding: 0 5px;
+    }
+  }
+
+  .card-standing-number {
+    width: 9%;
+  }
+
+  .card-standing-points {
+    width: 11%;
+  }
+
+  .card-standing-diff {
+    width: 11%;
+  }
+
+  .card-standing-toogle {
+    height: 32px;
+    width: 32px;
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .card-standing-team-details {
+    padding-right: 10px;
+  }
+
+  .card-standing-team,
+  .card-standing-game-status {
+    width: 40%;
+  }
+
+  .card-standing-position {
+    min-width: 40px;
+  }
+
+  .card-standing-divider {
+    margin-left: 67px;
+  }
+
+  .card-standing-game-status {
+    padding-left: 70px;
+  }
+
+  .card-standing-team {
+    flex-direction: row;
+    padding-left: 15px;
+  }
+
+  .card-standing-team-title {
+    margin-left: 8px;
+    margin-top: 0;
+    letter-spacing: .05em;
+  }
+
+  .card-standing-team,
+  .card-standing-game-status {
+    text-align: left;
+  }
+
+  .card-standing-counter {
+    padding-left: 10px;
+    line-height: 36px;
+  }
+
+  .card-standing-team-figure {
+    min-height: 60px;
+    line-height: 60px;
+  }
+}
+
+// Medium ≥768px
+@include media-breakpoint-up(md) {
+
+  .card-custom,
+  .card-standing-caption {
+    padding-left: 55px;
+  }
+
+  .card-standing-team-item {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .card-standing-team-details {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .card-standing-position {
+    min-width: 55px;
+  }
+
+  .card-standing-divider {
+    margin-left: 77px;
+  }
+
+  .card-standing-team {
+    padding-left: 24px;
+  }
+
+  .card-standing-game-status {
+    padding-left: 79px;
+  }
+
+  .card-standing-counter {
+    font-size: 1.4em;
+    line-height: 56px;
+  }
+}
+
+// Extra large ≥1200px
+@include media-breakpoint-up(xl) {
+  .card-custom,
+  .card-standing-caption {
+    padding-left: 74px;
+  }
+
+  .card-standing-caption {
+
+    .card-standing-position {
+      padding-left: 20px;
+    }
+  }
+
+  .card-standing-position {
+    min-width: 74px;
+  }
+
+  .card-standing-team,
+  .card-standing-game-status {
+    width: 44%;
+  }
+
+  .card-standing-counter {
+    font-size: 1.71em;
+    padding-left: 20px;
+  }
+}

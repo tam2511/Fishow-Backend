@@ -1,0 +1,95 @@
+/*
+*
+* Dividers
+*/
+
+//
+// Table of Contents:
+//
+// Base styles
+// Divider Small
+// Divider Middle
+//
+//
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  border-top: $hr-border-width solid $hr-border-color;
+}
+
+.divider {
+  font-size: 0;
+  line-height: 0;
+  
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 60px;
+    height: 2px;
+    background-color: $primary;
+  }
+}
+
+// Mods
+html .divider-secondary {
+  &::after {
+    background: $secondary;
+  }
+}
+
+//
+// Divider Small
+//
+.divider-small {
+  font-size: 0;
+  line-height: 0;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 44px;
+    height: 3px;
+    background: $primary;
+  }
+}
+
+//
+// Divider Medium
+//
+.divider-medium {
+  font-size: 0;
+  line-height: 0;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 67px;
+    height: 1px;
+    background: $primary;
+  }
+}
+
+* + .divider-medium { margin-top: 12px; }
+
+.divider-medium + * { margin-top: 30px; }
+.divider-medium + * { margin-top: 20px; }
+
+//
+// Divider Middle
+//
+.divider-middle {
+  font-size: 0;
+  line-height: 0;
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 3px;
+    background: $primary;
+  }
+}
+
+* + .divider-small { margin-top: 12px; }
+* + .divider-middle { margin-top: 14px; }

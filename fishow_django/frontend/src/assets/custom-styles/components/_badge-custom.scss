@@ -1,0 +1,65 @@
+/*
+*
+* Badges
+*/
+.badge {
+	display: inline-block;
+	padding: 3px 8px;
+	font-family: $font-family-sec;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 14px;
+	text-align: center;
+	text-transform: uppercase;
+	color: $white;
+	background: $gray-1;
+	border-radius: 4px;
+	> .icon {
+		margin-left: 5px;
+		font-size: 12px;
+	}
+}
+
+.badge-primary {
+	background: $primary;
+}
+
+.badge-secondary {
+	font-weight: 500;
+	color: $gray-800;
+	background: $secondary;
+}
+
+.badge-red {
+	background: $red;
+}
+
+.badge-orange {
+	background: $orange;
+}
+
+.badge-blue {
+	background: $blue;
+}
+
+.badge-green {
+	background: $green;
+}
+
+.badge-shop {
+	background: #4b88dc;
+}
+
+.badge-light-yellow {
+	color: $gray-800;
+	background: $light-yellow;
+}
+
+.badge-light-green {
+	background: $light-green;
+}
+
+.badge-east-bay {
+	font-weight: 500;
+	background: $east-bay;
+}

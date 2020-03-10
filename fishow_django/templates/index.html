@@ -1,14 +1,10 @@
+{% extends "base.html" %}
 {% load render_bundle from webpack_loader %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Fishow rest vue</title>
-</head>
-<body>
-    <h1>Vuew JS</h1>
-    <div id="app"></div>
 
-    {% render_bundle 'app' %}
-</body>
-</html>
+{% block content %}
+
+<div id="app"></div>
+
+{% render_bundle 'app' %}
+
+{% endblock %}
