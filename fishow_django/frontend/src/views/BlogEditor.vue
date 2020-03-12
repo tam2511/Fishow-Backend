@@ -1,24 +1,111 @@
 <template>
-    <div class="container mt-2">
-        <h1 class="mb-3">Create Blog</h1>
-        <form @submit.prevent="onsubmit">
-            <textarea
-                    v-model="blog_body"
-                    name="blog_body"
-                    class="form-control"
-                    placeholder="Write here text of your blog"
-                    cols="30"
-                    rows="4">
-            </textarea>
-            <br>
-            <button
-                    type="submit"
-                    class="btn btn-success">
-                Publish
-            </button>
-        </form>
-        <p class="muted mt-2">{{ error }}</p>
-    </div>
+<!--    <div class="container mt-2">-->
+<!--        <h1 class="mb-3">Create Blog</h1>-->
+<!--        <form @submit.prevent="onsubmit">-->
+<!--            <textarea-->
+<!--                    v-model="blog_body"-->
+<!--                    name="blog_body"-->
+<!--                    class="form-control"-->
+<!--                    placeholder="Write here text of your blog"-->
+<!--                    cols="30"-->
+<!--                    rows="4">-->
+<!--            </textarea>-->
+<!--            <br>-->
+<!--            <button-->
+<!--                    type="submit"-->
+<!--                    class="btn btn-success">-->
+<!--                Publish-->
+<!--            </button>-->
+<!--        </form>-->
+<!--        <p class="muted mt-2">{{ error }}</p>-->
+        <section class="section section-variant-1 bg-gray-100">
+            <div class="container">
+                <div class="row row-50">
+                    <div class="col-lg-7 col-xl-8">
+                        <!-- Heading Component-->
+                        <article class="heading-component">
+                            <div class="heading-component-inner">
+                                <h5 class="heading-component-title">Написать блог</h5>
+                            </div>
+                        </article>
+                        <form
+                                data-id="send-form"
+                                id='send-form'
+                                class="rd-form"
+                                data-form-output="form-output-global"
+                                data-form-type="blog"
+                                method="post"
+                        >
+                            {% csrf_token %}
+                            <div class="row row-10 row-narrow">
+                                <div class="col-md-12 fishow-content_container">
+                                    <div class="col-md-12 fishow-content">
+                                        <div class="form-wrap">
+                                            <label class="form-label" for="form-title">Заголовок</label
+                                            ><input
+                                                class="form-input"
+                                                id="form-title"
+                                                type="text"
+                                                name="title"
+                                        />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 fishow-content">
+                                        <div class="form-wrap">
+                                            <div class="fishow-blog_image__close-button">x</div>
+                                            <label class="form-label" for="form-text">Текст</label
+                                            ><textarea
+                                                class="form-input"
+                                                id="form-text"
+                                                name="text"
+                                        ></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 fishow_container">
+                                    <div class="fishow_button_text">
+                                        <div class="fishow_action_btn">Текст</div>
+                                    </div>
+                                    <div class="fishow_button_video">
+                                        <div class="fishow_action_btn">Видео</div>
+                                    </div>
+                                    <div class="fishow_button_picture">
+                                        <input
+                                                class="form-input"
+                                                id="fishow-picture1"
+                                                type="file"
+                                                name="picture"
+                                        />
+                                        <button class="fishow_action_btn"
+                                                type="button">Картинка</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button
+                                        class="button button-lg button-google button-block"
+                                        type="submit"
+                                        name="send_blog"
+                                >
+                                    Опубликовать
+                                </button>
+                            </div>
+                            <div class="col-md-12">
+                                <button
+                                        class="button button-lg button-primary button-block"
+                                        type="submit"
+                                        name="save_blog"
+                                        onclick="return save_func('save');"
+                                >
+                                    Сохранить как черновик
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!--    </div>-->
 </template>
 
 <script>
