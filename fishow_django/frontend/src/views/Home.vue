@@ -550,7 +550,9 @@ export default {
   name: 'home',
   data() {
       return {
-          blogs: []
+          blogs: [],
+          next: null,
+          loadingBlogs: false
       }
   },
   methods: {
@@ -559,9 +561,18 @@ export default {
       },
       getBlogs() {
           let endpoint = "/api/blogs/";
+          if (this.next) {
+              endpoint = this.next;
+          }
+          this.loadingBlogs = true;
           apiService(endpoint)
             .then(data => {
                 this.blogs.push(...data.results);
+                if (data.next) {
+                    this.next = data.next;
+                } else {
+                    this.next = null;
+                }
             })
       }
   },
