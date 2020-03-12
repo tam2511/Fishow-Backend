@@ -8,7 +8,7 @@
             <!-- RD Navbar Nav-->
             <ul class="rd-navbar-nav">
                 <li class="rd-nav-item">
-                    <router-link class="rd-nav-link" to="./">Главная</router-link>
+                    <router-link class="rd-nav-link" to="/">Главная</router-link>
                 </li>
                 <li class="rd-nav-item">
                     <router-link class="rd-nav-link" to="">Прогноз</router-link>
@@ -50,7 +50,7 @@
                             <router-link class="rd-dropdown-link" to="">Отчеты</router-link>
                         </li>
                         <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Написать Блог</router-link>
+                            <router-link class="rd-dropdown-link" to="/blog-editor">Написать Блог</router-link>
                         </li>
                         <li class="rd-dropdown-item">
                             <router-link class="rd-dropdown-link" to="">Написать Статью</router-link>
