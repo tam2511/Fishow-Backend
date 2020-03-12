@@ -6,11 +6,16 @@
 </template>
 
 <script>
+  // import script from "./components/script";
   import NavbarComponent from "./components/Navbar.vue";
   export default {
     name: 'App',
     components: {
       NavbarComponent
+    },
+    mounted() {
+      console.log('mounted');
+      // script();
     }
   }
 

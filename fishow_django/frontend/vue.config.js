@@ -4,8 +4,13 @@ module.exports = {
     // on Windows you might want to set publicPath: "http://127.0.0.1:8080/"
     publicPath: "http://127.0.0.1:8080/",
     outputDir: './dist/',
-
+    lintOnSave: false,
     chainWebpack: config => {
+        // config
+        //     .plugin('env')
+        //     .use(require.resolve('webpack/lib/ProvidePlugin'), [{ jQuery: 'jquery'  }])
+        //
+        // config.toString();
 
         config
             .plugin('BundleTracker')
