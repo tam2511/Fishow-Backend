@@ -14,5 +14,13 @@ urlpatterns = [
 
     path("blogs/<slug:slug>/comment/",
          qv.CommentCreateAPIView.as_view(),
-         name="create-comments")
+         name="create-comments"),
+
+    path("comments/<int:pk>/",
+         qv.CommentRUDAPIView.as_view(),
+         name="comment-detail"),
+
+    path("comments/<int:pk>/like/",
+         qv.CommentLikeAPIView.as_view(),
+         name="comment-like")
 ]
