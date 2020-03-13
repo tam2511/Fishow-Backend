@@ -12,8 +12,8 @@
                 <p>{{ comment.body }}</p>
             </div>
             <div class="post-comment-footer">
-                <div class="comment-like"><span class="icon mdi mdi-thumb-up-outline"></span><a href="#">32</a></div>
-                <div class="comment-reply"><span class="icon mdi mdi-comment-outline"></span><a href="#">Reply</a></div>
+                <div class="comment-like"><span class="icon mdi mdi-thumb-up-outline"></span><a href="#">0</a></div>
+                <div class="comment-reply"><span class="icon mdi mdi-comment-outline"></span><a href="#">Ответить</a></div>
             </div>
         </div>
     </div>

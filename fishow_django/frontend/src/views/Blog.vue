@@ -58,23 +58,7 @@
                                     :comment="comment"
                                     :key="index"
                                 />
-                                <div class="comment-box">
-                                    <div class="comment-box-aside"><img class="img-circle" src="images/user-7-69x69.jpg" alt="" width="69" height="69"/>
-                                    </div>
-                                    <div class="comment-box-main">
-                                        <h5 class="comment-box-name">Miranda</h5>
-                                        <!-- RD Mailform-->
-                                        <form class="rd-mailform comment-box-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
-                                            <div class="form-wrap">
-                                                <label class="form-label" for="comment-message">Your comment</label>
-                                                <textarea class="form-input" id="comment-message" name="message" data-constraints="@Required"></textarea>
-                                            </div>
-                                            <div class="form-button">
-                                                <button class="button button-primary" type="submit">Submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                <CreateComment/>
                             </div>
                         </div>
                     </div>
@@ -88,9 +72,10 @@
 <script>
     import { apiService } from "../common/api.service";
     import Comment from "../components/Comment.vue";
+    import CreateComment from "../components/CreateComment";
     export default {
         name: "Blog",
-        components: {Comment},
+        components: {CreateComment, Comment},
         props: {
             slug: {
                 type: String,
@@ -102,7 +87,7 @@
                 blog: {},
                 next: null,
                 comments: [],
-                loadingAnswers: false,
+                loadingAnswers: false
             }
         },
         methods: {
