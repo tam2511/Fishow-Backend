@@ -148,10 +148,6 @@
                 // emit an event to delete an answer instance
                 this.$emit("delete-comment", this.comment);
             }
-        },
-        mounted() {
-            console.log('this.comment.author = ', this.comment.author );
-            console.log('this.requestUser = ',  this.requestUser);
         }
     };
 </script>

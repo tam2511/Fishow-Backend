@@ -29,7 +29,7 @@ export default new Router ({
     },
     {
       path:"/comment/:id",
-      name: "comment-editor",
+      name: "Create-comment",
       component: CreateComment,
       props: true
     },
