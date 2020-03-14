@@ -19,7 +19,7 @@
             <div class="post-comment-text">
                 <p>{{ comment.body }}</p>
             </div>
-            <div v-if="isAnswerAuthor">
+            <div v-if="isCommentAuthor">
                 <router-link
                         :to="{ name: 'Create-comment', params: { id: comment.id } }"
                         class="btn btn-sm btn-outline-secondary mr-1"
@@ -88,7 +88,7 @@
             };
         },
         computed: {
-            isAnswerAuthor() {
+            isCommentAuthor() {
                 // return true if the logged in user is also the author of the answer instance
                 return this.comment.author === this.requestUser;
             }
@@ -147,6 +147,10 @@
                 // emit an event to delete an answer instance
                 this.$emit("delete-comment", this.comment);
             }
+        },
+        mounted() {
+            console.log('this.comment.author = ', this.comment.author );
+            console.log('this.requestUser = ',  this.requestUser);
         }
     };
 </script>

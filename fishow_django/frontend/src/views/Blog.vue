@@ -18,27 +18,8 @@
                                 <div class="blog-post-view"><span class="icon fl-justicons-visible6"></span>0</div>
                             </div>
                         </div>
-<!--                        <div class="blog-post-author-quote">-->
-<!--                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute</p>-->
-<!--                        </div>-->
-<!--                        <div class="blog-post-share">-->
-<!--                            <p>Share this post</p>-->
-<!--                            <ul class="group">-->
-<!--                                <li><a class="icon fa-facebook" href="#"></a></li>-->
-<!--                                <li><a class="icon fa-twitter" href="#"></a></li>-->
-<!--                                <li><a class="icon fa-google-plus" href="#"></a></li>-->
-<!--                                <li><a class="icon fa-instagram" href="#"></a></li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
                         <div class="blog-post-content">
                             <p>{{ blog.content }}</p>
-                            <!-- Quote Default-->
-<!--                            <article class="quote-default">-->
-<!--                                <div class="quote-default-text">-->
-<!--                                    <p class="q">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>-->
-<!--                                </div>-->
-<!--                            </article>-->
-<!--                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint</p>-->
                         </div>
                     </div>
                     <div class="row">
@@ -79,6 +60,7 @@
         props: {
             slug: {
                 type: String,
+                default: null,
                 required: true
             }
         },
@@ -104,7 +86,6 @@
                 })
             },
             getCommentData() {
-                console.log(this.slug);
                 let endpoint = `/api/blogs/${this.slug}/comments/`;
                 if (this.next) {
                     endpoint = this.next;

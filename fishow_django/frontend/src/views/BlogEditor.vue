@@ -15,6 +15,14 @@
                                 <div class="col-md-12 fishow-content">
                                     <div class="form-wrap">
                                         <textarea
+                                                v-model="blog_title"
+                                                name="blog_body"
+                                                class="form-control"
+                                                placeholder="Write here text of your blog"
+                                                cols="30"
+                                                rows="4">
+                                        </textarea>
+                                        <textarea
                                                 v-model="blog_body"
                                                 name="blog_body"
                                                 class="form-control"
@@ -101,6 +109,7 @@
         data() {
             return {
                 blog_body: null,
+                blog_title: null,
                 error: null
             }
         },
@@ -117,7 +126,10 @@
                         endpoint += `${ this.slug }/`;
                         method = "PUT";
                     }
-                    apiService(endpoint, method, {content: this.blog_body})
+                    apiService(endpoint, method, {
+                        title: this.blog_title,
+                        content: this.blog_body
+                    })
                         .then(blog_data => {
                             this.$router.push(
                                 {

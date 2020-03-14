@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  // import script from "./components/script";
+  import {apiService} from "./common/api.service";
   import NavbarComponent from "./components/Navbar.vue";
   import FIshow_Footer from "./components/FIshow_Footer";
   export default {
@@ -16,9 +16,16 @@
       FIshow_Footer,
       NavbarComponent
     },
-    mounted() {
-      console.log('mounted');
-      // script();
+    methods: {
+      async setUserInfo() {
+        // add the username of the logged in user to localStorage
+        const data = await apiService("/api/user/");
+        const requestUser = data["username"];
+        window.localStorage.setItem("username", requestUser);
+      }
+    },
+    created() {
+      this.setUserInfo()
     }
   }
 

@@ -1,22 +1,29 @@
-import { CSRF_TOKEN } from "./csrf_token.js";
+import { CSRF_TOKEN } from "./csrf_token.js"
 
-const getJSON = async (response) => {
-    if (response.status === 204) return '';
-    return response.json();
+function handleResponse(response) {
+    if (response.status === 204) {
+        return '';
+    } else if (response.status === 404) {
+        return null;
+    } else {
+        return response.json();
+    }
+
 }
 
-const apiService = (endpoint, method, data) => {
+function apiService(endpoint, method, data) {
+    // D.R.Y. code to make HTTP requests to the REST API backend using fetch
     const config = {
         method: method || "GET",
         body: data !== undefined ? JSON.stringify(data) : null,
         headers: {
-            'content-type': "application/json",
+            'content-type': 'application/json',
             'X-CSRFTOKEN': CSRF_TOKEN
         }
-    }
+    };
     return fetch(endpoint, config)
-                .then(getJSON)
-                .catch(error => console.log(error))
-};
+        .then(handleResponse)
+        .catch(error => console.log(error))
+}
 
 export { apiService };

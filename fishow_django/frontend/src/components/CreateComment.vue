@@ -62,7 +62,9 @@
             },
             onSubmit() {
                 // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
+                console.log('${this.slug} = ', this.blogSlug);
                 if (this.commentBody) {
+                    console.log('${this.slug} = ', this.slug);
                     let endpoint = `/api/blogs/${this.slug}/comment/`;
                     apiService(endpoint, "POST", { body: this.commentBody })
                         .then(data => {
@@ -76,18 +78,6 @@
                     }
                 } else {
                     this.error = "You can't send an empty answer!";
-                }
-            },
-            async deleteComment(comment) {
-                // delete a given answer from the answers array and make a delete request to the REST API
-                let endpoint = `/api/comments/${comment.id}/`;
-                try {
-                    await apiService(endpoint, "DELETE")
-                    this.$delete(this.comments, this.comments.indexOf(comment))
-                    // this.userHasAnswered = false;
-                }
-                catch (err) {
-                    console.log(err)
                 }
             }
         },
