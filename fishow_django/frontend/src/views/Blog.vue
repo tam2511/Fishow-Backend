@@ -70,9 +70,9 @@
 </template>
 
 <script>
-    import { apiService } from "../common/api.service";
-    import Comment from "../components/Comment.vue";
-    import CreateComment from "../components/CreateComment";
+    import { apiService } from "@/common/api.service";
+    import Comment from "@/components/Comment.vue";
+    import CreateComment from "@/components/CreateComment";
     export default {
         name: "Blog",
         components: {CreateComment, Comment},
@@ -87,6 +87,8 @@
                 blog: {},
                 next: null,
                 comments: [],
+                newCommentBody: null,
+                error: null,
                 loadingAnswers: false
             }
         },

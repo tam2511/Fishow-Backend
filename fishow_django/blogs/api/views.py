@@ -1,4 +1,4 @@
-from rest_framework import generics, viewsets
+from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -68,7 +68,7 @@ class CommentRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class BlogViewSet(viewsets.ModelViewSet):
-    queryset = Blog.objects.all()
+    queryset = Blog.objects.all().order_by("-created_at")
     lookup_field = "slug"
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]

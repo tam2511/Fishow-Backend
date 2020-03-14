@@ -1,23 +1,4 @@
 <template>
-    <!--    <div class="container mt-2">-->
-    <!--        <h1 class="mb-3">Create Blog</h1>-->
-    <!--        <form @submit.prevent="onsubmit">-->
-    <!--            <textarea-->
-    <!--                    v-model="blog_body"-->
-    <!--                    name="blog_body"-->
-    <!--                    class="form-control"-->
-    <!--                    placeholder="Write here text of your blog"-->
-    <!--                    cols="30"-->
-    <!--                    rows="4">-->
-    <!--            </textarea>-->
-    <!--            <br>-->
-    <!--            <button-->
-    <!--                    type="submit"-->
-    <!--                    class="btn btn-success">-->
-    <!--                Publish-->
-    <!--            </button>-->
-    <!--        </form>-->
-    <!--        <p class="muted mt-2">{{ error }}</p>-->
     <section class="section section-variant-1 bg-gray-100">
         <div class="container">
             <div class="row row-50">
@@ -107,7 +88,7 @@
 </template>
 
 <script>
-    import {apiService} from "../common/api.service.js";
+    import {apiService} from "@/common/api.service.js";
 
     export default {
         name: "BlogEditor",

@@ -12,14 +12,14 @@
         <div class="comment-box-main">
             <h5 class="comment-box-name">{{ userName }}</h5>
             <!-- RD Mailform-->
-            <form class="rd-mailform comment-box-form" @submit.prevent="onSubmit">
+            <form @submit.prevent="onSubmit" class="comment-box-form" >
                 <div class="form-wrap">
-                    <label class="form-label" for="comment-message">Your comment</label>
                     <textarea
-                            v-model="comment_body"
+                            v-model="commentBody"
                             class="form-input"
                             id="comment-message"
                             name="message"
+                            placeholder="Ваш комментарий"
                     ></textarea>
                 </div>
                 <div class="form-button">
@@ -36,14 +36,19 @@
     export default {
         name: "CreateComment",
         props: {
+            id: {
+                type: Number,
+                required: true
+            },
             slug: {
                 type: String,
-                required: false
+                required: true
             }
         },
         data() {
             return {
-                comment_body: null,
+                blogSlug: null,
+                commentBody: null,
                 userName: "",
                 error: null
             };
@@ -56,27 +61,44 @@
                 });
             },
             onSubmit() {
-                if (!this.comment_body) {
-                    this.error = "You can't send an empty blog!";
-                } else if (this.comment_body.length > 400) {
-                    this.error = "To much words in your blog";
-                } else {
+                // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
+                if (this.commentBody) {
                     let endpoint = `/api/blogs/${this.slug}/comment/`;
-                    let method = "POST";
-                    if (this.slug !== undefined) {
-                        endpoint += `${this.slug}/`;
-                        method = "PUT";
+                    apiService(endpoint, "POST", { body: this.commentBody })
+                        .then(data => {
+                            this.comments.unshift(data)
+                        })
+                    this.commentBody = null;
+                    this.showForm = false;
+                    // this.userHasAnswered = true;
+                    if (this.error) {
+                        this.error = null;
                     }
-                    apiService(endpoint, method, { body: this.comment_body }).then(
-                        comment_data => {
-                            this.$router.push({
-                                name: "blog",
-                                params: { slug: comment_data.slug }
-                            });
-                        }
-                    );
+                } else {
+                    this.error = "You can't send an empty answer!";
+                }
+            },
+            async deleteComment(comment) {
+                // delete a given answer from the answers array and make a delete request to the REST API
+                let endpoint = `/api/comments/${comment.id}/`;
+                try {
+                    await apiService(endpoint, "DELETE")
+                    this.$delete(this.comments, this.comments.indexOf(comment))
+                    // this.userHasAnswered = false;
+                }
+                catch (err) {
+                    console.log(err)
                 }
             }
+        },
+        async beforeRouteEnter(to, from, next) {
+            // get the answer's data from the REST API and set two data properties for the component
+            let endpoint = `/api/comments/${to.params.id}/`;
+            let data = await apiService(endpoint);
+            return next(vm => (
+                vm.commentBody = data.body,
+                vm.blogSlug = data.blog_slug
+            ));
         },
         created() {
             this.getUserName();
