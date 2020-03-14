@@ -26,8 +26,10 @@ class Comment(models.Model):
                              related_name='comments')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
-    voters = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votes')
+    votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                    related_name='votesUp')
+    votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                    related_name='votesDown')
 
     def __str__(self):
         return self.author.username

@@ -8,6 +8,6 @@ from blogs.models import Blog
 @receiver(pre_save, sender=Blog)
 def add_slug_to_blog(sender, instance,*args,**kwargs):
     if instance and not instance.slug:
-        slug = slugify(instance.content)
+        slug = slugify(instance.title)
         random_string = generate_random_string()
         instance.slug = slug + '-' + random_string

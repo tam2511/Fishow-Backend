@@ -31,7 +31,7 @@ class CommentLikeAPIView(APIView):
         comment = get_object_or_404(Comment, pk=pk)
         user = request.user
 
-        comment.voters.remove(user)
+        comment.votersUp.remove(user)
         comment.save()
 
         serializer_context = {"request": request}
@@ -44,7 +44,39 @@ class CommentLikeAPIView(APIView):
         comment = get_object_or_404(Comment, pk=pk)
         user = request.user
 
-        comment.voters.add(user)
+        comment.votersUp.add(user)
+        comment.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(comment, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CommentDisLikeAPIView(APIView):
+    """Allow users to add/remove a like to/from an comment instance."""
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        """Remove request.user from the voters queryset of an comment instance."""
+        comment = get_object_or_404(Comment, pk=pk)
+        user = request.user
+
+        comment.votersDown.remove(user)
+        comment.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(comment, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, pk):
+        """Add request.user to the voters queryset of an comment instance."""
+        comment = get_object_or_404(Comment, pk=pk)
+        user = request.user
+
+        comment.votersDown.add(user)
         comment.save()
 
         serializer_context = {"request": request}
