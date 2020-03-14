@@ -38,8 +38,13 @@
                                     v-for="(comment, index) in comments"
                                     :comment="comment"
                                     :key="index"
+                                    :slug="slug"
+                                    :requestUser="requestUser"
                                 />
-                                <CreateComment/>
+                                <CreateComment
+                                    :slug="slug"
+                                    :id="id"
+                                />
                             </div>
                         </div>
                     </div>
@@ -67,21 +72,28 @@
         data() {
             return {
                 blog: {},
+                id: 0,
                 next: null,
                 comments: [],
                 newCommentBody: null,
                 error: null,
-                loadingAnswers: false
+                loadingAnswers: false,
+                requestUser: null
             }
         },
         methods: {
             setPageTitle(title) {
                 document.title = title;
             },
+            getUser() {
+                this.requestUser = window.localStorage.getItem("username");
+            },
             getBlogData() {
                 let endpoint = `/api/blogs/${this.slug}/`;
                 apiService(endpoint).then(data => {
                     this.blog = data;
+                    this.id = data.id;
+                    console.log(this.id);
                     this.setPageTitle(data.title);
                 })
             },
@@ -104,6 +116,7 @@
         created() {
             this.getBlogData();
             this.getCommentData();
+            this.getUser();
         }
     }
 </script>

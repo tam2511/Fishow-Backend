@@ -17,29 +17,24 @@
                                         <textarea
                                                 v-model="blog_title"
                                                 name="blog_body"
-                                                class="form-control"
-                                                placeholder="Write here text of your blog"
+                                                class="form-input"
+                                                placeholder="Заголовок"
                                                 cols="30"
                                                 rows="4">
                                         </textarea>
-                                        <textarea
-                                                v-model="blog_body"
-                                                name="blog_body"
-                                                class="form-control"
-                                                placeholder="Write here text of your blog"
-                                                cols="30"
-                                                rows="4">
-                                        </textarea>
+
                                     </div>
                                 </div>
                                 <div class="col-md-12 fishow-content">
                                     <div class="form-wrap">
                                         <div class="fishow-blog_image__close-button">x</div>
-                                        <label class="form-label" for="form-text">Текст</label
-                                        ><textarea
+<!--                                        <label class="form-label" for="form-text">Текст</label>-->
+                                        <textarea
+                                            v-model="blog_body"
                                             class="form-input"
                                             id="form-text"
                                             name="text"
+                                            placeholder="Основной текст"
                                     ></textarea>
                                     </div>
                                 </div>
@@ -71,11 +66,7 @@
                             >
                                 Опубликовать
                             </button>
-                            <button
-                                type="submit"
-                                class="btn btn-success">
-                                Publish
-                            </button>
+
                         </div>
                         <div class="col-md-12">
                             <button

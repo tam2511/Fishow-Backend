@@ -90,6 +90,7 @@
         computed: {
             isCommentAuthor() {
                 // return true if the logged in user is also the author of the answer instance
+                // return this.comment.author === this.requestUser;
                 return this.comment.author === this.requestUser;
             }
         },
