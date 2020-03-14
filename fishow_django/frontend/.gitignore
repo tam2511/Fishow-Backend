@@ -6,7 +6,7 @@ node_modules
 .env.local
 .env.*.local
 
-webpack-stats.json
+/webpack-stats.json
 
 # Log files
 npm-debug.log*
