@@ -40,6 +40,7 @@
                                     :key="index"
                                     :slug="slug"
                                     :requestUser="requestUser"
+                                    @deleteComment="deleteComment"
                                 />
                                 <CreateComment
                                     :slug="slug"
@@ -49,16 +50,16 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 </template>
 
 <script>
-    import { apiService } from "@/common/api.service";
+    import {apiService} from "@/common/api.service";
     import Comment from "@/components/Comment.vue";
     import CreateComment from "@/components/CreateComment";
+
     export default {
         name: "Blog",
         components: {CreateComment, Comment},
@@ -111,8 +112,21 @@
                         this.next = null;
                     }
                 })
-            }
+            },
+            async deleteComment(comment) {
+                // delete a given answer from the answers array and make a delete request to the REST API
+                let endpoint = `/api/comments/${comment.id}/`;
+                try {
+                    await apiService(endpoint, "DELETE")
+                    this.$delete(this.comments, this.comments.indexOf(comment))
+                    this.userHasAnswered = false;
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            },
         },
+
         created() {
             this.getBlogData();
             this.getCommentData();

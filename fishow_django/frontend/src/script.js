@@ -1,6 +1,5 @@
 "use strict";
 (function () {
-	console.log('dsdsdasdasdasd');
 	/**
 	 * Global variables
 	 */

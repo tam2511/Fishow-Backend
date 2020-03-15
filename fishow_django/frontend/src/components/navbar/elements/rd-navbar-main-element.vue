@@ -45,17 +45,43 @@
                 <a
                         class="link link-icon link-icon-left link-classic"
                         href=""
+                        v-if="!userName"
                 >Вход/Регистрация
                     <span class="icon fl-bigmug-line-login12"></span
                     ></a>
+                <div
+                        class="link link-icon link-icon-left link-classic"
+                        href=""
+                        v-else
+                >{{ userName }}
+                   </div>
+
+
             </li>
+
         </ul>
     </div>
 </template>
 
 <script>
     export default {
-        name: "rd-navbar-main-element"
+        name: "rd-navbar-main-element",
+        data() {
+            return {
+                userName: null
+            }
+        },
+        methods: {
+            getUserName() {
+                if (!!window.localStorage.getItem("username")) {
+                    this.userName = window.localStorage.getItem("username");
+                }
+
+            }
+        },
+        created() {
+            this.getUserName();
+        }
     }
 </script>
 

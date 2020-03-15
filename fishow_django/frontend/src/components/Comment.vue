@@ -21,8 +21,11 @@
             </div>
             <div v-if="isCommentAuthor">
                 <router-link
-                        :to="{ name: 'Create-comment', params: { id: comment.id } }"
+                        :to="{ name: 'Create-comment', params: {
+                            id: comment.id
+                        } }"
                         class="btn btn-sm btn-outline-secondary mr-1"
+                        :slug="slug"
                 >Edit
                 </router-link>
                 <button
@@ -146,7 +149,7 @@
 
             triggerDeleteComment() {
                 // emit an event to delete an answer instance
-                this.$emit("delete-comment", this.comment);
+                this.$emit("deleteComment", this.comment);
             }
         }
     };

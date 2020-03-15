@@ -37,7 +37,7 @@
         name: "CreateComment",
         props: {
             id: {
-                type: Number,
+                type: String,
                 required: true
             },
             slug: {
@@ -62,9 +62,7 @@
             },
             onSubmit() {
                 // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
-                console.log('${this.slug} = ', this.blogSlug);
                 if (this.commentBody) {
-                    console.log('${this.slug} = ', this.slug);
                     let endpoint = `/api/blogs/${this.slug}/comment/`;
                     apiService(endpoint, "POST", { body: this.commentBody })
                         .then(data => {
@@ -72,7 +70,6 @@
                         })
                     this.commentBody = null;
                     this.showForm = false;
-                    // this.userHasAnswered = true;
                     if (this.error) {
                         this.error = null;
                     }
@@ -82,8 +79,9 @@
             }
         },
         async beforeRouteEnter(to, from, next) {
+            console.log('to.params.id = ', Number(to.params.id));
             // get the answer's data from the REST API and set two data properties for the component
-            let endpoint = `/api/comments/${to.params.id}/`;
+            let endpoint = `/api/comments/${Number(to.params.id)}/`;
             let data = await apiService(endpoint);
             return next(vm => (
                 vm.commentBody = data.body,
@@ -91,6 +89,8 @@
             ));
         },
         created() {
+            console.log(this.commentBody);
+            console.log(this.blogSlug);
             this.getUserName();
         }
     };

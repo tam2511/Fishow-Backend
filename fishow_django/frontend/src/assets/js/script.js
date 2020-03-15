@@ -1,6 +1,5 @@
 "use strict";
 (function () {
-	console.log('dsdsdasdasdasd');
 	/**
 	 * Global variables
 	 */
@@ -65,7 +64,7 @@
 			radioPanel: $('.radio-panel .radio-inline'),
 			// slick: $('.slick-slider'),
 			videoOverlay: $('.video-overlay'),
-			maps: $('.google-map-container'),
+			// maps: $('.google-map-container'),
 			customIFrame: $('iframe[data-src]')
 		};
 
