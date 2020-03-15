@@ -39,4 +39,8 @@
 @import "assets/css/bootstrap.css";
 @import "assets/css/fishowStyles.css";
 @import "localFIles/assest/scss/custom-styles/fonts.scss";
+  html {
+    background-color: #edeff4;
+  }
+
 </style>
