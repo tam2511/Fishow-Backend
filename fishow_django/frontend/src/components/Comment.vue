@@ -19,21 +19,7 @@
             <div class="post-comment-text">
                 <p>{{ comment.body }}</p>
             </div>
-            <div v-if="isCommentAuthor">
-                <router-link
-                        :to="{ name: 'Create-comment', params: {
-                            id: comment.id
-                        } }"
-                        class="btn btn-sm btn-outline-secondary mr-1"
-                        :slug="slug"
-                >Edit
-                </router-link>
-                <button
-                        class="btn btn-sm btn-outline-danger"
-                        @click="triggerDeleteComment"
-                >Delete
-                </button>
-            </div>
+
             <div class="post-comment-footer">
                 <div class="comment-like">
                     <button
@@ -55,8 +41,14 @@
                     <a href="#">{{ likesCounter - dislikesCounter }}</a>
                 </div>
                 <div class="comment-reply">
-
                     <a href="#">Ответить</a>
+                </div>
+                <div v-if="isCommentAuthor">
+
+
+                <div class="comment-reply">
+                    <div @click="triggerDeleteComment">Удалить</div>
+                </div>
                 </div>
             </div>
         </div>

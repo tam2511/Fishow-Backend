@@ -10,7 +10,7 @@
             />
         </div>
         <div class="comment-box-main">
-            <h5 class="comment-box-name">{{ userName }}</h5>
+            <h5 class="comment-box-name">{{ this.requestUser }}</h5>
             <!-- RD Mailform-->
             <form @submit.prevent="onSubmit" class="comment-box-form" >
                 <div class="form-wrap">
@@ -37,13 +37,16 @@
         name: "CreateComment",
         props: {
             id: {
-                type: String,
                 required: true
             },
             slug: {
                 type: String,
                 required: true
-            }
+            },
+            requestUser: {
+                type: String,
+                required: true
+            },
         },
         data() {
             return {
@@ -54,12 +57,6 @@
             };
         },
         methods: {
-            getUserName() {
-                let endpoint = `/api/user/`;
-                apiService(endpoint).then(data => {
-                    this.userName = data.username;
-                });
-            },
             onSubmit() {
                 // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
                 if (this.commentBody) {
@@ -87,11 +84,6 @@
                 vm.commentBody = data.body,
                 vm.blogSlug = data.blog_slug
             ));
-        },
-        created() {
-            console.log(this.commentBody);
-            console.log(this.blogSlug);
-            this.getUserName();
         }
     };
 </script>

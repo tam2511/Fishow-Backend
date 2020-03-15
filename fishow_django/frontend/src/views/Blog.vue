@@ -45,6 +45,7 @@
                                 <CreateComment
                                     :slug="slug"
                                     :id="id"
+                                    :requestUser="requestUser"
                                 />
                             </div>
                         </div>
