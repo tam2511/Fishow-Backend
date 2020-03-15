@@ -1,3 +1,4 @@
 .idea
 venv
 fishow_django/env/
+fishow_django/db.sqlite3
