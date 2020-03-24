@@ -143,7 +143,7 @@
             }
         },
         created() {
-            document.title = 'Blog Editor - Fishow';
+            document.title = 'Fishow - Создание блога';
         }
     }
 </script>

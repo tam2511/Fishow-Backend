@@ -63,7 +63,14 @@
                     let endpoint = `/api/blogs/${this.slug}/comment/`;
                     apiService(endpoint, "POST", { body: this.commentBody })
                         .then(data => {
-                            this.comments.unshift(data)
+                            // this.comments.unshift(data)
+                            console.log(data);
+                            this.$router.push(
+                                {
+                                    name: 'blog',
+                                    params: { slug: data.comments_slug}
+                                }
+                            )
                         })
                     this.commentBody = null;
                     this.showForm = false;

@@ -20,6 +20,7 @@
                         </div>
                         <div class="blog-post-content">
                             <p>{{ blog.content }}</p>
+                            <img src="/static/assets/images/basketball/post-basketball-1-769x416.jpg" alt="" width="769" height="416">
                         </div>
                     </div>
                     <div class="row">
@@ -51,6 +52,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-4">
+                    <div class="block-aside">
+                        <block-categories/>
+                        <block-spotlight/>
+                        <block-tags/>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -60,10 +68,13 @@
     import {apiService} from "@/common/api.service";
     import Comment from "@/components/Comment.vue";
     import CreateComment from "@/components/CreateComment";
+    import BlockCategories from "../components/blog/blockCategories";
+    import BlockSpotlight from "../components/blog/blockSpotlight";
+    import BlockTags from "../components/blog/blockTags";
 
     export default {
         name: "Blog",
-        components: {CreateComment, Comment},
+        components: {BlockTags, BlockSpotlight, BlockCategories, CreateComment, Comment},
         props: {
             slug: {
                 type: String,
@@ -95,8 +106,7 @@
                 apiService(endpoint).then(data => {
                     this.blog = data;
                     this.id = data.id;
-                    console.log(this.id);
-                    this.setPageTitle(data.title);
+                    this.setPageTitle('Fishow - ' + data.title);
                 })
             },
             getCommentData() {
@@ -105,6 +115,7 @@
                     endpoint = this.next;
                 }
                 apiService(endpoint).then(data => {
+
                     this.comments.push(...data.results);
                     this.loadingAnswers = false;
                     if (data.next) {
