@@ -5,6 +5,7 @@ import Blog from "../views/Blog.vue";
 import BlogEditor from "../views/BlogEditor.vue";
 import CreateComment from "../components/CreateComment.vue";
 import NotFound from "../views/NotFound.vue";
+import Article from "../views/Article";
 Vue.use(Router);
 
 export default new Router ({
@@ -14,6 +15,12 @@ export default new Router ({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/article/',
+      name: 'Article',
+      component: Article,
+      props: true
     },
     {
       path: '/blog/:slug',

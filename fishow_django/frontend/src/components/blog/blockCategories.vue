@@ -3,7 +3,7 @@
     <!-- Heading Component-->
     <article class="heading-component">
       <div class="heading-component-inner">
-        <h5 class="heading-component-title">Categories</h5>
+        <h5 class="heading-component-title">Категории</h5>
       </div>
     </article>
 

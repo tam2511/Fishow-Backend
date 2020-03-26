@@ -38,7 +38,7 @@
                     </ul>
                 </li>
                 <li class="rd-nav-item">
-                    <router-link class="rd-nav-link" to="">Статьи</router-link>
+                    <router-link class="rd-nav-link" to="/article">Статьи</router-link>
                     <!-- RD Navbar Dropdown-->
                     <ul class="rd-menu rd-navbar-dropdown">
                         <li class="rd-dropdown-item"><router-link class="rd-dropdown-link" to="">Истории</router-link>

@@ -14,7 +14,7 @@
                 <td class="team-inline">
                     <div class="team-figure">
                         <img
-                                src=""
+                                src="/static/assets/images/user-1-63x63.jpg"
                                 alt=""
                                 width="42"
                                 height="26"

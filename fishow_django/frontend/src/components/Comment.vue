@@ -3,7 +3,7 @@
         <div class="post-comment-aside">
             <img
                     class="img-circle"
-                    src="images/user-6-69x69.jpg"
+                    src="/static/assets/images/user-6-69x69.jpg"
                     alt=""
                     width="69"
                     height="69"
