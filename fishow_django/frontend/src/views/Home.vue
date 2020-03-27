@@ -226,7 +226,11 @@ export default {
     return {
       blogs: [],
       next: null,
-      loadingBlogs: false
+      loadingBlogs: false,
+      userLikedComment: this.blog.user_has_votedUp,
+      userDisLikedComment: this.blog.user_has_votedDown,
+      likesCounter: this.blog.likes_count,
+      dislikesCounter: this.blog.dislikes_count,
     };
   },
   methods: {
@@ -247,7 +251,55 @@ export default {
           this.next = null;
         }
       });
-    }
+    },
+    toggleLike() {
+      if (this.userLikedBlog) {
+        this.unLikeBlog()
+      } else {
+        if (this.userDisLikedBlog) {
+          this.undislikeBlog()
+        } else {
+          this.likeBlog()
+        }
+      }
+    },
+    toggleDislike() {
+      if (this.userDisLikedBlog) {
+        this.undislikeBlog()
+      } else {
+        if (this.userLikedBlog) {
+          this.unLikeBlog()
+        } else {
+          this.dislikeBlog()
+        }
+      }
+    },
+    likeBlog() {
+      this.likesCounter += 1;
+      this.userLikedBlog = true;
+      let endpoint = `/api/blogs/${this.blog.id}/like/`;
+      apiService(endpoint, "POST");
+    },
+    unLikeBlog() {
+
+      this.likesCounter -= 1;
+      this.userLikedBlog = false;
+      let endpoint = `/api/comments/${this.blog.id}/like/`;
+      apiService(endpoint, "DELETE");
+
+    },
+    dislikeBlog() {
+      this.dislikesCounter += 1;
+      this.userDisLikedBlog = true;
+      let endpoint = `/api/blogs/${this.blog.id}/dislike/`;
+      apiService(endpoint, "POST");
+    },
+    undislikeBlog() {
+      this.dislikesCounter -= 1;
+      this.userDisLikedBlog = false;
+      let endpoint = `/api/blogs/${this.blog.id}/dislike/`;
+      apiService(endpoint, "DELETE");
+    },
   },
   created() {
     this.getBlogs();

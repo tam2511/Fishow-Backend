@@ -138,7 +138,6 @@
                 let endpoint = `/api/comments/${this.comment.id}/dislike/`;
                 apiService(endpoint, "DELETE");
             },
-
             triggerDeleteComment() {
                 // emit an event to delete an answer instance
                 this.$emit("deleteComment", this.comment);

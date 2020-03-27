@@ -12,14 +12,31 @@
           <form @submit.prevent="onSubmit">
             <div class="row row-10 row-narrow">
               <div class="col-md-12 fishow-content_container">
-                <!--                                <text-field/>-->
-                <template v-for="(article, index) in articles">
-                  <component
-                    :is="article"
-                    :key="article[index]"
-                    :counter="article + articles.length"
-                  ></component>
-                </template>
+                <div class="form-wrap">
+                                        <textarea
+                                                v-model="blog_title"
+                                                name="blog_body"
+                                                class="form-control"
+                                                placeholder="Write here text of your blog"
+                                                cols="30"
+                                                rows="4">
+                                        </textarea>
+                  <textarea
+                          v-model="blog_body"
+                          name="blog_body"
+                          class="form-control"
+                          placeholder="Write here text of your blog"
+                          cols="30"
+                          rows="4">
+                                        </textarea>
+                </div>
+<!--                <template v-for="(article, index) in articles">-->
+<!--                  <component-->
+<!--                    :is="article"-->
+<!--                    :key="article[index]"-->
+<!--                    :counter="article + articles.length"-->
+<!--                  ></component>-->
+<!--                </template>-->
               </div>
               <div class="col-md-12 fishow_container">
                 <div class="fishow_button_text">
@@ -62,13 +79,13 @@
 
 <script>
 import { apiService } from "@/common/api.service.js";
-import TextField from "../components/blog/textField";
-import imageField from "../components/blog/imageField";
-import BlogContentField from "../components/blog/blogContentField";
-import videoField from "../components/blog/videoField";
+// import TextField from "../components/blog/textField";
+// import imageField from "../components/blog/imageField";
+// import BlogContentField from "../components/blog/blogContentField";
+// import videoField from "../components/blog/videoField";
 export default {
   name: "BlogEditor",
-  components: { BlogContentField, TextField, imageField, videoField },
+  components: {  },
   props: {
     slug: {
       type: String,

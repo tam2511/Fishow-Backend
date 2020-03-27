@@ -48,7 +48,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        exclude = ['updated_at']
+        exclude = ['updated_at', 'votersUp','votersDown']
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%B %d, %Y")
