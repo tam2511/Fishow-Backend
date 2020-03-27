@@ -12,6 +12,10 @@ class Blog(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name="blogs")
+    votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                      related_name='votesUpBlog')
+    votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                        related_name='votesDownBlog')
 
     def __str__(self):
         return self.content

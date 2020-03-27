@@ -108,3 +108,67 @@ class BlogViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+
+class BlogLikeAPIView(APIView):
+    """Allow users to add/remove a like to/from an comment instance."""
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        """Remove request.user from the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, pk=pk)
+        user = request.user
+
+        blog.votersUp.remove(user)
+        blog.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(blog, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, pk):
+        """Add request.user to the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, pk=pk)
+        user = request.user
+
+        blog.votersUp.add(user)
+        blog.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(blog, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class BlogDisLikeAPIView(APIView):
+    """Allow users to add/remove a like to/from an comment instance."""
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        """Remove request.user from the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, pk=pk)
+        user = request.user
+
+        blog.votersDown.remove(user)
+        blog.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(blog, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, pk):
+        """Add request.user to the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, pk=pk)
+        user = request.user
+
+        blog.votersDown.add(user)
+        blog.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(blog, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
