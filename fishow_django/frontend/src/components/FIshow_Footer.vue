@@ -6,7 +6,7 @@
                     <div class="row row-50 justify-content-center justify-content-lg-between">
                         <div class="col-md-4 col-lg-5 col-xxl-4 text-center text-lg-left">
                             <article class="unit flex-column flex-lg-row align-items-center justify-content-center justify-content-sm-start footer-creative-info">
-                                <div class="unit-left"><a class="brand brand-md" href="{% url 'home' %}"><img class="brand-logo brand-logo-dark" src="{% static '/images/logo-default-129x81.png' %}" alt="" width="129" height="81"/><img class="brand-logo brand-logo-light" src="{% static '/images/logo-inverse-129x81.png' %}" alt="" width="129" height="81"/></a></div>
+                                <div class="unit-left"><router-link class="brand brand-md" to="/"><img class="brand-logo brand-logo-dark" src="/static/assets/images/logo-default-129x81.png" alt="" width="129" height="81"/><img class="brand-logo brand-logo-light" src="/static/assets/images/logo-inverse-129x81.png" alt="" width="129" height="81"/></router-link></div>
                                 <div class="unit-body">
                                     <p>Dragons  provides extensive information on everything concerning our basketball team for fans all over the world.</p>
                                 </div>
@@ -38,7 +38,7 @@
                                 <!-- Post Classic-->
                                 <article class="post-classic">
                                     <div class="post-classic-main">
-                                        <p class="post-classic-title"><a href="{% url 'blog_post' %}">After seven days off, LeBron James and Cavs rout Raptors </a></p>
+                                        <p class="post-classic-title"><router-link to="/">After seven days off, LeBron James and Cavs rout Raptors </router-link></p>
                                         <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
                                             <time datetime="2018">April 15, 2018</time>
                                         </div>

@@ -6,6 +6,7 @@ import BlogEditor from "../views/BlogEditor.vue";
 import CreateComment from "../components/CreateComment.vue";
 import NotFound from "../views/NotFound.vue";
 import Article from "../views/Article";
+import UserPage from "../views/UserPage";
 Vue.use(Router);
 
 export default new Router ({
@@ -20,6 +21,12 @@ export default new Router ({
       path: '/article/',
       name: 'Article',
       component: Article,
+      props: true
+    },
+    {
+      path: '/user-page/',
+      name: 'UserPage',
+      component: UserPage,
       props: true
     },
     {
@@ -47,11 +54,3 @@ export default new Router ({
     }
   ]
 });
-
-// const router = new VueRouter({
-//   mode: 'history',
-//   base: process.env.BASE_URL,
-//   routes
-// })
-//
-// export default router

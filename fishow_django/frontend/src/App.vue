@@ -36,8 +36,7 @@
 @import "localFIles/assest/scss/custom-styles/style.scss";
 @import "localFIles/assest/scss/customStyles.scss";
 @import "localFIles/assest/scss/fishowStyles.scss";
-@import "assets/css/bootstrap.css";
-@import "assets/css/fishowStyles.css";
+/*@import "assets/css/bootstrap.css";*/
 @import "localFIles/assest/scss/custom-styles/fonts.scss";
   html {
     background-color: #edeff4;

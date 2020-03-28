@@ -77,6 +77,8 @@
     }
 </script>
 
-<style>
-
+<style scoped lang="scss">
+    a:active {
+        color: #fff;
+    }
 </style>

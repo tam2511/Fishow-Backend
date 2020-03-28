@@ -9,7 +9,7 @@
               <article class="heading-component">
                 <div class="heading-component-inner">
                   <h5 class="heading-component-title">Лучшие блоги</h5>
-                  <div class="">
+                  <div class="buttons-nav">
                     <router-link
                             class="button button-xs button-primary"
                             :to="{ name: 'blog-editor' }"
@@ -162,3 +162,8 @@
     }
   };
 </script>
+<style>
+  .buttons-nav a {
+    margin-left: 10px;
+  }
+</style>

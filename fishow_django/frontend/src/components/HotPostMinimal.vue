@@ -26,5 +26,7 @@
 </script>
 
 <style scoped>
-
+    .list-post-minimal {
+        margin-bottom: 10px;
+    }
 </style>

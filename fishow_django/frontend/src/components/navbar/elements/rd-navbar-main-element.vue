@@ -41,22 +41,30 @@
                     </form>
                 </div>
             </li>
-            <li>
+            <li v-if="!userName">
                 <a
                         class="link link-icon link-icon-left link-classic"
                         href=""
-                        v-if="!userName"
+
                 >Вход/Регистрация
                     <span class="icon fl-bigmug-line-login12"></span
                     ></a>
-                <div
+
+
+            </li>
+            <li>
+                <router-link
                         class="link link-icon link-icon-left link-classic"
-                        href=""
-                        v-else
+                        to="/user-page/"
                 >{{ userName }}
-                   </div>
-
-
+                </router-link>
+            </li>
+            <li>
+                <button
+                        @click="logout"
+                        class="button button-xs button-primary">
+                    Выйти
+                </button>
             </li>
 
         </ul>
@@ -64,6 +72,8 @@
 </template>
 
 <script>
+    import {apiService} from "../../../common/api.service";
+
     export default {
         name: "rd-navbar-main-element",
         data() {
@@ -76,7 +86,9 @@
                 if (!!window.localStorage.getItem("username")) {
                     this.userName = window.localStorage.getItem("username");
                 }
-
+            },
+            logout() {
+                window.location = '/accounts/logout/'
             }
         },
         created() {
