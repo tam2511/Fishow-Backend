@@ -4,13 +4,13 @@
         <article class="post-minimal">
             <div class="post-classic-main">
                 <p class="post-classic-title">
-                    <router-link :to="{ name: 'blog', params: { slug: slug } }"> {{ title }} </router-link>
+                    <router-link :to="{ name: 'blog', params: { slug: blog.slug } }"> {{ blog.title }} </router-link>
                 </p>
                 <div class="post-minimal_comments">
                     <div class="badge badge-primary">Категория</div>
-                    <div class="post-corporate-author"> Автор: {{author}} </div>
+                    <div class="post-corporate-author"> Автор: {{ blog.author}} </div>
                     <time class="post-classic-time">
-                        {{ time }}
+                        {{ blog.created_at }}
                     </time>
                 </div>
             </div>
@@ -21,7 +21,7 @@
 <script>
     export default {
         name: "HotPostMinimal",
-        props: ['title','author','content','time','slug'],
+        props: ['blog'],
     }
 </script>
 
