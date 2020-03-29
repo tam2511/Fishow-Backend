@@ -20,15 +20,15 @@
                         </div>
                         <div class="blog-post-content">
                             <div v-for="p in result"
-                            :key="p">
+                            :key="p.type">
                                 <p v-if="p.type === 'text'">{{ p.body }}</p>
                                 <iframe v-if="p.type === 'video'" width="560" height="315" :src="whomIsVideo(p.url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <img v-if="p.type === 'image'" :src="p.url" alt="">
                             </div>
                             <ul class="list-tags">
-                                <li v-for="tag in tags"
-                                :key="tag">
-                                    <router-link to="/">{{ tag }}</router-link>
+                                <li v-for="blogTag in blogTags"
+                                :key="blogTag">
+                                    <router-link to="/">{{ blogTag }}</router-link>
                                 </li>
                             </ul>
                         </div>
@@ -95,7 +95,7 @@
 
         data() {
             return {
-                tags: {},
+                blogTags: {},
                 result: {},
                 blog: {},
                 id: 0,
@@ -132,8 +132,7 @@
                     this.blog = data;
                     this.result = JSON.parse(data.content);
                     this.result = this.result.blocks[0];
-                    this.tags = JSON.parse(this.blog.tags);
-                    console.log(this.tags);
+                    this.blogTags = JSON.parse(this.blog.tags);
                     this.id = data.id;
                     this.setPageTitle('Fishow - ' + data.title);
                 })

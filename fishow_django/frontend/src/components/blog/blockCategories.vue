@@ -12,7 +12,7 @@
       <ul
         class="list-marked list-marked-categories">
         <li  v-for="category in categories"
-            :key="category">
+            :key="category.name">
             <a href="#">{{ category.name }}</a><span class="list-marked-counter">{{ category.count }}</span></li>
       </ul>
     </div>
