@@ -72,7 +72,6 @@
 </template>
 
 <script>
-    import {apiService} from "../../../common/api.service";
 
     export default {
         name: "rd-navbar-main-element",
@@ -83,7 +82,7 @@
         },
         methods: {
             getUserName() {
-                if (!!window.localStorage.getItem("username")) {
+                if (window.localStorage.getItem("username")) {
                     this.userName = window.localStorage.getItem("username");
                 }
             },

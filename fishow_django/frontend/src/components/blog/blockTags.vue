@@ -9,7 +9,8 @@
 
         <!-- List Tags-->
         <ul class="list-tags">
-            <li v-for="tag in tags"><a href="#">{{ tag.name }}</a></li>
+            <li v-for="tag in tags"
+            :key="tag"><a href="#">{{ tag.name }}</a></li>
         </ul>
     </div>
 </template>

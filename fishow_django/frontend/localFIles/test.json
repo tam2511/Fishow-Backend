@@ -1,0 +1,14 @@
+{
+  "title":"Заголовок",
+  "tags":"Картинка с текстом,Картинки",
+  "is_authors":false,
+  "is_adult":false,
+  "is_community":false,
+  "blocks":[
+    {
+      "id":"1582227911.089","type":"image","url":"http://s12.pikabu.ru/post_img/2020/02/20/11/1582227916134327909.png"},
+    {
+      "id":"1582649043.868","type":"text","body":"<p>text2</p>"
+    }
+  ]
+}

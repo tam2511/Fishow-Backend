@@ -22,15 +22,6 @@
                           rows="4"
                   >
                   </textarea>
-                  <textarea
-                          v-model="blog_body"
-                          name="blog_body"
-                          class="form-control"
-                          placeholder="Write here text of your blog"
-                          cols="30"
-                          rows="4"
-                  >
-                  </textarea>
                 </div>
                 <template v-for="(article, index) in articles">
                   <component
@@ -40,14 +31,21 @@
                   ></component>
                 </template>
               </div>
+
               <div class="col-md-12 fishow_container">
-                <button class="button button-primary button-sm" @click="addText">
+                <button class="button button-primary button-sm"
+                        type="button"
+                        @click="addText">
                   Текст
                 </button>
-                <button class="button button-primary button-sm" @click="addVideo">
+                <button class="button button-primary button-sm"
+                        type="button"
+                        @click="addVideo">
                   Видео
                 </button>
-                <button class="button button-primary button-sm" @click="addImage">
+                <button class="button button-primary button-sm"
+                        type="button"
+                        @click="addImage">
                   Картинка
                 </button>
               </div>
@@ -72,6 +70,13 @@
           </form>
 
         </div>
+        <div class="col-lg-5 col-xl-4">
+          <h4>{{ blog_title }}</h4>
+          <hr/>
+          <p style="white-sace: pre-line;">{{ blog_body }}</p>
+          <hr/>
+
+        </div>
       </div>
     </div>
   </section>
@@ -93,21 +98,49 @@
         required: false
       }
     },
+
     data() {
       return {
         imageCounter: 0,
         textCounter: 1,
         articles: ['BlogContentField'],
-        blog_body: null,
+        blog_body: '',
         blog_title: null,
         result: [],
         error: null,
-        field: "textField"
+        field: "textField",
+        blog_json: null
       };
     },
     methods: {
       onSubmit() {
-          if (!this.blog_body) {
+        const result = [];
+        const listBloks = document.querySelectorAll('textarea');
+
+        listBloks.forEach((block) => {
+          if (block.name === 'text') {
+            result.push({'type':'text','body':block.value})
+          }
+          if (block.name === 'image') {
+            result.push({'type':'image','url':block.value})
+          }
+          if (block.name === 'video') {
+            result.push({'type':'video','url':block.value})
+          }
+        });
+        console.log(result);
+        console.log(listBloks);
+        this.blog_body = JSON.stringify({
+          "tags":"Картинка с текстом,Картинки",
+          "is_authors":false,
+          "is_adult":false,
+          "is_community":false,
+          "blocks":[
+            result
+          ]
+        });
+
+        if (!this.blog_body) {
           this.error = "You can't send an empty blog!";
         } else if (this.blog_body.length > 400) {
           this.error = "To much words in your blog";

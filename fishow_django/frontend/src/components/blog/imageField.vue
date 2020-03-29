@@ -4,7 +4,7 @@
             <div class="fishow-blog_image__close-button"
                 @click="destroyMe">x</div>
             <textarea
-                    name="blog_body"
+                    name="image"
                     class="form-input"
                     v-model="image"
                     :id="counter"

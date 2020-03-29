@@ -7,12 +7,10 @@
                     v-model="urlVideo"
                     class="form-input"
                     :id="counter"
-                    name="text"
+                    name="video"
                     placeholder="ссылка на видео"
             ></textarea>
-            <video width="320" height="240" controls>
-                <source :src="urlVideo" type="video/mp4">
-            </video>
+            <iframe width="560" height="315" :src="urlVideo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
     </div>

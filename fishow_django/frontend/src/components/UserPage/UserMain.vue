@@ -62,7 +62,7 @@
         },
         methods: {
             getUserName() {
-                if (!!window.localStorage.getItem("username")) {
+                if (window.localStorage.getItem("username")) {
                     this.userName = window.localStorage.getItem("username");
                 }
 

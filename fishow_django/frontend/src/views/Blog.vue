@@ -19,8 +19,14 @@
                             </div>
                         </div>
                         <div class="blog-post-content">
-                            <p>{{ blog.content }}</p>
-                            <img src="/static/assets/images/basketball/post-basketball-1-769x416.jpg" alt="" width="769" height="416">
+                            <div v-for="p in result"
+                            :key="p">
+                                <p v-if="p.type === 'text'">{{ p.body }}</p>
+                                <iframe v-if="p.type === 'video'" width="560" height="315" :src="p.url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <img v-if="p.type === 'image'" :src="p.url" alt="">
+                            </div>
+
+
                         </div>
                     </div>
                     <div class="row">
@@ -82,8 +88,10 @@
                 required: true
             }
         },
+
         data() {
             return {
+                result: {},
                 blog: {},
                 id: 0,
                 next: null,
@@ -105,6 +113,9 @@
                 let endpoint = `/api/blogs/${this.slug}/`;
                 apiService(endpoint).then(data => {
                     this.blog = data;
+
+                    this.result = JSON.parse(data.content);
+                    this.result = this.result.blocks[0];
                     this.id = data.id;
                     this.setPageTitle('Fishow - ' + data.title);
                 })
@@ -137,16 +148,23 @@
                     console.log(err)
                 }
             },
+
         },
 
         created() {
             this.getBlogData();
             this.getCommentData();
             this.getUser();
+
+        },
+        mounted() {
+
         }
     }
 </script>
 
 <style scoped>
-
+    .blog-post-content p {
+        white-space: pre-line;
+    }
 </style>

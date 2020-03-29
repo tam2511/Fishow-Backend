@@ -9,8 +9,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="n in 10">
-                <td><span>{{ n }}</span></td>
+            <tr v-for="type in 10"
+                :key="type">
+                <td><span>{{ type }}</span></td>
                 <td class="team-inline">
                     <div class="team-figure">
                         <img
