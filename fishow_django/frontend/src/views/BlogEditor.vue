@@ -12,17 +12,18 @@
           <form @submit.prevent="onSubmit">
             <div class="row row-10 row-narrow">
               <div class="col-md-12 fishow-content_container">
-                <div class="form-wrap">
-                  <textarea
-                          v-model="blog_title"
-                          name="blog_body"
-                          class="form-control"
-                          placeholder="Write here text of your blog"
-                          cols="30"
-                          rows="4"
-                  >
-                  </textarea>
+                <div class="col-md-12 fishow-content">
+                  <div class="form-wrap">
+                    <textarea
+                            v-model="blog_title"
+                            class="form-input"
+                            id="blog_title"
+                            name="text"
+                            placeholder="Заголовок"
+                    ></textarea>
+                  </div>
                 </div>
+
                 <template v-for="(article, index) in articles">
                   <component
                           :is="article"
