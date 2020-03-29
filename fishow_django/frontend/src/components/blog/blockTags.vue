@@ -9,8 +9,8 @@
 
         <!-- List Tags-->
         <ul class="list-tags">
-            <li v-for="tag in tags"
-            :key="tag"><a href="#">{{ tag.name }}</a></li>
+            <li v-for="ctag in ctags"
+            :key="ctag.name"><a href="#">{{ ctag.name }}</a></li>
         </ul>
     </div>
 </template>
@@ -21,7 +21,7 @@
         data() {
             return {
                 // TODO: эт получать надо из блога, а не тут прописывать, но пока так.
-                tags: [
+                ctags: [
                     {name: "Снаряжение"},
                     {name: "История"},
                     {name: "Отчет"},

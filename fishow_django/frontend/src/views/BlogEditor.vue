@@ -88,9 +88,7 @@
           <h4>Категория: {{ blog_category }}</h4>
 
           <select v-model="blog_tags" multiple>
-            <option>Наука</option>
-            <option>Картинки</option>
-            <option>Юмор</option>
+            <option v-for="tag in deafultTags" :key="tag">{{ tag }}</option>
           </select>
           <br>
           <h5>Selected: {{ blog_tags }}</h5>
@@ -125,8 +123,9 @@
         articles: ['BlogContentField'],
         blog_body: '',
         blog_title: null,
-        blog_category: null,
-        blog_tags:{},
+        blog_category: 'Блоги',
+        blog_tags: [],
+        deafultTags: ['Пиво','Путин',"Москва", "Деньги", "ХУй"],
         result: [],
         error: null,
         field: "textField",
@@ -150,10 +149,6 @@
           }
         });
         this.blog_body = JSON.stringify({
-          "tags":"Картинка с текстом,Картинки",
-          "is_authors":false,
-          "is_adult":false,
-          "is_community":false,
           "blocks":[
             result
           ]
@@ -168,7 +163,7 @@
 
         if (!this.blog_body) {
           this.error = "You can't send an empty blog!";
-        } else if (this.blog_body.length > 400) {
+        } else if (this.blog_body.length > 4000) {
           this.error = "To much words in your blog";
         } else {
           let endpoint = "/api/blogs/";

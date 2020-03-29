@@ -80,7 +80,7 @@
             </h4>
             <div class="post-corporate-text">
                 <div v-for="p in getResult"
-                     :key="p">
+                     :key="p.type">
                     <p v-if="p.type === 'text'">{{ p.body }}</p>
                     <iframe v-if="p.type === 'video'" width="560" height="315" :src="p.url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <img v-if="p.type === 'image'" :src="p.url" alt="">
