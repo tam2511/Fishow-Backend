@@ -6,12 +6,6 @@ module.exports = {
     outputDir: './dist/',
     // lintOnSave: false,
     chainWebpack: config => {
-        // config
-        //     .plugin('env')
-        //     .use(require.resolve('webpack/lib/ProvidePlugin'), [{ jQuery: 'jquery'  }])
-        //
-        // config.toString();
-
         config
             .plugin('BundleTracker')
             .use(BundleTracker, [{filename: './webpack-stats.json'}])
@@ -39,11 +33,11 @@ module.exports = {
     },
 
     // uncomment before executing 'npm run build'
-    css: {
-        extract: {
-          filename: 'bundle.css',
-          chunkFilename: 'bundle.css',
-        },
-    }
+    // css: {
+    //     extract: {
+    //       filename: 'bundle.css',
+    //       chunkFilename: 'bundle.css',
+    //     },
+    // }
 
 };

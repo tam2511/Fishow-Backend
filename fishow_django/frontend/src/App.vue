@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
   import {apiService} from "./common/api.service";
   import NavbarComponent from "./components/Navbar.vue";
   import FIshow_Footer from "./components/FIshow_Footer";
@@ -36,7 +37,6 @@
 @import "localFIles/assest/scss/custom-styles/style.scss";
 @import "localFIles/assest/scss/customStyles.scss";
 @import "localFIles/assest/scss/fishowStyles.scss";
-/*@import "assets/css/bootstrap.css";*/
 @import "localFIles/assest/scss/custom-styles/fonts.scss";
   html {
     background-color: #edeff4;
