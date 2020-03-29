@@ -18,7 +18,7 @@
                             v-model="blog_title"
                             class="form-input"
                             id="blog_title"
-                            name="text"
+                            name="title"
                             placeholder="Заголовок"
                     ></textarea>
                   </div>
@@ -61,9 +61,10 @@
               </button>
               <button
                       class="button button-lg button-gray-outline button-block"
-                      type="submit"
+                      type="button"
                       name="save_blog"
                       onclick=""
+                      @click="convertBody"
               >
                 Сохранить как черновик
               </button>
@@ -114,6 +115,33 @@
       };
     },
     methods: {
+      convertBody() {
+        const result = [];
+        const listBloks = document.querySelectorAll('textarea');
+
+        listBloks.forEach((block) => {
+          if (block.name === 'text') {
+            result.push({'type':'text','body':block.value})
+          }
+          if (block.name === 'image') {
+            result.push({'type':'image','url':block.value})
+          }
+          if (block.name === 'video') {
+            result.push({'type':'video','url':block.value})
+          }
+        });
+        console.log(result);
+        console.log(listBloks);
+        this.blog_body = JSON.stringify({
+          "tags":"Картинка с текстом,Картинки",
+          "is_authors":false,
+          "is_adult":false,
+          "is_community":false,
+          "blocks":[
+            result
+          ]
+        });
+      },
       onSubmit() {
         const result = [];
         const listBloks = document.querySelectorAll('textarea');
@@ -199,6 +227,14 @@
       margin: 20px;
     }
   }
+  @media screen and (max-width: 500px){
+    .fishow_container {
+      justify-content: space-around;
+      flex-flow: row;
+      align-items: baseline;
+    }
+  }
+
   .fishow_action_btn {
     background-color: #18636b;
   }
