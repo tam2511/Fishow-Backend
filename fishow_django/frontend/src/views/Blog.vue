@@ -5,7 +5,7 @@
                 <div class="col-lg-8">
                     <div class="blog-post">
                         <!-- Badge-->
-                        <div class="badge badge-secondary">The Team
+                        <div class="badge badge-secondary">{{ blog.category }}
                         </div>
                         <h3 class="blog-post-title">{{ blog.title }}</h3>
                         <div class="blog-post-header">
@@ -25,8 +25,12 @@
                                 <iframe v-if="p.type === 'video'" width="560" height="315" :src="whomIsVideo(p.url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <img v-if="p.type === 'image'" :src="p.url" alt="">
                             </div>
-
-
+                            <ul class="list-tags">
+                                <li v-for="tag in tags"
+                                :key="tag">
+                                    <router-link to="/">{{ tag }}</router-link>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="row">
@@ -91,6 +95,7 @@
 
         data() {
             return {
+                tags: {},
                 result: {},
                 blog: {},
                 id: 0,
@@ -127,6 +132,8 @@
                     this.blog = data;
                     this.result = JSON.parse(data.content);
                     this.result = this.result.blocks[0];
+                    this.tags = JSON.parse(this.blog.tags);
+                    console.log(this.tags);
                     this.id = data.id;
                     this.setPageTitle('Fishow - ' + data.title);
                 })

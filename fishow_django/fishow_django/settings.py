@@ -139,7 +139,7 @@ LOGOUT_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'frontend/src/'),
+    os.path.join(BASE_DIR, 'frontend/dist/'),
 )
 # Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"

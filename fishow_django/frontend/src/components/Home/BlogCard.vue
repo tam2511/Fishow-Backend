@@ -59,7 +59,7 @@
                 <span data-votes-counter>{{ likesCounter - dislikesCounter }}</span>
                 <div class="post-corporate-header">
                     <!-- Badge-->
-                    <div class="badge badge-primary">Блог</div>
+                    <div class="badge badge-primary">{{ blog.category }}</div>
                     <time class="post-corporate-time"> {{ blog.created_at }} </time>
                     <div class="post-corporate-author">
                         Автор:

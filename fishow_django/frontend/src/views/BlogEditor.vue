@@ -7,6 +7,8 @@
           <article class="heading-component">
             <div class="heading-component-inner">
               <h5 class="heading-component-title">Написать блог</h5>
+
+
             </div>
           </article>
           <form @submit.prevent="onSubmit">
@@ -69,15 +71,29 @@
                 Сохранить как черновик
               </button>
             </div>
+            <div class="col-md-12">
+
+            </div>
           </form>
 
         </div>
         <div class="col-lg-5 col-xl-4">
-          <h4>{{ blog_title }}</h4>
-          <hr/>
-          <p style="white-sace: pre-line;">{{ blog_body }}</p>
-          <hr/>
+          <input type="radio" id="one" value="Новости" v-model="blog_category" checked>
+          <label for="one">Новости</label>
+          <input type="radio" id="two" value="Блоги" v-model="blog_category">
+          <label for="two">Блоги</label>
+          <input type="radio" id="three" value="Статьи" v-model="blog_category">
+          <label for="three">Статьи</label>
+          <br>
+          <h4>Категория: {{ blog_category }}</h4>
 
+          <select v-model="blog_tags" multiple>
+            <option>Наука</option>
+            <option>Картинки</option>
+            <option>Юмор</option>
+          </select>
+          <br>
+          <h5>Selected: {{ blog_tags }}</h5>
         </div>
       </div>
     </div>
@@ -103,11 +119,14 @@
 
     data() {
       return {
+        picked: null,
         imageCounter: 0,
         textCounter: 1,
         articles: ['BlogContentField'],
         blog_body: '',
         blog_title: null,
+        blog_category: null,
+        blog_tags:{},
         result: [],
         error: null,
         field: "textField",
@@ -140,7 +159,11 @@
           ]
         });
       },
+      convertTags() {
+        this.blog_tags = JSON.stringify(this.blog_tags);
+      },
       onSubmit() {
+        this.convertTags();
         this.convertBody();
 
         if (!this.blog_body) {
@@ -156,7 +179,9 @@
           }
           apiService(endpoint, method, {
             title: this.blog_title,
-            content: this.blog_body
+            content: this.blog_body,
+            category: this.blog_category,
+            tags: this.blog_tags
           }).then(blog_data => {
             this.$router.push({
               name: "blog",

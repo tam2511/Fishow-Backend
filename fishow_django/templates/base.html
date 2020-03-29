@@ -14,7 +14,9 @@
 <body>
     {% block content %}
     {% endblock %}
-    <script type="text/javascript" src="{% static 'assets/js/core.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'assets/js/script.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'bundle.js' %}"></script>
+    <script type="text/javascript" src="{% static 'core.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
 </body>
 </html>
