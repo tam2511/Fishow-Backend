@@ -5,6 +5,8 @@ from django.conf import settings
 class Blog(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=5000)
+    category = models.CharField(max_length=100)
+    tags = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     moderator_like = models.NullBooleanField(null=True, default=False)
