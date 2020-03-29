@@ -130,8 +130,6 @@
             result.push({'type':'video','url':block.value})
           }
         });
-        console.log(result);
-        console.log(listBloks);
         this.blog_body = JSON.stringify({
           "tags":"Картинка с текстом,Картинки",
           "is_authors":false,
@@ -143,31 +141,7 @@
         });
       },
       onSubmit() {
-        const result = [];
-        const listBloks = document.querySelectorAll('textarea');
-
-        listBloks.forEach((block) => {
-          if (block.name === 'text') {
-            result.push({'type':'text','body':block.value})
-          }
-          if (block.name === 'image') {
-            result.push({'type':'image','url':block.value})
-          }
-          if (block.name === 'video') {
-            result.push({'type':'video','url':block.value})
-          }
-        });
-        console.log(result);
-        console.log(listBloks);
-        this.blog_body = JSON.stringify({
-          "tags":"Картинка с текстом,Картинки",
-          "is_authors":false,
-          "is_adult":false,
-          "is_community":false,
-          "blocks":[
-            result
-          ]
-        });
+        this.convertBody();
 
         if (!this.blog_body) {
           this.error = "You can't send an empty blog!";

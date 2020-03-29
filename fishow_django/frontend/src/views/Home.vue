@@ -30,6 +30,9 @@
               <blog-card v-for="blog in blogs"
                          :blog="blog"
                          :key="blog.pk"/>
+              <button class="button button-primary button-lg"
+                      v-show="next"
+              @click="getBlogs">Load more</button>
             </div>
           </div>
           <!-- Aside Block-->
@@ -147,6 +150,7 @@
         this.loadingBlogs = true;
         apiService(endpoint).then(data => {
           this.blogs.push(...data.results);
+          this.loadingBlogs = false;
           if (data.next) {
             this.next = data.next;
           } else {

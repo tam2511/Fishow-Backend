@@ -22,7 +22,7 @@
                             <div v-for="p in result"
                             :key="p">
                                 <p v-if="p.type === 'text'">{{ p.body }}</p>
-                                <iframe v-if="p.type === 'video'" width="560" height="315" :src="p.url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe v-if="p.type === 'video'" width="560" height="315" :src="whomIsVideo(p.url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <img v-if="p.type === 'image'" :src="p.url" alt="">
                             </div>
 
@@ -94,15 +94,27 @@
                 result: {},
                 blog: {},
                 id: 0,
-                next: null,
                 comments: [],
                 newCommentBody: null,
                 error: null,
-                loadingAnswers: false,
                 requestUser: null
             }
         },
         methods: {
+            whomIsVideo(fields) {
+              const temp = fields.split('/');
+              let result = '';
+              for (let i = 0; i < temp.length; i++) {
+                  if (temp[i] === 'youtu.be') {
+                      result = 'https://www.youtube.com/embed/' + temp[temp.length-1];
+                      return result;
+                  }
+                  if (temp[i] === 'www.youtube.com') {
+                      result = 'https://www.youtube.com/embed/' + temp[temp.length-1].split('watch?v=')[0];
+                      return result;
+                  }
+              }
+            },
             setPageTitle(title) {
                 document.title = title;
             },
@@ -113,7 +125,6 @@
                 let endpoint = `/api/blogs/${this.slug}/`;
                 apiService(endpoint).then(data => {
                     this.blog = data;
-
                     this.result = JSON.parse(data.content);
                     this.result = this.result.blocks[0];
                     this.id = data.id;
@@ -122,18 +133,8 @@
             },
             getCommentData() {
                 let endpoint = `/api/blogs/${this.slug}/comments/`;
-                if (this.next) {
-                    endpoint = this.next;
-                }
                 apiService(endpoint).then(data => {
-
                     this.comments.push(...data.results);
-                    this.loadingAnswers = false;
-                    if (data.next) {
-                        this.next = data.next;
-                    } else {
-                        this.next = null;
-                    }
                 })
             },
             async deleteComment(comment) {
