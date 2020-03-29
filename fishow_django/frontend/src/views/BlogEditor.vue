@@ -149,10 +149,6 @@
           }
         });
         this.blog_body = JSON.stringify({
-          "tags":"Картинка с текстом,Картинки",
-          "is_authors":false,
-          "is_adult":false,
-          "is_community":false,
           "blocks":[
             result
           ]
@@ -167,7 +163,7 @@
 
         if (!this.blog_body) {
           this.error = "You can't send an empty blog!";
-        } else if (this.blog_body.length > 400) {
+        } else if (this.blog_body.length > 4000) {
           this.error = "To much words in your blog";
         } else {
           let endpoint = "/api/blogs/";
