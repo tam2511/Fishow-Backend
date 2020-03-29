@@ -38,8 +38,6 @@ class CommentSerializer(serializers.ModelSerializer):
 class BlogSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     created_at = serializers.SerializerMethodField()
-    category = serializers.SerializerMethodField()
-    tags = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
     user_has_votedUp = serializers.SerializerMethodField()
@@ -50,7 +48,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        exclude = ['updated_at', 'votersUp','votersDown', 'category', 'tags']
+        exclude = ['updated_at', 'votersUp','votersDown']
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%B %d, %Y")
