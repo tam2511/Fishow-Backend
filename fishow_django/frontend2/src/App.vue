@@ -9,6 +9,7 @@
 <script>
 
   import { apiService } from './common/api.service'
+  import store from './store'
   import NavbarComponent from './components/Navbar.vue'
   import FIshow_Footer from './components/FIshow_Footer'
   export default {
@@ -27,6 +28,9 @@
     },
     created () {
       this.setUserInfo()
+      store.commit('increment');
+
+      console.log(store.state.count)
     }
   }
 

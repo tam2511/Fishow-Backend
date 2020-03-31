@@ -100,10 +100,10 @@
 
 <script>
 import { apiService } from '@/common/api.service.js'
-import TextField from '../components/blog/textField'
-import imageField from '../components/blog/imageField'
-import BlogContentField from '../components/blog/blogContentField'
-import videoField from '../components/blog/videoField'
+import TextField from '@/components/blog/textField'
+import imageField from '@/components/blog/imageField'
+import BlogContentField from '@/components/blog/blogContentField'
+import videoField from '@/components/blog/videoField'
 export default {
   name: 'BlogEditor',
   components: { TextField, BlogContentField, imageField, videoField },
