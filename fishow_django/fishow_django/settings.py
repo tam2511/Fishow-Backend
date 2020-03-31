@@ -140,6 +140,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/dist/'),
+    os.path.join(BASE_DIR, 'frontend/source/'),
 )
 # Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"
