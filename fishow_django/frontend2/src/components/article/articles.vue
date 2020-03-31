@@ -5,13 +5,13 @@
             <div class="post-creative-content">
                 <div class="post-creative-header">
                     <!-- Badge-->
-                    <div class="badge badge-secondary">The League
+                    <div class="badge" :class="categ">{{ blog.category }}
                     </div>
-                    <time class="post-creative-time" datetime="2018">{{ time }}</time>
+                    <time class="post-creative-time" datetime="2018">{{ blog.created_at }}</time>
                     <div class="post-creative-view"><span class="icon fl-justicons-visible6"></span>234
                     </div>
                 </div>
-                <h4 class="post-creative-title"><router-link :to="{ name: 'blog', params: { slug: slug} }">{{ title }}</router-link></h4>
+                <h4 class="post-creative-title"><router-link :to="{ name: 'blog', params: { slug: blog.slug} }">{{ blog.title }}</router-link></h4>
             </div><a class="post-creative-figure" href="blog-post.html"><img src="static/assets/images/news-4-2-370x279.jpg" alt="" width="370" height="279"/></a>
             <div class="post-creative-footer">
                 <div class="post-creative-comment"><span class="icon mdi mdi-comment-outline"></span><a href="#">{{commentCount}} Comments</a></div>
@@ -36,7 +36,16 @@
 <script>
 export default {
   name: 'articles',
-  props: ['author', 'content', 'time', 'title', 'slug', 'commentCount']
+  props: ['blog'],
+    computed: {
+      categ: function () {
+          if (this.blog.category === 'Блоги') {
+              return 'badge-secondary'
+          } else {
+              return 'badge-primary'
+          }
+      }
+    }
 }
 </script>
 

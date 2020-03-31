@@ -18,11 +18,7 @@
                         <div class="row row-30">
                             <articles v-for="blog in blogs"
                                       :key="blog.pk"
-                                      :author="blog.author"
-                                      :title="blog.title"
-                                      :time="blog.created_at"
-                                      :slug="blog.slug"
-                                      :commentCount="blog.comments_count"   />
+                                      :blog="blog"  />
 
                         </div>
                         <nav class="pagination-wrap" aria-label="Page navigation">
