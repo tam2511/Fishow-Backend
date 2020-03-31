@@ -33,10 +33,10 @@
 </script>
 
 <style lang="scss">
-  @import "localFIles/assest/scss/custom-styles/style.scss";
-  @import "localFIles/assest/scss/customStyles.scss";
-  @import "localFIles/assest/scss/fishowStyles.scss";
-  @import "localFIles/assest/scss/custom-styles/fonts.scss";
+  @import "assets/scss/custom-styles/style.scss";
+  @import "assets/scss/customStyles.scss";
+  @import "assets/scss/fishowStyles.scss";
+  @import "assets/scss/custom-styles/fonts.scss";
   html {
     background-color: #edeff4;
   }
