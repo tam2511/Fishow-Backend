@@ -139,8 +139,8 @@ LOGOUT_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'frontend/dist/'),
-    os.path.join(BASE_DIR, 'frontend/source/'),
+    os.path.join(BASE_DIR, 'frontend2/dist/'),
+    os.path.join(BASE_DIR, 'frontend2/source/'),
 )
 # Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"
@@ -170,6 +170,6 @@ REST_FRAMEWORK = {
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend2', 'webpack-stats.json'),
     }
 }
