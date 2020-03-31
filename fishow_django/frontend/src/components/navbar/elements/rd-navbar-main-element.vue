@@ -50,7 +50,6 @@
                     <span class="icon fl-bigmug-line-login12"></span
                     ></a>
 
-
             </li>
             <li>
                 <router-link
@@ -73,27 +72,27 @@
 
 <script>
 
-    export default {
-        name: "rd-navbar-main-element",
-        data() {
-            return {
-                userName: null
-            }
-        },
-        methods: {
-            getUserName() {
-                if (window.localStorage.getItem("username")) {
-                    this.userName = window.localStorage.getItem("username");
-                }
-            },
-            logout() {
-                window.location = '/accounts/logout/'
-            }
-        },
-        created() {
-            this.getUserName();
-        }
+export default {
+  name: 'rd-navbar-main-element',
+  data () {
+    return {
+      userName: null
     }
+  },
+  methods: {
+    getUserName () {
+      if (window.localStorage.getItem('username')) {
+        this.userName = window.localStorage.getItem('username')
+      }
+    },
+    logout () {
+      window.location = '/accounts/logout/'
+    }
+  },
+  created () {
+    this.getUserName()
+  }
+}
 </script>
 
 <style scoped lang="scss">

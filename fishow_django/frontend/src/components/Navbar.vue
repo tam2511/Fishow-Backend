@@ -28,12 +28,12 @@
 </template>
 
 <script>
-import RdNavbarPanel from "./navbar/rd-navbar-panel";
-import RdNavbarMain from "./navbar/rd-navbar-main";
+import RdNavbarPanel from './navbar/rd-navbar-panel'
+import RdNavbarMain from './navbar/rd-navbar-main'
 export default {
-  name: "navbar",
-  components: {RdNavbarMain, RdNavbarPanel}
-};
+  name: 'navbar',
+  components: { RdNavbarMain, RdNavbarPanel }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

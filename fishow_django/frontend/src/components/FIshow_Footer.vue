@@ -103,9 +103,9 @@
 </template>
 
 <script>
-    export default {
-        name: "FIshow_Footer"
-    }
+export default {
+  name: 'FIshow_Footer'
+}
 </script>
 
 <style scoped>

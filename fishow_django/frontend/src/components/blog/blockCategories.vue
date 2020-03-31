@@ -21,23 +21,23 @@
 
 <script>
 export default {
-  name: "blockCategories",
-  data() {
+  name: 'blockCategories',
+  data () {
     return {
-        // TODO: ну тащемта это надо из АПИ получать, количество блогов и статей
+      // TODO: ну тащемта это надо из АПИ получать, количество блогов и статей
       categories: [
         {
-          name: "Статьи",
+          name: 'Статьи',
           count: 0
         },
         {
-          name: "Блоги",
+          name: 'Блоги',
           count: 0
         }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped></style>

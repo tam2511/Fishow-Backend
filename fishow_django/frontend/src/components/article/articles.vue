@@ -34,10 +34,10 @@
 </template>
 
 <script>
-    export default {
-        name: "articles",
-        props: ['author', 'content','time','title','slug','commentCount']
-    }
+export default {
+  name: 'articles',
+  props: ['author', 'content', 'time', 'title', 'slug', 'commentCount']
+}
 </script>
 
 <style scoped>

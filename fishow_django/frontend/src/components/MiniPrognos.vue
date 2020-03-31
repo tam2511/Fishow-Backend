@@ -22,9 +22,9 @@
 </template>
 
 <script>
-    export default {
-        name: "MiniPrognos"
-    }
+export default {
+  name: 'MiniPrognos'
+}
 </script>
 
 <style scoped>

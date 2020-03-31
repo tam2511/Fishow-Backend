@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home.vue'
-import Blog from "../views/Blog.vue";
-import BlogEditor from "../views/BlogEditor.vue";
-import CreateComment from "../components/CreateComment.vue";
-import NotFound from "../views/NotFound.vue";
-import Article from "../views/Article";
-import UserPage from "../views/UserPage";
-Vue.use(Router);
+import Blog from '../views/Blog.vue'
+import BlogEditor from '../views/BlogEditor.vue'
+import CreateComment from '../components/CreateComment.vue'
+import NotFound from '../views/NotFound.vue'
+import Article from '../views/Article'
+import UserPage from '../views/UserPage'
+Vue.use(Router)
 
-export default new Router ({
+export default new Router({
   mode: 'history',
   routes: [
     {
@@ -42,15 +42,15 @@ export default new Router ({
       props: true
     },
     {
-      path:"/comment/:id",
-      name: "Create-comment",
+      path: '/comment/:id',
+      name: 'Create-comment',
       component: CreateComment,
       props: true
     },
     {
-      path: "*",
-      name: "page-not-found",
+      path: '*',
+      name: 'page-not-found',
       component: NotFound
     }
   ]
-});
+})

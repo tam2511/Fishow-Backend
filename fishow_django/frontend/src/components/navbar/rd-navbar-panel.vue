@@ -52,9 +52,9 @@
 </template>
 
 <script>
-    export default {
-        name: "rd-navbar-panel"
-    }
+export default {
+  name: 'rd-navbar-panel'
+}
 </script>
 
 <style>

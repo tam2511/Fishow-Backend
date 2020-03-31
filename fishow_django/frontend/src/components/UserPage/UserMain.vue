@@ -53,25 +53,24 @@
 </template>
 
 <script>
-    export default {
-        name: "UserMain",
-        data() {
-            return {
-                userName: null
-            }
-        },
-        methods: {
-            getUserName() {
-                if (window.localStorage.getItem("username")) {
-                    this.userName = window.localStorage.getItem("username");
-                }
-
-            }
-        },
-        created() {
-            this.getUserName();
-        }
+export default {
+  name: 'UserMain',
+  data () {
+    return {
+      userName: null
     }
+  },
+  methods: {
+    getUserName () {
+      if (window.localStorage.getItem('username')) {
+        this.userName = window.localStorage.getItem('username')
+      }
+    }
+  },
+  created () {
+    this.getUserName()
+  }
+}
 </script>
 
 <style scoped>

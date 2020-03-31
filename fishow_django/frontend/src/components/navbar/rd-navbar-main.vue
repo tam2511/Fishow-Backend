@@ -70,11 +70,11 @@
 </template>
 
 <script>
-    import RdNavbarMainElement from "./elements/rd-navbar-main-element.vue";
-    export default {
-        name: "rd-navbar-main",
-        components: {RdNavbarMainElement}
-    }
+import RdNavbarMainElement from './elements/rd-navbar-main-element.vue'
+export default {
+  name: 'rd-navbar-main',
+  components: { RdNavbarMainElement }
+}
 </script>
 
 <style scoped lang="scss">

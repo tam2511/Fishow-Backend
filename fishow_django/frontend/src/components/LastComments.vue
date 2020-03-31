@@ -144,9 +144,9 @@
 </template>
 
 <script>
-    export default {
-        name: "LastComments"
-    }
+export default {
+  name: 'LastComments'
+}
 </script>
 
 <style scoped>

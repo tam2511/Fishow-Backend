@@ -19,10 +19,10 @@
 </template>
 
 <script>
-    export default {
-        name: "HotPostMinimal",
-        props: ['blog'],
-    }
+export default {
+  name: 'HotPostMinimal',
+  props: ['blog']
+}
 </script>
 
 <style scoped>

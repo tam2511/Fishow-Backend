@@ -35,9 +35,9 @@
 </template>
 
 <script>
-    export default {
-        name: "UserRate"
-    }
+export default {
+  name: 'UserRate'
+}
 </script>
 
 <style scoped>

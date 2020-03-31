@@ -18,34 +18,34 @@
 </template>
 
 <script>
-    export default {
-        name: "videoField",
-        props: ['counter'],
-        data() {
-            return {
-                urlVideo: ''
-            }
-        },
-        methods: {
-            whomIsVideo(fields) {
-                const temp = fields.split('/');
-                let result = '';
-                for (let i = 0; i < temp.length; i++) {
-                    if (temp[i] === 'youtu.be') {
-                        result = 'https://www.youtube.com/embed/' + temp[temp.length-1];
-                        return result;
-                    }
-                    if (temp[i] === 'www.youtube.com') {
-                        result = 'https://www.youtube.com/embed/' + temp[temp.length-1].split('watch?v=')[0];
-                        return result;
-                    }
-                }
-            },
-            destroyMe() {
-                this.$el.remove()
-            }
-        }
+export default {
+  name: 'videoField',
+  props: ['counter'],
+  data () {
+    return {
+      urlVideo: ''
     }
+  },
+  methods: {
+    whomIsVideo (fields) {
+      const temp = fields.split('/')
+      let result = ''
+      for (let i = 0; i < temp.length; i++) {
+        if (temp[i] === 'youtu.be') {
+          result = 'https://www.youtube.com/embed/' + temp[temp.length - 1]
+          return result
+        }
+        if (temp[i] === 'www.youtube.com') {
+          result = 'https://www.youtube.com/embed/' + temp[temp.length - 1].split('watch?v=')[0]
+          return result
+        }
+      }
+    },
+    destroyMe () {
+      this.$el.remove()
+    }
+  }
+}
 </script>
 
 <style scoped>

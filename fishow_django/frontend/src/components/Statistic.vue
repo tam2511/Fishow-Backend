@@ -30,31 +30,31 @@
 </template>
 
 <script>
-    import {apiService} from "../common/api.service";
+import { apiService } from '../common/api.service'
 
-    export default {
-        name: "Statistic",
-        data() {
-            return {
-                counterBlogs: null,
-                counterComments: 0
-            }
-        },
-        methods: {
-            getBlogData() {
-                let endpoint = `/api/blogs/`;
-                apiService(endpoint).then(data => {
-                    console.log(data);
-                    this.counterBlogs = data.count;
-                    // TODO: це хуйня
-                    data.results.forEach(item => this.counterComments += item.comments_count)
-                })
-            },
-        },
-        created() {
-            this.getBlogData();
-        }
+export default {
+  name: 'Statistic',
+  data () {
+    return {
+      counterBlogs: null,
+      counterComments: 0
     }
+  },
+  methods: {
+    getBlogData () {
+      const endpoint = '/api/blogs/'
+      apiService(endpoint).then(data => {
+        console.log(data)
+        this.counterBlogs = data.count
+        // TODO: це хуйня
+        data.results.forEach(item => this.counterComments += item.comments_count)
+      })
+    }
+  },
+  created () {
+    this.getBlogData()
+  }
+}
 </script>
 
 <style scoped>

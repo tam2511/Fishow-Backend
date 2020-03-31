@@ -112,59 +112,59 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  import { apiService } from "@/common/api.service";
-  import HotPostMinimal from "../components/HotPostMinimal";
-  import MiniPrognos from "../components/MiniPrognos";
-  import Statistic from "../components/Statistic";
-  import UserRate from "../components/UserRate";
-  import LastComments from "../components/LastComments";
-  import BlogCard from "../components/Home/BlogCard";
+// @ is an alias to /src
+import { apiService } from '@/common/api.service'
+import HotPostMinimal from '../components/HotPostMinimal'
+import MiniPrognos from '../components/MiniPrognos'
+import Statistic from '../components/Statistic'
+import UserRate from '../components/UserRate'
+import LastComments from '../components/LastComments'
+import BlogCard from '../components/Home/BlogCard'
 
-  export default {
-    name: "home",
-    components: {
-      BlogCard,
-      LastComments,
-      UserRate,
-      Statistic,
-      MiniPrognos,
-      HotPostMinimal
-    },
-    data() {
-      return {
-        blogs: [],
-        next: null,
-        loadingBlogs: false,
-      };
-    },
-    methods: {
-      setPageTitle(title) {
-        document.title = title;
-      },
-      getBlogs() {
-        let endpoint = "/api/blogs/";
-        if (this.next) {
-          endpoint = this.next;
-        }
-        this.loadingBlogs = true;
-        apiService(endpoint).then(data => {
-          this.blogs.push(...data.results);
-          this.loadingBlogs = false;
-          if (data.next) {
-            this.next = data.next;
-          } else {
-            this.next = null;
-          }
-        });
-      },
-
-    },
-    created() {
-      this.getBlogs();
-      this.setPageTitle("Fishow - Главная");
+export default {
+  name: 'home',
+  components: {
+    BlogCard,
+    LastComments,
+    UserRate,
+    Statistic,
+    MiniPrognos,
+    HotPostMinimal
+  },
+  data () {
+    return {
+      blogs: [],
+      next: null,
+      loadingBlogs: false
     }
-  };
+  },
+  methods: {
+    setPageTitle (title) {
+      document.title = title
+    },
+    getBlogs () {
+      let endpoint = '/api/blogs/'
+      if (this.next) {
+        endpoint = this.next
+      }
+      this.loadingBlogs = true
+      apiService(endpoint).then(data => {
+        this.blogs.push(...data.results)
+        this.loadingBlogs = false
+        if (data.next) {
+          this.next = data.next
+        } else {
+          this.next = null
+        }
+      })
+    }
+
+  },
+  created () {
+    this.getBlogs()
+    this.setPageTitle('Fishow - Главная')
+  }
+}
 </script>
 <style>
   .buttons-nav a {

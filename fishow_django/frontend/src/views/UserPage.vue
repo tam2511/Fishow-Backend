@@ -29,15 +29,15 @@
 </template>
 
 <script>
-    import UserStat from "@/components/UserPage/UserStat";
-    import UserAwards from "@/components/UserPage/UserAwards";
-    import UserNews from "@/components/UserPage/UserNews";
-    import UserInfo from "@/components/UserPage/UserInfo";
-    import UserMain from "@/components/UserPage/UserMain";
-    export default {
-        name: "UserPage",
-        components: {UserMain, UserInfo, UserNews, UserAwards, UserStat},
-    }
+import UserStat from '@/components/UserPage/UserStat'
+import UserAwards from '@/components/UserPage/UserAwards'
+import UserNews from '@/components/UserPage/UserNews'
+import UserInfo from '@/components/UserPage/UserInfo'
+import UserMain from '@/components/UserPage/UserMain'
+export default {
+  name: 'UserPage',
+  components: { UserMain, UserInfo, UserNews, UserAwards, UserStat }
+}
 </script>
 
 <style scoped>

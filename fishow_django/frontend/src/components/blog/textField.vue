@@ -15,10 +15,10 @@
 </template>
 
 <script>
-    export default {
-        name: "textField",
-        props: ['counter']
-    }
+export default {
+  name: 'textField',
+  props: ['counter']
+}
 </script>
 
 <style scoped>

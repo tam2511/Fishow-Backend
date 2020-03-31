@@ -101,9 +101,9 @@
 </template>
 
 <script>
-    export default {
-        name: "TrendingNews"
-    }
+export default {
+  name: 'TrendingNews'
+}
 </script>
 
 <style scoped>

@@ -112,77 +112,75 @@
 </template>
 
 <script>
-    import {apiService} from "../../common/api.service";
+import { apiService } from '../../common/api.service'
 
-    export default {
-        name: "BlogCard",
-        props: ['blog'],
-        data() {
-            return {
-                result:{},
-                userLikedBlog: this.blog.user_has_votedUp,
-                userDisLikedBlog: this.blog.user_has_votedDown,
-                likesCounter: this.blog.likes_count,
-                dislikesCounter: this.blog.dislikes_count,
-            }
-        },
-        computed: {
-          getResult: function () {
-            return JSON.parse(this.blog.content).blocks[0];
-          }
-        },
-        methods: {
-            toggleLike() {
-                if (this.userLikedBlog) {
-                    this.unLikeBlog()
-                } else {
-                    if (this.userDisLikedBlog) {
-                        this.undislikeBlog()
-                    } else {
-                        this.likeBlog()
-                    }
-                }
-            },
-            toggleDislike() {
-                if (this.userDisLikedBlog) {
-                    this.undislikeBlog()
-                } else {
-                    if (this.userLikedBlog) {
-                        this.unLikeBlog()
-                    } else {
-                        this.dislikeBlog()
-                    }
-                }
-            },
-            likeBlog() {
-                this.likesCounter += 1;
-                this.userLikedBlog = true;
-                let endpoint = `/api/blogs/${this.blog.id}/like/`;
-                apiService(endpoint, "POST");
-            },
-            unLikeBlog() {
-
-                this.likesCounter -= 1;
-                this.userLikedBlog = false;
-                let endpoint = `/api/blogs/${this.blog.id}/like/`;
-                apiService(endpoint, "DELETE");
-
-            },
-            dislikeBlog() {
-                this.dislikesCounter += 1;
-                this.userDisLikedBlog = true;
-                let endpoint = `/api/blogs/${this.blog.id}/dislike/`;
-                apiService(endpoint, "POST");
-            },
-            undislikeBlog() {
-                this.dislikesCounter -= 1;
-                this.userDisLikedBlog = false;
-                let endpoint = `/api/blogs/${this.blog.id}/dislike/`;
-                apiService(endpoint, "DELETE");
-            },
-        },
-
+export default {
+  name: 'BlogCard',
+  props: ['blog'],
+  data () {
+    return {
+      result: {},
+      userLikedBlog: this.blog.user_has_votedUp,
+      userDisLikedBlog: this.blog.user_has_votedDown,
+      likesCounter: this.blog.likes_count,
+      dislikesCounter: this.blog.dislikes_count
     }
+  },
+  computed: {
+    getResult: function () {
+      return JSON.parse(this.blog.content).blocks[0]
+    }
+  },
+  methods: {
+    toggleLike () {
+      if (this.userLikedBlog) {
+        this.unLikeBlog()
+      } else {
+        if (this.userDisLikedBlog) {
+          this.undislikeBlog()
+        } else {
+          this.likeBlog()
+        }
+      }
+    },
+    toggleDislike () {
+      if (this.userDisLikedBlog) {
+        this.undislikeBlog()
+      } else {
+        if (this.userLikedBlog) {
+          this.unLikeBlog()
+        } else {
+          this.dislikeBlog()
+        }
+      }
+    },
+    likeBlog () {
+      this.likesCounter += 1
+      this.userLikedBlog = true
+      const endpoint = `/api/blogs/${this.blog.id}/like/`
+      apiService(endpoint, 'POST')
+    },
+    unLikeBlog () {
+      this.likesCounter -= 1
+      this.userLikedBlog = false
+      const endpoint = `/api/blogs/${this.blog.id}/like/`
+      apiService(endpoint, 'DELETE')
+    },
+    dislikeBlog () {
+      this.dislikesCounter += 1
+      this.userDisLikedBlog = true
+      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+      apiService(endpoint, 'POST')
+    },
+    undislikeBlog () {
+      this.dislikesCounter -= 1
+      this.userDisLikedBlog = false
+      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+      apiService(endpoint, 'DELETE')
+    }
+  }
+
+}
 </script>
 
 <style scoped lang="scss">

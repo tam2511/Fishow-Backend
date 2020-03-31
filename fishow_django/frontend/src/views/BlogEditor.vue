@@ -8,7 +8,6 @@
             <div class="heading-component-inner">
               <h5 class="heading-component-title">Написать блог</h5>
 
-
             </div>
           </article>
           <form @submit.prevent="onSubmit">
@@ -100,115 +99,115 @@
 </template>
 
 <script>
-  import { apiService } from "@/common/api.service.js";
-  import TextField from "../components/blog/textField";
-  import imageField from "../components/blog/imageField";
-  import BlogContentField from "../components/blog/blogContentField";
-  import videoField from "../components/blog/videoField";
-  export default {
-    name: "BlogEditor",
-    components: {TextField,BlogContentField,imageField,videoField},
-    props: {
-      slug: {
-        type: String,
-        required: false
-      }
-    },
-
-    data() {
-      return {
-        picked: null,
-        imageCounter: 0,
-        textCounter: 1,
-        articles: ['BlogContentField'],
-        blog_body: '',
-        blog_title: null,
-        blog_category: 'Блоги',
-        blog_tags: [],
-        deafultTags: ['Пиво','Путин',"Москва", "Деньги", "ХУй"],
-        result: [],
-        error: null,
-        field: "textField",
-        blog_json: null
-      };
-    },
-    methods: {
-      convertBody() {
-        const result = [];
-        const listBloks = document.querySelectorAll('textarea');
-
-        listBloks.forEach((block) => {
-          if (block.name === 'text') {
-            result.push({'type':'text','body':block.value})
-          }
-          if (block.name === 'image') {
-            result.push({'type':'image','url':block.value})
-          }
-          if (block.name === 'video') {
-            result.push({'type':'video','url':block.value})
-          }
-        });
-        this.blog_body = JSON.stringify({
-          "blocks":[
-            result
-          ]
-        });
-      },
-      convertTags() {
-        this.blog_tags = JSON.stringify(this.blog_tags);
-      },
-      onSubmit() {
-        this.convertTags();
-        this.convertBody();
-
-        if (!this.blog_body) {
-          this.error = "You can't send an empty blog!";
-        } else if (this.blog_body.length > 4000) {
-          this.error = "To much words in your blog";
-        } else {
-          let endpoint = "/api/blogs/";
-          let method = "POST";
-          if (this.slug !== undefined) {
-            endpoint += `${this.slug}/`;
-            method = "PUT";
-          }
-          apiService(endpoint, method, {
-            title: this.blog_title,
-            content: this.blog_body,
-            category: this.blog_category,
-            tags: this.blog_tags
-          }).then(blog_data => {
-            this.$router.push({
-              name: "blog",
-              params: { slug: blog_data.slug }
-            });
-          });
-        }
-      },
-      addImage() {
-        this.articles.push("imageField");
-      },
-      addText() {
-        this.articles.push("BlogContentField");
-      },
-      addVideo() {
-        this.articles.push("videoField");
-      }
-    },
-    async beforeRouteEnter(to, from, next) {
-      // if the component will be used to update a question, then get the question's data from the REST API
-      if (to.params.slug !== undefined) {
-        let endpoint = `/api/blogs/${to.params.slug}/`;
-        let data = await apiService(endpoint);
-        return next(vm => (vm.blog_body = data.content));
-      } else {
-        return next();
-      }
-    },
-    created() {
-      document.title = "Fishow - Создание блога";
+import { apiService } from '@/common/api.service.js'
+import TextField from '../components/blog/textField'
+import imageField from '../components/blog/imageField'
+import BlogContentField from '../components/blog/blogContentField'
+import videoField from '../components/blog/videoField'
+export default {
+  name: 'BlogEditor',
+  components: { TextField, BlogContentField, imageField, videoField },
+  props: {
+    slug: {
+      type: String,
+      required: false
     }
-  };
+  },
+
+  data () {
+    return {
+      picked: null,
+      imageCounter: 0,
+      textCounter: 1,
+      articles: ['BlogContentField'],
+      blog_body: '',
+      blog_title: null,
+      blog_category: 'Блоги',
+      blog_tags: [],
+      deafultTags: ['Пиво', 'Путин', 'Москва', 'Деньги', 'ХУй'],
+      result: [],
+      error: null,
+      field: 'textField',
+      blog_json: null
+    }
+  },
+  methods: {
+    convertBody () {
+      const result = []
+      const listBloks = document.querySelectorAll('textarea')
+
+      listBloks.forEach((block) => {
+        if (block.name === 'text') {
+          result.push({ type: 'text', body: block.value })
+        }
+        if (block.name === 'image') {
+          result.push({ type: 'image', url: block.value })
+        }
+        if (block.name === 'video') {
+          result.push({ type: 'video', url: block.value })
+        }
+      })
+      this.blog_body = JSON.stringify({
+        blocks: [
+          result
+        ]
+      })
+    },
+    convertTags () {
+      this.blog_tags = JSON.stringify(this.blog_tags)
+    },
+    onSubmit () {
+      this.convertTags()
+      this.convertBody()
+
+      if (!this.blog_body) {
+        this.error = "You can't send an empty blog!"
+      } else if (this.blog_body.length > 4000) {
+        this.error = 'To much words in your blog'
+      } else {
+        let endpoint = '/api/blogs/'
+        let method = 'POST'
+        if (this.slug !== undefined) {
+          endpoint += `${this.slug}/`
+          method = 'PUT'
+        }
+        apiService(endpoint, method, {
+          title: this.blog_title,
+          content: this.blog_body,
+          category: this.blog_category,
+          tags: this.blog_tags
+        }).then(blog_data => {
+          this.$router.push({
+            name: 'blog',
+            params: { slug: blog_data.slug }
+          })
+        })
+      }
+    },
+    addImage () {
+      this.articles.push('imageField')
+    },
+    addText () {
+      this.articles.push('BlogContentField')
+    },
+    addVideo () {
+      this.articles.push('videoField')
+    }
+  },
+  async beforeRouteEnter (to, from, next) {
+    // if the component will be used to update a question, then get the question's data from the REST API
+    if (to.params.slug !== undefined) {
+      const endpoint = `/api/blogs/${to.params.slug}/`
+      const data = await apiService(endpoint)
+      return next(vm => (vm.blog_body = data.content))
+    } else {
+      return next()
+    }
+  },
+  created () {
+    document.title = 'Fishow - Создание блога'
+  }
+}
 </script>
 
 <style lang="scss">

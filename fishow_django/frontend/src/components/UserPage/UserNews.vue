@@ -48,9 +48,9 @@
 </template>
 
 <script>
-    export default {
-        name: "UserNews"
-    }
+export default {
+  name: 'UserNews'
+}
 </script>
 
 <style scoped>

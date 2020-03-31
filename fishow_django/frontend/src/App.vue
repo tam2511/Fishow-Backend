@@ -8,28 +8,27 @@
 
 <script>
 
-  import {apiService} from "./common/api.service";
-  import NavbarComponent from "./components/Navbar.vue";
-  import FIshow_Footer from "./components/FIshow_Footer";
-  export default {
-    name: 'App',
-    components: {
-      FIshow_Footer,
-      NavbarComponent
-    },
-    methods: {
-      async setUserInfo() {
-        // add the username of the logged in user to localStorage
-        const data = await apiService("/api/user/");
-        const requestUser = data["username"];
-        window.localStorage.setItem("username", requestUser);
-      }
-    },
-    created() {
-      this.setUserInfo()
+import { apiService } from './common/api.service'
+import NavbarComponent from './components/Navbar.vue'
+import FIshow_Footer from './components/FIshow_Footer'
+export default {
+  name: 'App',
+  components: {
+    FIshow_Footer,
+    NavbarComponent
+  },
+  methods: {
+    async setUserInfo () {
+      // add the username of the logged in user to localStorage
+      const data = await apiService('/api/user/')
+      const requestUser = data.username
+      window.localStorage.setItem('username', requestUser)
     }
+  },
+  created () {
+    this.setUserInfo()
   }
-
+}
 
 </script>
 

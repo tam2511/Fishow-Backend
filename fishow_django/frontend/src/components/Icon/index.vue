@@ -7,20 +7,20 @@
 </template>
 
 <script>
-    export default {
-        props: {
-            name: {},
-            size: {
-                default: 'normal',
-            },
-            modifier: {
-                default: null,
-            },
-            fixAlign: {
-                default: true,
-            },
-        },
+export default {
+  props: {
+    name: {},
+    size: {
+      default: 'normal'
+    },
+    modifier: {
+      default: null
+    },
+    fixAlign: {
+      default: true
     }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -16,21 +16,21 @@
 </template>
 
 <script>
-    export default {
-        name: "blockTags",
-        data() {
-            return {
-                // TODO: эт получать надо из блога, а не тут прописывать, но пока так.
-                ctags: [
-                    {name: "Снаряжение"},
-                    {name: "История"},
-                    {name: "Отчет"},
-                    {name: "Видео"},
-                    {name: "Опрос"},
-                ]
-            }
-        }
+export default {
+  name: 'blockTags',
+  data () {
+    return {
+      // TODO: эт получать надо из блога, а не тут прописывать, но пока так.
+      ctags: [
+        { name: 'Снаряжение' },
+        { name: 'История' },
+        { name: 'Отчет' },
+        { name: 'Видео' },
+        { name: 'Опрос' }
+      ]
     }
+  }
+}
 </script>
 
 <style scoped>

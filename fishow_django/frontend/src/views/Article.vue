@@ -2,7 +2,6 @@
     <div>
         <!-- Section Breadcrumbs-->
 
-
         <!-- News 4-->
         <section class="section section-sm bg-gray-100">
             <div class="container">
@@ -52,45 +51,45 @@
 </template>
 
 <script>
-    import { apiService } from "../common/api.service";
-    import blockCategories from "../components/blog/blockCategories";
-    import TrendingNews from "../components/TrendingNews";
-    import BlockTags from "../components/blog/blockTags";
-    import Articles from "../components/article/articles";
-    export default {
-        name: "Article",
-        components: {
-            Articles,
-            BlockTags,
-            TrendingNews,
-            blockCategories
-        },
-        data() {
-            return {
-                blogs: [],
-            }
-        },
-        methods: {
-            getBlogs() {
-                let endpoint = "/api/blogs/";
-                if (this.next) {
-                    endpoint = this.next;
-                }
-                this.loadingBlogs = true;
-                apiService(endpoint).then(data => {
-                    this.blogs.push(...data.results);
-                    if (data.next) {
-                        this.next = data.next;
-                    } else {
-                        this.next = null;
-                    }
-                });
-            }
-        },
-        created() {
-            this.getBlogs();
-        }
+import { apiService } from '../common/api.service'
+import blockCategories from '../components/blog/blockCategories'
+import TrendingNews from '../components/TrendingNews'
+import BlockTags from '../components/blog/blockTags'
+import Articles from '../components/article/articles'
+export default {
+  name: 'Article',
+  components: {
+    Articles,
+    BlockTags,
+    TrendingNews,
+    blockCategories
+  },
+  data () {
+    return {
+      blogs: []
     }
+  },
+  methods: {
+    getBlogs () {
+      let endpoint = '/api/blogs/'
+      if (this.next) {
+        endpoint = this.next
+      }
+      this.loadingBlogs = true
+      apiService(endpoint).then(data => {
+        this.blogs.push(...data.results)
+        if (data.next) {
+          this.next = data.next
+        } else {
+          this.next = null
+        }
+      })
+    }
+  },
+  created () {
+    this.getBlogs()
+  }
+}
 </script>
 
 <style scoped>

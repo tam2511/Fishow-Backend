@@ -19,23 +19,22 @@
 </template>
 
 <script>
-    export default {
-        name: "imageField",
-        props: ['counter'],
-        data() {
-            return {
-                image: ''
-            }
-        },
-        methods: {
-            destroyMe() {
-                this.$el.remove()
-            }
-        }
+export default {
+  name: 'imageField',
+  props: ['counter'],
+  data () {
+    return {
+      image: ''
     }
+  },
+  methods: {
+    destroyMe () {
+      this.$el.remove()
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
-
 
 </style>

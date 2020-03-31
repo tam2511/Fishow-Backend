@@ -55,9 +55,9 @@
 </template>
 
 <script>
-    export default {
-        name: "blockSpotlight"
-    }
+export default {
+  name: 'blockSpotlight'
+}
 </script>
 
 <style scoped>
