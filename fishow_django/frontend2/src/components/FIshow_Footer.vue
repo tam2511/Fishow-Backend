@@ -95,7 +95,7 @@
                         </ul>
                     </nav>
                     <!-- Rights-->
-                    <p class="rights"><span>Fishow - {{ count }}</span><span>&nbsp;&copy;&nbsp;</span><span class="copyright-year"></span><span>.&nbsp;</span><a class="link-underline" href="">Privacy Policy</a></p>
+                    <p class="rights"><span>Fishow</span><span>&nbsp;&copy;&nbsp;</span><span class="copyright-year"></span><span>.&nbsp;</span><a class="link-underline" href="">Privacy Policy</a></p>
                 </div>
             </div>
         </div>
@@ -103,14 +103,8 @@
 </template>
 
 <script>
-    // import store from '../store'
     export default {
-        name: 'FIshow_Footer',
-        computed: {
-            count() {
-                return this.$store.state.count
-            }
-        }
+        name: 'FIshow_Footer'
     }
 </script>
 

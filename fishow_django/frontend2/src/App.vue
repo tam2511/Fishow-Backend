@@ -7,9 +7,6 @@
 </template>
 
 <script>
-
-  import { apiService } from './common/api.service'
-  import store from './store'
   import NavbarComponent from './components/Navbar.vue'
   import FIshow_Footer from './components/FIshow_Footer'
   export default {
@@ -18,20 +15,6 @@
       FIshow_Footer,
       NavbarComponent
     },
-    methods: {
-      async setUserInfo () {
-        // add the username of the logged in user to localStorage
-        const data = await apiService('/api/user/')
-        const requestUser = data.username
-        window.localStorage.setItem('username', requestUser)
-      }
-    },
-    created () {
-      this.setUserInfo()
-      store.commit('increment');
-
-      console.log(store.state.count)
-    }
   }
 
 </script>

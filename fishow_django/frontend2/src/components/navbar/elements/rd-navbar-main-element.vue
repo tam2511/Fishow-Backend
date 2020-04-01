@@ -71,28 +71,22 @@
 </template>
 
 <script>
-
-export default {
-  name: 'rd-navbar-main-element',
-  data () {
-    return {
-      userName: null
+    export default {
+        name: 'rd-navbar-main-element',
+        computed: {
+            userName() {
+                return this.$store.state.username
+            }
+        },
+        methods: {
+            logout () {
+                window.location = '/accounts/logout/'
+            }
+        },
+        created() {
+            this.$store.dispatch('setUserInfo')
+        }
     }
-  },
-  methods: {
-    getUserName () {
-      if (window.localStorage.getItem('username')) {
-        this.userName = window.localStorage.getItem('username')
-      }
-    },
-    logout () {
-      window.location = '/accounts/logout/'
-    }
-  },
-  created () {
-    this.getUserName()
-  }
-}
 </script>
 
 <style scoped lang="scss">

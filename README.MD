@@ -1,3 +1,7 @@
+`.\env\Scripts\activate`
+
+`python manage.py runserver`
+
 **Backend**
 
 1. `cd fishow_django`

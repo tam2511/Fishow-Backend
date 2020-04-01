@@ -9,9 +9,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="user in userList"
-                :key="user">
-                <td><span>{{ type }}</span></td>
+            <tr v-for="(user, index) in userList"
+                :key="user.username">
+                <td><span>{{ index + 1 }}</span></td>
                 <td class="team-inline">
                     <div class="team-figure">
                         <img
@@ -49,14 +49,12 @@ export default {
             let endpoint = '/api/user_all/'
 
             apiService(endpoint).then(data => {
-                console.log('data = ', data);
                 this.userList.push(...data)
             })
         }
     },
     created() {
         this.getUserList();
-        console.log('this.userList = ', this.userList);
     }
 }
 </script>
