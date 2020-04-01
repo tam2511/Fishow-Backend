@@ -32,7 +32,7 @@
                          :key="blog.pk"/>
               <button class="button button-primary button-lg"
                       v-show="next"
-              @click="getBlogs">Load more</button>
+                      @click="getBlogs">Load more</button>
             </div>
           </div>
           <!-- Aside Block-->
@@ -112,7 +112,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+  // @ is an alias to /src
 import { apiService } from '@/common/api.service'
 import HotPostMinimal from '../components/HotPostMinimal'
 import MiniPrognos from '../components/MiniPrognos'
@@ -159,11 +159,11 @@ export default {
       })
     }
 
-  },
-  created () {
-    this.getBlogs()
-    this.setPageTitle('Fishow - Главная')
-  }
+},
+created () {
+  this.getBlogs()
+  this.setPageTitle('Fishow - Главная')
+}
 }
 </script>
 <style>

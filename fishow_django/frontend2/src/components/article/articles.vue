@@ -35,16 +35,16 @@
 
 <script>
 export default {
-  name: 'articles',
-  props: ['blog'],
+    name: 'articles',
+    props: ['blog'],
     computed: {
-      categ: function () {
-          if (this.blog.category === 'Блоги') {
-              return 'badge-secondary'
-          } else {
-              return 'badge-primary'
-          }
-      }
+        categ: function () {
+            if (this.blog.category === 'Блоги') {
+                return 'badge-secondary'
+            } else {
+                return 'badge-primary'
+            }
+        }
     }
 }
 </script>

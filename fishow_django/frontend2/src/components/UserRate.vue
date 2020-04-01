@@ -9,8 +9,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="type in 10"
-                :key="type">
+            <tr v-for="user in userList"
+                :key="user">
                 <td><span>{{ type }}</span></td>
                 <td class="team-inline">
                     <div class="team-figure">
@@ -22,12 +22,12 @@
                         />
                     </div>
                     <div class="team-title">
-                        <div class="team-name">Имя</div>
-                        <div class="team-country">Фамилия</div>
+                        <div class="team-name">{{ user.username}}</div>
+                        <div class="team-country">{{ user.email }}</div>
                     </div>
                 </td>
-                <td>153</td>
-                <td>30</td>
+                <td>0</td>
+                <td>0</td>
             </tr>
             </tbody>
         </table>
@@ -35,8 +35,29 @@
 </template>
 
 <script>
+import {apiService} from "../common/api.service";
+
 export default {
-  name: 'UserRate'
+    name: 'UserRate',
+    data() {
+        return {
+            userList: []
+        }
+    },
+    methods: {
+        getUserList () {
+            let endpoint = '/api/user_all/'
+
+            apiService(endpoint).then(data => {
+                console.log('data = ', data);
+                this.userList.push(...data)
+            })
+        }
+    },
+    created() {
+        this.getUserList();
+        console.log('this.userList = ', this.userList);
+    }
 }
 </script>
 
