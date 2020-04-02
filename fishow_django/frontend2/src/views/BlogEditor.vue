@@ -77,18 +77,21 @@
 
         </div>
         <div class="col-lg-5 col-xl-4">
-          <input type="radio" id="one" value="Новости" v-model="blog_category" checked>
-          <label for="one">Новости</label>
-          <input type="radio" id="two" value="Блоги" v-model="blog_category">
-          <label for="two">Блоги</label>
-          <input type="radio" id="three" value="Статьи" v-model="blog_category">
-          <label for="three">Статьи</label>
-          <br>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select v-model="blog_category" class="form-control" id="exampleFormControlSelect1">
+              <option>Новости</option>
+              <option>Блоги</option>
+              <option>Статьи</option>
+            </select>
+          </div>
           <h4>Категория: {{ blog_category }}</h4>
+          <div class="form-group">
+            <select v-model="blog_tags" multiple>
+              <option class="form-control" v-for="tag in deafultTags" :key="tag" id="exampleFormControlSelect2">{{ tag }} </option>
+            </select>
+          </div>
 
-          <select v-model="blog_tags" multiple>
-            <option v-for="tag in deafultTags" :key="tag">{{ tag }}</option>
-          </select>
           <br>
           <h5>Selected: {{ blog_tags }}</h5>
         </div>
@@ -124,7 +127,7 @@ export default {
       blog_title: null,
       blog_category: 'Блоги',
       blog_tags: [],
-      deafultTags: ['Пиво', 'Путин', 'Москва', 'Деньги', 'ХУй'],
+      deafultTags: ['Удочки', 'Шутки', 'Ночь', 'История', 'Деньги'],
       result: [],
       error: null,
       field: 'textField',
