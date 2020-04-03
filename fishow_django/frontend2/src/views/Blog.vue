@@ -109,7 +109,7 @@
             fixedBody: function () {
                 return this.result
             }
-        }, .len
+        },
         methods: {
             whomIsVideo (fields) {
                 const temp = fields.split('/')
