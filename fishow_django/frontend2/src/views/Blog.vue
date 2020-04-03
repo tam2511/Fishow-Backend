@@ -20,14 +20,14 @@
                         </div>
                         <div class="blog-post-content">
                             <div v-for="p in result"
-                            :key="p.type">
+                                 :key="p.type">
                                 <p v-if="p.type === 'text'">{{ p.body }}</p>
                                 <iframe v-if="p.type === 'video'" width="560" height="315" :src="whomIsVideo(p.url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <img v-if="p.type === 'image'" :src="p.url" alt="">
                             </div>
                             <ul class="list-tags">
                                 <li v-for="blogTag in blogTags"
-                                :key="blogTag">
+                                    :key="blogTag">
                                     <router-link to="/">{{ blogTag }}</router-link>
                                 </li>
                             </ul>
@@ -46,17 +46,17 @@
                             <div class="blog-post-comments">
                                 <!-- Post Comment-->
                                 <Comment
-                                    v-for="(comment, index) in comments"
-                                    :comment="comment"
-                                    :key="index"
-                                    :slug="slug"
-                                    :requestUser="requestUser"
-                                    @deleteComment="deleteComment"
+                                        v-for="(comment, index) in comments"
+                                        :comment="comment"
+                                        :key="index"
+                                        :slug="slug"
+                                        :requestUser="requestUser"
+                                        @deleteComment="deleteComment"
                                 />
                                 <CreateComment
-                                    :slug="slug"
-                                    :id="id"
-                                    :requestUser="requestUser"
+                                        :slug="slug"
+                                        :id="id"
+                                        :requestUser="requestUser"
                                 />
                             </div>
                         </div>
@@ -75,97 +75,102 @@
 </template>
 
 <script>
-import { apiService } from '@/common/api.service'
-import Comment from '@/components/Comment.vue'
-import CreateComment from '@/components/CreateComment'
-import BlockCategories from '../components/blog/blockCategories'
-import BlockSpotlight from '../components/blog/blockSpotlight'
-import BlockTags from '../components/blog/blockTags'
+    import { apiService } from '@/common/api.service'
+    import Comment from '@/components/Comment.vue'
+    import CreateComment from '@/components/CreateComment'
+    import BlockCategories from '../components/blog/blockCategories'
+    import BlockSpotlight from '../components/blog/blockSpotlight'
+    import BlockTags from '../components/blog/blockTags'
 
-export default {
-  name: 'Blog',
-  components: { BlockTags, BlockSpotlight, BlockCategories, CreateComment, Comment },
-  props: {
-    slug: {
-      type: String,
-      default: null,
-      required: true
-    }
-  },
+    export default {
+        name: 'Blog',
+        components: { BlockTags, BlockSpotlight, BlockCategories, CreateComment, Comment },
+        props: {
+            slug: {
+                type: String,
+                default: null,
+                required: true
+            }
+        },
 
-  data () {
-    return {
-      blogTags: {},
-      result: {},
-      blog: {},
-      id: 0,
-      comments: [],
-      newCommentBody: null,
-      error: null,
-      requestUser: null
-    }
-  },
-  methods: {
-    whomIsVideo (fields) {
-      const temp = fields.split('/')
-      let result = ''
-      for (let i = 0; i < temp.length; i++) {
-        if (temp[i] === 'youtu.be') {
-          result = 'https://www.youtube.com/embed/' + temp[temp.length - 1]
-          return result
+        data () {
+            return {
+                blogTags: {},
+                result: {},
+                blog: {},
+                id: 0,
+                comments: [],
+                newCommentBody: null,
+                error: null,
+                requestUser: null
+            }
+        },
+        computed: {
+            fixedBody: function () {
+                return this.result
+            }
+        }, .len
+        methods: {
+            whomIsVideo (fields) {
+                const temp = fields.split('/')
+                let result = ''
+                for (let i = 0; i < temp.length; i++) {
+                    if (temp[i] === 'youtu.be') {
+                        result = 'https://www.youtube.com/embed/' + temp[temp.length - 1]
+                        return result
+                    }
+                    if (temp[i] === 'www.youtube.com') {
+                        result = 'https://www.youtube.com/embed/' + temp[temp.length - 1].split('watch?v=')[0]
+                        return result
+                    }
+                }
+            },
+            setPageTitle (title) {
+                document.title = title
+            },
+            getUser () {
+                this.requestUser = window.localStorage.getItem('username')
+            },
+            getBlogData () {
+                const endpoint = `/api/blogs/${this.slug}/`
+                apiService(endpoint).then(data => {
+                    this.blog = data
+                    this.result = JSON.parse(data.content)
+                    this.result = this.result.blocks[0]
+                    this.blogTags = JSON.parse(this.blog.tags)
+                    this.id = data.id
+                    this.setPageTitle('Fishow - ' + data.title)
+                })
+            },
+            getCommentData () {
+                const endpoint = `/api/blogs/${this.slug}/comments/`
+                apiService(endpoint).then(data => {
+                    this.comments.push(...data.results)
+                })
+            },
+            async deleteComment (comment) {
+                // delete a given answer from the answers array and make a delete request to the REST API
+                const endpoint = `/api/comments/${comment.id}/`
+                try {
+                    await apiService(endpoint, 'DELETE')
+                    this.$delete(this.comments, this.comments.indexOf(comment))
+                    this.userHasAnswered = false
+                } catch (err) {
+                    console.log(err)
+                }
+            }
+
+        },
+
+        created () {
+            this.getBlogData()
+            this.getCommentData()
+            this.getUser()
+        },
+        mounted () {
+
         }
-        if (temp[i] === 'www.youtube.com') {
-          result = 'https://www.youtube.com/embed/' + temp[temp.length - 1].split('watch?v=')[0]
-          return result
-        }
-      }
-    },
-    setPageTitle (title) {
-      document.title = title
-    },
-    getUser () {
-      this.requestUser = window.localStorage.getItem('username')
-    },
-    getBlogData () {
-      const endpoint = `/api/blogs/${this.slug}/`
-      apiService(endpoint).then(data => {
-        this.blog = data
-        this.result = JSON.parse(data.content)
-        this.result = this.result.blocks[0]
-        this.blogTags = JSON.parse(this.blog.tags)
-        this.id = data.id
-        this.setPageTitle('Fishow - ' + data.title)
-      })
-    },
-    getCommentData () {
-      const endpoint = `/api/blogs/${this.slug}/comments/`
-      apiService(endpoint).then(data => {
-        this.comments.push(...data.results)
-      })
-    },
-    async deleteComment (comment) {
-      // delete a given answer from the answers array and make a delete request to the REST API
-      const endpoint = `/api/comments/${comment.id}/`
-      try {
-        await apiService(endpoint, 'DELETE')
-        this.$delete(this.comments, this.comments.indexOf(comment))
-        this.userHasAnswered = false
-      } catch (err) {
-        console.log(err)
-      }
     }
-
-  },
-
-  created () {
-    this.getBlogData()
-    this.getCommentData()
-    this.getUser()
-  },
-  mounted () {
-
-  }
-}
 </script>
 
 <style scoped>
