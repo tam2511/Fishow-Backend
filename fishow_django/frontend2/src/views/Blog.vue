@@ -9,7 +9,7 @@
                         </div>
                         <h3 class="blog-post-title">{{ blog.title }}</h3>
                         <div class="blog-post-header">
-                            <div class="blog-post-author"><img class="img-circle" src="images/user-3-63x63.jpg" alt="" width="63" height="63"/>
+                            <div class="blog-post-author"><img class="img-circle" src="/static/assets/images/user-3-63x63.jpg" alt="" width="63" height="63"/>
                                 <p class="post-author">{{ blog.author }}</p>
                             </div>
                             <div class="blog-post-meta">
@@ -53,11 +53,35 @@
                                         :requestUser="requestUser"
                                         @deleteComment="deleteComment"
                                 />
-                                <CreateComment
-                                        :slug="slug"
-                                        :id="id"
-                                        :requestUser="requestUser"
-                                />
+                                <div class="comment-box">
+                                    <div class="comment-box-aside">
+                                        <img
+                                                class="img-circle"
+                                                src="/static/assets/images/user-7-69x69.jpg"
+                                                alt=""
+                                                width="69"
+                                                height="69"
+                                        />
+                                    </div>
+                                    <div class="comment-box-main">
+                                        <h5 class="comment-box-name">{{ this.requestUser }}</h5>
+                                        <form @submit.prevent="onSubmit" class="comment-box-form" >
+                                            <div class="form-wrap">
+                                                <textarea
+                                                        v-model="commentBody"
+                                                        class="form-input"
+                                                        id="comment-message"
+                                                        name="message"
+                                                        placeholder="Ваш комментарий"
+                                                ></textarea>
+                                            </div>
+                                            <div class="alert-danger" v-if="error">{{ error }}</div>
+                                            <div class="form-button">
+                                                <button class="button button-primary" type="submit">Отправить</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -77,14 +101,14 @@
 <script>
     import { apiService } from '@/common/api.service'
     import Comment from '@/components/Comment.vue'
-    import CreateComment from '@/components/CreateComment'
+    // import CreateComment from '@/components/CreateComment'
     import BlockCategories from '../components/blog/blockCategories'
     import BlockSpotlight from '../components/blog/blockSpotlight'
     import BlockTags from '../components/blog/blockTags'
 
     export default {
         name: 'Blog',
-        components: { BlockTags, BlockSpotlight, BlockCategories, CreateComment, Comment },
+        components: { BlockTags, BlockSpotlight, BlockCategories, Comment },
         props: {
             slug: {
                 type: String,
@@ -101,13 +125,14 @@
                 id: 0,
                 comments: [],
                 newCommentBody: null,
-                error: null,
-                requestUser: null
+                requestUser: null,
+                commentBody: null,
+                error: null
             }
         },
         computed: {
-            fixedBody: function () {
-                return this.result
+            userName() {
+                return this.$store.state.username
             }
         },
         methods: {
@@ -129,7 +154,13 @@
                 document.title = title
             },
             getUser () {
-                this.requestUser = window.localStorage.getItem('username')
+                const wait = setInterval(() => {
+                    if (this.$store.state.username !== null) {
+                        clearInterval(wait);
+                        this.requestUser = this.$store.state.username
+                    }
+                }, 100)
+
             },
             getBlogData () {
                 const endpoint = `/api/blogs/${this.slug}/`
@@ -158,23 +189,47 @@
                 } catch (err) {
                     console.log(err)
                 }
+            },
+            onSubmit () {
+                // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
+                if (this.commentBody) {
+                    const endpoint = `/api/blogs/${this.slug}/comment/`
+                    apiService(endpoint, 'POST', { body: this.commentBody })
+                        .then(data => {
+                            this.comments.unshift(data)
+                            console.log(data)
+                        })
+                    this.commentBody = null
+                    if (this.error) {
+                        this.error = null
+                    }
+                } else {
+                    this.error = "Вы не можете отправить пустой комментарий"
+                }
             }
-
         },
 
         created () {
             this.getBlogData()
             this.getCommentData()
+            this.$store.dispatch('setUserInfo')
             this.getUser()
         },
-        mounted () {
-
-        }
     }
 </script>
 
-<style scoped>
-    .blog-post-content p {
-        white-space: pre-line;
+<style scoped lang="scss">
+    .blog-post-content {
+        img {
+            width: 100%;
+        }
+        p {
+            white-space: pre-line;
+        }
+    }
+
+
+    .blog-post-text {
+        text-align: justify;
     }
 </style>

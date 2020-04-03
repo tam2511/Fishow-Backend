@@ -22,8 +22,9 @@
                             placeholder="Ваш комментарий"
                     ></textarea>
                 </div>
+                <div class="alert-danger" v-if="error">{{ error }}</div>
                 <div class="form-button">
-                    <button class="button button-primary" type="submit">Submit</button>
+                    <button class="button button-primary" type="submit">Отправить</button>
                 </div>
             </form>
         </div>
@@ -44,43 +45,21 @@ export default {
       required: true
     },
     requestUser: {
-      type: String,
       required: true
-    }
+    },
+      comments: {
+        type: Array
+      }
   },
   data () {
     return {
       blogSlug: null,
       commentBody: null,
-      userName: '',
       error: null
     }
   },
   methods: {
-    onSubmit () {
-      // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
-      if (this.commentBody) {
-        const endpoint = `/api/blogs/${this.slug}/comment/`
-        apiService(endpoint, 'POST', { body: this.commentBody })
-          .then(data => {
-            // this.comments.unshift(data)
-            console.log(data)
-            this.$router.push(
-              {
-                name: 'blog',
-                params: { slug: data.comments_slug }
-              }
-            )
-          })
-        this.commentBody = null
-        this.showForm = false
-        if (this.error) {
-          this.error = null
-        }
-      } else {
-        this.error = "You can't send an empty answer!"
-      }
-    }
+
   },
   async beforeRouteEnter (to, from, next) {
     console.log('to.params.id = ', Number(to.params.id))
@@ -95,4 +74,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+    .alert-danger {
+        padding: 5px;
+    }
+
+</style>
