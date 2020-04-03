@@ -21,7 +21,7 @@
                         <div class="blog-post-content">
                             <div v-for="p in result"
                                  :key="p.type">
-                                <p v-if="p.type === 'text'">{{ p.body }}</p>
+                                <p class="blog-post-text" v-if="p.type === 'text'">{{ p.body }}</p>
                                 <iframe v-if="p.type === 'video'" width="560" height="315" :src="whomIsVideo(p.url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <img v-if="p.type === 'image'" :src="p.url" alt="">
                             </div>

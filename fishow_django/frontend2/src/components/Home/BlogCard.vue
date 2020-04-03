@@ -78,18 +78,21 @@
                 >{{ blog.title }}</router-link
                 >
             </h4>
-            <div class="post-corporate-text">
+            <div class="post-corporate-blog">
                 <div v-for="p in getResult"
                      :key="p.type">
-                    <p v-if="p.type === 'text'">{{ p.body }}</p>
-                    <iframe v-if="p.type === 'video'" width="560" height="315" :src="p.url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <img v-if="p.type === 'image'" :src="p.url" alt="">
+                    <div v-if="p.type === 'text'" class="post-corporate-text">
+                        <p>{{ p.body }}</p>
+                    </div>
+
+                    <iframe v-if="p.type === 'video'" width="560" height="315" :src="p.url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen name="video"></iframe>
+                    <div v-if="p.type === 'image'" class="post-corporate-figure">
+                        <img  :src="p.url" alt="">
+                    </div>
                 </div>
             </div>
+
         </div>
-        <a class="post-corporate-figure" href="">
-            <img src="" alt="" width="769" height="416" />
-        </a>
         <div class="post-corporate-footer">
             <div class="post-corporate-comment">
                 <span class="icon mdi mdi-comment-outline"></span>
@@ -112,75 +115,75 @@
 </template>
 
 <script>
-import { apiService } from '../../common/api.service'
+    import { apiService } from '../../common/api.service'
 
-export default {
-  name: 'BlogCard',
-  props: ['blog'],
-  data () {
-    return {
-      result: {},
-      userLikedBlog: this.blog.user_has_votedUp,
-      userDisLikedBlog: this.blog.user_has_votedDown,
-      likesCounter: this.blog.likes_count,
-      dislikesCounter: this.blog.dislikes_count
-    }
-  },
-  computed: {
-    getResult: function () {
-      return JSON.parse(this.blog.content).blocks[0]
-    }
-  },
-  methods: {
-    toggleLike () {
-      if (this.userLikedBlog) {
-        this.unLikeBlog()
-      } else {
-        if (this.userDisLikedBlog) {
-          this.undislikeBlog()
-        } else {
-          this.likeBlog()
+    export default {
+        name: 'BlogCard',
+        props: ['blog'],
+        data () {
+            return {
+                result: {},
+                userLikedBlog: this.blog.user_has_votedUp,
+                userDisLikedBlog: this.blog.user_has_votedDown,
+                likesCounter: this.blog.likes_count,
+                dislikesCounter: this.blog.dislikes_count
+            }
+        },
+        computed: {
+            getResult: function () {
+                return JSON.parse(this.blog.content).blocks[0]
+            }
+        },
+        methods: {
+            toggleLike () {
+                if (this.userLikedBlog) {
+                    this.unLikeBlog()
+                } else {
+                    if (this.userDisLikedBlog) {
+                        this.undislikeBlog()
+                    } else {
+                        this.likeBlog()
+                    }
+                }
+            },
+            toggleDislike () {
+                if (this.userDisLikedBlog) {
+                    this.undislikeBlog()
+                } else {
+                    if (this.userLikedBlog) {
+                        this.unLikeBlog()
+                    } else {
+                        this.dislikeBlog()
+                    }
+                }
+            },
+            likeBlog () {
+                this.likesCounter += 1
+                this.userLikedBlog = true
+                const endpoint = `/api/blogs/${this.blog.id}/like/`
+                apiService(endpoint, 'POST')
+            },
+            unLikeBlog () {
+                this.likesCounter -= 1
+                this.userLikedBlog = false
+                const endpoint = `/api/blogs/${this.blog.id}/like/`
+                apiService(endpoint, 'DELETE')
+            },
+            dislikeBlog () {
+                this.dislikesCounter += 1
+                this.userDisLikedBlog = true
+                const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+                apiService(endpoint, 'POST')
+            },
+            undislikeBlog () {
+                this.dislikesCounter -= 1
+                this.userDisLikedBlog = false
+                const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+                apiService(endpoint, 'DELETE')
+            }
         }
-      }
-    },
-    toggleDislike () {
-      if (this.userDisLikedBlog) {
-        this.undislikeBlog()
-      } else {
-        if (this.userLikedBlog) {
-          this.unLikeBlog()
-        } else {
-          this.dislikeBlog()
-        }
-      }
-    },
-    likeBlog () {
-      this.likesCounter += 1
-      this.userLikedBlog = true
-      const endpoint = `/api/blogs/${this.blog.id}/like/`
-      apiService(endpoint, 'POST')
-    },
-    unLikeBlog () {
-      this.likesCounter -= 1
-      this.userLikedBlog = false
-      const endpoint = `/api/blogs/${this.blog.id}/like/`
-      apiService(endpoint, 'DELETE')
-    },
-    dislikeBlog () {
-      this.dislikesCounter += 1
-      this.userDisLikedBlog = true
-      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      apiService(endpoint, 'POST')
-    },
-    undislikeBlog () {
-      this.dislikesCounter -= 1
-      this.userDisLikedBlog = false
-      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      apiService(endpoint, 'DELETE')
-    }
-  }
 
-}
+    }
 </script>
 
 <style scoped lang="scss">
@@ -193,7 +196,19 @@ export default {
     .post-corporate-content  {
         p {
             white-space: pre-line;
+            color: #0f0f0f;
+            text-align: justify;
         }
+
+    }
+    .post-corporate-figure {
+        img {
+            margin: 20px;
+        }
+    }
+    .post-corporate-blog {
+        max-height: 150px;
+        overflow: hidden;
 
     }
 
