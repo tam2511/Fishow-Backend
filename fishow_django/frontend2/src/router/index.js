@@ -7,6 +7,7 @@ import Blog from "../views/Blog";
 import BlogEditor from "../views/BlogEditor";
 import CreateComment from "../components/CreateComment";
 import NotFound from "../views/NotFound";
+import PredictPage from "../views/PredictPage";
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,12 @@ const routes = [
     path: '/article/',
     name: 'Article',
     component: Article,
+    props: true
+  },
+  {
+    path: '/predict-page/',
+    name: 'PredictPage',
+    component: PredictPage,
     props: true
   },
   {

@@ -1,4 +1,4 @@
-<template>
+/<template>
     <div class="rd-navbar-main rd-navbar-dark">
         <div class="rd-navbar-main-container container">
             <!-- RD Navbar Brand-->
@@ -11,7 +11,7 @@
                     <router-link class="rd-nav-link" to="/">Главная</router-link>
                 </li>
                 <li class="rd-nav-item">
-                    <router-link class="rd-nav-link" to="">Прогноз</router-link>
+                    <router-link class="rd-nav-link" to="/predict-page">Прогноз</router-link>
                 </li>
                 <li class="rd-nav-item">
                     <router-link class="rd-nav-link" to="#">Галерея</router-link>

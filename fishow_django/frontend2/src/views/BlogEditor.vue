@@ -2,7 +2,7 @@
   <section class="section section-variant-1 bg-gray-100">
     <div class="container">
       <div class="row row-50">
-        <div class="col-lg-7 col-xl-8">
+        <div class="col-lg-7 col-xl-8" v-if="blog_category !== 'Отчет'">
           <!-- Heading Component-->
           <article class="heading-component">
             <div class="heading-component-inner">
@@ -76,6 +76,24 @@
           </form>
 
         </div>
+        <div class="col-lg-7 col-xl-8" v-else>
+          <article class="heading-component">
+            <div class="heading-component-inner">
+              <h5 class="heading-component-title">Добавить отчет</h5>
+
+            </div>
+          </article>
+          <dynamic-form
+                  ref="dynamic-form"
+                  v-model="data"
+                  :descriptors="descriptors"
+                  :showOuterError="false">
+            <template slot="operations">
+              <el-button @click="reset">Reset</el-button>
+              <el-button type="primary" @click="validate" plain>Validate</el-button>
+            </template>
+          </dynamic-form>
+        </div>
         <div class="col-lg-5 col-xl-4">
           <div>
             <label class="typo__label">Выберите категорию:</label>
@@ -92,6 +110,7 @@
         </div>
       </div>
     </div>
+    <el-button :plain="true" @click="open2" style="display: none">success</el-button>
   </section>
   <!--    </div>-->
 </template>
@@ -137,9 +156,52 @@ export default {
         { name: 'Текст', code: 'текст' }
       ],
       optionsCategory: ['Новости','Блоги','Статьи','Отчет'],
+      descriptors: {
+        prop1: { type: 'string',
+          label: 'Место рыбалки',
+          required: true,
+          message: 'Обязательно укажите место рыбалки'},
+        prop2: {
+          type: 'object',
+          label: 'object label',
+          fields: {
+            prop1: { type: 'email', required: true },
+            prop2: { type: 'number', required: true },
+            prop3: [
+              { type: 'string', required: true, message: 'object label.prop3 is required' },
+              { pattern: /test/, message: 'object label.prop3 should include test' }
+            ],
+            prop4: {
+              type: 'enum',
+              enum: [0, 1],
+              label:'Рыба',
+              placeholder: 'sadsad',
+              options: [
+                // { label: 'Лев', value: 0, disabled: true },
+                { label: 'Лев', value: 0 },
+                { label: 'Тигр', value: 1 }
+              ]
+            },
+            prop5: { type: 'boolean', required: true },
+          }
+        }
+      },
+      data: {}
     }
   },
   methods: {
+    open2() {
+      this.$message({
+        message: 'Отлично, у вас получилсоь!',
+        type: 'success'
+      });
+    },
+    reset () {
+      this.$refs['dynamic-form'].resetFields()
+    },
+    validate () {
+      this.$refs['dynamic-form'].validate()
+    },
     addTag (newTag) {
       const tag = {
         name: newTag,
@@ -173,6 +235,7 @@ export default {
       this.blog_tags = JSON.stringify(this.blog_tags)
     },
     onSubmit () {
+      this.open2()
       this.convertTags()
       this.convertBody()
 
@@ -260,5 +323,8 @@ export default {
   .typo__label {
     color: #0f0f0f;
     font-size: 18px;
+  }
+  .dynamic-form {
+    background: none !important;
   }
 </style>
