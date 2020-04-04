@@ -30,6 +30,7 @@
               <blog-card v-for="blog in blogs"
                          :blog="blog"
                          :key="blog.pk"/>
+
               <button class="button button-primary button-lg"
                       v-show="next"
                       @click="getBlogs">Load more</button>
@@ -52,7 +53,7 @@
                   </div>
                 </article>
                 <HotPostMinimal
-                        v-for="blog in blogs"
+                        v-for="blog in computedObj"
                         :blog="blog"
                         :key="blog.pk"
                 />
@@ -135,13 +136,30 @@ export default {
     return {
       blogs: [],
       next: null,
-      loadingBlogs: false
+      loadingBlogs: false,
+      limit: 3
+    }
+  },
+  computed:{
+    computedObj(){
+      return this.limit ? this.blogs.slice(0,this.limit) : this.blogs
     }
   },
   methods: {
     setPageTitle (title) {
       document.title = title
     },
+    // listScroll() {
+    //   window.addEventListener("scroll", () => {
+    //     const value = document.querySelectorAll('.aside-component')[document.querySelectorAll('.aside-component').length - 1].getBoundingClientRect().x + document.querySelectorAll('.aside-component')[document.querySelectorAll('.aside-component').length - 1].clientHeight;
+    //     if (pageYOffset > value) {
+    //       document.querySelector('.col-lg-4 .aside-components').classList.add('aside-components__sticky')
+    //     } else {
+    //       document.querySelector('.col-lg-4 .aside-components').classList.remove('aside-components__sticky')
+    //     }
+    //     console.log(pageYOffset);
+    //   })
+    // },
     getBlogs () {
       let endpoint = '/api/blogs/'
       if (this.next) {
@@ -163,11 +181,20 @@ export default {
 created () {
   this.getBlogs()
   this.setPageTitle('Fishow - Главная')
+  // this.listScroll();
 }
 }
 </script>
-<style>
+<style scoped lang="scss">
   .buttons-nav a {
     margin-left: 10px;
+  }
+  .col-lg-4 {
+    @media screen and (min-width: 1024px){
+      .aside-components__sticky {
+        position: fixed;
+        width: 30%;
+      }
+    }
   }
 </style>

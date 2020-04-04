@@ -138,15 +138,12 @@
         methods: {
             whomIsVideo (fields) {
                 const temp = fields.split('/')
-                let result = ''
                 for (let i = 0; i < temp.length; i++) {
                     if (temp[i] === 'youtu.be') {
-                        result = 'https://www.youtube.com/embed/' + temp[temp.length - 1]
-                        return result
+                        return 'https://www.youtube.com/embed/' + temp[temp.length - 1]
                     }
                     if (temp[i] === 'www.youtube.com') {
-                        result = 'https://www.youtube.com/embed/' + temp[temp.length - 1].split('watch?v=')[0]
-                        return result
+                        return 'https://www.youtube.com/embed/' + temp[temp.length - 1].split('watch?v=')[0]
                     }
                 }
             },
@@ -160,7 +157,6 @@
                         this.requestUser = this.$store.state.username
                     }
                 }, 100)
-
             },
             getBlogData () {
                 const endpoint = `/api/blogs/${this.slug}/`
@@ -168,7 +164,11 @@
                     this.blog = data
                     this.result = JSON.parse(data.content)
                     this.result = this.result.blocks[0]
-                    this.blogTags = JSON.parse(this.blog.tags)
+                    const tags = JSON.parse(this.blog.tags)
+                    const result = [];
+                    tags.forEach((tag) => result.push(tag.name));
+                    this.blogTags = result;
+
                     this.id = data.id
                     this.setPageTitle('Fishow - ' + data.title)
                 })
@@ -191,7 +191,6 @@
                 }
             },
             onSubmit () {
-                // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
                 if (this.commentBody) {
                     const endpoint = `/api/blogs/${this.slug}/comment/`
                     apiService(endpoint, 'POST', { body: this.commentBody })
@@ -227,8 +226,6 @@
             white-space: pre-line;
         }
     }
-
-
     .blog-post-text {
         text-align: justify;
     }
