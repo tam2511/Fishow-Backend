@@ -4,9 +4,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from blogs.api.serializers import BlogSerializer, CommentSerializer
+from blogs.api.serializers import BlogSerializer, CommentSerializer, PredictionSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly
-from blogs.models import Blog, Comment
+from blogs.models import Blog, Comment, Prediction
 
 
 
@@ -171,4 +171,8 @@ class BlogDisLikeAPIView(APIView):
         serializer = self.serializer_class(blog, context=serializer_context)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class PredictionView(APIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
 
