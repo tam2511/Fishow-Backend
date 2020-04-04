@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tam2511.beget.tech']
 
 # Application definition
 
@@ -91,8 +91,12 @@ WSGI_APPLICATION = 'fishow_django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tam2511_fishow',
+        'USER': 'tam2511_fishow',
+        'PASSWORD': '081099ASDasd',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 
@@ -137,7 +141,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+STATIC_ROOT = '/home/t/tam2511/django_fishing/fishow_django/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend2/dist/'),
     os.path.join(BASE_DIR, 'frontend2/source/'),

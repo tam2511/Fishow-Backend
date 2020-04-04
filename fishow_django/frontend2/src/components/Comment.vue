@@ -43,11 +43,10 @@
                 <div class="comment-reply">
                     <a href="#">Ответить</a>
                 </div>
-                <div v-if="isCommentAuthor">
-
-                <div class="comment-reply">
-                    <div @click="triggerDeleteComment">Удалить</div>
-                </div>
+                <div class="comment-reply-parent" v-if="isCommentAuthor">
+                    <div class="comment-reply">
+                        <button type="button" @click="triggerDeleteComment">Удалить</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,7 +64,7 @@ export default {
       required: true
     },
     requestUser: {
-      type: String,
+      // type: String,
       required: true
     },
     slug: {
@@ -143,4 +142,23 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+    button {
+        background: none;
+        border: none;
+    }
+    .comment-reply {
+
+        button {
+
+            transition-duration: 0.3s;
+            &:hover {
+                color: red;
+            }
+        }
+    }
+    .comment-reply-parent {
+        margin-left: 10px;
+    }
+
+</style>

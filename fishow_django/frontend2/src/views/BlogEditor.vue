@@ -77,23 +77,18 @@
 
         </div>
         <div class="col-lg-5 col-xl-4">
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select v-model="blog_category" class="form-control" id="exampleFormControlSelect1">
-              <option>Новости</option>
-              <option>Блоги</option>
-              <option>Статьи</option>
-            </select>
+          <div>
+            <label class="typo__label">Выберите категорию:</label>
+            <multiselect v-model="blog_category" :options="optionsCategory" :searchable="false" :close-on-select="true" :show-labels="false" placeholder="Pick a value"></multiselect>
+            <pre class="language-json"><code>{{ valueCategory  }}</code></pre>
           </div>
-          <h4>Категория: {{ blog_category }}</h4>
-          <div class="form-group">
-            <select v-model="blog_tags" multiple>
-              <option class="form-control" v-for="tag in deafultTags" :key="tag" id="exampleFormControlSelect2">{{ tag }} </option>
-            </select>
-          </div>
-
+            <label class="typo__label">Теги:</label>
+            <multiselect v-model="blog_tags" tag-placeholder="Add this as new tag" placeholder="Найдите или добавьте свой тег" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" @tag="addTag">
+            </multiselect>
+<!--            <pre class="language-json"><code>{{ blog_tags  }}</code></pre>-->
           <br>
-          <h5>Selected: {{ blog_tags }}</h5>
+<!--          <p>Категория: {{ blog_category }}</p>-->
+<!--          <p>Selected: {{ blog_tags }}</p>-->
         </div>
       </div>
     </div>
@@ -107,9 +102,10 @@ import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
 import videoField from '@/components/blog/videoField'
+import Multiselect from 'vue-multiselect'
 export default {
   name: 'BlogEditor',
-  components: { TextField, BlogContentField, imageField, videoField },
+  components: { TextField, BlogContentField, imageField, videoField, Multiselect },
   props: {
     slug: {
       type: String,
@@ -126,15 +122,32 @@ export default {
       blog_body: '',
       blog_title: null,
       blog_category: 'Блоги',
-      blog_tags: [],
       deafultTags: ['Удочки', 'Шутки', 'Ночь', 'История', 'Деньги'],
       result: [],
       error: null,
       field: 'textField',
-      blog_json: null
+      blog_json: null,
+      valueCategory: '',
+      blog_tags: [
+        { name: 'Текст', code: 'текст' }
+      ],
+      options: [
+        { name: 'Видео', code: 'ви' },
+        { name: 'Картинки', code: 'os' },
+        { name: 'Текст', code: 'текст' }
+      ],
+      optionsCategory: ['Новости','Блоги','Статьи','Отчет'],
     }
   },
   methods: {
+    addTag (newTag) {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+      }
+      this.options.push(tag)
+      this.blog_tags.push(tag)
+    },
     convertBody () {
       const result = []
       const listBloks = document.querySelectorAll('textarea')
@@ -212,7 +225,7 @@ export default {
   }
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss">
   .form-wrap {
     display: flex;
@@ -243,5 +256,9 @@ export default {
     display: flex;
     align-items: baseline;
     justify-content: space-evenly;
+  }
+  .typo__label {
+    color: #0f0f0f;
+    font-size: 18px;
   }
 </style>

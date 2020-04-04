@@ -35,4 +35,10 @@
       color: #42b983;
     }
   }
+  @media (min-width: 1024px) {
+    .section-md {
+      padding: 30px 0 90px;
+    }
+  }
+
 </style>
