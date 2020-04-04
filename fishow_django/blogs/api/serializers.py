@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from blogs.models import Blog, Comment
+from datetime import datetime,timezone
+from django.utils.timesince import timesince
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -45,13 +47,17 @@ class BlogSerializer(serializers.ModelSerializer):
     slug = serializers.SlugField(read_only=True)
     comments_count = serializers.SerializerMethodField()
     user_has_commented = serializers.SerializerMethodField()
+    time_from_creations = serializers.SerializerMethodField()
 
     class Meta:
         model = Blog
         exclude = ['updated_at', 'votersUp','votersDown']
 
+#     def get_created_at(self, instance):
+#         return instance.created_at.strftime("%B %d, %Y")
+
     def get_created_at(self, instance):
-        return instance.created_at.strftime("%B %d, %Y")
+        return instance.created_at.strftime("%d.%m.%y %H:%M")
 
     def get_comments_count(self, instance):
         return instance.comments.count()
@@ -73,3 +79,9 @@ class BlogSerializer(serializers.ModelSerializer):
     def get_user_has_commented(self, instance):
         request = self.context.get('request')
         return instance.comments.filter(author=request.user).exists()
+
+    def get_time_from_creations(self, object):
+        created = object.created_at
+        now = datetime.now(timezone.utc)
+        time_spend = timesince(created, now)
+        return time_spend
