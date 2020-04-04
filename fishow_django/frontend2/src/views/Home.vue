@@ -18,7 +18,7 @@
                     </router-link>
                     <router-link
                             class="button button-xs button-gray-outline"
-                            to=""
+                            to="/article"
                             style="margin-top: 0"
                     >
                       Читать все
@@ -149,17 +149,6 @@ export default {
     setPageTitle (title) {
       document.title = title
     },
-    // listScroll() {
-    //   window.addEventListener("scroll", () => {
-    //     const value = document.querySelectorAll('.aside-component')[document.querySelectorAll('.aside-component').length - 1].getBoundingClientRect().x + document.querySelectorAll('.aside-component')[document.querySelectorAll('.aside-component').length - 1].clientHeight;
-    //     if (pageYOffset > value) {
-    //       document.querySelector('.col-lg-4 .aside-components').classList.add('aside-components__sticky')
-    //     } else {
-    //       document.querySelector('.col-lg-4 .aside-components').classList.remove('aside-components__sticky')
-    //     }
-    //     console.log(pageYOffset);
-    //   })
-    // },
     getBlogs () {
       let endpoint = '/api/blogs/'
       if (this.next) {

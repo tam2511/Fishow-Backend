@@ -14,28 +14,19 @@
                     <router-link class="rd-nav-link" to="/predict-page">Прогноз</router-link>
                 </li>
                 <li class="rd-nav-item">
-                    <router-link class="rd-nav-link" to="#">Галерея</router-link>
+                    <router-link class="rd-nav-link" to="/gallery">Галерея</router-link>
                     <!-- RD Navbar Dropdown-->
                     <ul class="rd-menu rd-navbar-dropdown">
                         <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Фотоальбом</router-link>
+                            <router-link class="rd-dropdown-link" to="/fotoalbum">Фотоальбом</router-link>
                         </li>
                         <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Видеоальбом</router-link>
+                            <router-link class="rd-dropdown-link" to="/videoalbum">Видеоальбом</router-link>
                         </li>
                     </ul>
                 </li>
                 <li class="rd-nav-item">
-                    <router-link class="rd-nav-link" to="">Новости</router-link>
-                    <!-- RD Navbar Dropdown-->
-                    <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Новости</router-link>
-                        </li>
-                        <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Blog post</router-link>
-                        </li>
-                    </ul>
+                    <router-link class="rd-nav-link" to="/news">Новости</router-link>
                 </li>
                 <li class="rd-nav-item">
                     <router-link class="rd-nav-link" to="/article">Статьи</router-link>
@@ -44,24 +35,24 @@
                         <li class="rd-dropdown-item"><router-link class="rd-dropdown-link" to="">Истории</router-link>
                         </li>
                         <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Блоги</router-link>
+                            <router-link class="rd-dropdown-link" to="/empty">Блоги</router-link>
                         </li>
                         <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Отчеты</router-link>
+                            <router-link class="rd-dropdown-link" to="/empty2">Отчеты</router-link>
                         </li>
                         <li class="rd-dropdown-item">
                             <router-link class="rd-dropdown-link" to="/blog-editor">Написать Блог</router-link>
                         </li>
                         <li class="rd-dropdown-item">
-                            <router-link class="rd-dropdown-link" to="">Написать Статью</router-link>
+                            <router-link class="rd-dropdown-link" to="/empty3">Написать Статью</router-link>
                         </li>
                     </ul>
                 </li>
                 <li class="rd-nav-item">
-                    <router-link class="rd-nav-link" to="">Вики</router-link>
+                    <router-link class="rd-nav-link" to="/wiki">Вики</router-link>
                 </li>
                 <li class="rd-nav-item">
-                    <router-link class="rd-nav-link" to="">Форум</router-link>
+                    <router-link class="rd-nav-link" to="/forum">Форум</router-link>
                 </li>
             </ul>
             <rd-navbar-main-element/>

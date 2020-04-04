@@ -32,7 +32,7 @@
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #ffd851 !important;
     }
   }
   @media (min-width: 1024px) {
