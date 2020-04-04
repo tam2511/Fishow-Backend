@@ -32,7 +32,13 @@
     color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #ffd851 !important;
     }
   }
+  @media (min-width: 1024px) {
+    .section-md {
+      padding: 30px 0 90px;
+    }
+  }
+
 </style>

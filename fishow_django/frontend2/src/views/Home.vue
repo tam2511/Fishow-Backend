@@ -18,7 +18,7 @@
                     </router-link>
                     <router-link
                             class="button button-xs button-gray-outline"
-                            to=""
+                            to="/article"
                             style="margin-top: 0"
                     >
                       Читать все
@@ -30,6 +30,7 @@
               <blog-card v-for="blog in blogs"
                          :blog="blog"
                          :key="blog.pk"/>
+
               <button class="button button-primary button-lg"
                       v-show="next"
                       @click="getBlogs">Load more</button>
@@ -52,7 +53,7 @@
                   </div>
                 </article>
                 <HotPostMinimal
-                        v-for="blog in blogs"
+                        v-for="blog in computedObj"
                         :blog="blog"
                         :key="blog.pk"
                 />
@@ -135,7 +136,13 @@ export default {
     return {
       blogs: [],
       next: null,
-      loadingBlogs: false
+      loadingBlogs: false,
+      limit: 3
+    }
+  },
+  computed:{
+    computedObj(){
+      return this.limit ? this.blogs.slice(0,this.limit) : this.blogs
     }
   },
   methods: {
@@ -163,11 +170,20 @@ export default {
 created () {
   this.getBlogs()
   this.setPageTitle('Fishow - Главная')
+  // this.listScroll();
 }
 }
 </script>
-<style>
+<style scoped lang="scss">
   .buttons-nav a {
     margin-left: 10px;
+  }
+  .col-lg-4 {
+    @media screen and (min-width: 1024px){
+      .aside-components__sticky {
+        position: fixed;
+        width: 30%;
+      }
+    }
   }
 </style>

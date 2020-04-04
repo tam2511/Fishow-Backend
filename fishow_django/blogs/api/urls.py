@@ -35,4 +35,8 @@ urlpatterns = [
     path("blogs/<int:pk>/dislike/",
          qv.BlogDisLikeAPIView.as_view(),
          name="blog-dislike"),
+
+    path("prediction/",
+         qv.PredictionView.as_view(),
+         name="prediction"),
 ]

@@ -23,7 +23,7 @@
                     </div>
                     <div class="team-title">
                         <div class="team-name">{{ user.username}}</div>
-                        <div class="team-country">{{ user.email }}</div>
+                        <div class="team-country"> Ник или Фамилия </div>
                     </div>
                 </td>
                 <td>0</td>

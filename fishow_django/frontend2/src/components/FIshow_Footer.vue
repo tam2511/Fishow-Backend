@@ -86,12 +86,12 @@
                 <div class="layout-justify">
                     <nav class="nav-minimal">
                         <ul class="nav-minimal-list">
-                            <li><a href="">Команда</a></li>
-                            <li><a href="#">Standings</a></li>
-                            <li><a href="">Новости</a></li>
-                            <li><a href="">Вики</a></li>
-                            <li><a href="#">Последние блоги</a></li>
-                            <li><a href="#">Schedule</a></li>
+                            <li><router-link to="/">Команда</router-link></li>
+                            <li><router-link to="/">Standings</router-link></li>
+                            <li><router-link to="/">Новости</router-link></li>
+                            <li><router-link to="/">Вики</router-link></li>
+                            <li><router-link to="/">Последние блоги</router-link></li>
+                            <li><router-link to="/">Schedule</router-link></li>
                         </ul>
                     </nav>
                     <!-- Rights-->

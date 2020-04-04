@@ -7,8 +7,7 @@
                     <router-link :to="{ name: 'blog', params: { slug: blog.slug } }"> {{ blog.title }} </router-link>
                 </p>
                 <div class="post-minimal_comments">
-                    <div class="badge badge-primary">Категория</div>
-                    <div class="post-corporate-author"> Автор: {{ blog.author}} </div>
+                    <div class="badge badge-primary">{{blog.category}}</div>
                     <time class="post-classic-time">
                         {{ blog.created_at }}
                     </time>
