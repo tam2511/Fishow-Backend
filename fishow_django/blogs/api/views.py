@@ -4,9 +4,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from blogs.api.serializers import BlogSerializer, CommentSerializer, PredictionSerializer
+from blogs.api.serializers import BlogSerializer, CommentSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly
-from blogs.models import Blog, Comment, Prediction
+from blogs.models import Blog, Comment
 
 
 
