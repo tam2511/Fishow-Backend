@@ -175,3 +175,4 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'frontend2', 'webpack-stats.json'),
     }
 }
+
