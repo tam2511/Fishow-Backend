@@ -35,7 +35,7 @@
       color: #ffd851 !important;
     }
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1023px) {
     .section-md {
       padding: 30px 0 90px;
     }
