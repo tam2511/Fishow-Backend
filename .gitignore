@@ -3,4 +3,4 @@ venv
 fishow_django/env/
 fishow_django/settings.py
 fishow_django/db.sqlite3
-/fishow_django/fishow_django/settings.py
+fishow_django/fishow_django/settings.py
