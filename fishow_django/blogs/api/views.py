@@ -8,6 +8,8 @@ from blogs.api.serializers import BlogSerializer, CommentSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly
 from blogs.models import Blog, Comment
 
+from users.models import CustomUser
+
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
@@ -34,6 +36,10 @@ class CommentLikeAPIView(APIView):
         comment.votersUp.remove(user)
         comment.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
 
@@ -46,6 +52,10 @@ class CommentLikeAPIView(APIView):
 
         comment.votersUp.add(user)
         comment.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
@@ -66,6 +76,10 @@ class CommentDisLikeAPIView(APIView):
         comment.votersDown.remove(user)
         comment.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
 
@@ -78,6 +92,10 @@ class CommentDisLikeAPIView(APIView):
 
         comment.votersDown.add(user)
         comment.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
@@ -122,6 +140,10 @@ class BlogLikeAPIView(APIView):
         blog.votersUp.remove(user)
         blog.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
 
@@ -134,6 +156,10 @@ class BlogLikeAPIView(APIView):
 
         blog.votersUp.add(user)
         blog.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
@@ -154,6 +180,10 @@ class BlogDisLikeAPIView(APIView):
         blog.votersDown.remove(user)
         blog.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
 
@@ -166,6 +196,10 @@ class BlogDisLikeAPIView(APIView):
 
         blog.votersDown.add(user)
         blog.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
