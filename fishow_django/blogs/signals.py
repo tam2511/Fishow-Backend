@@ -15,9 +15,7 @@ def add_slug_to_blog(sender, instance,*args,**kwargs):
         slug = slugify(instance.title)
         random_string = generate_random_string()
         instance.slug = slug + '-' + random_string
-
-@receiver(pre_save, sender=Blog)
-def count_plus_blog(sender, instance,*args,**kwargs):
+        
     user=CustomUser.objects.get(username=instance.author)
     user.count_blogs=int(user.count_blogs)+1
     user.save()
@@ -41,14 +39,14 @@ def dell_count_blog(sender, instance,*args,**kwargs):
     user.save()
 
 #@receiver(request_started)
-@receiver(request_started,sender=Blog)
-def priii(sender, instance,*args,**kwargs):
-    print('url')
-    info=kwargs['environ']
-    try:
-        if '/blog/' in info['HTTP_REFERER']:
-            for key, value in info.items():
-                if key in ["LC_CTYPE", "REQUEST_METHOD","HTTP_USER_AGENT","HTTP_REFERER","HTTP_ACCEPT_LANGUAGE"]:
-                    print (key, value)
-    except:
-        pass
+# @receiver(request_started,sender=Blog)
+# def priii(sender, instance,*args,**kwargs):
+#     print('url')
+#     info=kwargs['environ']
+#     try:
+#         if '/blog/' in info['HTTP_REFERER']:
+#             for key, value in info.items():
+#                 if key in ["LC_CTYPE", "REQUEST_METHOD","HTTP_USER_AGENT","HTTP_REFERER","HTTP_ACCEPT_LANGUAGE"]:
+#                     print (key, value)
+#     except:
+#         pass
