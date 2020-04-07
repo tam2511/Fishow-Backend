@@ -129,7 +129,7 @@ class BlogViewSet(viewsets.ModelViewSet):
 
 class BlogLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an comment instance."""
-    serializer_class = CommentSerializer
+    serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
@@ -169,7 +169,7 @@ class BlogLikeAPIView(APIView):
 
 class BlogDisLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an comment instance."""
-    serializer_class = CommentSerializer
+    serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
@@ -206,7 +206,7 @@ class BlogDisLikeAPIView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class PredictionView(APIView):
-    serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+# class PredictionView(APIView):
+#     serializer_class = CommentSerializer
+#     permission_classes = [IsAuthenticated]
 
