@@ -1,4 +1,5 @@
 from django.db.models.signals import pre_save,pre_delete
+from django.core.signals import request_started,request_finished
 from django.dispatch import receiver
 from django.utils.text import slugify
 
@@ -38,3 +39,16 @@ def dell_count_blog(sender, instance,*args,**kwargs):
     user=CustomUser.objects.get(username=instance.author)
     user.count_comments=int(user.count_comments)-1
     user.save()
+
+#@receiver(request_started)
+@receiver(request_started,sender=Blog)
+def priii(sender, instance,*args,**kwargs):
+    print('url')
+    info=kwargs['environ']
+    try:
+        if '/blog/' in info['HTTP_REFERER']:
+            for key, value in info.items():
+                if key in ["LC_CTYPE", "REQUEST_METHOD","HTTP_USER_AGENT","HTTP_REFERER","HTTP_ACCEPT_LANGUAGE"]:
+                    print (key, value)
+    except:
+        pass
