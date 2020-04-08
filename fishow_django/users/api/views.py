@@ -14,7 +14,7 @@ class CurrentUserAPIView(APIView):
 class UserList(APIView):
     def get(self, request):
         User = get_user_model()
-        users = [{'username':user.username,'email':user.email} for user in User.objects.all()]
+        users = [{'username':user.username,'email':user.email, 'blogs':user.count_blogs, 'comments':user.count_comments,'rating':user.rating} for user in User.objects.all()]
         return Response(users)
 
 class UserStatistic(APIView):
