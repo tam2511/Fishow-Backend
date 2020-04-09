@@ -44,7 +44,8 @@ export default {
 <style scoped>
     textarea {
         min-height: 60px;
-        border: none;
-        padding: 5px;
+        padding: 17px 19px;
+        color: #9b9b9b;
+        border: 1px solid #e1e1e1;
     }
 </style>
