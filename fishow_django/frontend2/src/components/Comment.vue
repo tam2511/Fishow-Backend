@@ -153,12 +153,24 @@ export default {
 
             transition-duration: 0.3s;
             &:hover {
-                color: red;
+                color: #a80000;
             }
         }
     }
     .comment-reply-parent {
         margin-left: 10px;
+    }
+    .mdi-thumb-down {
+        color: #a80000;
+        &-outline {
+            color: #a80000;
+        }
+    }
+    .mdi-thumb-up {
+        color: #005e00;
+        &-outline {
+            color: #005e00;
+        }
     }
 
 </style>

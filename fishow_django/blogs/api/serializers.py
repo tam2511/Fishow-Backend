@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from blogs.models import Blog, Comment, Prediction
+from blogs.models import Blog, Comment
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 
@@ -85,8 +85,3 @@ class BlogSerializer(serializers.ModelSerializer):
         now = datetime.now(timezone.utc)
         time_spend = timesince(created, now)
         return time_spend
-
-class PredictionSerializer(serializers.ModelSerializer):
-    class Meta:
-         model = Prediction
-         field = '__all__'

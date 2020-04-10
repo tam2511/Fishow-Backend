@@ -207,7 +207,7 @@
         }
     }
     .post-corporate-blog {
-        max-height: 150px;
+        max-height: 350px;
         overflow: hidden;
 
     }

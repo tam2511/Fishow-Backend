@@ -1,7 +1,6 @@
 .idea
 venv
 fishow_django/env/
-<<<<<<< HEAD
 fishow_django/db.sqlite3
 .htaccess
 __pycache__/
@@ -19,9 +18,9 @@ tam2511.beget.tech.error.log.20200401
 tam2511.beget.tech.error.log.20200402
 tam2511.beget.tech.error.log.20200403
 tmp/
-=======
 fishow_django/fishow_django/settings.py
 fishow_django/db.sqlite3
+<<<<<<< HEAD
 /fishow_django/fishow_django/settings.py
 >>>>>>> 619edbf7ff7ee7b7acf6c3dfd43ba30ab09dfc8d
 fishow_django/blogs/migrations/
@@ -29,3 +28,6 @@ fishow_django/users/migrations/
 tam2511.beget.tech.error.log.20200407
 tam2511.beget.tech.error.log.20200408
 tam2511.beget.tech.error.log.20200409
+=======
+/fishow_django/frontend2/webpack-stats.json
+>>>>>>> caf4798c6bacecfb5f5d649b7471d746a84db402
