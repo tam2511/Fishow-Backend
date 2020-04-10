@@ -4,9 +4,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from blogs.api.serializers import BlogSerializer, CommentSerializer, PredictionSerializer
+from blogs.api.serializers import BlogSerializer, CommentSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly
-from blogs.models import Blog, Comment, Prediction
+from blogs.models import Blog, Comment
+
+from users.models import CustomUser
 
 
 
@@ -34,6 +36,10 @@ class CommentLikeAPIView(APIView):
         comment.votersUp.remove(user)
         comment.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
 
@@ -46,6 +52,10 @@ class CommentLikeAPIView(APIView):
 
         comment.votersUp.add(user)
         comment.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
@@ -66,6 +76,10 @@ class CommentDisLikeAPIView(APIView):
         comment.votersDown.remove(user)
         comment.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
 
@@ -78,6 +92,10 @@ class CommentDisLikeAPIView(APIView):
 
         comment.votersDown.add(user)
         comment.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
@@ -111,7 +129,7 @@ class BlogViewSet(viewsets.ModelViewSet):
 
 class BlogLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an comment instance."""
-    serializer_class = CommentSerializer
+    serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
@@ -121,6 +139,10 @@ class BlogLikeAPIView(APIView):
 
         blog.votersUp.remove(user)
         blog.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
@@ -135,6 +157,10 @@ class BlogLikeAPIView(APIView):
         blog.votersUp.add(user)
         blog.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
 
@@ -143,7 +169,7 @@ class BlogLikeAPIView(APIView):
 
 class BlogDisLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an comment instance."""
-    serializer_class = CommentSerializer
+    serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
     def delete(self, request, pk):
@@ -153,6 +179,10 @@ class BlogDisLikeAPIView(APIView):
 
         blog.votersDown.remove(user)
         blog.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)+1
+        user.save()
 
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
@@ -167,12 +197,16 @@ class BlogDisLikeAPIView(APIView):
         blog.votersDown.add(user)
         blog.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.rating=int(user.rating)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class PredictionView(APIView):
-    serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+# class PredictionView(APIView):
+#     serializer_class = CommentSerializer
+#     permission_classes = [IsAuthenticated]
 

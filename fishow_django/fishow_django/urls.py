@@ -27,6 +27,9 @@ urlpatterns = [
     path('api/',
          include('blogs.api.urls')),
 
+    path('api/',
+         include('prediction.api.urls')),
+
     path('api-auth/',
          include('rest_framework.urls')),
 

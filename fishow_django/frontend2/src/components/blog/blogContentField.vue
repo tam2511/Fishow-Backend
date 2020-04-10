@@ -3,13 +3,12 @@
         <div class="form-wrap">
             <div class="fishow-blog_image__close-button"
                  @click="destroyMe">x</div>
-            <textarea
+            <autosize-textarea
                     v-model="model"
-                    class="form-input"
                     :id="counter"
                     name="text"
                     placeholder="Основной текст"
-            ></textarea>
+            ></autosize-textarea>
             <slot></slot>
         </div>
     </div>
@@ -43,5 +42,10 @@ export default {
 </script>
 
 <style scoped>
-
+    textarea {
+        min-height: 60px;
+        padding: 17px 19px;
+        color: #9b9b9b;
+        border: 1px solid #e1e1e1;
+    }
 </style>
