@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Article from "../views/Article";
-import UserPage from "../views/UserPage";
-import Blog from "../views/Blog";
-import BlogEditor from "../views/BlogEditor";
-import CreateComment from "../components/CreateComment";
-import NotFound from "../views/NotFound";
-import PredictPage from "../views/PredictPage";
+import Article from '../views/Article'
+import UserPage from '../views/UserPage'
+import Blog from '../views/Blog'
+import BlogEditor from '../views/BlogEditor'
+import CreateComment from '../components/CreateComment'
+import NotFound from '../views/NotFound'
+import PredictPage from '../views/PredictPage'
 
 Vue.use(VueRouter)
 
@@ -15,48 +15,48 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
   },
   {
     path: '/article/',
     name: 'Article',
     component: Article,
-    props: true
+    props: true,
   },
   {
     path: '/predict-page/',
     name: 'PredictPage',
     component: PredictPage,
-    props: true
+    props: true,
   },
   {
     path: '/user-page/',
     name: 'UserPage',
     component: UserPage,
-    props: true
+    props: true,
   },
   {
     path: '/blog/:slug',
     name: 'blog',
     component: Blog,
-    props: true
+    props: true,
   },
   {
     path: '/blog-editor/:slug?',
     name: 'blog-editor',
     component: BlogEditor,
-    props: true
+    props: true,
   },
   {
     path: '/comment/:id',
     name: 'Create-comment',
     component: CreateComment,
-    props: true
+    props: true,
   },
   {
     path: '*',
     name: 'page-not-found',
-    component: NotFound
+    component: NotFound,
   },
   // {
   //   path: '/about',
@@ -71,7 +71,7 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   // base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
