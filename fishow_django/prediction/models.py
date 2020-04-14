@@ -18,7 +18,9 @@ class Prediction(models.Model):
     date = models.DateField()
     areal = models.TextField()
     city = models.TextField()
-    probs = models.TextField()
+    prob = models.FloatField()
+    fish = models.TextField()
+    features = models.TextField()
 
     def __str__(self):
             return self.content
