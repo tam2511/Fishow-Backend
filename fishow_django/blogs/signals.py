@@ -39,15 +39,19 @@ def dell_count_blog(sender, instance,*args,**kwargs):
     user.count_comments=int(user.count_comments)-1
     user.save()
 
-#@receiver(request_started)
-# @receiver(request_started,sender=Blog)
-# def priii(sender, instance,*args,**kwargs):
-#     print('url')
-#     info=kwargs['environ']
-#     try:
+# @receiver(request_started)
+# def priii(sender, *args,**kwargs):
+# #@receiver(request_started,sender=Blog)
+# #def priii(sender,instance *args,**kwargs):
+#      info=kwargs['environ']
+#      try:
 #         if '/blog/' in info['HTTP_REFERER']:
-#             for key, value in info.items():
-#                 if key in ["LC_CTYPE", "REQUEST_METHOD","HTTP_USER_AGENT","HTTP_REFERER","HTTP_ACCEPT_LANGUAGE"]:
-#                     print (key, value)
-#     except:
-#         pass
+#             if '/images/' not in info['HTTP_REFERER']:
+#                 if 'GET' in info['REQUEST_METHOD']:
+#                            print (info['HTTP_REFERER'])
+#
+# #                   for key, value in info.items():
+# #                       if key in ["LC_CTYPE", "REQUEST_METHOD","HTTP_USER_AGENT","HTTP_REFERER","HTTP_ACCEPT_LANGUAGE"]:
+# #                           print (key, value)
+# #     except:
+# #         pass
