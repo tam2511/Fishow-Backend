@@ -17,7 +17,7 @@ class PredictionView(viewsets.ModelViewSet):
         serializer_class = PredictionSerializer
         permission_classes = [IsAuthenticated]
         filter_backends = [DjangoFilterBackend]
-        filterset_fields = ['areal','time','date','city']
+        filterset_fields = ['areal','time','date','city','fish']
 
         def perform_create(self, serializer):
             serializer.save()
