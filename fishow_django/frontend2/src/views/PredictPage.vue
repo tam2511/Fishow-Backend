@@ -1,6 +1,8 @@
 <template>
   <section class="section section-variant-1 bg-gray-100">
-    <div class="container container__small" :style="maxWidth">
+
+    <div class="container container__small" >
+
       <!--            <div v-if="getStep < 3" class="select-predict">-->
       <div v-if="step < 3" class="select-predict">
         <el-steps :active="step" finish-status="success">
@@ -49,18 +51,8 @@
         </div>
       </div>
       <div v-else class="predict" v-loading="loading">
-        <h4>{{this.value}} / {{this.value2}}</h4>
-        <h4>Прогноз на близжайшие 10 дней - {{ this.fish }}</h4>
-        <el-tabs v-model="activeName">
-          <el-tab-pane
-            v-for="day in days"
-            :key="day.id"
-            :label="day.name"
-            :name="day.label"
-          >
-            <column />
-          </el-tab-pane>
-        </el-tabs>
+            <span>{{this.value}} / {{this.value2}} | Прогноз на близжайшие 10 дней - {{ this.fish }}</span>
+        <column />
         <div class="predict_footer">
           <el-button @click="back">Назад</el-button>
         </div>
@@ -226,6 +218,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  .section.section-variant-1 {
+    overflow-scrolling: auto;
+    overflow: scroll;
+    overflow-y: auto;
+  }
 .el-cascader {
   margin: 20px 0;
   display: block;
@@ -257,14 +254,20 @@ export default {
   background-color: #f9fafc;
 }
 .container__small {
-  max-width: 500px;
+  scroll-direction: horizontal;
+  max-width: 900px;
   padding: 20px;
   border: none;
   min-height: 500px;
   background-color: #fff;
+
   transition: all 0.3s;
   &:hover {
     box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
+  }
+  @media screen and (max-width: 600px) {
+    width: 1024px !important;
+    max-height: 100% !important;
   }
 }
 .predict,

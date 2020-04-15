@@ -3,9 +3,17 @@ const BundleTracker = require('webpack-bundle-tracker')
 module.exports = {
   // on Windows you might want to set publicPath: "http://127.0.0.1:8080/"
   publicPath: 'http://127.0.0.1:8080/',
-  outputDir: './dist/',
-  lintOnSave: true,
 
+  outputDir: './dist/',
+  lintOnSave: false,
+
+  // uncomment before executing 'npm run build'
+  css: {
+    extract: {
+      filename: 'bundle.css',
+      chunkFilename: 'bundle.css',
+    },
+  },
   chainWebpack: (config) => {
     config
       .plugin('BundleTracker')
@@ -29,11 +37,7 @@ module.exports = {
       .headers({ 'Access-Control-Allow-Origin': ['*'] })
   },
 
-  // uncomment before executing 'npm run build'
-  // css: {
-  //   extract: {
-  //     filename: 'bundle.css',
-  //     chunkFilename: 'bundle.css',
-  //   },
-  // },
+  pwa: {
+    name: 'Fishow',
+  },
 }
