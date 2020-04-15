@@ -30,12 +30,13 @@ dict_of_params = [{'time': 23, 'temperature': 7, 'wind': 2, 'wind_direction': '�
                   'phenomenon': "['пасмурно', ' небольшой дождь']", 'pressure': 748, 'humidity': 0.26, 'uv_index': 1,
                   'moon_direction': 1, 'moon': 0.82, 'day': 95, 'date': datetime.strptime('04.04.2020','%d.%m.%Y'),
                   'areal': 'московская область', 'city': 'москва', 'prob': 0.5, 'fish': 'сом', 'features': "признаки ляляля"}]
-                  
+names = list(dict_of_param[0])                  
 cols = ', '.join(map(escape_name, names))  # assumes the keys are *valid column names*.
 placeholders = ', '.join(['%({})s'.format(name) for name in names])
 
 query = 'INSERT INTO prediction_prediction ({}) VALUES ({})'.format(cols, placeholders)
 with con:
     cur = con.cursor()
-    cur.execute(query, dict_of_params)
+    for _ in dict_of_params:
+        cur.execute(query, _)
 
