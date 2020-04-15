@@ -63,7 +63,7 @@ export default {
             type: 'link',
             text: 'Прогноз',
             path: './predict-page',
-            iconRight: '<i class="fa fa-long-arrow-right fa-fw"></i>',
+            // iconRight: '<i class="fa fa-long-arrow-right fa-fw"></i>',
           },
           {
             type: 'link',

@@ -4,6 +4,8 @@
     filterable
     remote
     @change="data"
+    no-data-text="Не найдено"
+    loading-text="Клюет..."
     reserve-keyword
     placeholder="Введите название рыбы"
     :remote-method="remoteMethod"
@@ -27,6 +29,7 @@ export default {
       value: [],
       list: [],
       loading: false,
+
       states: [
         'Судак',
         'Ёрш',

@@ -25,7 +25,7 @@
         <div v-else-if="step === 1">
           <el-select v-model="value2" placeholder="Select">
             <el-option
-              v-for="item in options[0].children"
+              v-for="item in options2[`${this.value}`]"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -49,8 +49,8 @@
         </div>
       </div>
       <div v-else class="predict" v-loading="loading">
-        <h4>Россия / Москва</h4>
-        <h3>Прогноз на близжайшие 10 дней</h3>
+        <h4>{{this.value}} / {{this.value2}}</h4>
+        <h4>Прогноз на близжайшие 10 дней - {{ this.fish }}</h4>
         <el-tabs v-model="activeName">
           <el-tab-pane
             v-for="day in days"
@@ -112,32 +112,35 @@ export default {
         {
           value: 'Московская область',
           label: 'Московская область',
-          children: [
-            {
-              value: 'москва',
-              label: 'Москва',
-            },
-            {
-              value: 'Балашиха',
-              label: 'Балашиха',
-            },
-          ],
         },
         {
           value: 'Ленинградская обл',
           label: 'Ленинградская обл',
-          children: [
-            {
-              value: 'СПБ',
-              label: 'Санкт-Петербург',
-            },
-            {
-              value: 'Светогорск',
-              label: 'Светогорск',
-            },
-          ],
+
         },
       ],
+      options2: {
+        'Московская область': [
+          {
+            value: 'москва',
+            label: 'Москва',
+          },
+          {
+            value: 'Балашиха',
+            label: 'Балашиха',
+          },
+        ],
+        'Ленинградская обл': [
+          {
+            value: 'СПБ',
+            label: 'Санкт-Петербург',
+          },
+          {
+            value: 'Светогорск',
+            label: 'Светогорск',
+          },
+        ],
+      },
       activeName: 'first',
       value: '',
       value2: '',
@@ -170,7 +173,7 @@ export default {
       return this.fish
     },
     maxWidth() {
-      return this.step <= 2 ? 'max-width: 500px' : 'max-width: 100%'
+      return this.step <= 2 ? 'max-width: 500px' : 'max-width: 70%'
     },
   },
   methods: {
@@ -256,7 +259,7 @@ export default {
 .container__small {
   max-width: 500px;
   padding: 20px;
-  border: 1px solid #e1e1e1;
+  border: none;
   min-height: 500px;
   background-color: #fff;
   transition: all 0.3s;
