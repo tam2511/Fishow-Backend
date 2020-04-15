@@ -144,12 +144,17 @@ export default {
 
 <style scoped lang="scss">
 button {
-  background: none;
+  padding: 5px 10px;
   border: none;
+  transition-duration: 0.2s;
+  &:hover {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.20)
+  }
 }
 .comment-reply {
   button {
-    transition-duration: 0.3s;
+    background: none;
+
     &:hover {
       color: #a80000;
     }
