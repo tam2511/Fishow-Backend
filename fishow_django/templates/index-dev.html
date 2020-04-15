@@ -2,12 +2,9 @@
 {% load render_bundle from webpack_loader %}
 {% load static %}
 {% block content %}
-<noscript>отключена поддержка JavaScript</noscript>
 <div id="app" ></div>
 
 {% render_bundle 'app' %}
 {% endblock %}
 {% block js %}
-<script type="text/javascript" src="{% static 'js/core.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 {% endblock %}

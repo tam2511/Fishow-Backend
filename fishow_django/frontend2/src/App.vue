@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <NavbarComponent />
+    <new-nav-bar />
     <router-view />
     <FIshow_Footer />
   </div>
 </template>
 
 <script>
-import NavbarComponent from './components/Navbar.vue'
 import FIshow_Footer from './components/FIshow_Footer'
+import NewNavBar from './components/navbar/new-nav-bar'
 export default {
   name: 'App',
   components: {
+    NewNavBar,
     FIshow_Footer,
-    NavbarComponent,
   },
 }
 </script>

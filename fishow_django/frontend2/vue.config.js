@@ -4,7 +4,7 @@ module.exports = {
   // on Windows you might want to set publicPath: "http://127.0.0.1:8080/"
   publicPath: 'http://127.0.0.1:8080/',
   outputDir: './dist/',
-  lintOnSave: false,
+  lintOnSave: true,
 
   chainWebpack: (config) => {
     config
@@ -31,9 +31,9 @@ module.exports = {
 
   // uncomment before executing 'npm run build'
   // css: {
-  //     extract: {
-  //       filename: 'bundle.css',
-  //       chunkFilename: 'bundle.css',
-  //     },
-  // }
+  //   extract: {
+  //     filename: 'bundle.css',
+  //     chunkFilename: 'bundle.css',
+  //   },
+  // },
 }

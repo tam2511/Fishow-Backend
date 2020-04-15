@@ -326,7 +326,7 @@ export default {
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style lang="scss">
+<style lang="scss" scoped>
 .form-wrap {
   display: flex;
   flex-flow: column;
@@ -347,8 +347,19 @@ export default {
 .fishow_action_btn {
   background-color: #18636b;
 }
+.button.button-primary.button-sm {
+  text-overflow: unset;
+}
 .button-block {
   width: auto;
+}
+.button {
+  &:first-child{
+    margin-top: 15px;
+  }
+  @media screen and (max-width: 840px){
+    width: 100%;
+  }
 }
 .button_send_blog {
   flex-direction: row;
