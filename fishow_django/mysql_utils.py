@@ -29,7 +29,7 @@ dict_of_params = [{'time': 23, 'temperature': 7, 'wind': 2, 'wind_direction': '�
                   {'time': 3, 'temperature': 7, 'wind': 2, 'wind_direction': 'СЗ', 'gust': 0,
                   'phenomenon': "['пасмурно', ' небольшой дождь']", 'pressure': 748, 'humidity': 0.26, 'uv_index': 1,
                   'moon_direction': 1, 'moon': 0.82, 'day': 95, 'date': datetime.strptime('04.04.2020','%d.%m.%Y'),
-                  'areal': 'московская область', 'city': 'москва', 'prob': 0.5, 'fish': 'сом', 'features': "признаки ляляля"},
+                  'areal': 'московская область', 'city': 'москва', 'prob': 0.5, 'fish': 'сом', 'features': "признаки ляляля"}]
                   
 cols = ', '.join(map(escape_name, names))  # assumes the keys are *valid column names*.
 placeholders = ', '.join(['%({})s'.format(name) for name in names])
