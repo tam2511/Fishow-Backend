@@ -8,12 +8,12 @@ module.exports = {
   lintOnSave: false,
 
   // uncomment before executing 'npm run build'
-  css: {
-    extract: {
-      filename: 'bundle.css',
-      chunkFilename: 'bundle.css',
-    },
-  },
+  // css: {
+  //   extract: {
+  //     filename: 'bundle.css',
+  //     chunkFilename: 'bundle.css',
+  //   },
+  // },
   chainWebpack: (config) => {
     config
       .plugin('BundleTracker')

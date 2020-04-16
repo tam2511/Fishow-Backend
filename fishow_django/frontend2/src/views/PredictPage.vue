@@ -1,7 +1,7 @@
 <template>
   <section class="section section-variant-1 bg-gray-100">
 
-    <div class="container container__small" >
+    <div class="container container__small" :class="step < 3 ? 'container__small_menu':'notcool'">
 
       <!--            <div v-if="getStep < 3" class="select-predict">-->
       <div v-if="step < 3" class="select-predict">
@@ -50,7 +50,7 @@
           <el-button @click="next">Дальше</el-button>
         </div>
       </div>
-      <div v-else class="predict" v-loading="loading">
+      <div v-else class="predict" >
             <span>{{this.value}} / {{this.value2}} | Прогноз на близжайшие 10 дней - {{ this.fish }}</span>
         <column />
         <div class="predict_footer">
@@ -64,6 +64,7 @@
 <script>
 import fishSearch from '../components/predictPage/fishSearch'
 import Column from '../components/predictPage/column'
+
 export default {
   name: 'PredictPage',
   components: { Column, fishSearch },
@@ -138,7 +139,7 @@ export default {
       value2: '',
       value3: '',
       loading: true,
-      step: 0,
+      step: 3,
       error: '',
       fish: '',
     }
@@ -172,12 +173,12 @@ export default {
     onChange(data) {
       this.fish = data.value
     },
-    errorMesage() {
-      this.$message({
-        message: 'Ошибка: Сперва выберите параметр',
-        type: 'error',
-      })
-    },
+    // errorMesage() {
+    //   this.$message({
+    //     message: 'Ошибка: Сперва выберите параметр',
+    //     type: 'error',
+    //   })
+    // },
     next() {
       if (this.value) {
         this.step = 1
@@ -189,7 +190,7 @@ export default {
           }
         }
       } else {
-        this.errorMesage()
+        // this.errorMesage()
       }
     },
     back() {
@@ -203,6 +204,7 @@ export default {
       this.value = ''
       this.value2 = ''
       this.value3 = ''
+      this.fish = ''
       this.step = 0
     },
     handleChange(value) {
@@ -214,10 +216,13 @@ export default {
       }, 2000)
     },
   },
+
 }
 </script>
 
 <style scoped lang="scss">
+
+
   .section.section-variant-1 {
     overflow-scrolling: auto;
     overflow: scroll;
@@ -236,15 +241,6 @@ export default {
 .el-col {
   border-radius: 4px;
 }
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
 .grid-content {
   border: 1px solid rgba(0, 0, 0, 0.2);
   min-height: 70px;
@@ -254,17 +250,16 @@ export default {
   background-color: #f9fafc;
 }
 .container__small {
-  scroll-direction: horizontal;
   max-width: 900px;
   padding: 20px;
   border: none;
   min-height: 500px;
   background-color: #fff;
-
-  transition: all 0.3s;
-  &:hover {
-    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
+  &_menu {
+    max-width: 500px;
   }
+  transition: all 0.3s;
+
   @media screen and (max-width: 600px) {
     width: 1024px !important;
     max-height: 100% !important;
@@ -279,6 +274,17 @@ export default {
   position: absolute;
   bottom: 0;
   right: 0;
+  button {
+    border: none;
+    transition-duration: 0.2s;
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
+    &:hover {
+      transition-duration: 0.2s;
+      box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
+      background-color: #ffd851;
+      color: #000;
+    }
+  }
 }
 .el-select {
   display: block;
