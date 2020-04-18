@@ -118,14 +118,15 @@ export default {
 
 <style lang="scss">
 #app .vnb {
-  background-color: var(--background-color-default);
+  background-color: var(--background-color-brand);
   text-transform: uppercase;
   position: sticky;
   top: 0;
   color: #fff !important;
   z-index: 5;
   &-button {
-    background: var(--background-color-brand);
+    color: var(--color-typo-primary);
+    background: var(--background-color-default);
     &:hover {
       background: var(--background-color-border);
     }

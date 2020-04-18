@@ -59,11 +59,10 @@
 <style scoped>
     .settings {
         position: fixed;
-        top: 60px;
-        left: 5px;
+        top: 65px;
+        left: 3px;
         z-index: 100;
     }
-
     .settings-container {
         transition-duration: 0.3s;
         opacity: 0;

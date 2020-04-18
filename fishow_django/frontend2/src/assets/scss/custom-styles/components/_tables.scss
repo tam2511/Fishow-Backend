@@ -37,7 +37,7 @@ $body-color: var(--color-typo-secondary);
   line-height: 1.2;
   border-collapse: collapse;
   border: 1px solid var(--background-color-border);
-  background: $table-bg;
+  background: var(--background-color-primary);
 }
 
 //
@@ -529,7 +529,7 @@ $body-color: var(--color-typo-secondary);
   font-size: 44px;
   font-weight: 300;
   line-height: 1;
-  color: $gray-800;
+  color: var(--color-typo-primary);
 }
 
 .team-statistic-title {

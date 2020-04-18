@@ -198,7 +198,7 @@ export default {
 .post-corporate-content {
   p {
     white-space: pre-line;
-    color: #0f0f0f;
+    color: var(--color-typo-primary);
     text-align: justify;
   }
 }

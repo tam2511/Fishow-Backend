@@ -30,7 +30,7 @@ body {
   text-transform: uppercase;
 
   a {
-    color: inherit;
+    color: var(--color-typo-primary);
 
     &:hover {
       color: $primary;
