@@ -40,7 +40,7 @@
             setTheme() {
                 console.log('this.theme = ', this.value)
                 if (this.value && this.value !== '') {
-                    document.getElementById('app').className = 'Theme'
+                    document.getElementById('app').className = 'theme'
                     document.getElementById('app').classList.add(this.value)
                     localStorage.setItem('theme', this.value)
                 }
