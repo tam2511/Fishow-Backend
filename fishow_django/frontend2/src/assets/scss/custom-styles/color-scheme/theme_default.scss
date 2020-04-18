@@ -47,9 +47,12 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
 //$color-link-hover: color($color-base-path l(-7%)); /* Цвет ховера ссылки */
 
 
-.theme_color_megafon-brand {
+.theme_color_fishow_default {
 
   /* Цвета блоков */
+  --background-color-primary: #fff;
+  --background-color-default: #edeff4;
+  --background-color-border: #212122;
   --color-bg-brand: #{$color-bg-brand}; /* Цвет фона брендированый */
   --color-bg-action: #{$color-bg-action}; /* Цвет фона действия */
   //--color-bg-selection: #{$color-bg-selection}; /* Цвет фона выделения */

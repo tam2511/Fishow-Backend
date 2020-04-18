@@ -188,7 +188,7 @@ $product-gradient-color-2: #d5deeb;
 //
 .page .cart-inline {
 	@include context-light;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 	text-align: left;
 }
@@ -375,7 +375,7 @@ $product-gradient-color-2: #d5deeb;
 // Share button with link
 a.product-button:hover {
 	color: $white;
-	background-color: var(--color-bg-default);
+	background-color: var(--background-color-primary);
 }
 
 // Social icon list

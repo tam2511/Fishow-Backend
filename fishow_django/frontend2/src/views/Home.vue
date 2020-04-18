@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="section section-md bg-gray-100">
+    <section class="section section-md section-view">
       <div class="container">
         <div class="row row-50">
           <div class="col-lg-8">

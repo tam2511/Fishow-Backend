@@ -1,5 +1,5 @@
 <template>
-  <section class="section section-variant-1 bg-gray-100">
+  <section class="section section-variant-1 section-view">
     <div class="container">
       <div class="row row-50">
         <div class="col-lg-7 col-xl-8" v-if="blog_category !== 'Отчет'">
@@ -342,7 +342,7 @@ export default {
 }
 
 .fishow_action_btn {
-  background-color: var(--color-bg-default);
+  background-color: var(--background-color-primary);
 }
 .button.button-primary.button-sm {
   text-overflow: unset;

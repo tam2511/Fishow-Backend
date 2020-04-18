@@ -45,6 +45,6 @@ textarea {
   min-height: 60px;
   padding: 17px 19px;
   color: #9b9b9b;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--backround-color-primary);
 }
 </style>

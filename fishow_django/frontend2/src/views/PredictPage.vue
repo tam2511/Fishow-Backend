@@ -1,5 +1,5 @@
 <template>
-  <section class="section section-variant-1 bg-gray-100">
+  <section class="section section-variant-1 section-view">
     <div
       class="container container__small"
       :class="step < 3 ? 'container__small_menu' : 'hideMenu'"

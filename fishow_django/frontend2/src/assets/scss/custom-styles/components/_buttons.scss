@@ -81,8 +81,8 @@ html {
 
 		&:hover {
 			color: var(--color-bg-default);
-			background-color: var(--color-bg-default);
-			border-color: var(--color-bg-default);
+			background-color: var(--background-color-primary);
+			border-color: var(--background-color-border);
 		}
 	}
 
@@ -302,7 +302,7 @@ html {
 	&:focus {
 		color: $white;
 		background: var(--color-bg-default);
-		border-color: var(--color-bg-default);
+		border-color: var(--background-color-border);
 	}
 
 	&:hover {

@@ -127,14 +127,14 @@ $tabs-corporate-border-color: $gray-1;
     .nav-link.active {
       color: $tabs-corporate-active-color;
       background: var(--color-bg-default);
-      border-color: var(--color-bg-default);
+      border-color: var(--background-color-border);
     }
   }
 }
 
 // Tabs corporate style
 .tabs-corporate {
-  background: $white;
+  background: var(--background-color-default);
   border: 1px solid $tabs-corporate-border-color;
 
   .nav-tabs {
@@ -371,7 +371,7 @@ $tabs-corporate-border-color: $gray-1;
     margin-top: 20px;
   }
   .nav-tabs {
-    background: $white;
+    background: var(--background-color-default);
     border: 1px solid $gray-1;
   }
   .nav-item {

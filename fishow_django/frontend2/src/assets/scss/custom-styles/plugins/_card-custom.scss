@@ -5,7 +5,7 @@
 // Light
 //
 $accordion-corporate-color: $gray-700;
-$accordion-corporate-background: $white;
+$accordion-corporate-background: var(--background-color-default);
 $accordion-corporate-border: #dedede;
 $accordion-corporate-content-color: $body-color;
 $accordion-corporate-arrow-color: $white;
@@ -207,7 +207,7 @@ $accordion-corporate-content-padding: 25px 44px 25px nth($accordion-corporate-he
 
 .card-custom {
   padding-left: 30px;
-  background: $white;
+  background: var(--background-color-default);
   transition: all 200ms ease-in-out;
 
   &.active {
@@ -339,7 +339,7 @@ $accordion-corporate-content-padding: 25px 44px 25px nth($accordion-corporate-he
   font-size: 16px;
   line-height: 26px;
   color: $gray-800;
-  background: $white;
+  background: var(--background-color-default);
   border-radius: 4px;
   transition-duration: 200ms;
 

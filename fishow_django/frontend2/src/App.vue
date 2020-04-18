@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="theme_color_megafon-brand">
+  <div id="app" :class="theme">
     <new-nav-bar />
     <router-view />
     <FIshow_Footer />
@@ -11,10 +11,25 @@ import FIshow_Footer from './components/FIshow_Footer'
 import NewNavBar from './components/navbar/new-nav-bar'
 export default {
   name: 'App',
+  data() {
+    return {
+      theme : 'theme_color_fishow_esoteric'
+    }
+  },
+  methods: {
+    checkTheme() {
+      if (localStorage.getItem('theme')) {
+        this.theme = localStorage.getItem('theme')
+      }
+    }
+  },
   components: {
     NewNavBar,
     FIshow_Footer,
   },
+  mounted() {
+    this.checkTheme();
+  }
 }
 </script>
 
@@ -23,6 +38,9 @@ export default {
 @import 'assets/scss/customStyles.scss';
 @import 'assets/scss/fishowStyles.scss';
 @import 'assets/scss/custom-styles/fonts.scss';
+#app {
+  transition-duration: 0.2s;
+}
 html {
   background-color: #edeff4;
 }

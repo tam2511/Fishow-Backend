@@ -422,7 +422,7 @@
 	letter-spacing: .05em;
 	text-transform: uppercase;
 	border: 1px solid $gray-1;
-	background: $white;
+	background: var(--background-color-primary);
 	transition: all 300ms ease-in-out;
 
 	.countdown-bordered {
@@ -908,7 +908,7 @@
 		right: 4px;
 		bottom: 0;
 		left: 4px;
-		background: $white;
+		background: var(--background-color-default);
 		z-index: 0;
 	}
 
@@ -1441,7 +1441,7 @@
 	font-weight: 500;
 	letter-spacing: .05em;
 	color: $gray-800;
-	background: $white;
+	background: var(--background-color-default);
 
 	li {
 		position: relative;
@@ -1557,7 +1557,7 @@
 	font-weight: 500;
 	letter-spacing: .05em;
 	text-transform: uppercase;
-	background: $white;
+	background: var(--background-color-default);
 	transition: all 300ms ease-in-out;
 }
 
@@ -1824,7 +1824,7 @@
 	position: relative;
 	padding: 24px 15px;
 	min-height: 100%;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 
 	&::before,
@@ -2485,7 +2485,7 @@
 
 .player-info-main {
 	padding: 25px 15px;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 	hr {
 		border-top: 1px solid $gray-1;
@@ -2889,7 +2889,7 @@
 	max-width: 370px;
 	padding: 25px 20px;
 	text-align: center;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 
 	.group-md {
@@ -2962,7 +2962,7 @@
 .bg-gray-100 {
 	.block-player-info {
 		padding: 35px 20px;
-		background: $white;
+		background: var(--background-color-default);
 		border: 1px solid $gray-1;
 		border-top: none;
 	}
@@ -3078,7 +3078,7 @@
 	line-height: 1.2;
 	letter-spacing: .05em;
 	text-transform: uppercase;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 }
 

@@ -56,7 +56,7 @@ input:-webkit-autofill ~ .form-validation {
 
   &:focus {
     outline: 0;
-    border-color: var(--color-bg-default);
+    border-color: var(--background-color-border);
   }
 }
 
@@ -270,7 +270,7 @@ textarea.form-input {
 
   &-dummy {
     pointer-events: none;
-    background: $white;
+    background: var(--background-color-default);
 
     &:after {
       position: absolute;
@@ -478,7 +478,7 @@ textarea.form-input {
 }
 
 .input-refilter input:checked +  [class*='custom-dummy'] {
-  border-color: var(--color-bg-default);
+  border-color: var(--background-color-border);
 }
 
 .input-refilter input:checked ~ span {

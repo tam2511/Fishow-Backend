@@ -17,7 +17,7 @@
 .box-minimal {
   max-width: 270px;
   padding: 20px 10px 30px 30px;
-  background: $white;
+  background: var(--background-color-default);
   border: 1px solid $gray-1;
   text-align: left;
   

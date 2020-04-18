@@ -119,7 +119,7 @@ export default {
 
 <style lang="scss">
 .vnb {
-  background-color: var(--color-bg-default) !important;
+  background-color: var(--background-color-primary) !important;
   text-transform: uppercase;
   position: sticky;
   top: 0;

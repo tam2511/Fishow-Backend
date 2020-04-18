@@ -3,7 +3,7 @@
     <!-- Section Breadcrumbs-->
 
     <!-- News 4-->
-    <section class="section section-sm bg-gray-100">
+    <section class="section section-sm section-view">
       <div class="container">
         <div class="row row-30">
           <div class="col-lg-8">
