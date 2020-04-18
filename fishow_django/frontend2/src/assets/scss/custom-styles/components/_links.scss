@@ -75,10 +75,10 @@ a {
 	}
 
 	&:hover {
-		color: $primary;
+		color: var(--color-bg-default);
 		.link-cart-counter {
 			color: $white;
-			background: $primary;
+			background: var(--color-bg-default);
 		}
 	}
 }
@@ -181,7 +181,7 @@ button.link-cart {
 	color: $body-color;
 
 	&:hover {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 

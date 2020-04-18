@@ -86,7 +86,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: $primary;
+    background: var(--color-bg-default);
     transform: translate(-50%, -50%);
     transition: all .2s ease-in-out;
   }

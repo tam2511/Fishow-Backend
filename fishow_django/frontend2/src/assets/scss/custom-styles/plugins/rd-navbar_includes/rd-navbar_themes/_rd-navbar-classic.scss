@@ -257,7 +257,7 @@ $panel-decoration-transform-angle: 30deg;
 		.rd-nav-item.active .rd-nav-link,
 		.rd-nav-item.opened .rd-nav-link,
 		.rd-nav-item.focus .rd-nav-link {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 
@@ -289,7 +289,7 @@ $panel-decoration-transform-angle: 30deg;
 			color: $white;
 
 			&:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 	}

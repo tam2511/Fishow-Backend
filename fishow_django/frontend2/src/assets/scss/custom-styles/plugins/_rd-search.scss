@@ -79,7 +79,7 @@
 
   .search-link {
      &:hover {
-       color: $primary;
+       color: var(--color-bg-default);
      }
    }
 
@@ -102,7 +102,7 @@
     text-transform: $btn-text-transform;
     text-align: center;
     color: $white-invariable;
-    background: $primary;
+    background: var(--color-bg-default);
 
     &:hover {
       color: $gray-800;
@@ -214,7 +214,7 @@
       color: inherit;
       
       &:hover {
-        color: $primary;
+        color: var(--color-bg-default);
       }
     }
   }
@@ -222,7 +222,7 @@
   .search {
     color: $white;
     padding: 0 .25em;
-    background: $primary;
+    background: var(--color-bg-default);
   }
 
   .match {
@@ -303,7 +303,7 @@
     }
 
     &:hover {
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 
@@ -334,7 +334,7 @@
   .rd-search.rd-search-inline {
     .button-link {
       &:hover {
-        color: $primary;
+        color: var(--color-bg-default);
       }
     }
   }
@@ -361,7 +361,7 @@
     cursor: pointer;
     transition: all .3s;
     &:hover{
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 }

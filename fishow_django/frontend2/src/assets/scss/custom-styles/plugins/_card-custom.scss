@@ -9,7 +9,7 @@ $accordion-corporate-background: $white;
 $accordion-corporate-border: #dedede;
 $accordion-corporate-content-color: $body-color;
 $accordion-corporate-arrow-color: $white;
-$accordion-corporate-arrow-background: $primary;
+$accordion-corporate-arrow-background: var(--color-bg-default);
 $accordion-corporate-shadow: -1px 2px 5px 0px rgba(#444953, 0.12);
 $accordion-corporate-border-radius: 6px;
 $accordion-corporate-header-padding: 21px 82px 21px 32px;
@@ -219,7 +219,7 @@ $accordion-corporate-content-padding: 25px 44px 25px nth($accordion-corporate-he
   position: relative;
   padding-left: 30px;
   color: $white;
-  background: $primary;
+  background: var(--color-bg-default);
 
   .card-standing-position {
     top: 50%;

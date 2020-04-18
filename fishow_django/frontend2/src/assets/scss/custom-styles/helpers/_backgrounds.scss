@@ -73,7 +73,7 @@
     color: $white;
 
     &:hover {
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 

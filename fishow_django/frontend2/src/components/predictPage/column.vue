@@ -15,11 +15,11 @@
       <div class="fishow_row">
         <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">
           <icon-pogoda
-                  :maxValue="20"
-                  :minValue="12"
-                  color="--red"
-                  :height="4"
-                  :margin-text="0.99"
+            :maxValue="20"
+            :minValue="12"
+            color="--red"
+            :height="4"
+            :margin-text="0.99"
           />
         </div>
       </div>
@@ -29,11 +29,11 @@
       <div class="fishow_row">
         <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">
           <icon-pogoda
-                  :maxValue="15"
-                  :minValue="10"
-                  color="--orange"
-                  :height="5"
-                  :margin-text="1"
+            :maxValue="15"
+            :minValue="10"
+            color="--orange"
+            :height="5"
+            :margin-text="1"
           />
         </div>
       </div>
@@ -57,11 +57,11 @@
       <div class="fishow_row">
         <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">
           <icon-pogoda
-                  :maxValue="700"
-                  :minValue="650"
-                  color="--green"
-                  :height="0.08"
-                  :margin-text="30"
+            :maxValue="700"
+            :minValue="650"
+            color="--green"
+            :height="0.08"
+            :margin-text="30"
           />
         </div>
       </div>
@@ -71,11 +71,11 @@
       <div class="fishow_row">
         <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">
           <icon-pogoda
-                  :maxValue="90"
-                  :minValue="80"
-                  color="--teal"
-                  :height="1.5"
-                  :margin-text="3"
+            :maxValue="90"
+            :minValue="80"
+            color="--teal"
+            :height="1.5"
+            :margin-text="3"
           />
         </div>
       </div>
@@ -85,11 +85,11 @@
       <div class="fishow_row">
         <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">
           <icon-pogoda
-                  :maxValue="5"
-                  :minValue="3"
-                  color="--cyan"
-                  :height="10"
-                  :margin-text="0.5"
+            :maxValue="5"
+            :minValue="3"
+            color="--cyan"
+            :height="10"
+            :margin-text="0.5"
           />
         </div>
       </div>
@@ -109,7 +109,7 @@ export default {
     return {}
   },
 
-  components: { IconPogoda, OneColum }
+  components: { IconPogoda, OneColum },
 }
 </script>
 

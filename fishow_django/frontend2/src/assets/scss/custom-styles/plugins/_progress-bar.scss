@@ -136,7 +136,7 @@
 
 .progress-bar-primary {
 	.progress-bar__stroke {
-		stroke: $primary;
+		stroke: var(--color-bg-default);
 	}
 
 	.progress-bar__trail {
@@ -146,7 +146,7 @@
 	.progress-bar-radial {
 
 		&::before {
-			background: $primary;
+			background: var(--color-bg-default);
 		}
 	}
 }
@@ -285,7 +285,7 @@
 		position: relative;
 		width: 0;
 		height: 4px;
-		background-color: $primary;
+		background-color: var(--color-bg-default);
 		transition: .5s all ease-in-out;
 
 		&::before {
@@ -295,7 +295,7 @@
 			width: 4px;
 			height: 10px;
 			content: '';
-			background: $primary;
+			background: var(--color-bg-default);
 			pointer-events: none;
 		}
 	}

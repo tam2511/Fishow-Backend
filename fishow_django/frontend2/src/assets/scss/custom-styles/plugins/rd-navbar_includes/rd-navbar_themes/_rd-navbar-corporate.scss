@@ -140,7 +140,7 @@ $panel-decoration-transform-angle: 30deg;
       &.active {
         .rd-nav-link {
           color: $white;
-          background: $primary;
+          background: var(--color-bg-default);
         }
 
         > .rd-navbar-submenu-toggle {
@@ -163,7 +163,7 @@ $panel-decoration-transform-angle: 30deg;
 
       &:hover {
         color: $white;
-        background: $primary;
+        background: var(--color-bg-default);
       }
     }
 
@@ -292,7 +292,7 @@ $panel-decoration-transform-angle: 30deg;
       color: $white;
 
       &:hover {
-        color: $primary;
+        color: var(--color-bg-default);
       }
     }
   }

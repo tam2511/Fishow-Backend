@@ -28,7 +28,7 @@
 
 .box-minimal-primary {
   color: rgba($white, .5);
-  background: $primary;
+  background: var(--color-bg-default);
 
   .box-minimal-icon,
   .box-minimal-title {
@@ -120,7 +120,7 @@
     display: inline-block;
     width: 80px;
     height: 2px;
-    background: $primary;
+    background: var(--color-bg-default);
   }
 }
 

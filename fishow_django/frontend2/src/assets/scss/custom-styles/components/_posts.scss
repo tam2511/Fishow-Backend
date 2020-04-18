@@ -46,7 +46,7 @@
 	}
 
 	&:hover {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -88,7 +88,7 @@
 }
 
 .post-inline-time {
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 .post-inline-title {
@@ -385,7 +385,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 	.icon {
@@ -400,7 +400,7 @@
 		font-size: 15px;
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -459,8 +459,8 @@
 		border: 1px solid $gray-1;
 
 		&:hover {
-			background: $primary;
-			border-color: $primary;
+			background: var(--color-bg-default);
+			border-color: var(--color-bg-default);
 		}
 	}
 }
@@ -693,7 +693,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 	.icon {
@@ -736,7 +736,7 @@
 				font-size: 15px;
 				color: $gray-500;
 				&:hover {
-					color: $primary;
+					color: var(--color-bg-default);
 				}
 			}
 		}
@@ -850,7 +850,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 	.icon {
@@ -865,7 +865,7 @@
 		font-size: 15px;
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -978,7 +978,7 @@
 	a {
 		color: $white;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -996,7 +996,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1190,7 +1190,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 
 	}
@@ -1295,7 +1295,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1470,7 +1470,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1549,7 +1549,7 @@
 	.icon {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1603,7 +1603,7 @@
 		.icon {
 			font-size: 13px;
 			&:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 	}
@@ -1737,7 +1737,7 @@
 		color: $white;
 
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1789,7 +1789,7 @@
 	font-weight: 500;
 	letter-spacing: .05em;
 	text-transform: uppercase;
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 //
@@ -1810,7 +1810,7 @@
 		margin-right: 5px;
 		font-size: 17px;
 		vertical-align: middle;
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -1832,7 +1832,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1857,7 +1857,7 @@
 			color: rgba($white, .6);
 			
 			&:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 	}

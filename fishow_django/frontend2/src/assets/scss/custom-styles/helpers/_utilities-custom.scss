@@ -83,7 +83,7 @@ p.rights {
     text-decoration: underline;
     
     &:hover {
-      color: $primary;
+      color: var(--color-bg-default);
     } 
   }
 }
@@ -102,7 +102,7 @@ p.rights {
 
 // Svg
 .svg-color-primary {
-  fill: $primary;
+  fill: var(--color-bg-default);
 }
 
 .svg-color-secondary {

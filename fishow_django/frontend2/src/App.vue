@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="theme_color_megafon-brand">
     <new-nav-bar />
     <router-view />
     <FIshow_Footer />

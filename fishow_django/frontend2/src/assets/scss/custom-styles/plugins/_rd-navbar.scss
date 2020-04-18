@@ -25,7 +25,7 @@ $rd-navbar-panel-background: $rd-navbar-background;
 $rd-navbar-nav-min-width: 300px;
 $rd-navbar-nav-color: $rd-navbar-color;
 $rd-navbar-nav-background: transparent;
-$rd-navbar-nav-hover-color: $primary;
+$rd-navbar-nav-hover-color: var(--color-bg-default);
 $rd-navbar-nav-hover-background: transparent;
 $rd-navbar-nav-active-color: $rd-navbar-nav-hover-color;
 $rd-navbar-nav-active-background: $rd-navbar-nav-hover-background;
@@ -36,7 +36,7 @@ $rd-navbar-dropdown-background: $white;
 $rd-navbar-dropdown-item-color: $gray-800;
 $rd-navbar-dropdown-item-background: transparent;
 $rd-navbar-dropdown-item-border-color: $gray-1;
-$rd-navbar-dropdown-item-hover-color: $primary;
+$rd-navbar-dropdown-item-hover-color: var(--color-bg-default);
 $rd-navbar-dropdown-item-hover-background: transparent;
 $rd-navbar-dropdown-item-active-color: $rd-navbar-dropdown-item-hover-color;
 $rd-navbar-dropdown-item-active-background: $rd-navbar-dropdown-item-hover-background;
@@ -46,7 +46,7 @@ $rd-navbar-megamenu-gutter: 30px;
 $rd-navbar-megamenu-background: $white;
 $rd-navbar-megamenu-item-color: $black;
 $rd-navbar-megamenu-item-background: transparent;
-$rd-navbar-megamenu-item-hover-color: $primary;
+$rd-navbar-megamenu-item-hover-color: var(--color-bg-default);
 $rd-navbar-megamenu-item-hover-background: transparent;
 
 // RD Navbar toggles
@@ -161,7 +161,7 @@ $navbar-static-nav-indent: 20px;
     transition: .33s;
     
     &:hover {
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 }

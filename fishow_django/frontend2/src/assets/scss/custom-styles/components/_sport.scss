@@ -109,7 +109,7 @@
 
 	&:hover {
 		color: $white;
-		background: $primary;
+		background: var(--color-bg-default);
 	}
 }
 
@@ -322,7 +322,7 @@
 		padding: 10px 10px 8px;
 		width: 100%;
 		color: $white;
-		background: $primary;
+		background: var(--color-bg-default);
 
 		&::after {
 			display: none;
@@ -637,7 +637,7 @@
 	letter-spacing: .025em;
 	text-transform: uppercase;
 	color: $white;
-	background: $primary;
+	background: var(--color-bg-default);
 
 	&::before {
 		position: absolute;
@@ -658,7 +658,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		border-width: 5px 4.5px 0 4.5px;
-		border-color: $primary transparent transparent transparent;
+		border-color: var(--color-bg-default) transparent transparent transparent;
 	}
 }
 
@@ -1060,7 +1060,7 @@
 	}
 
 	&.game-result-team-win {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -1072,7 +1072,7 @@
 .game-info-team-divider {
 	position: relative;
 	display: inline-block;
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 .game-info-countdown {
@@ -1099,7 +1099,7 @@
 	span {
 		display: block;
 		line-height: 1;
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -1401,7 +1401,7 @@
 }
 
 .charts-statistics-team-first-number {
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 .charts-statistics-team-second-number {
@@ -1523,7 +1523,7 @@
 
 .team-primary {
 	.game-highlights-goal {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -2591,7 +2591,7 @@
 			opacity: 1;
 		}
 		.player-info-modern-footer {
-			background: darken($primary, 2%);
+			background: var(--color-bg-default);
 		}
 		.player-info-modern-number {
 			border-color: rgba($white, .19);
@@ -2629,7 +2629,7 @@
 	line-height: 1;
 	text-align: center;
 	border-right: 1px solid transparent;
-	background: darken($primary, 2%);
+	background: var(--color-bg-default);
 	transition: all .3s;
 }
 

@@ -13,7 +13,7 @@
   font-size: 18px;
   line-height: $form-input-sm-height - 4px;
   color: $white-invariable;
-  background: $primary;
+  background: var(--color-bg-default);
   border-radius: $btn-border-radius;
   overflow: hidden;
   text-align: center;

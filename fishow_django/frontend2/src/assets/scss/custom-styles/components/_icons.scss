@@ -44,7 +44,7 @@
 }
 
 .icon-primary {
-  color: $primary;
+  color: var(--color-bg-default);
 }
 
 .icon-orange {
@@ -65,7 +65,7 @@
 
 a.icon-gray-500 {
   &, &:focus, &:active { color: $gray-500; }
-  &:hover, &.active { color: $primary; }
+  &:hover, &.active { color: var(--color-bg-default); }
 }
 
 %context-dark {
@@ -268,6 +268,6 @@ a.icon-gray-500 {
 
   &:hover {
     color: $white;
-    background: $primary;
+    background: var(--color-bg-default);
  }
 }

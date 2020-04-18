@@ -158,7 +158,7 @@ $product-gradient-color-2: #d5deeb;
 
 .product-inline-price {
 	font-family: $font-family-sec;
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 .product-inline-meta {
@@ -375,7 +375,7 @@ $product-gradient-color-2: #d5deeb;
 // Share button with link
 a.product-button:hover {
 	color: $white;
-	background-color: $primary;
+	background-color: var(--color-bg-default);
 }
 
 // Social icon list
@@ -507,7 +507,7 @@ a.product-button:hover {
 			color: $gray-800;
 		}
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -810,7 +810,7 @@ a.product-button:hover {
 		color: $gray-800;
 	}
 	&:hover {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -925,7 +925,7 @@ a.product-button:hover {
 	}
 
 	.product-single-price-new {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 
 	.input-refilter {
@@ -1254,7 +1254,7 @@ a.product-button:hover {
 	a {
 		color: inherit;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1307,7 +1307,7 @@ a.product-button:hover {
 	transition: .3s ease-out all;
 
 	&:hover {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 

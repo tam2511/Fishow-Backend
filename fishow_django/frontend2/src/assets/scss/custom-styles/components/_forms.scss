@@ -56,7 +56,7 @@ input:-webkit-autofill ~ .form-validation {
 
   &:focus {
     outline: 0;
-    border-color: $primary;
+    border-color: var(--color-bg-default);
   }
 }
 
@@ -332,7 +332,7 @@ textarea.form-input {
       left: 1px;
       font-size: 18px;
       line-height: 18px;
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 }
@@ -359,7 +359,7 @@ textarea.form-input {
       left: 1px;
       font-size: 18px;
       line-height: 18px;
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 
@@ -478,11 +478,11 @@ textarea.form-input {
 }
 
 .input-refilter input:checked +  [class*='custom-dummy'] {
-  border-color: $primary;
+  border-color: var(--color-bg-default);
 }
 
 .input-refilter input:checked ~ span {
-  color: $primary;
+  color: var(--color-bg-default);
   border-color: transparent;
   transition: .3s ease-out all;
 }
@@ -494,7 +494,7 @@ textarea.form-input {
 
   &:checked ~ .checkbox-custom-dummy {
     &::after {
-      background: $primary;
+      background: var(--color-bg-default);
       transform: translate(20px, -50%);
     }
   }

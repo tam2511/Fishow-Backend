@@ -133,7 +133,7 @@ $panel-decoration-transform-angle: 30deg;
 			color: $gray-800;
 
 			a:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 

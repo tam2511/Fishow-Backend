@@ -20,11 +20,7 @@
         </h4>
       </div>
       <a class="post-creative-figure" href="blog-post.html"
-        ><img
-          src="static/assets/images/news-4-2-370x279.jpg"
-          alt=""
-          width="370"
-          height="279"
+        ><img alt="" width="370" height="279"
       /></a>
       <div class="post-creative-footer">
         <div class="post-creative-comment">

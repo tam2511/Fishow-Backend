@@ -1,18 +1,15 @@
 <template>
   <section class="section section-variant-1 bg-gray-100">
-
-    <div class="container container__small" :class="step < 3 ? 'container__small_menu':'notcool'">
-
-      <!--            <div v-if="getStep < 3" class="select-predict">-->
+    <div
+      class="container container__small"
+      :class="step < 3 ? 'container__small_menu' : 'hideMenu'"
+    >
       <div v-if="step < 3" class="select-predict">
         <el-steps :active="step" finish-status="success">
           <el-step title="Область"></el-step>
           <el-step title="Населенный пункт"></el-step>
           <el-step title="Рыба"></el-step>
         </el-steps>
-
-        <!--                <el-cascader @change="handleChange" v-model="value" :options="options" placeholder="Ваш выбор" clearable></el-cascader>-->
-
         <div v-if="step === 0">
           <el-select v-model="value" placeholder="Select">
             <el-option
@@ -50,9 +47,12 @@
           <el-button @click="next">Дальше</el-button>
         </div>
       </div>
-      <div v-else class="predict" >
-            <span>{{this.value}} / {{this.value2}} | Прогноз на близжайшие 10 дней - {{ this.fish }}</span>
-        <column />
+      <div v-else class="predict">
+        <span
+          >{{ this.value }} / {{ this.value2 }} | Прогноз на близжайшие 10 дней
+          - {{ this.fish }}</span
+        >
+        <column :action="loadingfunc()" />
         <div class="predict_footer">
           <el-button @click="back">Назад</el-button>
         </div>
@@ -64,43 +64,36 @@
 <script>
 import fishSearch from '../components/predictPage/fishSearch'
 import Column from '../components/predictPage/column'
+import { Loading } from 'element-ui'
 
 export default {
   name: 'PredictPage',
   components: { Column, fishSearch },
   data() {
     return {
-      days: [
-        {
-          name: 'Понедельник',
-          label: 'first',
-        },
-        {
-          name: 'Вторник',
-          label: 'first2',
-        },
-        {
-          name: 'Среда',
-          label: 'first3',
-        },
-        {
-          name: 'Четверг',
-          label: 'first4',
-        },
-        {
-          name: 'Пятница',
-          label: 'first5',
-        },
-        {
-          name: 'Суббота',
-          label: 'first6',
-        },
-        {
-          name: 'Воскресенье',
-          label: 'first7',
-        },
-      ],
       result: '',
+      data: {
+        temperature_min: '[1,2,1,3,1,2,3,2,4]',
+        temperature_mean: '[2,3,2,3,3,4,5,4,3]',
+        temperature_max: '[4,5,4,5,5,4,6,7,8]',
+        wind_mean: '[3,6,5,7,3,4,6,3,2]',
+        wind_direction: '["СЗ","З","З","СЗ","С","В","Ю","ЮВ","В"]',
+        gust_max: '[7,13,5,11,11,10,9,10,10]',
+        phenomenon:
+          '["[пасмурно]","[дождь,малооблачно]","[малооблачно]","[дождь,пасмурно]","[ясно]","[пасмурно]","[пасмурно]","[ясно]","[пасмурно]"]',
+        pressure_min: '[733,734,733,735,735,733,738,735,733]',
+        pressure_max: '[739,740,739,751,739,744,746,744,739]',
+        humidity_mean: '[64,63,22,34,44,71,33,54,57]',
+        uv_index_mean: '[3,3,3,3,5,4,3,2,1]',
+        moon: '[1,4,7,14,21,28,33,40]',
+        moon_direction: '[1,1,1,1,1,1,1,1,1]',
+        date: '04.04.2020',
+        areal: 'московскаяобласть',
+        city: 'москва',
+        fish: 'щука',
+        prob_min: '[0.1,0.2,0.1,0.5,0.3,0.5,0.2,0.3,0.2]',
+        prob_max: '[0.2,0.5,0.3,0.8,0.6,0.8,0.5,0.7,0.6]',
+      },
       options: [
         {
           value: 'Московская область',
@@ -109,7 +102,6 @@ export default {
         {
           value: 'Ленинградская обл',
           label: 'Ленинградская обл',
-
         },
       ],
       options2: {
@@ -139,9 +131,10 @@ export default {
       value2: '',
       value3: '',
       loading: true,
-      step: 3,
+      step: 0,
       error: '',
       fish: '',
+      showMenu: false,
     }
   },
   computed: {
@@ -211,23 +204,42 @@ export default {
       console.log(value)
     },
     loadingfunc() {
+      const options = {
+        target: document.querySelector('body'),
+        fullscreen: true,
+        lock: true,
+        background: 'rgba(24,99,107,0.98)',
+      }
+      let loadingInstance = Loading.service(options)
       setTimeout(() => {
-        this.loading = false
+        document.querySelector('.container__small').classList.remove('hideMenu')
+        loadingInstance.close()
       }, 2000)
     },
   },
+  created() {
+    this.data.temperature_max = this.data.temperature_max
+      .slice(1, this.data.temperature_max.length - 1)
+      .split(',')
 
+    Object.keys(this.data).forEach((key) => {
+      if (this.data[key][0] === '[') {
+        this.data[key] = this.data[key]
+          .slice(1, this.data[key].length - 1)
+          .split(',')
+      }
+      console.log(key, ' ', this.data[key])
+    })
+  },
 }
 </script>
 
 <style scoped lang="scss">
-
-
-  .section.section-variant-1 {
-    overflow-scrolling: auto;
-    overflow: scroll;
-    overflow-y: auto;
-  }
+.section.section-variant-1 {
+  overflow-scrolling: auto;
+  overflow: scroll;
+  overflow-y: auto;
+}
 .el-cascader {
   margin: 20px 0;
   display: block;
@@ -250,6 +262,7 @@ export default {
   background-color: #f9fafc;
 }
 .container__small {
+  opacity: 1;
   max-width: 900px;
   padding: 20px;
   border: none;
@@ -264,6 +277,9 @@ export default {
     width: 1024px !important;
     max-height: 100% !important;
   }
+}
+.hideMenu {
+  opacity: 0;
 }
 .predict,
 .select-predict {

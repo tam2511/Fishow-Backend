@@ -123,10 +123,7 @@
             @tag="addTag"
           >
           </multiselect>
-          <!--            <pre class="language-json"><code>{{ blog_tags  }}</code></pre>-->
           <br />
-          <!--          <p>Категория: {{ blog_category }}</p>-->
-          <!--          <p>Selected: {{ blog_tags }}</p>-->
         </div>
       </div>
     </div>
@@ -345,7 +342,7 @@ export default {
 }
 
 .fishow_action_btn {
-  background-color: #18636b;
+  background-color: var(--color-bg-default);
 }
 .button.button-primary.button-sm {
   text-overflow: unset;
@@ -354,10 +351,10 @@ export default {
   width: auto;
 }
 .button {
-  &:first-child{
+  &:first-child {
     margin-top: 15px;
   }
-  @media screen and (max-width: 840px){
+  @media screen and (max-width: 840px) {
     width: 100%;
   }
 }

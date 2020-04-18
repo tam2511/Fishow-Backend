@@ -1,12 +1,12 @@
 //
 // Accent Colors
 //
-$primary: #18636b;
-$primary-light:         lighten(saturate($primary, 3.50), 1.76);
-$primary-dark:          darken(desaturate($primary, 0.21), 0.20);
+$primary: var(--color-bg-default);
+$primary-light:         var(--color-bg-default);
+$primary-dark:          var(--color-bg-default);
 
 $secondary:             #ffd851;
-$secondary-dark:        darken(desaturate($secondary, 11.88), 2.16);
+$secondary-dark:        var(--color-bg-default);
 
 
 $outer-space: #2c3337;
@@ -18,7 +18,7 @@ $shark-2: #1f2528;
 $gray-6: #707279;
 
 // Navbar
-$rd-navbar-dark: $primary;
+$rd-navbar-dark: var(--color-bg-default);
 $rd-navbar-darker: $shark-2;
 $rd-navbar-dark-1: $outer-space;
 $rd-navbar-light: $gray-6;

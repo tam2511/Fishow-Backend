@@ -98,7 +98,7 @@
 
 html .page {
   .text-primary {
-    color: $primary;
+    color: var(--color-bg-default);
   }
 
   .text-secondary {

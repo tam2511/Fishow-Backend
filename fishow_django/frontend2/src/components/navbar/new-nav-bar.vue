@@ -3,7 +3,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -36,8 +35,7 @@ export default {
                 isLinkAction: true,
                 type: 'link',
                 text: 'О нас',
-                subText:
-                  'Тут пока нету страницы :)',
+                subText: 'Тут пока нету страницы :)',
                 path: '/about-us',
                 iconLeft: '<i class="fa fa-star fa-fw"></i>',
               },
@@ -62,7 +60,7 @@ export default {
           {
             type: 'link',
             text: 'Прогноз',
-            path: './predict-page',
+            path: '/predict-page',
             // iconRight: '<i class="fa fa-long-arrow-right fa-fw"></i>',
           },
           {
@@ -80,7 +78,7 @@ export default {
           {
             type: 'button',
             text: 'Signup',
-            path: './signup',
+            path: '/signup',
             class: 'button-red',
           },
           {
@@ -120,9 +118,8 @@ export default {
 </script>
 
 <style lang="scss">
-
 .vnb {
-  background-color:#18636b !important;
+  background-color: var(--color-bg-default) !important;
   text-transform: uppercase;
   position: sticky;
   top: 0;
@@ -140,5 +137,4 @@ export default {
     color: white;
   }
 }
-
 </style>

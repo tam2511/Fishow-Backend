@@ -165,7 +165,7 @@
   z-index: 10;
 
   &:hover {
-    color: $primary;
+    color: var(--color-bg-default);
   }
 
   @include media-breakpoint-up(md) {
@@ -319,7 +319,7 @@
       width: 0;
       height: 0;
       pointer-events: none;
-      background: $primary;
+      background: var(--color-bg-default);
       content: '';
       transform: translate(-50%, -50%);
       transition: all .5s;
@@ -431,7 +431,7 @@
     &:hover {
       color: $white;
       &::after {
-        background: $primary;
+        background: var(--color-bg-default);
       }
     }
   }
@@ -487,7 +487,7 @@
 
     &-active,
     &:hover {
-      background: $primary;
+      background: var(--color-bg-default);
     }
 
     &-active {
@@ -612,7 +612,7 @@
     &:hover {
       color: $white;
       &::after {
-        background: $primary;
+        background: var(--color-bg-default);
       }
     }
   }
@@ -897,7 +897,7 @@
     &:hover {
       color: $white;
       &::after {
-        background: $primary;
+        background: var(--color-bg-default);
       }
     }
   }
@@ -953,7 +953,7 @@
 
     &-active,
     &:hover {
-      background: $primary;
+      background: var(--color-bg-default);
     }
 
     &-active {

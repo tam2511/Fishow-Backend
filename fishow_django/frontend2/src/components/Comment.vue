@@ -148,7 +148,7 @@ button {
   border: none;
   transition-duration: 0.2s;
   &:hover {
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.20)
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
   }
 }
 .comment-reply {

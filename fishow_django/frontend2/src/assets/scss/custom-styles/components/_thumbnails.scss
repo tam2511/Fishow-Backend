@@ -569,7 +569,7 @@
 	}
 
 	&:hover {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 

@@ -171,7 +171,6 @@ export default {
   created() {
     this.getBlogs()
     this.setPageTitle('Fishow - Главная')
-    // this.listScroll();
   },
 }
 </script>
