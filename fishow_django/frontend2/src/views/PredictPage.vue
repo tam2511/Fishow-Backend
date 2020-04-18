@@ -131,7 +131,7 @@ export default {
       value2: '',
       value3: '',
       loading: true,
-      step: 0,
+      step: 3,
       error: '',
       fish: '',
       showMenu: false,
@@ -267,7 +267,7 @@ export default {
   padding: 20px;
   border: none;
   min-height: 500px;
-  background-color: #fff;
+  background-color: var(--background-color-primary);
   &_menu {
     max-width: 500px;
   }

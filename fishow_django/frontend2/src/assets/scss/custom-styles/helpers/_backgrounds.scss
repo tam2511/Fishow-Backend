@@ -111,14 +111,14 @@
   // Forms
   .form-label,
   .form-input {
-    color: $form-input-color;
+    color: var(--color-typo-primary);
   }
 
   .form-input {
-    background-color: $form-input-background;
+    background-color: var(--background-color-default);
 
     @if ($form-input-border) {
-      border-color: $form-input-border-color;
+      border-color: var(--background-color-border);
     }
   }
 }

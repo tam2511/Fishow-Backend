@@ -177,7 +177,7 @@
 // Post Comment
 //
 .blog-post-comments{
-  color: $gray-800;
+  color: var(--color-typo-primary);
   background-color: var(--background-color-primary);
   border: 1px solid var(--background-color-border);
 }
@@ -314,7 +314,7 @@
     color: $gray-500;
   }
   .form-input{
-    border: 1px solid $gray-100;
+    border: 1px solid var(--background-color-border);
     background: var(--background-color-default);
   }
   * + .form-button{

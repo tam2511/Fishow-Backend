@@ -116,7 +116,7 @@ export default {
 <style scoped lang="scss">
 .fishow_row {
   margin-top: 10px;
-  color: #0f0f0f;
+  color: var(--color-typo-primary);
   height: 50px;
   width: 100%;
   display: flex;
@@ -136,7 +136,7 @@ export default {
 .fishow_row_element {
   padding-right: 4px;
   padding-left: 4px;
-  color: #000;
+  color: var(--color-typo-primary);
   width: 100%;
   height: 100%;
   display: flex;

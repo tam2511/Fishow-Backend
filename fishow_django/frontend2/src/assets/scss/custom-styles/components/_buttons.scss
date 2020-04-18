@@ -43,7 +43,7 @@ html {
 	}
 
 	.button-primary {
-		@include btn-variant($white, $primary, $primary, $gray-800, $secondary, $secondary);
+		@include btn-variant(var(--color-typo-primary), var(--background-color-default), var(--background-color-primary), $gray-800, $secondary, $secondary);
 	}
 
 	.button-secondary {
@@ -87,7 +87,7 @@ html {
 	}
 
 	.button-gray-outline {
-		@include btn-variant($gray-800, transparent, $gray-3, $white, $gray-2, $gray-2);
+		@include btn-variant(var(--color-typo-primary), var(--background-color-default), var(--background-color-border), $white, $gray-2, $gray-2);
 	}
 
 	.button-primary-outline {
