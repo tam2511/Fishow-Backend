@@ -123,7 +123,7 @@
                 </div>
               </article>
 
-              <div class="blog-post-comments">
+              <div class="blog-post-comments blog-space">
                 <!-- Post Comment-->
                 <Comment
                   v-for="(comment, index) in comments"

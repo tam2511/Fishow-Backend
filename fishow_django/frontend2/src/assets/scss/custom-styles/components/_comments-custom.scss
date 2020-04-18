@@ -178,6 +178,11 @@
 //
 .blog-post-comments{
   color: $gray-800;
+  background-color: var(--background-color-primary);
+  border: 1px solid var(--background-color-border);
+}
+.blog-space {
+  padding: 40px 30px;
 }
 .bg-gray-100{
   .blog-post-comments{
@@ -310,7 +315,7 @@
   }
   .form-input{
     border: 1px solid $gray-100;
-    background: var(--background-color-primary);
+    background: var(--background-color-default);
   }
   * + .form-button{
     margin-top: 20px;
