@@ -1,6 +1,7 @@
 <template>
-  <div id="app" :class="theme">
-    <new-nav-bar />
+  <div id="app" class="theme" :class="theme">
+    <settings/>
+    <new-nav-bar   />
     <router-view />
     <FIshow_Footer />
   </div>
@@ -9,6 +10,7 @@
 <script>
 import FIshow_Footer from './components/FIshow_Footer'
 import NewNavBar from './components/navbar/new-nav-bar'
+import Settings from "./components/Home/Settings";
 export default {
   name: 'App',
   data() {
@@ -24,6 +26,7 @@ export default {
     }
   },
   components: {
+    Settings,
     NewNavBar,
     FIshow_Footer,
   },
@@ -40,17 +43,6 @@ export default {
 @import 'assets/scss/custom-styles/fonts.scss';
 #app {
   transition-duration: 0.2s;
-}
-html {
-  background-color: #edeff4;
-}
-a {
-  font-weight: bold;
-  color: #2c3e50;
-
-  &.router-link-exact-active {
-    color: #ffd851 !important;
-  }
 }
 @media (min-width: 1023px) {
   .section-md {

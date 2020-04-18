@@ -79,7 +79,6 @@ export default {
             type: 'button',
             text: 'Signup',
             path: '/signup',
-            class: 'button-red',
           },
           {
             type: 'button',
@@ -118,21 +117,19 @@ export default {
 </script>
 
 <style lang="scss">
-.vnb {
-  background-color: var(--background-color-primary) !important;
+#app .vnb {
+  background-color: var(--background-color-default);
   text-transform: uppercase;
   position: sticky;
   top: 0;
   color: #fff !important;
   z-index: 5;
-
-  .button-red {
-    background: #3579b9;
-
+  &-button {
+    background: var(--background-color-brand);
     &:hover {
-      background: darken(#260f4b, 10%);
+      background: var(--background-color-border);
     }
-  }
+ }
   .vnb__menu-options__option__link {
     color: white;
   }

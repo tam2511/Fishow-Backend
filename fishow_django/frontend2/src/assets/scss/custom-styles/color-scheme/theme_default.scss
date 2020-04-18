@@ -1,5 +1,5 @@
 /* Базовые цвета от которых выстраивается вся политра */
-$color-base-base: #6b2c2c; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
+$color-base-base: #000000; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #4f1b6b; /* Базовый цвет поверхностей */
 $color-base-project: #ffffff; /* Проектный цвет, от которого выстраивают акцентные состояния */
 $color-base-phantom: #000000; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
@@ -52,6 +52,7 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
   /* Цвета блоков */
   --background-color-primary: #fff;
   --background-color-default: #edeff4;
+  --background-color-invert: #{$color-base-phantom};
   --background-color-border: #212122;
   --color-bg-brand: #{$color-bg-brand}; /* Цвет фона брендированый */
   --color-bg-action: #{$color-bg-action}; /* Цвет фона действия */

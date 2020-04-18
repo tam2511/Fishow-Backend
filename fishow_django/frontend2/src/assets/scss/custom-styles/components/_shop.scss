@@ -374,7 +374,7 @@ $product-gradient-color-2: #d5deeb;
 
 // Share button with link
 a.product-button:hover {
-	color: $white;
+	color: var(--color-typo-primary);
 	background-color: var(--background-color-primary);
 }
 

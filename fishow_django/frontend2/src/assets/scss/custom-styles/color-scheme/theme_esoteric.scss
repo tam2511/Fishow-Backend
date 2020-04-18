@@ -1,7 +1,7 @@
 /* Базовые цвета от которых выстраивается вся политра */
-$color-base-base: #6b2c2c; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
+$color-base-base: #f2feff; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #f2feff; /* Базовый цвет поверхностей */
-$color-base-project: #ffffff; /* Проектный цвет, от которого выстраивают акцентные состояния */
+$color-base-project: #000; /* Проектный цвет, от которого выстраивают акцентные состояния */
 $color-base-phantom: #000000; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
 $color-base-path: #ffffff; /* Ссылочный цвет, от которого выстраиваются все их состояния */
 $color-base-success: #00985f; /* Цвет успеха */
@@ -17,7 +17,7 @@ $color-bg-action:lighten(saturate($color-base-project, 3.50), 1.76); /* Цвет
 //$color-bg-hover: color($color-base-base a(15%)); /* Цвет фона при наведении */
 //$color-bg-border: color($color-base-phantom a(5%)); /* Цвет границ */ё
 //$color-bg-stripe: color($color-base-phantom a(4%)); /* Цвет зебры */
-//$color-bg-ghost: color($color-base-phantom a(8%)); /* Цвет затенения */
+//$color-bg-ghost: color($color-base-phantom a(8%)); /*  Цвет затенения */
 $color-bg-default: $color-base-essential; /* Цвет дефолта */
 //$color-bg-tone: color($color-base-phantom a(90%)); /* Цвет паранджи */
 //$color-bg-soft: color($color-base-essential a(97%)); /* Цвет молока */
@@ -53,6 +53,8 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
   --background-color-primary: #1a1a1a;
   --background-color-default: #131314;
   --background-color-border: #212122;
+  --background-color-brand: #363638;
+  --background-color-invert: #{$color-bg-default};
   --color-bg-brand: #{$color-bg-brand}; /* Цвет фона брендированый */
   --color-bg-action: #{$color-bg-action}; /* Цвет фона действия */
   //--color-bg-selection: #{$color-bg-selection}; /* Цвет фона выделения */
