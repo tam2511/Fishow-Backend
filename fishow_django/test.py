@@ -1,20 +1,18 @@
-import pymysql
+import sqlite3
 from datetime import datetime
 
 
 def escape_name(s):
     """Escape name to avoid SQL injection and keyword clashes.
-
     Doubles embedded backticks, surrounds the whole in backticks.
-
     Note: not security hardened, caveat emptor.
-
     """
     return '`{}`'.format(s.replace('`', '``'))
 
 
-con = pymysql.connect('localhost', 'tam2511_fishow',
-                      '081099', 'tam2511_fishow')
+# con = pymysql.connect('localhost', 'tam2511_fishow',
+#                       '081099', 'tam2511_fishow')
+con = sqlite3.connect('db.sqlite3')
 
 dict_of_params = [
     {
@@ -188,10 +186,11 @@ dict_of_params = [
 ]
 names = list(dict_of_params[0])
 cols = ', '.join(map(escape_name, names))  # assumes the keys are *valid column names*.
-placeholders = ', '.join(['%({})s'.format(name) for name in names])
 
-query = 'INSERT INTO prediction_predictionten ({}) VALUES ({})'.format(cols, placeholders)
 with con:
     cur = con.cursor()
     for _ in dict_of_params:
-        cur.execute(query, _)
+        placeholders = ', '.join(['\"{}\"'.format(str(_[name])) for name in names])
+        query = 'INSERT INTO prediction_predictionten ({}) VALUES ({})'.format(cols, placeholders)
+        print(query)
+        cur.execute(query)
