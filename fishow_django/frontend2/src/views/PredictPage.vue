@@ -72,28 +72,6 @@ export default {
   data() {
     return {
       result: '',
-      data: {
-        temperature_min: '[1,2,1,3,1,2,3,2,4]',
-        temperature_mean: '[2,3,2,3,3,4,5,4,3]',
-        temperature_max: '[4,5,4,5,5,4,6,7,8]',
-        wind_mean: '[3,6,5,7,3,4,6,3,2]',
-        wind_direction: '["СЗ","З","З","СЗ","С","В","Ю","ЮВ","В"]',
-        gust_max: '[7,13,5,11,11,10,9,10,10]',
-        phenomenon:
-          '["[пасмурно]","[дождь,малооблачно]","[малооблачно]","[дождь,пасмурно]","[ясно]","[пасмурно]","[пасмурно]","[ясно]","[пасмурно]"]',
-        pressure_min: '[733,734,733,735,735,733,738,735,733]',
-        pressure_max: '[739,740,739,751,739,744,746,744,739]',
-        humidity_mean: '[64,63,22,34,44,71,33,54,57]',
-        uv_index_mean: '[3,3,3,3,5,4,3,2,1]',
-        moon: '[1,4,7,14,21,28,33,40]',
-        moon_direction: '[1,1,1,1,1,1,1,1,1]',
-        date: '04.04.2020',
-        areal: 'московскаяобласть',
-        city: 'москва',
-        fish: 'щука',
-        prob_min: '[0.1,0.2,0.1,0.5,0.3,0.5,0.2,0.3,0.2]',
-        prob_max: '[0.2,0.5,0.3,0.8,0.6,0.8,0.5,0.7,0.6]',
-      },
       options: [
         {
           value: 'Московская область',
@@ -208,7 +186,7 @@ export default {
         target: document.querySelector('body'),
         fullscreen: true,
         lock: true,
-        background: 'rgba(24,99,107,0.98)',
+        background: 'var(--background-color-default)',
       }
       let loadingInstance = Loading.service(options)
       setTimeout(() => {
@@ -217,20 +195,7 @@ export default {
       }, 2000)
     },
   },
-  created() {
-    this.data.temperature_max = this.data.temperature_max
-      .slice(1, this.data.temperature_max.length - 1)
-      .split(',')
 
-    Object.keys(this.data).forEach((key) => {
-      if (this.data[key][0] === '[') {
-        this.data[key] = this.data[key]
-          .slice(1, this.data[key].length - 1)
-          .split(',')
-      }
-      console.log(key, ' ', this.data[key])
-    })
-  },
 }
 </script>
 

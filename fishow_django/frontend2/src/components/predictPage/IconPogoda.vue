@@ -15,6 +15,9 @@
     <span :style="{ bottom: getRandom15 / this.marginText + 15 + 'px' }">
       {{ getRandom15 }}
     </span>
+    <span :style="{ bottom: getRandom15 / this.marginText + 15 + 'px' }">
+      {{ getRandom15 }}
+    </span>
   </div>
 </template>
 
@@ -23,11 +26,9 @@ export default {
   name: 'IconPogoda',
   props: {
     maxValue: {
-      type: Number,
       required: true,
     },
     minValue: {
-      type: Number,
       required: true,
     },
     color: {

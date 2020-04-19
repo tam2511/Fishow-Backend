@@ -2,7 +2,7 @@
 $color-base-base: #000000; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #18636b; /* Базовый цвет поверхностей */
 $color-base-project: #18636b; /* Проектный цвет, от которого выстраивают акцентные состояния */
-$color-base-phantom: #000000; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
+$color-base-phantom: #292929; /* Тонирующий цвет, от которого выстраиватся бордеры, паранджа, ... */
 $color-base-path: #ffffff; /* Ссылочный цвет, от которого выстраиваются все их состояния */
 $color-base-success: #00985f; /* Цвет успеха */
 $color-base-alert: #f33; /* Цвет ошибки */
@@ -32,6 +32,7 @@ $color-bg-system: $color-base-system; /* Цвет фона системнный 
 /* Цвета текста */
 $color-typo-brand: $color-base-project; /* Цвет брендового текста */
 $color-typo-primary: $color-base-base; /* Цвет основного текста */
+$color-typo-invert: $color-base-phantom; /* Цвет основного текста */
 //$color-typo-promo: color($color-base-base a(80%)); /* Цвет промо текста */
 //$color-typo-secondary: color($color-base-base a(60%)); /* Цвет второстепенного текста */
 //$color-typo-ghost: color($color-base-base a(30%)); /* Цвет дополнительного текста */
@@ -53,7 +54,7 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
   --background-color-primary: #fff;
   --background-color-brand: #18636b;
   --background-color-default: #edeff4;
-  --background-color-invert: #{$color-base-phantom};
+  --background-color-invert: #292929;
   --background-color-border: #e0e0e5;
   --color-bg-brand: #{$color-bg-brand}; /* Цвет фона брендированый */
   --color-bg-action: #{$color-bg-action}; /* Цвет фона действия */
@@ -75,6 +76,7 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
   /* Цвета текста */
   --color-typo-brand: #{$color-typo-brand}; /* Цвет брендового текста */
   --color-typo-primary: #{$color-typo-primary}; /* Цвет основного текста */
+  --color-typo-invert: #{$color-typo-primary}; /* Цвет основного текста */
   //--color-typo-promo: #{$color-typo-promo}; /* Цвет промо текста */
   //--color-typo-secondary: #{$color-typo-secondary}; /* Цвет второстепенного текста */
   //--color-typo-ghost: #{$color-typo-ghost}; /* Цвет дополнительного текста */

@@ -26,10 +26,7 @@
                 options: [{
                     value: 'theme_color_fishow_default',
                     label: 'default'
-                }, {
-                    value: 'theme_color_fishow_dark',
-                    label: 'dark'
-                }, {
+                },{
                     value: 'theme_color_fishow_esoteric',
                     label: 'vip'
                 }],
