@@ -127,9 +127,9 @@
         </div>
       </div>
     </div>
-    <el-button :plain="true" @click="open2" style="display: none;"
-      >success</el-button
-    >
+<!--    <el-button :plain="true" @click="open2" style="display: none;"-->
+<!--      >success</el-button-->
+<!--    >-->
   </section>
   <!--    </div>-->
 </template>
@@ -222,18 +222,18 @@ export default {
     }
   },
   methods: {
-    open2() {
-      this.$message({
-        message: 'Отлично, у вас получилсоь!',
-        type: 'success',
-      })
-    },
-    open3(text) {
-      this.$message({
-        message: text,
-        type: 'warning',
-      })
-    },
+    // open2() {
+    //   this.$message({
+    //     message: 'Отлично, у вас получилсоь!',
+    //     type: 'success',
+    //   })
+    // },
+    // open3(text) {
+    //   this.$message({
+    //     message: text,
+    //     type: 'warning',
+    //   })
+    // },
     reset() {
       this.$refs['dynamic-form'].resetFields()
     },
@@ -272,12 +272,12 @@ export default {
     },
     onSubmit() {
       if (!this.blog_title) {
-        this.open3('Пустой заголовок!')
+        // this.open3('Пустой заголовок!')
       } else {
         this.convertTags()
         this.convertBody()
 
-        this.open2()
+        // this.open2()
         let endpoint = '/api/blogs/'
         let method = 'POST'
         if (this.slug !== undefined) {
