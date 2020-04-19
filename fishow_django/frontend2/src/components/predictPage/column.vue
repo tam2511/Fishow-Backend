@@ -8,47 +8,24 @@
 <!--        </div>-->
       </div>
       <div class="fishow_row">
-        <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">
 <!--          <one-colum />-->
         </div>
       </div>
       <div class="fishow_row">
-        <div class="fishow_row_element">
-          <temperatura  v-for="(data, index) in data.temperature_min" :key="index" :data="data"/>
-        </div>
-        <div class="fishow_row_element">
-          <temperatura  v-for="(data, index) in data.temperature_max" :key="index" :data="data"/>
-        </div>
+          <chart
+                  :optionsChart="{
+                      type: 'bar',
+                      probMin: data.temperature_min,
+                      probMax: data.temperature_max,
+                      max: 15,
+                      min: 0
+                  }"
+          />
       </div>
       <div class="fishow_row">
         Среднесуточная температура
       </div>
       <div class="fishow_row">
-<!--        <div class="fishow_row_element">-->
-<!--          <prob  v-for="(data, index) in data.prob_min" :key="index" :data="data"/>-->
-<!--        </div>-->
-<!--        <div class="fishow_row_element">-->
-<!--          <prob  v-for="(data, index) in data.prob_max" :key="index" :data="data"/>-->
-<!--        </div>-->
-          <chart
-                  :optionsChart="{
-                      type: 'area',
-                      probMin: data.prob_min,
-                      probMax: data.prob_max,
-                      max: 1,
-                      min: 0
-                  }"/>
-      </div>
-      <div class="fishow_row">
-        Вероятность клева
-      </div>
-      <div class="fishow_row">
-<!--        <div class="fishow_row_element">-->
-<!--          <temperatura  v-for="(data, index) in data.pressure_min" :key="index" :data="data"/>-->
-<!--        </div>-->
-<!--        <div class="fishow_row_element">-->
-<!--          <temperatura  v-for="(data, index) in data.pressure_max" :key="index" :data="data"/>-->
-<!--        </div>-->
           <chart
                   :optionsChart="{
                       type: 'bar',
@@ -60,36 +37,35 @@
           />
       </div>
       <div class="fishow_row">
+        Вероятность клева
+      </div>
+      <div class="fishow_row">
+          <chart
+                  :optionsChart="{
+                      type: 'area',
+                      probMin: data.pressure_min,
+                      probMax: data.pressure_max,
+                      max: 740,
+                      min: 650
+                  }"/>
+
+      </div>
+      <div class="fishow_row">
         Давление, мм рт.ст.
       </div>
-<!--      <div class="fishow_row">-->
-<!--        <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">-->
-<!--          <icon-pogoda-->
-<!--            :maxValue="15"-->
-<!--            :minValue="10"-->
-<!--            color="&#45;&#45;orange"-->
-<!--            :height="5"-->
-<!--            :margin-text="1"-->
-<!--          />-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="fishow_row">-->
-<!--        Прогноз аналогично температуре-->
-<!--      </div>-->
-<!--      <div class="fishow_row">-->
-<!--        <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">-->
-<!--          <icon-pogoda-->
-<!--            :maxValue="15"-->
-<!--            :minValue="10"-->
-<!--            color="&#45;&#45;yellow"-->
-<!--            :height="5"-->
-<!--            :margin-text="1"-->
-<!--          />-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="fishow_row">-->
-<!--        Ветер, м/с-->
-<!--      </div>-->
+      <div class="fishow_row">
+            <chart
+                    :optionsChart="{
+                      type: 'area',
+                      probMin: data.wind_mean,
+                      probMax: data.wind_mean,
+                      max: 10,
+                      min: 0
+                  }"/>
+      </div>
+      <div class="fishow_row">
+        Ветер, м/с
+      </div>
 <!--      <div class="fishow_row">-->
 <!--        <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">-->
 <!--          <icon-pogoda-->

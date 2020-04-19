@@ -109,7 +109,7 @@ export default {
       value2: '',
       value3: '',
       loading: true,
-      step: 3,
+      step: 0,
       error: '',
       fish: '',
       showMenu: false,
