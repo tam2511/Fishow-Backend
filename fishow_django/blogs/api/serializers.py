@@ -48,10 +48,11 @@ class BlogSerializer(serializers.ModelSerializer):
     comments_count = serializers.SerializerMethodField()
     user_has_commented = serializers.SerializerMethodField()
     time_from_creations = serializers.SerializerMethodField()
+    user_views = serializers.SerializerMethodField()
 
     class Meta:
         model = Blog
-        exclude = ['updated_at', 'votersUp','votersDown']
+        exclude = ['updated_at', 'votersUp','votersDown','views']
 
 #     def get_created_at(self, instance):
 #         return instance.created_at.strftime("%B %d, %Y")
@@ -85,3 +86,6 @@ class BlogSerializer(serializers.ModelSerializer):
         now = datetime.now(timezone.utc)
         time_spend = timesince(created, now)
         return time_spend
+
+    def get_user_views(self, instance):
+        return instance.views.count()
