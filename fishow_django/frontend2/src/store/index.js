@@ -6,13 +6,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: 0,
+    blogs: [],
     username: null,
+    next: null
   },
   mutations: {
-    increment(state) {
-      state.count++
-    },
+    SET_BLOGS(state, blogs) {
+      state.blogs = blogs
+    }
   },
   getters: {
     getUserName: (state) => {
@@ -25,6 +26,22 @@ export default new Vuex.Store({
       const data = await apiService('/api/user/')
       this.state.username = data.username
     },
+    async fetchBlogs({commit}) {
+      let endpoint = '/api/blogs/'
+      if (this.state.next) {
+        endpoint = this.state.next
+      }
+      const blogs = [];
+      apiService(endpoint).then((data) => {
+        blogs.push(...data.results)
+        if (data.next) {
+          this.state.next = data.next
+        } else {
+          this.state.next = null
+        }
+        commit('SET_BLOGS', blogs)
+      });
+    }
   },
   modules: {},
 })
