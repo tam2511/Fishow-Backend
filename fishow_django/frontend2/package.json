@@ -38,6 +38,6 @@
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11",
-    "webpack-bundle-tracker": "^1.0.0-alpha.1"
+    "webpack-bundle-tracker": "^0.4.3"
   }
 }

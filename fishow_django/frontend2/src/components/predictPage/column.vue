@@ -10,7 +10,6 @@
       <div class="fishow_row">
 <!--          <one-colum />-->
         </div>
-      </div>
       <div class="fishow_row">
           <chart
                   :optionsChart="{
@@ -144,6 +143,11 @@ export default {
         prob_min: '[0.1,0.2,0.1,0.5,0.3,0.5,0.2,0.3,0.2]',
         prob_max: '[0.2,0.5,0.3,0.8,0.6,0.8,0.5,0.7,0.6]',
       },
+
+    }
+  },
+  methods: {
+    getPrediction() {
 
     }
   },

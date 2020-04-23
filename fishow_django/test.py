@@ -1,4 +1,4 @@
-import sqlite3
+import pymysql
 from datetime import datetime
 
 
@@ -10,9 +10,9 @@ def escape_name(s):
     return '`{}`'.format(s.replace('`', '``'))
 
 
-# con = pymysql.connect('localhost', 'tam2511_fishow',
-#                       '081099', 'tam2511_fishow')
-con = sqlite3.connect('db.sqlite3')
+con = pymysql.connect('localhost', 'tam2511_fishow',
+                       '081099ASDasd', 'tam2511_fishow')
+#con = sqlite3.connect('db.sqlite3')
 
 dict_of_params = [
     {
