@@ -18,6 +18,8 @@ class Blog(models.Model):
                                       related_name='votesUpBlog')
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='votesDownBlog')
+    views = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                          related_name='viewsBlog')
 
     def __str__(self):
         return self.content
