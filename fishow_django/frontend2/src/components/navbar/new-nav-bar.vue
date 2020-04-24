@@ -124,15 +124,24 @@ export default {
   top: 0;
   color: #fff !important;
   z-index: 5;
+  padding: 20px 0 20px;
   &-button {
     color: var(--color-typo-primary);
     background: var(--background-color-default);
     &:hover {
       background: var(--background-color-border);
     }
- }
+  }
+  .vnb__menu-options__option__link[aria-label='Fishow'] {
+    font-size: 28px;
+  }
   .vnb__menu-options__option__link {
+    font-weight: 800;
     color: white;
+  }
+  .vnb-image {
+    width: 200px;
+    height: 200px;
   }
 }
 </style>
