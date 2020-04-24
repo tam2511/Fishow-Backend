@@ -186,8 +186,10 @@ $page-boxed-background-image:    url('/static/assets/images/bg-pattern-boxed.png
 //
 // Body
 //
-$body-bg:       $white;
-$body-color:    $gray-500;
+//$body-bg:       var(--background-color-default);
+$body-bg:       #000;
+//$body-color:    var(--color-typo-primary);
+$body-color:    #000;
 
 //
 // Components

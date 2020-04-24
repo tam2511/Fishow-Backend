@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="section section-md bg-gray-100">
+    <section class="section section-md section-view">
       <div class="container">
         <div class="row row-50">
           <div class="col-lg-8">
@@ -11,15 +11,15 @@
                   <h5 class="heading-component-title">Лучшие блоги</h5>
                   <div class="buttons-nav">
                     <router-link
-                            class="button button-xs button-primary"
-                            :to="{ name: 'blog-editor' }"
+                      class="button button-xs button-primary"
+                      :to="{ name: 'blog-editor' }"
                     >
                       Добавить блог
                     </router-link>
                     <router-link
-                            class="button button-xs button-gray-outline"
-                            to="/article"
-                            style="margin-top: 0"
+                      class="button button-xs button-gray-outline"
+                      to="/article"
+                      style="margin-top: 0;"
                     >
                       Читать все
                     </router-link>
@@ -27,13 +27,15 @@
                 </div>
               </article>
 
-              <blog-card v-for="blog in blogs"
-                         :blog="blog"
-                         :key="blog.pk"/>
+              <blog-card v-for="blog in blogs" :blog="blog" :key="blog.pk" />
 
-              <button class="button button-primary button-lg"
-                      v-show="next"
-                      @click="getBlogs">Load more</button>
+              <button
+                class="button button-primary button-lg"
+                v-show="next"
+                @click="checkNext"
+              >
+                Load more
+              </button>
             </div>
           </div>
           <!-- Aside Block-->
@@ -46,17 +48,17 @@
                   <div class="heading-component-inner">
                     <h5 class="heading-component-title">
                       <span
-                              class="icon material-icons-whatshot text-red"
+                        class="icon material-icons-whatshot text-red"
                       ></span>
                       Горячие блоги
                     </h5>
                   </div>
                 </article>
-                <HotPostMinimal
-                        v-for="blog in computedObj"
-                        :blog="blog"
-                        :key="blog.pk"
-                />
+<!--                <HotPostMinimal-->
+<!--                  v-for="blog in computedObj"-->
+<!--                  :blog="blog"-->
+<!--                  :key="blog.pk"-->
+<!--                />-->
               </div>
               <!-- Мини прогнозы -->
               <div class="aside-component">
@@ -113,14 +115,13 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-import { apiService } from '@/common/api.service'
-import HotPostMinimal from '../components/HotPostMinimal'
-import MiniPrognos from '../components/MiniPrognos'
-import Statistic from '../components/Statistic'
-import UserRate from '../components/UserRate'
-import LastComments from '../components/LastComments'
-import BlogCard from '../components/Home/BlogCard'
+import HotPostMinimal from '@/components/HotPostMinimal'
+import MiniPrognos from '@/components/MiniPrognos'
+import Statistic from '@/components/Statistic'
+import UserRate from '@/components/UserRate'
+import LastComments from '@/components/LastComments'
+import BlogCard from '@/components/Home/BlogCard'
+import { mapState } from 'vuex'
 
 export default {
   name: 'home',
@@ -130,60 +131,37 @@ export default {
     UserRate,
     Statistic,
     MiniPrognos,
-    HotPostMinimal
+    HotPostMinimal,
   },
-  data () {
-    return {
-      blogs: [],
-      next: null,
-      loadingBlogs: false,
-      limit: 3
-    }
-  },
-  computed:{
-    computedObj(){
-      return this.limit ? this.blogs.slice(0,this.limit) : this.blogs
-    }
+
+  computed: {
+    ...mapState(['blogs', 'next'])
   },
   methods: {
-    setPageTitle (title) {
+    setPageTitle(title) {
       document.title = title
     },
-    getBlogs () {
-      let endpoint = '/api/blogs/'
-      if (this.next) {
-        endpoint = this.next
-      }
-      this.loadingBlogs = true
-      apiService(endpoint).then(data => {
-        this.blogs.push(...data.results)
-        this.loadingBlogs = false
-        if (data.next) {
-          this.next = data.next
-        } else {
-          this.next = null
-        }
-      })
+    checkNext() {
+      this.$store.dispatch('fetchBlogs')
+      console.log('blogs = ', this.blogs)
     }
-
-},
-created () {
-  this.getBlogs()
-  this.setPageTitle('Fishow - Главная')
-  // this.listScroll();
-}
+  },
+  created() {
+    this.$store.dispatch('fetchBlogs')
+    this.setPageTitle('Fishow - Главная')
+  },
 }
 </script>
 <style scoped lang="scss">
-  .buttons-nav a {
-    margin-left: 10px;
-  }
-  .col-lg-4 {
-    @media screen and (min-width: 1024px){
-      .aside-components__sticky {
-        position: fixed;
-        width: 30%;
-      }
+.buttons-nav a {
+  margin-left: 10px;
+}
+.col-lg-4 {
+  @media screen and (min-width: 1024px) {
+    .aside-components__sticky {
+      position: fixed;
+      width: 30%;
     }
   }
+}
 </style>

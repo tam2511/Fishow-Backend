@@ -34,7 +34,7 @@
 	width: 55px;
 	height: 55px;
 	border-radius: 50%;
-	background: $white;
+	background: var(--background-color-default);
 	color: $gray-800;
 	.icon {
 		position: absolute;
@@ -46,7 +46,7 @@
 	}
 
 	&:hover {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -88,7 +88,7 @@
 }
 
 .post-inline-time {
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 .post-inline-title {
@@ -163,7 +163,7 @@
 	color: $gray-800;
 
 	a {
-		color: inherit;
+		color: var(--color-typo-primary);
 		&:hover {
 			color: $yellow;
 		}
@@ -205,8 +205,8 @@
 .bg-gray-100 {
 	.post-classic {
 		padding: 8px;
-		background: $white;
-		border: 1px solid $gray-1;
+		background: var(--background-color-default);
+		border: 1px solid  var(--background-color-default);
 	}
 	.post-classic-time {
 		color: $gray-500;
@@ -216,8 +216,8 @@
 .tabs-modern_1 {
 	.post-classic {
 		padding: 8px; 
-		background: $white;
-		border: 1px solid $gray-1;
+		background: var(--background-color-default);
+		border: 1px solid var(--background-color-border);
 	}
 	.post-classic-time {
 		color: $gray-500;
@@ -256,8 +256,8 @@
 	padding: 25px 35px 20px 25px;
 	font-family: $font-family-sec;
 	text-transform: uppercase;
-	background: $white;
-	border: 1px solid $gray-1;
+	background: var(--background-color-primary);
+	border: 1px solid var(--background-color-border);
 	transition: all .3s;
 
 	&:hover {
@@ -279,8 +279,8 @@
 	font-family: $font-family-sec;
 	font-weight: 600;
 	text-transform: uppercase;
-	background: $white;
-	border: 1px solid $gray-1;
+	background: var(--background-color-default);
+	border: 1px solid var(--background-color-border);
 	transition: all .3s;
 }
 
@@ -321,8 +321,8 @@
 // Post Corporate
 //
 .post-corporate {
-	background: $white;
-	border: 1px solid $gray-1;
+	background: var(--background-color-primary);
+	border: 1px solid var(--background-color-border);
 	transition: all .3s;
 	&:hover {
 		box-shadow: 0 7px 18px rgba($black, 0.13);
@@ -385,7 +385,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 	.icon {
@@ -400,7 +400,7 @@
 		font-size: 15px;
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -444,7 +444,7 @@
 // Post Future
 //
 .post-future {
-	border: 1px solid $gray-1;
+	border: 1px solid var(--background-color-border);
 
 	hr {
 		margin-top: 20px;
@@ -456,11 +456,11 @@
 		padding: 14px 19px;
 		font-weight: 600;
 		line-height: 17px;
-		border: 1px solid $gray-1;
+		border: 1px solid var(--background-color-border);
 
 		&:hover {
-			background: $primary;
-			border-color: $primary;
+			background: var(--background-color-primary);
+			border-color: var(--background-color-border);
 		}
 	}
 }
@@ -491,7 +491,7 @@
 
 .post-future-main {
 	padding: 20px 25px 35px;
-	background: $white;
+	background: var(--background-color-default);
 }
 
 .post-future-meta {
@@ -518,8 +518,8 @@
 			top: 0;
 			right: 1px;
 			padding: 14px 19px;
-			background: $white;
-			border: 1px solid $gray-1;
+			background: var(--background-color-default);
+			border: 1px solid var(--background-color-border);
 			border-radius: 3px;
 			margin-top: 0;
 			opacity: 1;
@@ -533,7 +533,7 @@
 			right: 0;
 			display: block;
 			padding: 14px 19px;
-			background: $white;
+			background: var(--background-color-default);
 			border: 1px solid $gray-1;
 			border-radius: 3px;
 			transform: translateX(-100%);
@@ -639,7 +639,7 @@
 // Post Creative
 //
 .post-creative {
-	background: $white;
+	background: var(--background-color-default);
 	transition: all .3s;
 }
 
@@ -693,7 +693,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 	.icon {
@@ -708,7 +708,7 @@
 	.inline-toggle-parent {
 		position: absolute;
 		right: 20px;
-		background: $white;
+		background: var(--background-color-default);
 		transition: all .4s;
 
 		&.active {
@@ -726,7 +726,7 @@
 			bottom: 25px;
 			padding: 10px;
 			text-align: center;
-			background: $white;
+			background: var(--background-color-default);
 			border-radius: 3px 3px 0 0;
 			transition: all .2s;
 			opacity: 0;
@@ -736,7 +736,7 @@
 				font-size: 15px;
 				color: $gray-500;
 				&:hover {
-					color: $primary;
+					color: var(--color-bg-default);
 				}
 			}
 		}
@@ -798,7 +798,7 @@
 // Post Miranda
 //
 .post-miranda {
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 	transition: all .3s;
 	&:hover {
@@ -850,7 +850,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 	.icon {
@@ -865,7 +865,7 @@
 		font-size: 15px;
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -978,7 +978,7 @@
 	a {
 		color: $white;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -996,7 +996,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1190,7 +1190,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 
 	}
@@ -1295,7 +1295,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1470,7 +1470,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1501,8 +1501,8 @@
 	padding: 30px;
 	font-size: 16px;
 	color: $gray-800;
-	background: $white;
-	border: 1px solid $gray-1;
+	background: var(--background-color-primary);
+	border: 1px solid var(--background-color-border);
 }
 
 .blog-post-title {
@@ -1549,7 +1549,7 @@
 	.icon {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1603,7 +1603,7 @@
 		.icon {
 			font-size: 13px;
 			&:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 	}
@@ -1737,7 +1737,7 @@
 		color: $white;
 
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1789,7 +1789,7 @@
 	font-weight: 500;
 	letter-spacing: .05em;
 	text-transform: uppercase;
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 //
@@ -1810,7 +1810,7 @@
 		margin-right: 5px;
 		font-size: 17px;
 		vertical-align: middle;
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -1832,7 +1832,7 @@
 	a {
 		color: $gray-500;
 		&:hover {
-			color: $primary;
+			color: var(--color-bg-default);
 		}
 	}
 }
@@ -1857,7 +1857,7 @@
 			color: rgba($white, .6);
 			
 			&:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 	}

@@ -27,7 +27,7 @@ hr {
     display: inline-block;
     width: 60px;
     height: 2px;
-    background-color: $primary;
+    background-color: var(--background-color-primary);
   }
 }
 
@@ -50,7 +50,7 @@ html .divider-secondary {
     display: inline-block;
     width: 44px;
     height: 3px;
-    background: $primary;
+    background: var(--color-bg-default);
   }
 }
 
@@ -66,7 +66,7 @@ html .divider-secondary {
     display: inline-block;
     width: 67px;
     height: 1px;
-    background: $primary;
+    background: var(--color-bg-default);
   }
 }
 
@@ -87,7 +87,7 @@ html .divider-secondary {
     display: inline-block;
     width: 50px;
     height: 3px;
-    background: $primary;
+    background: var(--color-bg-default);
   }
 }
 

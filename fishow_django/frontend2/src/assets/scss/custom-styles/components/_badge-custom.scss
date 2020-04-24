@@ -21,7 +21,7 @@
 }
 
 .badge-primary {
-	background: $primary;
+	background: var(--background-color-brand);
 }
 
 .badge-secondary {

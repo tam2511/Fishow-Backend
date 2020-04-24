@@ -31,14 +31,14 @@
   }
 
   li.active {
-    color: $primary;
+    color: var(--color-bg-default);
   }
 
   a {
     color: inherit;
 
     &:hover {
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 }
@@ -59,7 +59,7 @@
 
   li.active,
   a:hover {
-    color: $primary;
+    color: var(--color-bg-default);
   }
 }
 

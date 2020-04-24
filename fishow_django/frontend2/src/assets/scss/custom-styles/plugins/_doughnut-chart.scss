@@ -52,7 +52,7 @@
     line-height: 0;
     width: 8px;
     height: 8px;
-    background: $white;
+    background: var(--background-color-default);
     border-width: 0 1px 1px 0;
     border-style: solid;
     border-color: rgba($black, .1);
@@ -64,7 +64,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  color: $primary;
+  color: var(--color-bg-default);
   text-align: center;
   cursor: default;
   display: none !important;
@@ -79,7 +79,7 @@
 }
 
 [data-order='1'] {
-  fill: $primary;
+  fill: var(--color-bg-default);
 }
 
 .doughnut-chart path:hover { opacity: 0.65; }

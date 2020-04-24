@@ -124,7 +124,7 @@ $select-highlighted-color:    $white;
   position: absolute; 
   z-index: 100;
   top: 100%;
-  background: $white;
+  background: var(--background-color-default);
   color: $select-color;
   border: 1px solid $select-border;
   border-top: 0;
@@ -234,7 +234,7 @@ $select-highlighted-color:    $white;
 }
 
 .select2-results li em {
-  background: $white;
+  background: var(--background-color-default);
   font-style: normal;
 }
 
@@ -243,7 +243,7 @@ $select-highlighted-color:    $white;
 }
 
 .select2-results .select2-highlighted ul {
-  background: $white;
+  background: var(--background-color-default);
   color: $black;
 }
 

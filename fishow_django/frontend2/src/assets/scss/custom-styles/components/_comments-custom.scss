@@ -19,8 +19,8 @@
   z-index: 1;
   padding: 20px;
   letter-spacing: 0.05em;
-  background: $white;
-  border: 1px solid $gray-1;
+  background: var(--background-color-primary);
+  border: 1px solid var(--background-color-border);
   svg{
     position: absolute;
     top: 30px;
@@ -127,7 +127,7 @@
   padding: 30px 30px 30px 65px;
   font-family: $font-family-sec;
   text-transform: uppercase;
-  background: $white;
+  background: var(--background-color-default);
   border: 1px solid $gray-1;
   svg{
     position: absolute;
@@ -150,7 +150,7 @@
   a {
     color: $gray-800;
     &:hover {
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
 }
@@ -177,12 +177,17 @@
 // Post Comment
 //
 .blog-post-comments{
-  color: $gray-800;
+  color: var(--color-typo-primary);
+  background-color: var(--background-color-primary);
+  border: 1px solid var(--background-color-border);
+}
+.blog-space {
+  padding: 40px 30px;
 }
 .bg-gray-100{
   .blog-post-comments{
     padding: 40px 30px;
-    background: $white;
+    background: var(--background-color-primary);
     border: 1px solid $gray-1;
   }
 }
@@ -195,12 +200,12 @@
   @include group(30px, 7px);
   .icon{
     margin-right: 7px;
-    color: $primary;
+    color: var(--color-bg-default);
   }
   a{
     color: $gray-800;
     &:hover{
-      color: $primary;
+      color: var(--color-bg-default);
     }
   }
   
@@ -301,7 +306,7 @@
 
 .bg-gray-100{
   .form-input{
-    background: $white;
+    background: var(--background-color-default);
   }
 }
 .comment-box-form{
@@ -309,8 +314,8 @@
     color: $gray-500;
   }
   .form-input{
-    border: 1px solid $gray-100;
-    background: $gray-100;
+    border: 1px solid var(--background-color-border);
+    background: var(--background-color-default);
   }
   * + .form-button{
     margin-top: 20px;

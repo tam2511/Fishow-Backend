@@ -43,7 +43,7 @@ html {
 	}
 
 	.button-primary {
-		@include btn-variant($white, $primary, $primary, $gray-800, $secondary, $secondary);
+		@include btn-variant(var(--color-typo-primary), var(--background-color-default), var(--background-color-primary), $gray-800, $secondary, $secondary);
 	}
 
 	.button-secondary {
@@ -80,14 +80,14 @@ html {
 		}
 
 		&:hover {
-			color: $primary;
-			background-color: $primary;
-			border-color: $primary;
+			color: var(--color-bg-default);
+			background-color: var(--background-color-primary);
+			border-color: var(--background-color-border);
 		}
 	}
 
 	.button-gray-outline {
-		@include btn-variant($gray-800, transparent, $gray-3, $white, $gray-2, $gray-2);
+		@include btn-variant(var(--color-typo-primary), var(--background-color-default), var(--background-color-border), $white, $gray-2, $gray-2);
 	}
 
 	.button-primary-outline {
@@ -154,7 +154,7 @@ html {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: $primary;
+		background: var(--color-bg-default);
 		z-index: -1;
 		opacity: 0;
 		transform: scale3d(0.7, 1, 1);
@@ -301,8 +301,8 @@ html {
 	&:active,
 	&:focus {
 		color: $white;
-		background: $primary;
-		border-color: $primary;
+		background: var(--color-bg-default);
+		border-color: var(--background-color-border);
 	}
 
 	&:hover {

@@ -17,7 +17,7 @@
 .box-minimal {
   max-width: 270px;
   padding: 20px 10px 30px 30px;
-  background: $white;
+  background: var(--background-color-default);
   border: 1px solid $gray-1;
   text-align: left;
   
@@ -28,7 +28,7 @@
 
 .box-minimal-primary {
   color: rgba($white, .5);
-  background: $primary;
+  background: var(--color-bg-default);
 
   .box-minimal-icon,
   .box-minimal-title {
@@ -120,7 +120,7 @@
     display: inline-block;
     width: 80px;
     height: 2px;
-    background: $primary;
+    background: var(--color-bg-default);
   }
 }
 

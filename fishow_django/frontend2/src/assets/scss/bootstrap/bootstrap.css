@@ -105,9 +105,9 @@ body {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.7142857143;
-  color: #9b9b9b;
+  color: var(--color-typo-primary);
   text-align: left;
-  background-color: #fff; }
+  background-color: var(--background-color-default); }
 
 [tabindex="-1"]:focus {
   outline: none !important; }

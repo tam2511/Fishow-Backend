@@ -15,7 +15,7 @@
 $tabs-corporate-color: $body-color;
 $tabs-corporate-background: transparent;
 $tabs-corporate-active-color: $white;
-$tabs-corporate-active-background: $primary;
+$tabs-corporate-active-background: var(--color-bg-default);
 $tabs-corporate-border-color: $gray-1;
 
 .tab-content > .tab-pane {
@@ -126,15 +126,15 @@ $tabs-corporate-border-color: $gray-1;
     .nav-link:hover,
     .nav-link.active {
       color: $tabs-corporate-active-color;
-      background: $primary;
-      border-color: $primary;
+      background: var(--color-bg-default);
+      border-color: var(--background-color-border);
     }
   }
 }
 
 // Tabs corporate style
 .tabs-corporate {
-  background: $white;
+  background: var(--background-color-default);
   border: 1px solid $tabs-corporate-border-color;
 
   .nav-tabs {
@@ -283,7 +283,7 @@ $tabs-corporate-border-color: $gray-1;
           left: 0;
           height: 4px;
           width: 0;
-          background: $primary;
+          background: var(--color-bg-default);
           transition: .22s ease;
         }
       }
@@ -371,7 +371,7 @@ $tabs-corporate-border-color: $gray-1;
     margin-top: 20px;
   }
   .nav-tabs {
-    background: $white;
+    background: var(--background-color-default);
     border: 1px solid $gray-1;
   }
   .nav-item {

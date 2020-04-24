@@ -139,7 +139,7 @@ $slick-opacity-not-active: 0.25 !default;
 
 .slick-list {
   .slick-loading & {
-    background: $white slick-image-url("/assets/images/ajax-loader.gif") center center no-repeat;
+    background: var(--background-color-default) slick-image-url("/assets/images/ajax-loader.gif") center center no-repeat;
   }
 }
 
@@ -340,7 +340,7 @@ $slick-opacity-not-active: 0.25 !default;
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: $white;
+        background: var(--background-color-default);
 
         &::after {
           content: '';
@@ -358,7 +358,7 @@ $slick-opacity-not-active: 0.25 !default;
 
         &.slick-active,
         &:hover {
-          background: $primary;
+          background: var(--color-bg-default);
         }
 
         &.slick-active {
@@ -418,7 +418,7 @@ $slick-opacity-not-active: 0.25 !default;
         justify-content: center;
         align-items: center;
         float: none;
-        background: $white;
+        background: var(--background-color-default);
         transition: .33s;
         cursor: pointer;
         height: auto;

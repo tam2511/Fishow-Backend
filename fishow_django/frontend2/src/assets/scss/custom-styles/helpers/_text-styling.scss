@@ -98,10 +98,10 @@
 
 html .page {
   .text-primary {
-    color: $primary;
+    color: var(--color-typo-primary);
   }
 
   .text-secondary {
-    color: $secondary;
+    color: var(--color-typo-secondary);
   }
 }

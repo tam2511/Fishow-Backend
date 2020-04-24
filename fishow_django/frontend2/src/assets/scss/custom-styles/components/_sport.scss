@@ -109,7 +109,7 @@
 
 	&:hover {
 		color: $white;
-		background: $primary;
+		background: var(--color-bg-default);
 	}
 }
 
@@ -322,7 +322,7 @@
 		padding: 10px 10px 8px;
 		width: 100%;
 		color: $white;
-		background: $primary;
+		background: var(--color-bg-default);
 
 		&::after {
 			display: none;
@@ -421,8 +421,8 @@
 	font-weight: 500;
 	letter-spacing: .05em;
 	text-transform: uppercase;
-	border: 1px solid $gray-1;
-	background: $white;
+	border: 1px solid var(--background-color-border);
+	background: var(--background-color-primary);
 	transition: all 300ms ease-in-out;
 
 	.countdown-bordered {
@@ -637,7 +637,7 @@
 	letter-spacing: .025em;
 	text-transform: uppercase;
 	color: $white;
-	background: $primary;
+	background: var(--color-bg-default);
 
 	&::before {
 		position: absolute;
@@ -658,7 +658,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		border-width: 5px 4.5px 0 4.5px;
-		border-color: $primary transparent transparent transparent;
+		border-color: var(--color-bg-default) transparent transparent transparent;
 	}
 }
 
@@ -908,7 +908,7 @@
 		right: 4px;
 		bottom: 0;
 		left: 4px;
-		background: $white;
+		background: var(--background-color-default);
 		z-index: 0;
 	}
 
@@ -1060,7 +1060,7 @@
 	}
 
 	&.game-result-team-win {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -1072,7 +1072,7 @@
 .game-info-team-divider {
 	position: relative;
 	display: inline-block;
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 .game-info-countdown {
@@ -1099,7 +1099,7 @@
 	span {
 		display: block;
 		line-height: 1;
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -1401,7 +1401,7 @@
 }
 
 .charts-statistics-team-first-number {
-	color: $primary;
+	color: var(--color-bg-default);
 }
 
 .charts-statistics-team-second-number {
@@ -1441,7 +1441,7 @@
 	font-weight: 500;
 	letter-spacing: .05em;
 	color: $gray-800;
-	background: $white;
+	background: var(--background-color-default);
 
 	li {
 		position: relative;
@@ -1523,7 +1523,7 @@
 
 .team-primary {
 	.game-highlights-goal {
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }
 
@@ -1557,7 +1557,7 @@
 	font-weight: 500;
 	letter-spacing: .05em;
 	text-transform: uppercase;
-	background: $white;
+	background: var(--background-color-default);
 	transition: all 300ms ease-in-out;
 }
 
@@ -1824,7 +1824,7 @@
 	position: relative;
 	padding: 24px 15px;
 	min-height: 100%;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 
 	&::before,
@@ -2485,7 +2485,7 @@
 
 .player-info-main {
 	padding: 25px 15px;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 	hr {
 		border-top: 1px solid $gray-1;
@@ -2591,7 +2591,7 @@
 			opacity: 1;
 		}
 		.player-info-modern-footer {
-			background: darken($primary, 2%);
+			background: var(--color-bg-default);
 		}
 		.player-info-modern-number {
 			border-color: rgba($white, .19);
@@ -2629,7 +2629,7 @@
 	line-height: 1;
 	text-align: center;
 	border-right: 1px solid transparent;
-	background: darken($primary, 2%);
+	background: var(--color-bg-default);
 	transition: all .3s;
 }
 
@@ -2889,7 +2889,7 @@
 	max-width: 370px;
 	padding: 25px 20px;
 	text-align: center;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 
 	.group-md {
@@ -2962,7 +2962,7 @@
 .bg-gray-100 {
 	.block-player-info {
 		padding: 35px 20px;
-		background: $white;
+		background: var(--background-color-default);
 		border: 1px solid $gray-1;
 		border-top: none;
 	}
@@ -3078,7 +3078,7 @@
 	line-height: 1.2;
 	letter-spacing: .05em;
 	text-transform: uppercase;
-	background: $white;
+	background: var(--background-color-default);
 	border: 1px solid $gray-1;
 }
 

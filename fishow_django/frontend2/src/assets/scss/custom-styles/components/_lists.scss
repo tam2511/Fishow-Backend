@@ -162,7 +162,7 @@ p + .list-marked {
 			padding-right: 15px;
 			color: $gray-800;
 			&:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 
@@ -225,15 +225,15 @@ p + .list-marked {
 		color: $gray-800;
 		text-align: center;
 		text-transform: uppercase;
-		background: $white;
-		border: 1px solid $gray-1;
+		background: var(--background-color-primary);
+		border: 1px solid var(--backround-color-border);
 		border-radius: 4px;
 		transition: all .3s;
 
 		&:hover {
 			color: $white;
-			background: $primary;
-			border-color: $primary;
+			background: var(--background-color-primary);
+			border-color: var(--backround-color-border);
 		}
 	}
 }
@@ -288,9 +288,9 @@ p + .list-marked {
 }
 
 .contact-list {
-	background: $white;
+	background: var(--background-color-default);
 	border-radius: $border-radius;
-	border: 1px solid $gray-1;
+	border: 1px solid var(--background-color-border);
 
 	dl {
 		@include display-flex();
@@ -308,7 +308,7 @@ p + .list-marked {
 		line-height: 24px;
 		letter-spacing: .05em;
 		text-transform: uppercase;
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 
 	dd {
@@ -372,13 +372,13 @@ p + .list-marked {
 		font-weight: 500;
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
-		background: $white;
-		border: 1px solid $gray-1;
+		background: var(--background-color-default);
+		border: 1px solid var(--background-color-border);
 		transition: all .3s;
 		a {
 			color: $gray-800;
 			&:hover {
-				color: $primary;
+				color: var(--color-bg-default);
 			}
 		}
 		&:hover {
@@ -390,6 +390,6 @@ p + .list-marked {
 	}
 	.list-statictics-counter {
 		margin-left: 20px;
-		color: $primary;
+		color: var(--color-bg-default);
 	}
 }

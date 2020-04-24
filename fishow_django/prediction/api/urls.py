@@ -4,6 +4,7 @@ from prediction.api import views as qv
 
 router = DefaultRouter()
 router.register(r"prediction", qv.PredictionView)
+router.register(r"predictionten", qv.PredictiontenView)
 
 urlpatterns = [
     path("", include(router.urls)),
