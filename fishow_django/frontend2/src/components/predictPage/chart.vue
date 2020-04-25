@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import VueApexCharts from 'vue-apexcharts'
+// import VueApexCharts from 'vue-apexcharts'
 export default {
   name: 'chart',
   props: {
     optionsChart: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -29,26 +29,26 @@ export default {
         series: [
           {
             name: 'High - 2013',
-            data: this.optionsChart.probMin
+            data: this.optionsChart.probMin,
           },
           {
             name: 'Low - 2013',
-            data: this.optionsChart.probMax
-          }
+            data: this.optionsChart.probMax,
+          },
         ],
         chart: {
           height: 350,
           type: this.optionsChart.type,
           toolbar: {
-            show: false
-          }
+            show: false,
+          },
         },
         plotOptions: {
           bar: {
             dataLabels: {
-              position: 'top' // top, center, bottom
-            }
-          }
+              position: 'top', // top, center, bottom
+            },
+          },
         },
         // colors: ['#ea5d55', '#299431'],
         // dataLabels: {
@@ -56,24 +56,24 @@ export default {
         // },
         dataLabels: {
           enabled: true,
-          formatter: function(val) {
+          formatter: function (val) {
             return val
           },
           offsetY: -10,
           style: {
             fontSize: '12px',
-            colors: ['#304758']
-          }
+            colors: ['#304758'],
+          },
         },
         grid: {
           borderColor: '#e7e7e7',
           row: {
             colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          }
+            opacity: 0.5,
+          },
         },
         markers: {
-          size: 1
+          size: 1,
         },
         // xaxis: {
         //     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
@@ -104,14 +104,14 @@ export default {
             'Sep',
             'Oct',
             'Nov',
-            'Dec'
+            'Dec',
           ],
           position: 'top',
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           crosshairs: {
             fill: {
@@ -121,41 +121,41 @@ export default {
                 colorTo: '#BED1E6',
                 stops: [0, 100],
                 opacityFrom: 0.4,
-                opacityTo: 0.5
-              }
-            }
+                opacityTo: 0.5,
+              },
+            },
           },
           tooltip: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         yaxis: {
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
             show: false,
-            formatter: function(val) {
+            formatter: function (val) {
               return val + '%'
-            }
-          }
+            },
+          },
         },
         legend: {
           position: 'bottom',
           horizontalAlign: 'right',
           floating: true,
           offsetY: 0,
-          offsetX: 0
-        }
-      }
+          offsetX: 0,
+        },
+      },
     }
   },
-  components: {
-    apexchart: VueApexCharts
-  },
+  // components: {
+  //   apexchart: VueApexCharts
+  // },
   methods: {
     setArea() {
       this.options.chart.type = 'area'
@@ -165,8 +165,8 @@ export default {
     },
     setLines() {
       this.options.chart.type = 'line'
-    }
-  }
+    },
+  },
 }
 </script>
 

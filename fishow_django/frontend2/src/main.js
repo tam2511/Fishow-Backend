@@ -8,10 +8,12 @@ import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'vue-autosizer/dist/vue-autosizer.min.css'
 import 'vue-navigation-bar/dist/vue-navigation-bar.css'
+import 'element-ui/lib/theme-chalk/index.css'
+
 import VueAutosizer from 'vue-autosizer'
 import VueNavigationBar from 'vue-navigation-bar'
 import VueApexCharts from 'vue-apexcharts'
-
+import DynamicForm from 'vue-dynamic-form-component'
 
 import {
   Button,
@@ -23,14 +25,9 @@ import {
   Switch,
   Steps,
   Step,
-  Loading,
 } from 'element-ui'
-Vue.component('dynamic-form', (resolve) => {
-  import('vue-dynamic-form-component').then((DynamicForm) => {
-    resolve(DynamicForm.default)
-  })
-})
 
+Vue.use(DynamicForm)
 Vue.component(Button.name, Button)
 Vue.component(Select.name, Select)
 Vue.component(Form.name, Form)
