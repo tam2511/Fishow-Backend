@@ -16,7 +16,17 @@ export default new Vuex.Store({
       state.blogs = blogs
     },
     SET_PREDICTION(state, predictions) {
-      state.predictions = predictions
+      const arrayPredictions = predictions
+      if (arrayPredictions) {
+        Object.keys(arrayPredictions).forEach((key) => {
+          if (arrayPredictions[key][0] === '[') {
+            arrayPredictions[key] = arrayPredictions[key]
+              .slice(1, arrayPredictions[key].length - 1)
+              .split(',')
+          }
+        })
+      }
+      state.predictions = arrayPredictions
     },
   },
   getters: {
@@ -46,12 +56,13 @@ export default new Vuex.Store({
         commit('SET_BLOGS', blogs)
       })
     },
-    async fetchPredictionTen({ commit }) {
-      let endpoint = '/api/predictionten/'
-      const predictions = []
+    async fetchPredictionTen({ commit }, endpoint) {
+      // let endpoint = '/api/predictionten/'
+      console.log('store , commit = ', commit)
+      console.log('store , endpoint = ', endpoint)
       apiService(endpoint).then((data) => {
-        predictions.push(...data.results)
-        commit('SET_PREDICTION', predictions)
+        console.log('store , data  = ', data.results[0])
+        commit('SET_PREDICTION', data.results[0])
       })
     },
   },

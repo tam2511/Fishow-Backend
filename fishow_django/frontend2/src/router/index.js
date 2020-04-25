@@ -8,6 +8,7 @@ import BlogEditor from '../views/BlogEditor'
 import CreateComment from '../components/CreateComment'
 import NotFound from '../views/NotFound'
 import PredictPage from '../views/PredictPage'
+import column from '../components/predictPage/column'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,12 @@ const routes = [
     path: '/predict-page/',
     name: 'PredictPage',
     component: PredictPage,
+    props: true,
+  },
+  {
+    path: '/predict-page/:areal/:date/:city/:fish',
+    name: 'PredictResult',
+    component: column,
     props: true,
   },
   {
