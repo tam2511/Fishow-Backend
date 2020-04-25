@@ -28,11 +28,17 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def get_user_has_votedUp(self, instance):
         request = self.context.get("request")
-        return instance.votersUp.filter(pk=request.user.pk).exists()
+        if not request.user.is_anonymous:
+            return instance.votersUp.filter(pk=request.user.pk).exists()
+        else:
+            return False
 
     def get_user_has_votedDown(self, instance):
         request = self.context.get("request")
-        return instance.votersDown.filter(pk=request.user.pk).exists()
+        if not request.user.is_anonymous:
+            return instance.votersDown.filter(pk=request.user.pk).exists()
+        else:
+            return False
 
     def get_comments_slug(self, instance):
         return instance.blog.slug
@@ -71,15 +77,24 @@ class BlogSerializer(serializers.ModelSerializer):
 
     def get_user_has_votedUp(self, instance):
         request = self.context.get("request")
-        return instance.votersUp.filter(pk=request.user.pk).exists()
+        if not request.user.is_anonymous:
+            return instance.votersUp.filter(pk=request.user.pk).exists()
+        else:
+            return False
 
     def get_user_has_votedDown(self, instance):
         request = self.context.get("request")
-        return instance.votersDown.filter(pk=request.user.pk).exists()
+        if not request.user.is_anonymous:
+            return instance.votersDown.filter(pk=request.user.pk).exists()
+        else:
+            return False
 
     def get_user_has_commented(self, instance):
         request = self.context.get('request')
-        return instance.comments.filter(author=request.user).exists()
+        if not request.user.is_anonymous:
+            return instance.comments.filter(author=request.user).exists()
+        else:
+            return False
 
     def get_time_from_creations(self, object):
         created = object.created_at

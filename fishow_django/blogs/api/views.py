@@ -3,12 +3,15 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view, permission_classes
 
 from blogs.api.serializers import BlogSerializer, CommentSerializer
-from blogs.api.permissions import IsAuthorOrReadOnly
+from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
 from blogs.models import Blog, Comment
 
 from users.models import CustomUser
+
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -104,7 +107,7 @@ class CommentDisLikeAPIView(APIView):
 
 class CommentListAPIView(generics.ListAPIView):
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
         kwarg_slug = self.kwargs.get("slug")
@@ -121,10 +124,11 @@ class BlogViewSet(viewsets.ModelViewSet):
     queryset = Blog.objects.all().order_by("-created_at")
     lookup_field = "slug"
     serializer_class = BlogSerializer
-    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    permission_classes = [IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+            if not self.request.user.is_anonymous:
+                serializer.save(author=self.request.user)
 
 
 class BlogLikeAPIView(APIView):
