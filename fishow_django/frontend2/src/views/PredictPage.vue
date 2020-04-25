@@ -1,10 +1,7 @@
 <template>
   <section class="section section-variant-1 section-view">
-    <div
-      class="container container__small"
-      :class="step < 3 ? 'container__small_menu' : 'hideMenu'"
-    >
-      <div v-if="step < 3" class="select-predict">
+    <div class="container container__small">
+      <div class="select-predict">
         <el-steps :active="step" finish-status="success">
           <el-step title="Область"></el-step>
           <el-step title="Населенный пункт"></el-step>
@@ -44,17 +41,21 @@
         <div class="predict_footer">
           <el-button @click="fullBack">В начало</el-button>
           <el-button @click="back">Назад</el-button>
-          <el-button @click="next">Дальше</el-button>
-        </div>
-      </div>
-      <div v-else class="predict">
-        <span
-          >{{ this.value }} / {{ this.value2 }} | Прогноз на близжайшие 10 дней
-          - {{ this.fish }}</span
-        >
-        <column :action="loadingfunc()" />
-        <div class="predict_footer">
-          <el-button @click="back">Назад</el-button>
+
+          <el-button v-if="step < 3" @click="next">Дальше</el-button>
+          <router-link
+            :to="{
+              name: 'PredictResult',
+              params: {
+                areal: getOblast,
+                date: '2020-04-25',
+                city: getCity,
+                fish: getFish,
+              },
+            }"
+            v-if="step === 3"
+            ><el-button>Прогноз</el-button></router-link
+          >
         </div>
       </div>
     </div>
@@ -63,23 +64,21 @@
 
 <script>
 import fishSearch from '../components/predictPage/fishSearch'
-import Column from '../components/predictPage/column'
-import { Loading } from 'element-ui'
 
 export default {
   name: 'PredictPage',
-  components: { Column, fishSearch },
+  components: { fishSearch },
   data() {
     return {
       result: '',
       options: [
         {
-          value: 'Московская область',
+          value: 'московская область',
           label: 'Московская область',
         },
         {
-          value: 'Ленинградская обл',
-          label: 'Ленинградская обл',
+          value: 'Ленинградская область',
+          label: 'Ленинградская область',
         },
       ],
       options2: {
@@ -93,13 +92,13 @@ export default {
             label: 'Балашиха',
           },
         ],
-        'Ленинградская обл': [
+        'Ленинградская область': [
           {
-            value: 'СПБ',
+            value: 'санкт-петербург',
             label: 'Санкт-Петербург',
           },
           {
-            value: 'Светогорск',
+            value: 'светогорск',
             label: 'Светогорск',
           },
         ],
@@ -157,7 +156,6 @@ export default {
           this.step = 2
           if (this.value && this.value2 && this.fish) {
             this.step = 3
-            this.loadingfunc()
           }
         }
       } else {
@@ -180,19 +178,6 @@ export default {
     },
     handleChange(value) {
       console.log(value)
-    },
-    loadingfunc() {
-      const options = {
-        target: document.querySelector('body'),
-        fullscreen: true,
-        lock: true,
-        background: 'var(--background-color-default)',
-      }
-      let loadingInstance = Loading.service(options)
-      setTimeout(() => {
-        document.querySelector('.container__small').classList.remove('hideMenu')
-        loadingInstance.close()
-      }, 2000)
     },
   },
 }
