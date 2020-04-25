@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Home = () => import('../views/Home.vue')
-const Article = () => import('../views/Article')
-const UserPage = () => import('../views/UserPage')
-const Blog = () => import('../views/Blog')
-const BlogEditor = () => import('../views/BlogEditor')
-const CreateComment = () => import('../components/CreateComment')
-const NotFound = () => import('../views/NotFound')
-const PredictPage = () => import('../views/PredictPage')
+import Home from '../views/Home.vue'
+import Article from '../views/Article'
+import UserPage from '../views/UserPage'
+import Blog from '../views/Blog'
+import BlogEditor from '../views/BlogEditor'
+import CreateComment from '../components/CreateComment'
+import NotFound from '../views/NotFound'
+import PredictPage from '../views/PredictPage'
 
 Vue.use(VueRouter)
 

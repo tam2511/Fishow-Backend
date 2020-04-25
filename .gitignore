@@ -22,3 +22,4 @@ fishow_django/fishow_django/settings.py
 fishow_django/db.sqlite3
 /fishow_django/frontend2/webpack-stats.json
 /env/
+/static/

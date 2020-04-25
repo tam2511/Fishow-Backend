@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="theme" :class="theme">
-    <settings/>
-    <new-nav-bar   />
+    <settings />
+    <new-nav-bar />
     <router-view />
     <FIshow_Footer />
   </div>
@@ -10,12 +10,12 @@
 <script>
 import FIshow_Footer from './components/FIshow_Footer'
 import NewNavBar from './components/navbar/new-nav-bar'
-import Settings from "./components/Home/Settings";
+import Settings from './components/Home/Settings'
 export default {
   name: 'App',
   data() {
     return {
-      theme : 'theme_color_fishow_esoteric'
+      theme: 'theme_color_fishow_esoteric',
     }
   },
   methods: {
@@ -23,7 +23,7 @@ export default {
       if (localStorage.getItem('theme')) {
         this.theme = localStorage.getItem('theme')
       }
-    }
+    },
   },
   components: {
     Settings,
@@ -31,8 +31,8 @@ export default {
     FIshow_Footer,
   },
   mounted() {
-    this.checkTheme();
-  }
+    this.checkTheme()
+  },
 }
 </script>
 
