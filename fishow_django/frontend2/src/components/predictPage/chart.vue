@@ -14,7 +14,7 @@
 </template>
 
 <script>
-// import VueApexCharts from 'vue-apexcharts'
+import VueApexCharts from 'vue-apexcharts'
 export default {
   name: 'chart',
   props: {
@@ -153,9 +153,9 @@ export default {
       },
     }
   },
-  // components: {
-  //   apexchart: VueApexCharts
-  // },
+  components: {
+    apexchart: VueApexCharts
+  },
   methods: {
     setArea() {
       this.options.chart.type = 'area'
