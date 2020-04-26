@@ -58,10 +58,7 @@ export default new Vuex.Store({
     },
     async fetchPredictionTen({ commit }, endpoint) {
       // let endpoint = '/api/predictionten/'
-      console.log('store , commit = ', commit)
-      console.log('store , endpoint = ', endpoint)
       apiService(endpoint).then((data) => {
-        console.log('store , data  = ', data.results[0])
         commit('SET_PREDICTION', data.results[0])
       })
     },

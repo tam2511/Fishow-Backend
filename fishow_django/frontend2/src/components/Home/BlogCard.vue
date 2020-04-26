@@ -2,12 +2,17 @@
   <article class="post-corporate">
     <div class="post-corporate-content">
       <div class="fishow-votes_container">
-        <div class="fishow_votes" data-vote-status="">
+        <div
+          :class="{
+            fishow_votes: this.$store.state.username,
+            'fishow_votes fishow_votes_not_active': !this.$store.state.username,
+          }"
+        >
           <svg
             class=""
             :class="{
               'fishow-votes_up__active': userLikedBlog,
-              'fishow-votes_up': !userLikedBlog
+              'fishow-votes_up': !userLikedBlog,
             }"
             @click="toggleLike"
             version="1.1"
@@ -29,10 +34,9 @@
             />
           </svg>
           <svg
-            class=""
             :class="{
               'fishow-votes_down__active': userDisLikedBlog,
-              'fishow-votes_down': !userDisLikedBlog
+              'fishow-votes_down': !userDisLikedBlog,
             }"
             @click="toggleDislike"
             version="1.1"
@@ -129,13 +133,13 @@ export default {
       userLikedBlog: this.blog.user_has_votedUp,
       userDisLikedBlog: this.blog.user_has_votedDown,
       likesCounter: this.blog.likes_count,
-      dislikesCounter: this.blog.dislikes_count
+      dislikesCounter: this.blog.dislikes_count,
     }
   },
   computed: {
-    getResult: function() {
+    getResult: function () {
       return JSON.parse(this.blog.content).blocks[0]
-    }
+    },
   },
   methods: {
     toggleLike() {
@@ -183,15 +187,12 @@ export default {
       this.userDisLikedBlog = false
       const endpoint = `/api/blogs/${this.blog.id}/dislike/`
       apiService(endpoint, 'DELETE')
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped lang="scss">
-/*.fishow-votes_up {*/
-/*  fill: var(--background-color-primary)*/
-/*}*/
 .fishow-votes_up__active {
   fill: cadetblue;
 }

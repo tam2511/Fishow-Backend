@@ -32,15 +32,10 @@
         <div v-else-if="getStep === 2">
           <fish-search @data="onChange" />
         </div>
-        <!--        <h4>Область: {{ getOblast }}</h4>-->
-        <!--        <h4>Город: {{ getCity }}</h4>-->
-        <!--        <h4>Рыба: {{ getFish }}</h4>-->
-        <!--        <h4>Шаг: {{ step }}</h4>-->
         <h6 style="color: red;">{{ error }}</h6>
 
         <div class="predict_footer">
           <el-button v-if="getStep > 0" @click="fullBack">В начало</el-button>
-          <el-button @click="back">Назад</el-button>
           <router-link
             :to="{
               name: 'PredictResult',
@@ -115,11 +110,9 @@ export default {
   computed: {
     getStep() {
       let value = 0
-      console.log(this.value)
       if (this.value !== '') value = 1
       if (this.value2 !== '') value = 2
       if (this.fish !== '') {
-        console.log('step 3')
         value = 3
         this.route()
       }
@@ -143,11 +136,17 @@ export default {
       this.fish = data.value
     },
     route() {
+      const someDate = new Date()
+      const dd = someDate.getDate()
+      const mm = someDate.getMonth() + 1
+      const yy = someDate.getFullYear()
+      const newmm = yy + '-' + mm + '-' + dd
+
       this.$router.push({
         name: 'PredictResult',
         params: {
           areal: this.getOblast,
-          date: '2020-04-25',
+          date: newmm,
           city: this.getCity,
           fish: this.getFish,
         },
@@ -159,35 +158,12 @@ export default {
     //     type: 'error',
     //   })
     // },
-    next() {
-      if (this.value) {
-        this.step = 1
-        if (this.value && this.value2) {
-          this.step = 2
-          if (this.value && this.value2 && this.fish) {
-            this.step = 3
-          }
-        }
-      } else {
-        // this.errorMesage()
-      }
-    },
-    back() {
-      this.loading = true
-      if (this.step > 0) {
-        this.step -= 1
-      }
-      this.result = ''
-    },
     fullBack() {
       this.value = ''
       this.value2 = ''
       this.value3 = ''
       this.fish = ''
       this.step = 0
-    },
-    handleChange(value) {
-      console.log(value)
     },
   },
 }
@@ -255,6 +231,9 @@ export default {
       color: #000;
     }
   }
+}
+.select-predict .el-step__title.is-process {
+  color: var(--color-typo-primary);
 }
 .el-select {
   display: block;

@@ -5,6 +5,7 @@ const getData = (days) => {
 
   const dd = someDate.getDate();
   const mm = someDate.getMonth() + 1;
+  const yy = someDate.getFullYear();
   const newmm = mm.length > 1 ? mm : '0' + mm;
   const someFormattedDate = dd + '-'+ newmm;
   return someFormattedDate;

@@ -43,7 +43,7 @@ html {
 	}
 
 	.button-primary {
-		@include btn-variant(var(--color-typo-primary), var(--background-color-default), var(--background-color-primary), $gray-800, $secondary, $secondary);
+		@include btn-variant(var(--color-typo-primary), var(--background-color-primary), var(--background-color-border), $gray-800, $secondary, $secondary);
 	}
 
 	.button-secondary {
@@ -59,7 +59,7 @@ html {
 	}
 
 	.button-fifth {
-		@include btn-variant($gray-800, $secondary, $secondary, $white, $primary, $primary);
+		@include btn-variant(var(--color-link), var(--background-color-warning), var(--background-color-warning), $white, $primary, $primary);
 	}
 
 	// Outline

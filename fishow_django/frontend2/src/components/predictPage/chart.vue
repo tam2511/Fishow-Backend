@@ -8,13 +8,17 @@
       :series="options.series"
     ></apexchart>
     <div class="button-container">
-      <button type="button" @click="setArea" class="button button-fifth">
+      <button type="button" @click="setArea" class="button button-gray-outline">
         area
       </button>
-      <button type="button" @click="setBar" class="button button-fifth">
+      <button type="button" @click="setBar" class="button button-gray-outline">
         bar
       </button>
-      <button type="button" @click="setLines" class="button button-fifth">
+      <button
+        type="button"
+        @click="setLines"
+        class="button button-gray-outline"
+      >
         lines
       </button>
     </div>
@@ -60,7 +64,6 @@ export default {
     for (let i = 0; i < 9; i++) {
       result.push(getData(i))
     }
-    console.log('result = ', result)
 
     return {
       options: {
@@ -100,13 +103,13 @@ export default {
           offsetY: -10,
           style: {
             fontSize: '12px',
-            colors: ['#304758'],
+            colors: ['var(--color-typo-primary)'],
           },
         },
         grid: {
-          borderColor: '#e7e7e7',
+          borderColor: 'var(--background-color-border)',
           row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            colors: ['var(--background-color-default)', 'transparent'], // takes an array which will be repeated on columns
             opacity: 0.5,
           },
         },
@@ -205,5 +208,8 @@ export default {
     margin-right: 20px;
     padding: 3px 14px;
   }
+}
+.apexcharts-text tspan {
+  fill: var(--color-typo-primary);
 }
 </style>

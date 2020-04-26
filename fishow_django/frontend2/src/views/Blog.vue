@@ -31,9 +31,14 @@
               </div>
             </div>
             <div class="fishow-votes_container">
-              <div class="fishow_votes">
+              <div
+                :class="{
+                  fishow_votes: this.$store.state.username,
+                  'fishow_votes fishow_votes_not_active': !this.$store.state
+                    .username,
+                }"
+              >
                 <svg
-                  class=""
                   :class="{
                     'fishow-votes_up__active': userLikedBlog,
                     'fishow-votes_up': !userLikedBlog,
@@ -133,7 +138,7 @@
                   :requestUser="requestUser"
                   @deleteComment="deleteComment"
                 />
-                <div class="comment-box">
+                <div class="comment-box" v-if="userName">
                   <div class="comment-box-aside">
                     <img
                       class="img-circle"
@@ -164,6 +169,9 @@
                     </form>
                   </div>
                 </div>
+                <div v-else>
+                  Для возможности комментирования пожалуйста авторизуйтесь
+                </div>
               </div>
             </div>
           </div>
@@ -187,7 +195,6 @@ import Comment from '@/components/Comment.vue'
 import BlockCategories from '../components/blog/blockCategories'
 import BlockSpotlight from '../components/blog/blockSpotlight'
 import BlockTags from '../components/blog/blockTags'
-
 export default {
   name: 'Blog',
   components: { BlockTags, BlockSpotlight, BlockCategories, Comment },
@@ -334,7 +341,6 @@ export default {
         apiService(endpoint, 'POST', { body: this.commentBody }).then(
           (data) => {
             this.comments.unshift(data)
-            console.log(data)
           }
         )
         this.commentBody = null

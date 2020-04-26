@@ -1,31 +1,3 @@
-.fishow_logo {
-  font-size: 30px;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #ffffff;
-}
-.fishow_slider {
-  &__item {
-    position: absolute;
-    color: white;
-    left: 5%;
-    top: 3%;
-    background-color: #403d2891;
-    padding: 5px 20px;
-    cursor: pointer;
-  }
-
-  &__сomments {
-    position: absolute;
-    bottom: 3%;
-    left: 5%;
-    background-color: rgba(13, 10, 10, 0.25);
-    padding: 5px 20px;
-    color: white;
-    cursor: pointer;
-  }
-}
 .col-md-12.fishow_container {
   padding-left: 20px;
   padding-right: 20px;
@@ -36,6 +8,10 @@
     flex-flow: column;
     cursor: pointer;
     fill: var(--background-color-default);
+    &_not_active {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
     svg {
       max-height: 20px;
       max-width: 20px;
@@ -47,8 +23,6 @@
     svg:last-child {
       transform: rotate(180deg);
     }
-    //top: 86px;
-    //position: relative;
   }
   &-content_container {
     .col-md-12 {

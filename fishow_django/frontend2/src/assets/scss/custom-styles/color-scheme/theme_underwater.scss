@@ -42,6 +42,7 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
   --background-color-default: #244599;
   --background-color-invert: #292929;
   --background-color-border: #e0e0e500;
+  --background-color-warning: #{$color-bg-warning};
   --color-bg-brand: #{$color-bg-brand}; /* Цвет фона брендированый */
   --color-bg-action: #{$color-bg-action}; /* Цвет фона действия */
   --color-bg-default: #{$color-bg-default}; /* Цвет дефолта */

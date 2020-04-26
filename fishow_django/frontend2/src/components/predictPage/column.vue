@@ -35,7 +35,7 @@
         <div class="fishow_row">
           <chart
             :optionsChart="{
-              type: 'bar',
+              type: 'area',
               probMin: predictions.prob_min,
               probMax: predictions.prob_max,
               max: 1,
@@ -162,7 +162,6 @@ export default {
       }
       let loadingInstance = Loading.service(options)
       setTimeout(() => {
-        console.log('inside setTimeout')
         if (this.predictions) {
           this.isLoading = true
           loadingInstance.close()
@@ -176,8 +175,6 @@ export default {
   created() {
     const endpoint = `/api/predictionten/?areal=${this.areal}&date=${this.date}&city=${this.city}&fish=${this.fish}`
     this.$store.dispatch('fetchPredictionTen', endpoint)
-    console.log('result = ', this.result)
-    console.log('isLoading = ', this.isLoading)
     this.loadingfunc()
   },
 }
@@ -188,6 +185,9 @@ export default {
   @media screen and (max-width: 600px) {
     padding: 0;
   }
+}
+tspan {
+  fill: var(--color-typo-primary);
 }
 .results-prediction {
   min-height: 1500px;

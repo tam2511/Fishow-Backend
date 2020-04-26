@@ -54,11 +54,11 @@
                     </h5>
                   </div>
                 </article>
-<!--                <HotPostMinimal-->
-<!--                  v-for="blog in computedObj"-->
-<!--                  :blog="blog"-->
-<!--                  :key="blog.pk"-->
-<!--                />-->
+                <!--                <HotPostMinimal-->
+                <!--                  v-for="blog in computedObj"-->
+                <!--                  :blog="blog"-->
+                <!--                  :key="blog.pk"-->
+                <!--                />-->
               </div>
               <!-- Мини прогнозы -->
               <div class="aside-component">
@@ -135,7 +135,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['blogs', 'next'])
+    ...mapState(['blogs', 'next']),
   },
   methods: {
     setPageTitle(title) {
@@ -143,8 +143,7 @@ export default {
     },
     checkNext() {
       this.$store.dispatch('fetchBlogs')
-      console.log('blogs = ', this.blogs)
-    }
+    },
   },
   created() {
     this.$store.dispatch('fetchBlogs')

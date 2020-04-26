@@ -56,7 +56,6 @@ export default {
   },
   created() {
     this.getUserList()
-    console.log('data = ', this.userList)
   },
 }
 </script>
