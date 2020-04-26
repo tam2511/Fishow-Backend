@@ -16,6 +16,9 @@
           <!--          <one-colum />-->
         </div>
         <div class="fishow_row">
+          Среднесуточная температура
+        </div>
+        <div class="fishow_row">
           <chart
             :optionsChart="{
               type: 'bar',
@@ -27,7 +30,7 @@
           />
         </div>
         <div class="fishow_row">
-          Среднесуточная температура
+          Вероятность клева
         </div>
         <div class="fishow_row">
           <chart
@@ -41,7 +44,7 @@
           />
         </div>
         <div class="fishow_row">
-          Вероятность клева
+          Давление, мм рт.ст.
         </div>
         <div class="fishow_row">
           <chart
@@ -55,7 +58,7 @@
           />
         </div>
         <div class="fishow_row">
-          Давление, мм рт.ст.
+          Ветер, м/с
         </div>
         <div class="fishow_row">
           <chart
@@ -68,9 +71,14 @@
             }"
           />
         </div>
-        <div class="fishow_row">
-          Ветер, м/с
-        </div>
+        <!--        <div class="fishow_row">-->
+        <!--          Погода-->
+        <!--        </div>-->
+        <!--        <div class="fishow_row">-->
+        <!--          <span v-for="pog in predictions.phenomenon" :key="pog">{{-->
+        <!--            pog[0]-->
+        <!--          }}</span>-->
+        <!--        </div>-->
         <!--      <div class="fishow_row">-->
         <!--        <div class="fishow_row_element" v-for="(n, index) in 9" :key="index">-->
         <!--          <icon-pogoda-->
@@ -176,6 +184,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.section-variant-1 {
+  @media screen and (max-width: 600px) {
+    padding: 0;
+  }
+}
 .results-prediction {
   min-height: 1500px;
 }
@@ -210,10 +223,11 @@ export default {
 }
 .container__small {
   opacity: 1;
-  max-width: 900px;
-  padding: 20px;
+  /*max-width: 900px;*/
+  padding: 40px;
   border: none;
   min-height: 500px;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
   background-color: var(--background-color-primary);
   &_menu {
     max-width: 500px;
@@ -221,7 +235,7 @@ export default {
   transition: all 0.3s;
 
   @media screen and (max-width: 600px) {
-    width: 1024px !important;
+    /*width: 1024px !important;*/
     max-height: 100% !important;
   }
 }

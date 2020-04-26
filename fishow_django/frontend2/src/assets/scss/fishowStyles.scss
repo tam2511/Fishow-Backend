@@ -89,7 +89,7 @@
       width: 100%;
     }
     &:hover {
-      color: #151515;
+      color: var(--color-typo-primary);
       background-color: #ffd851;
       border-color: #ffd851;
       transition: .3s ease-out all;

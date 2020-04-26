@@ -27,8 +27,8 @@
               <div class="team-country">Ник или Фамилия</div>
             </div>
           </td>
-          <td>0</td>
-          <td>0</td>
+          <td>{{ user.comments }}</td>
+          <td>{{ user.blogs }}</td>
         </tr>
       </tbody>
     </table>
@@ -56,8 +56,20 @@ export default {
   },
   created() {
     this.getUserList()
+    console.log('data = ', this.userList)
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+thead,
+tbody {
+  display: block;
+}
+.team-inline {
+  max-width: 90px;
+}
+.team-title {
+  font-size: 12px;
+}
+</style>

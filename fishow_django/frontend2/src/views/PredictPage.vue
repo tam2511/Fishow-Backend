@@ -2,12 +2,12 @@
   <section class="section section-variant-1 section-view">
     <div class="container container__small">
       <div class="select-predict">
-        <el-steps :active="step" finish-status="success">
+        <el-steps :active="getStep" finish-status="success">
           <el-step title="Область"></el-step>
           <el-step title="Населенный пункт"></el-step>
           <el-step title="Рыба"></el-step>
         </el-steps>
-        <div v-if="step === 0">
+        <div v-if="getStep === 0">
           <el-select v-model="value" placeholder="Select">
             <el-option
               v-for="item in options"
@@ -18,7 +18,7 @@
             </el-option>
           </el-select>
         </div>
-        <div v-else-if="step === 1">
+        <div v-else-if="getStep === 1">
           <el-select v-model="value2" placeholder="Select">
             <el-option
               v-for="item in options2[`${this.value}`]"
@@ -29,20 +29,18 @@
             </el-option>
           </el-select>
         </div>
-        <div v-else-if="step === 2">
+        <div v-else-if="getStep === 2">
           <fish-search @data="onChange" />
         </div>
-        <h4>Область: {{ getOblast }}</h4>
-        <h4>Город: {{ getCity }}</h4>
-        <h4>Рыба: {{ getFish }}</h4>
-        <h4>Шаг: {{ step }}</h4>
+        <!--        <h4>Область: {{ getOblast }}</h4>-->
+        <!--        <h4>Город: {{ getCity }}</h4>-->
+        <!--        <h4>Рыба: {{ getFish }}</h4>-->
+        <!--        <h4>Шаг: {{ step }}</h4>-->
         <h6 style="color: red;">{{ error }}</h6>
 
         <div class="predict_footer">
-          <el-button @click="fullBack">В начало</el-button>
+          <el-button v-if="getStep > 0" @click="fullBack">В начало</el-button>
           <el-button @click="back">Назад</el-button>
-
-          <el-button v-if="step < 3" @click="next">Дальше</el-button>
           <router-link
             :to="{
               name: 'PredictResult',
@@ -53,7 +51,7 @@
                 fish: getFish,
               },
             }"
-            v-if="step === 3"
+            v-if="getStep === 3"
             ><el-button>Прогноз</el-button></router-link
           >
         </div>
@@ -73,7 +71,7 @@ export default {
       result: '',
       options: [
         {
-          value: 'московская область',
+          value: 'Московская область',
           label: 'Московская область',
         },
         {
@@ -120,9 +118,10 @@ export default {
       console.log(this.value)
       if (this.value !== '') value = 1
       if (this.value2 !== '') value = 2
-      if (this.value3 !== '') {
-        this.loadingfunc()
+      if (this.fish !== '') {
+        console.log('step 3')
         value = 3
+        this.route()
       }
       return value
     },
@@ -142,6 +141,17 @@ export default {
   methods: {
     onChange(data) {
       this.fish = data.value
+    },
+    route() {
+      this.$router.push({
+        name: 'PredictResult',
+        params: {
+          areal: this.getOblast,
+          date: '2020-04-25',
+          city: this.getCity,
+          fish: this.getFish,
+        },
+      })
     },
     // errorMesage() {
     //   this.$message({
@@ -185,9 +195,9 @@ export default {
 
 <style scoped lang="scss">
 .section.section-variant-1 {
-  overflow-scrolling: auto;
-  overflow: scroll;
-  overflow-y: auto;
+  @media screen and (max-width: 600px) {
+    padding: 0;
+  }
 }
 .el-cascader {
   margin: 20px 0;
@@ -212,20 +222,15 @@ export default {
 }
 .container__small {
   opacity: 1;
-  max-width: 900px;
+  max-width: 500px;
   padding: 20px;
   border: none;
   min-height: 500px;
   background-color: var(--background-color-primary);
   &_menu {
-    max-width: 500px;
+    max-width: 300px;
   }
   transition: all 0.3s;
-
-  @media screen and (max-width: 600px) {
-    width: 1024px !important;
-    max-height: 100% !important;
-  }
 }
 .hideMenu {
   opacity: 0;

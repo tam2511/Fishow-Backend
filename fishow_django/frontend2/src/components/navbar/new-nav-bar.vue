@@ -137,11 +137,26 @@ export default {
   }
   .vnb__menu-options__option__link {
     font-weight: 800;
-    color: white;
+    color: var(--color-link);
   }
   .vnb-image {
     width: 200px;
     height: 200px;
+  }
+  .vnb__popup__bottom,
+  .vnb__popup {
+    background-color: var(--background-color-primary);
+    border: none;
+  }
+  .vnb__popup__top {
+    border: none;
+  }
+  .vnb__popup__bottom__menu-options__option__link {
+    border: none;
+    color: var(--color-typo-primary);
+  }
+  .vnb__popup__bottom__menu-options__option__link--no-highlight {
+    color: var(--color-typo-primary);
   }
 }
 </style>
