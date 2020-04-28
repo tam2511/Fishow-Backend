@@ -148,10 +148,7 @@ export default {
     }
   },
   components: { Chart },
-  computed: {
-    ...mapState(['predictions']),
-    // this.isLoading = true
-  },
+
   methods: {
     loadingfunc() {
       const options = {
@@ -174,18 +171,17 @@ export default {
   },
   created() {
     const endpoint = `/api/predictionten/?areal=${this.areal}&date=${this.date}&city=${this.city}&fish=${this.fish}`
-    this.$store.dispatch('fetchPredictionTen', endpoint)
+    this.$store.dispatch('prediction/fetchPredictionTen', endpoint)
     this.loadingfunc()
+  },
+  computed: {
+    ...mapState('prediction', ['predictions']),
+    // this.isLoading = true
   },
 }
 </script>
 
 <style scoped lang="scss">
-.section-variant-1 {
-  @media screen and (max-width: 600px) {
-    padding: 0;
-  }
-}
 tspan {
   fill: var(--color-typo-primary);
 }

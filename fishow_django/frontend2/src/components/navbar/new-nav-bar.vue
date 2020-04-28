@@ -1,162 +1,122 @@
 <template>
-  <vue-navigation-bar :options="navbarOptions" />
+  <nav class="fishow_navbar">
+    <router-link class="fishow_navbar-brand" to="/">Fishow</router-link>
+    <div id="fishow_navbarNav">
+      <div class="fishow_navbar-nav">
+        <span class="fishow_nav-item">
+          <router-link class="fishow_nav-link" to="/">Главная</router-link>
+        </span>
+        <span class="fishow_nav-item">
+          <router-link class="fishow_nav-link" to="/predict-page"
+            >Прогноз</router-link
+          >
+        </span>
+        <span class="fishow_nav-item">
+          <router-link class="fishow_nav-link" to="/blog-editor"
+            >Создать блог</router-link
+          >
+        </span>
+        <span class="fishow_nav-item">
+          <router-link class="fishow_nav-link" to="/article"
+            >Все блоги</router-link
+          >
+        </span>
+        <span class="fishow_nav-item">
+          <router-link class="fishow_nav-link" to="/wiki">Вики</router-link>
+        </span>
+        <span class="fishow_nav-item">
+          <router-link class="fishow_nav-link" to="/forum">Форум</router-link>
+        </span>
+      </div>
+    </div>
+    <div class="fishow_navbar_menu">
+      <div>
+        <router-link to="/login">
+          <img src="./user.png" alt="" />
+        </router-link>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
-  data() {
-    return {
-      navbarOptions: {
-        elementId: 'main-navbar',
-        isUsingVueRouter: true,
-        mobileBreakpoint: 992,
-        brandImagePath: './',
-        // brandImage: require('/lockup-color.png'),
-        brandImageAltText: 'brand-image',
-        // collapseButtonImageOpen: require('/collapse-menu-dark.png'),
-        // collapseButtonImageClose: require('/times.png'),
-        showBrandImageInMobilePopup: true,
-        ariaLabelMainNav: 'Main Navigation',
-        tooltipAnimationType: 'shift-away',
-        menuOptionsLeft: [
-          {
-            type: 'link',
-            text: 'Fishow',
-            subMenuOptions: [
-              {
-                type: 'link',
-                text: 'Главная',
-                path: '/',
-              },
-              {
-                type: 'hr',
-              },
-              {
-                isLinkAction: true,
-                type: 'link',
-                text: 'О нас',
-                subText: 'Тут пока нету страницы :)',
-                path: '/about-us',
-                iconLeft: '<i class="fa fa-star fa-fw"></i>',
-              },
-            ],
-          },
-          {
-            type: 'link',
-            text: 'Блоги',
-            subMenuOptions: [
-              {
-                type: 'link',
-                text: 'Создать блог',
-                path: '/blog-editor',
-              },
-              {
-                type: 'link',
-                text: 'Все блоги',
-                path: '/article',
-              },
-            ],
-          },
-          {
-            type: 'link',
-            text: 'Прогноз',
-            path: '/predict-page',
-            // iconRight: '<i class="fa fa-long-arrow-right fa-fw"></i>',
-          },
-          {
-            type: 'link',
-            text: 'Вики',
-            path: '/Wiki',
-          },
-          {
-            type: 'link',
-            text: 'Форум',
-            path: '/Forum',
-          },
-        ],
-        menuOptionsRight: [
-          {
-            type: 'button',
-            text: 'Регистрация',
-            path: '/signup',
-          },
-          {
-            type: 'button',
-            text: 'sadasd',
-            path: '/login',
-          },
-        ],
-      },
-    }
-  },
   computed: {
-    userName() {
-      return this.$store.state.username
-    },
+    ...mapState('user', ['username']),
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
-    },
-    logout() {
-      window.location = '/accounts/logout/'
-    },
+    ...mapActions('user', ['setUserInfo']),
   },
   created() {
-    this.$store.dispatch('setUserInfo')
-
-    this.navbarOptions.menuOptionsRight[1].text = 'Войти'
+    this.setUserInfo()
+    console.log('this.username when created = ', this.username)
+    if (this.username) {
+      this.navbarOptions.menuOptionsRight[0] = {
+        type: 'button',
+        text: 'Личный кабинет',
+        path: '/user-page',
+      }
+    }
   },
 }
 </script>
 
-<style lang="scss">
-#app .vnb {
-  background-color: var(--background-color-brand);
+<style lang="scss" scoped>
+.fishow_navbar {
+  font-size: 16px;
   text-transform: uppercase;
-  position: sticky;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  font-weight: 700;
   top: 0;
-  color: #fff !important;
-  z-index: 5;
-  padding: 20px 0 20px;
-  &-button {
-    color: var(--color-typo-primary);
-    background: var(--background-color-default);
-    &:hover {
-      background: var(--background-color-border);
-    }
+  left: 0;
+  height: 70px;
+  z-index: 100;
+  width: 100%;
+  background-color: var(--background-color-brand);
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+    justify-content: flex-start;
+    overflow: auto;
   }
-  .vnb__menu-options__option__link[aria-label='Fishow'] {
-    font-size: 28px;
-  }
-  .vnb__menu-options__option__link {
-    font-weight: 800;
+  a {
     color: var(--color-link);
   }
-  .vnb-image {
-    width: 200px;
-    height: 200px;
+  .fishow_navbar-nav {
+    dispaly: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    min-width: 700px;
   }
-  .vnb__popup__bottom,
-  .vnb__popup {
-    background-color: var(--background-color-primary);
-    border: none;
+  .fishow_nav-item {
+    padding: 15px;
   }
-  .vnb__popup__top {
-    border: none;
+  .fishow_navbar-brand {
+    justify-self: flex-start;
+    padding-right: 30px;
+    font-size: 30px;
   }
-  .vnb__popup__bottom__menu-options__option__link {
-    border: none;
-    color: var(--color-typo-primary);
-  }
-  .vnb__popup__bottom__menu-options__option__link--no-highlight {
-    color: var(--color-typo-primary);
+}
+.fishow_navbar_menu {
+  height: 70px;
+  position: fixed;
+  cursor: pointer;
+  padding: 0 10px;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #fff;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
+  transition-duration: 0.3s;
+  &:hover {
+    background-color: var(--background-color-default);
   }
 }
 </style>

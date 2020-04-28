@@ -7,11 +7,9 @@ import store from './store'
 
 import 'element-ui/lib/theme-chalk/index.css'
 import 'vue-autosizer/dist/vue-autosizer.min.css'
-import 'vue-navigation-bar/dist/vue-navigation-bar.css'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import VueAutosizer from 'vue-autosizer'
-import VueNavigationBar from 'vue-navigation-bar'
 import VueApexCharts from 'vue-apexcharts'
 import DynamicForm from 'vue-dynamic-form-component'
 
@@ -37,7 +35,6 @@ Vue.component(Option.name, Option)
 Vue.component(Steps.name, Steps)
 Vue.component(Step.name, Step)
 Vue.component(Switch.name, Switch)
-Vue.component('vue-navigation-bar', VueNavigationBar)
 Vue.use(VueApexCharts)
 Vue.use(VueAutosizer)
 Vue.config.productionTip = false

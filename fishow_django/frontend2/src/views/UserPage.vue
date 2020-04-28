@@ -1,30 +1,28 @@
 <template>
-  <section class="section section-md section-view">
-    <div class="container">
-      <div class="row row-30">
-        <div class="col-lg-8">
-          <!-- Heading Component-->
-          <article class="heading-component">
-            <div class="heading-component-inner">
-              <h5 class="heading-component-title">Player overview</h5>
-            </div>
-          </article>
-
-          <!-- Player Info Corporate-->
-          <user-main />
-          <!--  Block Player Info-->
-          <user-info />
-        </div>
-        <div class="col-lg-4">
-          <div class="row row-30">
-            <user-stat />
-            <user-awards />
-            <user-news />
+  <div class="container">
+    <div class="row row-30">
+      <div class="col-lg-8">
+        <!-- Heading Component-->
+        <article class="heading-component">
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">Player overview</h5>
           </div>
+        </article>
+
+        <!-- Player Info Corporate-->
+        <user-main />
+        <!--  Block Player Info-->
+        <user-info />
+      </div>
+      <div class="col-lg-4">
+        <div class="row row-30">
+          <user-stat />
+          <user-awards />
+          <user-news />
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
