@@ -65,7 +65,7 @@ export default {
   name: 'rd-navbar-main-element',
   computed: {
     userName() {
-      return this.$store.state.username
+      // return this.$store.state.username
     },
   },
   methods: {
@@ -74,7 +74,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('setUserInfo')
+    // this.$store.dispatch('setUserInfo')
   },
 }
 </script>

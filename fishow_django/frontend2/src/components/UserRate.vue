@@ -27,8 +27,8 @@
               <div class="team-country">Ник или Фамилия</div>
             </div>
           </td>
-          <td>0</td>
-          <td>0</td>
+          <td>{{ user.comments }}</td>
+          <td>{{ user.blogs }}</td>
         </tr>
       </tbody>
     </table>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { apiService } from '../common/api.service'
+// import { apiService } from '../common/api.service'
 
 export default {
   name: 'UserRate',
@@ -46,18 +46,29 @@ export default {
     }
   },
   methods: {
-    getUserList() {
-      let endpoint = '/api/user_all/'
-
-      apiService(endpoint).then((data) => {
-        this.userList.push(...data)
-      })
-    },
+    // getUserList() {
+    //   let endpoint = '/api/user_all/'
+    //
+    //   apiService(endpoint).then((data) => {
+    //     this.userList.push(...data)
+    //   })
+    // },
   },
   created() {
-    this.getUserList()
+    // this.getUserList()
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+thead,
+tbody {
+  display: block;
+}
+.team-inline {
+  max-width: 90px;
+}
+.team-title {
+  font-size: 12px;
+}
+</style>

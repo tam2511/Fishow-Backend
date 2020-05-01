@@ -1,65 +1,56 @@
 <template>
-  <section class="section section-variant-1 section-view">
-    <div class="container container__small">
-      <div class="select-predict">
-        <el-steps :active="step" finish-status="success">
-          <el-step title="Область"></el-step>
-          <el-step title="Населенный пункт"></el-step>
-          <el-step title="Рыба"></el-step>
-        </el-steps>
-        <div v-if="step === 0">
-          <el-select v-model="value" placeholder="Select">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div v-else-if="step === 1">
-          <el-select v-model="value2" placeholder="Select">
-            <el-option
-              v-for="item in options2[`${this.value}`]"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-        </div>
-        <div v-else-if="step === 2">
-          <fish-search @data="onChange" />
-        </div>
-        <h4>Область: {{ getOblast }}</h4>
-        <h4>Город: {{ getCity }}</h4>
-        <h4>Рыба: {{ getFish }}</h4>
-        <h4>Шаг: {{ step }}</h4>
-        <h6 style="color: red;">{{ error }}</h6>
-
-        <div class="predict_footer">
-          <el-button @click="fullBack">В начало</el-button>
-          <el-button @click="back">Назад</el-button>
-
-          <el-button v-if="step < 3" @click="next">Дальше</el-button>
-          <router-link
-            :to="{
-              name: 'PredictResult',
-              params: {
-                areal: getOblast,
-                date: '2020-04-25',
-                city: getCity,
-                fish: getFish,
-              },
-            }"
-            v-if="step === 3"
-            ><el-button>Прогноз</el-button></router-link
+  <div class="container container__small">
+    <div class="select-predict">
+      <el-steps :active="getStep" finish-status="success">
+        <el-step title="Область"></el-step>
+        <el-step title="Населенный пункт"></el-step>
+        <el-step title="Рыба"></el-step>
+      </el-steps>
+      <div v-if="getStep === 0">
+        <el-select v-model="value" placeholder="Select">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
           >
-        </div>
+          </el-option>
+        </el-select>
+      </div>
+      <div v-else-if="getStep === 1">
+        <el-select v-model="value2" placeholder="Select">
+          <el-option
+            v-for="item in options2[`${this.value}`]"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+      </div>
+      <div v-else-if="getStep === 2">
+        <fish-search @data="onChange" />
+      </div>
+      <h6 style="color: red;">{{ error }}</h6>
+
+      <div class="predict_footer">
+        <el-button v-if="getStep > 0" @click="fullBack">В начало</el-button>
+        <router-link
+          :to="{
+            name: 'PredictResult',
+            params: {
+              areal: getOblast,
+              date: '2020-04-25',
+              city: getCity,
+              fish: getFish,
+            },
+          }"
+          v-if="getStep === 3"
+          ><el-button>Прогноз</el-button></router-link
+        >
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -73,7 +64,7 @@ export default {
       result: '',
       options: [
         {
-          value: 'московская область',
+          value: 'Московская область',
           label: 'Московская область',
         },
         {
@@ -117,12 +108,11 @@ export default {
   computed: {
     getStep() {
       let value = 0
-      console.log(this.value)
       if (this.value !== '') value = 1
       if (this.value2 !== '') value = 2
-      if (this.value3 !== '') {
-        this.loadingfunc()
+      if (this.fish !== '') {
         value = 3
+        this.route()
       }
       return value
     },
@@ -143,32 +133,29 @@ export default {
     onChange(data) {
       this.fish = data.value
     },
+    route() {
+      const someDate = new Date()
+      const dd = someDate.getDate()
+      const mm = someDate.getMonth() + 1
+      const yy = someDate.getFullYear()
+      const newmm = yy + '-' + mm + '-' + dd
+
+      this.$router.push({
+        name: 'PredictResult',
+        params: {
+          areal: this.getOblast,
+          date: newmm,
+          city: this.getCity,
+          fish: this.getFish,
+        },
+      })
+    },
     // errorMesage() {
     //   this.$message({
     //     message: 'Ошибка: Сперва выберите параметр',
     //     type: 'error',
     //   })
     // },
-    next() {
-      if (this.value) {
-        this.step = 1
-        if (this.value && this.value2) {
-          this.step = 2
-          if (this.value && this.value2 && this.fish) {
-            this.step = 3
-          }
-        }
-      } else {
-        // this.errorMesage()
-      }
-    },
-    back() {
-      this.loading = true
-      if (this.step > 0) {
-        this.step -= 1
-      }
-      this.result = ''
-    },
     fullBack() {
       this.value = ''
       this.value2 = ''
@@ -176,18 +163,15 @@ export default {
       this.fish = ''
       this.step = 0
     },
-    handleChange(value) {
-      console.log(value)
-    },
   },
 }
 </script>
 
 <style scoped lang="scss">
 .section.section-variant-1 {
-  overflow-scrolling: auto;
-  overflow: scroll;
-  overflow-y: auto;
+  @media screen and (max-width: 600px) {
+    padding: 0;
+  }
 }
 .el-cascader {
   margin: 20px 0;
@@ -212,20 +196,15 @@ export default {
 }
 .container__small {
   opacity: 1;
-  max-width: 900px;
+  max-width: 500px;
   padding: 20px;
   border: none;
   min-height: 500px;
   background-color: var(--background-color-primary);
   &_menu {
-    max-width: 500px;
+    max-width: 300px;
   }
   transition: all 0.3s;
-
-  @media screen and (max-width: 600px) {
-    width: 1024px !important;
-    max-height: 100% !important;
-  }
 }
 .hideMenu {
   opacity: 0;
@@ -250,6 +229,9 @@ export default {
       color: #000;
     }
   }
+}
+.select-predict .el-step__title.is-process {
+  color: var(--color-typo-primary);
 }
 .el-select {
   display: block;

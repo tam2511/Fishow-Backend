@@ -9,6 +9,7 @@ import CreateComment from '../components/CreateComment'
 import NotFound from '../views/NotFound'
 import PredictPage from '../views/PredictPage'
 import column from '../components/predictPage/column'
+import LoginPage from '../views/LoginPage';
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     name: 'PredictPage',
     component: PredictPage,
     props: true,
+  },
+  {
+    path: '/login/',
+    name: 'login',
+    component: LoginPage,
   },
   {
     path: '/predict-page/:areal/:date/:city/:fish',

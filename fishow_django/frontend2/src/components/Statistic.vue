@@ -42,7 +42,6 @@ export default {
     getBlogData() {
       const endpoint = '/api/blogs/'
       apiService(endpoint).then((data) => {
-        console.log(data)
         this.counterBlogs = data.count
         // TODO: це хуйня
         data.results.forEach(
