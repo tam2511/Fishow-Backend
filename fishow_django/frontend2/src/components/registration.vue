@@ -3,23 +3,35 @@
     <div class="note note--down">
       <p>{{ note }}</p>
     </div>
-    <div class="login">
+    <div class="login" v-if="!success">
       <header class="login--header">
-        <span>Личный кабинет</span>
+        <span>Регистрация</span>
       </header>
       <section class="login--section">
         <form class="login--form" @submit.prevent="makeAuth">
           <fieldset>
             <input
+              type="login"
+              placeholder="Логин"
+              v-model="login"
+              required
+              @focus="inputFocus"
+            />
+          </fieldset>
+          <div class="error" v-if="loginError">
+            {{ loginError }}
+          </div>
+          <fieldset>
+            <input
               type="email"
-              placeholder="email"
+              placeholder="Почта"
               v-model="email"
               required
               @focus="inputFocus"
             />
           </fieldset>
           <div class="error" v-if="errorEmail">
-            Укажите правильную почту
+            {{ errorEmail }}
           </div>
           <fieldset>
             <input
@@ -34,13 +46,25 @@
             Неверно указана почта или пароль
           </div>
           <fieldset>
-            <button type="submit" class="button button-default">Вход</button>
-            <router-link class="button button-default" to="/registration"
-              >Регистрация</router-link
+            <button type="submit" class="button button-default">
+              Подтвердить
+            </button>
+            <router-link class="button button-default" to="/login"
+              >Уже зарегистрирован</router-link
             >
           </fieldset>
         </form>
       </section>
+    </div>
+    <div v-else class="success">
+      <h3>Регистрация прошла успешно</h3>
+      <h4>Проверьте свою почту для активации аккаунта</h4>
+      <img
+        width="300"
+        height="300"
+        src="static/assets/images/source.gif"
+        alt=""
+      />
     </div>
   </div>
 </template>
@@ -50,7 +74,7 @@ import { apiService } from '@/common/api.service'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'LoginPage',
+  name: 'registration',
   data() {
     return {
       note: '',
@@ -59,6 +83,8 @@ export default {
       email: '',
       error: null,
       errorEmail: null,
+      loginError: null,
+      success: true,
     }
   },
   computed: {
@@ -67,23 +93,35 @@ export default {
   methods: {
     makeAuth(e) {
       this.note = 'Login failed'
-      const endpoint = 'api/rest-auth/login/'
+      const endpoint = 'api/rest-auth/registration/'
       apiService(endpoint, 'POST', {
+        username: this.login,
         email: this.email,
-        password: this.password,
+        password1: this.password,
+        password2: this.password,
       }).then((date) => {
+        console.log(date)
         if (date['non_field_errors']) {
           this.error = true
-        } else if (
-          date['email'] &&
-          date['email'][0] === 'Enter a valid email address.'
-        ) {
-          this.errorEmail = true
+        } else if (date['email'] || date['username']) {
+          if (
+            date['email'][0] ===
+            'A user is already registered with this e-mail address.'
+          ) {
+            this.errorEmail = 'Данная почта уже занята'
+          }
+          if (
+            date['username'] &&
+            date['username'][0] === 'A user with that username already exists.'
+          ) {
+            this.loginError = 'Данный логин уже занят.'
+          }
+          // this.errorEmail = true
         } else {
-          this.$router.push({
-            name: 'home',
-          })
-          location.reload()
+          // this.$router.push({
+          //   name: 'home',
+          // })
+          // location.reload()
         }
       })
     },
@@ -164,5 +202,10 @@ input:focus:invalid + svg > .line--default {
   text-align: center;
   padding: 10px 0 10px 0;
   color: #a30000;
+}
+.success {
+  min-height: 600px;
+  padding: 30px;
+  text-align: center;
 }
 </style>

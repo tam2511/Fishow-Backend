@@ -9,7 +9,8 @@ import CreateComment from '../components/CreateComment'
 import NotFound from '../views/NotFound'
 import PredictPage from '../views/PredictPage'
 import column from '../components/predictPage/column'
-import LoginPage from '../views/LoginPage';
+import LoginPage from '../views/LoginPage'
+import registration from '../components/registration'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/login/',
     name: 'login',
     component: LoginPage,
+  },
+  {
+    path: '/registration/',
+    name: 'registration',
+    component: registration,
   },
   {
     path: '/predict-page/:areal/:date/:city/:fish',

@@ -49,7 +49,7 @@ export default {
 }
 @media (min-width: 1023px) {
   .section-md {
-    padding: 80px 0 90px;
+    padding: 20px 0 90px;
   }
 }
 </style>

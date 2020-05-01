@@ -221,7 +221,7 @@ export default {
   },
   computed: {
     userName() {
-      return this.$store.state.username
+      return this.$store.state.user.username
     },
   },
   methods: {
@@ -352,7 +352,7 @@ export default {
   created() {
     this.getBlogData()
     this.getCommentData()
-    this.$store.dispatch('setUserInfo')
+    this.$store.dispatch('user/setUserInfo')
     this.getUser()
   },
 }
