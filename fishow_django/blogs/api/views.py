@@ -13,6 +13,8 @@ from users.models import CustomUser
 
 from django.contrib.auth.decorators import login_required
 
+# from django.conf import settings
+# from django.core.mail import send_mail
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
@@ -157,7 +159,7 @@ class BlogLikeAPIView(APIView):
         """Add request.user to the voters queryset of an comment instance."""
         blog = get_object_or_404(Blog, pk=pk)
         user = request.user
-
+#         send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, [request.user.email])
         blog.votersUp.add(user)
         blog.save()
 
