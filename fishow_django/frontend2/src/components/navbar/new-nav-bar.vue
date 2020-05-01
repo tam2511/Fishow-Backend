@@ -1,41 +1,42 @@
 <template>
   <nav class="fishow_navbar">
     <router-link class="fishow_navbar-brand" to="/">Fishow</router-link>
-    <div id="fishow_navbarNav">
-      <div class="fishow_navbar-nav">
-        <span class="fishow_nav-item">
-          <router-link class="fishow_nav-link" to="/">Главная</router-link>
-        </span>
-        <span class="fishow_nav-item">
-          <router-link class="fishow_nav-link" to="/predict-page"
-            >Прогноз</router-link
-          >
-        </span>
-        <span class="fishow_nav-item">
-          <router-link class="fishow_nav-link" to="/blog-editor"
-            >Создать блог</router-link
-          >
-        </span>
-        <span class="fishow_nav-item">
-          <router-link class="fishow_nav-link" to="/article"
-            >Все блоги</router-link
-          >
-        </span>
-        <span class="fishow_nav-item">
-          <router-link class="fishow_nav-link" to="/wiki">Вики</router-link>
-        </span>
-        <span class="fishow_nav-item">
-          <router-link class="fishow_nav-link" to="/forum">Форум</router-link>
-        </span>
-      </div>
+    <div class="fishow_navbar-nav">
+      <span class="fishow_nav-item">
+        <router-link class="fishow_nav-link" to="/">Главная</router-link>
+      </span>
+      <span class="fishow_nav-item">
+        <router-link class="fishow_nav-link" to="/predict-page"
+          >Прогноз</router-link
+        >
+      </span>
+      <span class="fishow_nav-item">
+        <router-link class="fishow_nav-link" to="/blog-editor"
+          >Создать блог</router-link
+        >
+      </span>
+      <span class="fishow_nav-item">
+        <router-link class="fishow_nav-link" to="/article"
+          >Все блоги</router-link
+        >
+      </span>
+      <span class="fishow_nav-item">
+        <router-link class="fishow_nav-link" to="/wiki">Вики</router-link>
+      </span>
+      <span class="fishow_nav-item">
+        <router-link class="fishow_nav-link" to="/forum">Форум</router-link>
+      </span>
     </div>
-    <div class="fishow_navbar_menu">
-      <div>
-        <router-link to="/login">
-          <img src="./user.png" alt="" />
-        </router-link>
+    <router-link to="/login" v-if="!username">
+      <div class="fishow_navbar_menu">
+        <img src="./user.png" alt="" />
       </div>
-    </div>
+    </router-link>
+    <router-link to="/user-page" v-else>
+      <div class="fishow_navbar_menu">
+        <img src="./user.png" alt="" />
+      </div>
+    </router-link>
   </nav>
 </template>
 
@@ -50,14 +51,15 @@ export default {
   },
   created() {
     this.setUserInfo()
-    console.log('this.username when created = ', this.username)
-    if (this.username) {
-      this.navbarOptions.menuOptionsRight[0] = {
-        type: 'button',
-        text: 'Личный кабинет',
-        path: '/user-page',
-      }
-    }
+    console.log(this.username)
+    // console.log('this.username when created = ', this.username)
+    // if (this.username.username) {
+    //   this.navbarOptions.menuOptionsRight[0] = {
+    //     type: 'button',
+    //     text: 'Личный кабинет',
+    //     path: '/user-page',
+    //   }
+    // }
   },
 }
 </script>
@@ -70,11 +72,11 @@ export default {
   flex-flow: row;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  position: sticky;
   font-weight: 700;
   top: 0;
   left: 0;
-  height: 70px;
+  height: 65px;
   z-index: 100;
   width: 100%;
   background-color: var(--background-color-brand);
@@ -87,22 +89,27 @@ export default {
     color: var(--color-link);
   }
   .fishow_navbar-nav {
-    dispaly: flex;
-    flex-flow: row;
-    flex-wrap: nowrap;
-    min-width: 700px;
+    display: contents;
+    white-space: nowrap;
+    /*flex-flow: row;*/
+    /*flex-wrap: nowrap;*/
+    /*width: 600px;*/
   }
   .fishow_nav-item {
     padding: 15px;
+    &:last-child {
+      padding-right: 70px;
+    }
   }
   .fishow_navbar-brand {
     justify-self: flex-start;
+    padding-left: 30px;
     padding-right: 30px;
     font-size: 30px;
   }
 }
 .fishow_navbar_menu {
-  height: 70px;
+  height: 65px;
   position: fixed;
   cursor: pointer;
   padding: 0 10px;

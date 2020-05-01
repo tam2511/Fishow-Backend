@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { apiService } from '../common/api.service'
+// import { apiService } from '../common/api.service'
 
 export default {
   name: 'UserRate',
@@ -46,16 +46,16 @@ export default {
     }
   },
   methods: {
-    getUserList() {
-      let endpoint = '/api/user_all/'
-
-      apiService(endpoint).then((data) => {
-        this.userList.push(...data)
-      })
-    },
+    // getUserList() {
+    //   let endpoint = '/api/user_all/'
+    //
+    //   apiService(endpoint).then((data) => {
+    //     this.userList.push(...data)
+    //   })
+    // },
   },
   created() {
-    this.getUserList()
+    // this.getUserList()
   },
 }
 </script>

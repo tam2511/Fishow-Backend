@@ -1,8 +1,10 @@
 <template>
-  <div id="app" class="theme" :class="theme">
+  <div id="app" :class="'theme ' + theme">
     <settings />
     <new-nav-bar />
-    <router-view />
+    <section class="section section-md section-view">
+      <router-view />
+    </section>
     <FIshow_Footer />
   </div>
 </template>
@@ -33,6 +35,7 @@ export default {
   mounted() {
     this.checkTheme()
   },
+  created() {},
 }
 </script>
 
@@ -46,7 +49,7 @@ export default {
 }
 @media (min-width: 1023px) {
   .section-md {
-    padding: 30px 0 90px;
+    padding: 80px 0 90px;
   }
 }
 </style>
