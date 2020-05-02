@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="face">
       <div class="band">
         <div class="red"></div>

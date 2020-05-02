@@ -59,9 +59,9 @@ $body-color: var(--color-typo-secondary);
     color: $head-color;
     background: $table-head-bg;
 
-    &:first-child {
-      text-align: left;
-    }
+    //&:first-child {
+    //  text-align: left;
+    //}
 
     @include media-breakpoint-down(md) {
       padding-top: 20px;
@@ -498,7 +498,6 @@ $body-color: var(--color-typo-secondary);
   @include media-breakpoint-down(lg) {
     display: block;
     width: 100%;
-    overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
 
     // Prevent double border on horizontal scroll due to use of `display: block;`

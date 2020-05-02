@@ -1,46 +1,37 @@
 <template>
-  <div>
-    <!-- Section Breadcrumbs-->
+  <div class="container">
+    <div class="row row-30">
+      <div class="col-lg-8">
+        <!-- Heading Component-->
+        <article class="heading-component">
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">Последние статьи</h5>
+          </div>
+        </article>
 
-    <!-- News 4-->
-    <section class="section section-sm section-view">
-      <div class="container">
         <div class="row row-30">
-          <div class="col-lg-8">
-            <!-- Heading Component-->
-            <article class="heading-component">
-              <div class="heading-component-inner">
-                <h5 class="heading-component-title">Последние статьи</h5>
-              </div>
-            </article>
-
-            <div class="row row-30">
-              <articles v-for="blog in blogs" :key="blog.pk" :blog="blog" />
-            </div>
-            <nav class="pagination-wrap" aria-label="Page navigation">
-              <ul class="pagination">
-                <li class="page-item active">
-                  <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><span class="page-link">...</span></li>
-                <li class="page-item"><a class="page-link" href="#">14</a></li>
-              </ul>
-            </nav>
-          </div>
-          <div class="col-lg-4">
-            <div class="block-aside">
-              <block-categories />
-              <trending-news />
-              <block-tags />
-            </div>
-          </div>
+          <articles v-for="blog in blogs" :key="blog.pk" :blog="blog" />
+        </div>
+        <nav class="pagination-wrap" aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><span class="page-link">...</span></li>
+            <li class="page-item"><a class="page-link" href="#">14</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-lg-4">
+        <div class="block-aside">
+          <block-categories />
+          <trending-news />
+          <block-tags />
         </div>
       </div>
-    </section>
-
-    <!-- Page Footer-->
+    </div>
   </div>
 </template>
 

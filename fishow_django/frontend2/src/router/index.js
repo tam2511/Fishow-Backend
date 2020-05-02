@@ -9,7 +9,9 @@ import CreateComment from '../components/CreateComment'
 import NotFound from '../views/NotFound'
 import PredictPage from '../views/PredictPage'
 import column from '../components/predictPage/column'
-
+import LoginPage from '../views/LoginPage'
+import registration from '../components/registration'
+import confirmEmail from '@/views/confirmEmail'
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,13 +33,29 @@ const routes = [
     props: true,
   },
   {
+    path: '/confirm-email/:fishowKey',
+    name: 'confirmEmail',
+    component: confirmEmail,
+    props: true,
+  },
+  {
+    path: '/login/',
+    name: 'login',
+    component: LoginPage,
+  },
+  {
+    path: '/registration/',
+    name: 'registration',
+    component: registration,
+  },
+  {
     path: '/predict-page/:areal/:date/:city/:fish',
     name: 'PredictResult',
     component: column,
     props: true,
   },
   {
-    path: '/user-page/',
+    path: '/:username',
     name: 'UserPage',
     component: UserPage,
     props: true,

@@ -9,8 +9,9 @@
         height="69"
       />
     </div>
+    <h2>lalala</h2>
     <div class="comment-box-main">
-      <h5 class="comment-box-name">{{ this.requestUser }}</h5>
+      <!--      <h5 class="comment-box-name">{{ this.requestUser }}</h5>-->
       <!-- RD Mailform-->
       <form @submit.prevent="onSubmit" class="comment-box-form">
         <div class="form-wrap">
@@ -24,7 +25,13 @@
         </div>
         <div class="alert-danger" v-if="error">{{ error }}</div>
         <div class="form-button">
-          <button class="button button-primary" type="submit">Отправить</button>
+          <button
+            v-if="username !== undefined"
+            class="button button-primary"
+            type="submit"
+          >
+            Отправить - username = {{ username }}
+          </button>
         </div>
       </form>
     </div>
@@ -33,6 +40,7 @@
 
 <script>
 import { apiService } from '../common/api.service'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CreateComment',
@@ -44,9 +52,9 @@ export default {
       type: String,
       required: true,
     },
-    requestUser: {
-      required: true,
-    },
+    // requestUser: {
+    //   required: true,
+    // },
     comments: {
       type: Array,
     },
@@ -58,6 +66,9 @@ export default {
       error: null,
     }
   },
+  computed: {
+    ...mapState(['username']),
+  },
   methods: {},
   async beforeRouteEnter(to, from, next) {
     console.log('to.params.id = ', Number(to.params.id))
@@ -67,6 +78,10 @@ export default {
     return next(
       (vm) => ((vm.commentBody = data.body), (vm.blogSlug = data.blog_slug))
     )
+  },
+  created() {
+    console.log('this.username =', this.username)
+    // console.log('this.requestUser =', this.requestUser)
   },
 }
 </script>

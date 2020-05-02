@@ -3,13 +3,25 @@
     <apexchart
       :type="this.options.chart.type"
       height="350"
-      width="850"
+      :width="this.getWidth"
       :options="options"
       :series="options.series"
     ></apexchart>
-    <button type="button" @click="setArea">area</button>
-    <button type="button" @click="setBar">bar</button>
-    <button type="button" @click="setLines">lines</button>
+    <div class="button-container">
+      <button type="button" @click="setArea" class="button button-gray-outline">
+        area
+      </button>
+      <button type="button" @click="setBar" class="button button-gray-outline">
+        bar
+      </button>
+      <button
+        type="button"
+        @click="setLines"
+        class="button button-gray-outline"
+      >
+        lines
+      </button>
+    </div>
   </div>
 </template>
 
@@ -23,16 +35,45 @@ export default {
       required: true,
     },
   },
+  computed: {
+    getWidth() {
+      let screen = document.body.offsetWidth
+      let value
+      if (screen > 1200) {
+        value = 1000
+      } else if (screen > 600 && screen < 1200) {
+        value = screen - 150
+      } else {
+        value = screen - 40
+      }
+      return value
+    },
+  },
   data() {
+    const getData = (days) => {
+      const someDate = new Date()
+      const numberOfDaysToAdd = days
+      someDate.setDate(someDate.getDate() + numberOfDaysToAdd)
+      const dd = someDate.getDate()
+      const mm = someDate.getMonth() + 1
+      const newmm = mm.length > 1 ? mm : '0' + mm
+      const someFormattedDate = dd + '/' + newmm
+      return someFormattedDate
+    }
+    const result = []
+    for (let i = 0; i < 9; i++) {
+      result.push(getData(i))
+    }
+
     return {
       options: {
         series: [
           {
-            name: 'High - 2013',
+            name: 'минимальное',
             data: this.optionsChart.probMin,
           },
           {
-            name: 'Low - 2013',
+            name: 'максимальное',
             data: this.optionsChart.probMax,
           },
         ],
@@ -62,13 +103,13 @@ export default {
           offsetY: -10,
           style: {
             fontSize: '12px',
-            colors: ['#304758'],
+            colors: ['var(--color-typo-primary)'],
           },
         },
         grid: {
-          borderColor: '#e7e7e7',
+          borderColor: 'var(--background-color-border)',
           row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            colors: ['var(--background-color-default)', 'transparent'], // takes an array which will be repeated on columns
             opacity: 0.5,
           },
         },
@@ -92,23 +133,10 @@ export default {
         //     max: this.minMax.max
         // },
         xaxis: {
-          categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
-          ],
+          categories: result,
           position: 'top',
           axisBorder: {
-            show: false,
+            show: true,
           },
           axisTicks: {
             show: false,
@@ -154,7 +182,7 @@ export default {
     }
   },
   components: {
-    apexchart: VueApexCharts
+    apexchart: VueApexCharts,
   },
   methods: {
     setArea() {
@@ -170,4 +198,18 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  padding-left: 20px;
+  button {
+    margin-right: 20px;
+    padding: 3px 14px;
+  }
+}
+.apexcharts-text tspan {
+  fill: var(--color-typo-primary);
+}
+</style>

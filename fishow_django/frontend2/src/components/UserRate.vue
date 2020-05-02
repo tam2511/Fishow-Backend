@@ -4,8 +4,7 @@
       <thead>
         <tr>
           <th colspan="2">Пользователи</th>
-          <th>Сообщ.</th>
-          <th>Блогов</th>
+          <th>Рейтинг</th>
         </tr>
       </thead>
       <tbody>
@@ -27,8 +26,8 @@
               <div class="team-country">Ник или Фамилия</div>
             </div>
           </td>
-          <td>0</td>
-          <td>0</td>
+          <td>{{ user.rating }}</td>
+          <!--          <td>{{ user.blogs }}</td>-->
         </tr>
       </tbody>
     </table>
@@ -50,7 +49,9 @@ export default {
       let endpoint = '/api/user_all/'
 
       apiService(endpoint).then((data) => {
+        // console.log(data, data.length)
         this.userList.push(...data)
+        console.log(this.userList)
       })
     },
   },
@@ -60,4 +61,14 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+thead {
+  background-color: var(--background-color-brand);
+}
+.team-inline {
+  max-width: 90px;
+}
+.team-title {
+  font-size: 12px;
+}
+</style>

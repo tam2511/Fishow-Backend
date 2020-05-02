@@ -1,137 +1,136 @@
 <template>
-  <section class="section section-variant-1 section-view">
-    <div class="container">
-      <div class="row row-50">
-        <div class="col-lg-7 col-xl-8" v-if="blog_category !== 'Отчет'">
-          <!-- Heading Component-->
-          <article class="heading-component">
-            <div class="heading-component-inner">
-              <h5 class="heading-component-title">Написать блог</h5>
-            </div>
-          </article>
-          <form @submit.prevent="onSubmit">
-            <div class="row row-10 row-narrow">
-              <div class="col-md-12 fishow-content_container">
-                <div class="col-md-12 fishow-content">
-                  <div class="form-wrap">
-                    <textarea
-                      v-model="blog_title"
-                      class="form-input"
-                      id="blog_title"
-                      name="title"
-                      placeholder="Заголовок"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <template v-for="(article, index) in articles">
-                  <component
-                    :is="article"
-                    :key="article[index]"
-                    :counter="article + index"
-                  ></component>
-                </template>
-              </div>
-
-              <div class="col-md-12 fishow_container">
-                <button
-                  class="button button-primary button-sm"
-                  type="button"
-                  @click="addText"
-                >
-                  Текст
-                </button>
-                <button
-                  class="button button-primary button-sm"
-                  type="button"
-                  @click="addVideo"
-                >
-                  Видео
-                </button>
-                <button
-                  class="button button-primary button-sm"
-                  type="button"
-                  @click="addImage"
-                >
-                  Картинка
-                </button>
-              </div>
-            </div>
-            <div class="col-md-12 button_send_blog">
-              <button
-                class="button button-lg button-primary button-block"
-                type="submit"
-                name="send_blog"
-              >
-                Опубликовать
-              </button>
-              <button
-                class="button button-lg button-gray-outline button-block"
-                type="button"
-                name="save_blog"
-                onclick=""
-                @click="convertBody"
-              >
-                Сохранить как черновик
-              </button>
-            </div>
-            <div class="col-md-12"></div>
-          </form>
-        </div>
-        <div class="col-lg-7 col-xl-8" v-else>
-          <article class="heading-component">
-            <div class="heading-component-inner">
-              <h5 class="heading-component-title">Добавить отчет</h5>
-            </div>
-          </article>
-          <dynamic-form
-            ref="dynamic-form"
-            v-model="data"
-            :descriptors="descriptors"
-            :showOuterError="false"
-          >
-            <template slot="operations">
-              <el-button @click="reset">Reset</el-button>
-              <el-button type="primary" @click="validate" plain
-                >Validate</el-button
-              >
-            </template>
-          </dynamic-form>
-        </div>
-        <div class="col-lg-5 col-xl-4">
-          <div>
-            <label class="typo__label">Выберите категорию:</label>
-            <multiselect
-              v-model="blog_category"
-              :options="optionsCategory"
-              :searchable="false"
-              :close-on-select="true"
-              :show-labels="false"
-              placeholder="Pick a value"
-            ></multiselect>
+  <div class="container">
+    <div class="row row-50" v-if="username">
+      <div class="col-lg-7 col-xl-8" v-if="blog_category !== 'Отчет'">
+        <!-- Heading Component-->
+        <article class="heading-component">
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">Написать блог</h5>
           </div>
-          <label class="typo__label">Теги:</label>
+        </article>
+        <form @submit.prevent="onSubmit">
+          <div class="row row-10 row-narrow">
+            <div class="col-md-12 fishow-content_container">
+              <div class="col-md-12 fishow-content">
+                <div class="form-wrap">
+                  <textarea
+                    v-model="blog_title"
+                    class="form-input"
+                    id="blog_title"
+                    name="title"
+                    placeholder="Заголовок"
+                  ></textarea>
+                </div>
+              </div>
+
+              <template v-for="(article, index) in articles">
+                <component
+                  :is="article"
+                  :key="article[index]"
+                  :counter="article + index"
+                ></component>
+              </template>
+            </div>
+
+            <div class="col-md-12 fishow_container">
+              <button
+                class="button button-primary button-sm"
+                type="button"
+                @click="addText"
+              >
+                Текст
+              </button>
+              <button
+                class="button button-primary button-sm"
+                type="button"
+                @click="addVideo"
+              >
+                Видео
+              </button>
+              <button
+                class="button button-primary button-sm"
+                type="button"
+                @click="addImage"
+              >
+                Картинка
+              </button>
+            </div>
+          </div>
+          <div class="col-md-12 button_send_blog">
+            <button
+              class="button button-lg button-primary button-block"
+              type="submit"
+              name="send_blog"
+            >
+              Опубликовать
+            </button>
+            <button
+              class="button button-lg button-gray-outline button-block"
+              type="button"
+              name="save_blog"
+              onclick=""
+              @click="convertBody"
+            >
+              Сохранить как черновик
+            </button>
+          </div>
+          <div class="col-md-12 error" v-if="error">
+            {{ error }}
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-7 col-xl-8" v-else>
+        <article class="heading-component">
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">Добавить отчет</h5>
+          </div>
+        </article>
+        <dynamic-form
+          ref="dynamic-form"
+          v-model="data"
+          :descriptors="descriptors"
+          :showOuterError="false"
+        >
+          <template slot="operations">
+            <el-button @click="reset">Reset</el-button>
+            <el-button type="primary" @click="validate" plain
+              >Validate</el-button
+            >
+          </template>
+        </dynamic-form>
+      </div>
+      <div class="col-lg-5 col-xl-4">
+        <div>
+          <label class="typo__label">Выберите категорию:</label>
           <multiselect
-            v-model="blog_tags"
-            tag-placeholder="Add this as new tag"
-            placeholder="Найдите или добавьте свой тег"
-            label="name"
-            track-by="code"
-            :options="options"
-            :multiple="true"
-            :taggable="true"
-            @tag="addTag"
-          >
-          </multiselect>
-          <br />
+            v-model="blog_category"
+            :options="optionsCategory"
+            :searchable="false"
+            :close-on-select="true"
+            :show-labels="false"
+            placeholder="Pick a value"
+          ></multiselect>
         </div>
+        <label class="typo__label">Теги:</label>
+        <multiselect
+          v-model="blog_tags"
+          tag-placeholder="Add this as new tag"
+          placeholder="Найдите или добавьте свой тег"
+          label="name"
+          track-by="code"
+          :options="options"
+          :multiple="true"
+          :taggable="true"
+          @tag="addTag"
+        >
+        </multiselect>
+        <br />
       </div>
     </div>
-<!--    <el-button :plain="true" @click="open2" style="display: none;"-->
-<!--      >success</el-button-->
-<!--    >-->
-  </section>
-  <!--    </div>-->
+    <div class="row row-50" v-else>
+      Авторизуйтесь
+    </div>
+  </div>
 </template>
 
 <script>
@@ -141,6 +140,8 @@ import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
 import videoField from '@/components/blog/videoField'
 import Multiselect from 'vue-multiselect'
+import { mapState } from 'vuex'
+
 export default {
   name: 'BlogEditor',
   components: {
@@ -221,6 +222,9 @@ export default {
       data: {},
     }
   },
+  computed: {
+    ...mapState('user', ['username']),
+  },
   methods: {
     // open2() {
     //   this.$message({
@@ -284,16 +288,23 @@ export default {
           endpoint += `${this.slug}/`
           method = 'PUT'
         }
-        apiService(endpoint, method, {
+        const blog = {
           title: this.blog_title,
           content: this.blog_body,
           category: this.blog_category,
           tags: this.blog_tags,
-        }).then((blog_data) => {
-          this.$router.push({
-            name: 'blog',
-            params: { slug: blog_data.slug },
-          })
+        }
+        console.log('blog = ', blog)
+        apiService(endpoint, method, blog).then((blog_data) => {
+          console.log('blog_data = ', blog_data)
+          if (blog_data.detail) {
+            this.error = 'Что то пошло не так, ошибка = ' + blog_data.detail
+          } else {
+            this.$router.push({
+              name: 'blog',
+              params: { slug: blog_data.slug },
+            })
+          }
         })
       }
     },
