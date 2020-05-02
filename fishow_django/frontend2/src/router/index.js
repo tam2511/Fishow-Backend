@@ -11,7 +11,7 @@ import PredictPage from '../views/PredictPage'
 import column from '../components/predictPage/column'
 import LoginPage from '../views/LoginPage'
 import registration from '../components/registration'
-
+import confirmEmail from '@/views/confirmEmail'
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,6 +30,12 @@ const routes = [
     path: '/predict-page/',
     name: 'PredictPage',
     component: PredictPage,
+    props: true,
+  },
+  {
+    path: '/confirm-email/:fishowKey',
+    name: 'confirmEmail',
+    component: confirmEmail,
     props: true,
   },
   {

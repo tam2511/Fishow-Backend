@@ -74,7 +74,9 @@
               Сохранить как черновик
             </button>
           </div>
-          <div class="col-md-12"></div>
+          <div class="col-md-12 error" v-if="error">
+            {{ error }}
+          </div>
         </form>
       </div>
       <div class="col-lg-7 col-xl-8" v-else>
@@ -286,16 +288,23 @@ export default {
           endpoint += `${this.slug}/`
           method = 'PUT'
         }
-        apiService(endpoint, method, {
+        const blog = {
           title: this.blog_title,
           content: this.blog_body,
           category: this.blog_category,
           tags: this.blog_tags,
-        }).then((blog_data) => {
-          this.$router.push({
-            name: 'blog',
-            params: { slug: blog_data.slug },
-          })
+        }
+        console.log('blog = ', blog)
+        apiService(endpoint, method, blog).then((blog_data) => {
+          console.log('blog_data = ', blog_data)
+          if (blog_data.detail) {
+            this.error = 'Что то пошло не так, ошибка = ' + blog_data.detail
+          } else {
+            this.$router.push({
+              name: 'blog',
+              params: { slug: blog_data.slug },
+            })
+          }
         })
       }
     },

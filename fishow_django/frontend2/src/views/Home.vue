@@ -117,7 +117,7 @@ import Statistic from '@/components/Statistic'
 import UserRate from '@/components/UserRate'
 import LastComments from '@/components/LastComments'
 import BlogCard from '@/components/Home/BlogCard'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'home',
@@ -140,9 +140,10 @@ export default {
     checkNext() {
       this.$store.dispatch('blogs/fetchBlogs')
     },
+    ...mapActions('blogs', ['fetchBlogs']),
   },
   created() {
-    this.$store.dispatch('blogs/fetchBlogs')
+    this.fetchBlogs()
     this.setPageTitle('Fishow - Главная')
   },
 }

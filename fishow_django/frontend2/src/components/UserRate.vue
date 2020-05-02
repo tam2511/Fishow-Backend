@@ -50,7 +50,9 @@ export default {
       let endpoint = '/api/user_all/'
 
       apiService(endpoint).then((data) => {
+        // console.log(data, data.length)
         this.userList.push(...data)
+        console.log(this.userList)
       })
     },
   },
