@@ -4,8 +4,7 @@
       <thead>
         <tr>
           <th colspan="2">Пользователи</th>
-          <th>Сообщ.</th>
-          <th>Блогов</th>
+          <th>Рейтинг</th>
         </tr>
       </thead>
       <tbody>
@@ -27,8 +26,8 @@
               <div class="team-country">Ник или Фамилия</div>
             </div>
           </td>
-          <td>{{ user.comments }}</td>
-          <td>{{ user.blogs }}</td>
+          <td>{{ user.rating }}</td>
+          <!--          <td>{{ user.blogs }}</td>-->
         </tr>
       </tbody>
     </table>
@@ -63,9 +62,8 @@ export default {
 </script>
 
 <style scoped>
-thead,
-tbody {
-  display: block;
+thead {
+  background-color: var(--background-color-brand);
 }
 .team-inline {
   max-width: 90px;

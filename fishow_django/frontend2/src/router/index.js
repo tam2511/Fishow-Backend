@@ -55,7 +55,7 @@ const routes = [
     props: true,
   },
   {
-    path: '/user-page/',
+    path: '/:username',
     name: 'UserPage',
     component: UserPage,
     props: true,

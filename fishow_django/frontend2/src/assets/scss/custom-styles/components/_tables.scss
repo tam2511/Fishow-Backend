@@ -59,9 +59,9 @@ $body-color: var(--color-typo-secondary);
     color: $head-color;
     background: $table-head-bg;
 
-    &:first-child {
-      text-align: left;
-    }
+    //&:first-child {
+    //  text-align: left;
+    //}
 
     @include media-breakpoint-down(md) {
       padding-top: 20px;

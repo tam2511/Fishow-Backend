@@ -32,7 +32,10 @@
         <img src="./user.png" alt="" />
       </div>
     </router-link>
-    <router-link to="/user-page" v-else>
+    <router-link
+      :to="{ name: 'UserPage', params: { username: username } }"
+      v-else
+    >
       <div class="fishow_navbar_menu">
         <img src="./user.png" alt="" />
       </div>

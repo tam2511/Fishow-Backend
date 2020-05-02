@@ -5,7 +5,7 @@
         <!-- Heading Component-->
         <article class="heading-component">
           <div class="heading-component-inner">
-            <h5 class="heading-component-title">Player overview</h5>
+            <h5 class="heading-component-title">Личный кабинет</h5>
             <button class="button button-gray-outline" @click="logout">
               Выйти
             </button>
@@ -13,7 +13,7 @@
         </article>
 
         <!-- Player Info Corporate-->
-        <user-main />
+        <user-main :username="username" />
         <!--  Block Player Info-->
         <user-info />
       </div>

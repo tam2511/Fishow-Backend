@@ -3,7 +3,7 @@
     <!-- Heading Component-->
     <article class="heading-component">
       <div class="heading-component-inner">
-        <h5 class="heading-component-title">Statistics</h5>
+        <h5 class="heading-component-title">Статистика</h5>
         <div class="heading-component-aside">
           <select
             class="select select-minimal"
