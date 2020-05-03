@@ -70,9 +70,9 @@ a.icon-gray-500 {
 
 %context-dark {
   .icon-light {
-    color: $white;
+    color: var(--color-typo-primary);
   }
-  
+
   a.icon-light {
     &:hover {
       color: $secondary;
@@ -131,7 +131,7 @@ a.icon-gray-500 {
   width: 60px;
   height: 60px;
   color: $white;
-  
+
   &::before {
     position: absolute;
     top: 50%;

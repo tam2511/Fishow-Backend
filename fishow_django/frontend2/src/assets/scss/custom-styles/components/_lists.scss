@@ -280,7 +280,7 @@ p + .list-marked {
 		> li {
 			&:not(:last-child) {
 				&::after {
-					background: rgba($white, .16);
+					background: rgba(var(--color-typo-primary), .16);
 				}
 			}
 		}

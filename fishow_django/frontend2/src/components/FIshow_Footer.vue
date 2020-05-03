@@ -1,5 +1,5 @@
 <template>
-  <footer class="section context-dark footer-creative footer-creative-dark">
+  <footer class="section context-dark footer-creative footer-classic-brand">
     <div class="footer-creative-main">
       <div class="footer-creative-main-bottom">
         <div class="container">
@@ -198,4 +198,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+footer {
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
+}
+</style>

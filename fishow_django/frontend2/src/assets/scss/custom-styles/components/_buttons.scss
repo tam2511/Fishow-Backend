@@ -100,7 +100,7 @@ html {
 
 	%context-dark {
 		.button-gray-outline {
-			@include btn-variant($white, transparent, $white, $gray-800, $yellow, $yellow);
+			@include btn-variant(var(--color-typo-primary), transparent, var(--color-typo-primary), $gray-800, $yellow, $yellow);
 		}
 	}
 

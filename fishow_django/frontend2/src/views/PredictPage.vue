@@ -230,8 +230,8 @@ export default {
     }
   }
 }
-.select-predict .el-step__title.is-process {
-  color: var(--color-typo-primary);
+div.el-step__title.is-process {
+  color: var(--color-typo-primary) !important;
 }
 .el-select {
   display: block;

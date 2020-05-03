@@ -111,7 +111,7 @@
 	}
 
 	.post-inline-title {
-		color: $white;
+		color: var(--color-typo-primary);
 	}
 }
 
@@ -215,7 +215,7 @@
 
 .tabs-modern_1 {
 	.post-classic {
-		padding: 8px; 
+		padding: 8px;
 		background: var(--background-color-default);
 		border: 1px solid var(--background-color-border);
 	}
@@ -237,7 +237,7 @@
 // context dark
 %context-dark {
 	.post-classic-title {
-		color: $white;
+		color: var(--color-typo-primary);
 	}
 }
 
@@ -1121,11 +1121,11 @@
 
 .post-gloria.post-gloria-1 {
 	justify-content: flex-end;
-	
+
 	.post-gloria-title {
 		font-weight: 400;
 	}
-	
+
 	.post-gloria-time {
 		color: $gray-500;
 	}
@@ -1138,15 +1138,15 @@
 		box-shadow: 0 7px 13px 0 rgba($black, 0.22);
 		@include btn-variant($gray-800, $secondary, $secondary, $white, $primary, $primary);
 	}
-	
+
 	@include media-breakpoint-up(lg) {
 		.post-gloria-main {
 			max-width: 260px;
-		} 
-	} 
+		}
+	}
 }
 
-// media  ≥1200px 
+// media  ≥1200px
 @include media-breakpoint-up(xl) {
 	.post-gloria {
 		padding: 40px;
@@ -1370,7 +1370,7 @@
 	.swiper-slide {
 		align-items: stretch;
 	}
-	
+
 	.post-alice {
 		width: 100%;
 		white-space: normal;
@@ -1845,17 +1845,17 @@
 
 %context-dark {
 	.post-elizabeth-text {
-		color: $white;
+		color: var(--color-typo-primary);
 	}
 
 	.post-elizabeth-meta {
-		color: rgba($white, .6)
+		color: rgba(var(--color-typo-primary), .6)
 	}
 
 	.post-elizabeth-comment {
 		a {
-			color: rgba($white, .6);
-			
+			color: rgba(var(--color-typo-primary), .6);
+
 			&:hover {
 				color: var(--color-bg-default);
 			}

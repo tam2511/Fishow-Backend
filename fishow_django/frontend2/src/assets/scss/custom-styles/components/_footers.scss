@@ -66,6 +66,10 @@
   background: $footer-classic-darker;
 }
 
+.footer-classic-brand{
+  background: var(--background-color-gradient);
+}
+
 .footer-classic-main {
   padding: 40px 0;
 }
@@ -271,7 +275,7 @@
     }
 
     h5 + * {
-      margin-top: 33px; 
+      margin-top: 33px;
     }
 
     * + hr {
@@ -421,26 +425,26 @@
 }
 
 footer.footer-creative {
-  color: $abbey;
+  color: var(--color-typo-primary);
 }
 
 .footer-creative {
   .unit {
     h6,
     .heading-6 {
-      color: $abbey;
+      color: var(--color-typo-primary);
     }
   }
 
   .rd-inline-form-creative {
     .form-label,
     .form-input {
-      color: $abbey;
+      color: var(--color-typo-primary);
     }
   }
 
   .nav-minimal-list {
-    color: $abbey;
+    color: var(--color-typo-primary);
 
     li.active,
     a:hover {
@@ -449,7 +453,7 @@ footer.footer-creative {
   }
 
   .post-classic-time {
-    color: $abbey;
+    color: var(--color-typo-primary);
   }
 
   .icon-corporate:not(:hover) {
@@ -457,7 +461,7 @@ footer.footer-creative {
   }
 
   .link {
-    color: $white;
+    color: var(--color-typo-primary);
 
     &:hover {
       color: var(--color-bg-default);
@@ -496,7 +500,7 @@ footer.footer-creative {
 }
 
 .footer-creative-darken {
-  background: $footer-classic-darker;
+  background: var(--background-color-primary)
 }
 
 .footer-creative-main-top,
