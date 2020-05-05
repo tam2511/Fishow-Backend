@@ -91,6 +91,9 @@ export default {
       this.note = ''
     },
   },
+  created() {
+    document.title = 'Fishow - Вход'
+  },
 }
 </script>
 

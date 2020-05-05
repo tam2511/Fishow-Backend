@@ -43,6 +43,9 @@ export default {
         })
     },
   },
+  created() {
+    document.title = 'Fishow - Подтверждение почты'
+  },
 }
 </script>
 
