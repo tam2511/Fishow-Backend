@@ -19,6 +19,7 @@
     .card {
         margin: auto;
         max-width: 300px;
+        background: var(--background-color-primary);
     }
     .card-text {
         color: var(--color-typo-primary)
