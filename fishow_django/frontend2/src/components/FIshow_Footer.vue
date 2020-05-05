@@ -174,6 +174,8 @@ export default {
 
 <style scoped>
 footer {
+  position: relative;
+  width: 100%;
   box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
 }
 </style>

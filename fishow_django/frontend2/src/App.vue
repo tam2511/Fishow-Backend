@@ -45,11 +45,17 @@ export default {
 @import 'assets/scss/fishowStyles.scss';
 @import 'assets/scss/custom-styles/fonts.scss';
 #app {
+  height: 100%;
   transition-duration: 0.2s;
 }
 @media (min-width: 1023px) {
   .section-md {
     padding: 20px 0 90px;
   }
+}
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
 }
 </style>
