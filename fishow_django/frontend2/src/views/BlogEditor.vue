@@ -127,8 +127,13 @@
         <br />
       </div>
     </div>
-    <div class="row row-50" v-else>
-      Авторизуйтесь
+    <div class="row" v-else>
+      <warning
+        title="Оповещение"
+        body="Для возможности создания блога вам необходимо авторизоваться"
+        button="Войти"
+        redirect="/login"
+      />
     </div>
   </div>
 </template>
@@ -141,10 +146,12 @@ import BlogContentField from '@/components/blog/blogContentField'
 import videoField from '@/components/blog/videoField'
 import Multiselect from 'vue-multiselect'
 import { mapState } from 'vuex'
+import Warning from "../components/Warning";
 
 export default {
   name: 'BlogEditor',
   components: {
+    Warning,
     TextField,
     BlogContentField,
     imageField,
@@ -226,18 +233,6 @@ export default {
     ...mapState('user', ['username']),
   },
   methods: {
-    // open2() {
-    //   this.$message({
-    //     message: 'Отлично, у вас получилсоь!',
-    //     type: 'success',
-    //   })
-    // },
-    // open3(text) {
-    //   this.$message({
-    //     message: text,
-    //     type: 'warning',
-    //   })
-    // },
     reset() {
       this.$refs['dynamic-form'].resetFields()
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="login" v-if="!username">
+  <div class="container" id="login">
     <div class="note note--down">
       <p>{{ note }}</p>
     </div>
@@ -56,7 +56,7 @@
         </form>
       </section>
     </div>
-    <div v-else class="success">
+    <div class="success" v-else>
       <h3>Регистрация прошла успешно</h3>
       <h4>Проверьте свою почту для активации аккаунта</h4>
       <img
@@ -84,7 +84,7 @@ export default {
       error: null,
       errorEmail: null,
       loginError: null,
-      success: true,
+      success: false,
     }
   },
   computed: {
@@ -118,6 +118,7 @@ export default {
           }
           // this.errorEmail = true
         } else {
+          this.success = true
           // this.$router.push({
           //   name: 'home',
           // })

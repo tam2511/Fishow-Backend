@@ -222,18 +222,18 @@ p + .list-marked {
 		font-size: 12px;
 		font-weight: 600;
 		letter-spacing: 0.05em;
-		color: $gray-800;
+		color: var(--color-typo-primary);
 		text-align: center;
 		text-transform: uppercase;
 		background: var(--background-color-primary);
-		border: 1px solid var(--backround-color-border);
+		border: 1px solid var(--background-color-border);
 		border-radius: 4px;
 		transition: all .3s;
 
 		&:hover {
-			color: $white;
-			background: var(--background-color-primary);
-			border-color: var(--backround-color-border);
+			color: var(--color-typo-secondary);
+			background: var(--background-color-default);
+			border-color: var(--background-color-default);
 		}
 	}
 }
@@ -280,7 +280,7 @@ p + .list-marked {
 		> li {
 			&:not(:last-child) {
 				&::after {
-					background: rgba($white, .16);
+					background: rgba(var(--color-typo-primary), .16);
 				}
 			}
 		}

@@ -53,7 +53,7 @@ $product-gradient-color-2: #d5deeb;
 
 .bg-gray-100 {
 	.card-shop {
-		background-color: $white;
+		background-color: var(--background-color-default);
 	}
 }
 

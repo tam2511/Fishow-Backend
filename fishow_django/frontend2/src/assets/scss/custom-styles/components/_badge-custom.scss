@@ -11,7 +11,7 @@
 	line-height: 14px;
 	text-align: center;
 	text-transform: uppercase;
-	color: $white;
+	color: var(--color-typo-invert);
 	background: $gray-1;
 	border-radius: 4px;
 	> .icon {

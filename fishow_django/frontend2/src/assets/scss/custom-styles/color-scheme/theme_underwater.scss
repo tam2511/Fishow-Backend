@@ -37,12 +37,15 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
 .theme_color_fishow_underwater {
 
   /* Цвета блоков */
+  --background-color-gradient: linear-gradient(180deg, rgba(2,101,228,1) 0%, rgba(0,44,65,1) 100%);
   --background-color-primary: #1d6dc2;
   --background-color-brand: #3296f5;
   --background-color-default: #244599;
   --background-color-invert: #292929;
   --background-color-border: #e0e0e500;
   --background-color-warning: #{$color-bg-warning};
+  --background-color-footer-down: rgb(0, 44, 65) 100%;
+
   --color-bg-brand: #{$color-bg-brand}; /* Цвет фона брендированый */
   --color-bg-action: #{$color-bg-action}; /* Цвет фона действия */
   --color-bg-default: #{$color-bg-default}; /* Цвет дефолта */

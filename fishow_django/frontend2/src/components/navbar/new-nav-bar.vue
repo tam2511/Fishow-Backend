@@ -54,15 +54,6 @@ export default {
   },
   created() {
     this.setUserInfo()
-    console.log(this.username)
-    // console.log('this.username when created = ', this.username)
-    // if (this.username.username) {
-    //   this.navbarOptions.menuOptionsRight[0] = {
-    //     type: 'button',
-    //     text: 'Личный кабинет',
-    //     path: '/user-page',
-    //   }
-    // }
   },
 }
 </script>
@@ -70,33 +61,31 @@ export default {
 <style lang="scss" scoped>
 .fishow_navbar {
   font-size: 16px;
-  text-transform: uppercase;
   display: flex;
   flex-flow: row;
   align-items: center;
-  justify-content: center;
   position: sticky;
-  font-weight: 700;
   top: 0;
   left: 0;
   height: 65px;
   z-index: 100;
   width: 100%;
-  background-color: var(--background-color-brand);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.13);
+  background-color: var(--background-color-default);
   @media screen and (max-width: 600px) {
     font-size: 14px;
     justify-content: flex-start;
     overflow: auto;
   }
   a {
-    color: var(--color-link);
+    color: var(--color-typo-primary);
+    &:hover {
+      color: var(--color-typo-brand);
+    }
   }
   .fishow_navbar-nav {
     display: contents;
     white-space: nowrap;
-    /*flex-flow: row;*/
-    /*flex-wrap: nowrap;*/
-    /*width: 600px;*/
   }
   .fishow_nav-item {
     padding: 15px;

@@ -3,38 +3,12 @@
     <div class="row row-30">
       <div class="col-lg-8">
         <div class="blog-post">
-          <div class="blog-post-header">
-            <div class="blog-post-author">
-              <img
-                class="img-circle"
-                src="/static/assets/images/user-3-63x63.jpg"
-                alt=""
-                width="63"
-                height="63"
-              />
-              <p class="post-author">{{ blog.author }}</p>
-            </div>
-            <div class="blog-post-meta">
-              <time class="blog-post-time" datetime="2018"
-                ><span class="icon mdi mdi-clock"></span
-                >{{ blog.created_at }}</time
-              >
-              <div class="blog-post-comment">
-                <span class="icon mdi mdi-comment-outline"></span
-                >{{ blog.comments_count }}
-              </div>
-              <div class="blog-post-view">
-                <span class="icon fl-justicons-visible6"></span>0
-              </div>
-              <div class="badge badge-secondary">{{ blog.category }}</div>
-            </div>
-          </div>
           <div class="fishow-votes_container">
             <div
               :class="{
-                fishow_votes: this.$store.state.username,
+                fishow_votes: this.$store.state.user.username,
                 'fishow_votes fishow_votes_not_active': !this.$store.state
-                  .username,
+                  .user.username,
               }"
             >
               <svg
@@ -114,6 +88,35 @@
             </ul>
           </div>
         </div>
+        <div class="blog-post-footer">
+          <div class="blog-post-header">
+            <div class="blog-post-author">
+              <img
+                      class="img-circle"
+                      src="/static/assets/images/user-3-63x63.jpg"
+                      alt=""
+                      width="25"
+                      height="25"
+              />
+              <p class="post-author">{{ blog.author }}</p>
+            </div>
+            <div class="blog-post-meta">
+              <time class="blog-post-time" datetime="2018"
+              ><span class="icon mdi mdi-clock"></span
+              >{{ blog.created_at }}</time
+              >
+              <div class="blog-post-comment">
+                <span class="icon mdi mdi-comment-outline"></span
+                >{{ blog.comments_count }}
+              </div>
+              <div class="blog-post-view">
+                <span class="icon fl-justicons-visible6"></span>0
+              </div>
+              <div class="badge badge-secondary">{{ blog.category }}</div>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-sm-12">
             <!-- Heading Component-->
@@ -175,9 +178,9 @@
       </div>
       <div class="col-lg-4">
         <div class="block-aside">
-          <block-categories />
-          <block-spotlight />
-          <block-tags />
+<!--          <block-categories />-->
+<!--          <block-spotlight />-->
+<!--          <block-tags />-->
         </div>
       </div>
     </div>
@@ -367,6 +370,11 @@ export default {
     white-space: pre-line;
   }
 }
+.blog-post-footer {
+  background: var(--background-color-primary);
+  border: 1px solid var(--background-color-border);
+  padding: 20px;
+}
 .blog-post-text {
   text-align: justify;
 }
@@ -383,4 +391,5 @@ export default {
   margin-left: 30px;
   margin-top: 0;
 }
+
 </style>

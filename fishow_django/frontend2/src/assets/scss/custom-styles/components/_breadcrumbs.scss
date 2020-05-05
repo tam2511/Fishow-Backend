@@ -32,7 +32,7 @@ $breadcrumb-separator: "\f238";
       color: $breadcrumb-color;
     }
   }
-  
+
   li {
     position: relative;
     display: inline-block;
@@ -52,20 +52,20 @@ $breadcrumb-separator: "\f238";
       font-size: 16px;
       font-style: normal;
       font-weight: 200;
-      color: $white;
+      color: var(--color-typo-primary);
       transform: translateY(-50%);
     }
   }
-  
+
   li:last-child {
     &:after { display: none; }
   }
-  
+
   a:hover,
   li.active {
     color: $breadcrumb-active-color;
   }
-  
+
   li.active {
     top: 1px;
   }

@@ -24,7 +24,7 @@
     border: none;
   }
   .close{
-    color: $white;
+    color: var(--color-typo-primary);
     opacity: 1;
     text-shadow: none;
     cursor: pointer;
@@ -33,7 +33,7 @@
       color: var(--color-bg-default);
     }
   }
-  
+
   &.show{
     .modal-dialog{
       transform: translate(0, -50%);

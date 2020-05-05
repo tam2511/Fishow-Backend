@@ -110,7 +110,7 @@ export default {
           borderColor: 'var(--background-color-border)',
           row: {
             colors: ['var(--background-color-default)', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5,
+            opacity: 0.2,
           },
         },
         markers: {
@@ -199,6 +199,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+//#5697ec
 .button-container {
   display: flex;
   justify-content: flex-start;

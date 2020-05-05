@@ -54,7 +54,7 @@ html {
 		@include btn-variant($blue-bell, $fiord, $fiord, $white, $secondary, $secondary);
 
 		&.button-icon .icon {
-			color: $white;
+			color: var(--color-typo-primary);
 		}
 	}
 
@@ -100,7 +100,7 @@ html {
 
 	%context-dark {
 		.button-gray-outline {
-			@include btn-variant($white, transparent, $white, $gray-800, $yellow, $yellow);
+			@include btn-variant(var(--color-typo-primary), transparent, var(--color-typo-primary), $gray-800, $yellow, $yellow);
 		}
 	}
 
@@ -300,13 +300,13 @@ html {
 	&,
 	&:active,
 	&:focus {
-		color: $white;
+		color: var(--color-typo-primary);
 		background: var(--color-bg-default);
 		border-color: var(--background-color-border);
 	}
 
 	&:hover {
-		color: $white;
+		color: var(--color-typo-primary);
 		background: $black;
 		border-color: $black;
 	}
@@ -331,17 +331,17 @@ html {
 
 	flex-basis: calc(50% - 12px);
 	padding: 20px;
-	color: $white;
+	color: var(--color-typo-primary);
 	text-align: right;
 	transition: all .3s;
 	&:hover {
-		color: $white;
+		color: var(--color-typo-primary);
 		.button-media-icon {
 			transform: translate(5px, -50%);
 		}
 	}
 	&:focus {
-		color: $white;
+		color: var(--color-typo-primary);
 	}
 	.ie-11 & {
 		max-width: 178px;
@@ -351,7 +351,7 @@ html {
 .button-media-title {
 	font-size: 24px;
 	font-weight: 400;
-	color: $white;
+	color: var(--color-typo-primary);
 	text-transform: inherit;
 }
 
@@ -371,7 +371,7 @@ html {
 	position: absolute;
 	top: 50%;
 	font-size: 130px;
-	color: $white;
+	color: var(--color-typo-primary);
 	opacity: .25;
 	transform: translate(0, -50%);
 	transition: all .3s;
@@ -427,7 +427,7 @@ html {
 	height: 85px;
 	max-width: 178px;
 	padding: 20px 14px;
-	color: $white;
+	color: var(--color-typo-primary);
 	flex-basis: calc(50% - 10px);
 	border-radius: 4px;
 	&:before {
@@ -441,7 +441,7 @@ html {
 		transition: all .3s;
 	}
 	&:hover {
-		color: $white;
+		color: var(--color-typo-primary);
 		&:before {
 			right: 0;
 			width: 100%;
@@ -449,7 +449,7 @@ html {
 		}
 	}
 	&:focus {
-		color: $white;
+		color: var(--color-typo-primary);
 	}
 	.icon {
 		min-width: 28px;
