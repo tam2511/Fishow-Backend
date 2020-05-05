@@ -164,6 +164,9 @@ export default {
       this.step = 0
     },
   },
+  created() {
+    document.title = 'Fishow - Прогноз'
+  },
 }
 </script>
 
