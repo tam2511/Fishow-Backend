@@ -97,6 +97,7 @@ export default {
 <style scoped lang="scss">
 body,
 input {
+  color: var(--color-typo-primary);
   font-size: 1.2rem;
 }
 
@@ -105,7 +106,7 @@ fieldset {
 }
 
 .note {
-  background: #ff9e80;
+  background: var(--background-color-primary);
   padding: 0.75rem 1.5rem;
   box-sizing: border-box;
   position: absolute;
@@ -116,9 +117,10 @@ fieldset {
 }
 
 .login {
+  color: var(--color-typo-primary);
   z-index: 1;
   position: relative;
-  background: white;
+  background: var(--background-color-primary);
   padding: 0.75rem 1.5rem 1.5rem;
   box-sizing: border-box;
   margin: auto;
