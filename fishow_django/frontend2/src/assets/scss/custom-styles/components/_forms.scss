@@ -406,7 +406,7 @@ textarea.form-input {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: $white;
+      color: var(--color-typo-primary);
     }
   }
 }
@@ -455,7 +455,7 @@ textarea.form-input {
   border-radius: $form-input-border-radius;
   font-family: $font-family-sec;
   font-size: 16px;
-  font-weight: 500; 
+  font-weight: 500;
 
   [class*='custom-dummy'] {
     top: 0;
@@ -868,7 +868,7 @@ textarea.form-input {
   .form-input {
     text-align: center;
   }
-  
+
   &-inline {
     .button {
       padding: 10px 12px;

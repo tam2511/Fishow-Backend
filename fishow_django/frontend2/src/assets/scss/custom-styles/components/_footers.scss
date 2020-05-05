@@ -180,7 +180,7 @@
   .rd-form {
     .form-label,
     .form-input {
-      color: $white;
+      color: var(--color-typo-primary);
     }
 
     .form-input {

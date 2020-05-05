@@ -33,10 +33,10 @@
                 </div>
               </article>
               <div class="group-md group-middle">
-                <a
+                <router-link
                   class="button button-sm button-gray-outline"
-                  href="{% url 'contact_us' %}"
-                  >Социальные сети</a
+                 to="/contact_us"
+                  >Социальные сети</router-link
                 >
                 <div class="align-items-center">
                   <ul class="list-inline list-inline-xs">
@@ -70,35 +70,7 @@
               <div class="divider-medium divider-secondary"></div>
               <div class="wrap-posts-classic">
                 <!-- Post Classic-->
-                <article class="post-classic">
-                  <div class="post-classic-main">
-                    <p class="post-classic-title">
-                      <a href="{% url 'blog_post' %}"
-                        >Which team will win the world championship series this
-                        year?</a
-                      >
-                    </p>
-                    <div class="post-classic-time">
-                      <span class="icon mdi mdi-clock"></span>
-                      <time datetime="2018">April 15, 2018</time>
-                    </div>
-                  </div>
-                </article>
-                <!-- Post Classic-->
-                <article class="post-classic">
-                  <div class="post-classic-main">
-                    <p class="post-classic-title">
-                      <router-link to="/"
-                        >After seven days off, LeBron James and Cavs rout
-                        Raptors
-                      </router-link>
-                    </p>
-                    <div class="post-classic-time">
-                      <span class="icon mdi mdi-clock"></span>
-                      <time datetime="2018">April 15, 2018</time>
-                    </div>
-                  </div>
-                </article>
+                <lastblogs/>
               </div>
             </div>
             <div class="col-10 col-md-4 col-lg-3">
@@ -193,8 +165,10 @@
 </template>
 
 <script>
+import Lastblogs from "./Home/lastblogs";
 export default {
   name: 'FIshow_Footer',
+  components: {Lastblogs},
 }
 </script>
 

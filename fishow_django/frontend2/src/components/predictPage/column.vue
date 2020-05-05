@@ -1,6 +1,5 @@
 <template>
   <div class="results-prediction">
-    <section class="section section-variant-1 section-view">
       <div class="fishow_container container container__small" v-if="isLoading">
         <span
           >{{ this.areal }} / {{ this.city }} | Прогноз на близжайшие 10 дней -
@@ -122,15 +121,14 @@
         <!--        Ультрафиолетовый индекс, баллы-->
         <!--      </div>-->
       </div>
-      <div v-if="error !== ''" class="container container__small">
-        <h2>{{ this.error }}</h2>
-        <router-link
-          :to="{ name: 'PredictPage' }"
-          class="button button-xl badge-orange"
-          >Назад</router-link
-        >
+      <div v-if="error !== ''" class="container">
+        <warning
+          title="Ошибка"
+          :body="error"
+          button="Главная"
+          redirect="/"
+        />
       </div>
-    </section>
   </div>
 </template>
 
@@ -138,6 +136,7 @@
 import Chart from './chart'
 import { mapState } from 'vuex'
 import { Loading } from 'element-ui'
+import Warning from "../Warning";
 export default {
   name: 'colum',
   props: ['areal', 'date', 'fish', 'city'],
@@ -147,7 +146,7 @@ export default {
       isLoading: false,
     }
   },
-  components: { Chart },
+  components: {Warning, Chart },
 
   methods: {
     loadingfunc() {

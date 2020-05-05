@@ -4,8 +4,8 @@
       <div class="fishow-votes_container">
         <div
           :class="{
-            fishow_votes: this.$store.state.username,
-            'fishow_votes fishow_votes_not_active': !this.$store.state.username,
+            fishow_votes: this.$store.state.user.username,
+            'fishow_votes fishow_votes_not_active': !this.$store.state.user.username,
           }"
         >
           <svg

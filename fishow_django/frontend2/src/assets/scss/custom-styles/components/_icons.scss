@@ -130,7 +130,7 @@ a.icon-gray-500 {
   overflow: hidden;
   width: 60px;
   height: 60px;
-  color: $white;
+  color: var(--color-typo-primary);
 
   &::before {
     position: absolute;
@@ -144,13 +144,13 @@ a.icon-gray-500 {
   }
   &:hover {
     &::before {
-      color: $white;
+      color: var(--color-typo-primary);
       transform: translate(-50%, -50%) scale(1.05);
     }
   }
   &:focus {
     &::before {
-      color: $white;
+      color: var(--color-typo-primary);
     }
   }
 }
@@ -263,11 +263,12 @@ a.icon-gray-500 {
   line-height: 38px;
   text-align: center;
   border-radius: $border-radius;
-  color: $white;
+  color: var(--color-typo-warning);
   background: $gray-8;
 
   &:hover {
-    color: $white;
-    background: var(--color-bg-default);
+    color: var(--color-typo-warning);
+    background: var(--background-color-gradient);
+    border: 1px solid var(--background-color-border);
  }
 }

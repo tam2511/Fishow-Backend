@@ -20,7 +20,7 @@
   background: var(--background-color-default);
   border: 1px solid $gray-1;
   text-align: left;
-  
+
   p {
     letter-spacing: .025em;
   }
@@ -32,16 +32,16 @@
 
   .box-minimal-icon,
   .box-minimal-title {
-    color: $white;
+    color: var(--color-typo-primary);
   }
 }
 
 .box-minimal-gray-2 {
   color: rgba($white, .5);
   background: $gray-2;
-  
+
   .box-minimal-title {
-    color: $white;
+    color: var(--color-typo-primary);
   }
 
   .box-minimal-icon {
@@ -52,7 +52,7 @@
 .box-minimal-header {
   display: table;
   margin-left: -10px;
-  
+
   > * {
     display: table-cell;
     padding: 0 10px;

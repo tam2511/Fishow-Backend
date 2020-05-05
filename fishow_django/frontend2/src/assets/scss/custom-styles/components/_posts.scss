@@ -976,7 +976,7 @@
 	font-size: 22px;
 	font-weight: 600;
 	a {
-		color: $white;
+		color: var(--color-typo-primary);
 		&:hover {
 			color: var(--color-bg-default);
 		}
@@ -1073,7 +1073,7 @@
 
 .post-gloria-title {
 	font-weight: 600;
-	color: $white;
+	color: var(--color-typo-primary);
 }
 
 .post-gloria-meta {
@@ -1089,7 +1089,7 @@
 .post-gloria-text {
 	position: relative;
 	padding-left: 40px;
-	color: $white;
+	color: var(--color-typo-primary);
 	svg {
 		position: absolute;
 		top: 5px;
@@ -1387,7 +1387,7 @@
 
 .post-alice-title {
 	font-weight: 600;
-	color: $white;
+	color: var(--color-typo-primary);
 	will-change: transform;
 }
 
@@ -1719,7 +1719,7 @@
 	font-weight: 600;
 
 	a {
-		color: $white;
+		color: var(--color-typo-primary);
 
 		&:hover {
 			color: $secondary;
@@ -1734,7 +1734,7 @@
 
 .post-lily-comment {
 	a {
-		color: $white;
+		color: var(--color-typo-primary);
 
 		&:hover {
 			color: var(--color-bg-default);
@@ -1745,7 +1745,7 @@
 .post-lily-meta {
 	@include group(15px, 7px);
 	@include postMeta($secondary);
-	color: $white;
+	color: var(--color-typo-primary);
 }
 
 .post-lily + * { margin-top: 30px; }

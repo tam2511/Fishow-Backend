@@ -58,7 +58,7 @@ $tabs-corporate-border-color: $gray-1;
     border: 0;
   }
   .nav-link.active {
-    cursor: default; 
+    cursor: default;
   }
 }
 
@@ -141,7 +141,7 @@ $tabs-corporate-border-color: $gray-1;
     position: relative;
     display: block;
   }
-  
+
   .nav-item {
     transform: translate3d(0, 0, 0);
   }
@@ -191,7 +191,7 @@ $tabs-corporate-border-color: $gray-1;
 @include media-breakpoint-up(md) {
   //
   // Horizontal tabs
-  // 
+  //
   .tabs-horizontal {
     &.tabs-corporate {
 
@@ -405,12 +405,12 @@ $tabs-corporate-border-color: $gray-1;
       transition: all .3s;
       pointer-events: none;
     }
-    &:hover, 
+    &:hover,
     &.active {
-      color: $white;
+      color: var(--color-typo-primary);
       background: $primary;
     }
-    
+
     &.active {
       &:before {
         bottom: -6px;
@@ -423,7 +423,7 @@ $tabs-corporate-border-color: $gray-1;
 @include media-breakpoint-up(md) {
   //
   // Horizontal tabs
-  // 
+  //
   .tabs-horizontal {
 
     // Tabs Corporate
@@ -443,7 +443,7 @@ $tabs-corporate-border-color: $gray-1;
 @include media-breakpoint-up(lg) {
   //
   // Horizontal tabs
-  // 
+  //
   .tabs-horizontal {
 
     // Tabs Corporate
@@ -472,7 +472,7 @@ $tabs-corporate-border-color: $gray-1;
 @include media-breakpoint-up(xl) {
   //
   // Horizontal tabs
-  // 
+  //
   .tabs-horizontal {
   }
 }
@@ -496,7 +496,7 @@ $tabs-corporate-border-color: $gray-1;
     min-width: inherit;
     border-bottom: none;
     color: $gray-500;
-    overflow: hidden; 
+    overflow: hidden;
   }
   .button-nav {
     position: relative;
@@ -518,7 +518,7 @@ $tabs-corporate-border-color: $gray-1;
     &:hover {
       background: $primary;
       .icon {
-        color: $white;
+        color: var(--color-typo-primary);
       }
     }
 

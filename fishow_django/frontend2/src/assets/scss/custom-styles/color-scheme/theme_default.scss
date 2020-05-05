@@ -57,7 +57,7 @@ $color-link-external: $color-base-path; /* Цвет дополнительной
   /* Цвета текста */
   --color-typo-brand: #{$color-typo-brand}; /* Цвет брендового текста */
   --color-typo-primary: #{$color-typo-primary}; /* Цвет основного текста */
-  --color-typo-invert: #{$color-typo-primary}; /* Цвет основного текста */
+  --color-typo-invert: #{$color-typo-invert}; /* Цвет основного текста */
   --color-typo-success: #{$color-typo-success}; /* Цвет текста успеха */
   --color-typo-warning: #{$color-typo-warning}; /* Цвет текста предупреждения */
   --color-typo-alert: #{$color-typo-alert}; /* Цвет текста ошибки */
