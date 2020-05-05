@@ -20,5 +20,5 @@ def view_blog(self, request, view, obj):
             blog.views.add(user)
             blog.save()
 
-class DjangoObjectPermissionsOrAnonReadOnly(permissions.DjangoObjectPermissions):
+class DjangoObjectPermissionsOrAnonReadOnly(permissions.BasePermission):
     authenticated_users_only = False
