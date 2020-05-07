@@ -294,9 +294,7 @@ export default {
           category: this.blog_category,
           tags: this.blog_tags,
         }
-        console.log('blog = ', blog)
         apiService(endpoint, method, blog).then((blog_data) => {
-          console.log('blog_data = ', blog_data)
           if (blog_data.detail) {
             this.error = 'Что то пошло не так, ошибка = ' + blog_data.detail
           } else {

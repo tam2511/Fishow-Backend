@@ -71,7 +71,6 @@ export default {
   },
   methods: {},
   async beforeRouteEnter(to, from, next) {
-    console.log('to.params.id = ', Number(to.params.id))
     // get the answer's data from the REST API and set two data properties for the component
     const endpoint = `/api/comments/${Number(to.params.id)}/`
     const data = await apiService(endpoint)
@@ -80,8 +79,6 @@ export default {
     )
   },
   created() {
-    console.log('this.username =', this.username)
-    // console.log('this.requestUser =', this.requestUser)
   },
 }
 </script>

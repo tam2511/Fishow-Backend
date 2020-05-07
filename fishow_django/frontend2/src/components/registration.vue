@@ -100,7 +100,6 @@ export default {
         password1: this.password,
         password2: this.password,
       }).then((date) => {
-        console.log(date)
         if (date['non_field_errors']) {
           this.error = true
         } else if (date['email'] || date['username']) {

@@ -35,7 +35,6 @@ export default {
           } else {
             this.msg = data
             this.result = true
-            console.log('this.data = ', data)
           }
         })
         .catch((e) => {
