@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="row row-50" v-if="username">
+  <div class="container" v-if="loading">
+    <div class="row row-50" :style="username ? '' : 'filter:blur(5px)'">
       <div class="col-lg-7 col-xl-8" v-if="blog_category !== 'Отчет'">
         <!-- Heading Component-->
         <article class="heading-component">
@@ -127,14 +127,16 @@
         <br />
       </div>
     </div>
-    <div class="row" v-else>
+    <div class="warning-overlay" v-if="!username">
       <warning
-        title="Оповещение"
-        body="Для возможности создания блога вам необходимо авторизоваться"
-        button="Войти"
-        redirect="/login"
+              class="warning-popin"
+              title="Оповещение"
+              body="Для возможности создания блога вам необходимо авторизоваться"
+              button="Войти"
+              redirect="/login"
       />
     </div>
+
   </div>
 </template>
 
@@ -230,6 +232,9 @@ export default {
     }
   },
   computed: {
+    loading() {
+      return this.username !== null
+    },
     ...mapState('user', ['username']),
   },
   methods: {

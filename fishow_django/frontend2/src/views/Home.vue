@@ -33,7 +33,7 @@
               v-show="next"
               @click="checkNext"
             >
-              Load more
+              Загрузить больше
             </button>
           </div>
         </div>
@@ -51,11 +51,11 @@
                   </h5>
                 </div>
               </article>
-              <!--                <HotPostMinimal-->
-              <!--                  v-for="blog in computedObj"-->
-              <!--                  :blog="blog"-->
-              <!--                  :key="blog.pk"-->
-              <!--                />-->
+                              <HotPostMinimal
+                                v-for="blog in minPost"
+                                :blog="blog"
+                                :key="blog.pk"
+                              />
             </div>
             <!-- Мини прогнозы -->
             <div class="aside-component">
@@ -131,6 +131,9 @@ export default {
   },
 
   computed: {
+    minPost() {
+      return this.blogs.filter((blog, index) => index < 3);
+    },
     ...mapState('blogs', ['blogs', 'next']),
   },
   methods: {

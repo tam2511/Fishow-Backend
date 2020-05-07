@@ -25,22 +25,22 @@ import {
   Step,
 } from 'element-ui'
 
-Vue.use(DynamicForm)
-Vue.component(Button.name, Button)
-Vue.component(Select.name, Select)
-Vue.component(Form.name, Form)
-Vue.component(FormItem.name, FormItem)
-Vue.component(Input.name, Input)
-Vue.component(Option.name, Option)
-Vue.component(Steps.name, Steps)
-Vue.component(Step.name, Step)
-Vue.component(Switch.name, Switch)
-Vue.use(VueApexCharts)
-Vue.use(VueAutosizer)
-Vue.config.productionTip = false
+Vue.use(DynamicForm);
+Vue.component(Button.name, Button);
+Vue.component(Select.name, Select);
+Vue.component(Form.name, Form);
+Vue.component(FormItem.name, FormItem);
+Vue.component(Input.name, Input);
+Vue.component(Option.name, Option);
+Vue.component(Steps.name, Steps);
+Vue.component(Step.name, Step);
+Vue.component(Switch.name, Switch);
+Vue.use(VueApexCharts);
+Vue.use(VueAutosizer);
+Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount('#app')
+}).$mount('#app');

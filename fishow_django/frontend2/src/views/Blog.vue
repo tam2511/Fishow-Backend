@@ -135,7 +135,7 @@
                 :comment="comment"
                 :key="index"
                 :slug="slug"
-                :requestUser="requestUser"
+                :requestUser="userName"
                 @deleteComment="deleteComment"
               />
               <div class="comment-box" v-if="userName">
@@ -169,7 +169,7 @@
                   </form>
                 </div>
               </div>
-              <div v-else>
+              <div class="comment-notUser" v-else>
                 Для возможности комментирования пожалуйста авторизуйтесь
               </div>
             </div>
@@ -244,14 +244,6 @@ export default {
     },
     setPageTitle(title) {
       document.title = title
-    },
-    getUser() {
-      const wait = setInterval(() => {
-        if (this.$store.state.username !== null) {
-          clearInterval(wait)
-          this.requestUser = this.$store.state.username
-        }
-      }, 100)
     },
     getBlogData() {
       const endpoint = `/api/blogs/${this.slug}/`
@@ -339,7 +331,7 @@ export default {
         const endpoint = `/api/blogs/${this.slug}/comment/`
         apiService(endpoint, 'POST', { body: this.commentBody }).then(
           (data) => {
-            this.comments.unshift(data)
+            this.comments.push(data)
           }
         )
         this.commentBody = null
@@ -356,7 +348,6 @@ export default {
     this.getBlogData()
     this.getCommentData()
     this.$store.dispatch('user/setUserInfo')
-    this.getUser()
   },
 }
 </script>
@@ -391,5 +382,10 @@ export default {
   margin-left: 30px;
   margin-top: 0;
 }
+  .comment-notUser {
+    padding: 20px;
+    color: #91171c;
+    text-align: center;
+  }
 
 </style>

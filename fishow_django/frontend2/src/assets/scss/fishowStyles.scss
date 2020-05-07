@@ -137,3 +137,17 @@
   font-size: 24px;
   margin-left: 15px;
 }
+.warning-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  filter: blur(33);
+}
+.warning-popin {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
