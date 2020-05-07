@@ -136,7 +136,6 @@
               redirect="/login"
       />
     </div>
-
   </div>
 </template>
 

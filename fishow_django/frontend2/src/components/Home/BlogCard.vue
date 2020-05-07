@@ -212,7 +212,7 @@ export default {
   }
 }
 .post-corporate-blog {
-  max-height: 350px;
+  max-height: 750px;
   overflow: hidden;
 }
 </style>
