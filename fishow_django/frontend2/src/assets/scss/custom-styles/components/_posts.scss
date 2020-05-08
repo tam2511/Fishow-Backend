@@ -518,7 +518,7 @@
 			top: 0;
 			right: 1px;
 			padding: 14px 19px;
-			background: var(--background-color-default);
+			background: var(--background-color-primary);
 			border: 1px solid var(--background-color-border);
 			border-radius: 3px;
 			margin-top: 0;
@@ -639,7 +639,7 @@
 // Post Creative
 //
 .post-creative {
-	background: var(--background-color-default);
+	background: var(--background-color-primary);
 	transition: all .3s;
 }
 
@@ -708,7 +708,7 @@
 	.inline-toggle-parent {
 		position: absolute;
 		right: 20px;
-		background: var(--background-color-default);
+		background: var(--background-color-primary);
 		transition: all .4s;
 
 		&.active {

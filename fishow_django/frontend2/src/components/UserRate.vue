@@ -8,7 +8,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, index) in userList" :key="user.username">
+        <tr v-for="(user, index) in userRating" :key="user.username">
           <td>
             <span>{{ index + 1 }}</span>
           </td>
@@ -42,6 +42,12 @@ export default {
   data() {
     return {
       userList: [],
+      lengthOfList: 5
+    }
+  },
+  computed: {
+    userRating() {
+      return this.userList.filter((user, index) => index < this.lengthOfList);
     }
   },
   methods: {
@@ -49,9 +55,7 @@ export default {
       let endpoint = '/api/user_all/'
 
       apiService(endpoint).then((data) => {
-        // console.log(data, data.length)
         this.userList.push(...data)
-        console.log(this.userList)
       })
     },
   },

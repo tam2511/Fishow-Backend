@@ -8,26 +8,32 @@ export const state = {
 }
 
 export const mutations = {
+  SET_NEXT(state, next) {
+    state.next = next
+  },
   SET_BLOGS(state, blogs) {
     state.blogs = blogs
+
   },
 }
 
 export const actions = {
   fetchBlogs({ commit }) {
     let endpoint = '/api/blogs/'
-    if (this.state.next) {
-      endpoint = this.state.next
+
+    if (this.state.blogs.next) {
+      endpoint = this.state.blogs.next
     }
-    const blogs = []
+    let next = null;
     apiService(endpoint).then((data) => {
-      blogs.push(...data.results)
+      this.state.blogs.blogs.push(...data.results)
       if (data.next) {
-        this.state.next = data.next
+        next = data.next
       } else {
-        this.state.next = null
+        next = null
       }
-      commit('SET_BLOGS', blogs)
+      commit('SET_BLOGS', this.state.blogs.blogs)
+      commit('SET_NEXT', next)
     })
   },
 }

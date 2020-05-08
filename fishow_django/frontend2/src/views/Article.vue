@@ -12,23 +12,20 @@
         <div class="row row-30">
           <articles v-for="blog in blogs" :key="blog.pk" :blog="blog" />
         </div>
-        <nav class="pagination-wrap" aria-label="Page navigation">
+        <nav class="pagination-wrap" aria-label="Page navigation" v-if="next">
           <ul class="pagination">
             <li class="page-item active">
               <a class="page-link" href="#">1</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><span class="page-link">...</span></li>
-            <li class="page-item"><a class="page-link" href="#">14</a></li>
+            <li class="page-item"><a class="page-link" href="#" @click="checkNext">2</a></li>
           </ul>
         </nav>
       </div>
       <div class="col-lg-4">
         <div class="block-aside">
-          <block-categories />
-          <trending-news />
-          <block-tags />
+<!--          <block-categories />-->
+<!--          <trending-news />-->
+<!--          <block-tags />-->
         </div>
       </div>
     </div>
@@ -36,11 +33,11 @@
 </template>
 
 <script>
-import { apiService } from '../common/api.service'
 import blockCategories from '../components/blog/blockCategories'
 import TrendingNews from '../components/TrendingNews'
 import BlockTags from '../components/blog/blockTags'
 import Articles from '../components/article/articles'
+import {mapActions, mapState} from "vuex";
 export default {
   name: 'Article',
   components: {
@@ -49,30 +46,22 @@ export default {
     TrendingNews,
     blockCategories,
   },
-  data() {
-    return {
-      blogs: [],
-    }
+
+  computed: {
+    ...mapState('blogs', ['blogs', 'next']),
   },
   methods: {
-    getBlogs() {
-      let endpoint = '/api/blogs/'
-      if (this.next) {
-        endpoint = this.next
-      }
-      this.loadingBlogs = true
-      apiService(endpoint).then((data) => {
-        this.blogs.push(...data.results)
-        if (data.next) {
-          this.next = data.next
-        } else {
-          this.next = null
-        }
-      })
+    setPageTitle(title) {
+      document.title = title
     },
+    checkNext() {
+      this.$store.dispatch('blogs/fetchBlogs')
+    },
+    ...mapActions('blogs', ['fetchBlogs']),
   },
   created() {
-    this.getBlogs()
+    this.fetchBlogs()
+    this.setPageTitle('Fishow - Все блоги')
   },
 }
 </script>

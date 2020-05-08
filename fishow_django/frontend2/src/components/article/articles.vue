@@ -25,7 +25,7 @@
       <div class="post-creative-footer">
         <div class="post-creative-comment">
           <span class="icon mdi mdi-comment-outline"></span
-          ><a href="#">{{ commentCount }} Comments</a>
+          ><a href="#">{{ blog.comments_count }} Comments</a>
         </div>
         <div class="post-creative-share">
           <div class="inline-toggle-parent">
