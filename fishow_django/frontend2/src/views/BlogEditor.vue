@@ -22,14 +22,16 @@
                   ></textarea>
                 </div>
               </div>
+              <transition-group name="slide-fade" tag="div" appear>
+                <template v-for="(article, index) in articles">
+                  <component
+                          :is="article"
+                          :key="article[index]"
+                          :counter="article + index"
+                  ></component>
+                </template>
+              </transition-group>
 
-              <template v-for="(article, index) in articles">
-                <component
-                  :is="article"
-                  :key="article[index]"
-                  :counter="article + index"
-                ></component>
-              </template>
             </div>
 
             <div class="col-md-12 fishow_container">

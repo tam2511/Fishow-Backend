@@ -33,6 +33,8 @@
 		C284.929,199.378,283.984,197.188,282.082,195.285z"
             />
           </svg>
+          <span data-votes-counter>{{ likesCounter - dislikesCounter }}</span>
+
           <svg
             :class="{
               'fishow-votes_down__active': userDisLikedBlog,
@@ -58,7 +60,6 @@
             />
           </svg>
         </div>
-        <span data-votes-counter>{{ likesCounter - dislikesCounter }}</span>
         <div class="post-corporate-header">
           <!-- Badge-->
           <div class="badge badge-primary">{{ blog.category }}</div>

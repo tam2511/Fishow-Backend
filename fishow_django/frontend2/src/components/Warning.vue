@@ -3,15 +3,22 @@
             <h5 class="card-header">{{title}}</h5>
             <div class="card-body">
                 <p class="card-text">{{body}}</p>
-                <router-link :to="redirect" class="button button-gray-outline">{{button}}</router-link>
+                <button @click="setShow" class="button button-gray-outline">{{button}}</button>
             </div>
         </div>
 </template>
 
 <script>
+    import {mapState, mapActions} from 'vuex'
     export default {
         name: "Warning",
-        props:['title', 'body','button', 'redirect']
+        props:['title', 'body','button', 'redirect'],
+        computed: {
+            ...mapState('login', ['show'])
+        },
+        methods: {
+            ...mapActions('login', ['setShow'])
+        }
     }
 </script>
 

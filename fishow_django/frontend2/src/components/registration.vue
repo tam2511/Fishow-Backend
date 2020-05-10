@@ -1,72 +1,88 @@
 <template>
-  <div class="container" id="login">
-    <div class="note note--down">
-      <p>{{ note }}</p>
-    </div>
-    <div class="login" v-if="!success">
-      <header class="login--header">
-        <span>Регистрация</span>
-      </header>
-      <section class="login--section">
-        <form class="login--form" @submit.prevent="makeAuth">
-          <fieldset>
-            <input
-              type="login"
-              placeholder="Логин"
-              v-model="login"
-              required
-              @focus="inputFocus"
-            />
-          </fieldset>
-          <div class="error" v-if="loginError">
-            {{ loginError }}
+<!--  <div class="container" id="login">-->
+<!--    <div class="note note&#45;&#45;down">-->
+<!--      <p>{{ note }}</p>-->
+<!--    </div>-->
+<!--    <div class="login" v-if="!success">-->
+<!--      <header class="login&#45;&#45;header">-->
+<!--        <span>Регистрация</span>-->
+<!--      </header>-->
+<!--      <section class="login&#45;&#45;section">-->
+<!--        <form class="login&#45;&#45;form" @submit.prevent="makeAuth">-->
+<!--          <fieldset>-->
+<!--            <input-->
+<!--              type="login"-->
+<!--              placeholder="Логин"-->
+<!--              v-model="login"-->
+<!--              required-->
+<!--              @focus="inputFocus"-->
+<!--            />-->
+<!--          </fieldset>-->
+<!--          <div class="error" v-if="loginError">-->
+<!--            {{ loginError }}-->
+<!--          </div>-->
+<!--          <fieldset>-->
+<!--            <input-->
+<!--              type="email"-->
+<!--              placeholder="Почта"-->
+<!--              v-model="email"-->
+<!--              required-->
+<!--              @focus="inputFocus"-->
+<!--            />-->
+<!--          </fieldset>-->
+<!--          <div class="error" v-if="errorEmail">-->
+<!--            {{ errorEmail }}-->
+<!--          </div>-->
+<!--          <fieldset>-->
+<!--            <input-->
+<!--              type="password"-->
+<!--              placeholder="Пароль"-->
+<!--              v-model="password"-->
+<!--              @focus="inputFocus"-->
+<!--              required-->
+<!--            />-->
+<!--          </fieldset>-->
+<!--          <div class="error" v-if="error">-->
+<!--            Неверно указана почта или пароль-->
+<!--          </div>-->
+<!--          <fieldset>-->
+<!--            <button type="submit" class="button button-default">-->
+<!--              Подтвердить-->
+<!--            </button>-->
+<!--            <router-link class="button button-default" to="/login"-->
+<!--              >Уже зарегистрирован</router-link-->
+<!--            >-->
+<!--          </fieldset>-->
+<!--        </form>-->
+<!--      </section>-->
+<!--    </div>-->
+<!--    <div class="success" v-else>-->
+<!--      <h3>Регистрация прошла успешно</h3>-->
+<!--      <h4>Проверьте свою почту для активации аккаунта</h4>-->
+<!--      <img-->
+<!--        width="300"-->
+<!--        height="300"-->
+<!--        src="static/assets/images/source.gif"-->
+<!--        alt=""-->
+<!--      />-->
+<!--    </div>-->
+<!--  </div>-->
+  <div class="container">
+    <div class="logmod">
+      <div class="logmod__wrapper">
+        <div class="logmod__container">
+          <ul class="logmod__tabs">
+            <li data-tabtar="lgm-2" class=""><router-link to="/login" tabindex="0" >Вход</router-link></li>
+            <li data-tabtar="lgm-1" class="current"><router-link to="/registration" tabindex="0">Регистрация</router-link></li>
+          </ul>
+          <div class="logmod__tab-wrapper">
           </div>
-          <fieldset>
-            <input
-              type="email"
-              placeholder="Почта"
-              v-model="email"
-              required
-              @focus="inputFocus"
-            />
-          </fieldset>
-          <div class="error" v-if="errorEmail">
-            {{ errorEmail }}
-          </div>
-          <fieldset>
-            <input
-              type="password"
-              placeholder="Пароль"
-              v-model="password"
-              @focus="inputFocus"
-              required
-            />
-          </fieldset>
-          <div class="error" v-if="error">
-            Неверно указана почта или пароль
-          </div>
-          <fieldset>
-            <button type="submit" class="button button-default">
-              Подтвердить
-            </button>
-            <router-link class="button button-default" to="/login"
-              >Уже зарегистрирован</router-link
-            >
-          </fieldset>
-        </form>
-      </section>
+        </div>
+      </div>
     </div>
-    <div class="success" v-else>
-      <h3>Регистрация прошла успешно</h3>
-      <h4>Проверьте свою почту для активации аккаунта</h4>
-      <img
-        width="300"
-        height="300"
-        src="static/assets/images/source.gif"
-        alt=""
-      />
-    </div>
+
   </div>
+
 </template>
 
 <script>

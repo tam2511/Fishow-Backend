@@ -27,34 +27,51 @@
         <router-link class="fishow_nav-link" to="/forum">Форум</router-link>
       </span>
     </div>
-    <router-link to="/login" v-if="!username">
+    <a @click="setShow" v-if="!username">
       <div class="fishow_navbar_menu">
         <img src="./user.png" alt="" />
       </div>
-    </router-link>
+    </a>
     <router-link
       :to="{ name: 'UserPage', params: { username: username } }"
       v-else
     >
-      <div class="fishow_navbar_menu">
-        <img src="./user.png" alt="" />
-      </div>
+    <div class="fishow_navbar_menu">
+      <img src="./user.png" alt="" />
+    </div>
     </router-link>
+    <login-page/>
   </nav>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import LoginPage from "../../views/LoginPage";
 export default {
+  data() {
+    return {
+      active: false,
+      step: false
+    }
+  },
+  components: {LoginPage},
   computed: {
     ...mapState('user', ['username']),
+    ...mapState('login', ['show','stepReg','error'])
   },
   methods: {
+    actiLog() {
+        this.active = !this.active
+    },
+    changeStep() {
+    },
     ...mapActions('user', ['setUserInfo']),
+    ...mapActions('login', ['setShow', 'setStep'])
   },
   created() {
     this.setUserInfo()
   },
+
 }
 </script>
 
@@ -118,4 +135,5 @@ export default {
     background-color: var(--background-color-default);
   }
 }
+
 </style>

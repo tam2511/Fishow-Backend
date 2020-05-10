@@ -25,8 +25,9 @@
                 </div>
               </div>
             </article>
-
-            <blog-card v-for="blog in blogs" :blog="blog" :key="blog.pk" />
+            <transition-group name="slide-fade" appear tag="div">
+              <blog-card v-for="(blog,index) in blogs" :blog="blog" :key="index" />
+            </transition-group>
 
             <button
               class="button button-primary button-lg"

@@ -212,7 +212,7 @@
 }
 .post-comment-main{
   padding-bottom: 30px;
-  border-bottom: 1px solid $gray-1;
+  border-bottom: 1px solid var(--background-color-border);
 }
 .post-comment-time{
   color: $gray-500;

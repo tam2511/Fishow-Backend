@@ -30,6 +30,7 @@
               'mdi-thumb-up-outline': !userLikedComment,
             }"
           ></button>
+          <span class="comment-like-counter">{{ likesCounter - dislikesCounter }}</span>
           <button
             class="icon mdi"
             @click="toggleDislike"
@@ -38,7 +39,7 @@
               'mdi-thumb-down-outline': !userDisLikedComment,
             }"
           ></button>
-          <a href="#">{{ likesCounter - dislikesCounter }}</a>
+
         </div>
         <div class="comment-reply">
           <a href="#">Ответить</a>
@@ -151,12 +152,17 @@ button {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
   }
 }
+.comment-like-counter {
+  padding-right: 10px;
+  padding-left: 10px;
+}
 .comment-reply {
-  button {
-    background: none;
 
+  button,a {
+    color: var(--color-typo-primary);
+    background: none;
     &:hover {
-      color: #a80000;
+      /*color: #a80000;*/
     }
   }
 }

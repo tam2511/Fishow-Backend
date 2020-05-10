@@ -35,6 +35,7 @@
 		C284.929,199.378,283.984,197.188,282.082,195.285z"
                 />
               </svg>
+              <span data-votes-counter>{{ likesCounter - dislikesCounter }}</span>
               <svg
                 class=""
                 :class="{
@@ -61,7 +62,7 @@
                 />
               </svg>
             </div>
-            <span data-votes-counter>{{ likesCounter - dislikesCounter }}</span>
+
 
             <h3 class="blog-post-title">{{ blog.title }}</h3>
           </div>
@@ -130,14 +131,17 @@
 
             <div class="blog-post-comments blog-space">
               <!-- Post Comment-->
-              <Comment
-                v-for="(comment, index) in comments"
-                :comment="comment"
-                :key="index"
-                :slug="slug"
-                :requestUser="userName"
-                @deleteComment="deleteComment"
-              />
+              <transition-group name="slide-fade" tag="div" appear>
+                <Comment
+                        v-for="(comment, index) in comments"
+                        :comment="comment"
+                        :key="index"
+                        :slug="slug"
+                        :requestUser="userName"
+                        @deleteComment="deleteComment"
+                />
+              </transition-group>
+
               <div class="comment-box" v-if="userName">
                 <div class="comment-box-aside">
                   <img

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import * as blogs from '@/store/modules/blogs.js'
 import * as prediction from '@/store/modules/prediction.js'
 import * as user from '@/store/modules/user.js'
+import * as login from '@/store/modules/login.js'
 
 Vue.use(Vuex)
 
@@ -15,5 +16,6 @@ export default new Vuex.Store({
     blogs,
     prediction,
     user,
+    login
   },
 })

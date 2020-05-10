@@ -25,14 +25,17 @@ export const actions = {
       endpoint = this.state.blogs.next
     }
     let next = null;
+    const blogs = []
     apiService(endpoint).then((data) => {
-      this.state.blogs.blogs.push(...data.results)
+      // this.state.blogs.blogs.push(...data.results)
+      blogs.push(...data.results)
       if (data.next) {
         next = data.next
       } else {
         next = null
       }
-      commit('SET_BLOGS', this.state.blogs.blogs)
+      commit('SET_BLOGS', blogs)
+      // commit('SET_BLOGS', this.state.blogs.blogs)
       commit('SET_NEXT', next)
     })
   },
