@@ -1,0 +1,63 @@
+/*
+*
+* Trunk version 2.0.0
+*
+*/
+@import "../bootstrap/bootstrap";
+@import "mixins";
+@import "variables_custom";
+@import "color-scheme/colors-basketball";
+@import "color-scheme/theme_default";
+@import "color-scheme/theme_dark";
+@import "color-scheme/theme_esoteric";
+@import "color-scheme/theme_underwater";
+@import "color-scheme/theme";
+@import "reset";
+@import "main-styles";
+
+.section-view {
+	background-color: var(--background-color-default);
+}
+// Footer Classic
+.footer-classic {
+	color: $abbey;
+
+	.unit {
+		h6,
+		.heading-6 {
+			color: $abbey;
+		}
+	}
+
+	.rd-inline-form-creative {
+		.form-label,
+		.form-input {
+			color: $abbey;
+		}
+	}
+
+	.nav-minimal-list {
+		color: $abbey;
+
+		li.active,
+		a:hover {
+			color: $secondary;
+		}
+	}
+
+	.post-classic-time {
+		color: $abbey;
+	}
+
+	.icon-corporate:not(:hover) {
+		background: $outer-space;
+	}
+}
+
+.product-comment .comment-box {
+	width: 100%;
+}
+
+.page {
+	background-color: #eceff4;
+}

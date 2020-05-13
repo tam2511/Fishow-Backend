@@ -1,0 +1,352 @@
+/*
+*
+* Comments
+*/
+//
+// Table of Contents:
+//
+// Comment Classic
+// Comment Modern
+// Post Comment
+// Comment Box
+//
+
+//
+// Comment Classic
+//
+.comment-classic {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  letter-spacing: 0.05em;
+  background: var(--background-color-primary);
+  border: 1px solid var(--background-color-border);
+  svg{
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    width: 36px;
+    height: 24px;
+    z-index: 0;
+    path{
+      fill: $gray-100;
+    }
+  }
+  > *{
+    position: relative;
+    z-index: 1;
+  }
+
+}
+.comment-classic-header + *{
+  margin-top: 10px;
+}
+.comment-classic-header{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.comment-classic-header-aside{
+  img{
+    max-width: inherit;
+    border-radius: 50%;
+  }
+}
+.comment-classic-header-aside + .comment-classic-header-main{   margin-left: 10px;}
+.comment-classic-header-main{
+  font-family: $font-family-sec;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.comment-classic-title{
+  color: $gray-800;
+  line-height: 18px;
+}
+.comment-classic-title + *{
+  margin-top: 1px;
+}
+.comment-classic-time{
+  display: inline-block;
+  font-size: 12px;
+  line-height: 16px;
+}
+.comment-classic-text + *{   margin-top: 12px;}
+.comment-classic-post-title{
+  position: relative;
+  padding-left: 40px;
+  &:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-left: 1px solid $gray-200;
+    border-bottom: 1px solid $gray-200;
+    content: '';
+    pointer-events: none;
+  }
+  &:after{
+    position: absolute;
+    top: 7px;
+    left: 17px;
+    display: inline-block;
+    font-family: 'Material Design Icons';
+    font-size: 20px;
+    color: $gray-200;
+    content: '\f238';
+    pointer-events: none;
+  }
+}
+
+.list-comments-classic{
+  .comment-classic + .comment-classic{
+    border-top: none;
+  }
+  .comment-classic-post-title{
+    margin-left: 15px;
+  }
+}
+
+// media  ≥992px
+@include media-breakpoint-up(lg) {
+  .comment-classic{
+    padding: 20px 40px 20px 20px;
+    &:before{
+      font-size: 120px;
+    }
+  }
+}
+
+
+//
+// Comment Modern
+//
+.comment-modern{
+  position: relative;
+  padding: 30px 30px 30px 65px;
+  font-family: $font-family-sec;
+  text-transform: uppercase;
+  background: var(--background-color-default);
+  border: 1px solid $gray-1;
+  svg{
+    position: absolute;
+    top: 33px;
+    left: 20px;
+    width: 31px;
+    height: 19px;
+    z-index: 0;
+
+    path{
+      fill: $gray-9;
+    }
+  }
+}
+.comment-modern-title{
+  margin-top: 0;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  a {
+    color: $gray-800;
+    &:hover {
+      color: var(--color-bg-default);
+    }
+  }
+}
+.comment-modern-title+ *{
+  margin-top: 5px;
+}
+.comment-modern-time{
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: $gray-500;
+  .icon {
+    margin-right: 8px;
+    font-size: 17px;
+    vertical-align: middle;
+  }
+}
+.comment-modern + .comment-modern{
+  margin-top: 14px;
+}
+
+//
+// Post Comment
+//
+.blog-post-comments{
+  color: var(--color-typo-primary);
+  background-color: var(--background-color-primary);
+  border: 1px solid var(--background-color-border);
+}
+.blog-space {
+  padding: 40px 30px;
+}
+.bg-gray-100{
+  .blog-post-comments{
+    padding: 40px 30px;
+    background: var(--background-color-primary);
+    border: 1px solid $gray-1;
+  }
+}
+.post-comment{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+.post-comment-footer{
+  @include group(30px, 7px);
+  .icon{
+    margin-right: 7px;
+    color: var(--color-bg-default);
+  }
+  a{
+    color: $gray-800;
+    &:hover{
+      color: var(--color-bg-default);
+    }
+  }
+  
+}
+.post-comment-main{
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--background-color-border);
+}
+.post-comment-time{
+  color: $gray-500;
+}
+* + .post-comment-main,
+* + .post-comment-text,
+* + .post-comment-footer{
+  margin-top: 15px;
+}
+.post-comment + .post-comment{
+  margin-top: 35px;
+}
+// Post Comment parent
+.post-comment-parent{
+  .post-comment-main{
+    padding-bottom: 5px;
+    border-bottom: none;
+  }
+}
+
+// Post Comment Child
+.post-comment-child{
+  margin-left: 30px;
+  border-bottom: 1px solid $gray-1;
+  .post-comment-main{
+    border-bottom: none;
+  }
+}
+
+// media  ≥576px
+@include media-breakpoint-up(sm){
+  * + .post-comment-main{
+    margin-top: 0;
+  }
+  .post-comment-main{
+    flex-basis: calc(100% - 89px);
+    margin-left: 20px;
+  }
+  .post-comment-header{
+    display: flex;
+    align-items: flex-end;
+  }
+  .author-name{
+    padding-right: 20px;
+  }
+  .post-comment-time{
+    padding-left: 20px;
+    border-left: 1px solid $gray-1;
+  }
+  .post-comment-child{
+    margin-left: 85px;
+    &::before{
+      position: absolute;
+      top: 44px;
+      left: -50px;
+      width: 40px;
+      border-top: 1px solid $gray-1;
+      content: '';
+    }
+  }
+  .post-comment-parent{
+    &::before{
+      position: absolute;
+      top: 80px;
+      left: 35px;
+      height: 100%;
+      border-left: 1px solid $gray-1;
+      content: '';
+    }
+  }
+}
+
+// media  ≥1200px
+@include media-breakpoint-up(xl){
+  .post-comment-child{
+    padding-left: 25px;
+    &::before{
+      position: absolute;
+      top: 44px;
+      left: -50px;
+      width: 60px;
+      border-top: 1px solid $gray-1;
+      content: '';
+    }
+  }
+}
+
+//
+// Comment Box
+//
+
+.bg-gray-100{
+  .form-input{
+    background: var(--background-color-default);
+  }
+}
+.comment-box-form{
+  .form-label{
+    color: $gray-500;
+  }
+  .form-input{
+    border: 1px solid var(--background-color-border);
+    background: var(--background-color-default);
+  }
+  * + .form-button{
+    margin-top: 20px;
+  }
+  .button{
+    min-height: inherit;
+    padding: 14px 40px;
+  }
+}
+
+
+* + .comment-box{
+  margin-top: 50px;
+}
+* + .comment-box-form{
+  margin-top: 15px;
+}
+* + .comment-box-main{
+  margin-top: 15px;
+}
+// media  ≥576px
+@include media-breakpoint-up(sm){
+  .comment-box{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  * + .comment-box-main{
+    margin-top: 0;
+  }
+  .comment-box-main{
+    flex-basis: calc(100% - 89px);
+    margin-left: 20px;
+  }
+}

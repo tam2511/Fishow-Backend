@@ -1,0 +1,28 @@
+//
+// Accent Colors
+//
+$primary: var(--color-bg-default);
+$primary-light:         var(--color-bg-default);
+$primary-dark:          var(--color-bg-default);
+
+$secondary:             #ffd851;
+$secondary-dark:        var(--color-bg-default);
+
+
+$outer-space: #2c3337;
+$abbey: #dae7eb;
+
+$shark: #252b2f;
+$shark-2: #1f2528;
+
+$gray-6: #707279;
+
+// Navbar
+$rd-navbar-dark: var(--background-color-brand);
+$rd-navbar-darker: $shark-2;
+$rd-navbar-dark-1: $outer-space;
+$rd-navbar-light: $gray-6;
+$rd-navbar-light-2: $abbey;
+
+$footer-classic-dark: $rd-navbar-dark;
+$footer-classic-darker: $rd-navbar-darker;

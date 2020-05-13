@@ -1,0 +1,25 @@
+/*
+*
+* Brand
+*/
+
+.brand {
+  display: inline-block;
+  .brand-logo-dark { display: block; }
+  .brand-logo-light { display: none; }
+}
+
+.brand-md {
+  img {
+    max-width: 117px;
+    max-height: 117px;
+  }
+
+  // Large ≥992px
+  @include media-breakpoint-between(lg, xl) {
+    img {
+      max-width: 90px;
+      max-height: 90px;
+    }
+  }
+}

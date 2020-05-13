@@ -1,0 +1,524 @@
+/*
+*
+* Buttons
+*/
+
+// Button General Styles
+
+.button {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	@include btn-size($input-btn-padding-y, $input-btn-padding-x, $input-btn-font-size, $input-btn-line-height);
+	border: 2px solid;
+	font-family: $btn-font-family;
+	font-weight: $btn-font-weight;
+	letter-spacing: $btn-letter-spacing;
+	text-transform: $btn-text-transform;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-align: center;
+	cursor: pointer;
+	vertical-align: middle;
+	user-select: none;
+	border-radius: 4px;
+	transition: .3s ease-out all;
+}
+
+.button-block {
+	display: block;
+	width: 100%;
+}
+
+// Appearance style
+// --------------------------------------------------
+
+html {
+	.button-default {
+		@include btn-variant($white, $gray-2, $gray-2, $gray-500, transparent, $gray-500);
+	}
+
+	.button-gray {
+		@include btn-variant($white, $gray-2, $gray-2, $gray-800, transparent, $gray-3);
+	}
+
+	.button-primary {
+		@include btn-variant(var(--color-typo-primary), var(--background-color-primary), var(--background-color-border), $gray-800, $secondary, $secondary);
+	}
+
+	.button-secondary {
+		@include btn-variant($gray-800, $secondary, $secondary, $gray-800, transparent, $gray-800);
+	}
+
+	.button-fiord {
+		@include btn-variant($blue-bell, $fiord, $fiord, $white, $secondary, $secondary);
+
+		&.button-icon .icon {
+			color: var(--color-typo-primary);
+		}
+	}
+
+	.button-fifth {
+		@include btn-variant(var(--color-link), var(--background-color-warning), var(--background-color-warning), $white, $primary, $primary);
+	}
+
+	// Outline
+	.button-default-outline {
+		@include btn-variant($gray-800, transparent, $gray-800, $primary, transparent, $primary);
+	}
+
+	.button-share-outline {
+		overflow: visible;
+		transition-duration: .15s;
+
+		&,
+		&:active,
+		&:focus {
+			color: $gray-800;
+			background-color: transparent;
+			border-color: $gray-800;
+		}
+
+		&:hover {
+			color: var(--color-bg-default);
+			background-color: var(--background-color-primary);
+			border-color: var(--background-color-border);
+		}
+	}
+
+	.button-gray-outline {
+		@include btn-variant(var(--color-typo-primary), var(--background-color-default), var(--background-color-border), $white, $gray-2, $gray-2);
+	}
+
+	.button-primary-outline {
+		@include btn-variant($primary, transparent, $primary, $white, $primary, $primary);
+	}
+
+	.button-secondary-outline {
+		@include btn-variant($gray-800, transparent, $gray-800, $gray-800, $secondary, $secondary);
+	}
+
+	%context-dark {
+		.button-gray-outline {
+			@include btn-variant(var(--color-typo-primary), transparent, var(--color-typo-primary), $gray-800, $yellow, $yellow);
+		}
+	}
+
+	%context-light {
+		.button-gray-outline {
+			@include btn-variant($gray-800, transparent, $gray-3, $white, $gray-2, $gray-2);
+		}
+	}
+}
+
+// Social
+.button-facebook {
+	@include btn-variant($white-invariable, $facebook, $facebook, $white-invariable, $facebook-darken, $facebook-darken);
+}
+
+.button-twitter {
+	@include btn-variant($white-invariable, $twitter, $twitter, $white-invariable, $twitter-darken, $twitter-darken);
+}
+
+.button-google {
+	@include btn-variant($white-invariable, $google, $google, $white-invariable, $google-darken, $google-darken);
+}
+
+// Btn with shadow
+.button-shadow {
+	box-shadow: 0 9px 21px 0 rgba($gray-300, 0.15);
+
+	&:hover {
+		box-shadow: 0 9px 10px 0 rgba($gray-300, 0.15);
+	}
+
+	&:focus,
+	&:active {
+		box-shadow: none;
+	}
+}
+
+/*
+* Button effects
+*/
+
+.button-ujarak {
+	position: relative;
+	z-index: 0;
+	transition: background .4s, border-color .4s, color .4s;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: var(--color-bg-default);
+		z-index: -1;
+		opacity: 0;
+		transform: scale3d(0.7, 1, 1);
+		transition: transform 0.42s, opacity 0.42s;
+		border-radius: inherit;
+	}
+
+	&,
+	&::before {
+		transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	}
+
+	&:hover {
+		transition: background .4s .4s, border-color .4s 0s, color .2s 0s;
+		&::before {
+			opacity: 1;
+			transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+		}
+	}
+}
+
+// Button Sizes
+// --------------------------------------------------
+
+.button-xs {
+	padding: 6px 14px;
+	font-size: 12px;
+	line-height: 1;
+	border-width: 1px;
+}
+
+.button-sm {
+	@include btn-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 12px, $input-btn-line-height-sm);
+}
+
+.button-md {
+	font-size: 13px;
+	padding: $input-btn-padding-y-sm $input-btn-padding-x-sm;
+}
+
+.button-lg {
+	@include btn-size($input-btn-padding-y-lg, $input-btn-padding-x-lg, 14px, $input-btn-line-height-lg);
+}
+
+.button-xl {
+	@include btn-size(16px, 50px, 16px, 28px);
+
+	@include media-breakpoint-up(lg) {
+		padding: 20px 80px;
+	}
+}
+
+.button-xs,
+.button-sm,
+.button-lg {
+	font-weight: 600;
+}
+
+// Button Shapes
+// --------------------------------------------------
+
+.button-circle {
+	border-radius: 30px;
+}
+
+.button-round-1 {
+	border-radius: 5px;
+}
+
+.button-round-2 {
+	border-radius: 10px;
+}
+
+// Button Icon styles
+// --------------------------------------------------
+
+/*
+* Button Icon styles
+*/
+.button {
+	&.button-icon {
+		@include display-inline-flex;
+		@include justify-content(center);
+		@include align-items(center);
+		vertical-align: middle;
+		padding: 18px 35px;
+
+		.icon {
+			position: relative;
+			display: inline-block;
+			vertical-align: middle;
+			color: inherit;
+			font-size: 1.42em;
+			line-height: 1em;
+		}
+
+		&-left {
+			.icon {
+				padding-right: 11px;
+			}
+		}
+
+		&-right {
+			@include flex-direction(row-reverse);
+			.icon {
+				padding-left: 11px;
+			}
+		}
+
+		&.button-link {
+			.icon {
+				top: 5px;
+				font-size: 1em;
+			}
+		}
+
+		&.button-xs {
+			.icon {
+				top: .05em;
+				font-size: 1.2em;
+				padding-right: 8px;
+			}
+
+			.button-icon-right {
+				padding-left: 8px;
+			}
+		}
+	}
+}
+
+/**
+* Bootstrap buttons
+*/
+
+.btn-primary {
+	border-radius: 3px;
+	font-family: $btn-font-family;
+	font-weight: $btn-font-weight;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+	transition: .33s;
+
+	&,
+	&:active,
+	&:focus {
+		color: var(--color-typo-primary);
+		background: var(--color-bg-default);
+		border-color: var(--background-color-border);
+	}
+
+	&:hover {
+		color: var(--color-typo-primary);
+		background: $black;
+		border-color: $black;
+	}
+}
+
+/*
+* Button Group
+*/
+
+.button-group-demo {
+	max-width: 460px;
+	.button {
+		margin-right: 15px;
+	}
+}
+
+// Button Media
+.button-media {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+
+	flex-basis: calc(50% - 12px);
+	padding: 20px;
+	color: var(--color-typo-primary);
+	text-align: right;
+	transition: all .3s;
+	&:hover {
+		color: var(--color-typo-primary);
+		.button-media-icon {
+			transform: translate(5px, -50%);
+		}
+	}
+	&:focus {
+		color: var(--color-typo-primary);
+	}
+	.ie-11 & {
+		max-width: 178px;
+	}
+}
+
+.button-media-title {
+	font-size: 24px;
+	font-weight: 400;
+	color: var(--color-typo-primary);
+	text-transform: inherit;
+}
+
+.button-media-title + .button-media-action {
+	margin-top: 0;
+}
+
+.button-media-action {
+	font-size: 14px;
+	.icon {
+		margin-left: 6px;
+		vertical-align: middle;
+	}
+}
+
+.button-media-icon {
+	position: absolute;
+	top: 50%;
+	font-size: 130px;
+	color: var(--color-typo-primary);
+	opacity: .25;
+	transform: translate(0, -50%);
+	transition: all .3s;
+	will-change: transform;
+}
+
+.button-media-facebook {
+	background: $facebook;
+	.button-media-icon {
+		top: 67%;
+		left: -7px;
+	}
+	&:hover {
+		background: $facebook-light;
+	}
+}
+
+.button-media-twitter {
+	background: $twitter;
+	.button-media-icon {
+		left: -30px;
+	}
+	&:hover {
+		background: $twitter-light;
+	}
+}
+
+.button-media-google {
+	background: $google;
+	.button-media-icon {
+		left: -40px;
+	}
+	&:hover {
+		background: $google-light;
+	}
+}
+
+.button-media-instagram {
+	background: $instagram;
+	.button-media-icon {
+		left: -40px;
+	}
+	&:hover {
+		background: $instagram-light;
+	}
+}
+
+// Button Icon Alternate
+.button-icon-alternate {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 85px;
+	max-width: 178px;
+	padding: 20px 14px;
+	color: var(--color-typo-primary);
+	flex-basis: calc(50% - 10px);
+	border-radius: 4px;
+	&:before {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 55px;
+		border-radius: 4px 40px 40px 4px;
+		content: '';
+		transition: all .3s;
+	}
+	&:hover {
+		color: var(--color-typo-primary);
+		&:before {
+			right: 0;
+			width: 100%;
+			border-radius: 4px;
+		}
+	}
+	&:focus {
+		color: var(--color-typo-primary);
+	}
+	.icon {
+		min-width: 28px;
+		font-size: 22px;
+		text-align: center;
+	}
+}
+
+.button-icon-alternate-facebook {
+	background: $facebook;
+	&:before {
+		background: $facebook-darken;
+	}
+}
+
+.button-icon-alternate-twitter {
+	background: $twitter;
+	&:before {
+		background: $twitter-darken;
+	}
+}
+
+.button-icon-alternate-google {
+	background: $google;
+	&:before {
+		background: $google-darken;
+	}
+}
+
+.button-icon-alternate-instagram {
+	background: $instagram;
+	&:before {
+		background: $instagram-darken;
+	}
+}
+
+.button-icon-alternate-title {
+	position: relative;
+	font-family: $font-family-sec;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+* + .button-icon-alternate-title {
+	margin-left: 15px;
+}
+
+// media  ≥576px
+@include media-breakpoint-up(sm) {
+	* + .button-icon-alternate-title {
+		margin-left: 35px;
+	}
+}
+
+// media  ≥922px
+@include media-breakpoint-up(lg) {
+	* + .button-icon-alternate-title {
+		margin-left: 20px;
+	}
+}
+
+// media  ≥1600px
+@include media-breakpoint-up(xxl) {
+	.button-media {
+		padding: 30px 20px;
+	}
+	* + .button-icon-alternate-title {
+		margin-left: 35px;
+	}
+}

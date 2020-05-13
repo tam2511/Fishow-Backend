@@ -1,0 +1,140 @@
+/*
+*
+* Backgrounds
+*/
+
+
+
+
+%context-dark {
+  @include context-dark;
+
+  // Logo
+  .brand {
+    .brand-logo-dark { display: none; }
+    .brand-logo-light { display: block; }
+  }
+}
+
+%context-light {
+  @include context-light;
+
+  // Logo
+  .brand {
+    .brand-logo-dark { display: block; }
+    .brand-logo-light { display: none; }
+  }
+}
+
+.context-dark {
+  @extend %context-dark;
+}
+
+.context-light {
+  @extend %context-light;
+}
+
+/**
+* Light Backgrounds
+*/
+.bg-default {
+  @include bg-behaviour($body-bg);
+}
+
+.bg-gray-100 {
+  @include bg-behaviour($gray-100);
+}
+
+.bg-gray-200 {
+  @include bg-behaviour($gray-200);
+}
+
+
+/**
+* Dark Backgrounds
+*/
+.bg-gray-700 {
+  @extend %context-dark;
+  @include bg-behaviour($gray-700);
+}
+
+.bg-gray-2 {
+  @extend %context-dark;
+  @include bg-behaviour($gray-2);
+
+  color: $gray-6;
+
+  h6,
+  .heading-6 {
+    color: $gray-6;
+  }
+
+  .link {
+    color: $white;
+
+    &:hover {
+      color: var(--color-bg-default);
+    }
+  }
+
+  .rights {
+    color: $gray-6;
+  }
+}
+
+.bg-gray-4 {
+  @extend %context-dark;
+  @include bg-behaviour($gray-4);
+}
+
+
+/**
+* Accent Backgrounds
+*/
+.bg-primary {
+  @extend %context-dark;
+  & + & { padding-top: 0; }
+}
+
+
+/**
+* Background Image
+*/
+.bg-image {
+  
+}
+
+.bg-image-dark {
+  @extend %context-dark;
+
+
+  // Forms
+  .form-label,
+  .form-input {
+    color: var(--color-typo-primary);
+  }
+
+  .form-input {
+    background-color: var(--background-color-default);
+
+    @if ($form-input-border) {
+      border-color: var(--background-color-border);
+    }
+  }
+}
+
+[class^='bg-'] {
+  background-size: cover;
+  background-position: center center;
+}
+
+// Desktop only
+//
+html:not(.tablet):not(.mobile) {
+  .bg-fixed {
+    @include media-breakpoint-up(lg) {
+      background-attachment: fixed;
+    }
+  }
+}
+
