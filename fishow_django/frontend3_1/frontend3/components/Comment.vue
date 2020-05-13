@@ -66,7 +66,7 @@ export default {
       required: true
     },
     requestUser: {
-      // type: String,
+      type: String,
       required: true
     },
     slug: {

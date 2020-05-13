@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    your key = {{ this.fishowKey }}
+    your key = {{ key }}
     <button type="button" @click="sendKey">send request</button>
     <div>{{ msg }}</div>
     <h3 v-if="error">{{ error }}</h3>

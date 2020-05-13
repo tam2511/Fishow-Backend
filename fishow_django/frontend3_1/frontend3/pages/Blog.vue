@@ -132,16 +132,16 @@
 
             <div class="blog-post-comments blog-space">
               <!-- Post Comment-->
-              <transition-group name="slide-fade" tag="div" appear>
-                <Comment
-                  v-for="(comment, index) in comments"
-                  :key="index"
-                  :comment="comment"
-                  :slug="slug"
-                  :request-user="userName"
-                  @deleteComment="deleteComment"
-                />
-              </transition-group>
+              <!--              <transition-group name="slide-fade" tag="div" appear>-->
+              <Comment
+                v-for="(comment, index) in comments"
+                :key="index"
+                :comment="comment"
+                :slug="slug"
+                :request-user="userName"
+                @deleteComment="deleteComment"
+              />
+              <!--              </transition-group>-->
 
               <div v-if="userName" class="comment-box">
                 <div class="comment-box-aside">
@@ -154,7 +154,7 @@
                   />
                 </div>
                 <div class="comment-box-main">
-                  <h5 class="comment-box-name">{{ this.requestUser }}</h5>
+                  <h5 class="comment-box-name">{{ requestUser }}</h5>
                   <form class="comment-box-form" @submit.prevent="onSubmit">
                     <div class="form-wrap">
                       <textarea
@@ -227,11 +227,7 @@ export default {
       dislikesCounter: null
     }
   },
-  head() {
-    return {
-      title: 'Fishow - ' + this.blog.title
-    }
-  },
+
   computed: {
     userName() {
       return this.$store.state.user.username
@@ -348,6 +344,11 @@ export default {
       // } else {
       //   this.error = 'Вы не можете отправить пустой комментарий'
       // }
+    },
+    head() {
+      return {
+        title: 'Fishow - ' + this.blog.title
+      }
     }
   }
 }

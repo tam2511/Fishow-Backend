@@ -20,7 +20,7 @@
       <div v-else-if="getStep === 1">
         <el-select v-model="value2" placeholder="Select">
           <el-option
-            v-for="item in options2[`${this.value}`]"
+            v-for="item in options2[`${value}`]"
             :key="item.value"
             :label="item.label"
             :value="item.value"

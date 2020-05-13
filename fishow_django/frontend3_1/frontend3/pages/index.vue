@@ -134,11 +134,7 @@ export default {
   //   },
   //   ...mapState('blogs', ['blogs', 'next'])
   // },
-  head() {
-    return {
-      title: 'Fishow - Главная'
-    }
-  },
+
   async asyncData({ $axios }) {
     try {
       const blogs = await $axios.$get('/blogs/')
@@ -155,6 +151,11 @@ export default {
   },
   created() {
     console.log('privey')
+  },
+  head() {
+    return {
+      title: 'Fishow - Главная'
+    }
   }
   // methods: {
   //   checkNext() {
