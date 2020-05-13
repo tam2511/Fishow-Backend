@@ -8,24 +8,24 @@
             <div class="heading-component-inner">
               <h5 class="heading-component-title">Лучшие блоги</h5>
               <div class="buttons-nav">
-                <!--                <router-link-->
-                <!--                  class="button button-xs button-primary"-->
-                <!--                  :to="{ name: 'blog-editor' }"-->
-                <!--                >-->
-                <!--                  Добавить блог-->
-                <!--                </router-link>-->
-                <!--                <router-link-->
-                <!--                  class="button button-xs button-gray-outline"-->
-                <!--                  to="/article"-->
-                <!--                  style="margin-top: 0;"-->
-                <!--                >-->
-                <!--                  Читать все-->
-                <!--                </router-link>-->
+                <nuxt-link
+                  class="button button-xs button-primary"
+                  to="/BlogEditor"
+                >
+                  Добавить блог
+                </nuxt-link>
+                <nuxt-link
+                  class="button button-xs button-gray-outline"
+                  to="/Article"
+                  style="margin-top: 0;"
+                >
+                  Читать все
+                </nuxt-link>
               </div>
             </div>
           </article>
           <!--          <transition-group name="slide-fade" appear tag="div">-->
-          {{ blogs }}
+          <!--          {{ blogs }}-->
           <BlogCard v-for="blog in blogs" :key="blog.id" :blog="blog" />
           <!--          {{ blogs }}-->
           <!--          </transition-group>-->
@@ -67,7 +67,7 @@
                 <h5 class="heading-component-title">Прогнозы</h5>
               </div>
             </article>
-            <!--            <MiniPrognos />-->
+            <MiniPrognos />
           </div>
           <!-- Статистика -->
           <div class="aside-component">
@@ -77,7 +77,7 @@
                 <h5 class="heading-component-title">Статистика</h5>
               </div>
             </article>
-            <!--            <Statistic />-->
+            <Statistic />
           </div>
           <!-- Пользователи -->
           <div class="aside-component">
@@ -91,7 +91,7 @@
               </div>
             </article>
             <!-- Table team-->
-            <!--            <UserRate />-->
+            <UserRate />
           </div>
           <!-- List Comments Classic-->
           <div class="aside-component">
@@ -103,7 +103,7 @@
                 </h5>
               </div>
             </article>
-            <!--            <last-comments />-->
+            <last-comments />
           </div>
         </aside>
       </div>
@@ -113,19 +113,19 @@
 
 <script>
 // import HotPostMinimal from '@/components/HotPostMinimal'
-// import MiniPrognos from '@/components/MiniPrognos'
-// import Statistic from '@/components/Statistic'
-// import UserRate from '@/components/UserRate'
-// import LastComments from '@/components/LastComments'
+import MiniPrognos from '@/components/MiniPrognos'
+import Statistic from '@/components/Statistic'
+import UserRate from '@/components/UserRate'
+import LastComments from '@/components/LastComments'
 import BlogCard from '@/components/BlogCard'
 // import axios from '~/.nuxt/axios'
 export default {
   components: {
-    BlogCard
-    // LastComments,
-    // UserRate,
-    // Statistic,
-    // MiniPrognos,
+    BlogCard,
+    LastComments,
+    UserRate,
+    Statistic,
+    MiniPrognos
     // HotPostMinimal
   },
 

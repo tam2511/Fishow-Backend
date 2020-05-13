@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="theme_color_fishow_default">
     <!--    <settings />-->
     <new-nav-bar />
     <section class="section section-md section-view">
@@ -7,15 +7,17 @@
         <nuxt />
       </transition>
     </section>
-    <!--    <FIshow_Footer />-->
+    <fishow-footer />
   </div>
 </template>
 <script>
 import newNavBar from '@/components/new-nav-bar.vue'
+import fishowFooter from '@/components/FIshow_Footer.vue'
 
 export default {
   components: {
-    newNavBar
+    newNavBar,
+    fishowFooter
   }
 }
 </script>
