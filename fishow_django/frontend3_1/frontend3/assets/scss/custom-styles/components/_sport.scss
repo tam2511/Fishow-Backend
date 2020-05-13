@@ -1637,7 +1637,7 @@
 }
 
 .promo-classic-meta {
-	background-image: url('/static/assets/images/sport-elements-323x171.jpg');
+	background-image: url('/assets/images/sport-elements-323x171.jpg');
 	background-repeat: no-repeat;
 	background-position: 50%;
 	background-size: cover;
@@ -1760,7 +1760,7 @@
 			&:not(:first-child) {
 				&::before {
 					color: $gray-200;
-					background-image: url('/static/assets/images/dot-dark.svg');
+					background-image: url('/assets/images/dot-dark.svg');
 				}
 			}
 		}

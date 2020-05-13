@@ -7,23 +7,23 @@
 
 @font-face {
 	font-family: "fl-budicons-launch";
-	src: url("/static/assets/fonts/fl-budicons-launch.eot");
-	src: url("/static/assets/fonts/fl-budicons-launch.eot#iefix") format("embedded-opentype"),
-	url("/static/assets/fonts/fl-budicons-launch.woff") format("woff"),
-	url("/static/assets/fonts/fl-budicons-launch.ttf") format("truetype"),
-	url("/static/assets/fonts/fl-budicons-launch.svg") format("svg");
+	src: url("/assets/fonts/fl-budicons-launch.eot");
+	src: url("/assets/fonts/fl-budicons-launch.eot#iefix") format("embedded-opentype"),
+	url("/assets/fonts/fl-budicons-launch.woff") format("woff"),
+	url("/assets/fonts/fl-budicons-launch.ttf") format("truetype"),
+	url("/assets/fonts/fl-budicons-launch.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
 
 .fl-budicons-launch-ico,
 [class^="fl-budicons-launch-"]:before, [class*=" fl-budicons-launch-"]:before,
-[class^="fl-budicons-launch-"]:after, [class*=" fl-budicons-launch-"]:after {   
+[class^="fl-budicons-launch-"]:after, [class*=" fl-budicons-launch-"]:after {
 	font-family: 'fl-budicons-launch';
     font-size: inherit;
 	font-weight: 400;
 	font-style: normal;
-} 
+}
 
 .fl-budicons-launch-arrows92:before {
 	content: "\e000";

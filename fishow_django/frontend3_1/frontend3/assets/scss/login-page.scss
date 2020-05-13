@@ -41,7 +41,13 @@ $array-color-swatch: (
         "grey":          $grey,
         "blue-grey":     $blue-grey
 );
-
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
 // logmod
 $logmod-baseline: 24px;
 $logmod-zindex: 1;

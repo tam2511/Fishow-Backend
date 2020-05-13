@@ -25,8 +25,9 @@
             </div>
           </article>
           <!--          <transition-group name="slide-fade" appear tag="div">-->
-          <!--          <blog-card v-for="(blog, index) in blogs" :key="index" :blog="blog" />-->
           {{ blogs }}
+          <BlogCard v-for="blog in blogs" :key="blog.id" :blog="blog" />
+          <!--          {{ blogs }}-->
           <!--          </transition-group>-->
 
           <!--          <button-->
@@ -111,62 +112,66 @@
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex'
 // import HotPostMinimal from '@/components/HotPostMinimal'
 // import MiniPrognos from '@/components/MiniPrognos'
 // import Statistic from '@/components/Statistic'
 // import UserRate from '@/components/UserRate'
 // import LastComments from '@/components/LastComments'
-// import BlogCard from '@/components/Home/BlogCard'
+import BlogCard from '@/components/BlogCard'
 // import axios from '~/.nuxt/axios'
 export default {
   components: {
-    // BlogCard
+    BlogCard
     // LastComments,
     // UserRate,
     // Statistic,
     // MiniPrognos,
     // HotPostMinimal
   },
+
   // computed: {
-  //   minPost() {
+  //   ...mapState('blogs', ['blogs'])
+  // minPost() {
   //     return this.blogs.filter((blog, index) => index < 3)
   //   },
   //   ...mapState('blogs', ['blogs', 'next'])
   // },
-
   async asyncData({ $axios }) {
     try {
-      const blogs = await $axios.$get('/blogs/')
+      const blogs = await $axios.$get('/blogs/').then(res => res.results)
       return { blogs }
     } catch (e) {
+      console.log('error', e)
       return { blogs: [] }
     }
   },
-  fetchOnServer: false,
   data() {
     return {
       blogs: []
     }
   },
-  created() {
-    console.log('privey')
-  },
+  created() {},
+  // methods: {
+  //   ...mapActions('blogs', ['getBlogs'])
+  // },
+
+  // fetchOnServer: false,
+  // async fetch({ store, params }) {
+  //   await store.dispatch('blogs/getBlogs')
+  // },
   head() {
     return {
       title: 'Fishow - Главная'
     }
   }
-  // methods: {
-  //   checkNext() {
-  //     this.$store.dispatch('blogs/fetchBlogs')
-  //   },
-  //   ...mapActions('blogs', ['fetchBlogs'])
-  // }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '~/assets/scss/custom-styles/style.scss';
+@import '~/assets/scss/customStyles.scss';
+@import '~/assets/scss/fishowStyles.scss';
+@import '~/assets/scss/custom-styles/fonts.scss';
 .buttons-nav a {
   margin-left: 10px;
 }

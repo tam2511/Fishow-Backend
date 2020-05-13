@@ -3,22 +3,22 @@
  * Author: Rami McMin
  * Source: http://www.flaticon.com/packs/justicons
  * License:  CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
- */ 
- 
+ */
+
 @font-face {
 	font-family: "fl-justicons";
-	src: url("/static/assets/fonts/fl-justicons.eot");
-	src: url("/static/assets/fonts/fl-justicons.eot#iefix") format("embedded-opentype"),
-	url("/static/assets/fonts/fl-justicons.woff") format("woff"),
-	url("/static/assets/fonts/fl-justicons.ttf") format("truetype"),
-	url("/static/assets/fonts/fl-justicons.svg") format("svg");
+	src: url("/assets/fonts/fl-justicons.eot");
+	src: url("/assets/fonts/fl-justicons.eot#iefix") format("embedded-opentype"),
+	url("/assets/fonts/fl-justicons.woff") format("woff"),
+	url("/assets/fonts/fl-justicons.ttf") format("truetype"),
+	url("/assets/fonts/fl-justicons.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
 
 .fl-justicons-ico,
 [class^="fl-justicons-"]:before, [class*=" fl-justicons-"]:before,
-[class^="fl-justicons-"]:after, [class*=" fl-justicons-"]:after {   
+[class^="fl-justicons-"]:after, [class*=" fl-justicons-"]:after {
 	font-family: fl-justicons;
     font-size: inherit;
 	font-weight: 400;

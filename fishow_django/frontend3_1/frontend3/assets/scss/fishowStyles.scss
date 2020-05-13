@@ -4,7 +4,7 @@
   padding-right: 20px;
 }
 .fishow {
-  &_votes {
+  &-votes_container {
     display: flex;
     flex-flow: column;
     cursor: pointer;
@@ -130,9 +130,6 @@
 .post-corporate-header {
   margin-top: 8px;
   margin-left: 0;
-}
-.fishow-votes_container {
-  display: flex;
 }
 [data-votes-counter] {
   font-size: 24px;

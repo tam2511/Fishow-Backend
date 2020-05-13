@@ -20,10 +20,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@/assets/scss/custom-styles/style.scss';
-@import '@/assets/scss/customStyles.scss';
-@import '@/assets/scss/fishowStyles.scss';
-@import '@/assets/scss/custom-styles/fonts.scss';
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;

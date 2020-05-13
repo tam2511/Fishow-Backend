@@ -1,7 +1,5 @@
 // import { apiService } from '@/plugins/api.service'
 
-import axios from '~/.nuxt/axios'
-
 export const state = () => ({
   blogs: [],
   next: null
@@ -17,16 +15,17 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchBlogs({ commit }) {
-    let endpoint = '/api/blogs/'
+  async getBlogs({ commit }) {
+    let endpoint = '/blogs/'
 
     if (this.state.blogs.next) {
       endpoint = this.state.blogs.next
     }
     // let next = null
     // const blogs = []
-    const { data } = await axios.get(endpoint)
-    console.log('data = ', data)
+    console.log('endpoint = ', endpoint)
+    const { data } = await this.$axios.$get(endpoint)
+    console.log('blogs = ', data)
     commit('SET_BLOGS', data)
 
     // apiService(endpoint).then(data => {

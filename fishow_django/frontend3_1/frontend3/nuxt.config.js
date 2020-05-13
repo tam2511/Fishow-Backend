@@ -60,7 +60,7 @@ export default {
     //   pathRewrite: { '^/api': '' }
     // }
     '/api': {
-      target: 'http://localhost:8000/',
+      target: 'http://localhost:3000/',
       pathRewrite: {
         '^/api': '/'
       }
