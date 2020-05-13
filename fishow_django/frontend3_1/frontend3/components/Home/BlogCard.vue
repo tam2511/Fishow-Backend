@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import { apiService } from '@/plugins/api.service'
+// import { apiService } from '@/plugins/api.service'
 
 export default {
   name: 'BlogCard',
@@ -168,28 +168,28 @@ export default {
       }
     },
     likeBlog() {
-      this.likesCounter += 1
-      this.userLikedBlog = true
-      const endpoint = `/api/blogs/${this.blog.id}/like/`
-      apiService(endpoint, 'POST')
+      // this.likesCounter += 1
+      // this.userLikedBlog = true
+      // const endpoint = `/api/blogs/${this.blog.id}/like/`
+      // apiService(endpoint, 'POST')
     },
     unLikeBlog() {
-      this.likesCounter -= 1
-      this.userLikedBlog = false
-      const endpoint = `/api/blogs/${this.blog.id}/like/`
-      apiService(endpoint, 'DELETE')
+      // this.likesCounter -= 1
+      // this.userLikedBlog = false
+      // const endpoint = `/api/blogs/${this.blog.id}/like/`
+      // apiService(endpoint, 'DELETE')
     },
     dislikeBlog() {
-      this.dislikesCounter += 1
-      this.userDisLikedBlog = true
-      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      apiService(endpoint, 'POST')
+      // this.dislikesCounter += 1
+      // this.userDisLikedBlog = true
+      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+      // apiService(endpoint, 'POST')
     },
     undislikeBlog() {
-      this.dislikesCounter -= 1
-      this.userDisLikedBlog = false
-      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      apiService(endpoint, 'DELETE')
+      // this.dislikesCounter -= 1
+      // this.userDisLikedBlog = false
+      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+      // apiService(endpoint, 'DELETE')
     }
   }
 }

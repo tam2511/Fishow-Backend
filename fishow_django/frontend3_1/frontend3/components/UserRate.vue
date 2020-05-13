@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { apiService } from '@/plugins/api.service'
+// import { apiService } from '@/plugins/api.service'
 
 export default {
   name: 'UserRate',
@@ -55,11 +55,11 @@ export default {
   },
   methods: {
     getUserList() {
-      const endpoint = '/api/user_all/'
-
-      apiService(endpoint).then((data) => {
-        this.userList.push(...data)
-      })
+      // const endpoint = '/api/user_all/'
+      //
+      // apiService(endpoint).then(data => {
+      //   this.userList.push(...data)
+      // })
     }
   }
 }

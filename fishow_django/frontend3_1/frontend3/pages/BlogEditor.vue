@@ -144,7 +144,7 @@
 import Multiselect from 'vue-multiselect'
 import { mapState } from 'vuex'
 import Warning from '../components/Warning'
-import { apiService } from '@/plugins/api.service'
+// import { apiService } from '@/plugins/api.service'
 import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
@@ -238,7 +238,7 @@ export default {
     ...mapState('user', ['username'])
   },
   created() {
-    document.title = 'Fishow - Создание блога'
+    // document.title = 'Fishow - Создание блога'
   },
   methods: {
     reset() {
@@ -259,7 +259,7 @@ export default {
       const result = []
       const listBloks = document.querySelectorAll('textarea')
 
-      listBloks.forEach((block) => {
+      listBloks.forEach(block => {
         if (block.name === 'text') {
           result.push({ type: 'text', body: block.value })
         }
@@ -285,28 +285,28 @@ export default {
         this.convertBody()
 
         // this.open2()
-        let endpoint = '/api/blogs/'
-        let method = 'POST'
-        if (this.slug !== undefined) {
-          endpoint += `${this.slug}/`
-          method = 'PUT'
-        }
-        const blog = {
-          title: this.blog_title,
-          content: this.blog_body,
-          category: this.blog_category,
-          tags: this.blog_tags
-        }
-        apiService(endpoint, method, blog).then((blog_data) => {
-          if (blog_data.detail) {
-            this.error = 'Что то пошло не так, ошибка = ' + blog_data.detail
-          } else {
-            this.$router.push({
-              name: 'blog',
-              params: { slug: blog_data.slug }
-            })
-          }
-        })
+        // let endpoint = '/api/blogs/'
+        // let method = 'POST'
+        // if (this.slug !== undefined) {
+        //   endpoint += `${this.slug}/`
+        //   method = 'PUT'
+        // }
+        // const blog = {
+        //   title: this.blog_title,
+        //   content: this.blog_body,
+        //   category: this.blog_category,
+        //   tags: this.blog_tags
+        // }
+        // apiService(endpoint, method, blog).then(blogData => {
+        //   if (blogData.detail) {
+        //     this.error = 'Что то пошло не так, ошибка = ' + blogData.detail
+        //   } else {
+        //     this.$router.push({
+        //       name: 'blog',
+        //       params: { slug: blogData.slug }
+        //     })
+        //   }
+        // })
       }
     },
     addImage() {
@@ -321,13 +321,13 @@ export default {
   },
   async beforeRouteEnter(to, from, next) {
     // if the component will be used to update a question, then get the question's data from the REST API
-    if (to.params.slug !== undefined) {
-      const endpoint = `/api/blogs/${to.params.slug}/`
-      const data = await apiService(endpoint)
-      return next((vm) => (vm.blog_body = data.content))
-    } else {
-      return next()
-    }
+    // if (to.params.slug !== undefined) {
+    // const endpoint = `/api/blogs/${to.params.slug}/`
+    // const data = await apiService(endpoint)
+    // return next(vm => (vm.blog_body = data.content))
+    // } else {
+    //   return next()
+    // }
   }
 }
 </script>

@@ -48,14 +48,16 @@ export default {
     TrendingNews,
     blockCategories
   },
-
+  head() {
+    return {
+      title: 'Fishow - Все блоги'
+    }
+  },
   computed: {
     ...mapState('blogs', ['blogs', 'next'])
   },
+
   methods: {
-    setPageTitle(title) {
-      document.title = title
-    },
     checkNext() {
       this.$store.dispatch('blogs/fetchBlogs')
     },
@@ -63,7 +65,6 @@ export default {
   },
   created() {
     this.fetchBlogs()
-    this.setPageTitle('Fishow - Все блоги')
   }
 }
 </script>

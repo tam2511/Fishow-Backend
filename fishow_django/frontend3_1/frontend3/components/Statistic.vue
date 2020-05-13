@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { apiService } from '@/plugins/api.service'
+// import { apiService } from '@/plugins/api.service'
 
 export default {
   name: 'Statistic',
@@ -43,14 +43,14 @@ export default {
   },
   methods: {
     getBlogData() {
-      const endpoint = '/api/blogs/'
-      apiService(endpoint).then(data => {
-        this.counterBlogs = data.count
-        // TODO: це хуйня
-        data.results.forEach(
-          item => (this.counterComments += item.comments_count)
-        )
-      })
+      // const endpoint = '/api/blogs/'
+      // apiService(endpoint).then(data => {
+      //   this.counterBlogs = data.count
+      //   // TODO: це хуйня
+      //   data.results.forEach(
+      //     item => (this.counterComments += item.comments_count)
+      //   )
+      // })
     }
   }
 }

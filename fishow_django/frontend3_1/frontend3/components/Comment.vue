@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { apiService } from '@/plugins/api.service'
+// import { apiService } from '@/plugins/api.service'
 
 export default {
   name: 'Comment',
@@ -109,28 +109,28 @@ export default {
       }
     },
     likeComment() {
-      this.likesCounter += 1
-      this.userLikedComment = true
-      const endpoint = `/api/comments/${this.comment.id}/like/`
-      apiService(endpoint, 'POST')
+      // this.likesCounter += 1
+      // this.userLikedComment = true
+      // const endpoint = `/api/comments/${this.comment.id}/like/`
+      // apiService(endpoint, 'POST')
     },
     unLikeComment() {
-      this.likesCounter -= 1
-      this.userLikedComment = false
-      const endpoint = `/api/comments/${this.comment.id}/like/`
-      apiService(endpoint, 'DELETE')
+      // this.likesCounter -= 1
+      // this.userLikedComment = false
+      // const endpoint = `/api/comments/${this.comment.id}/like/`
+      // apiService(endpoint, 'DELETE')
     },
     dislikeComment() {
-      this.dislikesCounter += 1
-      this.userDisLikedComment = true
-      const endpoint = `/api/comments/${this.comment.id}/dislike/`
-      apiService(endpoint, 'POST')
+      // this.dislikesCounter += 1
+      // this.userDisLikedComment = true
+      // const endpoint = `/api/comments/${this.comment.id}/dislike/`
+      // apiService(endpoint, 'POST')
     },
     undislikeComment() {
-      this.dislikesCounter -= 1
-      this.userDisLikedComment = false
-      const endpoint = `/api/comments/${this.comment.id}/dislike/`
-      apiService(endpoint, 'DELETE')
+      // this.dislikesCounter -= 1
+      // this.userDisLikedComment = false
+      // const endpoint = `/api/comments/${this.comment.id}/dislike/`
+      // apiService(endpoint, 'DELETE')
     },
     triggerDeleteComment() {
       // emit an event to delete an answer instance

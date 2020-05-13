@@ -130,7 +130,7 @@ export default {
     }
   },
   created() {
-    document.title = 'Fishow - Прогноз'
+    // document.title = 'Fishow - Прогноз'
   },
   methods: {
     onChange(data) {

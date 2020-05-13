@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { apiService } from '@/plugins/api.service'
+// import { apiService } from '@/plugins/api.service'
 
 export default {
   name: 'ConfirmEmail',
@@ -30,21 +30,21 @@ export default {
   },
   methods: {
     sendKey() {
-      const endpoint = `/account-confirm-email/${this.fishowKey}/`
-      apiService(endpoint, 'POST', {
-        key: this.fishowKey
-      })
-        .then((data) => {
-          if (data === null) {
-            this.error = 'Что то пошло не так'
-          } else {
-            this.msg = data
-            this.result = true
-          }
-        })
-        .catch((e) => {
-          console.log('error = ', e)
-        })
+      // const endpoint = `/account-confirm-email/${this.fishowKey}/`
+      // apiService(endpoint, 'POST', {
+      //   key: this.fishowKey
+      // })
+      //   .then(data => {
+      //     if (data === null) {
+      //       this.error = 'Что то пошло не так'
+      //     } else {
+      //       this.msg = data
+      //       this.result = true
+      //     }
+      //   })
+      //   .catch(e => {
+      //     console.log('error = ', e)
+      //   })
     }
   }
 }

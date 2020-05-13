@@ -183,9 +183,9 @@
       </div>
       <div class="col-lg-4">
         <div class="block-aside">
-          <!--          <block-categories />-->
-          <!--          <block-spotlight />-->
-          <!--          <block-tags />-->
+          <block-categories />
+          <block-spotlight />
+          <block-tags />
         </div>
       </div>
     </div>
@@ -198,7 +198,7 @@ import BlockCategories from '../components/blog/blockCategories'
 import BlockSpotlight from '../components/blog/blockSpotlight'
 import BlockTags from '../components/blog/blockTags'
 import Comment from '@/components/Comment.vue'
-import { apiService } from '@/plugins/api.service'
+// import { apiService } from '@/plugins/api.service'
 export default {
   name: 'Blog',
   components: { BlockTags, BlockSpotlight, BlockCategories, Comment },
@@ -227,6 +227,11 @@ export default {
       dislikesCounter: null
     }
   },
+  head() {
+    return {
+      title: 'Fishow - ' + this.blog.title
+    }
+  },
   computed: {
     userName() {
       return this.$store.state.user.username
@@ -253,32 +258,29 @@ export default {
         }
       }
     },
-    setPageTitle(title) {
-      document.title = title
-    },
     getBlogData() {
-      const endpoint = `/api/blogs/${this.slug}/`
-      apiService(endpoint).then((data) => {
-        this.blog = data
-        this.result = JSON.parse(data.content)
-        this.result = this.result.blocks[0]
-        const tags = JSON.parse(this.blog.tags)
-        const result = []
-        tags.forEach((tag) => result.push(tag.name))
-        this.blogTags = result
-        this.userLikedBlog = this.blog.user_has_votedUp
-        this.userDisLikedBlog = this.blog.user_has_votedDown
-        this.likesCounter = this.blog.likes_count
-        this.dislikesCounter = this.blog.dislikes_count
-        this.id = data.id
-        this.setPageTitle('Fishow - ' + data.title)
-      })
+      // const endpoint = `/api/blogs/${this.slug}/`
+      // apiService(endpoint).then(data => {
+      //   this.blog = data
+      //   this.result = JSON.parse(data.content)
+      //   this.result = this.result.blocks[0]
+      //   const tags = JSON.parse(this.blog.tags)
+      //   const result = []
+      //   tags.forEach(tag => result.push(tag.name))
+      //   this.blogTags = result
+      //   this.userLikedBlog = this.blog.user_has_votedUp
+      //   this.userDisLikedBlog = this.blog.user_has_votedDown
+      //   this.likesCounter = this.blog.likes_count
+      //   this.dislikesCounter = this.blog.dislikes_count
+      //   this.id = data.id
+      // this.setPageTitle('Fishow - ' + data.title)
+      // })
     },
     getCommentData() {
-      const endpoint = `/api/blogs/${this.slug}/comments/`
-      apiService(endpoint).then((data) => {
-        this.comments.push(...data.results)
-      })
+      // const endpoint = `/api/blogs/${this.slug}/comments/`
+      // apiService(endpoint).then(data => {
+      //   this.comments.push(...data.results)
+      // })
     },
     toggleLike() {
       if (this.userLikedBlog) {
@@ -301,53 +303,51 @@ export default {
     likeBlog() {
       this.likesCounter += 1
       this.userLikedBlog = true
-      const endpoint = `/api/blogs/${this.blog.id}/like/`
-      apiService(endpoint, 'POST')
+      // const endpoint = `/api/blogs/${this.blog.id}/like/`
+      // apiService(endpoint, 'POST')
     },
     unLikeBlog() {
       this.likesCounter -= 1
       this.userLikedBlog = false
-      const endpoint = `/api/blogs/${this.blog.id}/like/`
-      apiService(endpoint, 'DELETE')
+      // const endpoint = `/api/blogs/${this.blog.id}/like/`
+      // apiService(endpoint, 'DELETE')
     },
     dislikeBlog() {
       this.dislikesCounter += 1
       this.userDisLikedBlog = true
-      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      apiService(endpoint, 'POST')
+      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+      // apiService(endpoint, 'POST')
     },
     undislikeBlog() {
       this.dislikesCounter -= 1
       this.userDisLikedBlog = false
-      const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      apiService(endpoint, 'DELETE')
+      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
+      // apiService(endpoint, 'DELETE')
     },
     async deleteComment(comment) {
       // delete a given answer from the answers array and make a delete request to the REST API
-      const endpoint = `/api/comments/${comment.id}/`
-      try {
-        await apiService(endpoint, 'DELETE')
-        this.$delete(this.comments, this.comments.indexOf(comment))
-        this.userHasAnswered = false
-      } catch (err) {
-        console.log(err)
-      }
+      // const endpoint = `/api/comments/${comment.id}/`
+      // try {
+      //   await apiService(endpoint, 'DELETE')
+      //   this.$delete(this.comments, this.comments.indexOf(comment))
+      //   this.userHasAnswered = false
+      // } catch (err) {
+      //   console.log(err)
+      // }
     },
     onSubmit() {
-      if (this.commentBody) {
-        const endpoint = `/api/blogs/${this.slug}/comment/`
-        apiService(endpoint, 'POST', { body: this.commentBody }).then(
-          (data) => {
-            this.comments.push(data)
-          }
-        )
-        this.commentBody = null
-        if (this.error) {
-          this.error = null
-        }
-      } else {
-        this.error = 'Вы не можете отправить пустой комментарий'
-      }
+      // if (this.commentBody) {
+      //   const endpoint = `/api/blogs/${this.slug}/comment/`
+      //   apiService(endpoint, 'POST', { body: this.commentBody }).then(data => {
+      //     this.comments.push(data)
+      //   })
+      //   this.commentBody = null
+      //   if (this.error) {
+      //     this.error = null
+      //   }
+      // } else {
+      //   this.error = 'Вы не можете отправить пустой комментарий'
+      // }
     }
   }
 }

@@ -248,6 +248,11 @@ export default {
       email: ''
     }
   },
+  head() {
+    return {
+      title: 'Fishow - Вход'
+    }
+  },
   computed: {
     ...mapState('user', ['username']),
     ...mapState('login', ['show', 'stepReg', 'error'])
@@ -264,9 +269,6 @@ export default {
       this.$emit('actiLog', false)
     },
     ...mapActions('login', ['setShow', 'setStep', 'sendUserData'])
-  },
-  created() {
-    document.title = 'Fishow - Вход'
   }
 }
 </script>
