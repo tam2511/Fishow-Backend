@@ -48,7 +48,8 @@ export default {
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    'nuxt-vue-multiselect'
   ],
   proxy: {
     // ** is important here, * probably means it won't go more than one level deep

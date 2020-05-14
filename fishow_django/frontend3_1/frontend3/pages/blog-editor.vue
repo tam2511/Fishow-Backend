@@ -1,6 +1,8 @@
 <template>
-  <div v-if="loading" class="container">
-    <div class="row row-50" :style="username ? '' : 'filter:blur(5px)'">
+  <div class="container">
+    <div class="row row-50">
+      <!--    <div class="row row-50" :style="username ? '' : 'filter:blur(5px)'">-->
+      <!--      <div class="col-lg-7 col-xl-8">-->
       <div v-if="blog_category !== 'Отчет'" class="col-lg-7 col-xl-8">
         <!-- Heading Component-->
         <article class="heading-component">
@@ -9,6 +11,7 @@
           </div>
         </article>
         <form @submit.prevent="onSubmit">
+          <!--        <form>-->
           <div class="row row-10 row-narrow">
             <div class="col-md-12 fishow-content_container">
               <div class="col-md-12 fishow-content">
@@ -70,35 +73,35 @@
               type="button"
               name="save_blog"
               onclick=""
-              @click="convertBody"
             >
               Сохранить как черновик
             </button>
           </div>
-          <div v-if="error" class="col-md-12 error">
-            {{ error }}
-          </div>
+          <!--          <div v-if="error" class="col-md-12 error">-->
+          <!--            {{ error }}-->
+          <!--          </div>-->
         </form>
       </div>
+      <!--      <div class="col-lg-7 col-xl-8">-->
       <div v-else class="col-lg-7 col-xl-8">
         <article class="heading-component">
           <div class="heading-component-inner">
             <h5 class="heading-component-title">Добавить отчет</h5>
           </div>
         </article>
-        <dynamic-form
-          ref="dynamic-form"
-          v-model="data"
-          :descriptors="descriptors"
-          :show-outer-error="false"
-        >
-          <template slot="operations">
-            <el-button @click="reset">Reset</el-button>
-            <el-button type="primary" plain @click="validate"
-              >Validate</el-button
-            >
-          </template>
-        </dynamic-form>
+        <!--        <dynamic-form-->
+        <!--          ref="dynamic-form"-->
+        <!--          v-model="data"-->
+        <!--          :descriptors="descriptors"-->
+        <!--          :show-outer-error="false"-->
+        <!--        >-->
+        <!--          <template slot="operations">-->
+        <!--            <el-button @click="reset">Reset</el-button>-->
+        <!--            <el-button type="primary" plain @click="validate"-->
+        <!--              >Validate</el-button-->
+        <!--            >-->
+        <!--          </template>-->
+        <!--        </dynamic-form>-->
       </div>
       <div class="col-lg-5 col-xl-4">
         <div>
@@ -128,22 +131,21 @@
         <br />
       </div>
     </div>
-    <div v-if="!username" class="warning-overlay">
-      <warning
-        class="warning-popin"
-        title="Оповещение"
-        body="Для возможности создания блога вам необходимо авторизоваться"
-        button="Войти"
-        redirect="/login"
-      />
-    </div>
+    <!--    <div v-if="!username" class="warning-overlay">-->
+    <!--      <warning-->
+    <!--        class="warning-popin"-->
+    <!--        title="Оповещение"-->
+    <!--        body="Для возможности создания блога вам необходимо авторизоваться"-->
+    <!--        button="Войти"-->
+    <!--        redirect="/login"-->
+    <!--      />-->
+    <!--    </div>-->
   </div>
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
-import { mapState } from 'vuex'
-import Warning from '../components/Warning'
+// import { mapState } from 'vuex'
+// import Warning from '../components/Warning'
 // import { apiService } from '@/plugins/api.service'
 import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
@@ -153,101 +155,100 @@ import videoField from '@/components/blog/videoField'
 export default {
   name: 'BlogEditor',
   components: {
-    Warning,
+    // Warning,
     TextField,
     BlogContentField,
     imageField,
-    videoField,
-    Multiselect
+    videoField
   },
-  props: {
-    slug: {
-      type: String,
-      required: false,
-      default: null
-    }
-  },
+  // props: {
+  //   slug: {
+  //     type: String,
+  //     required: false,
+  //     default: null
+  //   }
+  // },
 
   data() {
     return {
-      picked: null,
-      imageCounter: 0,
-      textCounter: 1,
+      //     picked: null,
+      //     imageCounter: 0,
+      //     textCounter: 1,
       articles: ['BlogContentField'],
-      blog_body: '',
+      //     blog_body: '',
       blog_title: null,
       blog_category: 'Блоги',
-      deafultTags: ['Удочки', 'Шутки', 'Ночь', 'История', 'Деньги'],
-      result: [],
-      error: null,
-      field: 'textField',
-      blog_json: null,
-      valueCategory: '',
+      //     deafultTags: ['Удочки', 'Шутки', 'Ночь', 'История', 'Деньги'],
+      //     result: [],
+      //     error: null,
+      //     field: 'textField',
+      //     blog_json: null,
+      //     valueCategory: '',
       blog_tags: [{ name: 'Текст', code: 'текст' }],
       options: [
         { name: 'Видео', code: 'ви' },
         { name: 'Картинки', code: 'os' },
         { name: 'Текст', code: 'текст' }
       ],
-      optionsCategory: ['Новости', 'Блоги', 'Статьи', 'Отчет'],
-      descriptors: {
-        prop1: {
-          type: 'string',
-          label: 'Место рыбалки',
-          required: true,
-          message: 'Обязательно укажите место рыбалки'
-        },
-        prop2: {
-          type: 'object',
-          label: 'object label',
-          fields: {
-            prop1: { type: 'email', required: true },
-            prop2: { type: 'number', required: true },
-            prop3: [
-              {
-                type: 'string',
-                required: true,
-                message: 'object label.prop3 is required'
-              },
-              {
-                pattern: /test/,
-                message: 'object label.prop3 should include test'
-              }
-            ],
-            prop4: {
-              type: 'enum',
-              enum: [0, 1],
-              label: 'Рыба',
-              placeholder: 'sadsad',
-              options: [
-                // { label: 'Лев', value: 0, disabled: true },
-                { label: 'Лев', value: 0 },
-                { label: 'Тигр', value: 1 }
-              ]
-            },
-            prop5: { type: 'boolean', required: true }
-          }
-        }
-      },
-      data: {}
+      optionsCategory: ['Новости', 'Блоги', 'Статьи', 'Отчет']
+      //     descriptors: {
+      //       prop1: {
+      //         type: 'string',
+      //         label: 'Место рыбалки',
+      //         required: true,
+      //         message: 'Обязательно укажите место рыбалки'
+      //       },
+      //       prop2: {
+      //         type: 'object',
+      //         label: 'object label',
+      //         fields: {
+      //           prop1: { type: 'email', required: true },
+      //           prop2: { type: 'number', required: true },
+      //           prop3: [
+      //             {
+      //               type: 'string',
+      //               required: true,
+      //               message: 'object label.prop3 is required'
+      //             },
+      //             {
+      //               pattern: /test/,
+      //               message: 'object label.prop3 should include test'
+      //             }
+      //           ],
+      //           prop4: {
+      //             type: 'enum',
+      //             enum: [0, 1],
+      //             label: 'Рыба',
+      //             placeholder: 'sadsad',
+      //             options: [
+      //               // { label: 'Лев', value: 0, disabled: true },
+      //               { label: 'Лев', value: 0 },
+      //               { label: 'Тигр', value: 1 }
+      //             ]
+      //           },
+      //           prop5: { type: 'boolean', required: true }
+      //         }
+      //       }
+      //     },
+      //     data: {}
     }
   },
-  computed: {
-    loading() {
-      return this.username !== null
-    },
-    ...mapState('user', ['username'])
-  },
-  created() {
-    // document.title = 'Fishow - Создание блога'
-  },
+  // computed: {
+  //   loading() {
+  //     return this.username !== null
+  //   },
+  //   ...mapState('user', ['username'])
+  // },
+  // created() {
+  //   // document.title = 'Fishow - Создание блога'
+  // },
   methods: {
-    reset() {
-      this.$refs['dynamic-form'].resetFields()
-    },
-    validate() {
-      this.$refs['dynamic-form'].validate()
-    },
+    //   reset() {
+    //     this.$refs['dynamic-form'].resetFields()
+    //   },
+    //   validate() {
+    //     this.$refs['dynamic-form'].validate()
+    //   },
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -277,6 +278,21 @@ export default {
     },
     convertTags() {
       this.blog_tags = JSON.stringify(this.blog_tags)
+    },
+    async submitRecipe() {
+      const config = {
+        headers: { 'content-type': 'multipart/form-data' }
+      }
+      const formData = new FormData()
+      for (let data in this.recipe) {
+        formData.append(data, this.recipe[data])
+      }
+      try {
+        const response = await this.$axios.$post('/recipes/', formData, config)
+        this.$router.push('/blogs/')
+      } catch (e) {
+        console.log(e)
+      }
     },
     onSubmit() {
       if (!this.blog_title) {
@@ -319,17 +335,17 @@ export default {
     addVideo() {
       this.articles.push('videoField')
     }
-  },
-  async beforeRouteEnter(to, from, next) {
-    // if the component will be used to update a question, then get the question's data from the REST API
-    // if (to.params.slug !== undefined) {
-    // const endpoint = `/api/blogs/${to.params.slug}/`
-    // const data = await apiService(endpoint)
-    // return next(vm => (vm.blog_body = data.content))
-    // } else {
-    //   return next()
-    // }
   }
+  // async beforeRouteEnter(to, from, next) {
+  // if the component will be used to update a question, then get the question's data from the REST API
+  // if (to.params.slug !== undefined) {
+  // const endpoint = `/api/blogs/${to.params.slug}/`
+  // const data = await apiService(endpoint)
+  // return next(vm => (vm.blog_body = data.content))
+  // } else {
+  //   return next()
+  // }
+  // }
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

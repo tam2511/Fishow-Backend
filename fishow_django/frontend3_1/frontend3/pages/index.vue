@@ -10,7 +10,7 @@
               <div class="buttons-nav">
                 <nuxt-link
                   class="button button-xs button-primary"
-                  to="/BlogEditor"
+                  to="/blog-editor"
                 >
                   Добавить блог
                 </nuxt-link>

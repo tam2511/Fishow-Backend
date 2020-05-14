@@ -2,12 +2,15 @@
   <div class="col-md-12 fishow-content">
     <div class="form-wrap">
       <div class="fishow-blog_image__close-button" @click="destroyMe">x</div>
-      <autosize-textarea
+      <textarea
+        name="text"
         :id="counter"
         v-model="model"
-        name="text"
         placeholder="Основной текст"
-      ></autosize-textarea>
+        class="form-input"
+        cols="30"
+        rows="4"
+      ></textarea>
       <slot></slot>
     </div>
   </div>
@@ -18,16 +21,18 @@ export default {
   name: 'BlogContentField',
   props: {
     counter: {
-      type: Number,
+      type: String,
       required: true
     },
     value: {
       type: String,
-      required: true
+      // required: true
+      default: ''
     },
     val: {
       type: String,
-      required: true
+      // required: true,
+      default: ''
     }
   },
   data() {

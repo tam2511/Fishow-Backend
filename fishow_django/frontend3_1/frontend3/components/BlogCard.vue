@@ -71,7 +71,7 @@
       </div>
 
       <h4 class="post-corporate-title">
-        <nuxt-link :to="{ name: 'blog', params: { slug: blog.slug } }">{{
+        <nuxt-link :to="{ name: 'Blog', params: { slug: blog.slug } }">{{
           blog.title
         }}</nuxt-link>
       </h4>
@@ -100,7 +100,7 @@
     <div class="post-corporate-footer">
       <div class="post-corporate-comment">
         <span class="icon mdi mdi-comment-outline"></span>
-        <nuxt-link :to="{ name: 'blog', params: { slug: blog.slug } }"
+        <nuxt-link :to="{ name: 'Blog', params: { slug: blog.slug } }"
           >{{ blog.comments_count }} Комментариев</nuxt-link
         >
       </div>
