@@ -284,6 +284,7 @@ export default {
         headers: { 'content-type': 'multipart/form-data' }
       }
       const formData = new FormData()
+      /* eslint-disable */
       for (let data in this.recipe) {
         formData.append(data, this.recipe[data])
       }
