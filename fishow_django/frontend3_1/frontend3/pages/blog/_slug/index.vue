@@ -6,9 +6,9 @@
           <div class="fishow-votes_container">
             <div
               :class="{
-                fishow_votes: this.$store.state.user.username,
+                fishow_votes: this.$store.state.user.user,
                 'fishow_votes fishow_votes_not_active': !this.$store.state.user
-                  .username,
+                  .user,
               }"
             >
               <svg
@@ -193,28 +193,29 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 // import CreateComment from '@/components/CreateComment'
-import BlockCategories from '../components/blog/blockCategories'
-import BlockSpotlight from '../components/blog/blockSpotlight'
-import BlockTags from '../components/blog/blockTags'
+import BlockCategories from '@/components/blog/blockCategories'
+import BlockSpotlight from '@/components/blog/blockSpotlight'
+import BlockTags from '@/components/blog/blockTags'
 import Comment from '@/components/Comment.vue'
-// import { apiService } from '@/plugins/api.service'
 export default {
-  name: 'Blog',
   components: { BlockTags, BlockSpotlight, BlockCategories, Comment },
-  props: {
-    slug: {
-      type: String,
-      default: null,
-      required: true,
-    },
+  async fetch({ store, error, params }) {
+    try {
+      await store.dispatch('blogs/getBlog', params.slug)
+    } catch (e) {
+      console.log('erorr = ', e)
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch events at this time. Please try again.',
+      })
+    }
   },
-
   data() {
     return {
       blogTags: {},
       result: {},
-      blog: {},
       id: 0,
       comments: [],
       newCommentBody: null,
@@ -230,47 +231,37 @@ export default {
 
   computed: {
     userName() {
-      return this.$store.state.user.username
+      return this.$store.state.user.user
     },
-  },
-
-  created() {
-    this.getBlogData()
-    this.getCommentData()
-    this.$store.dispatch('user/setUserInfo')
+    ...mapState('blogs', ['blog']),
   },
   methods: {
-    whomIsVideo(fields) {
-      const temp = fields.split('/')
-      for (let i = 0; i < temp.length; i++) {
-        if (temp[i] === 'youtu.be') {
-          return 'https://www.youtube.com/embed/' + temp[temp.length - 1]
-        }
-        if (temp[i] === 'www.youtube.com') {
-          return (
-            'https://www.youtube.com/embed/' +
-            temp[temp.length - 1].split('watch?v=')[0]
-          )
-        }
-      }
-    },
+    // whomIsVideo(fields) {
+    //   const temp = fields.split('/')
+    //   for (let i = 0; i < temp.length; i++) {
+    //     if (temp[i] === 'youtu.be') {
+    //       return 'https://www.youtube.com/embed/' + temp[temp.length - 1]
+    //     }
+    //     if (temp[i] === 'www.youtube.com') {
+    //       return (
+    //         'https://www.youtube.com/embed/' +
+    //         temp[temp.length - 1].split('watch?v=')[0]
+    //       )
+    //     }
+    //   }
+    // },
     getBlogData() {
-      // const endpoint = `/api/blogs/${this.slug}/`
-      // apiService(endpoint).then(data => {
-      //   this.blog = data
-      //   this.result = JSON.parse(data.content)
-      //   this.result = this.result.blocks[0]
-      //   const tags = JSON.parse(this.blog.tags)
-      //   const result = []
-      //   tags.forEach(tag => result.push(tag.name))
-      //   this.blogTags = result
-      //   this.userLikedBlog = this.blog.user_has_votedUp
-      //   this.userDisLikedBlog = this.blog.user_has_votedDown
-      //   this.likesCounter = this.blog.likes_count
-      //   this.dislikesCounter = this.blog.dislikes_count
-      //   this.id = data.id
-      // this.setPageTitle('Fishow - ' + data.title)
-      // })
+      this.result = JSON.parse(this.blog.content)
+      this.result = this.result.blocks[0]
+      const tags = JSON.parse(this.blog.tags)
+      const result = []
+      tags.forEach((tag) => result.push(tag.name))
+      this.blogTags = result
+      this.userLikedBlog = this.blog.user_has_votedUp
+      this.userDisLikedBlog = this.blog.user_has_votedDown
+      this.likesCounter = this.blog.likes_count
+      this.dislikesCounter = this.blog.dislikes_count
+      this.id = this.blog.id
     },
     getCommentData() {
       // const endpoint = `/api/blogs/${this.slug}/comments/`
@@ -345,11 +336,14 @@ export default {
       //   this.error = 'Вы не можете отправить пустой комментарий'
       // }
     },
-    head() {
-      return {
-        title: 'Fishow - ' + this.blog.title,
-      }
-    },
+  },
+  created() {
+    this.getBlogData()
+  },
+  head() {
+    return {
+      title: 'Fishow - ' + this.blog.title,
+    }
   },
 }
 </script>

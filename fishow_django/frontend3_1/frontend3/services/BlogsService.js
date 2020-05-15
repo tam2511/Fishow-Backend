@@ -13,4 +13,7 @@ export default {
   getBlogs() {
     return apiClient.get('/blogs/')
   },
+  getBlog(slug) {
+    return apiClient.get(`/blogs/${slug}/`)
+  },
 }

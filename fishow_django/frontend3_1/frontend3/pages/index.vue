@@ -53,11 +53,11 @@
                 </h5>
               </div>
             </article>
-            <!--            <HotPostMinimal-->
-            <!--              v-for="blog in minPost"-->
-            <!--              :key="blog.pk"-->
-            <!--              :blog="blog"-->
-            <!--            />-->
+            <HotPostMinimal
+              v-for="blog in minPost"
+              :key="blog.id"
+              :blog="blog"
+            />
           </div>
           <!-- Мини прогнозы -->
           <div class="aside-component">
@@ -113,14 +113,12 @@
 
 <script>
 import { mapState } from 'vuex'
-
-// import HotPostMinimal from '@/components/HotPostMinimal'
+import HotPostMinimal from '@/components/HotPostMinimal'
 import MiniPrognos from '@/components/MiniPrognos'
 import Statistic from '@/components/Statistic'
 import UserRate from '@/components/UserRate'
 import LastComments from '@/components/LastComments'
 import BlogCard from '@/components/BlogCard'
-// import axios from '~/.nuxt/axios'
 export default {
   components: {
     BlogCard,
@@ -128,16 +126,8 @@ export default {
     UserRate,
     Statistic,
     MiniPrognos,
-    // HotPostMinimal
+    HotPostMinimal,
   },
-
-  // computed: {
-  //   ...mapState('blogs', ['blogs'])
-  // minPost() {
-  //     return this.blogs.filter((blog, index) => index < 3)
-  //   },
-  //   ...mapState('blogs', ['blogs', 'next'])
-  // },
   async fetch({ store, error }) {
     try {
       await store.dispatch('blogs/getBlogs')
@@ -149,18 +139,12 @@ export default {
     }
   },
   computed: {
+    minPost() {
+      return this.blogs.filter((blog, index) => index < 3)
+    },
     ...mapState('blogs', ['blogs']),
   },
   created() {},
-  // methods: {
-  //   ...mapActions('blogs', ['getBlogs'])
-  // },
-
-  // fetchOnServer: false,
-  // async fetch({ store, params }) {
-  //   await store.dispatch('blogs/getBlogs')
-  // },
-
   head() {
     return {
       title: 'Fishow - Главная',

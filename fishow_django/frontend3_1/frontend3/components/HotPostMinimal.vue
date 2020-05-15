@@ -24,7 +24,7 @@ export default {
   name: 'HotPostMinimal',
   props: {
     blog: {
-      type: String,
+      type: Object,
       required: true,
     },
   },

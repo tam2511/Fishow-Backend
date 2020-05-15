@@ -25,11 +25,11 @@
         <nuxt-link class="fishow_nav-link" to="/forum">Форум</nuxt-link>
       </span>
     </div>
-    <!--    <a @click="setShow" v-if="!username">-->
-    <!--      <div class="fishow_navbar_menu">-->
-    <!--&lt;!&ndash;        <img src="./user.png" alt="" />&ndash;&gt;-->
-    <!--      </div>-->
-    <!--    </a>-->
+    <a v-if="!user">
+      <div class="fishow_navbar_menu">
+        Login
+      </div>
+    </a>
     <!--    <nuxt-link-->
     <!--      :to="{ name: 'UserPage', params: { username: username } }"-->
     <!--      v-else-->
@@ -42,8 +42,18 @@
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 export default {
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('user/getUser')
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch events at this time. Please try again.',
+      })
+    }
+  },
   data() {
     return {
       active: false,
@@ -51,7 +61,7 @@ export default {
     }
   },
   computed: {
-    // ...mapState('user', ['username']),
+    ...mapState('user', ['user', 'userBlogs', 'userRating', 'userComments']),
     // ...mapState('login', ['show','stepReg','error'])
   },
   created() {

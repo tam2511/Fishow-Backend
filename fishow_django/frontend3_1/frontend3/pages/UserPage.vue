@@ -36,7 +36,6 @@ import UserNews from '@/components/UserPage/UserNews'
 import UserInfo from '@/components/UserPage/UserInfo'
 import UserMain from '@/components/UserPage/UserMain'
 export default {
-  name: 'UserPage',
   components: { UserMain, UserInfo, UserNews, UserAwards, UserStat },
   computed: {
     ...mapState('user', ['username']),

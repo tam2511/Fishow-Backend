@@ -57,7 +57,6 @@
 import fishSearch from '../components/predictPage/fishSearch'
 
 export default {
-  name: 'PredictPage',
   components: { fishSearch },
   data() {
     return {

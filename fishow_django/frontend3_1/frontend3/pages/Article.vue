@@ -41,14 +41,12 @@ import TrendingNews from '../components/TrendingNews'
 import BlockTags from '../components/blog/blockTags'
 import Articles from '../components/article/articles'
 export default {
-  name: 'Article',
   components: {
     Articles,
     BlockTags,
     TrendingNews,
     blockCategories,
   },
-
   computed: {
     ...mapState('blogs', ['blogs', 'next']),
   },

@@ -18,9 +18,7 @@
 </template>
 
 <script>
-export default {
-  name: 'NotFound',
-}
+export default {}
 </script>
 
 <style scoped lang="scss">

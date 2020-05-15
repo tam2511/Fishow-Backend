@@ -153,7 +153,6 @@ import BlogContentField from '@/components/blog/blogContentField'
 import videoField from '@/components/blog/videoField'
 
 export default {
-  name: 'BlogEditor',
   components: {
     // Warning,
     TextField,

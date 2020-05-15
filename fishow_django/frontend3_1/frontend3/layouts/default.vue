@@ -40,4 +40,7 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+.section-md {
+  min-height: 500px;
+}
 </style>
