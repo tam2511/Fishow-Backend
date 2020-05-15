@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       active: false,
-      step: false
+      step: false,
     }
   },
   computed: {
@@ -65,7 +65,7 @@ export default {
     // },
     // ...mapActions('user', ['setUserInfo']),
     // ...mapActions('login', ['setShow', 'setStep'])
-  }
+  },
 }
 </script>
 

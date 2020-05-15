@@ -12,10 +12,10 @@ export default {
   props: {
     data: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  computed: {}
+  computed: {},
 }
 </script>
 

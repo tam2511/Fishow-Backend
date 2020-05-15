@@ -103,11 +103,11 @@ export default {
       error: null,
       errorEmail: null,
       loginError: null,
-      success: false
+      success: false,
     }
   },
   computed: {
-    ...mapState('user', ['username'])
+    ...mapState('user', ['username']),
   },
   methods: {
     makeAuth(e) {
@@ -117,7 +117,7 @@ export default {
         username: this.login,
         email: this.email,
         password1: this.password,
-        password2: this.password
+        password2: this.password,
       }).then((date) => {
         if (date.non_field_errors) {
           this.error = true
@@ -146,8 +146,8 @@ export default {
     },
     inputFocus() {
       this.note = ''
-    }
-  }
+    },
+  },
 }
 </script>
 

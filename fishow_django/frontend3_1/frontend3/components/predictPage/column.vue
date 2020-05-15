@@ -24,7 +24,7 @@
             probMin: predictions.temperature_min,
             probMax: predictions.temperature_max,
             max: 15,
-            min: 0
+            min: 0,
           }"
         />
       </div>
@@ -38,7 +38,7 @@
             probMin: predictions.prob_min,
             probMax: predictions.prob_max,
             max: 1,
-            min: 0
+            min: 0,
           }"
         />
       </div>
@@ -52,7 +52,7 @@
             probMin: predictions.pressure_min,
             probMax: predictions.pressure_max,
             max: 740,
-            min: 650
+            min: 650,
           }"
         />
       </div>
@@ -66,7 +66,7 @@
             probMin: predictions.wind_mean,
             probMax: predictions.wind_mean,
             max: 10,
-            min: 0
+            min: 0,
           }"
         />
       </div>
@@ -138,25 +138,25 @@ export default {
   props: {
     areal: {
       type: String,
-      required: true
+      required: true,
     },
     date: {
       type: String,
-      required: true
+      required: true,
     },
     fish: {
       type: String,
-      required: true
+      required: true,
     },
     city: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       error: '',
-      isLoading: false
+      isLoading: false,
     }
   },
   created() {
@@ -171,7 +171,7 @@ export default {
         target: document.querySelector('body'),
         fullscreen: true,
         lock: true,
-        background: 'var(--background-color-default)'
+        background: 'var(--background-color-default)',
       }
       const loadingInstance = Loading.service(options)
       setTimeout(() => {
@@ -183,12 +183,12 @@ export default {
           loadingInstance.close()
         }
       }, 2000)
-    }
+    },
   },
   computed: {
-    ...mapState('prediction', ['predictions'])
+    ...mapState('prediction', ['predictions']),
     // this.isLoading = true
-  }
+  },
 }
 </script>
 

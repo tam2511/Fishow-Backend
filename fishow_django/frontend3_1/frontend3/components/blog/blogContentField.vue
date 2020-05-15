@@ -3,9 +3,9 @@
     <div class="form-wrap">
       <div class="fishow-blog_image__close-button" @click="destroyMe">x</div>
       <textarea
-        name="text"
         :id="counter"
         v-model="model"
+        name="text"
         placeholder="Основной текст"
         class="form-input"
         cols="30"
@@ -22,22 +22,22 @@ export default {
   props: {
     counter: {
       type: String,
-      required: true
+      required: true,
     },
     value: {
       type: String,
       // required: true
-      default: ''
+      default: '',
     },
     val: {
       type: String,
       // required: true,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
-      blog_body: ''
+      blog_body: '',
     }
   },
   computed: {
@@ -47,14 +47,14 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
-      }
-    }
+      },
+    },
   },
   methods: {
     destroyMe() {
       this.$el.remove()
-    }
-  }
+    },
+  },
 }
 </script>
 

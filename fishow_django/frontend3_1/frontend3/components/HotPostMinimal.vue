@@ -25,9 +25,9 @@ export default {
   props: {
     blog: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 

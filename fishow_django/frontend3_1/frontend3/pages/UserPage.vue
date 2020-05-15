@@ -39,13 +39,13 @@ export default {
   name: 'UserPage',
   components: { UserMain, UserInfo, UserNews, UserAwards, UserStat },
   computed: {
-    ...mapState('user', ['username'])
+    ...mapState('user', ['username']),
   },
   methods: {
     logout() {
       window.location = '/accounts/logout/'
-    }
-  }
+    },
+  },
 }
 </script>
 

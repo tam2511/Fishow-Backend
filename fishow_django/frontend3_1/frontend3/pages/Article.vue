@@ -46,11 +46,11 @@ export default {
     Articles,
     BlockTags,
     TrendingNews,
-    blockCategories
+    blockCategories,
   },
 
   computed: {
-    ...mapState('blogs', ['blogs', 'next'])
+    ...mapState('blogs', ['blogs', 'next']),
   },
   created() {
     this.fetchBlogs()
@@ -59,14 +59,14 @@ export default {
     checkNext() {
       this.$store.dispatch('blogs/fetchBlogs')
     },
-    ...mapActions('blogs', ['fetchBlogs'])
+    ...mapActions('blogs', ['fetchBlogs']),
   },
 
   head() {
     return {
-      title: 'Fishow - Все блоги'
+      title: 'Fishow - Все блоги',
     }
-  }
+  },
 }
 </script>
 

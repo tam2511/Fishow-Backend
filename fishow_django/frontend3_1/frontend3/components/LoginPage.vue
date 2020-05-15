@@ -245,17 +245,17 @@ export default {
       note: '',
       login: '',
       password: '',
-      email: ''
+      email: '',
     }
   },
   head() {
     return {
-      title: 'Fishow - Вход'
+      title: 'Fishow - Вход',
     }
   },
   computed: {
     ...mapState('user', ['username']),
-    ...mapState('login', ['show', 'stepReg', 'error'])
+    ...mapState('login', ['show', 'stepReg', 'error']),
   },
   methods: {
     makeAuth(e) {
@@ -268,8 +268,8 @@ export default {
       console.log('close from login')
       this.$emit('actiLog', false)
     },
-    ...mapActions('login', ['setShow', 'setStep', 'sendUserData'])
-  }
+    ...mapActions('login', ['setShow', 'setStep', 'sendUserData']),
+  },
 }
 </script>
 

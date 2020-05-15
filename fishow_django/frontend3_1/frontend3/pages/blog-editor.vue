@@ -159,7 +159,7 @@ export default {
     TextField,
     BlogContentField,
     imageField,
-    videoField
+    videoField,
   },
   // props: {
   //   slug: {
@@ -188,9 +188,9 @@ export default {
       options: [
         { name: 'Видео', code: 'ви' },
         { name: 'Картинки', code: 'os' },
-        { name: 'Текст', code: 'текст' }
+        { name: 'Текст', code: 'текст' },
       ],
-      optionsCategory: ['Новости', 'Блоги', 'Статьи', 'Отчет']
+      optionsCategory: ['Новости', 'Блоги', 'Статьи', 'Отчет'],
       //     descriptors: {
       //       prop1: {
       //         type: 'string',
@@ -252,7 +252,7 @@ export default {
     addTag(newTag) {
       const tag = {
         name: newTag,
-        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
       }
       this.options.push(tag)
       this.blog_tags.push(tag)
@@ -261,7 +261,7 @@ export default {
       const result = []
       const listBloks = document.querySelectorAll('textarea')
 
-      listBloks.forEach(block => {
+      listBloks.forEach((block) => {
         if (block.name === 'text') {
           result.push({ type: 'text', body: block.value })
         }
@@ -273,7 +273,7 @@ export default {
         }
       })
       this.blog_body = JSON.stringify({
-        blocks: [result]
+        blocks: [result],
       })
     },
     convertTags() {
@@ -281,7 +281,7 @@ export default {
     },
     async submitRecipe() {
       const config = {
-        headers: { 'content-type': 'multipart/form-data' }
+        headers: { 'content-type': 'multipart/form-data' },
       }
       const formData = new FormData()
       /* eslint-disable */
@@ -335,8 +335,8 @@ export default {
     },
     addVideo() {
       this.articles.push('videoField')
-    }
-  }
+    },
+  },
   // async beforeRouteEnter(to, from, next) {
   // if the component will be used to update a question, then get the question's data from the REST API
   // if (to.params.slug !== undefined) {

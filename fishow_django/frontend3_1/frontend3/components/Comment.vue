@@ -26,7 +26,7 @@
             class="icon mdi"
             :class="{
               'mdi-thumb-up': userLikedComment,
-              'mdi-thumb-up-outline': !userLikedComment
+              'mdi-thumb-up-outline': !userLikedComment,
             }"
             @click="toggleLike"
           ></button>
@@ -37,7 +37,7 @@
             class="icon mdi"
             :class="{
               'mdi-thumb-down': userDisLikedComment,
-              'mdi-thumb-down-outline': !userDisLikedComment
+              'mdi-thumb-down-outline': !userDisLikedComment,
             }"
             @click="toggleDislike"
           ></button>
@@ -63,23 +63,23 @@ export default {
   props: {
     comment: {
       type: Object,
-      required: true
+      required: true,
     },
     requestUser: {
       type: String,
-      required: true
+      required: true,
     },
     slug: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       userLikedComment: this.comment.user_has_votedUp,
       userDisLikedComment: this.comment.user_has_votedDown,
       likesCounter: this.comment.likes_count,
-      dislikesCounter: this.comment.dislikes_count
+      dislikesCounter: this.comment.dislikes_count,
     }
   },
   computed: {
@@ -87,7 +87,7 @@ export default {
       // return true if the logged in user is also the author of the answer instance
       // return this.comment.author === this.requestUser;
       return this.comment.author === this.requestUser
-    }
+    },
   },
   methods: {
     toggleLike() {
@@ -135,8 +135,8 @@ export default {
     triggerDeleteComment() {
       // emit an event to delete an answer instance
       this.$emit('deleteComment', this.comment)
-    }
-  }
+    },
+  },
 }
 </script>
 

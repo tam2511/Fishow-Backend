@@ -17,27 +17,27 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     body: {
       type: String,
-      required: true
+      required: true,
     },
     button: {
       type: String,
-      required: true
+      required: true,
     },
     redirect: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
-    ...mapState('login', ['show'])
+    ...mapState('login', ['show']),
   },
   methods: {
-    ...mapActions('login', ['setShow'])
-  }
+    ...mapActions('login', ['setShow']),
+  },
 }
 </script>
 

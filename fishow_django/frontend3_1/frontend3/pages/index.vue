@@ -112,6 +112,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 // import HotPostMinimal from '@/components/HotPostMinimal'
 import MiniPrognos from '@/components/MiniPrognos'
 import Statistic from '@/components/Statistic'
@@ -125,7 +127,7 @@ export default {
     LastComments,
     UserRate,
     Statistic,
-    MiniPrognos
+    MiniPrognos,
     // HotPostMinimal
   },
 
@@ -136,19 +138,18 @@ export default {
   //   },
   //   ...mapState('blogs', ['blogs', 'next'])
   // },
-  async asyncData({ $axios }) {
+  async fetch({ store, error }) {
     try {
-      const blogs = await $axios.$get('/blogs/').then(res => res.results)
-      return { blogs }
+      await store.dispatch('blogs/getBlogs')
     } catch (e) {
-      console.log('error', e)
-      return { blogs: [] }
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch events at this time. Please try again.',
+      })
     }
   },
-  data() {
-    return {
-      blogs: []
-    }
+  computed: {
+    ...mapState('blogs', ['blogs']),
   },
   created() {},
   // methods: {
@@ -159,11 +160,12 @@ export default {
   // async fetch({ store, params }) {
   //   await store.dispatch('blogs/getBlogs')
   // },
+
   head() {
     return {
-      title: 'Fishow - Главная'
+      title: 'Fishow - Главная',
     }
-  }
+  },
 }
 </script>
 

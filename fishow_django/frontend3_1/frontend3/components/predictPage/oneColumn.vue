@@ -45,9 +45,9 @@ export default {
   name: 'OneColum',
   data() {
     return {
-      value: ''
+      value: '',
     }
-  }
+  },
 }
 </script>
 

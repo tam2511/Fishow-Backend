@@ -17,15 +17,15 @@ export default {
   props: {
     name: {},
     size: {
-      default: 'normal'
+      default: 'normal',
     },
     modifier: {
-      default: null
+      default: null,
     },
     fixAlign: {
-      default: true
-    }
-  }
+      default: true,
+    },
+  },
 }
 </script>
 

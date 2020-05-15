@@ -30,13 +30,13 @@ import VueApexCharts from 'vue-apexcharts'
 export default {
   name: 'Chart',
   components: {
-    apexchart: VueApexCharts
+    apexchart: VueApexCharts,
   },
   props: {
     optionsChart: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     const getData = (days) => {
@@ -59,26 +59,26 @@ export default {
         series: [
           {
             name: 'минимальное',
-            data: this.optionsChart.probMin
+            data: this.optionsChart.probMin,
           },
           {
             name: 'максимальное',
-            data: this.optionsChart.probMax
-          }
+            data: this.optionsChart.probMax,
+          },
         ],
         chart: {
           height: 350,
           type: this.optionsChart.type,
           toolbar: {
-            show: false
-          }
+            show: false,
+          },
         },
         plotOptions: {
           bar: {
             dataLabels: {
-              position: 'top' // top, center, bottom
-            }
-          }
+              position: 'top', // top, center, bottom
+            },
+          },
         },
         // colors: ['#ea5d55', '#299431'],
         // dataLabels: {
@@ -92,18 +92,18 @@ export default {
           offsetY: -10,
           style: {
             fontSize: '12px',
-            colors: ['var(--color-typo-primary)']
-          }
+            colors: ['var(--color-typo-primary)'],
+          },
         },
         grid: {
           borderColor: 'var(--background-color-border)',
           row: {
             colors: ['var(--background-color-default)', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.2
-          }
+            opacity: 0.2,
+          },
         },
         markers: {
-          size: 1
+          size: 1,
         },
         // xaxis: {
         //     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
@@ -125,10 +125,10 @@ export default {
           categories: result,
           position: 'top',
           axisBorder: {
-            show: true
+            show: true,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           crosshairs: {
             fill: {
@@ -138,36 +138,36 @@ export default {
                 colorTo: '#BED1E6',
                 stops: [0, 100],
                 opacityFrom: 0.4,
-                opacityTo: 0.5
-              }
-            }
+                opacityTo: 0.5,
+              },
+            },
           },
           tooltip: {
-            enabled: true
-          }
+            enabled: true,
+          },
         },
         yaxis: {
           axisBorder: {
-            show: false
+            show: false,
           },
           axisTicks: {
-            show: false
+            show: false,
           },
           labels: {
             show: false,
             formatter(val) {
               return val + '%'
-            }
-          }
+            },
+          },
         },
         legend: {
           position: 'bottom',
           horizontalAlign: 'right',
           floating: true,
           offsetY: 0,
-          offsetX: 0
-        }
-      }
+          offsetX: 0,
+        },
+      },
     }
   },
   computed: {
@@ -182,7 +182,7 @@ export default {
         value = screen - 40
       }
       return value
-    }
+    },
   },
   methods: {
     setArea() {
@@ -193,8 +193,8 @@ export default {
     },
     setLines() {
       this.options.chart.type = 'line'
-    }
-  }
+    },
+  },
 }
 </script>
 

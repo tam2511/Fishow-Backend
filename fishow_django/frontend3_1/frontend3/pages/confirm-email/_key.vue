@@ -18,14 +18,14 @@ export default {
   props: {
     key: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       result: false,
       msg: '',
-      error: null
+      error: null,
     }
   },
   methods: {
@@ -45,8 +45,8 @@ export default {
       //   .catch(e => {
       //     console.log('error = ', e)
       //   })
-    }
-  }
+    },
+  },
 }
 </script>
 

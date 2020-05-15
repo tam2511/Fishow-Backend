@@ -43,8 +43,8 @@
               areal: getOblast,
               date: '2020-04-25',
               city: getCity,
-              fish: getFish
-            }
+              fish: getFish,
+            },
           }"
           ><el-button>Прогноз</el-button></router-link
         >
@@ -65,34 +65,34 @@ export default {
       options: [
         {
           value: 'Московская область',
-          label: 'Московская область'
+          label: 'Московская область',
         },
         {
           value: 'Ленинградская область',
-          label: 'Ленинградская область'
-        }
+          label: 'Ленинградская область',
+        },
       ],
       options2: {
         'Московская область': [
           {
             value: 'москва',
-            label: 'Москва'
+            label: 'Москва',
           },
           {
             value: 'Балашиха',
-            label: 'Балашиха'
-          }
+            label: 'Балашиха',
+          },
         ],
         'Ленинградская область': [
           {
             value: 'санкт-петербург',
-            label: 'Санкт-Петербург'
+            label: 'Санкт-Петербург',
           },
           {
             value: 'светогорск',
-            label: 'Светогорск'
-          }
-        ]
+            label: 'Светогорск',
+          },
+        ],
       },
       activeName: 'first',
       value: '',
@@ -102,7 +102,7 @@ export default {
       step: 0,
       error: '',
       fish: '',
-      showMenu: false
+      showMenu: false,
     }
   },
   computed: {
@@ -127,7 +127,7 @@ export default {
     },
     maxWidth() {
       return this.step <= 2 ? 'max-width: 500px' : 'max-width: 70%'
-    }
+    },
   },
   created() {
     // document.title = 'Fishow - Прогноз'
@@ -149,8 +149,8 @@ export default {
           areal: this.getOblast,
           date: newmm,
           city: this.getCity,
-          fish: this.getFish
-        }
+          fish: this.getFish,
+        },
       })
     },
     // errorMesage() {
@@ -165,8 +165,8 @@ export default {
       this.value3 = ''
       this.fish = ''
       this.step = 0
-    }
-  }
+    },
+  },
 }
 </script>
 

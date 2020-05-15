@@ -80,7 +80,7 @@
 
 <script>
 export default {
-  name: 'UserAwards'
+  name: 'UserAwards',
 }
 </script>
 

@@ -28,15 +28,15 @@ export default {
       categories: [
         {
           name: 'Статьи',
-          count: 0
+          count: 0,
         },
         {
           name: 'Блоги',
-          count: 0
-        }
-      ]
+          count: 0,
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

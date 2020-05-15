@@ -8,7 +8,7 @@
             class=""
             :class="{
               'fishow-votes_up__active': userLikedBlog,
-              'fishow-votes_up': !userLikedBlog
+              'fishow-votes_up': !userLikedBlog,
             }"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@
             id="Capa_1"
             :class="{
               'fishow-votes_down__active': userDisLikedBlog,
-              'fishow-votes_down': !userDisLikedBlog
+              'fishow-votes_down': !userDisLikedBlog,
             }"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -123,8 +123,8 @@ export default {
   props: {
     blog: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -132,13 +132,13 @@ export default {
       userLikedBlog: this.blog.user_has_votedUp,
       userDisLikedBlog: this.blog.user_has_votedDown,
       likesCounter: this.blog.likes_count,
-      dislikesCounter: this.blog.dislikes_count
+      dislikesCounter: this.blog.dislikes_count,
     }
   },
   computed: {
     getResult() {
       return JSON.parse(this.blog.content).blocks[0]
-    }
+    },
   },
   methods: {
     toggleLike() {
@@ -182,8 +182,8 @@ export default {
       // this.userDisLikedBlog = false
       // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
       // apiService(endpoint, 'DELETE')
-    }
-  }
+    },
+  },
 }
 </script>
 

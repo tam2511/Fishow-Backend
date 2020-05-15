@@ -113,7 +113,7 @@
 
 <script>
 export default {
-  name: 'UserInfo'
+  name: 'UserInfo',
 }
 </script>
 

@@ -17,7 +17,7 @@
                       src="/static/assets/images/logo-default-129x81.png"
                       alt=""
                       width="129"
-                      height="81"/><img
+                      height="81" /><img
                       class="brand-logo brand-logo-light"
                       src="/static/assets/images/logo-inverse-129x81.png"
                       alt=""
@@ -168,7 +168,7 @@
 import Lastblogs from './Home/lastblogs'
 export default {
   name: 'FIshowFooter',
-  components: { Lastblogs }
+  components: { Lastblogs },
 }
 </script>
 

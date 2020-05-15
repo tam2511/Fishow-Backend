@@ -16,13 +16,13 @@ import VueApexCharts from 'vue-apexcharts'
 export default {
   name: 'Prob',
   components: {
-    apexchart: VueApexCharts
+    apexchart: VueApexCharts,
   },
   props: {
     info: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -30,31 +30,31 @@ export default {
       series: [
         {
           name: 'min',
-          data: null
+          data: null,
         },
         {
           name: 'max',
-          data: null
-        }
+          data: null,
+        },
       ],
       chartOptions: {
         chart: {
           height: 350,
-          type: 'line'
+          type: 'line',
         },
         dataLabels: {
-          enabled: true
+          enabled: true,
         },
         stroke: {
           width: 2,
-          curve: 'smooth'
+          curve: 'smooth',
         },
         colors: ['#260f4b', '#66DA26', '#546E7A', '#e9e001', '#FF9800'],
         sparkline: {
-          enabled: true
+          enabled: true,
         },
         fill: {
-          type: 'solid'
+          type: 'solid',
         },
         xaxis: {
           type: 'datetime',
@@ -65,15 +65,15 @@ export default {
             '2018-09-19T03:30:00.000Z',
             '2018-09-19T04:30:00.000Z',
             '2018-09-19T05:30:00.000Z',
-            '2018-09-19T06:30:00.000Z'
-          ]
+            '2018-09-19T06:30:00.000Z',
+          ],
         },
         tooltip: {
           x: {
-            format: 'dd/MM/yy HH:mm'
-          }
-        }
-      }
+            format: 'dd/MM/yy HH:mm',
+          },
+        },
+      },
     }
   },
   computed: {},
@@ -85,8 +85,8 @@ export default {
       this.series[0].data = this.info.prob_min
       this.series[1].data = this.info.prob_max
       this.active = true
-    }
-  }
+    },
+  },
 }
 </script>
 

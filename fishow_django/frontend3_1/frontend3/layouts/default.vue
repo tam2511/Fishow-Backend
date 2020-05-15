@@ -17,8 +17,8 @@ import fishowFooter from '@/components/FIshow_Footer.vue'
 export default {
   components: {
     newNavBar,
-    fishowFooter
-  }
+    fishowFooter,
+  },
 }
 </script>
 <style lang="scss">

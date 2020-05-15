@@ -23,19 +23,19 @@ export default {
   props: {
     counter: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      image: ''
+      image: '',
     }
   },
   methods: {
     destroyMe() {
       this.$el.remove()
-    }
-  }
+    },
+  },
 }
 </script>
 

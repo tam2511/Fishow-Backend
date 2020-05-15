@@ -108,7 +108,7 @@
 
 <script>
 export default {
-  name: 'BlockSpotlight'
+  name: 'BlockSpotlight',
 }
 </script>
 

@@ -58,19 +58,19 @@ export default {
         'сазан',
         'подуст',
         'толстолобик',
-        'вобла'
-      ]
+        'вобла',
+      ],
     }
   },
   mounted() {
-    this.list = this.states.map(item => {
+    this.list = this.states.map((item) => {
       return { value: `${item}`, label: `${item}` }
     })
   },
   methods: {
     data() {
       this.$emit('data', {
-        value: this.value
+        value: this.value,
       })
     },
     remoteMethod(query) {
@@ -78,14 +78,14 @@ export default {
         this.loading = true
         setTimeout(() => {
           this.loading = false
-          this.options = this.list.filter(item => {
+          this.options = this.list.filter((item) => {
             return item.label.toLowerCase().includes(query.toLowerCase())
           })
         }, 200)
       } else {
         this.options = []
       }
-    }
-  }
+    },
+  },
 }
 </script>

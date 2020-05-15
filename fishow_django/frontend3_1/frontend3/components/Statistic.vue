@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       counterBlogs: null,
-      counterComments: 0
+      counterComments: 0,
     }
   },
   created() {
@@ -51,8 +51,8 @@ export default {
       //     item => (this.counterComments += item.comments_count)
       //   )
       // })
-    }
-  }
+    },
+  },
 }
 </script>
 

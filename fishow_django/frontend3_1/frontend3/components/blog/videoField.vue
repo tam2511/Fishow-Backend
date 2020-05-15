@@ -27,12 +27,12 @@ export default {
   props: {
     counter: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      urlVideo: ''
+      urlVideo: '',
     }
   },
   methods: {
@@ -54,8 +54,8 @@ export default {
     },
     destroyMe() {
       this.$el.remove()
-    }
-  }
+    },
+  },
 }
 </script>
 

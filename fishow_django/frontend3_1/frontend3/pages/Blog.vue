@@ -8,14 +8,14 @@
               :class="{
                 fishow_votes: this.$store.state.user.username,
                 'fishow_votes fishow_votes_not_active': !this.$store.state.user
-                  .username
+                  .username,
               }"
             >
               <svg
                 id="Capa_1"
                 :class="{
                   'fishow-votes_up__active': userLikedBlog,
-                  'fishow-votes_up': !userLikedBlog
+                  'fishow-votes_up': !userLikedBlog,
                 }"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +43,7 @@
                 class=""
                 :class="{
                   'fishow-votes_down__active': userDisLikedBlog,
-                  'fishow-votes_down': !userDisLikedBlog
+                  'fishow-votes_down': !userDisLikedBlog,
                 }"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -206,8 +206,8 @@ export default {
     slug: {
       type: String,
       default: null,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
@@ -224,14 +224,14 @@ export default {
       userLikedBlog: null,
       userDisLikedBlog: null,
       likesCounter: null,
-      dislikesCounter: null
+      dislikesCounter: null,
     }
   },
 
   computed: {
     userName() {
       return this.$store.state.user.username
-    }
+    },
   },
 
   created() {
@@ -347,10 +347,10 @@ export default {
     },
     head() {
       return {
-        title: 'Fishow - ' + this.blog.title
+        title: 'Fishow - ' + this.blog.title,
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -193,7 +193,7 @@
 
 <script>
 export default {
-  name: 'TrendingNews'
+  name: 'TrendingNews',
 }
 </script>
 

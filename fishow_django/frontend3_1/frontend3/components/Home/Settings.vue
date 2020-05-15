@@ -11,7 +11,7 @@
     <div
       :class="{
         'settings-container settings-show': settingsActive,
-        'settings-container': !settingsActive
+        'settings-container': !settingsActive,
       }"
     >
       <el-select v-model="value" placeholder="Select" :change="setTheme()">
@@ -36,18 +36,18 @@ export default {
       options: [
         {
           value: 'theme_color_fishow_default',
-          label: 'Основная'
+          label: 'Основная',
         },
         {
           value: 'theme_color_fishow_esoteric',
-          label: 'Темная'
+          label: 'Темная',
         },
         {
           value: 'theme_color_fishow_underwater',
-          label: 'Под водой'
-        }
+          label: 'Под водой',
+        },
       ],
-      value: ''
+      value: '',
     }
   },
   methods: {
@@ -62,8 +62,8 @@ export default {
       if (this.settingsActive) {
         this.settingsActive = false
       } else this.settingsActive = true
-    }
-  }
+    },
+  },
 }
 </script>
 

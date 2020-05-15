@@ -52,8 +52,8 @@ export default {
   props: {
     blog: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     categ() {
@@ -62,8 +62,8 @@ export default {
       } else {
         return 'badge-primary'
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

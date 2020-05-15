@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: 'LastComments'
+  name: 'LastComments',
 }
 </script>
 

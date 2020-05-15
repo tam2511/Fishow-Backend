@@ -46,28 +46,28 @@ export default {
   name: 'CreateComment',
   props: {
     id: {
-      required: true
+      required: true,
     },
     slug: {
       type: String,
-      required: true
+      required: true,
     },
     // requestUser: {
     //   required: true,
     // },
     comments: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   data() {
     return {
       blogSlug: null,
       commentBody: null,
-      error: null
+      error: null,
     }
   },
   computed: {
-    ...mapState(['username'])
+    ...mapState(['username']),
   },
   created() {},
   methods: {},
@@ -78,7 +78,7 @@ export default {
     return next(
       (vm) => ((vm.commentBody = data.body), (vm.blogSlug = data.blog_slug))
     )
-  }
+  },
 }
 </script>
 

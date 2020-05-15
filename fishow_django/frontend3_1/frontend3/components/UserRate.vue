@@ -42,13 +42,13 @@ export default {
   data() {
     return {
       userList: [],
-      lengthOfList: 5
+      lengthOfList: 5,
     }
   },
   computed: {
     userRating() {
       return this.userList.filter((user, index) => index < this.lengthOfList)
-    }
+    },
   },
   created() {
     this.getUserList()
@@ -60,8 +60,8 @@ export default {
       // apiService(endpoint).then(data => {
       //   this.userList.push(...data)
       // })
-    }
-  }
+    },
+  },
 }
 </script>
 

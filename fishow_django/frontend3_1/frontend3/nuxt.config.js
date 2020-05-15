@@ -1,7 +1,4 @@
-// eslint-disable-next-line nuxt/no-cjs-in-config
-import BundleTracker from 'webpack-bundle-tracker'
 export default {
-  context: __dirname,
   mode: 'universal',
   /*
    ** Headers of the page
@@ -14,10 +11,10 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress-bar color
@@ -30,15 +27,13 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-
-  ],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
   ],
   /*
    ** Nuxt.js modules
@@ -49,7 +44,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    'nuxt-vue-multiselect'
+    'nuxt-vue-multiselect',
   ],
   proxy: {
     // ** is important here, * probably means it won't go more than one level deep
@@ -63,16 +58,16 @@ export default {
     '/api': {
       target: 'http://localhost:3000/',
       pathRewrite: {
-        '^/api': '/'
-      }
-    }
+        '^/api': '/',
+      },
+    },
   },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'http://localhost:8000/api'
+    baseURL: 'http://localhost:8000/api',
   },
   /*
    ** Build configuration
@@ -109,6 +104,6 @@ export default {
     //     filename: '.nuxt/webpack-stats.json'
     //   })
     // ],
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 }

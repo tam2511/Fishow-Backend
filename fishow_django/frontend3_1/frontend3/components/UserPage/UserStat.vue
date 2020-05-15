@@ -61,7 +61,7 @@
 
 <script>
 export default {
-  name: 'UserStat'
+  name: 'UserStat',
 }
 </script>
 

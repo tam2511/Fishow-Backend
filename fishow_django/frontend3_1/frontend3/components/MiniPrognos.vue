@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'MiniPrognos'
+  name: 'MiniPrognos',
 }
 </script>
 

@@ -121,7 +121,7 @@
 
 <script>
 export default {
-  name: 'UserNews'
+  name: 'UserNews',
 }
 </script>
 

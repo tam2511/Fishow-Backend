@@ -9,7 +9,7 @@
         getRandom15 * this.height +
         '%, rgba(0,212,255,0)' +
         getRandom15 * this.height +
-        '%'
+        '%',
     }"
   >
     <span :style="{ bottom: getRandom15 / this.marginText + 15 + 'px' }">
@@ -26,31 +26,31 @@ export default {
   name: 'IconPogoda',
   props: {
     maxValue: {
-      required: true
+      required: true,
     },
     minValue: {
-      required: true
+      required: true,
     },
     color: {
       type: String,
-      required: true
+      required: true,
     },
     height: {
       type: Number,
-      required: true
+      required: true,
     },
     marginText: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     getRandom15() {
       return Math.floor(
         Math.random() * (this.maxValue - this.minValue) + this.minValue
       )
-    }
-  }
+    },
+  },
 }
 </script>
 

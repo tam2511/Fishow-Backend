@@ -20,9 +20,9 @@ export default {
   props: {
     counter: {
       type: Number,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
