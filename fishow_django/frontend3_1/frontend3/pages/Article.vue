@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import blockCategories from '../components/blog/blockCategories'
 import TrendingNews from '../components/TrendingNews'
 import BlockTags from '../components/blog/blockTags'
@@ -50,16 +50,6 @@ export default {
   computed: {
     ...mapState('blogs', ['blogs', 'next']),
   },
-  created() {
-    this.fetchBlogs()
-  },
-  methods: {
-    checkNext() {
-      this.$store.dispatch('blogs/fetchBlogs')
-    },
-    ...mapActions('blogs', ['fetchBlogs']),
-  },
-
   head() {
     return {
       title: 'Fishow - Все блоги',

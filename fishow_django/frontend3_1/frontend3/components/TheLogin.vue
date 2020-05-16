@@ -44,16 +44,16 @@
   <!--    </div>-->
   <!--  </div>-->
   <transition name="fade">
-    <div v-if="show" class="logmod">
+    <div v-if="showState" class="logmod">
       <div class="logmod__wrapper">
-        <div class="logmod__close" @click="setShow">X</div>
+        <div class="logmod__close" @click="close">X</div>
         <div class="logmod__container">
           <ul class="logmod__tabs">
             <li data-tabtar="lgm-2" :class="{ current: stepReg }">
-              <a tabindex="0" @click="setStep">Вход</a>
+              <a tabindex="0" @click="changeStep">Вход</a>
             </li>
             <li data-tabtar="lgm-1" :class="{ current: !stepReg }">
-              <a tabindex="0" @click="setStep">Регистрация</a>
+              <a tabindex="0" @click="changeStep">Регистрация</a>
             </li>
           </ul>
           <div class="logmod__tab-wrapper">
@@ -160,7 +160,7 @@
                   accept-charset="utf-8"
                   action="#"
                   class="simform"
-                  @submit.prevent="makeAuth"
+                  @submit="submit"
                 >
                   <div class="sminputs">
                     <div class="input full">
@@ -169,7 +169,7 @@
                       >
                       <input
                         id="user-email"
-                        v-model="email"
+                        v-model="login.email"
                         class="string optional"
                         maxlength="255"
                         placeholder="example@mail.ru"
@@ -185,7 +185,7 @@
                       >
                       <input
                         id="user-pw"
-                        v-model="password"
+                        v-model="login.password"
                         class="string optional"
                         maxlength="255"
                         placeholder="Пароль"
@@ -236,31 +236,104 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
-  name: 'LoginPage',
   data() {
     return {
+      login: {
+        email: 'etoto4nonezan9to@gmail.com',
+        password: 'Damir461',
+      },
+      register: {
+        email: '',
+        username: '',
+        password1: '',
+        password2: '',
+      },
       note: '',
-      login: '',
       password: '',
       email: '',
-    }
-  },
-  head() {
-    return {
-      title: 'Fishow - Вход',
+      show: true,
+      stepReg: true,
     }
   },
   computed: {
-    ...mapState('user', ['username']),
-    ...mapState('login', ['show', 'stepReg', 'error']),
+    ...mapState('user', ['user']),
+    ...mapState('login', ['showState']),
   },
   methods: {
-    makeAuth(e) {
-      this.sendUserData(e)
+    async submit() {
+      try {
+        await this.$auth.login({ data: this.login })
+        if (this.$auth.hasScope('general')) {
+          this.$nuxt.$router.push('/')
+        } else if (this.$auth.hasScope('admin')) {
+          this.$nuxt.$router.push('/admin')
+        }
+      } catch (e) {
+        this.error = 'Login failed.'
+      }
     },
+    // async makeAuth() {
+    //   try {
+    //     const response = await this.$auth.loginWith('local', {
+    //       data: this.login,
+    //     })
+    //     document.cookie =
+    //       'sessionid=' + response.data.key + ';secure=false;sameSite=lax'
+    //     console.log(response.data.key)
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // },
+    // async userLogin() {
+    //   try {
+    //     const response = await this.$auth.loginWith('local', {
+    //       data: this.login,
+    //     })
+    //     console.log(response)
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // },
+    // async makeAuth(e) {
+    //   try {
+    //     const data = {
+    //       email: this.email,
+    //       password: this.password,
+    //     }
+    //     console.log('data = ', data)
+    //
+    //     // const config = {
+    //     //   headers: {
+    //     //     'content-type': 'application/json',
+    //     //   },
+    //     // }
+    //     // eslint-disable-next-line no-unused-vars
+    //     const res = await this.$axios.$post('/rest-auth/login/', data)
+    //     console.log('Status code:  ', res)
+    //     document.cookie = 'sessionid=' + res.key + ';secure=false;sameSite=lax'
+    //   } catch (e) {
+    //     console.log('error = ', e)
+    //   }
+    //   // const endpoint = 'api/rest-auth/login/'
+    //   // apiService(endpoint, 'POST', userData).then((info) => {
+    //   //   if (info['non_field_errors']) {
+    //   //     this.error = true
+    //   //   } else if (
+    //   //     info['email'] &&
+    //   //     info['email'][0] === 'Enter a valid email address.'
+    //   //   ) {
+    //   //     this.errorEmail = true
+    //   //   } else {
+    //   //     // this.$router.push({
+    //   //     //     name: 'home',
+    //   //     // })
+    //   //     // location.reload()
+    //   //   }
+    //   // })
+    // },
     inputFocus() {
       this.note = ''
     },
@@ -268,7 +341,17 @@ export default {
       console.log('close from login')
       this.$emit('actiLog', false)
     },
-    ...mapActions('login', ['setShow', 'setStep', 'sendUserData']),
+    changeStep() {
+      this.stepReg = !this.stepReg
+    },
+    ...mapActions('login', { sendData: 'sendUserData' }),
+    ...mapMutations('login', { close: 'SET_SHOW' }),
+    // ...mapActions('login', ['setShow', 'setStep', 'sendUserData']),
+  },
+  head() {
+    return {
+      title: 'Fishow - Вход',
+    }
   },
 }
 </script>

@@ -76,7 +76,7 @@
         }}</nuxt-link>
       </h4>
       <div class="post-corporate-blog">
-        <div v-for="p in getResult" :key="p.type">
+        <div v-for="p in getResult" :key="p.url">
           <div v-if="p.type === 'text'" class="post-corporate-text">
             <p>{{ p.body }}</p>
           </div>
@@ -100,7 +100,7 @@
     <div class="post-corporate-footer">
       <div class="post-corporate-comment">
         <span class="icon mdi mdi-comment-outline"></span>
-        <nuxt-link :to="{ name: 'Blog', params: { slug: blog.slug } }"
+        <nuxt-link :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
           >{{ blog.comments_count }} Комментариев</nuxt-link
         >
       </div>

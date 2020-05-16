@@ -4,7 +4,7 @@
     <article class="post-minimal">
       <div class="post-classic-main">
         <p class="post-classic-title">
-          <router-link :to="{ name: 'blog', params: { slug: blog.slug } }">
+          <router-link :to="{ name: 'blog-slug', params: { slug: blog.slug } }">
             {{ blog.title }}
           </router-link>
         </p>

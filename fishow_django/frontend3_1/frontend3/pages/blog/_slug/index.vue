@@ -68,7 +68,7 @@
             <h3 class="blog-post-title">{{ blog.title }}</h3>
           </div>
           <div class="blog-post-content">
-            <div v-for="p in result" :key="p.type">
+            <div v-for="p in result" :key="p.url">
               <p v-if="p.type === 'text'" class="blog-post-text">
                 {{ p.body }}
               </p>
@@ -200,6 +200,7 @@ import BlockSpotlight from '@/components/blog/blockSpotlight'
 import BlockTags from '@/components/blog/blockTags'
 import Comment from '@/components/Comment.vue'
 export default {
+  scrollToTop: true,
   components: { BlockTags, BlockSpotlight, BlockCategories, Comment },
   async fetch({ store, error, params }) {
     try {
@@ -234,6 +235,9 @@ export default {
       return this.$store.state.user.user
     },
     ...mapState('blogs', ['blog']),
+  },
+  created() {
+    this.getBlogData()
   },
   methods: {
     // whomIsVideo(fields) {
@@ -337,9 +341,7 @@ export default {
       // }
     },
   },
-  created() {
-    this.getBlogData()
-  },
+
   head() {
     return {
       title: 'Fishow - ' + this.blog.title,

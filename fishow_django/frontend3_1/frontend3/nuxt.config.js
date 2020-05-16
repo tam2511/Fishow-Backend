@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -40,12 +40,14 @@ export default {
    */
   modules: [
     // Doc: https://bootstrap-vue.js.org
-    'bootstrap-vue/nuxt',
+    // 'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/auth',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     'nuxt-vue-multiselect',
   ],
+
   proxy: {
     // ** is important here, * probably means it won't go more than one level deep
     // '/api/**': {
@@ -60,6 +62,7 @@ export default {
       pathRewrite: {
         '^/api': '/',
       },
+      // changeOrigin: true,
     },
   },
   /*
@@ -67,6 +70,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
+    // proxy: true,
     baseURL: 'http://localhost:8000/api',
   },
   /*
@@ -85,7 +89,36 @@ export default {
   //    */
   //   extend(config, ctx) {}
   // }
+  auth: {
+    fetchUserOnLogin: true,
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/rest-auth/login/',
+            method: 'post',
+            propertyName: 'auth_token',
+          },
+          logout: { url: '/rest-auth/logout/', method: 'post' },
+          user: {
+            url: '/rest-auth/user/',
+            method: 'get',
+            propertyName: 'user',
+          },
+        },
+        tokenType: 'Token',
+        tokenName: 'Authorization',
+        // globalToken: true,
+        // autoFetchUser: true
+      },
+    },
+    redirect: {
+      login: '/',
+      home: '/',
+    },
+  },
   build: {
+    extractCSS: true,
     /*
      ** You can extend webpack config here
      */

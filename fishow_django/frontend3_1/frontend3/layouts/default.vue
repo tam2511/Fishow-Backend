@@ -1,23 +1,26 @@
 <template>
   <div class="theme_color_fishow_default">
     <!--    <settings />-->
-    <new-nav-bar />
+    <TheHeader />
     <section class="section section-md section-view">
       <transition name="fade" mode="out-in">
         <nuxt />
       </transition>
     </section>
-    <fishow-footer />
+    <theLogin />
+    <TheFooter />
   </div>
 </template>
 <script>
-import newNavBar from '@/components/new-nav-bar.vue'
-import fishowFooter from '@/components/FIshow_Footer.vue'
+import TheLogin from '~/components/TheLogin'
+import TheHeader from '~/components/TheHeader.vue'
+import TheFooter from '~/components/TheFooter.vue'
 
 export default {
   components: {
-    newNavBar,
-    fishowFooter,
+    TheHeader,
+    TheFooter,
+    TheLogin,
   },
 }
 </script>
@@ -41,6 +44,7 @@ html {
   margin: 0;
 }
 .section-md {
+  position: relative;
   min-height: 500px;
 }
 </style>

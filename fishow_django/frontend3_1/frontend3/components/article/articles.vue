@@ -14,9 +14,10 @@
           </div>
         </div>
         <h4 class="post-creative-title">
-          <router-link :to="{ name: 'blog', params: { slug: blog.slug } }">{{
-            blog.title
-          }}</router-link>
+          <router-link
+            :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
+            >{{ blog.title }}</router-link
+          >
         </h4>
       </div>
       <a class="post-creative-figure" href="blog-post.html"

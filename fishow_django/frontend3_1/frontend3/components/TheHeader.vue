@@ -25,24 +25,29 @@
         <nuxt-link class="fishow_nav-link" to="/forum">Форум</nuxt-link>
       </span>
     </div>
-    <a v-if="!user">
+    <div v-if="$auth.loggedIn">
       <div class="fishow_navbar_menu">
-        Login
+        {{ $auth.user.email }}
+      </div>
+    </div>
+    <a v-else @click="modalToggle">
+      <div class="fishow_navbar_menu">
+        Вход / Регистрация
       </div>
     </a>
     <!--    <nuxt-link-->
     <!--      :to="{ name: 'UserPage', params: { username: username } }"-->
     <!--      v-else-->
     <!--    >-->
-    <div class="fishow_navbar_menu">
-      <!--      <img src="./user.png" alt="" />-->
-    </div>
+    <!--    <div class="fishow_navbar_menu">-->
+    <!--      <img src="./user.png" alt="" />-->
+    <!--    </div>-->
     <!--    </nuxt-link>-->
   </nav>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   async fetch({ store, error }) {
     try {
@@ -68,6 +73,7 @@ export default {
     // this.setUserInfo()
   },
   methods: {
+    ...mapMutations('login', { modalToggle: 'SET_SHOW' }),
     // actiLog() {
     //     this.active = !this.active
     // },
