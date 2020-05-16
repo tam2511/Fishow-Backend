@@ -25,11 +25,11 @@
         <nuxt-link class="fishow_nav-link" to="/forum">Форум</nuxt-link>
       </span>
     </div>
-    <div v-if="$auth.loggedIn">
+    <nuxt-link to="/UserPage" v-if="$auth.loggedIn">
       <div class="fishow_navbar_menu">
-        {{ $auth.user.email }}
+        {{ $auth.user }}
       </div>
-    </div>
+    </nuxt-link>
     <a v-else @click="modalToggle">
       <div class="fishow_navbar_menu">
         Вход / Регистрация

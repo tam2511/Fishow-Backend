@@ -3,6 +3,7 @@ export default {
   /*
    ** Headers of the page
    */
+  middleware: 'auth',
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -24,6 +25,9 @@ export default {
    ** Global CSS
    */
   css: [],
+  router: {
+    middleware: ['auth'],
+  },
   /*
    ** Plugins to load before mounting the App
    */
@@ -70,6 +74,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
+    withCredentials: true,
     // proxy: true,
     baseURL: 'http://localhost:8000/api',
   },
@@ -90,6 +95,7 @@ export default {
   //   extend(config, ctx) {}
   // }
   auth: {
+    plugins: [{ src: '~/plugins/axios', ssr: true }, '~/plugins/auth.js'],
     fetchUserOnLogin: true,
     strategies: {
       local: {
@@ -97,13 +103,13 @@ export default {
           login: {
             url: '/rest-auth/login/',
             method: 'post',
-            propertyName: 'auth_token',
+            propertyName: 'key',
           },
           logout: { url: '/rest-auth/logout/', method: 'post' },
           user: {
             url: '/rest-auth/user/',
             method: 'get',
-            propertyName: 'user',
+            propertyName: 'username',
           },
         },
         tokenType: 'Token',

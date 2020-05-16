@@ -160,7 +160,7 @@
                   accept-charset="utf-8"
                   action="#"
                   class="simform"
-                  @submit="submit"
+                  @submit.prevent="submit"
                 >
                   <div class="sminputs">
                     <div class="input full">
@@ -236,9 +236,10 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
+  middleware: 'auth',
   data() {
     return {
       login: {
@@ -265,75 +266,13 @@ export default {
   methods: {
     async submit() {
       try {
-        await this.$auth.login({ data: this.login })
-        if (this.$auth.hasScope('general')) {
-          this.$nuxt.$router.push('/')
-        } else if (this.$auth.hasScope('admin')) {
-          this.$nuxt.$router.push('/admin')
-        }
+        await this.$auth.loginWith('local', { data: this.login })
+        this.close()
+        // }
       } catch (e) {
         this.error = 'Login failed.'
       }
     },
-    // async makeAuth() {
-    //   try {
-    //     const response = await this.$auth.loginWith('local', {
-    //       data: this.login,
-    //     })
-    //     document.cookie =
-    //       'sessionid=' + response.data.key + ';secure=false;sameSite=lax'
-    //     console.log(response.data.key)
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // },
-    // async userLogin() {
-    //   try {
-    //     const response = await this.$auth.loginWith('local', {
-    //       data: this.login,
-    //     })
-    //     console.log(response)
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // },
-    // async makeAuth(e) {
-    //   try {
-    //     const data = {
-    //       email: this.email,
-    //       password: this.password,
-    //     }
-    //     console.log('data = ', data)
-    //
-    //     // const config = {
-    //     //   headers: {
-    //     //     'content-type': 'application/json',
-    //     //   },
-    //     // }
-    //     // eslint-disable-next-line no-unused-vars
-    //     const res = await this.$axios.$post('/rest-auth/login/', data)
-    //     console.log('Status code:  ', res)
-    //     document.cookie = 'sessionid=' + res.key + ';secure=false;sameSite=lax'
-    //   } catch (e) {
-    //     console.log('error = ', e)
-    //   }
-    //   // const endpoint = 'api/rest-auth/login/'
-    //   // apiService(endpoint, 'POST', userData).then((info) => {
-    //   //   if (info['non_field_errors']) {
-    //   //     this.error = true
-    //   //   } else if (
-    //   //     info['email'] &&
-    //   //     info['email'][0] === 'Enter a valid email address.'
-    //   //   ) {
-    //   //     this.errorEmail = true
-    //   //   } else {
-    //   //     // this.$router.push({
-    //   //     //     name: 'home',
-    //   //     // })
-    //   //     // location.reload()
-    //   //   }
-    //   // })
-    // },
     inputFocus() {
       this.note = ''
     },
@@ -344,7 +283,7 @@ export default {
     changeStep() {
       this.stepReg = !this.stepReg
     },
-    ...mapActions('login', { sendData: 'sendUserData' }),
+    // ...mapActions('login', { sendData: 'sendUserData' }),
     ...mapMutations('login', { close: 'SET_SHOW' }),
     // ...mapActions('login', ['setShow', 'setStep', 'sendUserData']),
   },

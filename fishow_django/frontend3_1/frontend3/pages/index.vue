@@ -120,6 +120,7 @@ import UserRate from '@/components/UserRate'
 import LastComments from '@/components/LastComments'
 import BlogCard from '@/components/BlogCard'
 export default {
+  middleware: 'auth',
   components: {
     BlogCard,
     LastComments,

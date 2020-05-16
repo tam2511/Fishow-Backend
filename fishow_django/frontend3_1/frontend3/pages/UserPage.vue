@@ -1,5 +1,5 @@
 <template>
-  <div v-if="username" class="container">
+  <div v-if="$auth.user" class="container">
     <div class="row row-30">
       <div class="col-lg-8">
         <!-- Heading Component-->
@@ -13,15 +13,15 @@
         </article>
 
         <!-- Player Info Corporate-->
-        <user-main :username="username" />
-        <!--  Block Player Info-->
-        <user-info />
+        <!--        <user-main :username="username" />-->
+        <!--        Block Player Info-->
+        <!--        <user-info />-->
       </div>
       <div class="col-lg-4">
         <div class="row row-30">
-          <user-stat />
-          <user-awards />
-          <user-news />
+          <!--          <user-stat />-->
+          <!--          <user-awards />-->
+          <!--          <user-news />-->
         </div>
       </div>
     </div>
@@ -30,19 +30,23 @@
 
 <script>
 import { mapState } from 'vuex'
-import UserStat from '@/components/UserPage/UserStat'
-import UserAwards from '@/components/UserPage/UserAwards'
-import UserNews from '@/components/UserPage/UserNews'
-import UserInfo from '@/components/UserPage/UserInfo'
-import UserMain from '@/components/UserPage/UserMain'
+// import UserStat from '@/components/UserPage/UserStat'
+// import UserAwards from '@/components/UserPage/UserAwards'
+// import UserNews from '@/components/UserPage/UserNews'
+// import UserInfo from '@/components/UserPage/UserInfo'
+// import UserMain from '@/components/UserPage/UserMain'
 export default {
-  components: { UserMain, UserInfo, UserNews, UserAwards, UserStat },
+  // components: { UserMain, UserInfo, UserNews, UserAwards, UserStat },
   computed: {
-    ...mapState('user', ['username']),
+    ...mapState('user', ['user']),
   },
   methods: {
-    logout() {
-      window.location = '/accounts/logout/'
+    async logout() {
+      try {
+        await this.$auth.logout()
+      } catch (e) {
+        console.log('e = ', e)
+      }
     },
   },
 }
