@@ -242,12 +242,6 @@ export default {
   //   // document.title = 'Fishow - Создание блога'
   // },
   methods: {
-    //   reset() {
-    //     this.$refs['dynamic-form'].resetFields()
-    //   },
-    //   validate() {
-    //     this.$refs['dynamic-form'].validate()
-    //   },
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -278,52 +272,41 @@ export default {
     convertTags() {
       this.blog_tags = JSON.stringify(this.blog_tags)
     },
-    async submitRecipe() {
-      const config = {
-        headers: { 'content-type': 'multipart/form-data' },
-      }
-      const formData = new FormData()
-      /* eslint-disable */
-      for (let data in this.recipe) {
-        formData.append(data, this.recipe[data])
-      }
+    // async submitRecipe() {
+    //   const config = {
+    //     headers: { 'content-type': 'multipart/form-data' },
+    //   }
+    //   const formData = new FormData()
+    //   /* eslint-disable */
+    //   for (let data in this.recipe) {
+    //     formData.append(data, this.recipe[data])
+    //   }
+    //   try {
+    //     const response = await this.$axios.$post('/blogs/', formData, config)
+    //     console.log('response = ', response)
+    //     this.$router.push('/blogs/')
+    //   } catch (e) {
+    //     console.log(e)
+    //   }
+    // },
+    async onSubmit() {
       try {
-        const response = await this.$axios.$post('/recipes/', formData, config)
-        this.$router.push('/blogs/')
-      } catch (e) {
-        console.log(e)
-      }
-    },
-    onSubmit() {
-      if (!this.blog_title) {
-        // this.open3('Пустой заголовок!')
-      } else {
         this.convertTags()
         this.convertBody()
-
-        // this.open2()
-        // let endpoint = '/api/blogs/'
-        // let method = 'POST'
-        // if (this.slug !== undefined) {
-        //   endpoint += `${this.slug}/`
-        //   method = 'PUT'
-        // }
-        // const blog = {
-        //   title: this.blog_title,
-        //   content: this.blog_body,
-        //   category: this.blog_category,
-        //   tags: this.blog_tags
-        // }
-        // apiService(endpoint, method, blog).then(blogData => {
-        //   if (blogData.detail) {
-        //     this.error = 'Что то пошло не так, ошибка = ' + blogData.detail
-        //   } else {
-        //     this.$router.push({
-        //       name: 'blog',
-        //       params: { slug: blogData.slug }
-        //     })
-        //   }
-        // })
+        const blog = {
+          title: this.blog_title,
+          content: this.blog_body,
+          category: this.blog_category,
+          tags: this.blog_tags,
+        }
+        const response = await this.$axios.$post('/blogs/', blog)
+        this.$router.push({
+          name: 'blog-slug',
+          params: { slug: response.slug },
+        })
+        this.$nuxt.route()
+      } catch (e) {
+        console.log('error = ', e)
       }
     },
     addImage() {

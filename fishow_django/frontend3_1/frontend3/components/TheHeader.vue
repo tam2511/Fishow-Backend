@@ -25,7 +25,7 @@
         <nuxt-link class="fishow_nav-link" to="/forum">Форум</nuxt-link>
       </span>
     </div>
-    <nuxt-link to="/UserPage" v-if="$auth.loggedIn">
+    <nuxt-link v-if="$auth.loggedIn" to="/UserPage">
       <div class="fishow_navbar_menu">
         {{ $auth.user }}
       </div>
