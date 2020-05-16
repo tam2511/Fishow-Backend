@@ -1,6 +1,5 @@
 <template>
-  <div class="theme_color_fishow_default">
-    <!--    <settings />-->
+  <div id="app" :class="'theme ' + theme">
     <TheHeader />
     <section class="section section-md section-view">
       <transition name="fade" mode="out-in">
@@ -21,6 +20,21 @@ export default {
     TheHeader,
     TheFooter,
     TheLogin,
+  },
+  data() {
+    return {
+      theme: '',
+    }
+  },
+  methods: {
+    checkTheme() {
+      if (process.browser) {
+        this.theme = localStorage.getItem('theme')
+      }
+    },
+  },
+  mounted() {
+    this.checkTheme()
   },
 }
 </script>
@@ -46,5 +60,55 @@ html {
 .section-md {
   position: relative;
   min-height: 500px;
+}
+.slide-leave-active,
+.slide-enter-active {
+  transition: 1s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
+}
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease-out;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.2s ease;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.slide-up-enter {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.slide-up-enter-active {
+  transition: all 0.2s ease;
+}
+
+.slide-up-move {
+  transition: transform 0.8s ease-in;
 }
 </style>

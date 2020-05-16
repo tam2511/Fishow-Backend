@@ -1,119 +1,57 @@
 <template>
   <div class="block-player-info">
-    <h4>Biography</h4>
-    <!-- Quote Modern-->
-    <article class="quote-modern">
-      <div class="quote-modern-text">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis.
-        </p>
-      </div>
-    </article>
-    <div class="block-player-info-content">
-      <p>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-        ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua. Duis aute irure dolor in reprehenderit in
-        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat
-      </p>
-      <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est
-        laborum.Lorem ipsum dolor sit amet, consectetur
-      </p>
-      <p>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-        ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
-        consectetur adipisicing elit
-      </p>
-    </div>
-    <div class="block-player-info-timeline">
-      <div class="player-info-timeline-item">
-        <div class="player-info-timeline-item-header">
-          <span class="timeline-counter">2005</span>
-          <h5>Career Start</h5>
-        </div>
-        <div class="player-info-timeline-item-text">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in
-          </p>
-        </div>
-      </div>
-      <div class="player-info-timeline-item">
-        <div class="player-info-timeline-item-header">
-          <span class="timeline-counter">2009</span>
-          <h5>Getting more successful</h5>
-        </div>
-        <div class="player-info-timeline-item-text">
-          <p>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Duis aute irure dolor in
-            reprehenderit in
-          </p>
-        </div>
-      </div>
-      <div class="player-info-timeline-item">
-        <div class="player-info-timeline-item-header">
-          <span class="timeline-counter">2012</span>
-          <h5>Windsor becomes the top goalscorer</h5>
-        </div>
-        <div class="player-info-timeline-item-text">
-          <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.Lorem ipsum dolor sit amet, consectetur
-          </p>
-        </div>
-      </div>
-      <div class="player-info-timeline-item">
-        <div class="player-info-timeline-item-header">
-          <span class="timeline-counter">2015</span>
-          <h5>New matches and the first major injury</h5>
-        </div>
-        <div class="player-info-timeline-item-text">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in
-          </p>
-        </div>
-      </div>
-      <div class="player-info-timeline-item">
-        <div class="player-info-timeline-item-header">
-          <span class="timeline-counter">2018</span>
-          <h5>Copa del rey</h5>
-        </div>
-        <div class="player-info-timeline-item-text">
-          <p>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet,
-            consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Duis aute irure dolor in
-            reprehenderit in
-          </p>
-        </div>
-      </div>
+    <h4>Настройки</h4>
+    <div>
+      <label class="typo__label">Выберите тему:</label>
+      <multiselect
+        v-model="value"
+        track-by="label"
+        label="label"
+        :options="options"
+        :searchable="false"
+        :close-on-select="true"
+        :show-labels="false"
+        placeholder="Pick a value"
+        @input="setTheme"
+      ></multiselect>
+      {{ value.value }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'UserInfo',
+  data() {
+    return {
+      settingsActive: false,
+      options: [
+        {
+          value: 'theme_color_fishow_default',
+          label: 'Основная',
+        },
+        {
+          value: 'theme_color_fishow_esoteric',
+          label: 'Темная',
+        },
+        {
+          value: 'theme_color_fishow_underwater',
+          label: 'Под водой',
+        },
+      ],
+      optionsCategory: ['Стандартная', 'Темная', 'Синяя'],
+      value: '',
+    }
+  },
+  methods: {
+    setTheme() {
+      if (this.value && this.value !== '') {
+        console.log('set thheme = ', this.value.value)
+        document.getElementById('app').className = 'theme'
+        document.getElementById('app').classList.add(this.value.value)
+        localStorage.setItem('theme', this.value.value)
+      }
+    },
+  },
 }
 </script>
 

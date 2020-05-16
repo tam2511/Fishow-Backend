@@ -94,6 +94,10 @@ export default {
   //    */
   //   extend(config, ctx) {}
   // }
+  transition: {
+    name: 'fade',
+    mode: 'out-in',
+  },
   auth: {
     plugins: [{ src: '~/plugins/axios', ssr: true }, '~/plugins/auth.js'],
     fetchUserOnLogin: true,

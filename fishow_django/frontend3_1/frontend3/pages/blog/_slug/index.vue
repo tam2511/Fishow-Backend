@@ -143,7 +143,7 @@
               />
               <!--              </transition-group>-->
 
-              <div v-if="userName" class="comment-box">
+              <div v-if="$auth.loggedIn" class="comment-box">
                 <div class="comment-box-aside">
                   <img
                     class="img-circle"
@@ -154,7 +154,7 @@
                   />
                 </div>
                 <div class="comment-box-main">
-                  <h5 class="comment-box-name">{{ requestUser }}</h5>
+                  <h5 class="comment-box-name">{{ $auth.user }}</h5>
                   <form class="comment-box-form" @submit.prevent="onSubmit">
                     <div class="form-wrap">
                       <textarea
