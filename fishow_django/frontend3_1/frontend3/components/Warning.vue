@@ -3,7 +3,7 @@
     <h5 class="card-header">{{ title }}</h5>
     <div class="card-body">
       <p class="card-text">{{ body }}</p>
-      <button class="button button-gray-outline" @click="setShow">
+      <button class="button button-gray-outline" @click="toggleModal">
         {{ button }}
       </button>
     </div>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Warning',
   props: {
@@ -36,7 +36,7 @@ export default {
     ...mapState('login', ['show']),
   },
   methods: {
-    ...mapActions('login', ['setShow']),
+    ...mapMutations('login', { toggleModal: 'SET_SHOW' }),
   },
 }
 </script>

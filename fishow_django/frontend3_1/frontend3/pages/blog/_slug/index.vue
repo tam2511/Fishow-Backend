@@ -137,8 +137,8 @@
                 v-for="(comment, index) in comments"
                 :key="index"
                 :comment="comment"
-                :slug="slug"
-                :request-user="userName"
+                :slug="$route.params.slug"
+                :request-user="$auth.user"
                 @deleteComment="deleteComment"
               />
               <!--              </transition-group>-->
@@ -194,7 +194,6 @@
 
 <script>
 import { mapState } from 'vuex'
-// import CreateComment from '@/components/CreateComment'
 import BlockCategories from '@/components/blog/blockCategories'
 import BlockSpotlight from '@/components/blog/blockSpotlight'
 import BlockTags from '@/components/blog/blockTags'
@@ -231,13 +230,11 @@ export default {
   },
 
   computed: {
-    userName() {
-      return this.$store.state.user.user
-    },
     ...mapState('blogs', ['blog']),
   },
   created() {
     this.getBlogData()
+    this.getCommentData()
   },
   methods: {
     // whomIsVideo(fields) {
@@ -267,11 +264,11 @@ export default {
       this.dislikesCounter = this.blog.dislikes_count
       this.id = this.blog.id
     },
-    getCommentData() {
-      // const endpoint = `/api/blogs/${this.slug}/comments/`
-      // apiService(endpoint).then(data => {
-      //   this.comments.push(...data.results)
-      // })
+    async getCommentData() {
+      const response = await this.$axios.$get(
+        `/blogs/${this.$route.params.slug}/comments/`
+      )
+      this.comments.push(...response.results)
     },
     toggleLike() {
       if (this.userLikedBlog) {
@@ -291,27 +288,31 @@ export default {
         this.dislikeBlog()
       }
     },
-    likeBlog() {
+    async likeBlog() {
       this.likesCounter += 1
       this.userLikedBlog = true
+      await this.$axios.$post(`/api/blogs/${this.blog.id}/like/`)
       // const endpoint = `/api/blogs/${this.blog.id}/like/`
       // apiService(endpoint, 'POST')
     },
-    unLikeBlog() {
+    async unLikeBlog() {
       this.likesCounter -= 1
       this.userLikedBlog = false
+      await this.$axios.$delete(`/api/blogs/${this.blog.id}/like/`)
       // const endpoint = `/api/blogs/${this.blog.id}/like/`
       // apiService(endpoint, 'DELETE')
     },
-    dislikeBlog() {
+    async dislikeBlog() {
       this.dislikesCounter += 1
       this.userDisLikedBlog = true
+      await this.$axios.$post(`/api/blogs/${this.blog.id}/dislike/`)
       // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
       // apiService(endpoint, 'POST')
     },
-    undislikeBlog() {
+    async undislikeBlog() {
       this.dislikesCounter -= 1
       this.userDisLikedBlog = false
+      await this.$axios.$delete(`/api/blogs/${this.blog.id}/dislike/`)
       // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
       // apiService(endpoint, 'DELETE')
     },
@@ -326,7 +327,17 @@ export default {
       //   console.log(err)
       // }
     },
-    onSubmit() {
+    async onSubmit() {
+      try {
+        const response = await this.$axios.$post(
+          `/blogs/${this.$route.params.slug}/comment/`,
+          { body: this.commentBody }
+        )
+        console.log('responce = ', response)
+        this.comments.push(response)
+      } catch (e) {
+        console.log('error = ', e)
+      }
       // if (this.commentBody) {
       //   const endpoint = `/api/blogs/${this.slug}/comment/`
       //   apiService(endpoint, 'POST', { body: this.commentBody }).then(data => {

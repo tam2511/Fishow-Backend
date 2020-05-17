@@ -101,6 +101,7 @@ export default {
   auth: {
     plugins: [{ src: '~/plugins/axios', ssr: true }, '~/plugins/auth.js'],
     fetchUserOnLogin: true,
+    watchLoggedIn: false,
     strategies: {
       local: {
         endpoints: {
@@ -122,10 +123,7 @@ export default {
         // autoFetchUser: true
       },
     },
-    redirect: {
-      login: '/',
-      home: '/',
-    },
+    redirect: false,
   },
   build: {
     extractCSS: true,

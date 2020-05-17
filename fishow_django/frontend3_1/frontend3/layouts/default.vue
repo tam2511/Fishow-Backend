@@ -26,15 +26,15 @@ export default {
       theme: '',
     }
   },
+  mounted() {
+    this.checkTheme()
+  },
   methods: {
     checkTheme() {
       if (process.browser) {
         this.theme = localStorage.getItem('theme')
       }
     },
-  },
-  mounted() {
-    this.checkTheme()
   },
 }
 </script>

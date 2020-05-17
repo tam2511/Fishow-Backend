@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="row row-50">
-      <!--    <div class="row row-50" :style="username ? '' : 'filter:blur(5px)'">-->
+    <!--    <div class="row row-50">-->
+    <div class="row row-50" :style="$auth.loggedIn ? '' : 'filter:blur(5px)'">
       <!--      <div class="col-lg-7 col-xl-8">-->
       <div v-if="blog_category !== 'Отчет'" class="col-lg-7 col-xl-8">
         <!-- Heading Component-->
@@ -131,22 +131,21 @@
         <br />
       </div>
     </div>
-    <!--    <div v-if="!username" class="warning-overlay">-->
-    <!--      <warning-->
-    <!--        class="warning-popin"-->
-    <!--        title="Оповещение"-->
-    <!--        body="Для возможности создания блога вам необходимо авторизоваться"-->
-    <!--        button="Войти"-->
-    <!--        redirect="/login"-->
-    <!--      />-->
-    <!--    </div>-->
+    <div v-if="!$auth.loggedIn" class="warning-overlay">
+      <warning
+        class="warning-popin"
+        title="Оповещение"
+        body="Для возможности создания блога вам необходимо авторизоваться"
+        button="Войти"
+        redirect="/login"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 // import { mapState } from 'vuex'
-// import Warning from '../components/Warning'
-// import { apiService } from '@/plugins/api.service'
+import Warning from '@/components/Warning'
 import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
@@ -154,7 +153,7 @@ import videoField from '@/components/blog/videoField'
 
 export default {
   components: {
-    // Warning,
+    Warning,
     TextField,
     BlogContentField,
     imageField,
