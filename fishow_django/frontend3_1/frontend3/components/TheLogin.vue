@@ -243,8 +243,8 @@ export default {
   data() {
     return {
       login: {
-        email: 'etoto4nonezan9to@gmail.com',
-        password: 'Damir461',
+        email: '',
+        password: '',
       },
       register: {
         email: '',
