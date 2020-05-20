@@ -108,29 +108,25 @@ export default {
         this.dislikeComment()
       }
     },
-    likeComment() {
-      // this.likesCounter += 1
-      // this.userLikedComment = true
-      // const endpoint = `/api/comments/${this.comment.id}/like/`
-      // apiService(endpoint, 'POST')
+    async likeComment() {
+      this.likesCounter += 1
+      this.userLikedComment = true
+      await this.$axios.$post(`/comments/${this.comment.id}/like/`)
     },
-    unLikeComment() {
-      // this.likesCounter -= 1
-      // this.userLikedComment = false
-      // const endpoint = `/api/comments/${this.comment.id}/like/`
-      // apiService(endpoint, 'DELETE')
+    async unLikeComment() {
+      this.likesCounter -= 1
+      this.userLikedComment = false
+      await this.$axios.$delete(`/comments/${this.comment.id}/like/`)
     },
-    dislikeComment() {
-      // this.dislikesCounter += 1
-      // this.userDisLikedComment = true
-      // const endpoint = `/api/comments/${this.comment.id}/dislike/`
-      // apiService(endpoint, 'POST')
+    async dislikeComment() {
+      this.dislikesCounter += 1
+      this.userDisLikedComment = true
+      await this.$axios.$post(`/comments/${this.comment.id}/dislike/`)
     },
-    undislikeComment() {
-      // this.dislikesCounter -= 1
-      // this.userDisLikedComment = false
-      // const endpoint = `/api/comments/${this.comment.id}/dislike/`
-      // apiService(endpoint, 'DELETE')
+    async undislikeComment() {
+      this.dislikesCounter -= 1
+      this.userDisLikedComment = false
+      await this.$axios.$delete(`/comments/${this.comment.id}/dislike/`)
     },
     triggerDeleteComment() {
       // emit an event to delete an answer instance

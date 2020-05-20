@@ -2,7 +2,7 @@
   <article class="post-corporate">
     <div class="post-corporate-content">
       <div class="fishow-votes_container">
-        <div>
+        <div class="fishow_votes">
           <svg
             id="Capa_1"
             class=""
@@ -159,29 +159,25 @@ export default {
         this.dislikeBlog()
       }
     },
-    likeBlog() {
-      // this.likesCounter += 1
-      // this.userLikedBlog = true
-      // const endpoint = `/api/blogs/${this.blog.id}/like/`
-      // apiService(endpoint, 'POST')
+    async likeBlog() {
+      this.likesCounter += 1
+      this.userLikedBlog = true
+      await this.$axios.$post(`/blogs/${this.blog.id}/like/`)
     },
-    unLikeBlog() {
-      // this.likesCounter -= 1
-      // this.userLikedBlog = false
-      // const endpoint = `/api/blogs/${this.blog.id}/like/`
-      // apiService(endpoint, 'DELETE')
+    async unLikeBlog() {
+      this.likesCounter -= 1
+      this.userLikedBlog = false
+      await this.$axios.$delete(`/blogs/${this.blog.id}/like/`)
     },
-    dislikeBlog() {
-      // this.dislikesCounter += 1
-      // this.userDisLikedBlog = true
-      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      // apiService(endpoint, 'POST')
+    async dislikeBlog() {
+      this.dislikesCounter += 1
+      this.userDisLikedBlog = true
+      await this.$axios.$post(`/blogs/${this.blog.id}/dislike/`)
     },
-    undislikeBlog() {
-      // this.dislikesCounter -= 1
-      // this.userDisLikedBlog = false
-      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      // apiService(endpoint, 'DELETE')
+    async undislikeBlog() {
+      this.dislikesCounter -= 1
+      this.userDisLikedBlog = false
+      await this.$axios.$delete(`/blogs/${this.blog.id}/dislike/`)
     },
   },
 }

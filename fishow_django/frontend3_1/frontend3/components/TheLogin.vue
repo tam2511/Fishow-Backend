@@ -1,48 +1,4 @@
 <template>
-  <!--  <div class="container" id="login" v-if="!username">-->
-  <!--    <div class="note note&#45;&#45;down">-->
-  <!--      <p>{{ note }}</p>-->
-  <!--    </div>-->
-  <!--    <div class="login">-->
-  <!--      <header class="login&#45;&#45;header">-->
-  <!--        <span>Личный кабинет</span>-->
-  <!--      </header>-->
-  <!--      <section class="login&#45;&#45;section">-->
-  <!--        <form class="login&#45;&#45;form" @submit.prevent="makeAuth">-->
-  <!--          <fieldset>-->
-  <!--            <input-->
-  <!--              type="email"-->
-  <!--              placeholder="email"-->
-  <!--              v-model="email"-->
-  <!--              required-->
-  <!--              @focus="inputFocus"-->
-  <!--            />-->
-  <!--          </fieldset>-->
-  <!--          <div class="error" v-if="errorEmail">-->
-  <!--            Укажите правильную почту-->
-  <!--          </div>-->
-  <!--          <fieldset>-->
-  <!--            <input-->
-  <!--              type="password"-->
-  <!--              placeholder="Пароль"-->
-  <!--              v-model="password"-->
-  <!--              @focus="inputFocus"-->
-  <!--              required-->
-  <!--            />-->
-  <!--          </fieldset>-->
-  <!--          <div class="error" v-if="error">-->
-  <!--            Неверно указана почта или пароль-->
-  <!--          </div>-->
-  <!--          <fieldset>-->
-  <!--            <button type="submit" class="button button-default">Вход</button>-->
-  <!--            <router-link class="button button-default" to="/registration"-->
-  <!--              >Регистрация</router-link-->
-  <!--            >-->
-  <!--          </fieldset>-->
-  <!--        </form>-->
-  <!--      </section>-->
-  <!--    </div>-->
-  <!--  </div>-->
   <transition name="fade">
     <div v-if="showState" class="logmod">
       <div class="logmod__wrapper">
@@ -65,7 +21,12 @@
                 >
               </div>
               <div class="logmod__form">
-                <form accept-charset="utf-8" action="#" class="simform">
+                <form
+                  accept-charset="utf-8"
+                  action="#"
+                  class="simform"
+                  @submit.prevent="submitReg"
+                >
                   <div class="sminputs">
                     <div class="input full">
                       <label class="string optional" for="user-email"

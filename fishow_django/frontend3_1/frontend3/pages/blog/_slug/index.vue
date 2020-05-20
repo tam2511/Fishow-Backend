@@ -291,30 +291,22 @@ export default {
     async likeBlog() {
       this.likesCounter += 1
       this.userLikedBlog = true
-      await this.$axios.$post(`/api/blogs/${this.blog.id}/like/`)
-      // const endpoint = `/api/blogs/${this.blog.id}/like/`
-      // apiService(endpoint, 'POST')
+      await this.$axios.$post(`/blogs/${this.blog.id}/like/`)
     },
     async unLikeBlog() {
       this.likesCounter -= 1
       this.userLikedBlog = false
-      await this.$axios.$delete(`/api/blogs/${this.blog.id}/like/`)
-      // const endpoint = `/api/blogs/${this.blog.id}/like/`
-      // apiService(endpoint, 'DELETE')
+      await this.$axios.$delete(`/blogs/${this.blog.id}/like/`)
     },
     async dislikeBlog() {
       this.dislikesCounter += 1
       this.userDisLikedBlog = true
-      await this.$axios.$post(`/api/blogs/${this.blog.id}/dislike/`)
-      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      // apiService(endpoint, 'POST')
+      await this.$axios.$post(`/blogs/${this.blog.id}/dislike/`)
     },
     async undislikeBlog() {
       this.dislikesCounter -= 1
       this.userDisLikedBlog = false
-      await this.$axios.$delete(`/api/blogs/${this.blog.id}/dislike/`)
-      // const endpoint = `/api/blogs/${this.blog.id}/dislike/`
-      // apiService(endpoint, 'DELETE')
+      await this.$axios.$delete(`/blogs/${this.blog.id}/dislike/`)
     },
     async deleteComment(comment) {
       // delete a given answer from the answers array and make a delete request to the REST API
@@ -333,7 +325,6 @@ export default {
           `/blogs/${this.$route.params.slug}/comment/`,
           { body: this.commentBody }
         )
-        console.log('responce = ', response)
         this.comments.push(response)
       } catch (e) {
         console.log('error = ', e)
