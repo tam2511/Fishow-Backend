@@ -6,7 +6,7 @@ export default function ({ $axios, redirect }) {
   })
   $axios.onResponse((response) => {
     if (response.data.key) {
-      $axios.setHeader('Authorization', 'Token ' + response.data.key)
+      document.cookie = 'sessionid=' + response.data.key
     }
   })
   $axios.onError((error) => {

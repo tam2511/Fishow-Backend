@@ -1,7 +1,7 @@
 import pandas as pd
 from mysql_utils import MysqlConnector
 
-connector = MysqlConnector("tam2511_fishow", "081099", "localhost", "tam2511_fishow")
+connector = MysqlConnector("tam2511_fishow", "081099ASDasd", "localhost", "tam2511_fishow")
 
 # data = connector.select('prediction_predictionten')
 

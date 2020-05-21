@@ -25,7 +25,6 @@ export const mutations = {
 export const actions = {
   getUser({ commit }) {
     return UserService.getUserData().then((response) => {
-      console.log('response', response.data)
       commit('SET_USER', response.data.username)
       commit('SET_USERBLOGS', response.data.blogs)
       commit('SET_USERCOMMENTS', response.data.comments)

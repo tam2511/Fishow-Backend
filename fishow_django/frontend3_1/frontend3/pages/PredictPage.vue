@@ -1,63 +1,62 @@
 <template>
   <div class="container container__small">
     <div class="select-predict">
-      <el-steps :active="getStep" finish-status="success">
-        <el-step title="Область"></el-step>
-        <el-step title="Населенный пункт"></el-step>
-        <el-step title="Рыба"></el-step>
-      </el-steps>
+      <!--      <el-steps :active="getStep" finish-status="success">-->
+      <!--        <el-step title="Область"></el-step>-->
+      <!--        <el-step title="Населенный пункт"></el-step>-->
+      <!--        <el-step title="Рыба"></el-step>-->
+      <!--      </el-steps>-->
       <div v-if="getStep === 0">
-        <el-select v-model="value" placeholder="Select">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
+        <!--        <el-select v-model="value" placeholder="Select">-->
+        <!--          <el-option-->
+        <!--            v-for="item in options"-->
+        <!--            :key="item.value"-->
+        <!--            :label="item.label"-->
+        <!--            :value="item.value"-->
+        <!--          >-->
+        <!--          </el-option>-->
+        <!--        </el-select>-->
       </div>
       <div v-else-if="getStep === 1">
-        <el-select v-model="value2" placeholder="Select">
-          <el-option
-            v-for="item in options2[`${value}`]"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
-          </el-option>
-        </el-select>
+        <!--        <el-select v-model="value2" placeholder="Select">-->
+        <!--          <el-option-->
+        <!--            v-for="item in options2[`${value}`]"-->
+        <!--            :key="item.value"-->
+        <!--            :label="item.label"-->
+        <!--            :value="item.value"-->
+        <!--          >-->
+        <!--          </el-option>-->
+        <!--        </el-select>-->
       </div>
       <div v-else-if="getStep === 2">
-        <fish-search @data="onChange" />
+        <!--        <fish-search @data="onChange" />-->
       </div>
       <h6 style="color: red;">{{ error }}</h6>
 
       <div class="predict_footer">
-        <el-button v-if="getStep > 0" @click="fullBack">В начало</el-button>
-        <router-link
-          v-if="getStep === 3"
-          :to="{
-            name: 'PredictResult',
-            params: {
-              areal: getOblast,
-              date: '2020-04-25',
-              city: getCity,
-              fish: getFish,
-            },
-          }"
-          ><el-button>Прогноз</el-button></router-link
-        >
+        <!--        <el-button v-if="getStep > 0" @click="fullBack">В начало</el-button>-->
+        <!--        <router-link-->
+        <!--          v-if="getStep === 3"-->
+        <!--          :to="{-->
+        <!--            name: 'PredictResult',-->
+        <!--            params: {-->
+        <!--              areal: getOblast,-->
+        <!--              date: '2020-04-25',-->
+        <!--              city: getCity,-->
+        <!--              fish: getFish,-->
+        <!--            },-->
+        <!--          }"-->
+        <!--          ><el-button>Прогноз</el-button></router-link>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import fishSearch from '../components/predictPage/fishSearch'
+// import fishSearch from '../components/predictPage/fishSearch'
 
 export default {
-  components: { fishSearch },
+  // components: { fishSearch },
   data() {
     return {
       result: '',

@@ -248,11 +248,6 @@ export default {
     ...mapMutations('login', { close: 'SET_SHOW' }),
     // ...mapActions('login', ['setShow', 'setStep', 'sendUserData']),
   },
-  head() {
-    return {
-      title: 'Fishow - Вход',
-    }
-  },
 }
 </script>
 

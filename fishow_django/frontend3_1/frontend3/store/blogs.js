@@ -30,4 +30,5 @@ export const actions = {
       commit('SET_BLOG', response.data)
     })
   },
+  likeBlog({ commit }, id) {},
 }

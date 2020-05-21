@@ -6,7 +6,17 @@
         <nuxt-link class="fishow_nav-link" to="/">Главная</nuxt-link>
       </span>
       <span class="fishow_nav-item">
-        <nuxt-link class="fishow_nav-link" to="/predict-page"
+        <nuxt-link
+          class="fishow_nav-link"
+          :to="{
+            name: 'PredictionPage-areal-date-city-fish',
+            params: {
+              areal: 'московская область',
+              city: 'москва',
+              date: '2020-04-25',
+              fish: 'щука',
+            },
+          }"
           >Прогноз</nuxt-link
         >
       </span>
