@@ -1,18 +1,12 @@
 <template lang="pug">
     div.container.prediciton-select
       div.row.row-50
-        div.col-lg-12(v-if="!value")
-          ul
-            li(v-for="(area, key) in json" :key="area")
-              span.item-city(@click="value = key") {{ key }}
-        div.col-lg-12(v-if="!value2")
-          ul
-            li(v-for="city in json[value]" :key="city")
-              span.item-city(@click="value2= city") {{ city }}
         div.col-lg-12
-          span Areal = {{ value }}
-          hr
-          span City = {{ value2 }}
+          div.list-areals
+            div.list-areals_item(v-for="(area, key) in json" :key="area" v-if="!value")
+              span.item-city(@click="value = key") {{ key }}
+            div.list-areals_item(v-for="city in json[value]" :key="city" v-if="!value2")
+              span.item-city(@click="value2= city") {{ city }}
 </template>
 
 <script>
@@ -105,8 +99,18 @@ export default {
 .item-city {
   cursor: pointer;
   padding: 5px;
+  transition: color 0.3s;
   &:hover {
-    color: #1e347b;
+    color: #d58815;
+  }
+}
+.list-areals {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  &_item {
+    font-size: 20px;
+    padding: 5px;
   }
 }
 </style>

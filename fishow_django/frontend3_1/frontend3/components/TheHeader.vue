@@ -1,59 +1,29 @@
-<template>
-  <nav class="fishow_navbar">
-    <nuxt-link class="fishow_navbar-brand" to="/">Fishow</nuxt-link>
-    <div class="fishow_navbar-nav">
-      <span class="fishow_nav-item">
-        <nuxt-link class="fishow_nav-link" to="/">Главная</nuxt-link>
-      </span>
-      <span class="fishow_nav-item">
-        <nuxt-link
-          class="fishow_nav-link"
-          :to="{
-            name: 'PredictionPage-areal-date-city-fish',
-            params: {
-              areal: 'московская область',
-              city: 'москва',
-              date: '2020-04-25',
-              fish: 'щука',
-            },
-          }"
-          >Прогноз</nuxt-link
-        >
-      </span>
-      <span class="fishow_nav-item">
-        <nuxt-link class="fishow_nav-link" to="/blog-editor"
-          >Создать блог</nuxt-link
-        >
-      </span>
-      <span class="fishow_nav-item">
-        <nuxt-link class="fishow_nav-link" to="/article">Все блоги</nuxt-link>
-      </span>
-      <span class="fishow_nav-item">
-        <nuxt-link class="fishow_nav-link" to="/wiki">Вики</nuxt-link>
-      </span>
-      <span class="fishow_nav-item">
-        <nuxt-link class="fishow_nav-link" to="/forum">Форум</nuxt-link>
-      </span>
-    </div>
-    <nuxt-link v-if="$auth.loggedIn" to="/UserPage">
-      <div class="fishow_navbar_menu">
-        {{ $auth.user }}
-      </div>
-    </nuxt-link>
-    <a v-else @click="modalToggle">
-      <div class="fishow_navbar_menu">
-        Вход / Регистрация
-      </div>
-    </a>
-    <!--    <nuxt-link-->
-    <!--      :to="{ name: 'UserPage', params: { username: username } }"-->
-    <!--      v-else-->
-    <!--    >-->
-    <!--    <div class="fishow_navbar_menu">-->
-    <!--      <img src="./user.png" alt="" />-->
-    <!--    </div>-->
-    <!--    </nuxt-link>-->
-  </nav>
+<template lang="pug">
+  nav.fishow_navbar
+    nuxt-link.fishow_navbar-brand(to='/') Fishow
+    .fishow_navbar-nav
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(to='/') Главная
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(
+          :to="{name: 'PredictionPage-areal-date-city-fish',params: { areal: 'московская область', city: 'москва', date: '2020-04-25', fish: 'щука'}}"
+          ) Прогноз тест
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(to='/PredictionPage') Прогноз
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(to='/blog-editor') Создать блог
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(to='/article') Все блоги
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(to='/wiki') Вики
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(to='/forum') Форум
+    nuxt-link(v-if='$auth.loggedIn', to='/UserPage')
+      .fishow_navbar_menu
+        | {{ $auth.user }}
+    a(v-else='', @click='modalToggle')
+      .fishow_navbar_menu
+        | Вход / Регистрация
 </template>
 
 <script>
