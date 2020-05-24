@@ -14,6 +14,8 @@
         nuxt-link.fishow_nav-link(to='/wiki') Вики
       span.fishow_nav-item
         nuxt-link.fishow_nav-link(to='/forum') Форум
+      span.fishow_nav-item
+        nuxt-link.fishow_nav-link(to='/UserPage') Пользователь
     nuxt-link(v-if='$auth.loggedIn', to='/UserPage')
       .fishow_navbar_menu
         | {{ $auth.user }}
@@ -61,7 +63,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .fishow_navbar {
   font-size: 16px;
   display: flex;

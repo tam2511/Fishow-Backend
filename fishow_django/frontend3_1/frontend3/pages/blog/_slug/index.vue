@@ -343,7 +343,9 @@ export default {
       // }
     },
   },
-
+  mounted() {
+    scrollTo(0, 0)
+  },
   head() {
     return {
       title: 'Fishow - ' + this.blog.title,
@@ -374,13 +376,6 @@ export default {
 }
 .fishow-votes_down__active {
   fill: red;
-}
-.fishow-votes_container {
-  align-items: center;
-}
-.blog-post-title {
-  margin-left: 30px;
-  margin-top: 0;
 }
 .comment-notUser {
   padding: 20px;

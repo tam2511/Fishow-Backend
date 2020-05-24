@@ -9,7 +9,7 @@
                 .buttons-nav(v-if='value')
                   .button.button-xs.button-primary(@click="value = false") Назад
           .list-areals
-            .list-areals_item(v-for="(area, key) in json" :key="area" v-if="!value")
+            .list-areals_item(v-for="(area, key) in json" :key="key" v-if="!value")
               span.item-city(@click="value = key") {{ key }}
             .list-areals_item(v-for="city in json[value]" :key="city" v-if="!value2")
               nuxt-link.item-city(:to="{name: 'PredictionPage-areal-date-city-fish',params: { areal: value, city, date: '2020-04-25', fish: 'щука'}}") {{ city }}

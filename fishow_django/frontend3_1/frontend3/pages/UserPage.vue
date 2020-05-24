@@ -37,6 +37,12 @@ import UserInfo from '@/components/UserPage/UserInfo'
 import UserMain from '@/components/UserPage/UserMain'
 export default {
   components: { UserMain, UserInfo, UserNews, UserAwards, UserStat },
+  props: {
+    scrollValue: {
+      type: Number,
+      default: 0,
+    },
+  },
   computed: {
     ...mapState('user', ['user']),
   },
@@ -48,6 +54,9 @@ export default {
         console.log('e = ', e)
       }
     },
+  },
+  mounted() {
+    scrollTo(0, this.scrollValue)
   },
 }
 </script>

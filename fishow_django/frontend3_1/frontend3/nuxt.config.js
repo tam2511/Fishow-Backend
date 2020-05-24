@@ -66,7 +66,7 @@ export default {
     //   pathRewrite: { '^/api': '' }
     // }
     '/api': {
-      target: 'http://0.0.0.0:3000/',
+      target: 'http://localhost:3000/',
       pathRewrite: {
         '^/api': '/',
       },
@@ -80,7 +80,7 @@ export default {
   axios: {
     withCredentials: true,
     // proxy: true,
-    baseURL: 'http://0.0.0.0:8000/api',
+    baseURL: 'http://localhost:8000/api',
   },
   /*
    ** Build configuration

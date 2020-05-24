@@ -4,13 +4,14 @@
       div.col-lg-8
         div.fishow-prediction
           HeaderPrediction
-          FishSelectPrediction
+          FishSelectPrediction(:date="date" :city="city" :areal="areal")
+          .result {{ areal }} {{ city }} {{ date }} {{ fish }}
           ul
-            li(v-for="prediciton in predictions" :key="prediciton.id") {{prediciton}}
+            li(v-for="(prediciton, key) in predictions" :key="prediciton.id") {{ key}}: {{prediciton}}
       div.col-lg-4
         div.fishow-sidebar
           ul
-            li(v-for="i in 25" :key="i") {{ i }}
+            li(v-for="(prediciton, key, index) in predictions" :key="prediciton.id" @click="doScroll" :id="index") {{ key}}
 </template>
 
 <script>
@@ -44,6 +45,18 @@ export default {
       areal: this.$route.params.areal,
     }
   },
+  methods: {
+    doScroll(event) {
+      const list = [...document.querySelectorAll('.fishow-prediction li')]
+      const newList = []
+      list.forEach((item) => newList.push(item.getBoundingClientRect().y))
+      console.log('event = ', event.target.id)
+      window.scrollBy({
+        top: newList[event.target.id] - 70,
+        behavior: 'smooth',
+      })
+    },
+  },
 }
 </script>
 
@@ -61,12 +74,22 @@ export default {
   top: 0;
   background: var(--background-color-primary);
   border: 1px solid var(--background-color-border);
+  li {
+    cursor: pointer;
+    &:hover {
+      background-color: #1e347b;
+      color: #fff;
+    }
+  }
 }
 .fishow-prediction {
   min-height: 2000px;
   position: relative;
+  ul {
+    background-color: var(--background-color-primary);
+  }
   li {
-    min-height: 100px;
+    padding: 20px;
   }
 }
 </style>

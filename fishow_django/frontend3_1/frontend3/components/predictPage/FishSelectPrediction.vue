@@ -1,13 +1,31 @@
 <template lang="pug">
-  .fishow-prediction_fish-select
-    div.fishow-prediction_fish-select-item(v-for="fish in fishs" :key="fish") {{ fish }}
+  .fish-select-body
+    button(v-if="first - 10 > 0" @click="first -= 10") <<
+    .fish-conteiner
+      nuxt-link.fish-conteiner-item(v-for="fish in list" :key="fish" :to="{ name: 'PredictionPage-areal-date-city-fish', params: { areal, date, city, fish}}") {{ fish }}
+    button(v-if="first <= fishList.length" @click="first += 10") >>
+
 </template>
 
 <script>
 export default {
+  props: {
+    areal: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      fishs: [
+      fishList: [
         'щука',
         'судак',
         'окунь',
@@ -37,22 +55,35 @@ export default {
         'толстолобик',
         'вобла',
       ],
+      first: 10,
     }
+  },
+  computed: {
+    list() {
+      return this.fishList.filter(
+        (fish, index) => index > this.first - 10 && index < this.first
+      )
+    },
   },
 }
 </script>
 
 <style scoped lang="scss">
-.fishow-prediction_fish-select {
-  border: 3px solid #00b3ee;
+.fish-select-body {
+  display: flex;
+  flex-flow: row;
+}
+.fish-conteiner {
+  border: 1px solid rgba(0, 0, 0, 0.52);
   min-height: 250px;
   display: flex;
   flex-wrap: wrap;
   &-item {
-    padding: 20px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     transition: 0.3s;
-    background: url('/static/fish.svg') center;
+    margin: 20px;
     &:hover {
       color: #ffffff;
       background-color: cadetblue;
