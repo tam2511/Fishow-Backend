@@ -1,199 +1,21 @@
-<template>
-  <transition name="fade">
-    <div v-if="showState" class="logmod">
-      <div class="logmod__wrapper">
-        <div class="logmod__close" @click="close">X</div>
-        <div class="logmod__container">
-          <ul class="logmod__tabs">
-            <li data-tabtar="lgm-2" :class="{ current: stepReg }">
-              <a tabindex="0" @click="changeStep">Вход</a>
-            </li>
-            <li data-tabtar="lgm-1" :class="{ current: !stepReg }">
-              <a tabindex="0" @click="changeStep">Регистрация</a>
-            </li>
-          </ul>
-          <div class="logmod__tab-wrapper">
-            <div v-if="!stepReg" class="logmod__tab lgm-1 show">
-              <div class="logmod__heading">
-                <span class="logmod__heading-subtitle"
-                  >Введите свои данные
-                  <strong>для создания аккаунта</strong></span
-                >
-              </div>
-              <div class="logmod__form">
-                <form
-                  accept-charset="utf-8"
-                  action="#"
-                  class="simform"
-                  @submit.prevent="submitReg"
-                >
-                  <div class="sminputs">
-                    <div class="input full">
-                      <label class="string optional" for="user-email"
-                        >Email*</label
-                      >
-                      <input
-                        id="user-email"
-                        class="string optional"
-                        maxlength="255"
-                        placeholder="Email"
-                        type="email"
-                        size="50"
-                      />
-                    </div>
-                  </div>
-                  <div class="sminputs">
-                    <div class="input string optional">
-                      <label class="string optional" for="user-pw"
-                        >Пароль *</label
-                      >
-                      <input
-                        id="user-pw"
-                        class="string optional"
-                        maxlength="255"
-                        placeholder="Password"
-                        type="text"
-                        size="50"
-                      />
-                    </div>
-                    <div class="input string optional">
-                      <label class="string optional" for="user-pw-repeat"
-                        >Повторите пароль *</label
-                      >
-                      <input
-                        id="user-pw-repeat"
-                        class="string optional"
-                        maxlength="255"
-                        placeholder="Repeat password"
-                        type="text"
-                        size="50"
-                      />
-                    </div>
-                  </div>
-                  <div class="simform__actions">
-                    <button class="sumbit" name="commit" type="sumbit">
-                      Создать аккаунт
-                    </button>
-                    <span class="simform__actions-sidetext"
-                      >Создавая аккаунт вы соглашаетесь с
-                      <a class="special" href="#" target="_blank" role="link"
-                        >Terms &amp; Privacy</a
-                      ></span
-                    >
-                  </div>
-                </form>
-              </div>
-              <div class="logmod__alter">
-                <div class="logmod__alter-container">
-                  <a href="#" class="connect facebook">
-                    <div class="connect__icon">
-                      <i class="fa fa-facebook"></i>
-                    </div>
-                    <div class="connect__context">
-                      <span
-                        >Создать аккаунт с помощью
-                        <strong>Facebook</strong></span
-                      >
-                    </div>
-                  </a>
-                  <a href="#" class="connect googleplus">
-                    <div class="connect__icon">
-                      <i class="fa fa-google-plus"></i>
-                    </div>
-                    <div class="connect__context">
-                      <span
-                        >Создать аккаунт с помощью
-                        <strong>Google+</strong></span
-                      >
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div v-else class="logmod__tab lgm-2 show">
-              <div class="logmod__heading">
-                <span class="logmod__heading-subtitle"
-                  >Введите свою почту и пароль</span
-                >
-              </div>
-              <div class="logmod__form">
-                <form
-                  accept-charset="utf-8"
-                  action="#"
-                  class="simform"
-                  @submit.prevent="submit"
-                >
-                  <div class="sminputs">
-                    <div class="input full">
-                      <label class="string optional" for="user-email"
-                        >Почта*</label
-                      >
-                      <input
-                        id="user-email"
-                        v-model="login.email"
-                        class="string optional"
-                        maxlength="255"
-                        placeholder="example@mail.ru"
-                        type="email"
-                        size="50"
-                      />
-                    </div>
-                  </div>
-                  <div class="sminputs">
-                    <div class="input full">
-                      <label class="string optional" for="user-pw"
-                        >Пароль *</label
-                      >
-                      <input
-                        id="user-pw"
-                        v-model="login.password"
-                        class="string optional"
-                        maxlength="255"
-                        placeholder="Пароль"
-                        type="password"
-                        size="50"
-                      />
-                      <span class="hide-password">Показать</span>
-                    </div>
-                  </div>
-                  <div class="simform__actions">
-                    <button class="sumbit" name="commit" type="sumbit">
-                      Войти
-                    </button>
-                    <span class="simform__actions-sidetext"
-                      ><a class="special" role="link" href="#"
-                        >Забыли ваш пароль?<br />Нажмите здесь</a
-                      ></span
-                    >
-                  </div>
-                </form>
-              </div>
-              <div class="logmod__alter">
-                <div class="logmod__alter-container">
-                  <a href="#" class="connect facebook">
-                    <div class="connect__icon">
-                      <i class="fa fa-facebook"></i>
-                    </div>
-                    <div class="connect__context">
-                      <span>Войти с помощью <strong>Facebook</strong></span>
-                    </div>
-                  </a>
-                  <a href="#" class="connect googleplus">
-                    <div class="connect__icon">
-                      <i class="fa fa-google-plus"></i>
-                    </div>
-                    <div class="connect__context">
-                      <span>Войти с помощью <strong>Google+</strong></span>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </transition>
+<template lang="pug">
+  transition(name="fade")
+    .logmod(v-if="showState")
+      .logmod__wrapper
+        .logmod__close(@click="close") X
+        .logmod__container
+          button(@click="stepReg = !stepReg") {{ stepReg ? "Reg" : "Login" }}
+          form(v-if="stepReg" @submit.prevent="submit")
+            input(type="email" v-model="login.email" placeholder="email")
+            input(type="password" v-model="login.password" placeholder="password")
+            button Login
+          form(v-else @submit.prevent="registration")
+            input(type="login" v-model="register.username" placeholder="username")
+            input(type="email" v-model="register.email" placeholder="email")
+            input(type="password" v-model="register.password1" placeholder="password")
+            input(type="password" v-model="register.password2" placeholder="password")
+            button Register
+
 </template>
 
 <script>
@@ -208,8 +30,8 @@ export default {
         password: '',
       },
       register: {
-        email: '',
         username: '',
+        email: '',
         password1: '',
         password2: '',
       },
@@ -232,6 +54,17 @@ export default {
         // }
       } catch (e) {
         this.error = 'Login failed.'
+      }
+    },
+    async registration() {
+      try {
+        const response = await this.$axios.$post(
+          '/rest-auth/registration/',
+          this.register
+        )
+        console.log('response register = ', response)
+      } catch (e) {
+        console.log('error = ', e)
       }
     },
     inputFocus() {

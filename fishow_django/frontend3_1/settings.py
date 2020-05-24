@@ -24,7 +24,7 @@ SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0','localhost','213.139.208.107']
 
 # Application definition
 
@@ -71,16 +71,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = ( # new
-    'http://localhost:3000',
-)
+CORS_ORIGIN_WHITELIST = [ # new
+    'http://0.0.0.0:3000',
+    'http://0.0.0.0:8000',
+    'http://213.139.208.107:3000',
+]
 
 ROOT_URLCONF = 'fishow_django.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'templates', 'allauth')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tam2511_fishow',
         'USER': 'tam2511_fishow',
-        'PASSWORD': '081099ASDasd',
+        'PASSWORD': '081099ASDasd!',
     }
 }
 
@@ -148,7 +150,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/kvazar/WebstormProjects/fishow_rest_vue2/static/'
+STATIC_ROOT = '/home/theoffice/projects/fishow_rest_vue/static/'
 
 MEDIA_URL = '/media/' # new
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new

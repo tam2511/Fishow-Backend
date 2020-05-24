@@ -1,12 +1,18 @@
 <template lang="pug">
-    div.container.prediciton-select
-      div.row.row-50
-        div.col-lg-12
-          div.list-areals
-            div.list-areals_item(v-for="(area, key) in json" :key="area" v-if="!value")
+    .container.prediciton-select
+      .row.row-50
+        .col-lg-12
+          .main-component
+            article.heading-component
+              .heading-component-inner
+                h5.heading-component-title {{ value ? "Город " : "Область"}}
+                .buttons-nav(v-if='value')
+                  .button.button-xs.button-primary(@click="value = false") Назад
+          .list-areals
+            .list-areals_item(v-for="(area, key) in json" :key="area" v-if="!value")
               span.item-city(@click="value = key") {{ key }}
-            div.list-areals_item(v-for="city in json[value]" :key="city" v-if="!value2")
-              span.item-city(@click="value2= city") {{ city }}
+            .list-areals_item(v-for="city in json[value]" :key="city" v-if="!value2")
+              nuxt-link.item-city(:to="{name: 'PredictionPage-areal-date-city-fish',params: { areal: value, city, date: '2020-04-25', fish: 'щука'}}") {{ city }}
 </template>
 
 <script>

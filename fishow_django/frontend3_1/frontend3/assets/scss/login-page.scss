@@ -50,7 +50,7 @@ $array-color-swatch: (
 }
 // logmod
 $logmod-baseline: 24px;
-$logmod-zindex: 1;
+$logmod-zindex: 101;
 .logmod {
   display: block;
   position: fixed;
@@ -110,6 +110,7 @@ $logmod-zindex: 1;
   // .logmod__container
   &__container {
     overflow: hidden;
+    min-height: 500px;
     width: 100%;
     @include clearfix;
   }

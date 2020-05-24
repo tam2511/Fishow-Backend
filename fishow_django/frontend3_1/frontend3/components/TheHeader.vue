@@ -5,10 +5,6 @@
       span.fishow_nav-item
         nuxt-link.fishow_nav-link(to='/') Главная
       span.fishow_nav-item
-        nuxt-link.fishow_nav-link(
-          :to="{name: 'PredictionPage-areal-date-city-fish',params: { areal: 'московская область', city: 'москва', date: '2020-04-25', fish: 'щука'}}"
-          ) Прогноз тест
-      span.fishow_nav-item
         nuxt-link.fishow_nav-link(to='/PredictionPage') Прогноз
       span.fishow_nav-item
         nuxt-link.fishow_nav-link(to='/blog-editor') Создать блог

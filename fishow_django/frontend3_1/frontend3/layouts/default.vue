@@ -32,7 +32,8 @@ export default {
   methods: {
     checkTheme() {
       if (process.browser) {
-        this.theme = localStorage.getItem('theme')
+        this.theme =
+          localStorage.getItem('theme') || 'theme_color_fishow_default'
       }
     },
   },

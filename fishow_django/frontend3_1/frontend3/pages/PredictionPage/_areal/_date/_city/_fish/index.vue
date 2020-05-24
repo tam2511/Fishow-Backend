@@ -3,6 +3,8 @@
     div.row.row-50
       div.col-lg-8
         div.fishow-prediction
+          HeaderPrediction
+          FishSelectPrediction
           ul
             li(v-for="prediciton in predictions" :key="prediciton.id") {{prediciton}}
       div.col-lg-4
@@ -12,6 +14,8 @@
 </template>
 
 <script>
+import HeaderPrediction from '@/components/predictPage/HeaderPrediction'
+import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
 export default {
   async asyncData({ $axios, route }) {
     try {
@@ -27,6 +31,10 @@ export default {
     } catch (e) {
       console.log('e =', e)
     }
+  },
+  components: {
+    HeaderPrediction,
+    FishSelectPrediction,
   },
   data() {
     return {

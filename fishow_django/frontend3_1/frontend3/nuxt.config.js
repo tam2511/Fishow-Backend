@@ -1,4 +1,8 @@
 export default {
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
+  },
   mode: 'universal',
   /*
    ** Headers of the page
@@ -62,7 +66,7 @@ export default {
     //   pathRewrite: { '^/api': '' }
     // }
     '/api': {
-      target: 'http://localhost:3000/',
+      target: 'http://0.0.0.0:3000/',
       pathRewrite: {
         '^/api': '/',
       },
@@ -76,7 +80,7 @@ export default {
   axios: {
     withCredentials: true,
     // proxy: true,
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://0.0.0.0:8000/api',
   },
   /*
    ** Build configuration
@@ -107,6 +111,11 @@ export default {
         endpoints: {
           login: {
             url: '/rest-auth/login/',
+            method: 'post',
+            propertyName: 'key',
+          },
+          registration: {
+            url: '/rest-auth/registration/',
             method: 'post',
             propertyName: 'key',
           },
