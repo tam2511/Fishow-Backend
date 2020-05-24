@@ -15,7 +15,7 @@
             input(type="password" v-model="register.password1" placeholder="password")
             input(type="password" v-model="register.password2" placeholder="password")
             button Register
-
+          span {{ error }}
 </template>
 
 <script>
@@ -30,16 +30,17 @@ export default {
         password: '',
       },
       register: {
-        username: '',
-        email: '',
-        password1: '',
-        password2: '',
+        password1: 'Damir461',
+        password2: 'Damir461',
+        email: 'sayava9429@whowlft.com',
+        username: 'sayava9429',
       },
       note: '',
       password: '',
       email: '',
       show: true,
       stepReg: true,
+      error: null,
     }
   },
   computed: {
@@ -58,13 +59,22 @@ export default {
     },
     async registration() {
       try {
+        const data = this.register
+        console.log('data = ', data)
         const response = await this.$axios.$post(
           '/rest-auth/registration/',
-          this.register
+          data
         )
         console.log('response register = ', response)
+        console.log('response register = ', response.response)
       } catch (e) {
-        console.log('error = ', e)
+        console.log('error = ', e.response)
+        if (e.response.data.email) {
+          this.error = e.response.data.email[0]
+        }
+        if (e.response.data.username) {
+          this.error.push(e.response.data.username[0])
+        }
       }
     },
     inputFocus() {
