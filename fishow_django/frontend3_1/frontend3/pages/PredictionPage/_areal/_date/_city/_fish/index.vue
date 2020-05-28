@@ -6,6 +6,7 @@
           HeaderPrediction
           FishSelectPrediction(:date="date" :city="city" :areal="areal")
           .result {{ areal }} {{ city }} {{ date }} {{ fish }}
+          .days {{ days }}
           ul
             li(v-for="(prediciton, key) in predictions" :key="prediciton.id") {{ key}}: {{prediciton}}
       div.col-lg-4
@@ -17,6 +18,7 @@
 <script>
 import HeaderPrediction from '@/components/predictPage/HeaderPrediction'
 import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
+import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
 export default {
   async asyncData({ $axios, route }) {
     try {
@@ -39,6 +41,7 @@ export default {
   },
   data() {
     return {
+      days: getData(this.$route.params.date, 9),
       fish: this.$route.params.fish,
       date: this.$route.params.date,
       city: this.$route.params.city,
