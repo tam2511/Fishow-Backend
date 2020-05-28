@@ -1,3 +1,5 @@
+import confserver from './confserver'
+
 export default {
   server: {
     port: 3000,
@@ -66,7 +68,7 @@ export default {
     //   pathRewrite: { '^/api': '' }
     // }
     '/api': {
-      target: 'http://localhost:3000/',
+      target: `http://${confserver.ip}:3000/api`,
       pathRewrite: {
         '^/api': '/',
       },
@@ -80,7 +82,7 @@ export default {
   axios: {
     withCredentials: true,
     // proxy: true,
-    baseURL: 'http://localhost:8000/api',
+    baseURL: `http://${confserver.ip}:8000/api`,
   },
   /*
    ** Build configuration
