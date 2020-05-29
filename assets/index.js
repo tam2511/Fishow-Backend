@@ -21,4 +21,16 @@ const getData = (fromData,days) => {
     return result
 }
 
-console.log(getData('2020-04-10', 10))
+// console.log(getData('2020-04-10', 10))
+
+const data = '[3, 0, 2, 0, 0, 4, 6, 1, 5]'
+
+const newResult = []
+
+for (let i = 0; i < data.length; i++) {
+    if (data[i].match(/[0-9]/)) {
+        newResult.push(Number(data[i]))
+    }
+}
+
+console.log('newResult = ', newResult)

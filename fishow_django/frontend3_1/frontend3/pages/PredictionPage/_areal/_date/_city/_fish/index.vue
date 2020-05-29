@@ -6,9 +6,16 @@
           HeaderPrediction
           FishSelectPrediction(:date="date" :city="city" :areal="areal")
           .result {{ areal }} {{ city }} {{ date }} {{ fish }}
-          .days {{ days }}
           ul
-            li(v-for="(prediciton, key) in predictions" :key="prediciton.id") {{ key}}: {{prediciton}}
+            li
+              .heading-4 Погодные условия
+              Temperature(
+                :phenomenon="predictions['phenomenon']"
+                :days="days"
+                :tempMin="predictions['temperature_min']"
+                :tempMean="predictions['temperature_mean']"
+                :tempMax="predictions['temperature_max']"
+                )
       div.col-lg-4
         div.fishow-sidebar
           ul
@@ -19,6 +26,8 @@
 import HeaderPrediction from '@/components/predictPage/HeaderPrediction'
 import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
+import ListParams from '~/components/predictPage/ListParams'
+import Temperature from '~/components/predictPage/Temperature'
 export default {
   async asyncData({ $axios, route }) {
     try {
@@ -36,6 +45,8 @@ export default {
     }
   },
   components: {
+    Temperature,
+    ListParams,
     HeaderPrediction,
     FishSelectPrediction,
   },
