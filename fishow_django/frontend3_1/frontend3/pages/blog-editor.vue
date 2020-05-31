@@ -62,12 +62,12 @@
       <p class="title">Написать блог</p>
       <div class="tile is-parent is-vertical box">
         <div class="field">
-          <label for="title" class="label">Заголовок</label>
+          <label for="blog_title" class="label">Заголовок</label>
           <div class="control">
             <input
+              id="blog_title"
               v-model="blog_title"
               type="text"
-              id="title"
               class="input"
               placeholder="Заголовок"
             />
@@ -125,6 +125,13 @@
     </div>
     <div class="tile is-vertical is-4">
       <p class="title">Настройки</p>
+      blog_body {{ blog_body }}
+      <hr />
+      blog_title {{ blog_title }}
+      <hr />
+      blog_category {{ blog_category }}
+      <hr />
+      blog_tags {{ blog_tags }}
     </div>
   </div>
 </template>
@@ -155,18 +162,14 @@ export default {
 
   data() {
     return {
-      //     picked: null,
-      //     imageCounter: 0,
-      //     textCounter: 1,
       articles: ['BlogContentField'],
-      //     blog_body: '',
+      blog_body: '',
       blog_title: null,
       blog_category: 'Блоги',
       //     deafultTags: ['Удочки', 'Шутки', 'Ночь', 'История', 'Деньги'],
-      //     result: [],
+
       //     error: null,
-      //     field: 'textField',
-      //     blog_json: null,
+
       //     valueCategory: '',
       blog_tags: [{ name: 'Текст', code: 'текст' }],
       options: [
@@ -237,7 +240,7 @@ export default {
     },
     convertBody() {
       const result = []
-      const listBloks = document.querySelectorAll('textarea')
+      const listBloks = [...document.querySelectorAll('textarea')]
 
       listBloks.forEach((block) => {
         if (block.name === 'text') {
@@ -289,7 +292,6 @@ export default {
           name: 'blog-slug',
           params: { slug: response.slug },
         })
-        this.$nuxt.route()
       } catch (e) {
         console.log('error = ', e)
       }

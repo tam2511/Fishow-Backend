@@ -4,9 +4,10 @@
     <div class="control">
       <a class="delete" @click="destroyMe"></a>
       <textarea
-        class="textarea"
         :id="counter"
         v-model="model"
+        name="text"
+        class="textarea"
         placeholder="Textarea"
       ></textarea>
       <slot></slot>
