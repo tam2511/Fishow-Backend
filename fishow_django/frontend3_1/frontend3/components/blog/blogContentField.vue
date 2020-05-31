@@ -1,15 +1,13 @@
 <template>
-  <div class="col-md-12 fishow-content">
-    <div class="form-wrap">
-      <div class="fishow-blog_image__close-button" @click="destroyMe">x</div>
+  <div class="field">
+    <label class="label">Message</label>
+    <div class="control">
+      <a class="delete" @click="destroyMe"></a>
       <textarea
+        class="textarea"
         :id="counter"
         v-model="model"
-        name="text"
-        placeholder="Основной текст"
-        class="form-input"
-        cols="30"
-        rows="4"
+        placeholder="Textarea"
       ></textarea>
       <slot></slot>
     </div>
@@ -58,11 +56,4 @@ export default {
 }
 </script>
 
-<style scoped>
-textarea {
-  min-height: 60px;
-  padding: 17px 19px;
-  color: #9b9b9b;
-  border: 1px solid var(--backround-color-primary);
-}
-</style>
+<style scoped></style>

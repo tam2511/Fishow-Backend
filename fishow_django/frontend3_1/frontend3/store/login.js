@@ -1,12 +1,16 @@
 import UserService from '~/services/UserService'
 
 export const state = () => ({
-  showState: false,
+  showStateLogin: false,
+  showStateReg: false,
 })
 
 export const mutations = {
-  SET_SHOW(state) {
-    state.showState = !state.showState
+  TOGGLE_LOGIN(state) {
+    state.showStateLogin = !state.showStateLogin
+  },
+  TOGGLE_REG(state) {
+    state.showStateReg = !state.showStateReg
   },
 }
 

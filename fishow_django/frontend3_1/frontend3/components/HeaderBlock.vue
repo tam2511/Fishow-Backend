@@ -1,0 +1,68 @@
+<template>
+  <b-navbar :fixed-top="true">
+    <template slot="brand">
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
+        Fishow
+      </b-navbar-item>
+    </template>
+    <template slot="start">
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
+        Главная
+      </b-navbar-item>
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/PredictionPage' }">
+        Прогноз
+      </b-navbar-item>
+      <b-navbar-dropdown label="Блоги">
+        <b-navbar-item tag="nuxt-link" :to="{ path: '/article' }">
+          Все блоги
+        </b-navbar-item>
+        <b-navbar-item tag="nuxt-link" :to="{ path: '/blog-editor' }">
+          Создать блог
+        </b-navbar-item>
+      </b-navbar-dropdown>
+    </template>
+
+    <template slot="end">
+      <b-navbar-item tag="div">
+        <div v-if="!$auth.user" class="buttons">
+          <a class="button is-primary" @click="toggleReg">
+            <strong>Регистрация</strong>
+          </a>
+          <a class="button is-light" @click="toggleLogin">
+            Войти
+          </a>
+        </div>
+        <div v-else class="buttons">
+          <a class="button ip-primary"> {{ $auth.user }}</a>
+          <a class="button is-light" @click="logout">
+            Выйти
+          </a>
+        </div>
+      </b-navbar-item>
+    </template>
+  </b-navbar>
+</template>
+
+<script>
+import { mapState, mapMutations } from 'vuex'
+export default {
+  computed: {
+    ...mapState('user', ['user']),
+  },
+  methods: {
+    async logout() {
+      try {
+        await this.$auth.logout()
+      } catch (e) {
+        console.log('e = ', e)
+      }
+    },
+    ...mapMutations('login', {
+      toggleLogin: 'TOGGLE_LOGIN',
+      toggleReg: 'TOGGLE_REG',
+    }),
+  },
+}
+</script>
+
+<style scoped></style>

@@ -9,6 +9,7 @@
         :tempMax="predictions['temperature_max']"
         )
     SideBar
+    b-loading(:is-full-page="true" :active.sync="isLoading" :can-cancel="true")
 </template>
 
 <script>
@@ -45,12 +46,18 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       days: getData(this.$route.params.date, 9),
       fish: this.$route.params.fish,
       date: this.$route.params.date,
       city: this.$route.params.city,
       areal: this.$route.params.areal,
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.isLoading = false
+    }, 500)
   },
   methods: {
     doScroll(event) {
@@ -68,6 +75,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$loading-background: red;
 .fish {
   display: flex;
   flex-flow: row;
