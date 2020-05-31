@@ -156,18 +156,6 @@ export default {
 
 <style lang="scss">
 @import '~/assets/scss/custom-styles/style.scss';
-@import '~/assets/scss/customStyles.scss';
 @import '~/assets/scss/fishowStyles.scss';
 @import '~/assets/scss/custom-styles/fonts.scss';
-.buttons-nav a {
-  margin-left: 10px;
-}
-.col-lg-4 {
-  @media screen and (min-width: 1024px) {
-    .aside-components__sticky {
-      position: fixed;
-      width: 30%;
-    }
-  }
-}
 </style>

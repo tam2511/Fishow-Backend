@@ -2,20 +2,8 @@
   nav.fishow_navbar
     nuxt-link.fishow_navbar-brand(to='/') Fishow
     .fishow_navbar-nav
-      span.fishow_nav-item
-        nuxt-link.fishow_nav-link(to='/') Главная
-      span.fishow_nav-item
-        nuxt-link.fishow_nav-link(to='/PredictionPage') Прогноз
-      span.fishow_nav-item
-        nuxt-link.fishow_nav-link(to='/blog-editor') Создать блог
-      span.fishow_nav-item
-        nuxt-link.fishow_nav-link(to='/article') Все блоги
-      span.fishow_nav-item
-        nuxt-link.fishow_nav-link(to='/wiki') Вики
-      span.fishow_nav-item
-        nuxt-link.fishow_nav-link(to='/forum') Форум
-      span.fishow_nav-item
-        nuxt-link.fishow_nav-link(to='/UserPage') Пользователь
+      span.fishow_nav-item(v-for="item in menu" :key="item.title")
+        nuxt-link.fishow_nav-link(:to='item.link') {{ item.title }}
     nuxt-link(v-if='$auth.loggedIn', to='/UserPage')
       .fishow_navbar_menu
         | {{ $auth.user }}
@@ -39,6 +27,24 @@ export default {
   },
   data() {
     return {
+      menu: [
+        {
+          title: 'Главная',
+          link: '/',
+        },
+        {
+          title: 'Прогноз',
+          link: '/PredictionPage',
+        },
+        {
+          title: 'Создать блог',
+          link: '/blog-editor',
+        },
+        {
+          title: 'Все блоги',
+          link: '/article',
+        },
+      ],
       active: false,
       step: false,
     }

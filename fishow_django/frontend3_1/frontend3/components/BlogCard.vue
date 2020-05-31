@@ -14,9 +14,8 @@
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            width="284.929px"
-            height="284.929px"
-            viewBox="0 0 284.929 284.929"
+            width="16"
+            height="16"
             xml:space="preserve"
             @click="toggleLike"
           >
@@ -29,7 +28,6 @@
             />
           </svg>
           <span data-votes-counter>{{ likesCounter - dislikesCounter }}</span>
-
           <svg
             id="Capa_1"
             :class="{
@@ -40,9 +38,8 @@
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
-            width="284.929px"
-            height="284.929px"
-            viewBox="0 0 284.929 284.929"
+            width="16"
+            height="16"
             xml:space="preserve"
             @click="toggleDislike"
           >

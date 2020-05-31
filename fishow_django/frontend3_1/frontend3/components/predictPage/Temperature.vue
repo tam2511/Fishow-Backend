@@ -1,5 +1,4 @@
 <template lang="pug">
-  .fishow_temperature
     .temperature-box
       .date.temperature-list
         .date_item(v-for="day in days" :key="day.id") {{ day }}
@@ -10,14 +9,14 @@
       .temperature-min.temperature-list.temperature-list__start.temperature-list__p_b
         .temperature-min_item(v-for="min in dataJSON.minTemp"
           :key="min.id" :style="'padding-top:' + (50 - min * 3) + 'px'")
-          .value {{ min >= 0 ? '+' : '-' }}{{ min }}
+          .value {{ min >= 0 ? '+' : '' }}{{ min }}
 </template>
 
 <script>
 export default {
   props: {
     phenomenon: {
-      type: Array,
+      type: String,
       required: true,
     },
     days: {

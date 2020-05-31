@@ -1,11 +1,13 @@
 <template lang="pug">
   .fish-select-body
     button(v-if="first - 10 > 0" @click="first -= 10") <<
-    .fish-conteiner
-      nuxt-link.fish-conteiner-item(v-for="fish in list" :key="fish" :to="{ name: 'PredictionPage-areal-date-city-fish', params: { areal, date, city, fish}}") {{ fish }}
+    .fish-container
+      nuxt-link.fish-container-item(v-for="fish in list" :key="fish" :to="{ name: 'PredictionPage-areal-date-city-fish', params: { areal, date, city, fish}}")
+        .fish-container-item_value {{ fish }}
     button(v-if="first <= fishList.length" @click="first += 10") >>
 
 </template>
+js
 
 <script>
 export default {
@@ -61,7 +63,7 @@ export default {
   computed: {
     list() {
       return this.fishList.filter(
-        (fish, index) => index > this.first - 10 && index < this.first
+        (fish, index) => index > this.first - 9 && index < this.first
       )
     },
   },
@@ -72,11 +74,13 @@ export default {
 .fish-select-body {
   display: flex;
   flex-flow: row;
+  max-width: 640px;
+  margin: auto;
 }
-.fish-conteiner {
-  border: 1px solid rgba(0, 0, 0, 0.52);
+.fish-container {
   min-height: 250px;
   display: flex;
+  padding: 0 50px;
   flex-wrap: wrap;
   &-item {
     width: 80px;
@@ -84,6 +88,17 @@ export default {
     cursor: pointer;
     transition: 0.3s;
     margin: 20px;
+    border-radius: 25px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.3);
+    &_value {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+      margin: 0;
+      text-align: center;
+    }
     &:hover {
       color: #ffffff;
       background-color: cadetblue;

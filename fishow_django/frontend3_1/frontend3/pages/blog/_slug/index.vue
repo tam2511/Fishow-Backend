@@ -4,6 +4,33 @@
       <div class="col-lg-8">
         <div class="blog-post">
           <div class="fishow-votes_container">
+            <h3 class="blog-post-title">{{ blog.title }}</h3>
+          </div>
+          <div class="blog-post-content">
+            <div v-for="p in result" :key="p.url">
+              <p v-if="p.type === 'text'" class="blog-post-text">
+                {{ p.body }}
+              </p>
+              <iframe
+                v-if="p.type === 'video'"
+                width="560"
+                height="315"
+                :src="whomIsVideo(p.url)"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              <img v-if="p.type === 'image'" :src="p.url" alt="" />
+            </div>
+            <ul class="list-tags">
+              <li v-for="blogTag in blogTags" :key="blogTag">
+                <router-link to="/">{{ blogTag }}</router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="blog-post-footer">
+          <div class="blog-post-header">
             <div
               :class="{
                 fishow_votes: this.$store.state.user.user,
@@ -64,34 +91,6 @@
                 />
               </svg>
             </div>
-
-            <h3 class="blog-post-title">{{ blog.title }}</h3>
-          </div>
-          <div class="blog-post-content">
-            <div v-for="p in result" :key="p.url">
-              <p v-if="p.type === 'text'" class="blog-post-text">
-                {{ p.body }}
-              </p>
-              <iframe
-                v-if="p.type === 'video'"
-                width="560"
-                height="315"
-                :src="whomIsVideo(p.url)"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-              <img v-if="p.type === 'image'" :src="p.url" alt="" />
-            </div>
-            <ul class="list-tags">
-              <li v-for="blogTag in blogTags" :key="blogTag">
-                <router-link to="/">{{ blogTag }}</router-link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="blog-post-footer">
-          <div class="blog-post-header">
             <div class="blog-post-author">
               <img
                 class="img-circle"
@@ -236,6 +235,9 @@ export default {
     this.getBlogData()
     this.getCommentData()
   },
+  mounted() {
+    scrollTo(0, 0)
+  },
   methods: {
     // whomIsVideo(fields) {
     //   const temp = fields.split('/')
@@ -342,9 +344,6 @@ export default {
       //   this.error = 'Вы не можете отправить пустой комментарий'
       // }
     },
-  },
-  mounted() {
-    scrollTo(0, 0)
   },
   head() {
     return {

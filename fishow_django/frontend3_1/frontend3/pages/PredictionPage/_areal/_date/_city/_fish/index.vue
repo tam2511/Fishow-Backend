@@ -1,34 +1,33 @@
 <template lang="pug">
   div.container
-    div.row.row-50
-      div.col-lg-8
-        div.fishow-prediction
-          HeaderPrediction
-          FishSelectPrediction(:date="date" :city="city" :areal="areal")
-          .result {{ areal }} {{ city }} {{ date }} {{ fish }}
-          ul
-            li
-              .heading-4 Погодные условия
-              Temperature(
-                :phenomenon="predictions['phenomenon']"
-                :days="days"
-                :tempMin="predictions['temperature_min']"
-                :tempMean="predictions['temperature_mean']"
-                :tempMax="predictions['temperature_max']"
-                )
-      div.col-lg-4
-        div.fishow-sidebar
-          ul
-            li(v-for="(prediciton, key, index) in predictions" :key="prediciton.id" @click="doScroll" :id="index") {{ key}}
+    div.fishow-prediction
+      Temperature(
+        :phenomenon="predictions['phenomenon']"
+        :days="days"
+        :tempMin="predictions['temperature_min']"
+        :tempMean="predictions['temperature_mean']"
+        :tempMax="predictions['temperature_max']"
+        )
+    SideBar
 </template>
 
 <script>
-import HeaderPrediction from '@/components/predictPage/HeaderPrediction'
-import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
+// import HeaderPrediction from '@/components/predictPage/HeaderPrediction'
+// import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
+// import FishSelectCarousel from '@/components/predictPage/FishSelectCarousel'
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
 import ListParams from '~/components/predictPage/ListParams'
 import Temperature from '~/components/predictPage/Temperature'
+import SideBar from '~/components/predictPage/SideBar'
 export default {
+  components: {
+    SideBar,
+    Temperature,
+    ListParams,
+    // HeaderPrediction,
+    // FishSelectPrediction,
+    // FishSelectCarousel,
+  },
   async asyncData({ $axios, route }) {
     try {
       const fish = route.params.fish
@@ -43,12 +42,6 @@ export default {
     } catch (e) {
       console.log('e =', e)
     }
-  },
-  components: {
-    Temperature,
-    ListParams,
-    HeaderPrediction,
-    FishSelectPrediction,
   },
   data() {
     return {
@@ -99,9 +92,6 @@ export default {
 .fishow-prediction {
   min-height: 2000px;
   position: relative;
-  ul {
-    background-color: var(--background-color-primary);
-  }
   li {
     padding: 20px;
   }
