@@ -2,7 +2,15 @@
   <div class="field">
     <label class="label">Message</label>
     <div class="control">
-      <a class="delete" @click="destroyMe"></a>
+      <div class="field">
+        <button class="button is-danger is-outlined" @click="destroyMe">
+          <span>Delete</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+
       <textarea
         :id="counter"
         v-model="model"
@@ -17,7 +25,6 @@
 
 <script>
 export default {
-  name: 'BlogContentField',
   props: {
     counter: {
       type: String,

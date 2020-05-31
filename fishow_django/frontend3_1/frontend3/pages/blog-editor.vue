@@ -125,13 +125,6 @@
     </div>
     <div class="tile is-vertical is-4">
       <p class="title">Настройки</p>
-      blog_body {{ blog_body }}
-      <hr />
-      blog_title {{ blog_title }}
-      <hr />
-      blog_category {{ blog_category }}
-      <hr />
-      blog_tags {{ blog_tags }}
     </div>
   </div>
 </template>
