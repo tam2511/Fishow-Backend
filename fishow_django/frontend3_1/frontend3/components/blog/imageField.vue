@@ -29,7 +29,7 @@ export default {
   name: 'ImageField',
   props: {
     counter: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

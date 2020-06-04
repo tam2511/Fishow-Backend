@@ -123,7 +123,7 @@
     <div class="tile is-vertical is-4">
       <article class="tile is-parent is-vertical">
         <p class="title">Горячие блоги</p>
-        <div class="tile is-child box">
+        <div class="tile is-child">
           <HotPostMinimal v-for="blog in minPost" :key="blog.id" :blog="blog" />
         </div>
       </article>
@@ -186,4 +186,8 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.tile.is-parent.is-vertical {
+  flex-grow: initial;
+}
+</style>

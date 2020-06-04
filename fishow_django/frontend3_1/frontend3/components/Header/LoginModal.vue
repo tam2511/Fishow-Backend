@@ -45,10 +45,20 @@
         </div>
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-link" @click="submit">Подтвердить</button>
+            <button
+              class="button is-link"
+              @keypress.enter="submit"
+              @click="submit"
+            >
+              Подтвердить
+            </button>
           </div>
           <div class="control">
-            <button class="button is-link is-light" @click="toggle">
+            <button
+              class="button is-link is-light"
+              @keypress.esc="toggle"
+              @click="toggle"
+            >
               Отмена
             </button>
           </div>

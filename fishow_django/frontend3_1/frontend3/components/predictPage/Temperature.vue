@@ -1,5 +1,6 @@
 <template lang="pug">
-    .temperature-box
+    .temperature-box.box
+      p.title Температура
       .date.temperature-list
         .date_item(v-for="day in days" :key="day.id") {{ day }}
       .temperature-max.temperature-list.temperature-list__end.temperature-list__p_t

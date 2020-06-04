@@ -13,9 +13,6 @@
         Прогноз
       </b-navbar-item>
       <b-navbar-dropdown label="Блоги">
-        <b-navbar-item tag="nuxt-link" :to="{ path: '/article' }">
-          Все блоги
-        </b-navbar-item>
         <b-navbar-item tag="nuxt-link" :to="{ path: '/blog-editor' }">
           Создать блог
         </b-navbar-item>

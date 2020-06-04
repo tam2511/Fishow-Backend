@@ -1,7 +1,11 @@
 <template>
   <div class="card">
     <div class="card-content">
-      <p class="title">“{{ blog.title }}”</p>
+      <h5 class="title is-5">
+        <nuxt-link :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
+          >{{ blog.title }}
+        </nuxt-link>
+      </h5>
       <p class="subtitle">
         {{ blog.author }}
       </p>
@@ -31,8 +35,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.list-post-minimal {
-  margin-bottom: 10px;
-}
-</style>
+<style scoped></style>

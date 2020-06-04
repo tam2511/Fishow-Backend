@@ -195,7 +195,7 @@
     <div class="tile is-vertical is-8 is-parent">
       <p class="title">{{ blog.title }}</p>
       <div class="tile is-child is-vertical box">
-        <div v-for="p in result" :key="p.url">
+        <div v-for="p in result" :key="p.id">
           <p v-if="p.type === 'text'" class="blog-post-text">
             {{ p.body }}
           </p>
@@ -208,6 +208,41 @@
             allowfullscreen
           ></iframe>
           <img v-if="p.type === 'image'" :src="p.url" alt="" />
+        </div>
+        <div class="tags box">
+          <span class="tag" v-for="tag in blogTags" :key="tag.id">{{
+            tag
+          }}</span>
+        </div>
+      </div>
+      <p class="title">Комментарии</p>
+      <div class="tile is-child is-vertical box">
+        <p v-if="(comments.length === 0)">Ваш комментарий будет первым</p>
+        <Comment
+          v-for="(comment, index) in comments"
+          :key="index"
+          :comment="comment"
+          :slug="$route.params.slug"
+          :request-user="$auth.user"
+          @deleteComment="deleteComment"
+        />
+      </div>
+      <p class="title">Оставить комментарий</p>
+      <div class="tile is-child is-vertical box">
+        <div class="form-wrap">
+          <textarea
+            id="comment-message"
+            v-model="commentBody"
+            class="textarea"
+            name="message"
+            placeholder="Ваш комментарий"
+          ></textarea>
+        </div>
+        <div v-if="error" class="alert-danger">{{ error }}</div>
+        <div class="buttons">
+          <b-button type="is-primary" @click="onSubmit">
+            Отправить
+          </b-button>
         </div>
       </div>
     </div>
@@ -227,10 +262,11 @@ import { mapState } from 'vuex'
 // import BlockCategories from '@/components/blog/blockCategories'
 // import BlockSpotlight from '@/components/blog/blockSpotlight'
 // import BlockTags from '@/components/blog/blockTags'
-// import Comment from '@/components/Comment.vue'
+import Comment from '@/components/Comment'
 export default {
   scrollToTop: true,
   // components: { BlockTags, BlockSpotlight, BlockCategories, Comment },
+  components: { Comment },
   async fetch({ store, error, params }) {
     try {
       await store.dispatch('blogs/getBlog', params.slug)
@@ -359,6 +395,7 @@ export default {
           { body: this.commentBody }
         )
         this.comments.push(response)
+        this.commentBody = ''
       } catch (e) {
         console.log('error = ', e)
       }

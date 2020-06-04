@@ -119,7 +119,7 @@
           </nuxt-link>
         </p>
         <div class="content">
-          <div v-for="p in getResult" :key="p.url">
+          <div v-for="p in getResult" :key="p.id">
             <div v-if="p.type === 'text'" class="post-corporate-text">
               <p>{{ p.body }}</p>
             </div>

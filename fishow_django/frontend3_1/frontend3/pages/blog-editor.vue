@@ -125,6 +125,34 @@
     </div>
     <div class="tile is-vertical is-4">
       <p class="title">Настройки</p>
+      <div class="tile is-parent is-vertical box">
+        <div>
+          <label class="typo__label">Выберите категорию:</label>
+          <multiselect
+            v-model="blog_category"
+            :options="optionsCategory"
+            :searchable="false"
+            :close-on-select="true"
+            :show-labels="false"
+            placeholder="Pick a value"
+          ></multiselect>
+        </div>
+        <div>
+          <label class="typo__label">Теги:</label>
+          <multiselect
+            v-model="blog_tags"
+            tag-placeholder="Add this as new tag"
+            placeholder="Найдите или добавьте свой тег"
+            label="name"
+            track-by="code"
+            :options="options"
+            :multiple="true"
+            :taggable="true"
+            @tag="addTag"
+          >
+          </multiselect>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -281,12 +309,13 @@ export default {
           tags: this.blog_tags,
         }
         const response = await this.$axios.$post('/blogs/', blog)
+        console.log('responce')
         this.$router.push({
           name: 'blog-slug',
           params: { slug: response.slug },
         })
       } catch (e) {
-        console.log('error = ', e)
+        console.log('error = ', e.responce)
       }
     },
     addImage() {
