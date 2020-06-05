@@ -1,48 +1,38 @@
 <template>
-  <div class="table-custom-responsive">
-    <table class="table-custom table-standings table-classic">
-      <thead>
-        <tr>
-          <th colspan="2">Пользователи</th>
-          <th>Рейтинг</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(user, index) in userRating" :key="user.username">
-          <td>
-            <span>{{ index + 1 }}</span>
-          </td>
-          <td class="team-inline">
-            <div class="team-figure">
-              <img
-                src="/static/assets/images/user-1-63x63.jpg"
-                alt=""
-                width="42"
-                height="26"
-              />
-            </div>
-            <div class="team-title">
-              <div class="team-name">{{ user.username }}</div>
-              <div class="team-country">Ник или Фамилия</div>
-            </div>
-          </td>
-          <td>{{ user.rating }}</td>
-          <!--          <td>{{ user.blogs }}</td>-->
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <section>
+    <b-table :data="userRating" :columns="columns"> </b-table>
+  </section>
 </template>
 
 <script>
-// import { apiService } from '@/plugins/api.service'
-
 export default {
   name: 'UserRate',
   data() {
     return {
       userList: [],
       lengthOfList: 5,
+      data: [
+        { username: 'Jesse Simmons', posts: 2, comments: 5 },
+        { username: 'John Jacobs', posts: 11, comments: 42 },
+        { username: 'Tina Gilbert', posts: 0, comments: 7 },
+        { username: 'Clarence Flores', posts: 4, comments: 4 },
+        { username: 'Anne Lee', posts: 1, comments: 2 },
+      ],
+      columns: [
+        {
+          field: 'username',
+          label: 'Username',
+          width: 160,
+        },
+        {
+          field: 'blogs',
+          label: 'Blogs',
+        },
+        {
+          field: 'comments',
+          label: 'Comments',
+        },
+      ],
     }
   },
   computed: {
@@ -54,25 +44,27 @@ export default {
     this.getUserList()
   },
   methods: {
-    getUserList() {
-      // const endpoint = '/api/user_all/'
-      //
-      // apiService(endpoint).then(data => {
-      //   this.userList.push(...data)
-      // })
+    async getUserList() {
+      try {
+        const responce = await this.$axios.get('/user_all/')
+        this.userList.push(...responce.data)
+        console.log('responce = ', responce)
+      } catch (e) {
+        console.log('error userlist = ', e.responce)
+      }
     },
   },
 }
 </script>
 
 <style scoped>
-thead {
-  background-color: var(--background-color-brand);
+section [data-label='Username'],
+td {
+  max-width: 160px;
+  overflow: hidden;
 }
-.team-inline {
-  max-width: 90px;
-}
-.team-title {
-  font-size: 12px;
+.table td {
+  max-width: 160px;
+  overflow: hidden;
 }
 </style>

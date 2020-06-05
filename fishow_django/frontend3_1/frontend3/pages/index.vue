@@ -129,11 +129,15 @@
       </article>
       <article class="tile is-parent is-vertical">
         <p class="title">Прогнозы</p>
-        <div class="tile is-child box"></div>
+        <div class="tile is-child box">
+          <MiniPrediction />
+        </div>
       </article>
       <article class="tile is-parent is-vertical">
         <p class="title">Статистика</p>
-        <div class="tile is-child box"></div>
+        <div class="tile is-child box">
+          <UserRate />
+        </div>
       </article>
       <article class="tile is-parent is-vertical">
         <p class="title">Последние комментарии</p>
@@ -148,17 +152,19 @@ import { mapState } from 'vuex'
 import HotPostMinimal from '@/components/HotPostMinimal'
 // import MiniPrognos from '@/components/MiniPrognos'
 // import Statistic from '@/components/Statistic'
-// import UserRate from '@/components/UserRate'
+import UserRate from '@/components/UserRate'
 // import LastComments from '@/components/LastComments'
+import MiniPrediction from '@/components/Home/MiniPrediction'
 import BlogCard from '@/components/BlogCard'
 export default {
   middleware: 'auth',
   components: {
     BlogCard,
     // LastComments,
-    // UserRate,
+    UserRate,
     // Statistic,
     // MiniPrognos,
+    MiniPrediction,
     HotPostMinimal,
   },
   async fetch({ store, error }) {
