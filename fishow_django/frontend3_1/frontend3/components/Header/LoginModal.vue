@@ -95,6 +95,7 @@ export default {
           data: this.login,
         })
         this.toggle()
+        window.location.reload()
         // }
       } catch (e) {
         console.log(e.response)

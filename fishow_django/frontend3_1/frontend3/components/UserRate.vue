@@ -1,6 +1,7 @@
 <template>
   <section>
-    <b-table :data="userRating" :columns="columns"> </b-table>
+    <b-table v-if="$auth.user" :data="userRating" :columns="columns"> </b-table>
+    <div v-else>Авторизуйтесь что бы увидеть список пользователей</div>
   </section>
 </template>
 
@@ -11,18 +12,12 @@ export default {
     return {
       userList: [],
       lengthOfList: 5,
-      data: [
-        { username: 'Jesse Simmons', posts: 2, comments: 5 },
-        { username: 'John Jacobs', posts: 11, comments: 42 },
-        { username: 'Tina Gilbert', posts: 0, comments: 7 },
-        { username: 'Clarence Flores', posts: 4, comments: 4 },
-        { username: 'Anne Lee', posts: 1, comments: 2 },
-      ],
       columns: [
         {
           field: 'username',
           label: 'Username',
-          width: 160,
+          width: '160',
+          'cell-class': 'column-username',
         },
         {
           field: 'blogs',
@@ -57,13 +52,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 section [data-label='Username'],
 td {
   max-width: 160px;
   overflow: hidden;
 }
-.table td {
+.column-username {
   max-width: 160px;
   overflow: hidden;
 }
