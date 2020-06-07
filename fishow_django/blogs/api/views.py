@@ -112,6 +112,7 @@ class CommentListAPIView(generics.ListAPIView):
     permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
+        print(self.request.user)
         kwarg_slug = self.kwargs.get("slug")
         return Comment.objects.filter(blog__slug=kwarg_slug).order_by("-created_at")
 
@@ -126,11 +127,23 @@ class BlogViewSet(viewsets.ModelViewSet):
     queryset = Blog.objects.all().order_by("-created_at")
     lookup_field = "slug"
     serializer_class = BlogSerializer
-    permission_classes = [IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly]
+    permission_classes = [IsAuthorOrReadOnly]
 
     def perform_create(self, serializer):
             if not self.request.user.is_anonymous:
                 serializer.save(author=self.request.user)
+    def get_object(self):
+            queryset = self.get_queryset()
+            obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
+            print(self.request.user)
+            if self.request.user.is_authenticated:
+                    blog=get_object_or_404(Blog, pk=obj.id)
+                    user = self.request.user
+                    print(user)
+                    if user not in blog.views.all():
+                        blog.views.add(user)
+                        blog.save()
+            return obj
 
 
 class BlogLikeAPIView(APIView):
