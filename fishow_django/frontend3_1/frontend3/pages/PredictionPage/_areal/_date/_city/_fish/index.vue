@@ -1,16 +1,19 @@
 <template lang="pug">
   .columns
     .column.is-three-quarters
+      PDataPicker(:date2="date")
       FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
       FishowPredictionHeader
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
       Temperature(
+        v-if='predictions'
         :phenomenon="predictions['phenomenon']"
         :days="days"
         :tempMin="predictions['temperature_min']"
         :tempMean="predictions['temperature_mean']"
         :tempMax="predictions['temperature_max']"
         )
+      EmptyPrediction(v-else)
     .column.fixed-top
       SideBar
     b-loading(:is-full-page="true" :active.sync="isLoading" :can-cancel="true")
@@ -20,8 +23,10 @@
 import FishowPredictionHeader from '@/components/predictPage/FishowPredictionHeader'
 import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
 import FPBreadCrumbs from '@/components/predictPage/FPBreadCrumbs'
+import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
 import ListParams from '~/components/predictPage/ListParams'
+import PDataPicker from '@/components/predictPage/PDataPicker'
 import Temperature from '~/components/predictPage/Temperature'
 import SideBar from '~/components/predictPage/SideBar'
 
@@ -32,6 +37,8 @@ export default {
     ListParams,
     FishowPredictionHeader,
     FishSelectPrediction,
+    EmptyPrediction,
+    PDataPicker,
     FPBreadCrumbs,
   },
   async asyncData({ $axios, route }) {
@@ -44,6 +51,11 @@ export default {
         `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
       )
       const response = await $axios.get(url)
+      console.log(response.data)
+      if (response.data.count === 0) {
+        console.log('empty')
+        console.log(response.data.results[0])
+      }
       return { predictions: response.data.results[0] }
     } catch (e) {
       console.log('e =', e)

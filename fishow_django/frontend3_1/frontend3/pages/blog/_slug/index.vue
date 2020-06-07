@@ -210,7 +210,7 @@
           <img v-if="p.type === 'image'" :src="p.url" alt="" />
         </div>
         <div class="tags box">
-          <span class="tag" v-for="tag in blogTags" :key="tag.id">{{
+          <span v-for="tag in blogTags" :key="tag.id" class="tag">{{
             tag
           }}</span>
         </div>

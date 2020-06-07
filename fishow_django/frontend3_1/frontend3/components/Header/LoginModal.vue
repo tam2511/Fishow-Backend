@@ -8,8 +8,8 @@
           <p class="control has-icons-left has-icons-right">
             <label for="email">Email:</label>
             <input
-              v-model="login.email"
               id="email"
+              v-model="login.email"
               class="input"
               type="email"
               placeholder="Email"
@@ -29,8 +29,8 @@
           <p class="control has-icons-left">
             <label for="password">Пароль:</label>
             <input
-              v-model="login.password"
               id="password"
+              v-model="login.password"
               class="input"
               type="password"
               placeholder="Password"

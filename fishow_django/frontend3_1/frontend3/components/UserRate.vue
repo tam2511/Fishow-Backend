@@ -15,17 +15,17 @@ export default {
       columns: [
         {
           field: 'username',
-          label: 'Username',
+          label: 'Пользователь',
           width: '160',
           'cell-class': 'column-username',
         },
         {
           field: 'blogs',
-          label: 'Blogs',
+          label: 'Блогов',
         },
         {
           field: 'comments',
-          label: 'Comments',
+          label: 'Комм-ев',
         },
       ],
     }
@@ -43,7 +43,6 @@ export default {
       try {
         const responce = await this.$axios.get('/user_all/')
         this.userList.push(...responce.data)
-        console.log('responce = ', responce)
       } catch (e) {
         console.log('error userlist = ', e.responce)
       }

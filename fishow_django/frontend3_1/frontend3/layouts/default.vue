@@ -54,4 +54,11 @@ export default {
 .section {
   background-color: #edeff4;
 }
+a {
+  color: #0d0a0a;
+  transition: color 0.3s;
+  &:hover {
+    color: rgba(0, 0, 0, 0.55);
+  }
+}
 </style>
