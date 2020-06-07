@@ -1,57 +1,101 @@
-<template>
-  <div class="post-comment">
-    <div class="post-comment-aside">
-      <img
-        class="img-circle"
-        src="/static/assets/images/user-6-69x69.jpg"
-        alt=""
-        width="69"
-        height="69"
-      />
-    </div>
-    <div class="post-comment-main">
-      <div class="post-comment-header">
-        <h5 class="author-name">{{ comment.author }}</h5>
-        <time class="post-comment-time" datetime="2018">{{
-          comment.created_at
-        }}</time>
-      </div>
-      <div class="post-comment-text">
-        <p>{{ comment.body }}</p>
-      </div>
+<!--<template>-->
+<!--  <div class="post-comment">-->
+<!--    <div class="post-comment-aside">-->
+<!--      <img-->
+<!--        class="img-circle"-->
+<!--        src="/static/assets/images/user-6-69x69.jpg"-->
+<!--        alt=""-->
+<!--        width="69"-->
+<!--        height="69"-->
+<!--      />-->
+<!--    </div>-->
+<!--    <div class="post-comment-main">-->
+<!--      <div class="post-comment-header">-->
+<!--        <h5 class="author-name">{{ comment.author }}</h5>-->
+<!--        <time class="post-comment-time" datetime="2018">{{-->
+<!--          comment.created_at-->
+<!--        }}</time>-->
+<!--      </div>-->
+<!--      <div class="post-comment-text">-->
+<!--        <p>{{ comment.body }}</p>-->
+<!--      </div>-->
 
-      <div class="post-comment-footer">
-        <div class="comment-like">
-          <button
-            class="icon mdi"
-            :class="{
-              'mdi-thumb-up': userLikedComment,
-              'mdi-thumb-up-outline': !userLikedComment,
-            }"
-            @click="toggleLike"
-          ></button>
-          <span class="comment-like-counter">{{
-            likesCounter - dislikesCounter
-          }}</span>
-          <button
-            class="icon mdi"
-            :class="{
-              'mdi-thumb-down': userDisLikedComment,
-              'mdi-thumb-down-outline': !userDisLikedComment,
-            }"
-            @click="toggleDislike"
-          ></button>
-        </div>
-        <div class="comment-reply">
-          <a href="#">Ответить</a>
-        </div>
-        <div v-if="isCommentAuthor" class="comment-reply-parent">
-          <div class="comment-reply">
-            <button type="button" @click="triggerDeleteComment">Удалить</button>
-          </div>
-        </div>
+<!--      <div class="post-comment-footer">-->
+<!--        <div class="comment-like">-->
+<!--          <button-->
+<!--            class="icon mdi"-->
+<!--            :class="{-->
+<!--              'mdi-thumb-up': userLikedComment,-->
+<!--              'mdi-thumb-up-outline': !userLikedComment,-->
+<!--            }"-->
+<!--            @click="toggleLike"-->
+<!--          ></button>-->
+<!--          <span class="comment-like-counter">{{-->
+<!--            likesCounter - dislikesCounter-->
+<!--          }}</span>-->
+<!--          <button-->
+<!--            class="icon mdi"-->
+<!--            :class="{-->
+<!--              'mdi-thumb-down': userDisLikedComment,-->
+<!--              'mdi-thumb-down-outline': !userDisLikedComment,-->
+<!--            }"-->
+<!--            @click="toggleDislike"-->
+<!--          ></button>-->
+<!--        </div>-->
+<!--        <div class="comment-reply">-->
+<!--          <a href="#">Ответить</a>-->
+<!--        </div>-->
+<!--        <div v-if="isCommentAuthor" class="comment-reply-parent">-->
+<!--          <div class="comment-reply">-->
+<!--            <button type="button" @click="triggerDeleteComment">Удалить</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</template>-->
+<template>
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img
+            src="https://bulma.io/images/placeholders/128x128.png"
+            alt="Image"
+          />
+        </figure>
       </div>
-    </div>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>{{ comment.author }}</strong>
+            <small>@{{ comment.author }}</small>
+            <small>{{ comment.created_at }}</small>
+            <br />
+            {{ comment.body }}
+          </p>
+        </div>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <a class="level-item" aria-label="reply">
+              <span class="icon is-small">
+                <i class="fas fa-reply" aria-hidden="true"></i>
+              </span>
+            </a>
+            <a class="level-item" aria-label="retweet">
+              <span class="icon is-small">
+                <i class="fas fa-retweet" aria-hidden="true"></i>
+              </span>
+            </a>
+            <a class="level-item" aria-label="like">
+              <span class="icon is-small">
+                <i class="fas fa-heart" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </article>
   </div>
 </template>
 
@@ -59,7 +103,6 @@
 // import { apiService } from '@/plugins/api.service'
 
 export default {
-  name: 'Comment',
   props: {
     comment: {
       type: Object,

@@ -88,7 +88,7 @@ export default {
       this.stepReg = !this.stepReg
     },
     // ...mapActions('login', { sendData: 'sendUserData' }),
-    ...mapMutations('login', { close: 'SET_SHOW' }),
+    ...mapMutations('login', { close: 'TOGGLE_LOGIN' }),
     // ...mapActions('login', ['setShow', 'setStep', 'sendUserData']),
   },
 }

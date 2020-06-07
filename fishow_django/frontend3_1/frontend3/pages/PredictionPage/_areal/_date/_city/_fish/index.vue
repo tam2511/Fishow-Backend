@@ -1,23 +1,39 @@
 <template lang="pug">
-  div.container
-    div.row.row-50
-      div.col-lg-8
-        div.fishow-prediction
-          HeaderPrediction
-          FishSelectPrediction(:date="date" :city="city" :areal="areal")
-          .result {{ areal }} {{ city }} {{ date }} {{ fish }}
-          ul
-            li(v-for="(prediciton, key) in predictions" :key="prediciton.id") {{ key}}: {{prediciton}}
-      div.col-lg-4
-        div.fishow-sidebar
-          ul
-            li(v-for="(prediciton, key, index) in predictions" :key="prediciton.id" @click="doScroll" :id="index") {{ key}}
+  .columns
+    .column.is-three-quarters
+      FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
+      FishowPredictionHeader
+      FishSelectPrediction(:areal="areal" :city="city" :date="date")
+      Temperature(
+        :phenomenon="predictions['phenomenon']"
+        :days="days"
+        :tempMin="predictions['temperature_min']"
+        :tempMean="predictions['temperature_mean']"
+        :tempMax="predictions['temperature_max']"
+        )
+    .column.fixed-top
+      SideBar
+    b-loading(:is-full-page="true" :active.sync="isLoading" :can-cancel="true")
 </template>
 
 <script>
-import HeaderPrediction from '@/components/predictPage/HeaderPrediction'
+import FishowPredictionHeader from '@/components/predictPage/FishowPredictionHeader'
 import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
+import FPBreadCrumbs from '@/components/predictPage/FPBreadCrumbs'
+import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
+import ListParams from '~/components/predictPage/ListParams'
+import Temperature from '~/components/predictPage/Temperature'
+import SideBar from '~/components/predictPage/SideBar'
+
 export default {
+  components: {
+    SideBar,
+    Temperature,
+    ListParams,
+    FishowPredictionHeader,
+    FishSelectPrediction,
+    FPBreadCrumbs,
+  },
   async asyncData({ $axios, route }) {
     try {
       const fish = route.params.fish
@@ -33,17 +49,20 @@ export default {
       console.log('e =', e)
     }
   },
-  components: {
-    HeaderPrediction,
-    FishSelectPrediction,
-  },
   data() {
     return {
+      isLoading: true,
+      days: getData(this.$route.params.date, 9),
       fish: this.$route.params.fish,
       date: this.$route.params.date,
       city: this.$route.params.city,
       areal: this.$route.params.areal,
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.isLoading = false
+    }, 500)
   },
   methods: {
     doScroll(event) {
@@ -61,35 +80,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.fish {
-  display: flex;
-  flex-flow: row;
-}
-.fishow-sidebar {
+.fixed-top {
   position: fixed;
-  margin: 70px 70px 0 70px;
-  padding: 10px;
-  min-width: 200px;
+  top: 135px;
   right: 0;
-  top: 0;
-  background: var(--background-color-primary);
-  border: 1px solid var(--background-color-border);
-  li {
-    cursor: pointer;
-    &:hover {
-      background-color: #1e347b;
-      color: #fff;
-    }
-  }
-}
-.fishow-prediction {
-  min-height: 2000px;
-  position: relative;
-  ul {
-    background-color: var(--background-color-primary);
-  }
-  li {
-    padding: 20px;
+  width: 26%;
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 }
 </style>

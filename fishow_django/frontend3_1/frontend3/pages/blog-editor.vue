@@ -1,109 +1,131 @@
-<template>
-  <div class="container">
-    <!--    <div class="row row-50">-->
-    <div class="row row-50" :style="$auth.loggedIn ? '' : 'filter:blur(5px)'">
-      <!--      <div class="col-lg-7 col-xl-8">-->
-      <div v-if="blog_category !== 'Отчет'" class="col-lg-7 col-xl-8">
-        <!-- Heading Component-->
-        <article class="heading-component">
-          <div class="heading-component-inner">
-            <h5 class="heading-component-title">Написать блог</h5>
-          </div>
-        </article>
-        <form @submit.prevent="onSubmit">
-          <!--        <form>-->
-          <div class="row row-10 row-narrow">
-            <div class="col-md-12 fishow-content_container">
-              <div class="col-md-12 fishow-content">
-                <div class="form-wrap">
-                  <textarea
-                    id="blog_title"
-                    v-model="blog_title"
-                    class="form-input"
-                    name="title"
-                    placeholder="Заголовок"
-                  ></textarea>
-                </div>
-              </div>
-              <transition-group name="slide-fade" tag="div" appear>
-                <template v-for="(article, index) in articles">
-                  <component
-                    :is="article"
-                    :key="article[index]"
-                    :counter="article + index"
-                  ></component>
-                </template>
-              </transition-group>
-            </div>
+<!--<template>-->
+<!--  <div class="container">-->
+<!--    <div class="row row-50" :style="$auth.loggedIn ? '' : 'filter:blur(5px)'">-->
+<!--      <div v-if="blog_category !== 'Отчет'" class="col-lg-7 col-xl-8">-->
+<!--        <article class="heading-component">-->
+<!--          <div class="heading-component-inner">-->
+<!--            <h5 class="heading-component-title">Написать блог</h5>-->
+<!--          </div>-->
+<!--        </article>-->
 
-            <div class="col-md-12 fishow_container">
-              <button
-                class="button button-primary button-sm"
-                type="button"
-                @click="addText"
-              >
-                Текст
-              </button>
-              <button
-                class="button button-primary button-sm"
-                type="button"
-                @click="addVideo"
-              >
-                Видео
-              </button>
-              <button
-                class="button button-primary button-sm"
-                type="button"
-                @click="addImage"
-              >
-                Картинка
-              </button>
-            </div>
+<!--      </div>-->
+<!--      &lt;!&ndash;      <div class="col-lg-7 col-xl-8">&ndash;&gt;-->
+<!--      <div v-else class="col-lg-7 col-xl-8">-->
+<!--        <article class="heading-component">-->
+<!--          <div class="heading-component-inner">-->
+<!--            <h5 class="heading-component-title">Добавить отчет</h5>-->
+<!--          </div>-->
+<!--        </article>-->
+<!--      </div>-->
+<!--      <div class="col-lg-5 col-xl-4">-->
+<!--        <div>-->
+<!--          <label class="typo__label">Выберите категорию:</label>-->
+<!--          <multiselect-->
+<!--            v-model="blog_category"-->
+<!--            :options="optionsCategory"-->
+<!--            :searchable="false"-->
+<!--            :close-on-select="true"-->
+<!--            :show-labels="false"-->
+<!--            placeholder="Pick a value"-->
+<!--          ></multiselect>-->
+<!--        </div>-->
+<!--        <label class="typo__label">Теги:</label>-->
+<!--        <multiselect-->
+<!--          v-model="blog_tags"-->
+<!--          tag-placeholder="Add this as new tag"-->
+<!--          placeholder="Найдите или добавьте свой тег"-->
+<!--          label="name"-->
+<!--          track-by="code"-->
+<!--          :options="options"-->
+<!--          :multiple="true"-->
+<!--          :taggable="true"-->
+<!--          @tag="addTag"-->
+<!--        >-->
+<!--        </multiselect>-->
+<!--        <br />-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div v-if="!$auth.loggedIn" class="warning-overlay">-->
+<!--      <warning-->
+<!--        class="warning-popin"-->
+<!--        title="Оповещение"-->
+<!--        body="Для возможности создания блога вам необходимо авторизоваться"-->
+<!--        button="Войти"-->
+<!--        redirect="/login"-->
+<!--      />-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</template>-->
+<template>
+  <div class="tile">
+    <div class="tile is-vertical is-8">
+      <p class="title">Написать блог</p>
+      <div class="tile is-parent is-vertical box">
+        <div class="field">
+          <label for="blog_title" class="label">Заголовок</label>
+          <div class="control">
+            <input
+              id="blog_title"
+              v-model="blog_title"
+              type="text"
+              class="input"
+              placeholder="Заголовок"
+            />
           </div>
-          <div class="col-md-12 button_send_blog">
-            <button
-              class="button button-lg button-primary button-block"
-              type="submit"
-              name="send_blog"
-            >
-              Опубликовать
-            </button>
-            <button
-              class="button button-lg button-gray-outline button-block"
-              type="button"
-              name="save_blog"
-              onclick=""
-            >
-              Сохранить как черновик
-            </button>
-          </div>
-          <!--          <div v-if="error" class="col-md-12 error">-->
-          <!--            {{ error }}-->
-          <!--          </div>-->
-        </form>
+        </div>
+        <template v-for="(article, index) in articles">
+          <component
+            :is="article"
+            :key="article[index]"
+            :counter="article + index"
+          ></component>
+        </template>
+        <div class="buttons">
+          <button
+            class="button button-primary button-sm"
+            type="button"
+            @click="addText"
+          >
+            Текст
+          </button>
+          <button
+            class="button button-primary button-sm"
+            type="button"
+            @click="addVideo"
+          >
+            Видео
+          </button>
+          <button
+            class="button button-primary button-sm"
+            type="button"
+            @click="addImage"
+          >
+            Картинка
+          </button>
+        </div>
+        <div class="buttons">
+          <button
+            class="button is-success"
+            type="button"
+            name="send_blog"
+            @click="onSubmit"
+          >
+            Опубликовать
+          </button>
+          <button
+            class="button is-info"
+            type="button"
+            name="save_blog"
+            disabled
+          >
+            Сохранить как черновик
+          </button>
+        </div>
       </div>
-      <!--      <div class="col-lg-7 col-xl-8">-->
-      <div v-else class="col-lg-7 col-xl-8">
-        <article class="heading-component">
-          <div class="heading-component-inner">
-            <h5 class="heading-component-title">Добавить отчет</h5>
-          </div>
-        </article>
-        <!--        <dynamic-form-->
-        <!--          ref="dynamic-form"-->
-        <!--          v-model="data"-->
-        <!--          :descriptors="descriptors"-->
-        <!--          :show-outer-error="false"-->
-        <!--        >-->
-        <!--          <template slot="operations">-->
-        <!--            <el-button @click="reset">Reset</el-button>-->
-        <!--            <el-button type="primary" plain @click="validate"-->
-        <!--              >Validate</el-button-->
-        <!--            >-->
-        <!--          </template>-->
-        <!--        </dynamic-form>-->
-      </div>
-      <div class="col-lg-5 col-xl-4">
+    </div>
+    <div class="tile is-vertical is-4">
+      <p class="title">Настройки</p>
+      <div class="tile is-parent is-vertical box">
         <div>
           <label class="typo__label">Выберите категорию:</label>
           <multiselect
@@ -115,46 +137,38 @@
             placeholder="Pick a value"
           ></multiselect>
         </div>
-        <label class="typo__label">Теги:</label>
-        <multiselect
-          v-model="blog_tags"
-          tag-placeholder="Add this as new tag"
-          placeholder="Найдите или добавьте свой тег"
-          label="name"
-          track-by="code"
-          :options="options"
-          :multiple="true"
-          :taggable="true"
-          @tag="addTag"
-        >
-        </multiselect>
-        <br />
+        <div>
+          <label class="typo__label">Теги:</label>
+          <multiselect
+            v-model="blog_tags"
+            tag-placeholder="Add this as new tag"
+            placeholder="Найдите или добавьте свой тег"
+            label="name"
+            track-by="code"
+            :options="options"
+            :multiple="true"
+            :taggable="true"
+            @tag="addTag"
+          >
+          </multiselect>
+        </div>
       </div>
-    </div>
-    <div v-if="!$auth.loggedIn" class="warning-overlay">
-      <warning
-        class="warning-popin"
-        title="Оповещение"
-        body="Для возможности создания блога вам необходимо авторизоваться"
-        button="Войти"
-        redirect="/login"
-      />
     </div>
   </div>
 </template>
 
 <script>
 // import { mapState } from 'vuex'
-import Warning from '@/components/Warning'
-import TextField from '@/components/blog/textField'
+// import Warning from '@/components/Warning'
+// import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
 import videoField from '@/components/blog/videoField'
 
 export default {
   components: {
-    Warning,
-    TextField,
+    // Warning,
+    // TextField,
     BlogContentField,
     imageField,
     videoField,
@@ -169,18 +183,14 @@ export default {
 
   data() {
     return {
-      //     picked: null,
-      //     imageCounter: 0,
-      //     textCounter: 1,
       articles: ['BlogContentField'],
-      //     blog_body: '',
+      blog_body: '',
       blog_title: null,
       blog_category: 'Блоги',
       //     deafultTags: ['Удочки', 'Шутки', 'Ночь', 'История', 'Деньги'],
-      //     result: [],
+
       //     error: null,
-      //     field: 'textField',
-      //     blog_json: null,
+
       //     valueCategory: '',
       blog_tags: [{ name: 'Текст', code: 'текст' }],
       options: [
@@ -251,7 +261,7 @@ export default {
     },
     convertBody() {
       const result = []
-      const listBloks = document.querySelectorAll('textarea')
+      const listBloks = [...document.querySelectorAll('textarea')]
 
       listBloks.forEach((block) => {
         if (block.name === 'text') {
@@ -299,13 +309,13 @@ export default {
           tags: this.blog_tags,
         }
         const response = await this.$axios.$post('/blogs/', blog)
+        console.log('responce')
         this.$router.push({
           name: 'blog-slug',
           params: { slug: response.slug },
         })
-        this.$nuxt.route()
       } catch (e) {
-        console.log('error = ', e)
+        console.log('error = ', e.responce)
       }
     },
     addImage() {
@@ -331,53 +341,4 @@ export default {
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style lang="scss" scoped>
-.form-wrap {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  img,
-  video {
-    margin: 20px;
-  }
-}
-@media screen and (max-width: 500px) {
-  .fishow_container {
-    justify-content: space-around;
-    flex-flow: row;
-    align-items: baseline;
-  }
-}
-
-.fishow_action_btn {
-  background-color: var(--background-color-primary);
-}
-.button.button-primary.button-sm {
-  text-overflow: unset;
-}
-.button-block {
-  width: auto;
-}
-.button {
-  &:first-child {
-    margin-top: 15px;
-  }
-  @media screen and (max-width: 840px) {
-    width: 100%;
-  }
-}
-.button_send_blog {
-  flex-direction: row;
-  flex-wrap: wrap;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-evenly;
-}
-.typo__label {
-  color: #0f0f0f;
-  font-size: 18px;
-}
-.dynamic-form {
-  background: none !important;
-}
-</style>
+<style lang="scss" scoped></style>

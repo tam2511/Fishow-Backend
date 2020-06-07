@@ -1,15 +1,22 @@
 <template>
-  <div class="col-md-12 fishow-content">
-    <div class="form-wrap">
-      <div class="fishow-blog_image__close-button" @click="destroyMe">x</div>
+  <div class="field">
+    <label class="label">Message</label>
+    <div class="control">
+      <div class="field">
+        <button class="button is-danger is-outlined" @click="destroyMe">
+          <span>Delete</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
+
       <textarea
         :id="counter"
         v-model="model"
         name="text"
-        placeholder="Основной текст"
-        class="form-input"
-        cols="30"
-        rows="4"
+        class="textarea"
+        placeholder="Textarea"
       ></textarea>
       <slot></slot>
     </div>
@@ -18,7 +25,6 @@
 
 <script>
 export default {
-  name: 'BlogContentField',
   props: {
     counter: {
       type: String,
@@ -58,11 +64,4 @@ export default {
 }
 </script>
 
-<style scoped>
-textarea {
-  min-height: 60px;
-  padding: 17px 19px;
-  color: #9b9b9b;
-  border: 1px solid var(--backround-color-primary);
-}
-</style>
+<style scoped></style>

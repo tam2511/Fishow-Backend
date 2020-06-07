@@ -1,18 +1,25 @@
 <template>
   <div class="col-md-12 fishow-content">
     <div class="form-wrap">
-      <div class="fishow-blog_image__close-button" @click="destroyMe">x</div>
+      <div class="field">
+        <button class="button is-danger is-outlined" @click="destroyMe">
+          <span>Delete</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        </button>
+      </div>
       <textarea
         :id="counter"
         v-model="image"
         name="image"
-        class="form-input"
+        class="textarea"
         placeholder="Например: https://peach.blender.org/wp-content/uploads/bbb-splash.png?x10518"
         cols="30"
         rows="4"
       >
       </textarea>
-      <img :src="image" width="500" height="500" />
+      <img :src="image" width="500" height="500" alt="uploaded image" />
     </div>
   </div>
 </template>
@@ -22,7 +29,7 @@ export default {
   name: 'ImageField',
   props: {
     counter: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

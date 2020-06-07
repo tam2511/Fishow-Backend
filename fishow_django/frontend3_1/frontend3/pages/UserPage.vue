@@ -46,6 +46,9 @@ export default {
   computed: {
     ...mapState('user', ['user']),
   },
+  mounted() {
+    scrollTo(0, this.scrollValue)
+  },
   methods: {
     async logout() {
       try {
@@ -54,9 +57,6 @@ export default {
         console.log('e = ', e)
       }
     },
-  },
-  mounted() {
-    scrollTo(0, this.scrollValue)
   },
 }
 </script>
