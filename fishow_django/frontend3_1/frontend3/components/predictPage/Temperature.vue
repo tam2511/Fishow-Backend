@@ -3,6 +3,10 @@
       p.title Температура
       .date.temperature-list
         .date_item(v-for="day in days" :key="day.id") {{ day }}
+      .temperature-max.temperature-list.temperature-list__end
+        .phenomenon(v-for="phe in dataJSON.phenomen" :key="phe.id")
+          .value
+            weather(:day="phe")
       .temperature-max.temperature-list.temperature-list__end.temperature-list__p_t
         .temperature-max_item(v-for="max in dataJSON.maxTemp"
           :key="max.id" :style="'padding-bottom:' + max * 3 + 'px'")
@@ -14,7 +18,9 @@
 </template>
 
 <script>
+import Weather from '~/components/predictPage/icon/weather'
 export default {
+  components: { Weather },
   props: {
     phenomenon: {
       type: String,
@@ -68,14 +74,17 @@ export default {
     align-items: flex-end;
   }
   &__p_t {
-    padding-top: 10px;
+    padding-top: 70px;
   }
   &__p_b {
     padding-bottom: 10px;
   }
 }
+.phenomenon {
+  position: relative;
+}
 .temperature-max_item {
-  background-color: #1e347b;
+  background-color: #fee187;
   color: white;
   width: 5%;
   position: relative;
@@ -87,7 +96,7 @@ export default {
   }
 }
 .temperature-min_item {
-  background-color: #7b1e6f;
+  background-color: #7957d582;
   color: white;
   width: 5%;
   position: relative;
@@ -97,5 +106,12 @@ export default {
     left: 10px;
     color: #000;
   }
+}
+.value {
+  position: absolute;
+  color: #000;
+  bottom: -50px;
+  left: -25px;
+  width: 50px;
 }
 </style>

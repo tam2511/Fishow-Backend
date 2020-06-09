@@ -5,14 +5,19 @@
       FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
       FishowPredictionHeader
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
-      Temperature(
-        v-if='predictions'
-        :phenomenon="predictions['phenomenon']"
-        :days="days"
-        :tempMin="predictions['temperature_min']"
-        :tempMean="predictions['temperature_mean']"
-        :tempMax="predictions['temperature_max']"
+      .box(v-if='predictions')
+        PProbe(
+          :days="days"
+          :probMaxProp="predictions['prob_max']"
+          :probMinProp="predictions['prob_min']"
         )
+        Temperature(
+          :phenomenon="predictions['phenomenon']"
+          :days="days"
+          :tempMin="predictions['temperature_min']"
+          :tempMean="predictions['temperature_mean']"
+          :tempMax="predictions['temperature_max']"
+          )
       EmptyPrediction(v-else)
     .column.fixed-top
       SideBar
@@ -29,9 +34,11 @@ import ListParams from '~/components/predictPage/ListParams'
 import PDataPicker from '@/components/predictPage/PDataPicker'
 import Temperature from '~/components/predictPage/Temperature'
 import SideBar from '~/components/predictPage/SideBar'
+import PProbe from '~/components/predictPage/PProbe'
 
 export default {
   components: {
+    PProbe,
     SideBar,
     Temperature,
     ListParams,
@@ -51,7 +58,6 @@ export default {
         `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
       )
       const response = await $axios.get(url)
-      console.log(response.data)
       if (response.data.count === 0) {
         console.log('empty')
         console.log(response.data.results[0])
@@ -74,7 +80,7 @@ export default {
   created() {
     setTimeout(() => {
       this.isLoading = false
-    }, 500)
+    }, 1500)
   },
   methods: {
     doScroll(event) {

@@ -1,10 +1,11 @@
 <template>
   <b-field class="box" label="Select a date">
-    {{ date }}
     <b-datepicker
+      v-model="day"
       :focused-date="date"
       :first-day-of-week="1"
       placeholder="Click to select..."
+      @input="goToDay"
     >
       <template slot="header">
         <b-field>
@@ -37,6 +38,7 @@ export default {
   data() {
     return {
       month: null,
+      day: null,
       date: new Date(),
       months: [
         { name: 'Январь', value: 0 },
@@ -56,22 +58,48 @@ export default {
   },
   computed: {
     rightDate() {
-      const year = this.date2
-      console.log('ere', year)
-      return ''
+      const d = new Date(this.day)
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+      const year = d.getFullYear()
+
+      if (month.length < 2) month = '0' + month
+      if (day.length < 2) day = '0' + day
+
+      return [year, month, day].join('-')
     },
   },
   mounted() {
     this.month = this.months.filter(
       (item) => item.value === this.date.getMonth()
     )[0].name
+    // const newData = this.date2.split('-')
+    // this.date = newData[1] + '-' + newData[2] + '-' + newData[0]
   },
   methods: {
     selectMonth(option) {
       if (option) {
         this.date = new Date(this.date)
         this.date.setMonth(option.value)
+        console.log('asdasd')
       }
+    },
+    goToDay() {
+      console.log('select')
+      this.$router.push({
+        name: 'PredictionPage-areal-date-city-fish',
+        params: {
+          areal: this.$route.params.areal,
+          date: this.rightDate,
+          city: this.$route.params.city,
+          fish: this.$route.params.fish,
+        },
+        hash: '#experience',
+      })
+      // fish: this.$route.params.fish,
+      //   date: this.$route.params.date,
+      //   city: this.$route.params.city,
+      //   areal: this.$route.params.areal,
     },
   },
 }
