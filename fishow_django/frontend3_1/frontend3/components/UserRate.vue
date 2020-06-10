@@ -41,8 +41,10 @@ export default {
   methods: {
     async getUserList() {
       try {
-        const responce = await this.$axios.get('/user_all/')
-        this.userList.push(...responce.data)
+        if (this.$auth.user) {
+          const responce = await this.$axios.get('/user_all/')
+          this.userList.push(...responce.data)
+        }
       } catch (e) {
         console.log('error userlist = ', e.responce)
       }
