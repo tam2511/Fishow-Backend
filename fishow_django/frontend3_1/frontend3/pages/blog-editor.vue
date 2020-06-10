@@ -154,12 +154,20 @@
         </div>
       </div>
     </div>
+    <div v-if="!$auth.loggedIn" class="warning-overlay">
+      <warning
+        title="Оповещение"
+        body="Для возможности создания блога вам необходимо авторизоваться"
+        button="Войти"
+        redirect="/login"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 // import { mapState } from 'vuex'
-// import Warning from '@/components/Warning'
+import Warning from '@/components/Warning'
 // import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
@@ -167,7 +175,7 @@ import videoField from '@/components/blog/videoField'
 
 export default {
   components: {
-    // Warning,
+    Warning,
     // TextField,
     BlogContentField,
     imageField,
