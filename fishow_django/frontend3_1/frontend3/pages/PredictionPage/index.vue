@@ -12,7 +12,7 @@
             .list-areals_item(v-for="(area, key) in json" :key="key" v-if="!value")
               span.item-city(@click="value = key") {{ key }}
             .list-areals_item(v-for="city in json[value]" :key="city" v-if="!value2")
-              nuxt-link.item-city(:to="{name: 'PredictionPage-areal-date-city-fish',params: { areal: value, city, date: '2020-04-25', fish: 'щука'}}") {{ city }}
+              nuxt-link.item-city(:to="{name: 'PredictionPage-areal-date-city-fish',params: { areal: value, city, date: rightDate, fish: 'щука'}}") {{ city }}
 </template>
 
 <script>
@@ -97,6 +97,19 @@ export default {
         ],
       },
     }
+  },
+  computed: {
+    rightDate() {
+      const d = new Date()
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+      const year = d.getFullYear()
+
+      if (month.length < 2) month = '0' + month
+      if (day.length < 2) day = '0' + day
+
+      return [year, month, day].join('-')
+    },
   },
 }
 </script>
