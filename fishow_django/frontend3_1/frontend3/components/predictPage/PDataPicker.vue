@@ -1,6 +1,7 @@
 <template>
   <b-field class="box" label="Select a date">
     <b-datepicker
+      id="pdata"
       v-model="day"
       :focused-date="date"
       :first-day-of-week="1"
@@ -94,7 +95,7 @@ export default {
           city: this.$route.params.city,
           fish: this.$route.params.fish,
         },
-        hash: '#experience',
+        hash: '#pdata',
       })
       // fish: this.$route.params.fish,
       //   date: this.$route.params.date,

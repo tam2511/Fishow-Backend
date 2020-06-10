@@ -2,7 +2,8 @@
   <div class="card box">
     <div class="columns">
       <div class="column is-three-fifths">
-        <p class="title">Прогноз на 9 дней</p>
+        <p class="title">Прогноз на 9 дней от {{ $route.params.date }}</p>
+
         Наслаждайтесь максимально хорошо спланированной рыбалкой
       </div>
       <div class="column">
