@@ -132,6 +132,8 @@ export default {
         const data = this.reg
         console.log('data = ', data)
         await this.$axios.$post('/rest-auth/registration/', data)
+        this.toggle()
+        this.success()
         // console.log('response register = ', response)
         // console.log('response register = ', response.response)
       } catch (e) {
@@ -149,6 +151,13 @@ export default {
           this.error.password2 = this.message(e.response.data.password2[0])
         }
       }
+    },
+    success() {
+      this.$buefy.notification.open({
+        message: 'Регистрация прошла успешна, письмо отправлено!',
+        type: 'is-success',
+        duration: 9000,
+      })
     },
     message(data) {
       switch (data) {
