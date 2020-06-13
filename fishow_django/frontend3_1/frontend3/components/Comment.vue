@@ -82,16 +82,21 @@
                 <i class="fas fa-reply" aria-hidden="true"></i>
               </span>
             </a>
-            <a class="level-item" aria-label="retweet">
-              <span class="icon is-small">
-                <i class="fas fa-retweet" aria-hidden="true"></i>
-              </span>
-            </a>
-            <a class="level-item" aria-label="like">
+            <a
+              :class="{
+                'level-item': !userLikedComment,
+                'level-item active': userLikedComment,
+              }"
+              aria-label="like"
+              @click="toggleLike"
+            >
               <span class="icon is-small">
                 <i class="fas fa-heart" aria-hidden="true"></i>
               </span>
             </a>
+            <span>
+              {{ likesCounter - dislikesCounter }}
+            </span>
           </div>
         </nav>
       </div>
@@ -100,8 +105,6 @@
 </template>
 
 <script>
-// import { apiService } from '@/plugins/api.service'
-
 export default {
   props: {
     comment: {
@@ -179,42 +182,10 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-button {
-  padding: 5px 10px;
-  border: none;
-  transition-duration: 0.2s;
-  &:hover {
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-  }
-}
-.comment-like-counter {
-  padding-right: 10px;
-  padding-left: 10px;
-}
-.comment-reply {
-  button,
-  a {
-    color: var(--color-typo-primary);
-    background: none;
-    &:hover {
-      /*color: #a80000;*/
-    }
-  }
-}
-.comment-reply-parent {
-  margin-left: 10px;
-}
-.mdi-thumb-down {
-  color: #a80000;
-  &-outline {
-    color: #a80000;
-  }
-}
-.mdi-thumb-up {
-  color: #005e00;
-  &-outline {
-    color: #005e00;
+<style lang="scss">
+.level-item {
+  .active {
+    color: darkcyan;
   }
 }
 </style>

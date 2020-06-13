@@ -1,44 +1,54 @@
 <template lang="pug">
   .temperature-box.box
-    p.title Прогноз клева
+    p.title Ветер
     .date.temperature-list
       .date_item(v-for="day in days" :key="day.id") {{ day }}
+    .temperature-max.temperature-list.temperature-list__end
+      .phenomenon(v-for="direction in dataJSON.direction" :key="direction.id")
+        .value
+          span {{direction}}
+          WindDir(:dir="direction")
     .temperature-max.temperature-list.temperature-list__end.temperature-list__p_t
-      .temperature-max_item(v-for="max in dataJSON.probMax"
-        :key="max.id" :style="'padding-bottom:' + max * 100 + 'px'")
-        .value {{ (max * 100).toFixed() }} %
-    .temperature-min.temperature-list.temperature-list__start.temperature-list__p_b
-      .temperature-min_item(v-for="min in dataJSON.probMin"
-        :key="min.id" :style="'padding-top:' + (50 - min * 0) + 'px'")
-        .value {{ (min * 100).toFixed() }} %
+      .temperature-max_item(v-for="max in dataJSON.wind"
+        :key="max.id")
+        .value {{ Number(max).toFixed() }}
 </template>
 
 <script>
+import WindDir from '@/components/predictPage/icon/windDir'
 export default {
+  components: { WindDir },
   props: {
     days: {
       type: Array,
       required: true,
     },
-    probMaxProp: {
+    windMean: {
       type: String,
       required: true,
     },
-    probMinProp: {
+    windDirection: {
       type: String,
       required: true,
     },
   },
-
   computed: {
     dataJSON() {
       try {
         return {
-          probMax: JSON.parse(this.probMaxProp),
-          probMin: JSON.parse(this.probMinProp),
+          wind: this.windMean.substr(1, this.windMean.length - 2).split(', '),
+          direction: this.windDirection
+            .substr(1, this.windDirection.length - 2)
+            .split(', '),
         }
       } catch (e) {
-        return null
+        console.log('this.wind = ', this.windMean)
+        console.log('this.wind = ', this.windDirection)
+        console.log('error = ', e)
+        return {
+          wind: 'null',
+          direction: 'null',
+        }
       }
     },
   },
@@ -59,14 +69,17 @@ export default {
     align-items: flex-end;
   }
   &__p_t {
-    padding-top: 10px;
+    padding-top: 70px;
   }
   &__p_b {
     padding-bottom: 10px;
   }
 }
+.phenomenon {
+  position: relative;
+}
 .temperature-max_item {
-  background-color: #1e347b;
+  background-color: #fee187;
   color: white;
   width: 5%;
   position: relative;
@@ -75,11 +88,10 @@ export default {
     top: -25px;
     left: 10px;
     color: #000;
-    width: 100%;
   }
 }
 .temperature-min_item {
-  background-color: #7b1e6f;
+  background-color: #7957d582;
   color: white;
   width: 5%;
   position: relative;
@@ -88,8 +100,14 @@ export default {
     bottom: -25px;
     left: 10px;
     color: #000;
-    width: 100%;
   }
+}
+.value {
+  position: absolute;
+  color: #000;
+  bottom: -50px;
+  left: -25px;
+  width: 50px;
 }
 .date_item {
   font-weight: 700;

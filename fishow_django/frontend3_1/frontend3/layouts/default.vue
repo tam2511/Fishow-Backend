@@ -53,6 +53,9 @@ export default {
 <style lang="scss">
 .section {
   background-color: #edeff4;
+  @media (max-width: 450px) {
+    padding: 0;
+  }
 }
 a {
   color: #0d0a0a;

@@ -18,6 +18,10 @@
           :tempMean="predictions['temperature_mean']"
           :tempMax="predictions['temperature_max']"
           )
+        Wind(
+          :days="days"
+          :windMean="predictions['wind_mean']"
+          :windDirection="predictions['wind_direction']")
       EmptyPrediction(v-else)
     .column.fixed-top
       SideBar
@@ -28,6 +32,7 @@
 import FishowPredictionHeader from '@/components/predictPage/FishowPredictionHeader'
 import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
 import FPBreadCrumbs from '@/components/predictPage/FPBreadCrumbs'
+import Wind from '@/components/predictPage/Wind'
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
 import ListParams from '~/components/predictPage/ListParams'
@@ -47,6 +52,7 @@ export default {
     EmptyPrediction,
     PDataPicker,
     FPBreadCrumbs,
+    Wind,
   },
   async asyncData({ $axios, route }) {
     try {
