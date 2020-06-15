@@ -68,8 +68,16 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     'nuxt-vue-multiselect',
+    '@nuxtjs/yandex-metrika',
   ],
-
+  yandexMetrika: {
+    id: '64900765',
+    webvisor: true,
+    // clickmap:true,
+    // useCDN:false,
+    // trackLinks:true,
+    // accurateTrackBounce:true,
+  },
   proxy: {
     // ** is important here, * probably means it won't go more than one level deep
     // '/api/**': {

@@ -43,6 +43,7 @@
           <b-menu-item label="Addresses"></b-menu-item>
         </b-menu-item>
       </b-menu-list>
+      сть
       <b-menu-list label="Actions">
         <b-menu-item label="Logout"></b-menu-item>
       </b-menu-list>
