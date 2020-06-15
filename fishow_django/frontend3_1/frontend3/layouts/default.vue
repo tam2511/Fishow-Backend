@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="'theme ' + theme">
+  <div id="app">
     <!--    <TheHeader />-->
     <HeaderBlock />
     <LoginModal v-if="showStateLogin" />
@@ -29,24 +29,8 @@ export default {
     // TheFooter,
     // TheLogin,
   },
-  data() {
-    return {
-      theme: '',
-    }
-  },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
-  },
-  mounted() {
-    this.checkTheme()
-  },
-  methods: {
-    checkTheme() {
-      if (process.browser) {
-        this.theme =
-          localStorage.getItem('theme') || 'theme_color_fishow_default'
-      }
-    },
   },
 }
 </script>

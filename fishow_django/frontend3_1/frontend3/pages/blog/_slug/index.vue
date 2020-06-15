@@ -191,67 +191,55 @@
 <!--  </div>-->
 <!--</template>-->
 <template>
-  <div class="tile">
-    <div class="tile is-vertical is-8 is-parent">
-      <p class="title">{{ blog.title }}</p>
-      <div class="tile is-child is-vertical box">
-        <div v-for="p in result" :key="p.id">
-          <p v-if="p.type === 'text'" class="blog-post-text">
-            {{ p.body }}
-          </p>
-          <iframe
-            v-if="p.type === 'video'"
-            width="560"
-            height="315"
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-          <img v-if="p.type === 'image'" :src="p.url" alt="" />
-        </div>
-        <div class="tags box">
-          <span v-for="tag in blogTags" :key="tag.id" class="tag">{{
-            tag
-          }}</span>
-        </div>
+  <div class="tile is-vertical is-8">
+    <p class="title">{{ blog.title }}</p>
+    <div class="tile is-child is-vertical box">
+      <div v-for="p in result" :key="p.id" class="content">
+        <p v-if="p.type === 'text'" class="blog-post-text">
+          {{ p.body }}
+        </p>
+        <iframe
+          v-if="p.type === 'video'"
+          width="560"
+          height="315"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <img v-if="p.type === 'image'" :src="p.url" alt="" />
       </div>
-      <p class="title">Комментарии</p>
-      <div class="tile is-child is-vertical box">
-        <p v-if="(comments.length === 0)">Ваш комментарий будет первым</p>
-        <Comment
-          v-for="(comment, index) in comments"
-          :key="index"
-          :comment="comment"
-          :slug="$route.params.slug"
-          :request-user="$auth.user"
-          @deleteComment="deleteComment"
-        />
-      </div>
-      <p class="title">Оставить комментарий</p>
-      <div class="tile is-child is-vertical box">
-        <div class="form-wrap">
-          <textarea
-            id="comment-message"
-            v-model="commentBody"
-            class="textarea"
-            name="message"
-            placeholder="Ваш комментарий"
-          ></textarea>
-        </div>
-        <div v-if="error" class="alert-danger">{{ error }}</div>
-        <div class="buttons">
-          <b-button type="is-primary" @click="onSubmit">
-            Отправить
-          </b-button>
-        </div>
+      <div class="tags box">
+        <span v-for="tag in blogTags" :key="tag.id" class="tag">{{ tag }}</span>
       </div>
     </div>
-    <div class="tile is-vertical is-4">
-      <div class="tile is-parent is-vertical">
-        <p class="title">Sidebar</p>
-        <div class="tile is-child box">
-          Content
-        </div>
+    <p class="title">Комментарии</p>
+    <div class="tile is-child is-vertical box">
+      <p v-if="(comments.length === 0)">Ваш комментарий будет первым</p>
+      <Comment
+        v-for="(comment, index) in comments"
+        :key="index"
+        :comment="comment"
+        :slug="$route.params.slug"
+        :request-user="$auth.user"
+        @deleteComment="deleteComment"
+      />
+    </div>
+    <p class="title">Оставить комментарий</p>
+    <div class="tile is-child is-vertical box">
+      <div class="form-wrap">
+        <textarea
+          id="comment-message"
+          v-model="commentBody"
+          class="textarea"
+          name="message"
+          placeholder="Ваш комментарий"
+        ></textarea>
+      </div>
+      <div v-if="error" class="alert-danger">{{ error }}</div>
+      <div class="buttons">
+        <b-button type="is-primary" @click="onSubmit">
+          Отправить
+        </b-button>
       </div>
     </div>
   </div>
@@ -264,6 +252,7 @@ import { mapState } from 'vuex'
 // import BlockTags from '@/components/blog/blockTags'
 import Comment from '@/components/Comment'
 export default {
+  layout: 'SideBarRight',
   scrollToTop: true,
   // components: { BlockTags, BlockSpotlight, BlockCategories, Comment },
   components: { Comment },
@@ -448,5 +437,12 @@ export default {
   padding: 20px;
   color: #91171c;
   text-align: center;
+}
+.content {
+  img {
+    padding: 20px 0;
+    width: 100%;
+    height: auto;
+  }
 }
 </style>

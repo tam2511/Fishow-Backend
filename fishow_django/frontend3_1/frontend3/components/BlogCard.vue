@@ -113,11 +113,15 @@
             <p class="subtitle is-6">@{{ blog.author }}</p>
           </div>
         </div>
+        <b-tag class="blog-category" type="is-primary" size="is-medium">{{
+          blog.category
+        }}</b-tag>
         <p class="title">
           <nuxt-link :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
             >{{ blog.title }}
           </nuxt-link>
         </p>
+
         <div class="content">
           <div v-for="p in getResult" :key="p.id">
             <div v-if="p.type === 'text'" class="post-corporate-text">
@@ -226,4 +230,9 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.blog-category {
+  background-color: #1e347b;
+  font-size: 45px;
+}
+</style>
