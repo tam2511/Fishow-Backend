@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="'theme ' + theme">
+  <div id="app">
     <!--    <TheHeader />-->
     <HeaderBlock />
     <LoginModal v-if="showStateLogin" />
@@ -73,6 +73,7 @@ export default {
   },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
+    ...mapState('blogs', ['minPost']),
   },
   mounted() {
     this.checkTheme()

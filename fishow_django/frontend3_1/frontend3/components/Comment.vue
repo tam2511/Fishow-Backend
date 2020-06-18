@@ -111,10 +111,10 @@ export default {
       type: Object,
       required: true,
     },
-    requestUser: {
-      type: String,
-      required: true,
-    },
+    // requestUser: {
+    //   type: String,
+    //   required: true,
+    // },
     slug: {
       type: String,
       required: true,
@@ -132,7 +132,7 @@ export default {
     isCommentAuthor() {
       // return true if the logged in user is also the author of the answer instance
       // return this.comment.author === this.requestUser;
-      return this.comment.author === this.requestUser
+      return this.comment.author === this.$auth.user
     },
   },
   methods: {

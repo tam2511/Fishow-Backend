@@ -31,9 +31,6 @@ export default {
     }
   },
   computed: {
-    minPost() {
-      return this.blogs.filter((blog, index) => index < 3)
-    },
     ...mapState('blogs', ['blogs']),
   },
   created() {},

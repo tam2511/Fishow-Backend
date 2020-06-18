@@ -4,6 +4,7 @@ export const state = () => ({
   blogs: [],
   blog: {},
   next: null,
+  minPost: [],
 })
 
 export const mutations = {
@@ -16,13 +17,17 @@ export const mutations = {
   SET_BLOG(state, blog) {
     state.blog = blog
   },
+  SET_MIN(state, blog) {
+    state.minPost = blog
+  },
 }
 
 export const actions = {
-  getBlogs({ commit }) {
+  getBlogs({ dispatch, commit }) {
     return BlogsService.getBlogs().then((response) => {
       commit('SET_BLOGS', response.data.results)
       commit('SET_NEXT', response.data.next)
+      dispatch('likeBlog', response.data.results)
     })
   },
   getBlog({ commit }, slug) {
@@ -30,5 +35,10 @@ export const actions = {
       commit('SET_BLOG', response.data)
     })
   },
-  likeBlog({ commit }, id) {},
+  likeBlog({ commit }, blogs) {
+    commit(
+      'SET_MIN',
+      blogs.filter((blog, index) => index < 3)
+    )
+  },
 }
