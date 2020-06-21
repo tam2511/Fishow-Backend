@@ -84,6 +84,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import errors from '~/components/Header/errors'
 export default {
   data() {
     return {
@@ -105,27 +106,14 @@ export default {
         })
         this.toggle()
         window.location.reload()
-        // }
       } catch (e) {
-        console.log(e.response.data)
         if (e.response.data.password) {
           const response = e.response.data.password[0]
-          console.log('responce = ', response)
-          if (response === 'Unable to log in with provided credentials.') {
-            this.error.email = 'Неверно введена почта или пароль'
-          } else if (response === 'This field may not be blank.') {
-            this.error.password = 'Поле не может быть пустым'
-          }
+          this.error.password = errors[response]
         }
         if (e.response.data.non_field_errors) {
           const response = e.response.data.non_field_errors[0]
-          if (response === 'Unable to log in with provided credentials.') {
-            this.error.email = 'Неверно введена почта или пароль'
-          } else if (response === 'This field may not be blank.') {
-            this.error.email = 'Поле не может быть пустым'
-          } else if (response === 'Must include "email" and "password".') {
-            this.error.email = 'Должна быть указана почта и пароль'
-          }
+          this.error.email = errors[response]
         }
       }
     },
