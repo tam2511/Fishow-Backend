@@ -10,9 +10,6 @@
       <li>
         <nuxt-link to="/PredictionPage">{{ city }}</nuxt-link>
       </li>
-      <li>
-        <a href="#">{{ fish }}</a>
-      </li>
     </ul>
   </nav>
 </template>

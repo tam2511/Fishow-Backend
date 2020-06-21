@@ -11,6 +11,7 @@
               <!--              </button>-->
               <b-button
                 outlined
+                :disabled="!$auth.user"
                 icon-pack="fa"
                 icon-right="chevron-up"
                 @click="toggleLike"
@@ -20,6 +21,7 @@
               }}</b-button>
               <b-button
                 outlined
+                :disabled="!$auth.user"
                 icon-pack="fa"
                 icon-right="chevron-down"
                 @click="toggleDislike"

@@ -6,7 +6,9 @@
     <RegModal v-if="showStateReg" />
     <transition name="fade" mode="out-in">
       <section class="section">
-        <nuxt />
+        <div class="container">
+          <nuxt />
+        </div>
       </section>
     </transition>
     <!--    <theLogin />-->
