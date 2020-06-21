@@ -1,11 +1,11 @@
 <template>
-  <b-field class="box" label="Select a date">
+  <b-field class="" label="Выберите дату">
     <b-datepicker
       id="pdata"
       v-model="day"
       :focused-date="date"
       :first-day-of-week="1"
-      placeholder="Click to select..."
+      placeholder="Нажмите что бы выбрать"
       @input="goToDay"
     >
       <template slot="header">

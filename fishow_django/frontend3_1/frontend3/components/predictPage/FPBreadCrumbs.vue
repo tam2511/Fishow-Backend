@@ -2,6 +2,9 @@
   <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
     <ul>
       <li>
+        <a> Россия </a>
+      </li>
+      <li>
         <nuxt-link to="/PredictionPage">{{ areal }}</nuxt-link>
       </li>
       <li>

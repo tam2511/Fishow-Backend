@@ -93,21 +93,19 @@ export default {
   },
   methods: {
     info(value) {
-      console.log('click', value)
+      const fish = this.fishList[value].title
+      const date = this.date
+      const city = this.city
+      const areal = this.areal
+      const url = encodeURI(
+        `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+      )
       this.setFish(value)
-      this.$router.push({
-        name: 'PredictionPage-areal-date-city-fish',
-        params: {
-          areal: this.areal,
-          date: this.date,
-          city: this.city,
-          fish: this.fishList[value].title,
-        },
-        hash: '#experience',
-      })
+      this.getPrediction(url)
     },
     ...mapActions('prediction', {
       setFish: 'setFishId',
+      getPrediction: 'getPrediction',
     }),
   },
 }

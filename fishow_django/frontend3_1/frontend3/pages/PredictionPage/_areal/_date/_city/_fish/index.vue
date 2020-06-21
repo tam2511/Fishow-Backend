@@ -1,9 +1,9 @@
 <template lang="pug">
   .columns
     .column.is-three-quarters
-      PDataPicker(:date2="date")
       FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
       FishowPredictionHeader
+        PDataPicker(:date2="date")
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
       .box(v-if='predictions')
         PProbe(
@@ -25,10 +25,10 @@
       EmptyPrediction(v-else)
     .column.fixed-top
       SideBar
-    b-loading(:is-full-page="true" :active.sync="isLoading" :can-cancel="true")
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import FishowPredictionHeader from '@/components/predictPage/FishowPredictionHeader'
 import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
 import FPBreadCrumbs from '@/components/predictPage/FPBreadCrumbs'
@@ -54,28 +54,8 @@ export default {
     FPBreadCrumbs,
     Wind,
   },
-  async asyncData({ $axios, route }) {
-    try {
-      const fish = route.params.fish
-      const date = route.params.date
-      const city = route.params.city
-      const areal = route.params.areal
-      const url = encodeURI(
-        `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
-      )
-      const response = await $axios.get(url)
-      if (response.data.count === 0) {
-        console.log('empty')
-        console.log(response.data.results[0])
-      }
-      return { predictions: response.data.results[0] }
-    } catch (e) {
-      console.log('e =', e)
-    }
-  },
   data() {
     return {
-      isLoading: true,
       days: getData(this.$route.params.date, 9),
       fish: this.$route.params.fish,
       date: this.$route.params.date,
@@ -83,10 +63,18 @@ export default {
       areal: this.$route.params.areal,
     }
   },
+  computed: {
+    ...mapState('prediction', ['predictions']),
+  },
   created() {
-    setTimeout(() => {
-      this.isLoading = false
-    }, 1500)
+    const fish = this.$route.params.fish
+    const date = this.$route.params.date
+    const city = this.$route.params.city
+    const areal = this.$route.params.areal
+    const url = encodeURI(
+      `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+    )
+    this.getPrediction(url)
   },
   methods: {
     doScroll(event) {
@@ -99,6 +87,7 @@ export default {
         behavior: 'smooth',
       })
     },
+    ...mapActions('prediction', { getPrediction: 'getPrediction' }),
   },
 }
 </script>
