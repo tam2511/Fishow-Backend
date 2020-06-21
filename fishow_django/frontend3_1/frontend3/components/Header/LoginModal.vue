@@ -21,12 +21,17 @@
           </b-field>
         </div>
         <div class="field">
-          <b-field label="Пароль">
+          <b-field
+            label="Пароль"
+            :type="{ 'is-danger': error.password }"
+            :message="error.password"
+          >
             <b-input
-              type="password"
               v-model="login.password"
+              type="password"
               value="iwantmytreasure"
               password-reveal
+              @blur="error.password = null"
             >
             </b-input>
           </b-field>
@@ -102,16 +107,24 @@ export default {
         window.location.reload()
         // }
       } catch (e) {
-        console.log(e.response)
-        if (e.response.data.non_field_errors) {
-          if (
-            e.response.data.non_field_errors[0] ===
-            'Unable to log in with provided credentials.'
-          ) {
+        console.log(e.response.data)
+        if (e.response.data.password) {
+          const response = e.response.data.password[0]
+          console.log('responce = ', response)
+          if (response === 'Unable to log in with provided credentials.') {
             this.error.email = 'Неверно введена почта или пароль'
-          } else {
-            this.error.email = 'Поле не может быть пустым'
+          } else if (response === 'This field may not be blank.') {
             this.error.password = 'Поле не может быть пустым'
+          }
+        }
+        if (e.response.data.non_field_errors) {
+          const response = e.response.data.non_field_errors[0]
+          if (response === 'Unable to log in with provided credentials.') {
+            this.error.email = 'Неверно введена почта или пароль'
+          } else if (response === 'This field may not be blank.') {
+            this.error.email = 'Поле не может быть пустым'
+          } else if (response === 'Must include "email" and "password".') {
+            this.error.email = 'Должна быть указана почта и пароль'
           }
         }
       }
