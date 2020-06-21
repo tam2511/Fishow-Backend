@@ -35,22 +35,6 @@
             >
             </b-input>
           </b-field>
-          <!--          <p class="control has-icons-left">-->
-          <!--            <label for="password">Пароль:</label>-->
-          <!--            <input-->
-          <!--              id="password"-->
-          <!--              v-model="login.password"-->
-          <!--              class="input"-->
-          <!--              type="password"-->
-          <!--              placeholder="Password"-->
-          <!--            />-->
-          <!--            <span class="icon is-small is-left">-->
-          <!--              <i class="fas fa-lock"></i>-->
-          <!--            </span>-->
-          <!--          </p>-->
-          <!--          <p v-if="error.password" class="help is-danger">-->
-          <!--            {{ error.password }}-->
-          <!--          </p>-->
         </div>
         <div class="field is-grouped">
           <div class="control">

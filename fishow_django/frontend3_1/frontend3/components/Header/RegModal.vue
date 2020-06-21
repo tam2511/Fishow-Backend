@@ -5,85 +5,71 @@
       <header class="modal-card-head">Регистрация</header>
       <section class="modal-card-body">
         <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <label for="email">Email:</label>
-            <input
-              id="email"
+          <b-field
+            label="Логин"
+            :type="{
+              'is-danger': error.username,
+              'is-success': !error.username && reg.username,
+            }"
+            :message="error.username"
+          >
+            <b-input
+              v-model="reg.username"
+              value=" "
+              maxlength="30"
+              @blur="error.username = null"
+            ></b-input>
+          </b-field>
+        </div>
+        <div class="field">
+          <b-field
+            label="Почта"
+            :type="{
+              'is-danger': error.email,
+              'is-success': !error.email && reg.email,
+            }"
+            :message="error.email"
+          >
+            <b-input
               v-model="reg.email"
               type="email"
-              class="input"
-              placeholder="Email"
+              value=" "
+              maxlength="30"
               @blur="error.email = null"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
-            </span>
-          </p>
-          <p v-if="error.email" class="help is-danger">
-            {{ error.email }}
-          </p>
+            >
+            </b-input>
+          </b-field>
         </div>
         <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <label for="username">Username:</label>
-            <input
-              id="username"
-              v-model="reg.username"
-              class="input"
-              name="username"
-              type="text"
-              placeholder="Логин"
-              @blur="error.login = null"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
-            </span>
-          </p>
-          <p v-if="error.login" class="help is-danger">
-            {{ error.login }}
-          </p>
-        </div>
-        <div class="field">
-          <p class="control has-icons-left">
-            <label for="password">Пароль:</label>
-            <input
-              id="password"
+          <b-field
+            label="Пароль"
+            :type="{ 'is-danger': error.password1 }"
+            :message="error.password1"
+          >
+            <b-input
               v-model="reg.password1"
-              class="input"
               type="password"
-              placeholder="Пароль"
+              value=" "
+              password-reveal
               @blur="error.password1 = null"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-          <p v-if="error.password1" class="help is-danger">
-            {{ error.password1 }}
-          </p>
+            >
+            </b-input>
+          </b-field>
         </div>
         <div class="field">
-          <p class="control has-icons-left">
-            <input
+          <b-field
+            :type="{ 'is-danger': error.password2 }"
+            :message="error.password2"
+          >
+            <b-input
               v-model="reg.password2"
-              class="input"
               type="password"
-              placeholder="Повторите пароль"
+              value=" "
+              password-reveal
               @blur="error.password2 = null"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-          <p v-if="error.password2" class="help is-danger">
-            {{ error.password2 }}
-          </p>
+            >
+            </b-input>
+          </b-field>
         </div>
         <div class="field is-grouped">
           <div class="control">
@@ -120,7 +106,7 @@ export default {
       },
       error: {
         email: null,
-        login: null,
+        username: null,
         password1: null,
         password2: null,
       },
@@ -134,8 +120,6 @@ export default {
         await this.$axios.$post('/rest-auth/registration/', data)
         this.toggle()
         this.success()
-        // console.log('response register = ', response)
-        // console.log('response register = ', response.response)
       } catch (e) {
         console.log('error = ', e.response)
         if (e.response.data.email) {
