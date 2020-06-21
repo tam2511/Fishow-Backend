@@ -18,7 +18,12 @@
       <nav class="level">
         <div class="level-left">
           <div class="level-item">
-            <a class="button is-info" @click="onSubmit">Отправить</a>
+            <b-button
+              type="is-primary"
+              :disabled="!$auth.user"
+              @click="onSubmit"
+              >Отправить</b-button
+            >
           </div>
         </div>
       </nav>

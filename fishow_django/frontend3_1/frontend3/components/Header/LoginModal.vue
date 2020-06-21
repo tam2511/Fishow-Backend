@@ -5,43 +5,47 @@
       <header class="modal-card-head">Авторизация</header>
       <section class="modal-card-body">
         <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <label for="email">Email:</label>
-            <input
-              id="email"
+          <b-field
+            label="Почта"
+            :type="{ 'is-danger': error.email }"
+            :message="error.email"
+          >
+            <b-input
               v-model="login.email"
-              class="input"
               type="email"
-              placeholder="Email"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
-            </span>
-          </p>
-          <p v-if="error.email" class="help is-danger">
-            {{ error.email }}
-          </p>
+              value=" "
+              maxlength="30"
+              @blur="error.email = null"
+            >
+            </b-input>
+          </b-field>
         </div>
         <div class="field">
-          <p class="control has-icons-left">
-            <label for="password">Пароль:</label>
-            <input
-              id="password"
-              v-model="login.password"
-              class="input"
+          <b-field label="Пароль">
+            <b-input
               type="password"
-              placeholder="Password"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-          <p v-if="error.password" class="help is-danger">
-            {{ error.password }}
-          </p>
+              v-model="login.password"
+              value="iwantmytreasure"
+              password-reveal
+            >
+            </b-input>
+          </b-field>
+          <!--          <p class="control has-icons-left">-->
+          <!--            <label for="password">Пароль:</label>-->
+          <!--            <input-->
+          <!--              id="password"-->
+          <!--              v-model="login.password"-->
+          <!--              class="input"-->
+          <!--              type="password"-->
+          <!--              placeholder="Password"-->
+          <!--            />-->
+          <!--            <span class="icon is-small is-left">-->
+          <!--              <i class="fas fa-lock"></i>-->
+          <!--            </span>-->
+          <!--          </p>-->
+          <!--          <p v-if="error.password" class="help is-danger">-->
+          <!--            {{ error.password }}-->
+          <!--          </p>-->
         </div>
         <div class="field is-grouped">
           <div class="control">
