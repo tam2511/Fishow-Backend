@@ -4,7 +4,30 @@
       <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
+            <div class="like">
+              <!--              <button class="up" @click="toggleLike">-->
+              <!--                <i class="fas fa-chevron-up"></i>-->
+              <!--                -->
+              <!--              </button>-->
+              <b-button
+                outlined
+                icon-pack="fa"
+                icon-right="chevron-up"
+                @click="toggleLike"
+              />
+              <b-button type="is-primary">{{
+                likesCounter - dislikesCounter
+              }}</b-button>
+              <b-button
+                outlined
+                icon-pack="fa"
+                icon-right="chevron-down"
+                @click="toggleDislike"
+              />
+            </div>
+          </div>
+          <div class="media-left">
+            <figure class="image is-32x32">
               <img
                 src="https://bulma.io/images/placeholders/96x96.png"
                 alt="Placeholder image"
@@ -13,14 +36,13 @@
           </div>
           <div class="media-content">
             <p class="title is-4">{{ blog.author }}</p>
-            <p class="subtitle is-6">@{{ blog.author }}</p>
-            <span data-votes-counter>{{ likesCounter - dislikesCounter }}</span>
-            <button class="up" @click="toggleLike">UP</button>
-            <button class="down" @click="toggleDislike">DOWN</button>
+            <!--            <p class="subtitle is-6">@{{ blog.author }}</p>-->
           </div>
-          <b-tag class="blog-category" type="is-primary" size="is-medium">{{
-            blog.category
-          }}</b-tag>
+          <div class="media-right">
+            <b-tag class="blog-category" type="is-primary" size="is-medium">{{
+              blog.category
+            }}</b-tag>
+          </div>
         </div>
         <p class="title">
           <nuxt-link :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
@@ -28,7 +50,11 @@
           </nuxt-link>
         </p>
         <div class="content">
-          <div v-for="p in getResult" :key="p.id">
+          <div
+            v-for="p in getResult"
+            :key="p.id"
+            :class="p.type + '_container'"
+          >
             <div v-if="p.type === 'text'" class="post-corporate-text">
               <p>{{ p.body }}</p>
             </div>
@@ -42,11 +68,10 @@
               allowfullscreen
               name="video"
             ></iframe>
-            <div v-if="p.type === 'image'" class="post-corporate-figure">
+            <figure v-if="p.type === 'image'" class="image is-fullwidth">
               <img :src="p.url" alt="" />
-            </div>
+            </figure>
           </div>
-          <br />
           <div class="column is-one-quarter is-inline-block">
             <time datetime="2016-1-1">{{ blog.created_at }}</time>
           </div>
@@ -54,8 +79,12 @@
             <b-field grouped group-multiline>
               <div class="control">
                 <b-taglist attached>
-                  <b-tag type="is-light">Комментариев</b-tag>
-                  <b-tag type="is-info">{{ blog.comments_count }}</b-tag>
+                  <nuxt-link
+                    :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
+                  >
+                    <b-tag type="is-light">Комментариев</b-tag>
+                    <b-tag type="is-info">{{ blog.comments_count }}</b-tag>
+                  </nuxt-link>
                 </b-taglist>
               </div>
             </b-field>
@@ -140,4 +169,23 @@ export default {
   background-color: #1e347b;
   font-size: 45px;
 }
+.image_container {
+  padding: 20px 0;
+}
+.media {
+  align-items: center;
+  .title {
+    color: #adadad;
+    font-weight: 300;
+  }
+}
+/*.btn {*/
+/*  !*background: none;*!*/
+/*  border: none;*/
+/*}*/
+/*.like {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*  width: 50px;*/
+/*}*/
 </style>

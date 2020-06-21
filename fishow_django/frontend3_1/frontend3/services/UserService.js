@@ -14,4 +14,7 @@ export default {
   getUserData() {
     return apiClient.get('/rest-auth/user/')
   },
+  getAllUsers() {
+    return apiClient.get('/user_all/')
+  },
 }
