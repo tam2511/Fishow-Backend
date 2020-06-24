@@ -1,5 +1,5 @@
 <template>
-  <b-field class="" label="Выберите дату">
+  <b-field class="myClass" label="Выберите дату">
     <b-datepicker
       id="pdata"
       v-model="day"
@@ -105,3 +105,10 @@ export default {
   },
 }
 </script>
+<style scoped lang="scss">
+.myClass {
+  .label {
+    color: #00b3ee !important;
+  }
+}
+</style>

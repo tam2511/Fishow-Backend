@@ -37,7 +37,11 @@ export const convertDataFromServer = (data) => {
 
     keys.forEach((item) => {
         if (!excludeKeys[item]) {
-            newData[item] = JSON.parse(data[item])
+            try {
+                newData[item] = JSON.parse(data[item])
+            } catch (e) {
+                newData[item] = data[item]
+            }
         } else {
             newData[item] = data[item]
         }

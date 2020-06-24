@@ -3,7 +3,7 @@
     .column.is-three-quarters
       FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
       FishowPredictionHeader
-        PDataPicker(:date2="date")
+        DaysPicker(:days="date")
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
       .box(v-if='predictions')
         PProbe(
@@ -11,13 +11,7 @@
           :probMaxProp="predictions['prob_max']"
           :probMinProp="predictions['prob_min']"
         )
-        Temperature(
-          :phenomenon="predictions['phenomenon']"
-          :days="days"
-          :tempMin="predictions['temperature_min']"
-          :tempMean="predictions['temperature_mean']"
-          :tempMax="predictions['temperature_max']"
-          )
+        Temperature(:days="readyData")
         Wind(
           :days="days"
           :windMean="predictions['wind_mean']"
@@ -28,29 +22,39 @@
 </template>
 
 <script>
+// vuex
 import { mapState, mapActions } from 'vuex'
-import FishowPredictionHeader from '@/components/predictPage/FishowPredictionHeader'
-import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
-import FPBreadCrumbs from '@/components/predictPage/FPBreadCrumbs'
-import Wind from '@/components/predictPage/Wind'
+
+// menu items
+import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
+import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
+import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
+import SideBar from '~/components/predictPage/Menu/SideBar'
+import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
+import PDataPicker from '@/components/predictPage/Menu/PDataPicker'
+
+// if empty
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
+
+// results
+import Wind from '@/components/predictPage/Results/Wind/index'
+import Temperature from '~/components/predictPage/Results/Temperature/index'
+import PProbe from '~/components/predictPage/Results/PProbe/index'
+
+// helpers
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
-import ListParams from '~/components/predictPage/ListParams'
-import PDataPicker from '@/components/predictPage/PDataPicker'
-import Temperature from '~/components/predictPage/Temperature'
-import SideBar from '~/components/predictPage/SideBar'
-import PProbe from '~/components/predictPage/PProbe'
+import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 
 export default {
   components: {
     PProbe,
     SideBar,
     Temperature,
-    ListParams,
     FishowPredictionHeader,
     FishSelectPrediction,
     EmptyPrediction,
     PDataPicker,
+    DaysPicker,
     FPBreadCrumbs,
     Wind,
   },
@@ -64,6 +68,9 @@ export default {
     }
   },
   computed: {
+    readyData() {
+      return convertDataFromServer(this.predictions)
+    },
     ...mapState('prediction', ['predictions']),
   },
   created() {
@@ -75,13 +82,6 @@ export default {
       `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
     )
     this.getPrediction(url)
-    setTimeout(() => {
-      console.log('this.result = ', this.predictions)
-      try {
-      } catch (e) {
-        console.error(e)
-      }
-    }, 2000)
   },
   methods: {
     doScroll(event) {
