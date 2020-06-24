@@ -1,26 +1,14 @@
 <template lang="pug">
     .temperature-box.box
       p.title Температура
-      .date.temperature-list
-        .date_item(v-for="day in days" :key="day.id") {{ day }}
-      .temperature-max.temperature-list.temperature-list__end
-        .phenomenon(v-for="phe in dataJSON.phenomen" :key="phe.id")
-          .value
-            weather(:day="phe")
-      .temperature-max.temperature-list.temperature-list__end.temperature-list__p_t
-        .temperature-max_item(v-for="max in dataJSON.maxTemp"
-          :key="max.id" :style="'padding-bottom:' + max * 3 + 'px'")
-          .value +{{ max }}
-      .temperature-min.temperature-list.temperature-list__start.temperature-list__p_b
-        .temperature-min_item(v-for="min in dataJSON.minTemp"
-          :key="min.id" :style="'padding-top:' + (50 - min * 3) + 'px'")
-          .value {{ min >= 0 ? '+' : '' }}{{ min }}
+      one-day
 </template>
 
 <script>
 import Weather from '~/components/predictPage/icon/weather'
+import OneDay from '~/components/predictPage/temp/oneDay'
 export default {
-  components: { Weather },
+  components: { OneDay, Weather },
   props: {
     phenomenon: {
       type: String,
@@ -43,6 +31,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      niceDays: null,
+    }
+  },
   computed: {
     dataJSON() {
       try {
@@ -55,6 +48,34 @@ export default {
       } catch (e) {
         return null
       }
+    },
+  },
+  created() {
+    this.convertDays()
+  },
+  methods: {
+    convertDays() {
+      const whatMonth = {
+        '01': 'Января',
+        '02': 'Февраля',
+        '03': 'Марта',
+        '04': 'Апреля',
+        '05': 'Мая',
+        '06': 'Июня',
+        '07': 'Июля',
+        '08': 'Августа',
+        '09': 'Сентября',
+        '10': 'Октября',
+        '11': 'Ноября',
+        '12': 'Декабря',
+      }
+      const days = this.days
+      const result = []
+      days.forEach((item) => {
+        const arrayFromItem = item.split('/')
+        result.push(arrayFromItem[0] + ' ' + whatMonth[arrayFromItem[1]])
+      })
+      this.niceDays = result
     },
   },
 }
@@ -90,9 +111,11 @@ export default {
   position: relative;
   .value {
     position: absolute;
-    top: -25px;
-    left: 10px;
+    top: -30px;
+    left: 0;
+    text-align: center;
     color: #000;
+    font-size: 20px;
   }
 }
 .temperature-min_item {
@@ -102,9 +125,11 @@ export default {
   position: relative;
   .value {
     position: absolute;
-    bottom: -25px;
-    left: 10px;
-    color: #000;
+    bottom: -30px;
+    left: 0;
+    text-align: center;
+    color: #4e4e4e;
+    font-size: 20px;
   }
 }
 .value {
@@ -115,7 +140,7 @@ export default {
   width: 50px;
 }
 .date_item {
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 300;
+  font-size: 15px;
 }
 </style>

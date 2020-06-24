@@ -75,6 +75,13 @@ export default {
       `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
     )
     this.getPrediction(url)
+    setTimeout(() => {
+      console.log('this.result = ', this.predictions)
+      try {
+      } catch (e) {
+        console.error(e)
+      }
+    }, 2000)
   },
   methods: {
     doScroll(event) {
@@ -88,6 +95,11 @@ export default {
       })
     },
     ...mapActions('prediction', { getPrediction: 'getPrediction' }),
+  },
+  head() {
+    return {
+      title: 'Fishow - Прогноз',
+    }
   },
 }
 </script>
