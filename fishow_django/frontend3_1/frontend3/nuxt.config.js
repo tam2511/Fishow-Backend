@@ -68,23 +68,22 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     'nuxt-vue-multiselect',
+    '@nuxtjs/yandex-metrika',
   ],
-
+  yandexMetrika: {
+    id: '64900765',
+    webvisor: true,
+    // clickmap:true,
+    // useCDN:false,
+    // trackLinks:true,
+    // accurateTrackBounce:true,
+  },
   proxy: {
-    // ** is important here, * probably means it won't go more than one level deep
-    // '/api/**': {
-    //   target:
-    //     process.env.PRODUCTION === 'true'
-    //       ? process.env.HEROKU_BACKEND_API_URL
-    //       : process.env.LOCAL_API_URL,
-    //   pathRewrite: { '^/api': '' }
-    // }
     '/api': {
       target: `http://${confserver.ip}:3000/api`,
       pathRewrite: {
         '^/api': '/',
       },
-      // changeOrigin: true,
     },
   },
   /*
@@ -93,25 +92,8 @@ export default {
    */
   axios: {
     withCredentials: true,
-    // proxy: true,
     baseURL: `http://${confserver.ip}:8000/api`,
   },
-  /*
-   ** Build configuration
-   */
-  // build: {
-  //   plugins: [
-  //     new BundleTracker({
-  //       path: __dirname,
-  //       filename: './assets/webpack-stats.json'
-  //     })
-  //   ],
-  //   /*
-  //
-  //    ** You can extend webpack config here
-  //    */
-  //   extend(config, ctx) {}
-  // }
   transition: {
     name: 'fade',
     mode: 'out-in',

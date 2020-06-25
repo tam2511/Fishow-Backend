@@ -1,9 +1,9 @@
 <template lang="pug">
   .columns
     .column.is-three-quarters
-      PDataPicker(:date2="date")
       FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
       FishowPredictionHeader
+        DaysPicker(:days="date")
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
       .box(v-if='predictions')
         PProbe(
@@ -11,65 +11,55 @@
           :probMaxProp="predictions['prob_max']"
           :probMinProp="predictions['prob_min']"
         )
-        Temperature(
-          :phenomenon="predictions['phenomenon']"
+        Temperature(:days="readyData")
+        Wind(
           :days="days"
-          :tempMin="predictions['temperature_min']"
-          :tempMean="predictions['temperature_mean']"
-          :tempMax="predictions['temperature_max']"
-          )
+          :windMean="predictions['wind_mean']"
+          :windDirection="predictions['wind_direction']")
       EmptyPrediction(v-else)
     .column.fixed-top
       SideBar
-    b-loading(:is-full-page="true" :active.sync="isLoading" :can-cancel="true")
 </template>
 
 <script>
-import FishowPredictionHeader from '@/components/predictPage/FishowPredictionHeader'
-import FishSelectPrediction from '@/components/predictPage/FishSelectPrediction'
-import FPBreadCrumbs from '@/components/predictPage/FPBreadCrumbs'
+// vuex
+import { mapState, mapActions } from 'vuex'
+
+// menu items
+import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
+import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
+import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
+import SideBar from '~/components/predictPage/Menu/SideBar'
+import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
+import PDataPicker from '@/components/predictPage/Menu/PDataPicker'
+
+// if empty
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
+
+// results
+import Wind from '@/components/predictPage/Results/Wind/index'
+import Temperature from '~/components/predictPage/Results/Temperature/index'
+import PProbe from '~/components/predictPage/Results/PProbe/index'
+
+// helpers
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
-import ListParams from '~/components/predictPage/ListParams'
-import PDataPicker from '@/components/predictPage/PDataPicker'
-import Temperature from '~/components/predictPage/Temperature'
-import SideBar from '~/components/predictPage/SideBar'
-import PProbe from '~/components/predictPage/PProbe'
+import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 
 export default {
   components: {
     PProbe,
     SideBar,
     Temperature,
-    ListParams,
     FishowPredictionHeader,
     FishSelectPrediction,
     EmptyPrediction,
     PDataPicker,
+    DaysPicker,
     FPBreadCrumbs,
-  },
-  async asyncData({ $axios, route }) {
-    try {
-      const fish = route.params.fish
-      const date = route.params.date
-      const city = route.params.city
-      const areal = route.params.areal
-      const url = encodeURI(
-        `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
-      )
-      const response = await $axios.get(url)
-      if (response.data.count === 0) {
-        console.log('empty')
-        console.log(response.data.results[0])
-      }
-      return { predictions: response.data.results[0] }
-    } catch (e) {
-      console.log('e =', e)
-    }
+    Wind,
   },
   data() {
     return {
-      isLoading: true,
       days: getData(this.$route.params.date, 9),
       fish: this.$route.params.fish,
       date: this.$route.params.date,
@@ -77,10 +67,21 @@ export default {
       areal: this.$route.params.areal,
     }
   },
+  computed: {
+    readyData() {
+      return convertDataFromServer(this.predictions)
+    },
+    ...mapState('prediction', ['predictions']),
+  },
   created() {
-    setTimeout(() => {
-      this.isLoading = false
-    }, 1500)
+    const fish = this.$route.params.fish
+    const date = this.$route.params.date
+    const city = this.$route.params.city
+    const areal = this.$route.params.areal
+    const url = encodeURI(
+      `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+    )
+    this.getPrediction(url)
   },
   methods: {
     doScroll(event) {
@@ -93,6 +94,12 @@ export default {
         behavior: 'smooth',
       })
     },
+    ...mapActions('prediction', { getPrediction: 'getPrediction' }),
+  },
+  head() {
+    return {
+      title: 'Fishow - Прогноз',
+    }
   },
 }
 </script>

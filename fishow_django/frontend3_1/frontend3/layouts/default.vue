@@ -1,12 +1,14 @@
 <template>
-  <div id="app" :class="'theme ' + theme">
+  <div id="app">
     <!--    <TheHeader />-->
     <HeaderBlock />
     <LoginModal v-if="showStateLogin" />
     <RegModal v-if="showStateReg" />
     <transition name="fade" mode="out-in">
       <section class="section">
-        <nuxt />
+        <div class="container">
+          <nuxt />
+        </div>
       </section>
     </transition>
     <!--    <theLogin />-->
@@ -29,30 +31,17 @@ export default {
     // TheFooter,
     // TheLogin,
   },
-  data() {
-    return {
-      theme: '',
-    }
-  },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
-  },
-  mounted() {
-    this.checkTheme()
-  },
-  methods: {
-    checkTheme() {
-      if (process.browser) {
-        this.theme =
-          localStorage.getItem('theme') || 'theme_color_fishow_default'
-      }
-    },
   },
 }
 </script>
 <style lang="scss">
 .section {
   background-color: #edeff4;
+  @media (max-width: 450px) {
+    padding: 0;
+  }
 }
 a {
   color: #0d0a0a;

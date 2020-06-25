@@ -11,10 +11,7 @@ const apiClient = axios.create({
 })
 
 export default {
-  getUserData() {
-    return apiClient.get('/rest-auth/user/')
-  },
-  getAllUsers() {
-    return apiClient.get('/user_all/')
+  getPredicitons(url) {
+    return apiClient.get(url)
   },
 }

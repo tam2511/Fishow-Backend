@@ -91,4 +91,8 @@ export default {
     width: 100%;
   }
 }
+.date_item {
+  font-weight: 700;
+  font-size: 20px;
+}
 </style>

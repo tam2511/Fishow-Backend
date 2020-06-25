@@ -2,13 +2,13 @@
   <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
     <ul>
       <li>
+        <a> Россия </a>
+      </li>
+      <li>
         <nuxt-link to="/PredictionPage">{{ areal }}</nuxt-link>
       </li>
       <li>
         <nuxt-link to="/PredictionPage">{{ city }}</nuxt-link>
-      </li>
-      <li>
-        <a href="#">{{ fish }}</a>
       </li>
     </ul>
   </nav>

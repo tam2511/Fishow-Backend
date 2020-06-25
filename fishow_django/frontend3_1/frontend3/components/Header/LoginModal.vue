@@ -5,43 +5,36 @@
       <header class="modal-card-head">Авторизация</header>
       <section class="modal-card-body">
         <div class="field">
-          <p class="control has-icons-left has-icons-right">
-            <label for="email">Email:</label>
-            <input
-              id="email"
+          <b-field
+            label="Почта"
+            :type="{ 'is-danger': error.email }"
+            :message="error.email"
+          >
+            <b-input
               v-model="login.email"
-              class="input"
               type="email"
-              placeholder="Email"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
-            </span>
-          </p>
-          <p v-if="error.email" class="help is-danger">
-            {{ error.email }}
-          </p>
+              value=" "
+              maxlength="30"
+              @blur="error.email = null"
+            >
+            </b-input>
+          </b-field>
         </div>
         <div class="field">
-          <p class="control has-icons-left">
-            <label for="password">Пароль:</label>
-            <input
-              id="password"
+          <b-field
+            label="Пароль"
+            :type="{ 'is-danger': error.password }"
+            :message="error.password"
+          >
+            <b-input
               v-model="login.password"
-              class="input"
               type="password"
-              placeholder="Password"
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-          <p v-if="error.password" class="help is-danger">
-            {{ error.password }}
-          </p>
+              value="iwantmytreasure"
+              password-reveal
+              @blur="error.password = null"
+            >
+            </b-input>
+          </b-field>
         </div>
         <div class="field is-grouped">
           <div class="control">
@@ -75,6 +68,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import errors from '~/components/Header/errors'
 export default {
   data() {
     return {
@@ -96,19 +90,14 @@ export default {
         })
         this.toggle()
         window.location.reload()
-        // }
       } catch (e) {
-        console.log(e.response)
+        if (e.response.data.password) {
+          const response = e.response.data.password[0]
+          this.error.password = errors[response]
+        }
         if (e.response.data.non_field_errors) {
-          if (
-            e.response.data.non_field_errors[0] ===
-            'Unable to log in with provided credentials.'
-          ) {
-            this.error.email = 'Неверно введена почта или пароль'
-          } else {
-            this.error.email = 'Поле не может быть пустым'
-            this.error.password = 'Поле не может быть пустым'
-          }
+          const response = e.response.data.non_field_errors[0]
+          this.error.email = errors[response]
         }
       }
     },
