@@ -16,6 +16,7 @@
           :days="days"
           :windMean="predictions['wind_mean']"
           :windDirection="predictions['wind_direction']")
+        test
       EmptyPrediction(v-else)
     .column.fixed-top
       SideBar
@@ -32,6 +33,7 @@ import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
 import SideBar from '~/components/predictPage/Menu/SideBar'
 import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
 import PDataPicker from '@/components/predictPage/Menu/PDataPicker'
+import Test from '~/components/predictPage/chart/test'
 
 // if empty
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
@@ -47,6 +49,7 @@ import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 
 export default {
   components: {
+    Test,
     PProbe,
     SideBar,
     Temperature,
