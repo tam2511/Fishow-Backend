@@ -44,7 +44,6 @@ export default {
     return {
       first: 5,
       data: 0,
-      fishId: null,
       fishList: [
         { title: 'щука', image: '/fish_green/щука.jpg' },
         { title: 'судак', image: '/fish_green/судак.jpg' },

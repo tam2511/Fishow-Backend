@@ -4,7 +4,7 @@ const server = {
 }
 // eslint-disable-next-line no-unused-vars
 const dev = {
-  ip: 'localhost',
+  ip: '127.0.0.1',
 }
 
 export default dev

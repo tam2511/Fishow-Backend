@@ -80,7 +80,7 @@ export default {
   },
   proxy: {
     '/api': {
-      target: `http://${confserver.ip}:3000/api`,
+      target: `http://${confserver.ip}:8000/api`,
       pathRewrite: {
         '^/api': '/',
       },

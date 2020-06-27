@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django_registration.backends.one_step.views import RegistrationView
 from rest_auth.registration.views import VerifyEmailView, RegisterView
+from rest_framework.authtoken import views
 
 from core.views import IndexTemplateView
 from users.forms import CustomUserForm

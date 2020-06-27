@@ -5,7 +5,7 @@
       FishowPredictionHeader
         DaysPicker(:days="date")
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
-      .box(v-if='predictions')
+      .box(v-if='readyData')
         PProbe(
           :days="days"
           :probMaxProp="predictions['prob_max']"
@@ -88,7 +88,6 @@ export default {
       const list = [...document.querySelectorAll('.fishow-prediction li')]
       const newList = []
       list.forEach((item) => newList.push(item.getBoundingClientRect().y))
-      console.log('event = ', event.target.id)
       window.scrollBy({
         top: newList[event.target.id] - 70,
         behavior: 'smooth',

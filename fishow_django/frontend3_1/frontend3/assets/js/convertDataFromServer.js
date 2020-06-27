@@ -1,4 +1,7 @@
 export const convertDataFromServer = (data) => {
+  if (data === null || typeof data !== 'object') {
+    return null
+  }
   const getData = (fromData, days) => {
     const returnData = (a, b) => {
       const predictDate = a.split('-')
