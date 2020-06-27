@@ -24,7 +24,7 @@ SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','localhost','213.139.208.107']
+ALLOWED_HOSTS = ['0.0.0.0','localhost','213.139.208.107','127.0.0.1']
 
 # Application definition
 
@@ -38,8 +38,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders', # new
-    'core', # new
+    'corsheaders',
+    'core',
 
 
     'django.contrib.sites',
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook', # new
 
     'rest_auth',
     'rest_auth.registration',
@@ -57,11 +58,12 @@ INSTALLED_APPS = [
     'users',
     'blogs',
     'prediction',
+    'report', # new
     'django_filters'
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # new
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -71,10 +73,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = [ # new
+CORS_ORIGIN_WHITELIST = [
     'http://0.0.0.0:3000',
-    'http://0.0.0.0:8000',
+    'http://localhost:3000',
+    'http://192.168.0.102:3000',
     'http://213.139.208.107:3000',
+    'http://109.63.168.229:3000',
 ]
 
 ROOT_URLCONF = 'fishow_django.urls'
@@ -105,7 +109,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tam2511_fishow',
         'USER': 'tam2511_fishow',
-        'PASSWORD': '081099ASDasd!',
+        'PASSWORD': '081099ASDasd',
     }
 }
 
@@ -144,7 +148,8 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-
+ACCOUNT_ADAPTER = 'users.views.DefaultAccountAdapterCustom' # new
+URL_FRONT = 'http://192.168.0.102:3000/' # new
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -152,13 +157,13 @@ LOGOUT_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/theoffice/projects/fishow_rest_vue/static/'
 
-MEDIA_URL = '/media/' # new
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # new
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'frontend3_1/frontend3/.nuxt/dist/server/'), # new
-    os.path.join(BASE_DIR, 'frontend3_1/frontend3/.nuxt/dist/client/'), # new
-    os.path.join(BASE_DIR, 'frontend3_1/frontend3/static/'), # new
+    os.path.join(BASE_DIR, 'frontend3_1/frontend3/.nuxt/dist/server/'),
+    os.path.join(BASE_DIR, 'frontend3_1/frontend3/.nuxt/dist/client/'),
+    os.path.join(BASE_DIR, 'frontend3_1/frontend3/static/'),
 )
 # Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"
