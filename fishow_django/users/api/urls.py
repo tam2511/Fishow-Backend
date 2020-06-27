@@ -9,5 +9,5 @@ urlpatterns = [
     path('rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
     path('rest-auth/facebook/connect/', FacebookConnect.as_view(), name='fb_connect'),
     path('socialaccounts/',SocialAccountListView.as_view(),name='social_account_list'),
-    path(r'socialaccounts/(?P<pk>\d+)/disconnect/',SocialAccountDisconnectView.as_view(),name='social_account_disconnect')
+    path('socialaccounts/(?P<pk>\d+)/disconnect/',SocialAccountDisconnectView.as_view(),name='social_account_disconnect')
 ]
