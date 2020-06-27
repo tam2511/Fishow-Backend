@@ -1,7 +1,7 @@
 <template>
   <div class="data-pick">
     <div class="buttons">
-      <b-button icon-right="arrow-left" pack="fas" @mouseenter="moveLeft" />
+      <b-button icon-right="arrow-left" pack="fas" @click="moveLeft" />
       <div class="carousel-slides">
         <div class="slides" :style="'margin-left:' + marginLeft + 'px'">
           <b-button v-for="day in tenDays" :key="day.id" type="is-link">
@@ -9,7 +9,12 @@
           </b-button>
         </div>
       </div>
-      <b-button icon-right="arrow-right" pack="fas" @mouseenter="moveRight" />
+      <b-button
+        icon-right="arrow-right"
+        pack="fas"
+        @click="moveRight"
+        @keypress.right="moveRight"
+      />
     </div>
   </div>
 </template>
@@ -30,10 +35,12 @@ export default {
   },
   methods: {
     moveRight() {
-      this.marginLeft -= 100
+      if (this.marginLeft > -350) this.marginLeft -= 50
     },
     moveLeft() {
-      this.marginLeft += 100
+      if (this.marginLeft < 0) {
+        this.marginLeft += 50
+      }
     },
   },
   computed: {
@@ -57,6 +64,9 @@ export default {
   overflow: hidden;
   display: flex;
   flex-flow: row;
+  @media (max-width: 450px) {
+    max-width: 230px;
+  }
 }
 .slides {
   width: 100%;

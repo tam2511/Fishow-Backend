@@ -12,7 +12,7 @@
         :key="min.id" :style="'padding-top:' + (50 - min * 0) + 'px'")
         .value {{ (min * 100).toFixed() }} %
 </template>
-
+pi
 <script>
 export default {
   props: {
