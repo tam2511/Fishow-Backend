@@ -1,5 +1,5 @@
 <template lang="pug">
-  .temperature-box.box
+  .prediction-box.box
     p.title Прогноз клева
     .date.temperature-list
       .date_item(v-for="day in days" :key="day.id") {{ day }}

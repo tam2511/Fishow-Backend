@@ -1,18 +1,18 @@
 <template>
   <div class="card box">
     <b-menu>
-      <b-menu-list label="Главная">
-        <b-menu-item
-          label="Главная странциа"
-          icon="home"
-          tag="nuxt-link"
-          to="/"
-        ></b-menu-item>
-      </b-menu-list>
       <b-menu-list label="Меню">
-        <b-menu-item icon="information-outline" label="Город"></b-menu-item>
-        <b-menu-item icon="information-outline" label="Рыба"></b-menu-item>
-        <b-menu-item>
+        <b-menu-item
+          icon="information-outline"
+          label="В начало"
+          @click="doScroll('.breadcrumb')"
+        ></b-menu-item>
+        <b-menu-item
+          icon="information-outline"
+          label="Рыба"
+          @click="doScroll('.fish')"
+        ></b-menu-item>
+        <b-menu-item v-if="predictions">
           <template slot="label" slot-scope="props">
             Прогноз
             <b-icon
@@ -21,9 +21,13 @@
             >
             </b-icon>
           </template>
-          <b-menu-item icon="account" label="Клев"></b-menu-item>
+          <b-menu-item
+            icon="account"
+            label="Клев"
+            @click="doScroll('predic')"
+          ></b-menu-item>
         </b-menu-item>
-        <b-menu-item icon="settings" :active="isActive" expanded>
+        <b-menu-item v-if="predictions" icon="settings" :active="isActive">
           <template slot="label" slot-scope="props">
             Погода
             <b-icon
@@ -31,27 +35,24 @@
               :icon="props.expanded ? 'menu-down' : 'menu-up'"
             ></b-icon>
           </template>
-          <b-menu-item icon="account" label="Температура"></b-menu-item>
-          <b-menu-item icon="cellphone-link">
-            <template slot="label">
-              Осадки
-            </template>
-          </b-menu-item>
+          <b-menu-item
+            icon="account"
+            label="Температура"
+            @click="doScroll('temp')"
+          ></b-menu-item>
+          <b-menu-item
+            icon="cellphone-link"
+            label="Ветер"
+            @click="doScroll('wind')"
+          ></b-menu-item>
         </b-menu-item>
-        <b-menu-item icon="account" label="My Account">
-          <b-menu-item label="Account data"></b-menu-item>
-          <b-menu-item label="Addresses"></b-menu-item>
-        </b-menu-item>
-      </b-menu-list>
-      сть
-      <b-menu-list label="Actions">
-        <b-menu-item label="Logout"></b-menu-item>
       </b-menu-list>
     </b-menu>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -60,8 +61,36 @@ export default {
       isActive: false,
     }
   },
+  computed: {
+    ...mapState('prediction', ['predictions']),
+  },
   created() {},
-  methods: {},
+  methods: {
+    scroll() {
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    },
+    doScroll(value) {
+      console.log('value = ', value)
+      let item
+
+      if (value === '.breadcrumb' || value === '.fish') {
+        item = document.querySelector(value).getBoundingClientRect().y
+      } else {
+        item = document
+          .querySelector(`.result-container > [class*=${value}]`)
+          .getBoundingClientRect().y
+      }
+      console.log('scroll')
+      window.scrollBy({
+        top: item - 70,
+        behavior: 'smooth',
+      })
+    },
+  },
 }
 </script>
 

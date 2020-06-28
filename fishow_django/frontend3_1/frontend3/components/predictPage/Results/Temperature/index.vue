@@ -2,16 +2,18 @@
     .temperature-box.box
       p.title Температура
       .columns
-        .column(v-for="day in days" :key="day.id")
+        .column(v-for="day in readyData" :key="day.id")
           TempOneDay(:day="day")
+      slot
 </template>
 
 <script>
 import TempOneDay from '@/components/predictPage/Results/Temperature/OneDay/index'
+// import getCalendarDay from '~/assets/js/getCalendarDay'
 export default {
   components: { TempOneDay },
   props: {
-    days: {
+    readyData: {
       type: Array,
       required: true,
     },
@@ -21,31 +23,7 @@ export default {
       niceDays: null,
     }
   },
-  methods: {
-    // convertDays() {
-    //   const whatMonth = {
-    //     '01': 'Января',
-    //     '02': 'Февраля',
-    //     '03': 'Марта',
-    //     '04': 'Апреля',
-    //     '05': 'Мая',
-    //     '06': 'Июня',
-    //     '07': 'Июля',
-    //     '08': 'Августа',
-    //     '09': 'Сентября',
-    //     '10': 'Октября',
-    //     '11': 'Ноября',
-    //     '12': 'Декабря',
-    //   }
-    //   const days = this.days
-    //   const result = []
-    //   days.forEach((item) => {
-    //     const arrayFromItem = item.split('/')
-    //     result.push(arrayFromItem[0] + ' ' + whatMonth[arrayFromItem[1]])
-    //   })
-    //   this.niceDays = result
-    // },
-  },
+  computed: {},
 }
 </script>
 

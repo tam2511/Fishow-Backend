@@ -4,17 +4,6 @@
     <figure class="image is-48x48">
       <img :src="image" alt="" :title="day.phenomenon" />
     </figure>
-    <hr />
-    <div class="chart">
-      <p
-        class="temperature-max"
-        :style="'padding-bottom:' + day.temperature_max * 3 + 'px'"
-      >
-        {{ day.temperature_max }}
-      </p>
-      <p class="temperature-min">{{ day.temperature_min }}</p>
-    </div>
-
     <!--    {{ day.phenomenon }}-->
   </div>
 </template>

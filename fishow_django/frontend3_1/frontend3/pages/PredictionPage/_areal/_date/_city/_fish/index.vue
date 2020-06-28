@@ -5,18 +5,22 @@
       FishowPredictionHeader
         DaysPicker(:days="date")
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
-      .box(v-if='readyData')
+      .box.result-container(v-if='readyData')
         PProbe(
           :days="days"
           :probMaxProp="predictions['prob_max']"
           :probMinProp="predictions['prob_min']"
         )
-        Temperature(:days="readyData")
+        Temperature(:readyData="readyData")
+          ChartTemperature(
+            :days="days"
+            :tempMax="predictions['temperature_max']"
+            :tempMin="predictions['temperature_min']"
+          )
         Wind(
           :days="days"
           :windMean="predictions['wind_mean']"
           :windDirection="predictions['wind_direction']")
-        test
       EmptyPrediction(v-else)
     .column.fixed-top
       SideBar
@@ -33,7 +37,6 @@ import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
 import SideBar from '~/components/predictPage/Menu/SideBar'
 import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
 import PDataPicker from '@/components/predictPage/Menu/PDataPicker'
-import Test from '~/components/predictPage/chart/test'
 
 // if empty
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
@@ -46,10 +49,11 @@ import PProbe from '~/components/predictPage/Results/PProbe/index'
 // helpers
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
+import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
 
 export default {
   components: {
-    Test,
+    ChartTemperature,
     PProbe,
     SideBar,
     Temperature,
@@ -87,15 +91,6 @@ export default {
     this.getPrediction(url)
   },
   methods: {
-    doScroll(event) {
-      const list = [...document.querySelectorAll('.fishow-prediction li')]
-      const newList = []
-      list.forEach((item) => newList.push(item.getBoundingClientRect().y))
-      window.scrollBy({
-        top: newList[event.target.id] - 70,
-        behavior: 'smooth',
-      })
-    },
     ...mapActions('prediction', { getPrediction: 'getPrediction' }),
   },
   head() {

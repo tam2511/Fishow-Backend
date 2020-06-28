@@ -1,5 +1,5 @@
 <template lang="pug">
-  .temperature-box.box
+  .wind-box.box
     p.title Ветер
     .date.temperature-list
       .date_item(v-for="day in days" :key="day.id") {{ day }}
