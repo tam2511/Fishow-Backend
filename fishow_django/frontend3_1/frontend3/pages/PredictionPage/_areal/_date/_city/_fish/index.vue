@@ -17,10 +17,8 @@
             :tempMax="predictions['temperature_max']"
             :tempMin="predictions['temperature_min']"
           )
-        Wind(
-          :days="days"
-          :windMean="predictions['wind_mean']"
-          :windDirection="predictions['wind_direction']")
+        Wind(:readyData="readyData"
+          :days="days")
       EmptyPrediction(v-else)
     .column.fixed-top
       SideBar

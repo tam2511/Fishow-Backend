@@ -78,8 +78,8 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: 5,
-          max: 30,
+          min: JSON.parse(this.tempMin).sort()[0] - 2,
+          max: JSON.parse(this.tempMax).sort()[JSON.parse(this.tempMin).length],
         },
         legend: {
           position: 'top',

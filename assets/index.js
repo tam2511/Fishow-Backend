@@ -36,7 +36,7 @@
 // console.log('newResult = ', newResult)
 
 
-let array = "[1.875, 2.125, 4.75, 1.375, 4.125, 3.625, 1.375, 2.875, 4.75]";
-array = array.substr(1, array.length - 2).split(', ')
+let array = "[1.875, 2.125, 4.75, 1.375, 4.125, 3.625, 1.375, 2.875, 4.75, 0.23]";
+// array = array.substr(1, array.length - 2).split(', ')
 
-console.log('array = ', array)
+console.log('array = ', JSON.parse(array).sort()[0])

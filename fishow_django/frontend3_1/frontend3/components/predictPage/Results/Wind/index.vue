@@ -1,55 +1,36 @@
 <template lang="pug">
   .wind-box.box
     p.title Ветер
-    .date.temperature-list
-      .date_item(v-for="day in days" :key="day.id") {{ day }}
-    .temperature-max.temperature-list.temperature-list__end
-      .phenomenon(v-for="direction in dataJSON.direction" :key="direction.id")
-        .value
-          span {{direction}}
-          WindDir(:dir="direction")
-    .temperature-max.temperature-list.temperature-list__end.temperature-list__p_t
-      .temperature-max_item(v-for="max in dataJSON.wind"
-        :key="max.id")
-        .value {{ Number(max).toFixed() }}
+    .columns
+      .column(v-for="day in readyData" :key="day.id")
+        WindOneDay(:day="day" )
+    slot
 </template>
 
 <script>
-import WindDir from '@/components/predictPage/icon/windDir'
+import WindOneDay from '@/components/predictPage/Results/Wind/OneDay/index'
+import getCalendarDay from '~/assets/js/getCalendarDay'
+
 export default {
-  components: { WindDir },
+  components: { WindOneDay },
   props: {
+    readyData: {
+      type: Array,
+      required: true,
+    },
     days: {
       type: Array,
       required: true,
     },
-    windMean: {
-      type: String,
-      required: true,
-    },
-    windDirection: {
-      type: String,
-      required: true,
-    },
+  },
+  data() {
+    return {
+      niceDays: null,
+    }
   },
   computed: {
-    dataJSON() {
-      try {
-        return {
-          wind: this.windMean.substr(1, this.windMean.length - 2).split(', '),
-          direction: this.windDirection
-            .substr(1, this.windDirection.length - 2)
-            .split(', '),
-        }
-      } catch (e) {
-        console.log('this.wind = ', this.windMean)
-        console.log('this.wind = ', this.windDirection)
-        console.log('error = ', e)
-        return {
-          wind: 'null',
-          direction: 'null',
-        }
-      }
+    calendarDay() {
+      return getCalendarDay(this.days)
     },
   },
 }
