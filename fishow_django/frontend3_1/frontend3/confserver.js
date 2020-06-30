@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const server = {
-  ip: '213.139.208.107',
+  ip: 'fishow.ru',
 }
 // eslint-disable-next-line no-unused-vars
 const dev = {
