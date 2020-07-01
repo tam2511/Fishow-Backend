@@ -4,7 +4,7 @@
       <p class="date-first">{{ dayCalendar }}</p>
       <p class="date-second">{{ normDay }}</p>
     </div>
-    <div class="block">{{ Math.round(day.wind_mean) }}</div>
+    <div class="block" :style="colorWind">{{ Math.round(day.wind_mean) }}</div>
     <!--    {{ color }}-->
     <div class="block">
       <b-icon
@@ -15,7 +15,7 @@
       />
     </div>
     <div class="block">{{ wind }}</div>
-    <div class="block gust" :style="color">
+    <div class="block gust" :style="colorGust">
       {{ day.gust_max }}
     </div>
   </div>
@@ -56,13 +56,33 @@ export default {
       }
       return `transform: rotate(${deg[this.wind]}deg)`
     },
-    color() {
+    colorWind() {
       let result = 'null'
       const colors = [
-        [0, '#c0f400'],
-        [5, '#f7ff00'],
+        [1, 'rgba(0,33,244,0.05)'],
+        [2, 'rgba(0,33,244,0.10)'],
+        [3, 'rgba(0,33,244,0.15)'],
+        [4, 'rgba(247,255,0,0.64)'],
+        [5, '#ffe800'],
+        [6, '#ffa700'],
+        [7, '#ff8c00'],
+        [8, '#ff3500'],
+        [9, '#ff1300'],
+      ]
+      for (let i = 0; i < colors.length; i++) {
+        if (this.day.wind_mean > colors[i][0]) {
+          result = colors[i][1]
+        }
+      }
+      return 'background-color:' + result
+    },
+    colorGust() {
+      let result = 'null'
+      const colors = [
+        [5, 'rgba(0,33,244,0.19)'],
+        [6, 'rgba(247,255,0,0.64)'],
         [7, '#ffe800'],
-        [10, '#ffa700'],
+        [8, '#ffa700'],
         [13, '#ff8c00'],
         [15, '#ff3500'],
         [20, '#ff1300'],
