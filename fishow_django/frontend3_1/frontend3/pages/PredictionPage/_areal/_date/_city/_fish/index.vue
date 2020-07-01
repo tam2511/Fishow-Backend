@@ -15,6 +15,7 @@
           ChartTemperature(
             :days="days"
             :tempMax="predictions['temperature_max']"
+            :tempMean="predictions['temperature_mean']"
             :tempMin="predictions['temperature_min']"
           )
         Wind(:readyData="readyData"

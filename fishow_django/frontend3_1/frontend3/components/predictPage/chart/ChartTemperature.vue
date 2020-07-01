@@ -24,6 +24,10 @@ export default {
       type: String,
       required: true,
     },
+    tempMean: {
+      type: String,
+      required: true,
+    },
     tempMin: {
       type: String,
       required: true,
@@ -33,11 +37,15 @@ export default {
     return {
       series: [
         {
-          name: 'Максимальная среднесуточная температура',
+          name: 'Максимальная суточная температура',
           data: JSON.parse(this.tempMax),
         },
         {
-          name: 'Минимальная среднесуточная температура',
+          name: 'Максимальная суточная температура',
+          data: JSON.parse(this.tempMean),
+        },
+        {
+          name: 'Минимальная суточная температура',
           data: JSON.parse(this.tempMin),
         },
       ],
@@ -62,7 +70,7 @@ export default {
           enabled: true,
         },
         stroke: {
-          // curve: 'smooth',
+          curve: 'smooth',
         },
         grid: {
           borderColor: '#e7e7e7',
@@ -83,6 +91,7 @@ export default {
         },
         legend: {
           position: 'top',
+          show: true,
           horizontalAlign: 'right',
           floating: false,
           offsetY: -25,

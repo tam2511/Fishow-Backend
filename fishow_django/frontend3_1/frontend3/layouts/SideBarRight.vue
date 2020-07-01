@@ -12,7 +12,7 @@
             <div class="tile is-vertical is-4">
               <div>
                 <article class="tile is-parent is-vertical">
-                  <p class="title">Горячие блоги</p>
+                  <p class="title">Популярные блоги</p>
                   <div class="tile is-child">
                     <HotPostMinimal
                       v-for="blog in minPost"
