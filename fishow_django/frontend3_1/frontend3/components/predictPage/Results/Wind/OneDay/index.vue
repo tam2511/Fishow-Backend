@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="block">
-      <p>{{ normDay }}</p>
+      <p class="date-first">{{ dayCalendar }}</p>
+      <p class="date-second">{{ normDay }}</p>
     </div>
     <div class="block">{{ Math.round(day.wind_mean) }}</div>
     <!--    {{ color }}-->
@@ -14,7 +15,7 @@
       />
     </div>
     <div class="block">{{ wind }}</div>
-    <div class="block gust" :style="'background-color:' + color">
+    <div class="block gust" :style="color">
       {{ day.gust_max }}
     </div>
   </div>
@@ -22,13 +23,18 @@
 
 <script>
 import helper from '~/assets/js/helper'
-
+import convertFromObjectToDate from '~/assets/js/convertFromObjectToDate'
 export default {
   props: {
     day: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      colorOfValue: null,
+    }
   },
   computed: {
     normDay() {
@@ -39,62 +45,44 @@ export default {
     },
     direction() {
       const deg = {
-        С: 0,
-        СВ: 45,
-        В: 90,
-        ЮВ: 135,
-        Ю: 180,
-        ЮЗ: 225,
-        З: 270,
-        СЗ: 315,
+        С: -45,
+        СВ: 0,
+        В: 45,
+        ЮВ: 90,
+        Ю: 135,
+        ЮЗ: 180,
+        З: 225,
+        СЗ: 270,
       }
       return `transform: rotate(${deg[this.wind]}deg)`
     },
     color() {
-      const percentColors = [
-        { pct: 0, color: { r: '0xff', g: '0x00', b: 0 } },
-        { pct: 50, color: { r: '0xff', g: '0xff', b: 0 } },
-        { pct: 100, color: { r: '0x00', g: '0xff', b: 0 } },
+      let result = 'null'
+      const colors = [
+        [0, '#c0f400'],
+        [5, '#f7ff00'],
+        [7, '#ffe800'],
+        [10, '#ffa700'],
+        [13, '#ff8c00'],
+        [15, '#ff3500'],
+        [20, '#ff1300'],
       ]
-      let result = null
-      const getColorForPercentage = function (pct) {
-        for (let i = 1; i < percentColors.length - 1; i++) {
-          if (pct < percentColors[i].pct) {
-            const lower = percentColors[i - 1]
-            const upper = percentColors[i]
-            const range = upper.pct - lower.pct
-            const rangePct = (pct - lower.pct) / range
-            const pctLower = 1 - rangePct
-            const pctUpper = rangePct
-            const color = {
-              r: Math.floor(
-                lower.color.r * pctLower + upper.color.r * pctUpper
-              ),
-              g: Math.floor(
-                lower.color.g * pctLower + upper.color.g * pctUpper
-              ),
-              b: Math.floor(
-                lower.color.b * pctLower + upper.color.b * pctUpper
-              ),
-            }
-            result = 'rgb(' + [color.r, color.g, color.b].join(',') + ')'
-            break
-          }
+      for (let i = 0; i < colors.length; i++) {
+        if (this.day.gust_max > colors[i][0]) {
+          result = colors[i][1]
         }
-
-        // or output as hex if preferred
       }
-      getColorForPercentage(this.day.wind_mean)
-      console.log('result = ', result)
-
-      return result
+      return 'background-color:' + result
+    },
+    dayCalendar() {
+      return convertFromObjectToDate(this.day)
     },
   },
   mounted() {},
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .chart {
   display: flex;
   flex-flow: column;
@@ -103,16 +91,14 @@ export default {
 .block {
   text-align: center;
 }
-.gust {
-  background-color: #0d0a0a;
+.date {
+  &-fisrt {
+  }
+  &-second {
+    color: #a8a8a8;
+  }
 }
-html,
-body {
-  width: 100%;
-  background-color: #333;
-  margin: 0;
-  position: relative;
-  font: 1em sans-serif;
+.gust {
 }
 .moon {
   width: 200px;

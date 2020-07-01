@@ -2,7 +2,7 @@
     .temperature-box.box
       p.title Температура
       .columns
-        .column(v-for="day in readyData" :key="day.id")
+        .column(v-for="day in readyData" :key="day.idc")
           TempOneDay(:day="day")
       slot
 </template>
