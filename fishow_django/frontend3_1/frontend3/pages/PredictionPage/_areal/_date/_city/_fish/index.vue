@@ -7,10 +7,13 @@
       FishSelectPrediction(:areal="areal" :city="city" :date="date")
       .box.result-container(v-if='readyData')
         PProbe(
-          :days="days"
-          :probMaxProp="predictions['prob_max']"
-          :probMinProp="predictions['prob_min']"
+          :readyData="readyData"
         )
+          one-day-probe(
+            days="days"
+            :probMax="predictions['prob_max']"
+            :probMin="predictions['prob_min']"
+          )
         Temperature(:readyData="readyData")
           ChartTemperature(
             :days="days"
@@ -49,9 +52,11 @@ import PProbe from '~/components/predictPage/Results/PProbe/index'
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
+import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
 
 export default {
   components: {
+    OneDayProbe,
     ChartTemperature,
     PProbe,
     SideBar,

@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div class="block">
-      <p class="date-first">{{ dayCalendar }}</p>
-      <p class="date-second">{{ normDay }}</p>
-    </div>
+    <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
     <div class="block" :style="colorWind">{{ Math.round(day.wind_mean) }}</div>
     <!--    {{ color }}-->
     <div class="block">
@@ -24,7 +21,9 @@
 <script>
 import helper from '~/assets/js/helper'
 import convertFromObjectToDate from '~/assets/js/convertFromObjectToDate'
+import DayBlock from '~/components/predictPage/helpers/dayBlock'
 export default {
+  components: { DayBlock },
   props: {
     day: {
       type: Object,

@@ -19,9 +19,7 @@ export default {
     },
   },
   data() {
-    return {
-      niceDays: null,
-    }
+    return {}
   },
   computed: {},
 }
