@@ -70,6 +70,7 @@ export default {
     '@nuxtjs/proxy',
     'nuxt-vue-multiselect',
     '@nuxtjs/yandex-metrika',
+    '@nuxtjs/robots',
   ],
   yandexMetrika: {
     id: '64900765',
@@ -95,6 +96,16 @@ export default {
     withCredentials: true,
     baseURL: `http://${confserver.ip}:8000/api`,
   },
+  robots: [
+    {
+      UserAgent: 'Googlebot',
+      Disallow: ['/api', '/user'],
+    },
+    {
+      UserAgent: '*',
+      Disallow: '/api',
+    },
+  ],
   transition: {
     name: 'fade',
     mode: 'out-in',
