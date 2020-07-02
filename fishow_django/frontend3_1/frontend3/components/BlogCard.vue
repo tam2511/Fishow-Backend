@@ -114,6 +114,7 @@ export default {
       required: true,
     },
   },
+  transitions: 'bounce',
   data() {
     return {
       result: {},
