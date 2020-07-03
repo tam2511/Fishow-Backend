@@ -12,7 +12,7 @@
       </section>
     </transition>
     <!--    <theLogin />-->
-    <!--    <TheFooter />-->
+    <TheFooter />
   </div>
 </template>
 <script>
@@ -20,7 +20,7 @@ import { mapState } from 'vuex'
 import LoginModal from '@/components/Header/LoginModal'
 import RegModal from '@/components/Header/RegModal'
 import HeaderBlock from '@/components/HeaderBlock'
-// import TheFooter from '~/components/TheFooter'
+import TheFooter from '~/components/TheFooter'
 
 export default {
   components: {
@@ -28,7 +28,7 @@ export default {
     HeaderBlock,
     LoginModal,
     RegModal,
-    // TheFooter,
+    TheFooter,
     // TheLogin,
   },
   computed: {

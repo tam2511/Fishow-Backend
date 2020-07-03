@@ -15,6 +15,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'yandex-verification', content: 'cb7a2c560ce5c37b' },
       {
         hid: 'description',
         name: 'description',
@@ -22,7 +23,7 @@ export default {
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon2.ico' },
       {
         rel: 'stylesheet',
         href:
@@ -69,6 +70,7 @@ export default {
     '@nuxtjs/proxy',
     'nuxt-vue-multiselect',
     '@nuxtjs/yandex-metrika',
+    '@nuxtjs/robots',
   ],
   yandexMetrika: {
     id: '64900765',
@@ -80,7 +82,7 @@ export default {
   },
   proxy: {
     '/api': {
-      target: `http://${confserver.ip}:3000/api`,
+      target: `http://${confserver.ip}:8000/api`,
       pathRewrite: {
         '^/api': '/',
       },
@@ -94,6 +96,16 @@ export default {
     withCredentials: true,
     baseURL: `http://${confserver.ip}:8000/api`,
   },
+  robots: [
+    {
+      UserAgent: 'Googlebot',
+      Disallow: ['/api', '/user'],
+    },
+    {
+      UserAgent: '*',
+      Disallow: '/api',
+    },
+  ],
   transition: {
     name: 'fade',
     mode: 'out-in',

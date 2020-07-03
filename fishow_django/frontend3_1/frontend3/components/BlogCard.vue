@@ -3,6 +3,28 @@
     <div class="card">
       <div class="card-content">
         <div class="media">
+          <div class="media-content">
+            <div class="flex">
+              <div class="is-flex">
+                <figure class="image is-32x32">
+                  <img
+                    src="https://bulma.io/images/placeholders/96x96.png"
+                    alt="Placeholder image"
+                  />
+                </figure>
+
+                <p class="title is-4">{{ blog.author }}</p>
+              </div>
+            </div>
+            <!--            <p class="subtitle is-6">@{{ blog.author }}</p>-->
+          </div>
+          <div class="media-right">
+            <b-tag class="blog-category" type="is-primary" size="is-medium">{{
+              blog.category
+            }}</b-tag>
+          </div>
+        </div>
+        <div class="media">
           <div class="media-left">
             <div class="like">
               <!--              <button class="up" @click="toggleLike">-->
@@ -28,29 +50,16 @@
               />
             </div>
           </div>
-          <div class="media-left">
-            <figure class="image is-32x32">
-              <img
-                src="https://bulma.io/images/placeholders/96x96.png"
-                alt="Placeholder image"
-              />
-            </figure>
-          </div>
           <div class="media-content">
-            <p class="title is-4">{{ blog.author }}</p>
-            <!--            <p class="subtitle is-6">@{{ blog.author }}</p>-->
-          </div>
-          <div class="media-right">
-            <b-tag class="blog-category" type="is-primary" size="is-medium">{{
-              blog.category
-            }}</b-tag>
+            <p class="title">
+              <nuxt-link
+                :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
+                >{{ blog.title }}
+              </nuxt-link>
+            </p>
           </div>
         </div>
-        <p class="title">
-          <nuxt-link :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
-            >{{ blog.title }}
-          </nuxt-link>
-        </p>
+
         <div class="content">
           <div
             v-for="p in getResult"
@@ -105,6 +114,7 @@ export default {
       required: true,
     },
   },
+  transitions: 'bounce',
   data() {
     return {
       result: {},
@@ -179,15 +189,27 @@ export default {
   .title {
     color: #adadad;
     font-weight: 300;
+    @media screen and (max-width: 450px) {
+      font-size: 20px;
+    }
   }
 }
-/*.btn {*/
-/*  !*background: none;*!*/
-/*  border: none;*/
-/*}*/
-/*.like {*/
-/*  display: flex;*/
-/*  flex-wrap: wrap;*/
-/*  width: 50px;*/
-/*}*/
+.like {
+  display: flex;
+  flex-flow: column;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 450px) {
+    flex-flow: column;
+    align-items: flex-start;
+    figure {
+      margin: 0;
+    }
+  }
+  figure {
+    margin: 0 20px;
+  }
+}
 </style>

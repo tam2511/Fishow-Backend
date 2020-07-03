@@ -1,7 +1,7 @@
 <template>
   <div class="card box">
     <div class="columns">
-      <div class="column">
+      <div class="column is-two-thirds">
         <slot></slot>
       </div>
       <div class="column">

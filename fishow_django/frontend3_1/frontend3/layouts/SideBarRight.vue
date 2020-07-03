@@ -12,7 +12,7 @@
             <div class="tile is-vertical is-4">
               <div>
                 <article class="tile is-parent is-vertical">
-                  <p class="title">Горячие блоги</p>
+                  <p class="title">Популярные блоги</p>
                   <div class="tile is-child">
                     <HotPostMinimal
                       v-for="blog in minPost"
@@ -85,7 +85,7 @@ $primary: #21807d;
 .section {
   background-color: #edeff4;
   @media (max-width: 450px) {
-    padding: 0;
+    padding: 10px;
   }
 }
 a {

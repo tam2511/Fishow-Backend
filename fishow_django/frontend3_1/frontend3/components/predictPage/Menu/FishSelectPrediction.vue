@@ -4,7 +4,7 @@
     v-model="fishId"
     :data="fishList"
     :items-to-show="countFish"
-    class="box"
+    class="box fish"
   >
     <template slot="item" slot-scope="props">
       <div class="card">
