@@ -15,11 +15,10 @@ from django.contrib.auth.decorators import login_required
 
 
 class ReportView(viewsets.ModelViewSet):
-        queryset = Report.objects.all()
+        queryset = Report.objects.all().order_by("-created_at")
+        lookup_field = "slug"
         serializer_class = ReportSerializer
-        permission_classes = [DjangoObjectPermissionsOrAnonReadOnly]
-        #filter_backends = [DjangoFilterBackend]
-        filterset_fields = ['areal','time','date','city','fish']
+        permission_classes = [IsAuthorOrReadOnly]
 
         def perform_create(self, serializer):
                     if not self.request.user.is_anonymous:
@@ -29,7 +28,7 @@ class ReportView(viewsets.ModelViewSet):
                     obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
                     print(self.request.user)
                     if self.request.user.is_authenticated:
-                            blog=get_object_or_404(Report, pk=obj.id)
+                            report=get_object_or_404(Report, pk=obj.id)
                             user = self.request.user
                             print(user)
                             if user not in report.views.all():

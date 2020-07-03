@@ -22,8 +22,8 @@ class Prediction(models.Model):
     fish = models.TextField()
     features = models.TextField()
 
-    def __str__(self):
-            return self.content
+#     def __str__(self):
+#             return self
 
 class Predictionten(models.Model):
     temperature_min = models.TextField()
@@ -46,5 +46,5 @@ class Predictionten(models.Model):
     prob_min = models.TextField()
     prob_max = models.TextField()
 
-    def __str__(self):
-            return self.content
+#     def __str__(self):
+#             return self.content
