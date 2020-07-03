@@ -21,6 +21,7 @@ class Prediction(models.Model):
     prob = models.FloatField()
     fish = models.TextField()
     features = models.TextField()
+    water_temperature = models.NullBooleanField(null=True, default=False)
 
 #     def __str__(self):
 #             return self
@@ -45,6 +46,7 @@ class Predictionten(models.Model):
     fish = models.TextField()
     prob_min = models.TextField()
     prob_max = models.TextField()
+    water_temperature = models.TextField()
 
 #     def __str__(self):
 #             return self.content
