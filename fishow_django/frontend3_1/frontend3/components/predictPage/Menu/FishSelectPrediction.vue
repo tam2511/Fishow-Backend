@@ -1,26 +1,51 @@
 <template>
-  <b-carousel-list
-    id="experience"
-    v-model="fishId"
-    :data="fishList"
-    :items-to-show="countFish"
-    class="box fish"
-  >
-    <template slot="item" slot-scope="props">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-5by4">
-            <a @click="info(props.index)"> <img :src="props.list.image" /></a>
-          </figure>
-        </div>
-        <div class="card-content">
-          <div class="content">
-            <p class="title is-6">{{ props.list.title }}</p>
+  <div class="box fish">
+    <div class="columns">
+      <div class="column is-two-thirds">
+        <p class="content">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <div class="column">
+        <b-field>
+          <b-select placeholder="Select a name">
+            <option
+              v-for="(fishs, index) in fishList"
+              :key="fishs.id"
+              @click="info(index)"
+              :value="fishs.id"
+            >
+              {{ fishs.title }}
+            </option>
+          </b-select>
+        </b-field>
+      </div>
+    </div>
+    <b-carousel-list
+      id="experience"
+      v-model="fishId"
+      :data="fishList"
+      :items-to-show="countFish"
+    >
+      <template slot="item" slot-scope="props">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-5by4">
+              <a @click="info(props.index)"> <img :src="props.list.image" /></a>
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <p class="title is-6">{{ props.list.title }}</p>
+            </div>
           </div>
         </div>
-      </div>
-    </template>
-  </b-carousel-list>
+      </template>
+    </b-carousel-list>
+  </div>
 </template>
 
 <script>
@@ -100,8 +125,10 @@ export default {
       const url = encodeURI(
         `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
       )
+
       this.setFish(value)
       this.getPrediction(url)
+      // this.$refs.pprobe.updateData()
     },
     ...mapActions('prediction', {
       setFish: 'setFishId',

@@ -6,17 +6,7 @@
       <!--        <el-step title="Населенный пункт"></el-step>-->
       <!--        <el-step title="Рыба"></el-step>-->
       <!--      </el-steps>-->
-      <div v-if="getStep === 0">
-        <!--        <el-select v-model="value" placeholder="Select">-->
-        <!--          <el-option-->
-        <!--            v-for="item in options"-->
-        <!--            :key="item.value"-->
-        <!--            :label="item.label"-->
-        <!--            :value="item.value"-->
-        <!--          >-->
-        <!--          </el-option>-->
-        <!--        </el-select>-->
-      </div>
+      <div v-if="getStep === 0"></div>
       <div v-else-if="getStep === 1">
         <!--        <el-select v-model="value2" placeholder="Select">-->
         <!--          <el-option-->

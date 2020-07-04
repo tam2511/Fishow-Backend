@@ -1,11 +1,12 @@
 <template>
   <div class="prediction-box box">
     <p class="title">Прогноз клева</p>
-    <div class="colums">
-      <!--      <div v-for="day in readyData" :key="day.idc" class="column">-->
-      <!--        <one-day-probe :day="day"></one-day-probe>-->
-      <!--      </div>-->
-    </div>
+    <p class="content">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </p>
     <slot></slot>
   </div>
 </template>

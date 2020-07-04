@@ -1,6 +1,7 @@
 <template lang="pug">
     .temperature-box.box
       p.title Температура
+      p.content {{ text }}
       .columns
         .column(v-for="day in readyData" :key="day.idc")
           TempOneDay(:day="day")
@@ -19,7 +20,12 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.`,
+    }
   },
   computed: {},
 }

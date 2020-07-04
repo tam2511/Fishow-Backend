@@ -1,11 +1,18 @@
 <template>
   <client-only>
-    <VueApexCharts
-      width="100%"
-      type="line"
-      :options="chartOptions"
-      :series="series"
-    ></VueApexCharts>
+    <div>
+      <div class="legend">
+        <span class="legend_max">Максимальная суточная температура</span>
+        <span class="legend_mean">Среднесуточная температура</span>
+        <span class="legend_min">Минимальная суточная температура</span>
+      </div>
+      <VueApexCharts
+        width="100%"
+        type="line"
+        :options="chartOptions"
+        :series="series"
+      ></VueApexCharts>
+    </div>
   </client-only>
 </template>
 
@@ -41,7 +48,7 @@ export default {
           data: JSON.parse(this.tempMax),
         },
         {
-          name: 'Максимальная суточная температура',
+          name: 'Среднесуточная температура',
           data: JSON.parse(this.tempMean),
         },
         {
@@ -49,6 +56,7 @@ export default {
           data: JSON.parse(this.tempMin),
         },
       ],
+
       chartOptions: {
         chart: {
           height: 250,
@@ -65,9 +73,12 @@ export default {
             show: false,
           },
         },
-        colors: ['#ba5f3d', '#1e63ad'],
+        colors: ['#ba5f3d', 'rgba(173,121,30,0.29)', '#1e47ad'],
         dataLabels: {
           enabled: true,
+          formatter(value) {
+            return Math.round(value)
+          },
         },
         stroke: {
           curve: 'smooth',
@@ -88,6 +99,11 @@ export default {
         yaxis: {
           min: JSON.parse(this.tempMin).sort()[0] - 2,
           max: JSON.parse(this.tempMax).sort()[JSON.parse(this.tempMin).length],
+          labels: {
+            formatter(value) {
+              return Math.round(value)
+            },
+          },
         },
         legend: {
           position: 'top',
@@ -103,4 +119,45 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+%legend-flag {
+  content: '';
+  height: 10px;
+  width: 10px;
+  display: block;
+  position: absolute;
+  left: -15px;
+  top: 7px;
+}
+.legend {
+  display: flex;
+  flex-flow: column;
+  align-items: end;
+
+  color: rgba(128, 128, 128, 0.8);
+  span {
+    position: relative;
+  }
+  &_max {
+    color: #ba5f3d;
+    &:after {
+      @extend %legend-flag;
+      background-color: #ba5f3d;
+    }
+  }
+  &_mean {
+    color: rgba(173, 121, 30, 1);
+    &:after {
+      @extend %legend-flag;
+      background-color: rgba(173, 121, 30, 0.29);
+    }
+  }
+  &_min {
+    color: #1e47ad;
+    &:after {
+      @extend %legend-flag;
+      background-color: #1e47ad;
+    }
+  }
+}
+</style>

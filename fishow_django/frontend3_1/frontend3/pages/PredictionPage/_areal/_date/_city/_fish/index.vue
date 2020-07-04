@@ -10,7 +10,8 @@
           :readyData="readyData"
         )
           one-day-probe(
-            days="days"
+            ref="pprobe"
+            :days="days"
             :probMax="predictions['prob_max']"
             :probMin="predictions['prob_min']"
           )

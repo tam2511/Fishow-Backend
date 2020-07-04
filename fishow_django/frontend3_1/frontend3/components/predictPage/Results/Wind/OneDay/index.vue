@@ -1,19 +1,25 @@
 <template>
   <div>
-    <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
-    <div class="block" :style="colorWind">{{ Math.round(day.wind_mean) }}</div>
-    <!--    {{ color }}-->
-    <div class="block">
-      <b-icon
-        pack="fas"
-        icon="location-arrow"
-        size="is-medium"
-        :style="direction"
-      />
+    <div v-if="gustOnly">
+      <div class="block gust" :style="colorGust">
+        {{ day.gust_max }}
+      </div>
     </div>
-    <div class="block">{{ wind }}</div>
-    <div class="block gust" :style="colorGust">
-      {{ day.gust_max }}
+    <div v-else>
+      <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
+      <div class="block" :style="colorWind">
+        {{ Math.round(day.wind_mean) }}
+      </div>
+      <!--    {{ color }}-->
+      <div class="block">
+        <b-icon
+          pack="fas"
+          icon="location-arrow"
+          size="is-medium"
+          :style="direction"
+        />
+      </div>
+      <div class="block">{{ wind }}</div>
     </div>
   </div>
 </template>
@@ -25,6 +31,10 @@ import DayBlock from '~/components/predictPage/helpers/dayBlock'
 export default {
   components: { DayBlock },
   props: {
+    gustOnly: {
+      type: Boolean,
+      default: false,
+    },
     day: {
       type: Object,
       required: true,
