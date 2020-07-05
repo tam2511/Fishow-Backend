@@ -31,7 +31,7 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'https://use.fontawesome.com/releases/v5.2.0/css/all.css',
+        href: 'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
       },
     ],
   },

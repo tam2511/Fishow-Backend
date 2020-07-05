@@ -1,9 +1,14 @@
 <template lang="pug">
   .wind-box.box
-    p.title Ветер
+    p.title Ветер, м/с
+    p.content {{ text }}
     .columns
       .column(v-for="day in readyData" :key="day.id")
-        WindOneDay(:day="day" )
+        WindOneDay(:day="day")
+    p.title.has-text-weight-light Порывы, м/с
+    .columns
+      .column(v-for="day in readyData" :key="day.id")
+        WindOneDay(:day="day" :gustOnly="true")
     slot
 </template>
 
@@ -26,6 +31,10 @@ export default {
   data() {
     return {
       niceDays: null,
+      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.`,
     }
   },
   computed: {

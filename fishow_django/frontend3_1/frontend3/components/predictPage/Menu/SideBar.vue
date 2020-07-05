@@ -3,49 +3,32 @@
     <b-menu>
       <b-menu-list label="Меню">
         <b-menu-item
-          icon="information-outline"
+          icon="arrow-up"
           label="В начало"
+          pack="fas"
           @click="doScroll('.breadcrumb')"
-        ></b-menu-item>
+        />
         <b-menu-item
-          icon="information-outline"
-          label="Рыба"
+          icon="fish"
+          pack="fas"
+          label="Виды рыб"
           @click="doScroll('.fish')"
-        ></b-menu-item>
-        <b-menu-item v-if="predictions">
-          <template slot="label" slot-scope="props">
-            Прогноз
-            <b-icon
-              class="is-pulled-right"
-              :icon="props.extended ? 'menu-down' : 'menu-up'"
-            >
-            </b-icon>
-          </template>
-          <b-menu-item
-            icon="account"
-            label="Клев"
-            @click="doScroll('predic')"
-          ></b-menu-item>
-        </b-menu-item>
-        <b-menu-item v-if="predictions" icon="settings" :active="isActive">
-          <template slot="label" slot-scope="props">
-            Погода
-            <b-icon
-              class="is-pulled-right"
-              :icon="props.expanded ? 'menu-down' : 'menu-up'"
-            ></b-icon>
-          </template>
-          <b-menu-item
-            icon="account"
-            label="Температура"
-            @click="doScroll('temp')"
-          ></b-menu-item>
-          <b-menu-item
-            icon="cellphone-link"
-            label="Ветер"
-            @click="doScroll('wind')"
-          ></b-menu-item>
-        </b-menu-item>
+        />
+      </b-menu-list>
+      <b-menu-list label="Прогноз">
+        <b-menu-item
+          icon="percent"
+          pack="fas"
+          label="Клев"
+          @click="doScroll('predic')"
+        />
+        <b-menu-item
+          pack="fas"
+          icon="thermometer"
+          label="Погодные условия"
+          @click="doScroll('temp')"
+        />
+        <b-menu-item label="Ветер" @click="doScroll('wind')"></b-menu-item>
       </b-menu-list>
     </b-menu>
   </div>
@@ -74,9 +57,7 @@ export default {
       })
     },
     doScroll(value) {
-      console.log('value = ', value)
       let item
-
       if (value === '.breadcrumb' || value === '.fish') {
         item = document.querySelector(value).getBoundingClientRect().y
       } else {
@@ -84,7 +65,6 @@ export default {
           .querySelector(`.result-container > [class*=${value}]`)
           .getBoundingClientRect().y
       }
-      console.log('scroll')
       window.scrollBy({
         top: item - 70,
         behavior: 'smooth',
