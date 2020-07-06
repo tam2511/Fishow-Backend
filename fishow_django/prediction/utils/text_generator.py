@@ -21,6 +21,32 @@ def feature_influence(influence_time):
     return sum([_[0] for _ in influence_time]) > 0
 
 
+def influence_text_generate(influence_time):
+    text_builder = ''
+    morning, day, evening, night = morning_influence(influence_time), day_influence(influence_time), evening_influence(
+        influence_time), night_influence(influence_time)
+    if morning or day or evening or night:
+        text_builder += 'сегодня '
+        words = []
+        if morning:
+            words.append('утром')
+        if day:
+            words.append('днем')
+        if evening:
+            words.append('вечером')
+        if night:
+            words.append('ночью')
+        if feature_influence(influence_time):
+            text_builder += ', '.join(words)
+            text_builder += 'и на клев в ближайшие трое суток'
+        elif len(words) == 1:
+            text_builder += (words[0]) + ''
+        else:
+            text_builder += ', '.join(words[:-1]) + 'и {}'.format(words[-1])
+    else:
+        text_builder += 'в ближайшие трое суток'
+
+
 cases = {
     'щука': {'r': 'щуки'},
     'сом': {'r': 'сома'},
@@ -95,6 +121,6 @@ class TextGenerator:
         Это можно объяснить тем, что есть факторы, которые влияют на клев более существенно.'''.format(cases[fish]['r'])
         if len(influence_time) > 0:
             text_builder += '''Однако, по нашим прогнозам изменения температуры воздуха за сегодня могут
-             повлиять на клев {} '''
+             повлиять на клев {}.'''.format(influence_text_generate(influence_time))
         ...
-        return 'example'
+        return text_builder
