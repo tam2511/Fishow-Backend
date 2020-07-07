@@ -197,6 +197,11 @@ export default {
 .like {
   display: flex;
   flex-flow: column;
+  .button {
+    background: none;
+    color: black;
+    border: none;
+  }
 }
 .flex {
   display: flex;

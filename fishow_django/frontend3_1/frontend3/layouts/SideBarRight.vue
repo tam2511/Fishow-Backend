@@ -81,7 +81,11 @@ export default {
 }
 </script>
 <style lang="scss">
+@import '~bulma/sass/utilities/_all';
 $primary: #21807d;
+
+$link: $primary;
+$link-focus-border: $primary;
 .section {
   background-color: #edeff4;
   @media (max-width: 450px) {
@@ -103,4 +107,6 @@ a {
 .nav {
   max-width: 1200px;
 }
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 </style>

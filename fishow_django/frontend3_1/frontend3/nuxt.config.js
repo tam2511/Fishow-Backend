@@ -69,17 +69,30 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     'nuxt-vue-multiselect',
-    '@nuxtjs/yandex-metrika',
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '64900765',
+        webvisor: true,
+        clickmap: true,
+        // useCDN:false,
+        trackLinks: true,
+        accurateTrackBounce: true,
+      },
+    ],
     '@nuxtjs/robots',
   ],
-  yandexMetrika: {
-    id: '64900765',
-    webvisor: true,
-    // clickmap:true,
-    // useCDN:false,
-    // trackLinks:true,
-    // accurateTrackBounce:true,
+  buefy: {
+    /* buefy options */
   },
+  // yandexMetrika: {
+  //   id: 64900765,
+  //   webvisor: true,
+  //   clickmap: true,
+  //   // useCDN:false,
+  //   trackLinks: true,
+  //   accurateTrackBounce: true,
+  // },
   proxy: {
     '/api': {
       target: `http://${confserver.ip}:8000/api`,

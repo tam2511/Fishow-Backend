@@ -30,7 +30,9 @@
           </a>
         </div>
         <div v-else class="buttons">
-          <a class="button ip-primary"> {{ $auth.user }}</a>
+          <nuxt-link to="/UserPage" class="button ip-primary">
+            {{ $auth.user }}</nuxt-link
+          >
           <a class="button is-light" @click="logout">
             Выйти
           </a>
