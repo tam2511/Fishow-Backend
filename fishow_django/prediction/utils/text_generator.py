@@ -87,10 +87,6 @@ class TextGenerator:
     current_areal = None
 
     @staticmethod
-    def check_current_stage(city, areal):
-        return TextGenerator.current_city == city and TextGenerator.current_areal == areal
-
-    @staticmethod
     def update_stage(city, areal):
         TextGenerator.current_city = city
         TextGenerator.current_areal = areal
