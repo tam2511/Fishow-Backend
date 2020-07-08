@@ -32,4 +32,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
         # 'phenomenon','pressure_min','pressure_max','humidity_mean','uv_index_mean','moon','moon_direction','date','areal','city','fish','prob_min','prob_max']
 
     def get_temperature_text(self, instance):
-        return 'pogodochka'
+        data = Prediction.objects.filter(city=instance.city, fish=instance.fish, areal=instance.areal,
+                                         date=instance.date)
+        TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.ten_day_temperature_text_generate(data, instance.date, instance.fish)
