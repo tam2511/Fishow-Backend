@@ -20,6 +20,18 @@ def night_influence(influence_time):
 def feature_influence(influence_time):
     return sum([_[0] for _ in influence_time]) > 0
 
+def parse_date(date):
+    date = date.split('.')
+    day = date[0]
+    month = date[1]
+    month_map = {
+        '1': 'января', '2': 'февраля', '3': 'марта',
+        '4': 'апреля', '5': 'мая', '6': 'июня',
+        '7': 'июля', '8': 'августа', '9': 'сентября',
+        '10': 'октября', '11': 'ноября', '12': 'декабря'
+    }
+    return '{} {}'.format(day, month_map[month])
+
 
 def influence_text_generate(influence_time):
     text_builder = ''
@@ -45,6 +57,12 @@ def influence_text_generate(influence_time):
             text_builder += ', '.join(words[:-1]) + 'и {}'.format(words[-1])
     else:
         text_builder += 'в ближайшие трое суток'
+
+def influence_tendays_text_generate(influence_time):
+    days = list(set(influence_time))
+    if len(days) == 1:
+        return parse_date(days[0])
+    return ', '.join([parse_date(_) for _ in days[:-1]]) + ' и {}'.format(parse_date(days[-1]))
 
 
 cases = {
@@ -118,5 +136,32 @@ class TextGenerator:
         if len(influence_time) > 0:
             text_builder += '''Однако, по нашим прогнозам изменения температуры воздуха за сегодня могут
              повлиять на клев {}.'''.format(influence_text_generate(influence_time))
-        ...
+        return text_builder
+
+    @staticmethod
+    def ten_day_temperature_text_generate(data, date, fish):
+        '''
+        Генерация текста для девяти суток для блока температура на основе десяти дневного прогноза.
+        :param data: Список строк из базы данных для фиксированной местности
+        :param date: Текущая дата
+        :param fish: Текущий вид рыбы
+        :return: Текст
+        '''
+        observe_dates = [date - datetime.timedelta(days=day) for day in range(9)]
+        filtred_data = {observe_date: [(eval(_.feature), _.temperature, _.time) for _ in data if
+                                       _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+        influence = []
+        for index, observe_date in enumerate(observe_dates):
+            explain_prediction = sorted(filtred_data[observe_date], key=lambda x: x[-1])
+            for features, temperature, time in explain_prediction:
+                for feature, value, weight in features:
+                    feature_name, day_shift, time_shift = feature
+                    if 0 <= index * 24 + time - (day_shift * 24 + time_shift) < 24 and feature_name == 'temperature':
+                        influence.append((observe_date, time, weight, value))
+        influence_days = [_[0] for _ in influence]
+        text_builder = '''Как правило, температура воздуха несильно влияет на клев {}. 
+        Это можно объяснить тем, что есть факторы, которые влияют на клев более существенно.'''.format(cases[fish]['r'])
+        if len(influence_days) > 0:
+            text_builder += '''Однако, по нашим прогнозам изменения температуры воздуха за эту неделю могут
+             повлиять на клев {}.'''.format(influence_tendays_text_generate(influence_days))
         return text_builder
