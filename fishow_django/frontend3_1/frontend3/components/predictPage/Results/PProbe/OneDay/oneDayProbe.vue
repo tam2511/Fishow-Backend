@@ -40,11 +40,11 @@ export default {
     return {
       series: [
         {
-          name: 'Максимальная суточная температура',
+          name: 'Максимальная суточная вероятность клёва',
           data: JSON.parse(this.probMax),
         },
         {
-          name: 'Минимальная суточная температура',
+          name: 'Минимальная суточная вероятность клёва',
           data: JSON.parse(this.probMin),
         },
       ],
@@ -114,13 +114,37 @@ export default {
           },
         },
         legend: {
-          position: 'top',
-          show: true,
-          horizontalAlign: 'right',
-          floating: false,
-          offsetY: -25,
-          offsetX: -5,
+          // position: 'top',
+          show: false,
+          // horizontalAlign: 'right',
+          // floating: false,
+          // offsetY: -25,
+          // offsetX: -5,
         },
+        responsive: [
+          {
+            breakpoint: 450,
+            options: {
+              chart: {
+                height: 350,
+                type: 'bar',
+              },
+              yaxis: {
+                labels: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                },
+              },
+              legend: {
+                position: 'bottom',
+              },
+            },
+          },
+        ],
       },
     }
   },
@@ -159,7 +183,7 @@ export default {
 .legend {
   display: flex;
   flex-flow: column;
-  align-items: end;
+  align-items: flex-end;
 
   color: rgba(128, 128, 128, 0.8);
   span {
@@ -172,19 +196,23 @@ export default {
       background-color: #4fbb26;
     }
   }
-  &_max {
+  &_min {
     color: #172a3b;
     &:after {
       @extend %legend-flag;
       background-color: #172a3b;
     }
   }
-  &_min {
+  &_max {
     color: #17b1bd;
     &:after {
       @extend %legend-flag;
       background-color: #17b1bd;
     }
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
   }
 }
 </style>

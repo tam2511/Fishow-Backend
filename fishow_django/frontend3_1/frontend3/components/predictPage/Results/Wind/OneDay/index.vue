@@ -129,42 +129,4 @@ export default {
 }
 .gust {
 }
-.moon {
-  width: 200px;
-  margin: 2rem auto;
-}
-#phase {
-  width: 200px;
-  margin: 25px 0;
-}
-
-.moon-left,
-.moon-right {
-  display: inline-block;
-  width: 100px;
-  position: relative;
-  margin: 0;
-}
-.moon-left .bg,
-.moon-right .bg {
-  stroke-width: 2px;
-}
-
-.moon-right .fg {
-  stroke-width: 2px;
-}
-.moon-left .bg {
-  fill: black;
-}
-.moon-left .fg {
-  fill: white;
-  transform-origin: 0% 0%;
-}
-
-.moon-right .fg {
-  transform: scaleX(1);
-}
-.moon-left .fg {
-  transform: scaleX(0) translateX(0);
-}
 </style>
