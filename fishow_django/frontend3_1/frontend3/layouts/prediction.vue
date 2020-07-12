@@ -59,6 +59,7 @@ a {
   width: 25%;
   top: 0;
   height: 100%;
+
   @media screen and (max-width: 450px) {
     display: none;
   }
