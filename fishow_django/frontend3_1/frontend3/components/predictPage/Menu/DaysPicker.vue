@@ -1,20 +1,7 @@
 <template>
   <div class="data-pick">
-    <div class="buttons">
-      <b-button icon-right="arrow-left" pack="fas" @click="moveLeft" />
-      <div class="carousel-slides">
-        <div class="slides" :style="'margin-left:' + marginLeft + 'px'">
-          <b-button v-for="day in tenDays" :key="day.id" type="is-link">
-            {{ day }}
-          </b-button>
-        </div>
-      </div>
-      <b-button
-        icon-right="arrow-right"
-        pack="fas"
-        @click="moveRight"
-        @keypress.right="moveRight"
-      />
+    <div v-for="day in tenDays" :key="day.id" class="tenDays">
+      {{ day }}
     </div>
   </div>
 </template>
@@ -26,21 +13,6 @@ export default {
     days: {
       type: String,
       required: true,
-    },
-  },
-  data() {
-    return {
-      marginLeft: 0,
-    }
-  },
-  methods: {
-    moveRight() {
-      if (this.marginLeft > -350) this.marginLeft -= 50
-    },
-    moveLeft() {
-      if (this.marginLeft < 0) {
-        this.marginLeft += 50
-      }
     },
   },
   computed: {
@@ -55,21 +27,20 @@ export default {
 .data-pick {
   display: flex;
   flex-flow: row;
+  flex-wrap: wrap;
 }
 .is-link {
   background-color: #204a6f85;
 }
-.carousel-slides {
-  max-width: 300px;
-  overflow: hidden;
-  display: flex;
-  flex-flow: row;
-  @media (max-width: 450px) {
-    max-width: 230px;
+.tenDays {
+  color: #fff;
+  padding: 2px 5px;
+  background-color: #00000040;
+  cursor: pointer;
+  margin: 5px 5px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #00b3ee;
   }
-}
-.slides {
-  width: 100%;
-  display: flex;
 }
 </style>

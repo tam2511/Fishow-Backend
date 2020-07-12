@@ -1,32 +1,30 @@
 <template lang="pug">
-  .columns
-    .column.is-three-quarters
-      FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
-      FishowPredictionHeader
-        DaysPicker(:days="date")
-      FishSelectPrediction(:areal="areal" :city="city" :date="date")
-      .box.result-container(v-if='readyData')
-        PProbe(
-          :readyData="readyData"
+  div
+    FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
+    FishowPredictionHeader
+      DaysPicker(:days="date")
+    FishSelectPrediction(:areal="areal" :city="city" :date="date")
+    .box.result-container(v-if='readyData')
+      PProbe(
+        :readyData="readyData"
+      )
+        one-day-probe(
+          ref="pprobe"
+          :days="days"
+          :probMax="predictions['prob_max']"
+          :probMin="predictions['prob_min']"
         )
-          one-day-probe(
-            ref="pprobe"
-            :days="days"
-            :probMax="predictions['prob_max']"
-            :probMin="predictions['prob_min']"
-          )
-        Temperature(:readyData="readyData")
-          ChartTemperature(
-            :days="days"
-            :tempMax="predictions['temperature_max']"
-            :tempMean="predictions['temperature_mean']"
-            :tempMin="predictions['temperature_min']"
-          )
-        Wind(:readyData="readyData"
-          :days="days")
-      EmptyPrediction(v-else)
-    .column.fixed-top
-      SideBar
+      Temperature(:readyData="readyData")
+        ChartTemperature(
+          :days="days"
+          :tempMax="predictions['temperature_max']"
+          :tempMean="predictions['temperature_mean']"
+          :tempMin="predictions['temperature_min']"
+        )
+      Wind(:readyData="readyData"
+        :days="days")
+      PressureContainer
+    EmptyPrediction(v-else)
 </template>
 
 <script>
@@ -48,6 +46,7 @@ import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 import Wind from '@/components/predictPage/Results/Wind/index'
 import Temperature from '~/components/predictPage/Results/Temperature/index'
 import PProbe from '~/components/predictPage/Results/PProbe/index'
+import PressureContainer from '~/components/predictPage/Results/Pressure/PressureContainer'
 
 // helpers
 import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
@@ -56,6 +55,7 @@ import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
 
 export default {
+  layout: 'prediction',
   components: {
     OneDayProbe,
     ChartTemperature,
@@ -65,6 +65,7 @@ export default {
     FishowPredictionHeader,
     FishSelectPrediction,
     EmptyPrediction,
+    PressureContainer,
     PDataPicker,
     DaysPicker,
     FPBreadCrumbs,
@@ -114,6 +115,13 @@ export default {
   width: 26%;
   @media screen and (max-width: 768px) {
     display: none;
+  }
+}
+.box.result-container > .box {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  &:hover {
+    box-shadow: 6px 9px 16px -11px rgba(0, 0, 0, 0.75);
   }
 }
 </style>

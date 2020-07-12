@@ -1,8 +1,8 @@
-<template><div></div> </template>
+<template> </template>
 
 <script>
 export default {
-  name: 'Uvindexfull',
+  name: 'PressureOneDay',
 }
 </script>
 

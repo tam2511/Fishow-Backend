@@ -47,7 +47,6 @@ export default {
   computed: {
     ...mapState('prediction', ['predictions']),
   },
-  created() {},
   methods: {
     scroll() {
       window.scroll({
@@ -74,4 +73,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.card.box {
+  height: 100%;
+}
+</style>

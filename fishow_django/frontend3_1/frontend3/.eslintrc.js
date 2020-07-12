@@ -20,7 +20,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     indent: [2, 2, { SwitchCase: 1 }],
-    quotes: [2, 'single', { "avoidEscape": true }],
+    quotes: [2, 'single', { avoidEscape: true }],
     'prettier/prettier': ['error', { singleQuote: true }],
   },
 }

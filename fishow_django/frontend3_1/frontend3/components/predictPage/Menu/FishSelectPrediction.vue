@@ -15,8 +15,8 @@
             <option
               v-for="(fishs, index) in fishList"
               :key="fishs.id"
-              @click="info(index)"
               :value="fishs.id"
+              @click="info(index)"
             >
               {{ fishs.title }}
             </option>
@@ -31,10 +31,10 @@
       :items-to-show="countFish"
     >
       <template slot="item" slot-scope="props">
-        <div class="card">
+        <div class="card" @click="info(props.index)">
           <div class="card-image">
             <figure class="image is-5by4">
-              <a @click="info(props.index)"> <img :src="props.list.image" /></a>
+              <a> <img :src="props.list.image" /></a>
             </figure>
           </div>
           <div class="card-content">
@@ -139,7 +139,14 @@ export default {
 </script>
 
 <style lang="scss">
-.carousel-slide.is-active {
-  background-color: #00b3ee;
+.carousel-slide {
+  transition: background-color 0.3s;
+  cursor: pointer;
+  &.is-active {
+    background-color: #30bab5;
+  }
+  &:hover {
+    background-color: #30bab5;
+  }
 }
 </style>

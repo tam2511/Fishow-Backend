@@ -1,6 +1,6 @@
 <template lang="pug">
     .temperature-box.box
-      p.title Температура
+      p.title Погодные условия
       p.content {{ text }}
       .columns
         TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 768px) {
   div.column {
     display: inline-block;
   }

@@ -3,10 +3,10 @@
     p.title Ветер, м/с
     p.content {{ text }}
     .columns
-      WindOneDay.column(v-for="day in readyData" :key="day.id" :day="day")
+      WindOneDay.column(v-for="(day, index) in readyData" :key="day.id + index" :day="day")
     p.title.has-text-weight-light Порывы, м/с
     .columns
-      WindOneDay.column.gust-column(v-for="day in readyData" :key="day.id" :day="day" :gustOnly="true")
+      WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.id + index" :day="day" :gustOnly="true")
     slot
 </template>
 
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 768px) {
   div.column {
     display: inline-block;
     padding: 0;

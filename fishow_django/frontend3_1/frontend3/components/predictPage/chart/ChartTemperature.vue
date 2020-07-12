@@ -114,7 +114,7 @@ export default {
         },
         responsive: [
           {
-            breakpoint: 450,
+            breakpoint: 768,
             options: {
               chart: {
                 height: 350,
