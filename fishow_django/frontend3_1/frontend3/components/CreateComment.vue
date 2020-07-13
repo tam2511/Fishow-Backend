@@ -9,8 +9,8 @@
       <div class="field">
         <p class="control">
           <textarea
-            class="textarea"
             v-model="commentBody"
+            class="textarea"
             placeholder="Ваш комментарий..."
           ></textarea>
         </p>

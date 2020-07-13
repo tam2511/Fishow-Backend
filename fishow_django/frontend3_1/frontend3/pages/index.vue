@@ -42,6 +42,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$primary: #21807d;
-</style>
+<style lang="scss"></style>

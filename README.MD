@@ -12,7 +12,7 @@
 
 4. `pip install -r requirements.txt`
 
-~ `python manage.py migrate --run-syncdb`
+~ `python3 manage.py migrate --run-syncdb`
 
 **Frontend** 
 

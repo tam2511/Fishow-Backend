@@ -2,7 +2,7 @@
 
 <script>
 export default {
-  name: 'uvindexOneDay',
+  name: 'UvindexOneDay',
 }
 </script>
 

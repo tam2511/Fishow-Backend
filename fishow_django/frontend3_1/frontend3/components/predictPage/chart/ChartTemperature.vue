@@ -56,7 +56,6 @@ export default {
           data: JSON.parse(this.tempMin),
         },
       ],
-
       chartOptions: {
         chart: {
           height: 250,
@@ -106,13 +105,37 @@ export default {
           },
         },
         legend: {
-          position: 'top',
-          show: true,
-          horizontalAlign: 'right',
-          floating: false,
-          offsetY: -25,
-          offsetX: -5,
+          // position: 'top',
+          show: false,
+          // horizontalAlign: 'right',
+          // floating: false,
+          // offsetY: -25,
+          // offsetX: -5,
         },
+        responsive: [
+          {
+            breakpoint: 768,
+            options: {
+              chart: {
+                height: 350,
+                type: 'bar',
+              },
+              yaxis: {
+                labels: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                },
+              },
+              legend: {
+                position: 'bottom',
+              },
+            },
+          },
+        ],
       },
     }
   },
@@ -132,7 +155,7 @@ export default {
 .legend {
   display: flex;
   flex-flow: column;
-  align-items: end;
+  align-items: flex-end;
 
   color: rgba(128, 128, 128, 0.8);
   span {
@@ -158,6 +181,9 @@ export default {
       @extend %legend-flag;
       background-color: #1e47ad;
     }
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
   }
 }
 </style>

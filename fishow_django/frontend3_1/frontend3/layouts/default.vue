@@ -37,10 +37,10 @@ export default {
 }
 </script>
 <style lang="scss">
-.section {
+section.section {
   background-color: #edeff4;
   @media (max-width: 450px) {
-    padding: 0;
+    padding: 10px;
   }
 }
 a {
