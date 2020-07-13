@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
 
-from blogs.api.serializers import BlogSerializer, CommentSerializer
+from blogs.api.serializers import BlogSerializer, CommentSerializer, ImageSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
-from blogs.models import Blog, Comment
+from blogs.models import Blog, Comment, Image
 
 from users.models import CustomUser
 
@@ -229,3 +229,6 @@ class BlogDisLikeAPIView(APIView):
 #     serializer_class = CommentSerializer
 #     permission_classes = [IsAuthenticated]
 
+class ImageViewSet(viewsets.ModelViewSet):
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()

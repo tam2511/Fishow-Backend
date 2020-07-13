@@ -42,3 +42,5 @@ class Comment(models.Model):
     def __str__(self):
         return self.author.username
 # Create your models here.
+class Image(models.Model):
+    image = models.FileField()

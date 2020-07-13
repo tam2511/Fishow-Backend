@@ -4,7 +4,7 @@ from blogs.api import views as qv
 
 router = DefaultRouter()
 router.register(r"blogs", qv.BlogViewSet)
-
+router.register(r"image", qv.ImageViewSet)
 urlpatterns = [
     path("", include(router.urls)),
 
