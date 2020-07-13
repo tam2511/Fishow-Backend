@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view, permission_classes
 from blogs.api.serializers import BlogSerializer, CommentSerializer, ImageSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
 from blogs.models import Blog, Comment, Image
-
+from rest_framework.parsers import MultiPartParser, FormParser
 from users.models import CustomUser
 
 from django.contrib.auth.decorators import login_required
@@ -232,3 +232,35 @@ class BlogDisLikeAPIView(APIView):
 class ImageViewSet(viewsets.ModelViewSet):
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
+
+class ImageView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def get(self, request):
+        all_images = Image.objects.all()
+        serializer = ImageSerializer(all_images, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        # converts querydict to original dict
+        images = dict((request.data).lists())['image']
+        flag = 1
+        arr = []
+        for img_name in images:
+            modified_data = modify_input_for_multiple_files(img_name)
+            file_serializer = ImageSerializer(data=modified_data)
+            if file_serializer.is_valid():
+                file_serializer.save()
+                arr.append(file_serializer.data)
+            else:
+                flag = 0
+
+        if flag == 1:
+            return Response(arr, status=status.HTTP_201_CREATED)
+        else:
+            return Response(arr, status=status.HTTP_400_BAD_REQUEST)
+
+def modify_input_for_multiple_files(image):
+    dict = {}
+    dict['image'] = image
+    return dict

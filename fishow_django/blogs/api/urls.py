@@ -5,9 +5,10 @@ from blogs.api import views as qv
 router = DefaultRouter()
 router.register(r"blogs", qv.BlogViewSet)
 router.register(r"image", qv.ImageViewSet)
+#router.register(r"image", qv.ImageView)
 urlpatterns = [
     path("", include(router.urls)),
-
+    path("images/",qv.ImageView.as_view(), name='images'),
     path("blogs/<slug:slug>/comments/",
          qv.CommentListAPIView.as_view(),
          name="comments-list"),
