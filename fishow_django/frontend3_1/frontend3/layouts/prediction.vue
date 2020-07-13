@@ -40,6 +40,9 @@ export default {
 }
 </script>
 <style lang="scss">
+body {
+  background-color: #eee;
+}
 section.section {
   background-color: #edeff4;
   @media (max-width: 450px) {
@@ -66,7 +69,8 @@ a {
 }
 .header {
   width: 75%;
-  padding-left: 20px;
+  padding: 0 20px;
+  border-radius: 5px;
   @media screen and (max-width: 450px) {
     width: 100%;
   }
