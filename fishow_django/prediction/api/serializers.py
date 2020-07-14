@@ -19,7 +19,7 @@ class PredictionSerializer(serializers.ModelSerializer):
         data = Prediction.objects.filter(city=instance.city, fish=instance.fish, areal=instance.areal,
                                          date=instance.date)
         TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.day_temperature_text_generate(data, instance.date, instance.fish)
+        return TextGenerator.temperature_one(data, instance.date, instance.fish)
 
 
 class PredictiontenSerializer(serializers.ModelSerializer):
@@ -35,4 +35,4 @@ class PredictiontenSerializer(serializers.ModelSerializer):
         data = Prediction.objects.filter(city=instance.city, fish=instance.fish, areal=instance.areal,
                                          date=instance.date)
         TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.ten_day_temperature_text_generate(data, instance.date, instance.fish)
+        return TextGenerator.temperature_ten(data, instance.date, instance.fish)
