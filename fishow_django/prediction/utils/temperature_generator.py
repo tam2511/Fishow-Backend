@@ -1,5 +1,3 @@
-import datetime
-
 from .helper import *
 
 
@@ -17,7 +15,7 @@ class TemperatureTextGenerator:
                      повлиять на клев {}.'''
 
     @staticmethod
-    def day_temperature_text_generate(data, date, fish):
+    def day_text_generate(data, date, fish):
         '''
         Генерация текста для одного дня для блока температура на основе 1-3 дневного прогноза.
         :param data: Список строк из базы данных для фиксированной местности
@@ -33,7 +31,7 @@ class TemperatureTextGenerator:
         return text_builder
 
     @staticmethod
-    def ten_day_temperature_text_generate(data, date, fish):
+    def ten_day_text_generate(data, date, fish):
         '''
         Генерация текста для девяти суток для блока температура на основе десяти дневного прогноза.
         :param data: Список строк из базы данных для фиксированной местности

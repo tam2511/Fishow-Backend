@@ -1,5 +1,6 @@
 import datetime
 
+
 def morning_influence(influence_time):
     return (0, 6) in influence_time or (0, 9) in influence_time
 
@@ -18,6 +19,7 @@ def night_influence(influence_time):
 
 def feature_influence(influence_time):
     return sum([_[0] for _ in influence_time]) > 0
+
 
 def parse_date(date):
     date = date.split('.')
@@ -56,6 +58,7 @@ def influence_text_generate(influence_time):
             text_builder += ', '.join(words[:-1]) + 'и {}'.format(words[-1])
     else:
         text_builder += 'в ближайшие трое суток'
+
 
 def influence_tendays_text_generate(influence_time):
     days = list(set(influence_time))
@@ -111,6 +114,7 @@ def get_influence_time(data, date, fish):
     influence = sorted(influence)
     return [(_[0], _[1]) for _ in influence]
 
+
 def get_influence_days(data, date, fish):
     observe_dates = [date - datetime.timedelta(days=day) for day in range(9)]
     filtred_data = {observe_date: [(eval(_.feature), _.temperature, _.time) for _ in data if
@@ -123,4 +127,40 @@ def get_influence_days(data, date, fish):
                 feature_name, day_shift, time_shift = feature
                 if 0 <= index * 24 + time - (day_shift * 24 + time_shift) < 24 and feature_name == 'temperature':
                     influence.append((observe_date, time, weight, value))
-    return [_[0] for _ in influence]
+    return list(set([_[0] for _ in influence]))
+
+
+def get_influence_time_prob(data, date, fish, lower_bound, upper_bound):
+    observe_dates = [date - datetime.timedelta(days=day) for day in range(4)]
+    filtred_data = {observe_date: [(eval(_.prob), _.time) for _ in data if
+                                   _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+    influence_low = []
+    influence_up = []
+    for index, observe_date in enumerate(observe_dates):
+        explain_prediction = sorted(filtred_data[observe_date], key=lambda x: x[-1])
+        for prob, time in explain_prediction:
+            if prob < lower_bound:
+                influence_low.append((index, time))
+            if prob > upper_bound:
+                influence_up.append((index, time))
+    influence_low = sorted(influence_low)
+    influence_up = sorted(influence_up)
+    return influence_low, influence_up
+
+
+def get_influence_days_prob(data, date, fish, lower_bound, upper_bound):
+    observe_dates = [date - datetime.timedelta(days=day) for day in range(9)]
+    filtred_data = {observe_date: [(eval(_.prob), _.time) for _ in data if
+                                   _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+    influence_low = []
+    influence_up = []
+    for index, observe_date in enumerate(observe_dates):
+        explain_prediction = sorted(filtred_data[observe_date], key=lambda x: x[-1])
+        for prob, time in explain_prediction:
+            if prob < lower_bound:
+                influence_low.append((observe_date))
+            if prob > upper_bound:
+                influence_up.append((observe_date))
+    influence_low = sorted(influence_low)
+    influence_up = sorted(influence_up)
+    return list(set(influence_low)), list(set(influence_up))

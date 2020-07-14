@@ -1,4 +1,6 @@
 from .temperature_generator import TemperatureTextGenerator
+from .phenomenon_generator import PhenomenonTextGenerator
+from .prediction_generator import PredictTextGenerator
 
 class TextGenerator:
     '''
@@ -6,6 +8,7 @@ class TextGenerator:
     '''
     current_city = None
     current_areal = None
+    data = None
 
     @staticmethod
     def update_stage(city, areal):
@@ -17,9 +20,29 @@ class TextGenerator:
         return TextGenerator.current_city == city and TextGenerator.current_areal == areal
 
     @staticmethod
-    def temperature_one(data, date, fish):
-        return TemperatureTextGenerator.day_temperature_text_generate(data, date, fish)
+    def set_data(data):
+        TextGenerator.data = data
 
     @staticmethod
-    def temperature_ten(data, date, fish):
-        return TemperatureTextGenerator.ten_day_temperature_text_generate(data, date, fish)
+    def temperature_one(date, fish):
+        return TemperatureTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def temperature_ten(date, fish):
+        return TemperatureTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def phenomenon_one(date, fish):
+        return PhenomenonTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def phenomenon_ten(date, fish):
+        return PhenomenonTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def prediction_one(date, fish):
+        return PredictTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def prediction_ten(date, fish):
+        return PredictTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
