@@ -24,6 +24,11 @@
       Wind(:readyData="readyData"
         :days="days")
       PressureContainer
+        pressure-chart(
+          :days="days"
+          :tempMax="predictions['pressure_max']"
+          :tempMin="predictions['pressure_min']"
+        )
     EmptyPrediction(v-else)
 </template>
 
@@ -53,10 +58,12 @@ import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
+import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
 
 export default {
   layout: 'prediction',
   components: {
+    PressureChart,
     OneDayProbe,
     ChartTemperature,
     PProbe,

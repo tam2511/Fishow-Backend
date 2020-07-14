@@ -72,7 +72,7 @@ export default {
             show: false,
           },
         },
-        colors: ['#ba5f3d', 'rgba(173,121,30,0.29)', '#1e47ad'],
+        colors: ['#17b1bd', 'rgba(173,121,30,0.29)', '#172a3b'],
         dataLabels: {
           enabled: true,
           formatter(value) {
@@ -162,10 +162,10 @@ export default {
     position: relative;
   }
   &_max {
-    color: #ba5f3d;
+    color: #17b1bd;
     &:after {
       @extend %legend-flag;
-      background-color: #ba5f3d;
+      background-color: #17b1bd;
     }
   }
   &_mean {
@@ -176,10 +176,10 @@ export default {
     }
   }
   &_min {
-    color: #1e47ad;
+    color: #172a3b;
     &:after {
       @extend %legend-flag;
-      background-color: #1e47ad;
+      background-color: #172a3b;
     }
   }
   @media screen and (max-width: 450px) {

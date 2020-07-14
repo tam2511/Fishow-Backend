@@ -1,8 +1,9 @@
 <template lang="pug">
-  .temperature-box.box
+  .pressure-box.box
     p.title Давление
     p.content {{ text }}
     .columns
+    slot
 </template>
 
 <script>

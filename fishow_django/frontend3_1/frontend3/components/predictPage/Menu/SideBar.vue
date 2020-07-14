@@ -28,7 +28,14 @@
           label="Погодные условия"
           @click="doScroll('temp')"
         />
+
         <b-menu-item label="Ветер" @click="doScroll('wind')"></b-menu-item>
+        <b-menu-item
+          pack="fas"
+          icon="thermometer"
+          label="Давление"
+          @click="doScroll('pressure')"
+        />
       </b-menu-list>
     </b-menu>
   </div>
