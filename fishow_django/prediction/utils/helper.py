@@ -58,6 +58,7 @@ def influence_text_generate(influence_time):
             text_builder += ', '.join(words[:-1]) + 'и {}'.format(words[-1])
     else:
         text_builder += 'в ближайшие трое суток'
+    return text_builder
 
 
 def influence_tendays_text_generate(influence_time):
@@ -100,8 +101,8 @@ cases = {
 
 
 def get_influence_time(data, date, fish):
-    observe_dates = [date - datetime.timedelta(days=day) for day in range(4)]
-    filtred_data = {observe_date: [(eval(_.feature), _.temperature, _.time) for _ in data if
+    observe_dates = [date + datetime.timedelta(days=day) for day in range(4)]
+    filtred_data = {observe_date: [(eval(_.features), _.temperature, _.time) for _ in data if
                                    _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
     influence = []
     for index, observe_date in enumerate(observe_dates):
@@ -116,8 +117,8 @@ def get_influence_time(data, date, fish):
 
 
 def get_influence_days(data, date, fish):
-    observe_dates = [date - datetime.timedelta(days=day) for day in range(9)]
-    filtred_data = {observe_date: [(eval(_.feature), _.temperature, _.time) for _ in data if
+    observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
+    filtred_data = {observe_date: [(eval(_.features), _.temperature, _.time) for _ in data if
                                    _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
     influence = []
     for index, observe_date in enumerate(observe_dates):
@@ -131,8 +132,9 @@ def get_influence_days(data, date, fish):
 
 
 def get_influence_time_prob(data, date, fish, lower_bound, upper_bound):
-    observe_dates = [date - datetime.timedelta(days=day) for day in range(4)]
-    filtred_data = {observe_date: [(eval(_.prob), _.time) for _ in data if
+    observe_dates = [date + datetime.timedelta(days=day) for day in range(4)]
+
+    filtred_data = {observe_date: [(_.prob, _.time) for _ in data if
                                    _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
     influence_low = []
     influence_up = []
@@ -149,8 +151,8 @@ def get_influence_time_prob(data, date, fish, lower_bound, upper_bound):
 
 
 def get_influence_days_prob(data, date, fish, lower_bound, upper_bound):
-    observe_dates = [date - datetime.timedelta(days=day) for day in range(9)]
-    filtred_data = {observe_date: [(eval(_.prob), _.time) for _ in data if
+    observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
+    filtred_data = {observe_date: [(_.prob, _.time) for _ in data if
                                    _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
     influence_low = []
     influence_up = []
