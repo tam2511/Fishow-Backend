@@ -67,7 +67,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
                                              date=instance.date)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.phenomenon_one(instance.date, instance.fish)
+        return TextGenerator.phenomenon_ten(instance.date, instance.fish)
 
     def get_prediction_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
@@ -75,4 +75,4 @@ class PredictiontenSerializer(serializers.ModelSerializer):
                                              date=instance.date)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.prediction_one(instance.date, instance.fish)
+        return TextGenerator.prediction_ten(instance.date, instance.fish)
