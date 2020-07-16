@@ -1,6 +1,7 @@
 from .temperature_generator import TemperatureTextGenerator
 from .phenomenon_generator import PhenomenonTextGenerator
 from .prediction_generator import PredictTextGenerator
+from .wind_generator import WindTextGenerator
 
 class TextGenerator:
     '''
@@ -46,3 +47,11 @@ class TextGenerator:
     @staticmethod
     def prediction_ten(date, fish):
         return PredictTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def wind_one(date, fish):
+        return WindTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def wind_ten(date, fish):
+        return WindTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)

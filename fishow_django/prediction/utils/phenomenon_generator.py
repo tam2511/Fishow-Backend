@@ -19,7 +19,7 @@ class PhenomenonTextGenerator:
         :param fish: Текущий вид рыбы
         :return: Текст
         '''
-        influence_time = get_influence_time(data, date, fish)
+        influence_time = get_influence_time(data, date, fish, 'phenomenon')
         text_builder = PhenomenonTextGenerator.template_text_one.format(cases[fish]['r'])
         if len(influence_time) > 0:
             text_builder += PhenomenonTextGenerator.template_text_fork_one.format(
@@ -35,7 +35,7 @@ class PhenomenonTextGenerator:
         :param fish: Текущий вид рыбы
         :return: Текст
         '''
-        influence_days = get_influence_days(data, date, fish)
+        influence_days = get_influence_days(data, date, fish, 'phenomenon')
         text_builder = PhenomenonTextGenerator.template_text_ten.format(cases[fish]['r'])
         if len(influence_days) > 0:
             text_builder += PhenomenonTextGenerator.template_text_fork_ten.format(

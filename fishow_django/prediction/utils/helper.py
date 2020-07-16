@@ -100,7 +100,7 @@ cases = {
 }
 
 
-def get_influence_time(data, date, fish):
+def get_influence_time(data, date, fish, target_feature_name):
     observe_dates = [date + datetime.timedelta(days=day) for day in range(4)]
     filtred_data = {observe_date: [(eval(_.features), _.temperature, _.time) for _ in data if
                                    _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
@@ -110,13 +110,13 @@ def get_influence_time(data, date, fish):
         for features, temperature, time in explain_prediction:
             for feature, value, weight in features:
                 feature_name, day_shift, time_shift = feature
-                if 0 <= index * 24 + time - (day_shift * 24 + time_shift) < 24 and feature_name == 'temperature':
+                if 0 <= index * 24 + time - (day_shift * 24 + time_shift) < 24 and feature_name == target_feature_name:
                     influence.append((index, time, weight, value))
     influence = sorted(influence)
     return [(_[0], _[1]) for _ in influence]
 
 
-def get_influence_days(data, date, fish):
+def get_influence_days(data, date, fish, target_feature_name):
     observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
     filtred_data = {observe_date: [(eval(_.features), _.temperature, _.time) for _ in data if
                                    _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
@@ -126,7 +126,7 @@ def get_influence_days(data, date, fish):
         for features, temperature, time in explain_prediction:
             for feature, value, weight in features:
                 feature_name, day_shift, time_shift = feature
-                if 0 <= index * 24 + time - (day_shift * 24 + time_shift) < 24 and feature_name == 'temperature':
+                if 0 <= index * 24 + time - (day_shift * 24 + time_shift) < 24 and feature_name == target_feature_name:
                     influence.append((observe_date, time, weight, value))
     return list(set([_[0] for _ in influence]))
 
