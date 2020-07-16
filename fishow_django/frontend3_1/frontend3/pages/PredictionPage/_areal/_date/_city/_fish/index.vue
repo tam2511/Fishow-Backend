@@ -54,14 +54,13 @@ import PProbe from '~/components/predictPage/Results/PProbe/index'
 import PressureContainer from '~/components/predictPage/Results/Pressure/PressureContainer'
 
 // helpers
-import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
+
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
 import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
-
+import urlData from '~/assets/mixins/prediction/urlData'
 export default {
-  layout: 'prediction',
   components: {
     PressureChart,
     OneDayProbe,
@@ -78,15 +77,8 @@ export default {
     FPBreadCrumbs,
     Wind,
   },
-  data() {
-    return {
-      days: getData(this.$route.params.date, 9),
-      fish: this.$route.params.fish,
-      date: this.$route.params.date,
-      city: this.$route.params.city,
-      areal: this.$route.params.areal,
-    }
-  },
+  mixins: [urlData],
+  layout: 'prediction',
   computed: {
     readyData() {
       return convertDataFromServer(this.predictions)

@@ -1,5 +1,5 @@
 <template>
-  <nav class="breadcrumb is-centered" aria-label="breadcrumbs">
+  <nav class="breadcrumb is-centered box" aria-label="breadcrumbs">
     <ul>
       <li>
         <a> Россия </a>
@@ -39,6 +39,7 @@ export default {
 
 <style scoped>
 .breadcrumb {
+  margin-top: 1rem;
   text-transform: capitalize;
 }
 </style>

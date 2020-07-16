@@ -15,7 +15,7 @@
           @click="doScroll('.fish')"
         />
       </b-menu-list>
-      <b-menu-list label="Прогноз">
+      <b-menu-list v-if="predictions" label="Прогноз">
         <b-menu-item
           icon="percent"
           pack="fas"
@@ -28,7 +28,6 @@
           label="Погодные условия"
           @click="doScroll('temp')"
         />
-
         <b-menu-item label="Ветер" @click="doScroll('wind')"></b-menu-item>
         <b-menu-item
           pack="fas"
@@ -65,8 +64,12 @@ export default {
     doScroll(value) {
       let item
       if (value === '.breadcrumb' || value === '.fish') {
-        item = document.querySelector(value).getBoundingClientRect().y
-      } else {
+        if (document.querySelector(value)) {
+          item = document.querySelector(value).getBoundingClientRect().y
+        }
+      } else if (
+        document.querySelector(`.result-container > [class*=${value}]`)
+      ) {
         item = document
           .querySelector(`.result-container > [class*=${value}]`)
           .getBoundingClientRect().y

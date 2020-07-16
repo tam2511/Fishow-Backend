@@ -1,7 +1,19 @@
 <template>
   <div class="data-pick">
     <div v-for="day in tenDays" :key="day.id" class="tenDays">
-      {{ day }}
+      <nuxt-link
+        :to="{
+          name: 'OnePrediction-areal-date-city-fish',
+          params: {
+            areal: $route.params.areal,
+            date: '2020-' + day.split('/')[1] + '-' + day.split('/')[0],
+            city: $route.params.city,
+            fish: $route.params.fish,
+          },
+        }"
+      >
+        {{ day }}
+      </nuxt-link>
     </div>
   </div>
 </template>

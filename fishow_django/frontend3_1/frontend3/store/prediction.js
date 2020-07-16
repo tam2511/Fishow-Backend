@@ -4,6 +4,7 @@ export const state = () => ({
   fishId: 0,
   pageScroll: 0,
   predictions: null,
+  prediction: null,
 })
 
 export const mutations = {
@@ -13,8 +14,11 @@ export const mutations = {
   SET_SCROLL(state, scroll) {
     state.pageScroll = scroll
   },
-  SET_PREDICTION(state, predictions) {
+  SET_PREDICTIONS(state, predictions) {
     state.predictions = predictions
+  },
+  SET_PREDICTION(state, prediction) {
+    state.prediction = prediction
   },
 }
 
@@ -27,7 +31,13 @@ export const actions = {
   },
   getPrediction({ commit, axios }, conf) {
     return PredictionService.getPredicitons(conf).then((response) => {
-      commit('SET_PREDICTION', response.data.results[0])
+      commit('SET_PREDICTIONS', response.data.results[0])
+    })
+  },
+  getPredictionOne({ commit, axios }, conf) {
+    return PredictionService.getPredicitons(conf).then((response) => {
+      console.log(response.data)
+      commit('SET_PREDICTION', response.data.results)
     })
   },
 }
