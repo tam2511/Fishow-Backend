@@ -22,9 +22,9 @@ def feature_influence(influence_time):
 
 
 def parse_date(date):
-    date = date.split('.')
-    day = date[0]
-    month = date[1]
+    date = str(date).split('-')
+    day = str(int(date[0]))
+    month = str(int(date[1]))
     month_map = {
         '1': 'января', '2': 'февраля', '3': 'марта',
         '4': 'апреля', '5': 'мая', '6': 'июня',
