@@ -11,6 +11,7 @@ class PredictionSerializer(serializers.ModelSerializer):
     phenomenon_text = serializers.SerializerMethodField()
     prediction_text = serializers.SerializerMethodField()
     wind_text = serializers.SerializerMethodField()
+    pressure_text = serializers.SerializerMethodField()
 
     class Meta:
         model = Prediction
@@ -46,12 +47,20 @@ class PredictionSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.wind_one(instance.date, instance.fish)
 
+    def get_pressure_text(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.pressure_one(instance.date, instance.fish)
+
 
 class PredictiontenSerializer(serializers.ModelSerializer):
     temperature_text = serializers.SerializerMethodField()
     phenomenon_text = serializers.SerializerMethodField()
     prediction_text = serializers.SerializerMethodField()
     wind_text = serializers.SerializerMethodField()
+    pressure_text = serializers.SerializerMethodField()
 
     class Meta:
         model = Predictionten
@@ -86,3 +95,10 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.wind_ten(instance.date, instance.fish)
+
+    def get_pressure_text(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.pressure_ten(instance.date, instance.fish)
