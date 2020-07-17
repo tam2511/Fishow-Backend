@@ -3,6 +3,7 @@ from .phenomenon_generator import PhenomenonTextGenerator
 from .prediction_generator import PredictTextGenerator
 from .wind_generator import WindTextGenerator
 from .pressure_generator import PressureTextGenerator
+from .moon_generator import MoonTextGenerator
 
 class TextGenerator:
     '''
@@ -64,3 +65,11 @@ class TextGenerator:
     @staticmethod
     def pressure_ten(date, fish):
         return PressureTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def moon_one(date, fish):
+        return MoonTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def moon_ten(date, fish):
+        return MoonTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
