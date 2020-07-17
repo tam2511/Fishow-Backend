@@ -55,7 +55,7 @@ class PredictionSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.pressure_one(instance.date, instance.fish)
 
-    def get_pressure_text(self, instance):
+    def get_moon_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
@@ -112,7 +112,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.pressure_ten(instance.date, instance.fish)
 
-    def get_pressure_text(self, instance):
+    def get_moon_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
