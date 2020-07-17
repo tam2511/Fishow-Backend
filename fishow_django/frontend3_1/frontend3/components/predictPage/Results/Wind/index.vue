@@ -1,9 +1,12 @@
 <template lang="pug">
   .wind-box.box
-    p.title Ветер
+    p.title Ветер, м/с
+    p.content {{ text }}
     .columns
-      .column(v-for="day in readyData" :key="day.id")
-        WindOneDay(:day="day" )
+      WindOneDay.column(v-for="(day, index) in readyData" :key="day.id + index" :day="day")
+    p.title.has-text-weight-light Порывы, м/с
+    .columns
+      WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.id + index" :day="day" :gustOnly="true")
     slot
 </template>
 
@@ -26,6 +29,10 @@ export default {
   data() {
     return {
       niceDays: null,
+      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.`,
     }
   },
   computed: {
@@ -37,61 +44,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.date {
-  padding-bottom: 20px;
-}
-.temperature-list {
-  display: flex;
-  justify-content: space-around;
-  &__start {
-    align-items: flex-start;
+@media screen and (max-width: 768px) {
+  div.column {
+    display: inline-block;
+    padding: 0;
+    border-right: 6px solid #fff;
   }
-  &__end {
-    align-items: flex-end;
+  div.columns {
+    margin: 0 auto;
+    display: inline-flex;
+    width: 100%;
+    overflow: scroll;
   }
-  &__p_t {
-    padding-top: 70px;
+  .gust-column {
+    padding: 0;
   }
-  &__p_b {
-    padding-bottom: 10px;
-  }
-}
-.phenomenon {
-  position: relative;
-}
-.temperature-max_item {
-  background-color: #fee187;
-  color: white;
-  width: 5%;
-  position: relative;
-  .value {
-    position: absolute;
-    top: -25px;
-    left: 10px;
-    color: #000;
-  }
-}
-.temperature-min_item {
-  background-color: #7957d582;
-  color: white;
-  width: 5%;
-  position: relative;
-  .value {
-    position: absolute;
-    bottom: -25px;
-    left: 10px;
-    color: #000;
-  }
-}
-.value {
-  position: absolute;
-  color: #000;
-  bottom: -50px;
-  left: -25px;
-  width: 50px;
-}
-.date_item {
-  font-weight: 700;
-  font-size: 20px;
 }
 </style>

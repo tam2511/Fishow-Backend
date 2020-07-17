@@ -1,11 +1,14 @@
 <template>
   <client-only>
     <div>
-      {{ probMin }}
-      <button @click="updateData">update</button>
+      <div class="legend">
+        <span class="legend_max">Максимальная суточная вероятность клёва</span>
+        <span class="legend_min">Минимальная суточная вероятность клёва</span>
+        <span class="legend_area">Высокий шанс клева рыбы</span>
+      </div>
       <VueApexCharts
         width="100%"
-        type="line"
+        type="area"
         :options="chartOptions"
         :series="series"
       ></VueApexCharts>
@@ -14,6 +17,7 @@
 </template>
 
 <script>
+import getCalendarDay from '~/assets/js/getCalendarDay'
 export default {
   components: {
     VueApexCharts: () => import('vue-apexcharts'),
@@ -36,11 +40,11 @@ export default {
     return {
       series: [
         {
-          name: 'Максимальная суточная температура',
+          name: 'Максимальная суточная вероятность клёва',
           data: JSON.parse(this.probMax),
         },
         {
-          name: 'Минимальная суточная температура',
+          name: 'Минимальная суточная вероятность клёва',
           data: JSON.parse(this.probMin),
         },
       ],
@@ -60,9 +64,12 @@ export default {
             show: false,
           },
         },
-        colors: ['#ba5f3d', '#1e63ad'],
+        colors: ['#17b1bd', '#172a3b'],
         dataLabels: {
           enabled: true,
+          formatter(value) {
+            return Math.round(value * 100)
+          },
         },
         stroke: {
           curve: 'smooth',
@@ -74,44 +81,80 @@ export default {
             opacity: 0.5,
           },
         },
+        annotations: {
+          yaxis: [
+            {
+              y: 1,
+              y2: 0.74,
+              borderColor: '#4fbb26',
+              fillColor: 'rgba(109,180,61,0.83)',
+              label: {
+                borderColor: '#4fbb26',
+                style: {
+                  color: '#fff',
+                  background: '#4fbb26',
+                },
+              },
+            },
+          ],
+        },
         markers: {
           size: 1,
         },
         xaxis: {
-          categories: '',
+          categories: getCalendarDay(this.days),
         },
         yaxis: {
           min: 0,
           max: 1,
+          labels: {
+            formatter(value) {
+              return Math.round(value * 100)
+            },
+          },
         },
         legend: {
-          position: 'top',
-          show: true,
-          horizontalAlign: 'right',
-          floating: false,
-          offsetY: -25,
-          offsetX: -5,
+          // position: 'top',
+          show: false,
+          // horizontalAlign: 'right',
+          // floating: false,
+          // offsetY: -25,
+          // offsetX: -5,
         },
+        responsive: [
+          {
+            breakpoint: 768,
+            options: {
+              chart: {
+                height: 350,
+                type: 'bar',
+              },
+              yaxis: {
+                labels: {
+                  show: false,
+                },
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                },
+              },
+              legend: {
+                position: 'bottom',
+              },
+            },
+          },
+        ],
       },
     }
   },
-  // watch: {
-  //   series() {
-  //     this.series = [
-  //       {
-  //         name: 'Максимальная суточная температура',
-  //         data: JSON.parse(this.probMax),
-  //       },
-  //       {
-  //         name: 'Минимальная суточная температура',
-  //         data: JSON.parse(this.probMin),
-  //       },
-  //     ]
-  //   },
-  // },
+  watch: {
+    probMin() {
+      this.updateData()
+    },
+  },
   methods: {
     updateData() {
-      console.log('update!')
       this.series = [
         {
           name: 'Максимальная суточная температура',
@@ -127,4 +170,49 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+%legend-flag {
+  content: '';
+  height: 10px;
+  width: 10px;
+  display: block;
+  position: absolute;
+  left: -15px;
+  top: 7px;
+}
+.legend {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+
+  color: rgba(128, 128, 128, 0.8);
+  span {
+    position: relative;
+  }
+  &_area {
+    color: #4fbb26;
+    &:after {
+      @extend %legend-flag;
+      background-color: #4fbb26;
+    }
+  }
+  &_min {
+    color: #172a3b;
+    &:after {
+      @extend %legend-flag;
+      background-color: #172a3b;
+    }
+  }
+  &_max {
+    color: #17b1bd;
+    &:after {
+      @extend %legend-flag;
+      background-color: #17b1bd;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
+  }
+}
+</style>

@@ -4,6 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django_registration.backends.one_step.views import RegistrationView
 from rest_auth.registration.views import VerifyEmailView, RegisterView
+from rest_auth.views import PasswordResetConfirmView,PasswordResetView
+from django.views.generic import TemplateView
 from rest_framework.authtoken import views
 
 from core.views import IndexTemplateView
@@ -23,6 +25,9 @@ urlpatterns = [
 
     path('accounts/',
          include('django.contrib.auth.urls')),
+
+     path('account/',
+          include('allauth.urls')),
 
     path('api/',
          include('users.api.urls')),

@@ -1,19 +1,25 @@
 <template>
   <div>
-    <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
-    <div class="block" :style="colorWind">{{ Math.round(day.wind_mean) }}</div>
-    <!--    {{ color }}-->
-    <div class="block">
-      <b-icon
-        pack="fas"
-        icon="location-arrow"
-        size="is-medium"
-        :style="direction"
-      />
+    <div v-if="gustOnly">
+      <div class="block gust" :style="colorGust">
+        {{ day.gust_max }}
+      </div>
     </div>
-    <div class="block">{{ wind }}</div>
-    <div class="block gust" :style="colorGust">
-      {{ day.gust_max }}
+    <div v-else>
+      <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
+      <div class="block" :style="colorWind">
+        {{ Math.round(day.wind_mean) }}
+      </div>
+      <!--    {{ color }}-->
+      <div class="block">
+        <b-icon
+          pack="fas"
+          icon="location-arrow"
+          size="is-medium"
+          :style="direction"
+        />
+      </div>
+      <div class="block">{{ wind }}</div>
     </div>
   </div>
 </template>
@@ -25,6 +31,10 @@ import DayBlock from '~/components/predictPage/helpers/dayBlock'
 export default {
   components: { DayBlock },
   props: {
+    gustOnly: {
+      type: Boolean,
+      default: false,
+    },
     day: {
       type: Object,
       required: true,
@@ -118,43 +128,5 @@ export default {
   }
 }
 .gust {
-}
-.moon {
-  width: 200px;
-  margin: 2rem auto;
-}
-#phase {
-  width: 200px;
-  margin: 25px 0;
-}
-
-.moon-left,
-.moon-right {
-  display: inline-block;
-  width: 100px;
-  position: relative;
-  margin: 0;
-}
-.moon-left .bg,
-.moon-right .bg {
-  stroke-width: 2px;
-}
-
-.moon-right .fg {
-  stroke-width: 2px;
-}
-.moon-left .bg {
-  fill: black;
-}
-.moon-left .fg {
-  fill: white;
-  transform-origin: 0% 0%;
-}
-
-.moon-right .fg {
-  transform: scaleX(1);
-}
-.moon-left .fg {
-  transform: scaleX(0) translateX(0);
 }
 </style>

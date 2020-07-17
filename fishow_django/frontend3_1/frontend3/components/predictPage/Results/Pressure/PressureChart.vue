@@ -2,13 +2,13 @@
   <client-only>
     <div>
       <div class="legend">
-        <span class="legend_max">Максимальная суточная температура</span>
-        <span class="legend_mean">Среднесуточная температура</span>
-        <span class="legend_min">Минимальная суточная температура</span>
+        <span class="legend_max">Максимальное суточное давление</span>
+        <span class="legend_min">Минимальное суточное давление</span>
       </div>
       <VueApexCharts
         width="100%"
-        type="line"
+        height="200px"
+        type="bar"
         :options="chartOptions"
         :series="series"
       ></VueApexCharts>
@@ -31,10 +31,6 @@ export default {
       type: String,
       required: true,
     },
-    tempMean: {
-      type: String,
-      required: true,
-    },
     tempMin: {
       type: String,
       required: true,
@@ -44,15 +40,11 @@ export default {
     return {
       series: [
         {
-          name: 'Максимальная суточная температура',
+          name: 'Максимальное суточное давление',
           data: JSON.parse(this.tempMax),
         },
         {
-          name: 'Среднесуточная температура',
-          data: JSON.parse(this.tempMean),
-        },
-        {
-          name: 'Минимальная суточная температура',
+          name: 'Минимальное суточное давление',
           data: JSON.parse(this.tempMin),
         },
       ],
@@ -72,7 +64,7 @@ export default {
             show: false,
           },
         },
-        colors: ['#17b1bd', 'rgba(173,121,30,0.29)', '#172a3b'],
+        colors: ['#17b1bd', '#172a3b'],
         dataLabels: {
           enabled: true,
           formatter(value) {
@@ -83,10 +75,10 @@ export default {
           curve: 'smooth',
         },
         grid: {
-          borderColor: '#e7e7e7',
+          borderColor: 'rgba(231,231,231,0)',
           row: {
             colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5,
+            opacity: 0.0,
           },
         },
         markers: {
@@ -166,13 +158,6 @@ export default {
     &:after {
       @extend %legend-flag;
       background-color: #17b1bd;
-    }
-  }
-  &_mean {
-    color: rgba(173, 121, 30, 1);
-    &:after {
-      @extend %legend-flag;
-      background-color: rgba(173, 121, 30, 0.29);
     }
   }
   &_min {

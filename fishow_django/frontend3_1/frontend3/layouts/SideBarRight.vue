@@ -81,7 +81,6 @@ export default {
 }
 </script>
 <style lang="scss">
-$primary: #21807d;
 .section {
   background-color: #edeff4;
   @media (max-width: 450px) {

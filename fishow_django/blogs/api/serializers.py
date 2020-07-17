@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from blogs.models import Blog, Comment
+from blogs.models import Blog, Comment, Image
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 
@@ -104,3 +104,9 @@ class BlogSerializer(serializers.ModelSerializer):
 
     def get_user_views(self, instance):
         return instance.views.count()
+
+class ImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Image
+        fields = ['image']
