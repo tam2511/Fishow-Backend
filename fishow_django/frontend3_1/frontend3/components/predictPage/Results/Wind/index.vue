@@ -1,7 +1,7 @@
 <template lang="pug">
   .wind-box.box
     p.title Ветер, м/с
-    p.content {{ text }}
+    p.content {{ readyData[0].wind_text }}
     .columns
       WindOneDay.column(v-for="(day, index) in readyData" :key="day.id + index" :day="day")
     p.title.has-text-weight-light Порывы, м/с
@@ -12,32 +12,15 @@
 
 <script>
 import WindOneDay from '@/components/predictPage/Results/Wind/OneDay/index'
-import getCalendarDay from '~/assets/js/getCalendarDay'
+import readyData from '~/assets/mixins/prediction/readyData'
 
 export default {
   components: { WindOneDay },
+  mixins: [readyData],
   props: {
-    readyData: {
-      type: Array,
-      required: true,
-    },
     days: {
       type: Array,
       required: true,
-    },
-  },
-  data() {
-    return {
-      niceDays: null,
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.`,
-    }
-  },
-  computed: {
-    calendarDay() {
-      return getCalendarDay(this.days)
     },
   },
 }

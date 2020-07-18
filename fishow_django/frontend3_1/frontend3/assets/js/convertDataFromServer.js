@@ -37,6 +37,12 @@ export const convertDataFromServer = (data) => {
     fish: 'fish',
     id_array: 'id_array',
     wind_direction: 'wind_direction',
+    temperature_text: 'temp-text',
+    phenomenon_text: 'pheno-text',
+    prediction_text: 'predict-text',
+    wind_text: 'wind-text',
+    pressure_text: 'pressure-text',
+    moon_text: 'moon-text',
   }
 
   keys.forEach((item) => {
@@ -63,6 +69,12 @@ export const convertDataFromServer = (data) => {
     city: 'city',
     fish: 'fish',
     id_array: 'id_array',
+    temperature_text: 'temp-text',
+    phenomenon_text: 'pheno-text',
+    prediction_text: 'predict-text',
+    wind_text: 'wind-text',
+    pressure_text: 'pressure-text',
+    moon_text: 'moon-text',
   }
 
   const length = newData.temperature_max.length
