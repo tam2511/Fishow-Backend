@@ -1,8 +1,8 @@
 '''
-Тестирование генерации текста на основе временных порогов
+Тестирование influence_text_generate
 '''
 
-from helper import influence_text_generate, influence_tendays_text_generate
+from helper import influence_text_generate
 
 
 class InfluenceTextGenerator:
@@ -71,3 +71,38 @@ InfluenceTextGenerator.test6()
 InfluenceTextGenerator.test7()
 InfluenceTextGenerator.test8()
 InfluenceTextGenerator.test9()
+
+'''
+Тестирование influence_tendays_text_generate
+'''
+
+from helper import influence_tendays_text_generate
+from datetime import datetime
+
+def to_date(date_str):
+    return datetime.strptime(date_str, '%d.%m.%Y')
+
+class InfluenceTenDaysTextGenerator:
+    influence_time1 = [to_date('08.01.2016')]
+    influence_time2 = [to_date('08.03.2016'), to_date('10.03.2016')]
+    influence_time3 = [to_date('30.07.2016'), to_date('01.08.2016'), to_date('03.08.2016'), to_date('07.08.2016')]
+
+    @staticmethod
+    def test1():
+        expected_value = '8 января'
+        assert influence_tendays_text_generate(InfluenceTenDaysTextGenerator.influence_time1) == expected_value
+
+    @staticmethod
+    def test2():
+        expected_value = '8 марта и 10 марта'
+        assert influence_tendays_text_generate(InfluenceTenDaysTextGenerator.influence_time2) == expected_value
+
+    @staticmethod
+    def test3():
+        expected_value = '30 июля, 1 августа, 3 августа и 7 августа'
+        assert influence_tendays_text_generate(InfluenceTenDaysTextGenerator.influence_time3) == expected_value
+
+
+InfluenceTenDaysTextGenerator.test1()
+InfluenceTenDaysTextGenerator.test2()
+InfluenceTenDaysTextGenerator.test3()
