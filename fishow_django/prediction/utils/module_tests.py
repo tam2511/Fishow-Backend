@@ -18,47 +18,47 @@ class InfluenceTextGenerator:
 
     @staticmethod
     def test1():
-        expected_value = 'сегодня ночью'
+        expected_value = '*сегодня* *ночью*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time1) == expected_value
 
     @staticmethod
     def test2():
-        expected_value = 'сегодня утром'
+        expected_value = '*сегодня* *утром*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time2) == expected_value
 
     @staticmethod
     def test3():
-        expected_value = 'сегодня днем'
+        expected_value = '*сегодня* *днем*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time3) == expected_value
 
     @staticmethod
     def test4():
-        expected_value = 'сегодня вечером'
+        expected_value = '*сегодня* *вечером*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time4) == expected_value
 
     @staticmethod
     def test5():
-        expected_value = 'сегодня утром и вечером'
+        expected_value = '*сегодня* *утром* и *вечером*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time5) == expected_value
 
     @staticmethod
     def test6():
-        expected_value = 'сегодня днем, вечером и ночью'
+        expected_value = '*сегодня* *днем*, *вечером* и *ночью*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time6) == expected_value
 
     @staticmethod
     def test7():
-        expected_value = 'сегодня утром, днем, вечером и ночью'
+        expected_value = '*сегодня* *утром*, *днем*, *вечером* и *ночью*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time7) == expected_value
 
     @staticmethod
     def test8():
-        expected_value = 'в ближайшие трое суток'
+        expected_value = 'в *ближайшие трое суток*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time8) == expected_value
 
     @staticmethod
     def test9():
-        expected_value = 'сегодня утром, днем, вечером, ночью и в ближайшие трое суток'
+        expected_value = '*сегодня* *утром*, *днем*, *вечером*, *ночью* и в *ближайшие трое суток*'
         assert influence_text_generate(InfluenceTextGenerator.influence_time9) == expected_value
 
 
@@ -89,17 +89,17 @@ class InfluenceTenDaysTextGenerator:
 
     @staticmethod
     def test1():
-        expected_value = '8 января'
+        expected_value = '*8 января*'
         assert influence_tendays_text_generate(InfluenceTenDaysTextGenerator.influence_time1) == expected_value
 
     @staticmethod
     def test2():
-        expected_value = '8 марта и 10 марта'
+        expected_value = '*8 марта* и *10 марта*'
         assert influence_tendays_text_generate(InfluenceTenDaysTextGenerator.influence_time2) == expected_value
 
     @staticmethod
     def test3():
-        expected_value = '30 июля, 1 августа, 3 августа и 7 августа'
+        expected_value = '*30 июля*, *1 августа*, *3 августа* и *7 августа*'
         assert influence_tendays_text_generate(InfluenceTenDaysTextGenerator.influence_time3) == expected_value
 
 
