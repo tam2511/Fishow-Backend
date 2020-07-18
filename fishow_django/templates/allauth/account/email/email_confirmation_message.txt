@@ -1,0 +1,11 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello from {{ site_name }}!
+
+Благодарим за регистрацию на нашем сайте, "{{ user_display }}".
+
+Для подтверждения своего аккаунта необходимо пройти по ссылке, указанной ниже:
+{{ activate_url }}
+
+{% endblocktrans %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}С уважением, Администрация Fishow!
+{{ site_domain }}{% endblocktrans %}
+{% endautoescape %}
