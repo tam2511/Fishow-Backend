@@ -31,7 +31,7 @@ def parse_date(date):
         '7': 'июля', '8': 'августа', '9': 'сентября',
         '10': 'октября', '11': 'ноября', '12': 'декабря'
     }
-    return '{} {}'.format(day, month_map[month])
+    return '*{} {}*'.format(day, month_map[month])
 
 
 def influence_text_generate(influence_time):
@@ -39,25 +39,25 @@ def influence_text_generate(influence_time):
     morning, day, evening, night = morning_influence(influence_time), day_influence(influence_time), evening_influence(
         influence_time), night_influence(influence_time)
     if morning or day or evening or night:
-        text_builder += 'сегодня '
+        text_builder += '*сегодня* '
         words = []
         if morning:
-            words.append('утром')
+            words.append('*утром*')
         if day:
-            words.append('днем')
+            words.append('*днем*')
         if evening:
-            words.append('вечером')
+            words.append('*вечером*')
         if night:
-            words.append('ночью')
+            words.append('*ночью*')
         if feature_influence(influence_time):
             text_builder += ', '.join(words)
-            text_builder += ' и в ближайшие трое суток'
+            text_builder += ' и в *ближайшие трое суток*'
         elif len(words) == 1:
             text_builder += (words[0]) + ''
         else:
             text_builder += ', '.join(words[:-1]) + ' и {}'.format(words[-1])
     else:
-        text_builder += 'в ближайшие трое суток'
+        text_builder += 'в *ближайшие трое суток*'
     return text_builder
 
 
