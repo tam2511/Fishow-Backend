@@ -51,11 +51,11 @@ def influence_text_generate(influence_time):
             words.append('ночью')
         if feature_influence(influence_time):
             text_builder += ', '.join(words)
-            text_builder += 'и на клев в ближайшие трое суток'
+            text_builder += ' и в ближайшие трое суток'
         elif len(words) == 1:
             text_builder += (words[0]) + ''
         else:
-            text_builder += ', '.join(words[:-1]) + 'и {}'.format(words[-1])
+            text_builder += ', '.join(words[:-1]) + ' и {}'.format(words[-1])
     else:
         text_builder += 'в ближайшие трое суток'
     return text_builder
