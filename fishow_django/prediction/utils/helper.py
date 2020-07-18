@@ -22,8 +22,8 @@ def feature_influence(influence_time):
 
 
 def parse_date(date):
-    date = str(date).split('-')
-    day = str(int(date[0]))
+    date = str(date).split(' ')[0].split('-')
+    day = str(int(date[2]))
     month = str(int(date[1]))
     month_map = {
         '1': 'января', '2': 'февраля', '3': 'марта',
@@ -62,7 +62,7 @@ def influence_text_generate(influence_time):
 
 
 def influence_tendays_text_generate(influence_time):
-    days = list(set(influence_time))
+    days = list(dict.fromkeys(influence_time).keys())
     if len(days) == 1:
         return parse_date(days[0])
     return ', '.join([parse_date(_) for _ in days[:-1]]) + ' и {}'.format(parse_date(days[-1]))
