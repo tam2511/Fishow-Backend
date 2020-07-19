@@ -23,7 +23,7 @@
         )
       Wind(:readyData="readyData"
         :days="days")
-      PressureContainer
+      PressureContainer(:readyData="readyData")
         pressure-chart(
           :days="days"
           :tempMax="predictions['pressure_max']"
