@@ -45,6 +45,10 @@ class FacebookConnect(SocialConnectView):
 
 
 
+
+
+#sdg
+
 #         User = get_user_model()
 #         username = [user.username for user in User.objects.all()]
 #         blogs_all = Blog.objects.all()
