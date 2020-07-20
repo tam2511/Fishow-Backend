@@ -83,6 +83,11 @@ CORS_ORIGIN_WHITELIST = [
 
 ROOT_URLCONF = 'fishow_django.urls'
 
+REST_AUTH_SERIALIZERS = {
+    'PASSWORD_RESET_SERIALIZER':
+        'users.api.serializers.PasswordResetSerializer',
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

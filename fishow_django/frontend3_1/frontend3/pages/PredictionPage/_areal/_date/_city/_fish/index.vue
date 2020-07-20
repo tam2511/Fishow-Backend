@@ -29,6 +29,7 @@
           :tempMax="predictions['pressure_max']"
           :tempMin="predictions['pressure_min']"
         )
+      Moon(:readyData="readyData" :days="days")
     EmptyPrediction(v-else)
 </template>
 
@@ -52,6 +53,7 @@ import Wind from '@/components/predictPage/Results/Wind/index'
 import Temperature from '~/components/predictPage/Results/Temperature/index'
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import PressureContainer from '~/components/predictPage/Results/Pressure/PressureContainer'
+import Moon from '~/components/predictPage/Results/Moon/Moon'
 
 // helpers
 
@@ -76,6 +78,7 @@ export default {
     DaysPicker,
     FPBreadCrumbs,
     Wind,
+    Moon,
   },
   mixins: [urlData],
   layout: 'prediction',
