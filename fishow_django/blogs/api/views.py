@@ -42,7 +42,7 @@ class CommentLikeAPIView(APIView):
         comment.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)-1
+        user.social_rating=int(user.social_rating)-1
         user.save()
 
         serializer_context = {"request": request}
@@ -59,7 +59,7 @@ class CommentLikeAPIView(APIView):
         comment.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)+1
+        user.social_rating=int(user.social_rating)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -82,7 +82,7 @@ class CommentDisLikeAPIView(APIView):
         comment.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)+1
+        user.social_rating=int(user.social_rating)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -99,7 +99,7 @@ class CommentDisLikeAPIView(APIView):
         comment.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)-1
+        user.social_rating=int(user.social_rating)-1
         user.save()
 
         serializer_context = {"request": request}
@@ -160,7 +160,7 @@ class BlogLikeAPIView(APIView):
         blog.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)-1
+        user.social_rating=int(user.social_rating)-1
         user.save()
 
         serializer_context = {"request": request}
@@ -177,7 +177,7 @@ class BlogLikeAPIView(APIView):
         blog.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)+1
+        user.social_rating=int(user.social_rating)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -200,7 +200,7 @@ class BlogDisLikeAPIView(APIView):
         blog.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)+1
+        user.social_rating=int(user.social_rating)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -217,7 +217,7 @@ class BlogDisLikeAPIView(APIView):
         blog.save()
 
         user=CustomUser.objects.get(username=request.user)
-        user.rating=int(user.rating)-1
+        user.social_rating=int(user.social_rating)-1
         user.save()
 
         serializer_context = {"request": request}

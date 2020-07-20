@@ -28,12 +28,12 @@ urlpatterns = [
 #          qv.CommentDisLikeAPIView.as_view(),
 #          name="comment-dislike"),
 
-#     path("report/<int:pk>/like/",
-#          qv.BlogLikeAPIView.as_view(),
-#          name="blog-like"),
-#
-#     path("report/<int:pk>/dislike/",
-#          qv.BlogDisLikeAPIView.as_view(),
-#          name="blog-dislike"),
+    path("report/<int:pk>/like/",
+         qv.ReportLikeAPIView.as_view(),
+         name="report-like"),
+
+    path("report/<int:pk>/dislike/",
+         qv.ReportDisLikeAPIView.as_view(),
+         name="report-dislike"),
 
 ]

@@ -36,6 +36,86 @@ class ReportView(viewsets.ModelViewSet):
                                 report.save()
                     return obj
 
+class ReportLikeAPIView(APIView):
+    """Allow users to add/remove a like to/from an comment instance."""
+    serializer_class = ReportSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        """Remove request.user from the voters queryset of an comment instance."""
+        report = get_object_or_404(Report, pk=pk)
+        user = request.user
+
+        report.votersUp.remove(user)
+        report.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.fishing_rating=int(user.fishing_rating)-1
+        user.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(report, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, pk):
+        """Add request.user to the voters queryset of an comment instance."""
+        report = get_object_or_404(Report, pk=pk)
+        user = request.user
+#         send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, [request.user.email])
+        report.votersUp.add(user)
+        report.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.fishing_rating=int(user.fishing_rating)+1
+        user.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(report, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class ReportDisLikeAPIView(APIView):
+    """Allow users to add/remove a like to/from an comment instance."""
+    serializer_class = ReportSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        """Remove request.user from the voters queryset of an comment instance."""
+        report = get_object_or_404(Report, pk=pk)
+        user = request.user
+
+        report.votersDown.remove(user)
+        report.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.fishing_rating=int(user.fishing_rating)+1
+        user.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(report, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, pk):
+        """Add request.user to the voters queryset of an comment instance."""
+        report = get_object_or_404(Report, pk=pk)
+        user = request.user
+
+        report.votersDown.add(user)
+        report.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.fishing_rating=int(user.fishing_rating)-1
+        user.save()
+
+        serializer_context = {"request": request}
+        serializer = self.serializer_class(report, context=serializer_context)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 # class CommentCreateAPIView(generics.CreateAPIView):
 #     queryset = Comment.objects.all()
 #     serializer_class = CommentSerializer
