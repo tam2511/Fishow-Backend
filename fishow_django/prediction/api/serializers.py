@@ -7,7 +7,9 @@ from ..utils.text_generator import TextGenerator
 
 
 class PredictionSerializer(serializers.ModelSerializer):
-    temperature_text = serializers.SerializerMethodField()
+    temperature_brief = serializers.SerializerMethodField()
+    temperature_fish = serializers.SerializerMethodField()
+    temperature_desc = serializers.SerializerMethodField()
     phenomenon_text = serializers.SerializerMethodField()
     prediction_text = serializers.SerializerMethodField()
     wind_text = serializers.SerializerMethodField()
@@ -20,7 +22,21 @@ class PredictionSerializer(serializers.ModelSerializer):
         # exclude = ['time', 'temperature','wind', 'wind_direction','gust','phenomenon',
         # 'pressure','humidity','uv_index','moon','moon_direction','day','date','areal','city','prob','fish','features']
 
-    def get_temperature_text(self, instance):
+    def get_temperature_brief(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.temperature_one(instance.date, instance.fish)
+
+    def get_temperature_fish(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.temperature_one(instance.date, instance.fish)
+
+    def get_temperature_desc(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
@@ -64,7 +80,9 @@ class PredictionSerializer(serializers.ModelSerializer):
 
 
 class PredictiontenSerializer(serializers.ModelSerializer):
-    temperature_text = serializers.SerializerMethodField()
+    temperature_brief = serializers.SerializerMethodField()
+    temperature_fish = serializers.SerializerMethodField()
+    temperature_desc = serializers.SerializerMethodField()
     phenomenon_text = serializers.SerializerMethodField()
     prediction_text = serializers.SerializerMethodField()
     wind_text = serializers.SerializerMethodField()

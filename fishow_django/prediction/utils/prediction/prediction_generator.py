@@ -1,4 +1,4 @@
-from .helper import *
+from fishow_django.prediction.utils.helper import *
 
 LOWER_BOUND = 0.3
 UPPER_BOUND = 0.7
