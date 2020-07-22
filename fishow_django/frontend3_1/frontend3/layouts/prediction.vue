@@ -60,15 +60,14 @@ a {
   position: fixed;
   right: 0;
   width: 25%;
-  top: 0;
+  top: 55px;
   height: 100%;
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 }
 .header {
-  width: 75%;
   padding: 0 20px;
   border-radius: 5px;
   @media screen and (max-width: 450px) {
