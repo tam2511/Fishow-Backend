@@ -10,11 +10,11 @@ class TemperatureTextGenerator:
 
     @staticmethod
     def get_day_brief(fish):
-        return brief_dict[fish].format(cases[fish])
+        return brief_dict[fish].format(cases[fish]['r'])
 
     @staticmethod
     def get_tenday_brief(fish):
-        return brief_dict[fish].format(cases[fish])
+        return brief_dict[fish].format(cases[fish]['r'])
 
     @staticmethod
     def get_day_fish(fish):
