@@ -100,21 +100,21 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_temperature_brief(instance.fish)
+        return TextGenerator.get_tenday_temperature_brief(instance.fish)
 
     def get_temperature_fish(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_temperature_fish(instance.fish)
+        return TextGenerator.get_tenday_temperature_fish(instance.fish)
 
     def get_temperature_desc(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_temperature_desc(instance.date, instance.fish)
+        return TextGenerator.get_tenday_temperature_desc(instance.date, instance.fish)
 
     def get_phenomenon_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
