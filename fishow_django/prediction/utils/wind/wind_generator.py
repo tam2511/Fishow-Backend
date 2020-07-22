@@ -1,4 +1,4 @@
-from .helper import *
+from fishow_django.prediction.utils.helper import *
 
 
 class WindTextGenerator:
