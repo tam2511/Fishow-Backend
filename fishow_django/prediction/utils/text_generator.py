@@ -1,9 +1,9 @@
-from fishow_django.prediction.utils.temperature.temperature_generator import TemperatureTextGenerator
-from fishow_django.prediction.utils.phenomenon.phenomenon_generator import PhenomenonTextGenerator
-from fishow_django.prediction.utils.prediction.prediction_generator import PredictTextGenerator
-from fishow_django.prediction.utils.wind.wind_generator import WindTextGenerator
-from fishow_django.prediction.utils.pressure.pressure_generator import PressureTextGenerator
-from fishow_django.prediction.utils.moon.moon_generator import MoonTextGenerator
+from .temperature.temperature_generator import TemperatureTextGenerator
+from .phenomenon.phenomenon_generator import PhenomenonTextGenerator
+from .prediction.prediction_generator import PredictTextGenerator
+from .wind.wind_generator import WindTextGenerator
+from .pressure.pressure_generator import PressureTextGenerator
+from .moon.moon_generator import MoonTextGenerator
 
 class TextGenerator:
     '''
