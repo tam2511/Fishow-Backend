@@ -19,24 +19,24 @@ class TemperatureTextGenerator:
     @staticmethod
     def get_day_fish(fish):
         fish_case = cases[fish]
-        if fish['temperature+'] and fish['temperature-']:
-            return pos_neg_fish.format(fish_case['d'], fish['temperature+'], fish['temperature-'])
-        elif fish['temperature+'] and not fish['temperature-']:
-            return pos_fish.format(fish_case['r'], fish['temperature+'])
-        elif fish['temperature-'] and not fish['temperature+']:
-            return neg_fish.format(fish_case['r'], fish['temperature-'])
+        if fish_case['temperature+'] and fish_case['temperature-']:
+            return pos_neg_fish.format(fish_case['d'], fish_case['temperature+'], fish_case['temperature-'])
+        elif fish_case['temperature+'] and not fish_case['temperature-']:
+            return pos_fish.format(fish_case['r'], fish_case['temperature+'])
+        elif fish_case['temperature-'] and not fish_case['temperature+']:
+            return neg_fish.format(fish_case['r'], fish_case['temperature-'])
         else:
             return none_fish.format(fish_case['r'])
 
     @staticmethod
     def get_tenday_fish(fish):
         fish_case = cases[fish]
-        if fish['temperature+'] and fish['temperature-']:
-            return pos_neg_fish.format(fish_case['d'], fish['temperature+'], fish['temperature-'])
-        elif fish['temperature+'] and not fish['temperature-']:
-            return pos_fish.format(fish_case['r'], fish['temperature+'])
-        elif fish['temperature-'] and not fish['temperature+']:
-            return neg_fish.format(fish_case['r'], fish['temperature-'])
+        if fish_case['temperature+'] and fish_case['temperature-']:
+            return pos_neg_fish.format(fish_case['d'], fish_case['temperature+'], fish_case['temperature-'])
+        elif fish_case['temperature+'] and not fish_case['temperature-']:
+            return pos_fish.format(fish_case['r'], fish_case['temperature+'])
+        elif fish_case['temperature-'] and not fish_case['temperature+']:
+            return neg_fish.format(fish_case['r'], fish_case['temperature-'])
         else:
             return none_fish.format(fish_case['r'])
 
