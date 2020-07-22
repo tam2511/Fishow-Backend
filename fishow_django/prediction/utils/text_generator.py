@@ -27,16 +27,28 @@ class TextGenerator:
         TextGenerator.data = data
 
     @staticmethod
-    def get_temperature_brief(date, fish):
-        return TemperatureTextGenerator
+    def get_day_temperature_brief(fish):
+        return TemperatureTextGenerator.get_day_brief(fish)
 
     @staticmethod
-    def temperature_one(date, fish):
-        return TemperatureTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+    def get_tenday_temperature_brief(fish):
+        return TemperatureTextGenerator.get_tenday_brief(fish)
 
     @staticmethod
-    def temperature_ten(date, fish):
-        return TemperatureTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+    def get_day_temperature_fish(fish):
+        return TemperatureTextGenerator.get_day_fish(fish)
+
+    @staticmethod
+    def get_tenday_temperature_fish(fish):
+        return TemperatureTextGenerator.get_tenday_fish(fish)
+
+    @staticmethod
+    def get_day_temperature_desc(date, fish):
+        return TemperatureTextGenerator.get_day_desc(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def get_tenday_temperature_desc(date, fish):
+        return TemperatureTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
 
     @staticmethod
     def phenomenon_one(date, fish):

@@ -30,6 +30,18 @@ def parse_date(date):
     }
     return '*{} {}*'.format(day, month_map[month])
 
+def get_dates_by_intervals(dates, intervals):
+    dates_interval = []
+    for interval in intervals:
+        date1 = parse_date(dates[interval[0]])
+        date2 = parse_date(dates[interval[1]])
+        dates_interval.append('{}-{}'.format(date1, date2))
+    if len(dates_interval) == 1:
+        return dates_interval[0]
+    elif len(dates_interval) == 2:
+        return '{} и {}'.format(dates_interval[0], dates_interval[1])
+    return ', '.join(dates_interval[:-1]) + 'и {}'.format(dates_interval[-1])
+
 
 def influence_text_generate(influence_time):
     text_builder = ''

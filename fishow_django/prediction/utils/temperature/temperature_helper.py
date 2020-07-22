@@ -23,10 +23,71 @@ none_fish = '''На данный момент точно неизвестно, �
 desc block
 '''
 
-stab_desc = '''{} ожидаются небольшие изменения температуры воздуха. '''
-
 hard_low_desc = '''{} ожидается резкое понижение температуры воздуха. '''
 
-hard_up_desc = '''{} ожидается резкое повыщение температуры воздуха. '''
+hard_up_desc = '''{} прогнозируется резкое повышение температуры воздуха. '''
 
 minmax_desc = '''Минимальная температура воздуха - {}, максимальная - {}. '''
+
+ten_minmax_desc = '''{} будет минимальная температура воздуха - {}, а {} ожидается максимальная - {}. '''
+
+
+'''
+utils
+'''
+
+brief_dict = {
+    'щука': not_influence_text,
+    'сом': not_influence_text,
+    'судак': not_influence_text,
+    'окунь': not_influence_text,
+    'берш': not_influence_text,
+    'речная форель': influence_text,
+    'озерная форель': influence_text,
+    'елец': not_influence_text,
+    'чехонь': influence_text,
+    'голавль': not_influence_text,
+    'язь': not_influence_text,
+    'карп': not_influence_text,
+    'жерех': not_influence_text,
+    'лещ': not_influence_text,
+    'карась': not_influence_text,
+    'линь': not_influence_text,
+    'пескарь': not_influence_text,
+    'ротан': not_influence_text,
+    'плотва': not_influence_text,
+    'красноперка': not_influence_text,
+    'налим': influence_text,
+    'густера': not_influence_text,
+    'амур': influence_text,
+    'ерш': not_influence_text,
+    'сазан': not_influence_text,
+    'подуст': not_influence_text,
+    'толстолобик': influence_text,
+    'вобла': not_influence_text
+}
+
+from ..helper.date import get_dates_by_intervals
+
+def hard_dates(temperatures, dates, tag):
+    subs = []
+    for i in range(1, len(temperatures)):
+        subs.append(temperatures[i] - temperatures[i - 1])
+    if tag == 'low':
+        mask_subs = [1 if sub <= -3 else 0 for sub in subs]
+    elif tag == 'up':
+        mask_subs = [1 if sub >= 3 else 0 for sub in subs]
+    if sum(mask_subs) == 0:
+        return None
+    intervals = []
+    current = [-1, -1]
+    for i in range(len(mask_subs)):
+        if mask_subs[i]:
+            if current[0] == -1:
+                current[0] = i
+            current[1] = i
+        else:
+            if not current[0] == -1:
+                intervals.append((current[0] - 1, current[1]))
+            current[0] = -1
+    return get_dates_by_intervals(dates, intervals)
