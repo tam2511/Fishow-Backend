@@ -2,7 +2,7 @@
 Тестирование influence_text_generate
 '''
 
-from helper import influence_text_generate
+from .helper.date import influence_text_generate
 
 
 class InfluenceTextGenerator:
@@ -76,7 +76,7 @@ InfluenceTextGenerator.test9()
 Тестирование influence_tendays_text_generate
 '''
 
-from helper import influence_tendays_text_generate
+from .helper.date import influence_tendays_text_generate
 from datetime import datetime
 
 def to_date(date_str):
