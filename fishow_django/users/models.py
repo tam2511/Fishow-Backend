@@ -10,4 +10,5 @@ class CustomUser(AbstractUser):
     views_profile = models.IntegerField(default=0)
     count_blogs = models.IntegerField(default=0)
     count_comments = models.IntegerField(default=0)
+    count_report = models.IntegerField(default=0)
 

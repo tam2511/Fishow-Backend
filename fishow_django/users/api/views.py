@@ -24,15 +24,8 @@ class CurrentUserAPIView(APIView):
 class UserList(APIView):
     def get(self, request):
         User = get_user_model()
-        users = [{'username':user.username,'email':user.email, 'blogs':user.count_blogs, 'comments':user.count_comments,'rating':user.rating} for user in User.objects.all()]
-        return Response(users)
-
-class UserStatistic(APIView):
-    def get(self, request):
-        User = get_user_model()
-        users = [{'username':user.username,'blogs':user.count_blogs, 'comments':user.count_comments,'rating':user.rating} for user in User.objects.all()]
-        return Response(users)
-
+        users = [{'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating} for user in User.objects.order_by('social_rating')]
+        return Response(users[0:5])
 
 
 class FacebookLogin(SocialLoginView):

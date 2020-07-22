@@ -47,8 +47,17 @@ class UserDisplaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['username','email', 'count_blogs', 'count_comments','social_rating', 'fishing_rating', 'rang']
+        fields = ['username','email', 'count_blogs', 'count_comments', 'count_report', 'social_rating', 'fishing_rating', 'rang']
 
     def get_rang(self, instance):
-            data = CustomUser.objects.filter(username=instance.username)
-            return str(data.count_blogs)
+            rang_koef = int(instance.social_rating) + int(instance.fishing_rating)
+            if rang_koef<1000:
+                return str('Новичок')
+            elif rang_koef<10000:
+                return str('Любитель')
+            elif rang_koef<100000:
+                return str('Полупрофессионал')
+            elif rang_koef<1000000:
+                return str('Профессионал')
+            else:
+                return str('Мастер')
