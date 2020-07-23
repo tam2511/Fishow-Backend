@@ -6,7 +6,7 @@ from ..helper.text import cases
 from ..helper.date import parse_date
 
 
-class TemperatureTextGenerator:
+class PhenomenonTextGenerator:
 
     @staticmethod
     def get_warning(fish):
