@@ -51,12 +51,12 @@ class TextGenerator:
         return TemperatureTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
 
     @staticmethod
-    def phenomenon_one(date, fish):
-        return PhenomenonTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+    def get_day_phenomenon_warning(fish):
+        return PhenomenonTextGenerator.get_warning(fish)
 
     @staticmethod
-    def phenomenon_ten(date, fish):
-        return PhenomenonTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+    def get_tenday_phenomenon_warning(fish):
+        return PhenomenonTextGenerator.get_warning(fish)
 
     @staticmethod
     def prediction_one(date, fish):
