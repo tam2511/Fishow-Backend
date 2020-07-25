@@ -80,4 +80,16 @@ div.container {
     padding-right: 20px;
   }
 }
+.blue {
+  color: #00b3ee;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.strong {
+  font-weight: 800;
+}
 </style>
