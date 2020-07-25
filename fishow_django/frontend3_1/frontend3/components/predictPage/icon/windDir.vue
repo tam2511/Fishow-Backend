@@ -22,10 +22,7 @@ export default {
   },
   computed: {
     result() {
-      const pogoda = {
-        штиль: '',
-      }
-      console.log('=========== ', pogoda[this.dir])
+      // console.log('=========== ', pogoda[this.dir])
       let result
       switch (this.dir) {
         case "'штиль'":

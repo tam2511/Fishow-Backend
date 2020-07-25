@@ -17,7 +17,7 @@ export const mutations = {
 export const actions = {
   sendUserData({ commit }, userData) {
     return UserService.sendUserData(userData).then((response) => {
-      console.log('response = ', response)
+      // console.log('response = ', response)
       // commit('SET_BLOGS', response.data.results)
       // commit('SET_NEXT', response.data.next)
     })

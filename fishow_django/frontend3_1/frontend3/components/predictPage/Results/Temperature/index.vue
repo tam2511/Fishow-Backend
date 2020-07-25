@@ -1,10 +1,14 @@
 <template lang="pug">
     .temperature-box.box
       p.title Погодные условия
-      p.content {{ readyData[0].temperature_text }}
+      p.content(v-html="readyData[0].temperature_brief")
       .columns
         TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
       slot
+      p.content(v-html="readyData[0].temperature_fish")
+      p.content(v-html="readyData[0].temperature_desc")
+
+      p.content(v-html="readyData[0].phenomenon_warning")
 </template>
 
 <script>

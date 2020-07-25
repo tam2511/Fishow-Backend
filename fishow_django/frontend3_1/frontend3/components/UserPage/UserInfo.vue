@@ -45,7 +45,7 @@ export default {
   methods: {
     setTheme() {
       if (this.value && this.value !== '') {
-        console.log('set thheme = ', this.value.value)
+        // console.log('set thheme = ', this.value.value)
         document.getElementById('app').className = 'theme'
         document.getElementById('app').classList.add(this.value.value)
         localStorage.setItem('theme', this.value.value)

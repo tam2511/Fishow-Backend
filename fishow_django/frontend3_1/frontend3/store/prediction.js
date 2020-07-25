@@ -36,7 +36,7 @@ export const actions = {
   },
   getPredictionOne({ commit, axios }, conf) {
     return PredictionService.getPredicitons(conf).then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       commit('SET_PREDICTION', response.data.results)
     })
   },

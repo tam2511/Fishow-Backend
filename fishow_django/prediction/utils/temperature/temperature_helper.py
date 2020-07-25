@@ -90,4 +90,6 @@ def hard_dates(temperatures, dates, tag):
             if not current[0] == -1:
                 intervals.append((current[0] - 1, current[1]))
             current[0] = -1
+    if not current[0] == -1:
+        intervals.append((current[0] - 1, current[1]))
     return get_dates_by_intervals(dates, intervals)
