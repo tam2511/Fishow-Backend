@@ -2,7 +2,7 @@
   <div class="prediction-box box">
     <p class="title">Прогноз клева</p>
     <p class="content">
-      {{ readyData[0].prediction_text }}
+      {{ readyData.prediction_text }}
     </p>
     <slot></slot>
   </div>

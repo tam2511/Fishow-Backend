@@ -67,7 +67,7 @@ export default {
       first: 5,
       data: 0,
       rawHtml:
-        '<strong>Lorem ipsum dolor sit amet</strong>, consectetur *adipiscing elit*, sed do eiusmod tempor incididunt ut <strong>labore</strong> et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco *laboris nisi ut aliquip* ex ea commodo consequat. <strong>uis aute irure dolor <span class="red">in reprehenderit in voluptate velit esse cillum</strong></span>  dolore eu *fugiat nulla pariatur. <span class="green strong">Excepteur sint occaecat cupidatat non proident*, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>',
+        '<strong>Lorem ipsum dolor sit amet</strong>, consectetur *adipiscing elit*, sed do eiusmod tempor incididunt ut <strong>labore</strong> et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco *laboris nisi ut aliquip* ex ea commodo consequat. <strong>uis aute irure dolor <span class="red">in reprehenderit in voluptate velit esse cillum</strong></span>',
       fishList: [
         { title: 'щука', image: '/fish_green/щука.jpg' },
         { title: 'судак', image: '/fish_green/судак.jpg' },
