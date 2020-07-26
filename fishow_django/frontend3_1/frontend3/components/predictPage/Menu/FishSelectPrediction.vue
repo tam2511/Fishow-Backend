@@ -148,13 +148,4 @@ export default {
     background-color: #30bab5;
   }
 }
-.red {
-  color: red;
-}
-.green {
-  color: green;
-}
-.strong {
-  font-weight: 800;
-}
 </style>
