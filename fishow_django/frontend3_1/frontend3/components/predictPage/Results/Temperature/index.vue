@@ -7,7 +7,6 @@
       slot
       p.content(v-html="readyData.temperature_fish")
       p.content(v-html="readyData.temperature_desc")
-
       p.content(v-html="readyData.phenomenon_warning")
 </template>
 
