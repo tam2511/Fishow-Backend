@@ -18,7 +18,7 @@ hard_low_desc = '''<strong>{}</strong> ожидается резкий <span cla
 
 hard_up_desc = '''<strong>{}</strong> прогнозируется резкое <span class="red strong">рост</span> атмосферного давления. '''
 
-minmax_desc = '''Минимальное значение атмосферного давления ожидается - <span class="blue strong">{}</span>, максимальное - <span class="red strong">{}</span>. '''
+minmax_desc = '''Минимальное значение атмосферного давления - <span class="blue strong">{}</span>, максимальное - <span class="red strong">{}</span>. '''
 
 ten_minmax_desc = '''<strong>{}</strong> прогнозируется минимальное значение атмосферного давления - <span class="blue strong">{}</span>, а <strong>{}</strong> ожидается максимальная - <span class="red strong">{}</span>. '''
 

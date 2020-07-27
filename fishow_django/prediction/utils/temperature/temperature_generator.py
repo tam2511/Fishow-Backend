@@ -47,7 +47,7 @@ class TemperatureTextGenerator:
         temps = [_[0] for _ in filtred_data]
         min_temp = min(temps)
         max_temp = max(temps)
-        return minmax_desc.format(max_temp, min_temp)
+        return minmax_desc.format(min_temp, max_temp)
 
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
