@@ -59,12 +59,12 @@ class TextGenerator:
     '''
 
     @staticmethod
-    def get_day_phenomenon_warning(fish):
-        return PhenomenonTextGenerator.get_warning(fish)
+    def get_day_phenomenon_warning(areal, fish):
+        return PhenomenonTextGenerator.get_warning(areal, fish)
 
     @staticmethod
-    def get_tenday_phenomenon_warning(fish):
-        return PhenomenonTextGenerator.get_warning(fish)
+    def get_tenday_phenomenon_warning(areal, fish):
+        return PhenomenonTextGenerator.get_warning(areal, fish)
 
     '''
     Прогноз

@@ -9,5 +9,5 @@ from ..helper.date import parse_date
 class PhenomenonTextGenerator:
 
     @staticmethod
-    def get_warning(fish):
-        return warning_text.format(cases[fish]['r'])
+    def get_warning(areal, fish):
+        return warning_text.format(cases[fish]['r']).format()

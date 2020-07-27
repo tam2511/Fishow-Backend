@@ -50,7 +50,7 @@ class PredictionSerializer(serializers.ModelSerializer):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_phenomenon_warning(instance.fish)
+        return TextGenerator.get_day_phenomenon_warning(instance.areal, instance.fish)
 
     def get_prediction_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
@@ -139,7 +139,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_phenomenon_warning(instance.fish)
+        return TextGenerator.get_tenday_phenomenon_warning(instance.areal, instance.fish)
 
     def get_prediction_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):

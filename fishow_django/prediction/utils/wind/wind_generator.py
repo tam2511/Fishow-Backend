@@ -28,9 +28,11 @@ class WindTextGenerator:
         wind_directions = [_[1] for _ in filtred_data]
         freq_direction = Counter(wind_directions).most_common(1)[0][0]
         if mean_wind > 5:
-            return hard_wind_desc.format(wind_cases[freq_direction])
-        else:
+            return hard_wind_desc.format(mean_wind, wind_cases[freq_direction])
+        elif mean_wind < 2:
             return low_wind_desc.format(wind_cases[freq_direction])
+        else:
+            return mean_wind_desc.format(mean_wind, wind_cases[freq_direction])
 
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
