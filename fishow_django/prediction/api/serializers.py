@@ -13,7 +13,8 @@ class PredictionSerializer(serializers.ModelSerializer):
     phenomenon_warning = serializers.SerializerMethodField()
     prediction_text = serializers.SerializerMethodField()
     wind_text = serializers.SerializerMethodField()
-    pressure_text = serializers.SerializerMethodField()
+    pressure_fish = serializers.SerializerMethodField()
+    pressure_desc = serializers.SerializerMethodField()
     moon_text = serializers.SerializerMethodField()
 
     class Meta:
@@ -64,12 +65,19 @@ class PredictionSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.wind_one(instance.date, instance.fish)
 
-    def get_pressure_text(self, instance):
+    def get_pressure_fish(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.pressure_one(instance.date, instance.fish)
+        return TextGenerator.get_day_pressure_fish(instance.fish)
+
+    def get_pressure_desc(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_day_pressure_desc(instance.date, instance.fish)
 
     def get_moon_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
@@ -86,7 +94,8 @@ class PredictiontenSerializer(serializers.ModelSerializer):
     phenomenon_warning = serializers.SerializerMethodField()
     prediction_text = serializers.SerializerMethodField()
     wind_text = serializers.SerializerMethodField()
-    pressure_text = serializers.SerializerMethodField()
+    pressure_fish = serializers.SerializerMethodField()
+    pressure_desc = serializers.SerializerMethodField()
     moon_text = serializers.SerializerMethodField()
 
     class Meta:
@@ -137,12 +146,19 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.wind_ten(instance.date, instance.fish)
 
-    def get_pressure_text(self, instance):
+    def get_pressure_fish(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.pressure_ten(instance.date, instance.fish)
+        return TextGenerator.get_tenday_pressure_fish(instance.fish)
+
+    def get_pressure_desc(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_tenday_pressure_desc(instance.date, instance.fish)
 
     def get_moon_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
