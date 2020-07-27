@@ -83,12 +83,20 @@ class TextGenerator:
     '''
 
     @staticmethod
-    def wind_one(date, fish):
-        return WindTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+    def get_day_wind_fish(fish):
+        return WindTextGenerator.get_day_fish(fish)
 
     @staticmethod
-    def wind_ten(date, fish):
-        return WindTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+    def get_tenday_wind_fish(fish):
+        return WindTextGenerator.get_tenday_fish(fish)
+
+    @staticmethod
+    def get_day_wind_desc(date, fish):
+        return WindTextGenerator.get_day_desc(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def get_tenday_wind_desc(date, fish):
+        return WindTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
 
     '''
     Давление
