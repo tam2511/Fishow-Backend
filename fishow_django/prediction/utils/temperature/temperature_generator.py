@@ -22,9 +22,9 @@ class TemperatureTextGenerator:
         if fish_case['temperature+'] and fish_case['temperature-']:
             return pos_neg_fish.format(fish_case['d'], fish_case['temperature+'], fish_case['temperature-'])
         elif fish_case['temperature+'] and not fish_case['temperature-']:
-            return pos_fish.format(fish_case['r'], fish_case['temperature+'])
+            return pos_fish.format(fish_case['temperature+'], fish_case['r'])
         elif fish_case['temperature-'] and not fish_case['temperature+']:
-            return neg_fish.format(fish_case['r'], fish_case['temperature-'])
+            return neg_fish.format(fish_case['temperature-'], fish_case['r'])
         else:
             return none_fish.format(fish_case['r'])
 
@@ -34,9 +34,9 @@ class TemperatureTextGenerator:
         if fish_case['temperature+'] and fish_case['temperature-']:
             return pos_neg_fish.format(fish_case['d'], fish_case['temperature+'], fish_case['temperature-'])
         elif fish_case['temperature+'] and not fish_case['temperature-']:
-            return pos_fish.format(fish_case['r'], fish_case['temperature+'])
+            return pos_fish.format(fish_case['temperature+'], fish_case['r'])
         elif fish_case['temperature-'] and not fish_case['temperature+']:
-            return neg_fish.format(fish_case['r'], fish_case['temperature-'])
+            return neg_fish.format(fish_case['temperature-'], fish_case['r'])
         else:
             return none_fish.format(fish_case['r'])
 

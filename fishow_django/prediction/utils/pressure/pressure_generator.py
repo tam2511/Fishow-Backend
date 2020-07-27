@@ -14,9 +14,9 @@ class PressureTextGenerator:
         if fish_case['pressure+'] and fish_case['pressure-']:
             return pos_neg_fish.format(fish_case['d'], fish_case['pressure+'], fish_case['pressure-'])
         elif fish_case['pressure+'] and not fish_case['pressure-']:
-            return pos_fish.format(fish_case['r'], fish_case['pressure+'])
+            return pos_fish.format(fish_case['pressure+'], fish_case['r'])
         elif fish_case['pressure-'] and not fish_case['pressure+']:
-            return neg_fish.format(fish_case['r'], fish_case['pressure-'])
+            return neg_fish.format(fish_case['pressure-'], fish_case['r'])
         else:
             return none_fish.format(fish_case['r'])
 
@@ -26,9 +26,9 @@ class PressureTextGenerator:
         if fish_case['pressure+'] and fish_case['pressure-']:
             return pos_neg_fish.format(fish_case['d'], fish_case['pressure+'], fish_case['pressure-'])
         elif fish_case['pressure+'] and not fish_case['pressure-']:
-            return pos_fish.format(fish_case['r'], fish_case['pressure+'])
+            return pos_fish.format(fish_case['pressure+'], fish_case['r'])
         elif fish_case['pressure-'] and not fish_case['pressure+']:
-            return neg_fish.format(fish_case['r'], fish_case['pressure-'])
+            return neg_fish.format(fish_case['pressure-'], fish_case['r'])
         else:
             return none_fish.format(fish_case['r'])
 
