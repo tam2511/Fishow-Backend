@@ -29,7 +29,7 @@ hard_up_desc = '''<strong>{}</strong> прогнозируется резкое 
 
 minmax_desc = '''Минимальная температура воздуха - <span class="blue strong">{}</span>, максимальная - <span class="red strong">{}</span>. '''
 
-ten_minmax_desc = '''<strong>{}</strong> минимальная температура воздуха будет составлять - <span class="blue strong">{}</span>, а <strong>{}</strong> ожидается максимальная - <span class="red strong">{}</span>. '''
+ten_minmax_desc = '''<strong>{}</strong> прогнозируется минимальная температура воздуха - <span class="blue strong">{}</span>, а <strong>{}</strong> ожидается максимальная - <span class="red strong">{}</span>. '''
 
 
 '''
