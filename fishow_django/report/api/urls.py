@@ -8,25 +8,27 @@ router.register(r"report", qv.ReportView)
 urlpatterns = [
     path("", include(router.urls)),
 
-#     path("blogs/<slug:slug>/comments/",
-#          qv.CommentListAPIView.as_view(),
-#          name="comments-list"),
+    path("fishing/", qv.FishingView.as_view(), name='fishing'),
+
+    path("report/<slug:slug>/comments/",
+         qv.CommentListAPIView.as_view(),
+         name="comment_r-list"),
 #
-#     path("blogs/<slug:slug>/comment/",
-#          qv.CommentCreateAPIView.as_view(),
-#          name="create-comments"),
+    path("report/<slug:slug>/comment/",
+         qv.CommentCreateAPIView.as_view(),
+         name="create-comment_r"),
 #
-#     path("comments/<int:pk>/",
-#          qv.CommentRUDAPIView.as_view(),
-#          name="comment-detail"),
+    path("comments/<int:pk>/",
+         qv.CommentRUDAPIView.as_view(),
+         name="comment_r-detail"),
 #
-#     path("comments/<int:pk>/like/",
-#          qv.CommentLikeAPIView.as_view(),
-#          name="comment-like"),
+    path("comments/<int:pk>/like/",
+         qv.CommentLikeAPIView.as_view(),
+         name="comment_r-like"),
 #
-#     path("comments/<int:pk>/dislike/",
-#          qv.CommentDisLikeAPIView.as_view(),
-#          name="comment-dislike"),
+    path("comments/<int:pk>/dislike/",
+         qv.CommentDisLikeAPIView.as_view(),
+         name="comment_r-dislike"),
 
     path("report/<int:pk>/like/",
          qv.ReportLikeAPIView.as_view(),
