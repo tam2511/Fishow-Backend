@@ -22,17 +22,17 @@ neutral_desc_text = '''<strong>{}</strong> луна не оказывает зн
 
 good_desc_text = '''<strong>{}</strong> луна находится в благоприятной стадии и способствуют хорошему клеву <strong>{}</strong>. '''
 
-
 '''
 utils
 '''
 
 moon_cases = {
     -1: 'убывания',
-    1: 'роста'
+    1: 'роста',
+    0: 'роста'
 }
 
-moon_intervals ={
+moon_intervals = {
     -1: {
         (0.8, 1.0): 'bad',
         (-0.001, 0.07): 'bad',
@@ -46,8 +46,16 @@ moon_intervals ={
         (0.5, 0.75): 'good',
         (0.2, 0.5): 'neutral',
         (0.75, 0.95): 'neutral',
+    },
+    0: {
+        (-0.001, 0.2): 'bad',
+        (0.95, 1.0): 'bad',
+        (0.5, 0.75): 'good',
+        (0.2, 0.5): 'neutral',
+        (0.75, 0.95): 'neutral',
     }
 }
+
 
 def stage_flag(moon_direction, moon):
     for left_right in moon_intervals[moon_direction]:
