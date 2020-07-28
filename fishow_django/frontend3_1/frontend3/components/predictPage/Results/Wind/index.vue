@@ -3,10 +3,10 @@
     p.title Ветер, м/с
     p.content {{ readyData.wind_text }}
     .columns
-      WindOneDay.column(v-for="(day, index) in readyData" :key="day.id + index" :day="day")
+      WindOneDay.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
     p.title.has-text-weight-light Порывы, м/с
     .columns
-      WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.id + index" :day="day" :gustOnly="true")
+      WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.date + index" :day="day" :gustOnly="true")
     slot
 </template>
 

@@ -8,7 +8,7 @@
       </div>
       <div class="column">
         <b-field>
-          <b-select placeholder="Select a name">
+          <b-select placeholder="Выберите рыбу">
             <option
               v-for="(fishs, index) in fishList"
               :key="fishs.id"

@@ -35,8 +35,8 @@ export default {
       default: true,
     },
     radius: {
-      type: Number,
-      default: 50,
+      type: String,
+      default: '50',
     },
   },
   computed: {

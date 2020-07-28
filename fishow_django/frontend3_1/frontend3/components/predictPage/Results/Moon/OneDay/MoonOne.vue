@@ -59,14 +59,18 @@ export default {
           100: '/assets/moon/13.png',
         },
       }
-      let result = null
+      let result = 0
       result = pic[this.day.moon_direction]
       for (const one in result) {
         if (this.day.moon * 100 >= one) {
           result = one
         }
       }
-      return pic[this.day.moon_direction]?.[result]
+      return (
+        (pic[this.day.moon_direction] &&
+          pic[this.day.moon_direction][result]) ||
+        '/assets/moon/23.png'
+      )
     },
   },
   created() {},

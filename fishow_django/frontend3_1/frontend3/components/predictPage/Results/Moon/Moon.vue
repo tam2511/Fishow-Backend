@@ -3,7 +3,7 @@
     p.title Луна
     p.content {{ readyData.moon_text }}
     .columns
-      MoonOne.column(v-for="(day, index) in readyData" :key="day.id + index" :day="day")
+      MoonOne.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
 </template>
 
 <script>
