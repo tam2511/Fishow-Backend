@@ -34,6 +34,7 @@ class WindTextGenerator:
         else:
             return mean_wind_desc.format(mean_wind, wind_cases[freq_direction])
 
+    @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {observe_date: [(_.wind, _.time) for _ in data if
