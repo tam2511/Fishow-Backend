@@ -1,6 +1,47 @@
 <template>
-  <div class="miniPrediction">
-    {{ readyData }}
+  <div class="miniPrediction box">
+    <!--    {{ readyData }}-->
+    <div v-if="readyData">
+      <div class="media">
+        <div class="media-left">
+          {{ readyData.fish }}
+        </div>
+        <div class="media-right">
+          <ul>
+            <li>
+              {{ readyData.areal }}
+            </li>
+            <li>
+              {{ readyData.city }}
+            </li>
+            <li>
+              {{ predictions.date }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="body">
+        <div class="">
+          Сред. температура воздуха: {{ readyData[0].temperature_mean }}
+        </div>
+      </div>
+      <div class="progressbar-footer">
+        <div class="progressbar-main">
+          <div
+            class="progressbar-value"
+            :style="'width:' + readyData[0].prob_max * 100 + '%'"
+          >
+            {{ readyData[0].prob_max * 100 }}%
+          </div>
+        </div>
+        <div class="progressbar-values"></div>
+      </div>
+    </div>
+    <nuxt-link to="/PredictionPage">
+      <div class="placeholder">
+        Посмотреть другие прогнозы
+      </div>
+    </nuxt-link>
   </div>
 </template>
 
@@ -20,7 +61,7 @@ export default {
       `/predictionten/?areal=Московская область&date=${date}&city=Москва&fish=Щука`
     )
     this.getPrediction(url)
-    console.log('this.readyData = ', this.readyData)
+    // console.log('this.readyData = ', this.readyData)
   },
   methods: {
     ...mapActions('prediction', { getPrediction: 'getPrediction' }),
@@ -28,4 +69,58 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.media-right {
+  flex-grow: 1;
+  text-align: right;
+}
+.media {
+  padding: 1.25rem;
+}
+.footer {
+  background: #363636;
+  border-radius: 6px;
+}
+div.box {
+  padding: 0;
+  position: relative;
+}
+.body {
+  padding: 0 1.25rem;
+}
+.progressbar-footer {
+  padding: 2rem;
+  border-radius: 6px;
+}
+.progressbar-main {
+  background-color: #ababab;
+  height: 44px;
+}
+.progressbar-value {
+  width: 50%;
+  height: 100%;
+  background-color: #c8e5bc;
+}
+.placeholder {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  font-size: 20px;
+}
+.placeholder a {
+  color: white;
+}
+.placeholder:hover {
+  background-color: rgba(15, 21, 119, 0.73);
+  color: white;
+  opacity: 1;
+  cursor: pointer;
+}
+</style>
