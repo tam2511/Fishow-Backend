@@ -10,4 +10,4 @@ class PhenomenonTextGenerator:
 
     @staticmethod
     def get_warning(areal, fish):
-        return warning_text.format(cases[fish]['r']).format()
+        return warning_text.format(cases[fish]['r'], areal)
