@@ -116,7 +116,7 @@ export default {
     async registration() {
       try {
         const data = this.reg
-        console.log('data = ', data)
+        // console.log('data = ', data)
         await this.$axios.$post('/rest-auth/registration/', data)
         this.toggle()
         this.success()

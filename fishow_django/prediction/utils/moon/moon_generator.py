@@ -1,5 +1,6 @@
-from .helper import *
-
+from ..helper.extra import *
+from ..helper.date import *
+from ..helper.text import *
 
 class MoonTextGenerator:
     template_text_one = '''Лунные фазы можно назвать важнейшим показателем при построении прогноза клева. Для {} этот показатель очень важен. '''

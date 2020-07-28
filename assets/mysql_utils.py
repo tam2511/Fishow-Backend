@@ -18,6 +18,7 @@ def serialize_key(key):
 class MysqlConnector:
     def __init__(self, username, password, host, database):
         self.connector = pymysql.connect(host, username, password, database)
+        print(self.connector)
 
     def escape_name(self, s):
         return '`{}`'.format(s.replace('`', '``'))
@@ -30,9 +31,10 @@ class MysqlConnector:
         cols = ', '.join(map(self.escape_name, names))
         placeholders = ', '.join(['%({})s'.format(name) for name in names])
         query = 'INSERT INTO {} ({}) VALUES ({})'.format(table_name, cols, placeholders)
-        with self.connector:
-            cur = self.connector.cursor()
-            cur.execute(query, new_row)
+        #with self.connector:
+        cur = self.connector.cursor()
+        cur.execute(query, new_row)
+        self.connector.commit()
 
     def select(self, table_name, where=None):
         if where:
@@ -65,4 +67,3 @@ class MysqlConnector:
         with self.connector:
             cur = self.connector.cursor()
             cur.execute(query)
-

@@ -1,9 +1,9 @@
-from .temperature_generator import TemperatureTextGenerator
-from .phenomenon_generator import PhenomenonTextGenerator
-from .prediction_generator import PredictTextGenerator
-from .wind_generator import WindTextGenerator
-from .pressure_generator import PressureTextGenerator
-from .moon_generator import MoonTextGenerator
+from .temperature.temperature_generator import TemperatureTextGenerator
+from .phenomenon.phenomenon_generator import PhenomenonTextGenerator
+from .prediction.prediction_generator import PredictTextGenerator
+from .wind.wind_generator import WindTextGenerator
+from .pressure.pressure_generator import PressureTextGenerator
+from .moon.moon_generator import MoonTextGenerator
 
 class TextGenerator:
     '''
@@ -27,20 +27,36 @@ class TextGenerator:
         TextGenerator.data = data
 
     @staticmethod
-    def temperature_one(date, fish):
-        return TemperatureTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+    def get_day_temperature_brief(fish):
+        return TemperatureTextGenerator.get_day_brief(fish)
 
     @staticmethod
-    def temperature_ten(date, fish):
-        return TemperatureTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+    def get_tenday_temperature_brief(fish):
+        return TemperatureTextGenerator.get_tenday_brief(fish)
 
     @staticmethod
-    def phenomenon_one(date, fish):
-        return PhenomenonTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+    def get_day_temperature_fish(fish):
+        return TemperatureTextGenerator.get_day_fish(fish)
 
     @staticmethod
-    def phenomenon_ten(date, fish):
-        return PhenomenonTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+    def get_tenday_temperature_fish(fish):
+        return TemperatureTextGenerator.get_tenday_fish(fish)
+
+    @staticmethod
+    def get_day_temperature_desc(date, fish):
+        return TemperatureTextGenerator.get_day_desc(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def get_tenday_temperature_desc(date, fish):
+        return TemperatureTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def get_day_phenomenon_warning(fish):
+        return PhenomenonTextGenerator.get_warning(fish)
+
+    @staticmethod
+    def get_tenday_phenomenon_warning(fish):
+        return PhenomenonTextGenerator.get_warning(fish)
 
     @staticmethod
     def prediction_one(date, fish):

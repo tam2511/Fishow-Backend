@@ -44,13 +44,14 @@ export default {
 .is-link {
   background-color: #204a6f85;
 }
-.tenDays {
+.tenDays a {
   color: #fff;
-  padding: 2px 5px;
+  padding: 10px;
   background-color: #00000040;
   cursor: pointer;
-  margin: 5px 5px;
-  border-radius: 5px;
+  display: inline-block;
+  /*margin: 5px 5px;*/
+  /*border-radius: 5px;*/
   &:hover {
     background-color: #00b3ee;
   }

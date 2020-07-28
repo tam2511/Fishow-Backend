@@ -2,7 +2,7 @@ export default (days) => {
   if (days === null || days.length < 2 || typeof days === 'string') {
     return null
   }
-  console.log('days = ', typeof days)
+  // console.log('days = ', typeof days)
   const whatMonth = {
     '01': 'Января',
     '02': 'Февраля',

@@ -82,11 +82,11 @@ export default {
       if (option) {
         this.date = new Date(this.date)
         this.date.setMonth(option.value)
-        console.log('asdasd')
+        // console.log('asdasd')
       }
     },
     goToDay() {
-      console.log('select')
+      // console.log('select')
       this.$router.push({
         name: 'PredictionPage-areal-date-city-fish',
         params: {

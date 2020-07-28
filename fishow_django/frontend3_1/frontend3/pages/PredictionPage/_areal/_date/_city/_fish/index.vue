@@ -15,12 +15,6 @@
           :probMin="predictions['prob_min']"
         )
       Temperature(:readyData="readyData")
-        ChartTemperature(
-          :days="days"
-          :tempMax="predictions['temperature_max']"
-          :tempMean="predictions['temperature_mean']"
-          :tempMin="predictions['temperature_min']"
-        )
       Wind(:readyData="readyData"
         :days="days")
       PressureContainer(:readyData="readyData")
@@ -29,6 +23,7 @@
           :tempMax="predictions['pressure_max']"
           :tempMin="predictions['pressure_min']"
         )
+      Moon(:readyData="readyData" :days="days")
     EmptyPrediction(v-else)
 </template>
 
@@ -52,6 +47,7 @@ import Wind from '@/components/predictPage/Results/Wind/index'
 import Temperature from '~/components/predictPage/Results/Temperature/index'
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import PressureContainer from '~/components/predictPage/Results/Pressure/PressureContainer'
+import Moon from '~/components/predictPage/Results/Moon/Moon'
 
 // helpers
 
@@ -76,6 +72,7 @@ export default {
     DaysPicker,
     FPBreadCrumbs,
     Wind,
+    Moon,
   },
   mixins: [urlData],
   layout: 'prediction',
@@ -119,8 +116,5 @@ export default {
 .box.result-container > .box {
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
-  &:hover {
-    box-shadow: 6px 9px 16px -11px rgba(0, 0, 0, 0.75);
-  }
 }
 </style>

@@ -2,7 +2,6 @@ export const convertDataFromServer = (data) => {
   if (data === null || typeof data !== 'object') {
     return null
   }
-  console.log(data)
   const getData = (fromData, days) => {
     const returnData = (a, b) => {
       const predictDate = a.split('-')
@@ -29,73 +28,38 @@ export const convertDataFromServer = (data) => {
   const keys = Object.keys(data)
   const newData = {}
 
-  const excludeKeys = {
-    id: 'id',
-    date: 'date',
-    areal: 'areal',
-    city: 'city',
-    fish: 'fish',
-    id_array: 'id_array',
-    wind_direction: 'wind_direction',
-    temperature_text: 'temp-text',
-    phenomenon_text: 'pheno-text',
-    prediction_text: 'predict-text',
-    wind_text: 'wind-text',
-    pressure_text: 'pressure-text',
-    moon_text: 'moon-text',
-  }
-
   keys.forEach((item) => {
-    if (!excludeKeys[item]) {
-      try {
-        newData[item] = JSON.parse(data[item])
-      } catch (e) {
-        newData[item] = data[item]
-      }
+    if (data[item][0] === '[' && data[item][2] !== '[') {
+      // if array
+      newData[item] = data[item].substr(1, data[item].length - 2).split(', ')
+    } else if (data[item][2] === '[') {
+      // if phenomenon
+      newData[item] = JSON.parse(data[item])
     } else {
+      // if just string
       newData[item] = data[item]
     }
   })
-
-  // transform wind_direction to array
-  newData.wind_direction = newData.wind_direction
-    .substr(1, newData.wind_direction.length - 2)
-    .split(', ')
-
-  const excludeKeysNew = {
-    id: 'id',
-    date: 'date',
-    areal: 'areal',
-    city: 'city',
-    fish: 'fish',
-    id_array: 'id_array',
-    temperature_text: 'temp-text',
-    phenomenon_text: 'pheno-text',
-    prediction_text: 'predict-text',
-    wind_text: 'wind-text',
-    pressure_text: 'pressure-text',
-    moon_text: 'moon-text',
-  }
-
   const length = newData.temperature_max.length
-
   const days = []
   const calendarDays = getData(data.date, 9)
-
   for (let i = 0; i < length; i++) {
     const day = {}
     keys.forEach((item) => {
-      if (!excludeKeysNew[item]) {
+      if (typeof newData[item] === 'object') {
         day[item] = newData[item][i]
-      } else {
-        day[item] = newData[item]
       }
     })
     days.push(day)
   }
+  keys.forEach((item) => {
+    if (typeof newData[item] === 'string') {
+      days[item] = newData[item]
+    }
+  })
   days.forEach((day, index) => {
     day.date = calendarDays[index]
   })
-
   return days
 }
+// convertDataFromServer(datafromserver);

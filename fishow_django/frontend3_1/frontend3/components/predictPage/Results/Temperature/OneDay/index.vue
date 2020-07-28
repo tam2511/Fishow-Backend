@@ -1,9 +1,15 @@
 <template>
-  <div>
+  <div class="tem-container">
     <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
     <figure class="image is-48x48">
       <img :src="image" alt="" :title="day.phenomenon" />
     </figure>
+    {{ day.temperature_max }}
+    <div class="svg-container">
+      <temp-box :radius="day.temperature_max"></temp-box>
+      <temp-box :radius="day.temperature_min" :up="false"></temp-box>
+    </div>
+    {{ day.temperature_min }}
     <!--    {{ day.phenomenon }}-->
   </div>
 </template>
@@ -13,9 +19,10 @@ import { pogoda } from '~/assets/js/convertPogodaToUrlImage'
 import helper from '~/assets/js/helper'
 import convertFromObjectToDate from '~/assets/js/convertFromObjectToDate'
 import DayBlock from '~/components/predictPage/helpers/dayBlock'
+import TempBox from '~/components/predictPage/icon/tempBox'
 
 export default {
-  components: { DayBlock },
+  components: { TempBox, DayBlock },
   props: {
     day: {
       type: Object,
@@ -49,5 +56,22 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: center;
+}
+.tem-container {
+  text-align: center;
+}
+figure {
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+.svg-container {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.svg-container svg {
+  display: block;
 }
 </style>

@@ -1,5 +1,6 @@
-from .helper import *
-
+from ..helper.extra import *
+from ..helper.date import *
+from ..helper.text import *
 
 class PressureTextGenerator:
     template_text_one = '''Давление является одним из самых важных показателей для определения прогноза клева {}. '''

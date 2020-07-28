@@ -1,10 +1,13 @@
 <template lang="pug">
     .temperature-box.box
       p.title Погодные условия
-      p.content {{ readyData[0].temperature_text }}
+      p.content(v-html="readyData.temperature_brief")
       .columns
         TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
       slot
+      p.content(v-html="readyData.temperature_fish")
+      p.content(v-html="readyData.temperature_desc")
+      p.content(v-html="readyData.phenomenon_warning")
 </template>
 
 <script>
@@ -19,8 +22,12 @@ export default {
 
 <style scoped lang="scss">
 @media screen and (max-width: 768px) {
-  div.column {
-    display: inline-block;
+  div.columns {
+    display: flex;
+    overflow: scroll;
+  }
+  p.content {
+    text-align: justify;
   }
 }
 </style>
