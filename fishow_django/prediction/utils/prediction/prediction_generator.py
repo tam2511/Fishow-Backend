@@ -5,7 +5,7 @@ from ..helper.text import cases
 from ..helper.date import parse_date
 
 
-class PhenomenonTextGenerator:
+class PredictTextGenerator:
 
     @staticmethod
     def get_warning(areal, fish):
