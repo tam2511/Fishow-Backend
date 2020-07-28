@@ -37,6 +37,7 @@
         <div class="progressbar-values"></div>
       </div>
     </div>
+    <div v-else class="if-lostdata"></div>
     <nuxt-link to="/PredictionPage">
       <div class="placeholder">
         Посмотреть другие прогнозы
@@ -53,12 +54,22 @@ export default {
     readyData() {
       return convertDataFromServer(this.predictions)
     },
+    rightDate() {
+      const d = new Date()
+      let month = '' + (d.getMonth() + 1)
+      let day = '' + d.getDate()
+      const year = d.getFullYear()
+
+      if (month.length < 2) month = '0' + month
+      if (day.length < 2) day = '0' + day
+
+      return [year, month, day].join('-')
+    },
     ...mapState('prediction', ['predictions']),
   },
   created() {
-    const date = '2020-07-18'
     const url = encodeURI(
-      `/predictionten/?areal=Московская область&date=${date}&city=Москва&fish=Щука`
+      `/predictionten/?areal=Московская область&date=${this.rightDate}&city=Москва&fish=Щука`
     )
     this.getPrediction(url)
     // console.log('this.readyData = ', this.readyData)
@@ -122,5 +133,8 @@ div.box {
   color: white;
   opacity: 1;
   cursor: pointer;
+}
+.if-lostdata {
+  height: 200px;
 }
 </style>
