@@ -71,6 +71,9 @@ export default {
     const url = encodeURI(
       `/predictionten/?areal=Московская область&date=${this.rightDate}&city=Москва&fish=Щука`
     )
+    // const url = encodeURI(
+    //   '/predictionten/?areal=Московская область&date=2020-07-18&city=Москва&fish=Щука'
+    // )
     this.getPrediction(url)
     // console.log('this.readyData = ', this.readyData)
   },
