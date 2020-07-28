@@ -22,8 +22,12 @@ export default {
 
 <style scoped lang="scss">
 @media screen and (max-width: 768px) {
-  div.column {
-    display: inline-block;
+  div.columns {
+    display: flex;
+    overflow: scroll;
+  }
+  p.content {
+    text-align: justify;
   }
 }
 </style>

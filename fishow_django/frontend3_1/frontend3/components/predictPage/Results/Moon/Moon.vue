@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .moon-box {
   background-color: rgba(0, 0, 0, 0.89);
   color: #fff;
@@ -32,5 +32,12 @@ export default {
 }
 .title {
   color: #fff;
+}
+@media screen and (max-width: 768px) {
+  div.columns {
+    display: flex;
+    overflow: scroll;
+    min-height: 200px;
+  }
 }
 </style>

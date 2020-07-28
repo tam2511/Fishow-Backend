@@ -29,9 +29,6 @@ export default {
 <style scoped lang="scss">
 @media screen and (max-width: 768px) {
   div.column {
-    display: inline-block;
-    padding: 0;
-    border-right: 6px solid #fff;
   }
   div.columns {
     margin: 0 auto;
