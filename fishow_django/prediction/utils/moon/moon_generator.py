@@ -3,10 +3,10 @@ import numpy as np
 
 from .moon_helper import *
 from ..helper.text import cases
-from ..helper.date import parse_date
+from ..helper.date import parse_date, get_dates_tex
 
 
-class PhenomenonTextGenerator:
+class MoonTextGenerator:
 
     @staticmethod
     def get_day_desc(data, date, fish):
@@ -34,16 +34,21 @@ class PhenomenonTextGenerator:
         good_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages == 'good']
         neutral_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages == 'neutral']
         if len(bad_dates) > 0 and len(good_dates) > 0 and len(neutral_dates) > 0:
-            return 1
+            return bad_neutral_good_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
+                                                     get_dates_tex(neutral_dates), get_dates_tex(good_dates),
+                                                     cases[fish]['r'])
         if len(bad_dates) > 0 and len(good_dates) > 0 and len(neutral_dates) == 0:
-            return 1
+            return bad_good_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
+                                             get_dates_tex(good_dates))
         if len(bad_dates) > 0 and len(good_dates) == 0 and len(neutral_dates) > 0:
-            return 1
+            return bad_neutral_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
+                                                get_dates_tex(neutral_dates))
         if len(bad_dates) > 0 and len(good_dates) == 0 and len(neutral_dates) == 0:
-            return 1
+            return bad_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'])
         if len(bad_dates) == 0 and len(good_dates) > 0 and len(neutral_dates) > 0:
-            return 1
+            return neutral_good_desc_text.format(get_dates_tex(neutral_dates), get_dates_tex(good_dates),
+                                                 cases[fish]['r'])
         if len(bad_dates) == 0 and len(good_dates) > 0 and len(neutral_dates) == 0:
-            return 1
+            return good_desc_text.format(get_dates_tex(good_dates), cases[fish]['r'])
         if len(bad_dates) == 0 and len(good_dates) == 0 and len(neutral_dates) > 0:
-            return 1
+            return neutral_desc_text.format(get_dates_tex(neutral_dates), cases[fish]['r'])

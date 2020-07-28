@@ -123,9 +123,9 @@ class TextGenerator:
     '''
 
     @staticmethod
-    def moon_one(date, fish):
-        return MoonTextGenerator.day_text_generate(TextGenerator.data, date, fish)
+    def get_day_moon_desc(date, fish):
+        return MoonTextGenerator.get_day_desc(TextGenerator.data, date, fish)
 
     @staticmethod
-    def moon_ten(date, fish):
-        return MoonTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
+    def get_tenday_moon_desc(date, fish):
+        return MoonTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
