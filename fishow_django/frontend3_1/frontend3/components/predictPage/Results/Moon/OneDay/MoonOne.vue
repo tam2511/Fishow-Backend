@@ -5,7 +5,7 @@
     <!--    {{ day.moon_direction }}-->
     <figure class="image is-48x48">
       <img :src="moonPic" />
-      <p class="content">{{ day.moon * 100 }}</p>
+      <p class="content">{{ (day.moon * 100).toFixed() }}%</p>
     </figure>
   </div>
 </template>
@@ -73,4 +73,11 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.column {
+  text-align: center;
+}
+.content {
+  padding-top: 10px;
+}
+</style>

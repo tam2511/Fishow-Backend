@@ -116,8 +116,5 @@ export default {
 .box.result-container > .box {
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
-  &:hover {
-    box-shadow: 6px 9px 16px -11px rgba(0, 0, 0, 0.75);
-  }
 }
 </style>

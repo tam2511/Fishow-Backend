@@ -23,4 +23,14 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.moon-box {
+  background-color: rgba(0, 0, 0, 0.89);
+  color: #fff;
+
+  padding-bottom: 50px;
+}
+.title {
+  color: #fff;
+}
+</style>

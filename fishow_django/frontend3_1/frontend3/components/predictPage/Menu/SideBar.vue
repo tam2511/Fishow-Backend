@@ -17,24 +17,14 @@
       </b-menu-list>
       <b-menu-list v-if="predictions" label="Прогноз">
         <b-menu-item
-          icon="percent"
-          pack="fas"
-          label="Клев"
-          @click="doScroll('predic')"
-        />
-        <b-menu-item
-          pack="fas"
-          icon="thermometer"
-          label="Погодные условия"
-          @click="doScroll('temp')"
-        />
-        <b-menu-item label="Ветер" @click="doScroll('wind')"></b-menu-item>
-        <b-menu-item
-          pack="fas"
-          icon="thermometer"
-          label="Давление"
-          @click="doScroll('pressure')"
-        />
+          v-for="menu in menuPrognos"
+          :key="menu.title"
+          :icon="menu.icon"
+          :label="menu.label"
+          size="is-small"
+          icon-pack="fas"
+          @click="doScroll(menu.click)"
+        ></b-menu-item>
       </b-menu-list>
     </b-menu>
   </div>
@@ -48,6 +38,33 @@ export default {
       drawer: true,
       mini: true,
       isActive: false,
+      menuPrognos: [
+        {
+          icon: 'percent',
+          label: 'Клев',
+          click: 'predic',
+        },
+        {
+          icon: 'thermometer-quarter',
+          label: 'Погодные условия',
+          click: 'temp',
+        },
+        {
+          icon: 'wind',
+          label: 'Ветер',
+          click: 'wind',
+        },
+        {
+          icon: 'mountain',
+          label: 'Давление',
+          click: 'pressure',
+        },
+        {
+          icon: 'moon',
+          label: 'Луна',
+          click: 'moon',
+        },
+      ],
     }
   },
   computed: {
@@ -86,5 +103,8 @@ export default {
 <style scoped lang="scss">
 .card.box {
   height: 100%;
+}
+.icon.is-small i {
+  font-size: 12px;
 }
 </style>
