@@ -30,6 +30,7 @@ def parse_date(date):
     }
     return '*{} {}*'.format(day, month_map[month])
 
+
 def get_dates_by_intervals(dates, intervals):
     dates_interval = []
     for interval in intervals:
@@ -41,6 +42,7 @@ def get_dates_by_intervals(dates, intervals):
     elif len(dates_interval) == 2:
         return '{} и {}'.format(dates_interval[0], dates_interval[1])
     return ', '.join(dates_interval[:-1]) + 'и {}'.format(dates_interval[-1])
+
 
 def get_dates_tex(dates):
     intervals = []
@@ -58,7 +60,8 @@ def get_dates_tex(dates):
         intervals.append((dates[-1]))
     else:
         intervals.append((left_date, dates[-1]))
-    dates_interval = ['{}-{}'.format(_[0], _[1]) if len(_) == 2 else ''.format(_[0]) for _ in intervals]
+    dates_interval = ['{}-{}'.format(parse_date(_[0]), parse_date(_[1])) if len(_) == 2 else ''.format(parse_date(_[0]))
+                      for _ in intervals]
     if len(dates_interval) == 1:
         return dates_interval[0]
     if len(dates_interval) == 2:
