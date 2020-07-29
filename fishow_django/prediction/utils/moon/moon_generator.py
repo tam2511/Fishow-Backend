@@ -30,9 +30,9 @@ class MoonTextGenerator:
         moon_directions = [filtred_data[d][0][0] for d in filtred_data]
         moons = [filtred_data[d][0][1] for d in filtred_data]
         moon_stages = [stage_flag(moon_directions[i], moons[i]) for i in range(len(moons))]
-        bad_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages == 'bad']
-        good_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages == 'good']
-        neutral_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages == 'neutral']
+        bad_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'bad']
+        good_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'good']
+        neutral_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'neutral']
         if len(bad_dates) > 0 and len(good_dates) > 0 and len(neutral_dates) > 0:
             return bad_neutral_good_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
                                                      get_dates_tex(neutral_dates), get_dates_tex(good_dates),
