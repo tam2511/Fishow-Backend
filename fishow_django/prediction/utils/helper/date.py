@@ -28,7 +28,7 @@ def parse_date(date):
         '7': 'июля', '8': 'августа', '9': 'сентября',
         '10': 'октября', '11': 'ноября', '12': 'декабря'
     }
-    return '*{} {}*'.format(day, month_map[month])
+    return '{} {}'.format(day, month_map[month])
 
 
 def get_dates_by_intervals(dates, intervals):
@@ -59,7 +59,7 @@ def get_dates_tex(dates):
         intervals.append((left_date, current_date) if current_date > left_date else (left_date))
         intervals.append((dates[-1]))
     else:
-        intervals.append((left_date, dates[-1]))
+        intervals.append((left_date, dates[-1]) if dates[-1] > left_date else (left_date))
     dates_interval = ['{}-{}'.format(parse_date(_[0]), parse_date(_[1])) if len(_) == 2 else ''.format(parse_date(_[0]))
                       for _ in intervals]
     if len(dates_interval) == 1:
