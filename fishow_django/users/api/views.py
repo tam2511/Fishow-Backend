@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from users.api.serializers import UserDisplaySerializer
+from rest_framework.permissions import AllowAny
 from users.models import CustomUser
 from blogs.models import Blog
 from django.contrib.auth import get_user_model
@@ -22,11 +23,36 @@ class CurrentUserAPIView(APIView):
         return Response(serializer.data)
 
 class UserList(APIView):
-    def get(self, request):
-        User = get_user_model()
-        users = [{'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating} for user in User.objects.order_by('social_rating')]
-        return Response(users[0:5])
 
+    def get(self, request):
+        def get_rang(user):
+            rang_koef = int(user.social_rating) + int(user.fishing_rating)
+            if rang_koef<1000:
+                return str('Новичок')
+            elif rang_koef<10000:
+                return str('Любитель')
+            elif rang_koef<100000:
+                return str('Полупрофессионал')
+            elif rang_koef<1000000:
+                return str('Профессионал')
+            else:
+                return str('Мастер')
+
+        User = get_user_model()
+        users=[]
+        count=0
+        for user in User.objects.order_by('social_rating'):
+            if count<5:
+                users.append({'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating, 'rang':get_rang(user)})
+                count=count+1
+            else: return
+        return Response(users)
+
+
+# class UserList(APIView):
+#         queryset = get_user_model().objects.all().order_by('social_rating')
+#         serializer_class = UserDisplaySerializer
+#         permission_classes = [AllowAny]
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter

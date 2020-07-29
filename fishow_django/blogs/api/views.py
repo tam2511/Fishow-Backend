@@ -41,7 +41,7 @@ class CommentLikeAPIView(APIView):
         comment.votersUp.remove(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)-1
         user.save()
 
@@ -58,7 +58,7 @@ class CommentLikeAPIView(APIView):
         comment.votersUp.add(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)+1
         user.save()
 
@@ -81,7 +81,7 @@ class CommentDisLikeAPIView(APIView):
         comment.votersDown.remove(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)+1
         user.save()
 
@@ -98,7 +98,7 @@ class CommentDisLikeAPIView(APIView):
         comment.votersDown.add(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)-1
         user.save()
 
@@ -159,7 +159,7 @@ class BlogLikeAPIView(APIView):
         blog.votersUp.remove(user)
         blog.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=blog.author)
         user.social_rating=int(user.social_rating)-1
         user.save()
 
@@ -176,7 +176,7 @@ class BlogLikeAPIView(APIView):
         blog.votersUp.add(user)
         blog.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=blog.author)
         user.social_rating=int(user.social_rating)+1
         user.save()
 
@@ -199,7 +199,7 @@ class BlogDisLikeAPIView(APIView):
         blog.votersDown.remove(user)
         blog.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=blog.author)
         user.social_rating=int(user.social_rating)+1
         user.save()
 
@@ -216,7 +216,7 @@ class BlogDisLikeAPIView(APIView):
         blog.votersDown.add(user)
         blog.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=blog.author)
         user.social_rating=int(user.social_rating)-1
         user.save()
 

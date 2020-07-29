@@ -49,7 +49,7 @@ class ReportLikeAPIView(APIView):
         report.votersUp.remove(user)
         report.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=report.author)
         user.fishing_rating=int(user.fishing_rating)-1
         user.save()
 
@@ -66,7 +66,7 @@ class ReportLikeAPIView(APIView):
         report.votersUp.add(user)
         report.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=report.author)
         user.fishing_rating=int(user.fishing_rating)+1
         user.save()
 
@@ -89,7 +89,7 @@ class ReportDisLikeAPIView(APIView):
         report.votersDown.remove(user)
         report.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=request.author)
         user.fishing_rating=int(user.fishing_rating)+1
         user.save()
 
@@ -106,7 +106,7 @@ class ReportDisLikeAPIView(APIView):
         report.votersDown.add(user)
         report.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=report.author)
         user.fishing_rating=int(user.fishing_rating)-1
         user.save()
 
@@ -139,7 +139,7 @@ class CommentLikeAPIView(APIView):
         comment.votersUp.remove(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)-1
         user.save()
 
@@ -156,7 +156,7 @@ class CommentLikeAPIView(APIView):
         comment.votersUp.add(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)+1
         user.save()
 
@@ -179,7 +179,7 @@ class CommentDisLikeAPIView(APIView):
         comment.votersDown.remove(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)+1
         user.save()
 
@@ -196,7 +196,7 @@ class CommentDisLikeAPIView(APIView):
         comment.votersDown.add(user)
         comment.save()
 
-        user=CustomUser.objects.get(username=request.user)
+        user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)-1
         user.save()
 
@@ -212,7 +212,7 @@ class CommentListAPIView(generics.ListAPIView):
     def get_queryset(self):
         print(self.request.user)
         kwarg_slug = self.kwargs.get("slug")
-        return Comment_r.objects.filter(blog__slug=kwarg_slug).order_by("-created_at")
+        return Comment_r.objects.filter(report__slug=kwarg_slug).order_by("-created_at")
 
 class CommentRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     """Provide *RUD functionality for an comment instance to it's author."""
