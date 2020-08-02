@@ -55,7 +55,7 @@ class PredictTextGenerator:
         min_group_by_date = {}
         max_group_by_date = {}
         for d, time in min_dates:
-            if d in min_group_by_date:
+            if not d in min_group_by_date:
                 min_group_by_date[d] = [time]
             else:
                 min_group_by_date[d].append(time)
