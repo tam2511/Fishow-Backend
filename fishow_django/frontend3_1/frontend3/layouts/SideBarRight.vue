@@ -23,7 +23,7 @@
                 </article>
                 <article class="tile is-parent is-vertical">
                   <p class="title">Прогнозы</p>
-                  <div class="tile is-child box">
+                  <div class="tile is-child">
                     <MiniPrediction />
                   </div>
                 </article>
