@@ -69,7 +69,7 @@ export default {
   },
   created() {
     const url = encodeURI(
-      `/predictionten/?areal=Московская область&date=${this.rightDate}&city=Москва&fish=Щука`
+      `/predictionten/?areal=Брянская область&date=${this.rightDate}&city=Брянск&fish=Щука`
     )
     // const url = encodeURI(
     //   '/predictionten/?areal=Московская область&date=2020-07-18&city=Москва&fish=Щука'

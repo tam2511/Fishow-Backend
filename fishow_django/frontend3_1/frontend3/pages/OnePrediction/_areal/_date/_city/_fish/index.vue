@@ -1,8 +1,14 @@
 <template>
   <div>
     <FPBreadCrumbs :areal="areal" :city="city" :fish="fish" :date="date" />
-    <div v-for="predict in prediction" :key="predict.id">
-      {{ predict.id }}
+    <div class="columns is-2">
+      <div v-for="predict in prediction" :key="predict.id" class="column">
+        <div class="box card" мн>
+          <div class="card-content">
+            {{ predict.date }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
