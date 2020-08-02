@@ -1,22 +1,3 @@
-def morning_influence(influence_time):
-    return (0, 6) in influence_time or (0, 9) in influence_time
-
-
-def day_influence(influence_time):
-    return (0, 12) in influence_time or (0, 15) in influence_time
-
-
-def evening_influence(influence_time):
-    return (0, 18) in influence_time or (0, 21) in influence_time
-
-
-def night_influence(influence_time):
-    return (0, 0) in influence_time or (0, 3) in influence_time
-
-
-def feature_influence(influence_time):
-    return sum([_[0] for _ in influence_time]) > 0
-
 
 def parse_date(date):
     date = str(date).split(' ')[0].split('-')

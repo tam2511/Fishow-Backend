@@ -71,12 +71,20 @@ class TextGenerator:
     '''
 
     @staticmethod
-    def get_day_prediction_warning(date, fish):
-        return PredictTextGenerator.get_warning(TextGenerator.data, date, fish)
+    def get_day_prediction_brief(date, fish):
+        return PredictTextGenerator.get_day_brief(date, fish)
 
     @staticmethod
-    def get_tenday_prediction_warning(date, fish):
-        return PredictTextGenerator.get_warning(TextGenerator.data, date, fish)
+    def get_tenday_prediction_brief(date, fish):
+        return PredictTextGenerator.get_tenday_brief(date, fish)
+
+    @staticmethod
+    def get_day_prediction_desc(date, fish):
+        return PredictTextGenerator.get_day_desc(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def get_tenday_prediction_desc(date, fish):
+        return PredictTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
 
     '''
     Ветер
