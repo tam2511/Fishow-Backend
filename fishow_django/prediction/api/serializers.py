@@ -11,13 +11,10 @@ class PredictionSerializer(serializers.ModelSerializer):
     temperature_fish = serializers.SerializerMethodField()
     temperature_desc = serializers.SerializerMethodField()
     phenomenon_warning = serializers.SerializerMethodField()
-    prediction_brief = serializers.SerializerMethodField()
-    prediction_desc = serializers.SerializerMethodField()
-    wind_fish = serializers.SerializerMethodField()
-    wind_desc = serializers.SerializerMethodField()
-    pressure_fish = serializers.SerializerMethodField()
-    pressure_desc = serializers.SerializerMethodField()
-    moon_desc = serializers.SerializerMethodField()
+    prediction_text = serializers.SerializerMethodField()
+    wind_text = serializers.SerializerMethodField()
+    pressure_text = serializers.SerializerMethodField()
+    moon_text = serializers.SerializerMethodField()
 
     class Meta:
         model = Prediction
@@ -51,56 +48,35 @@ class PredictionSerializer(serializers.ModelSerializer):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_phenomenon_warning(instance.areal, instance.fish)
+        return TextGenerator.get_day_phenomenon_warning(instance.fish)
 
-    def get_prediction_desc(self, instance):
+    def get_prediction_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_prediction_desc(instance.date, instance.fish)
+        return TextGenerator.prediction_one(instance.date, instance.fish)
 
-    def get_prediction_brief(self, instance):
+    def get_wind_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_prediction_brief(instance.date, instance.fish)
+        return TextGenerator.wind_one(instance.date, instance.fish)
 
-    def get_wind_fish(self, instance):
+    def get_pressure_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_wind_fish(instance.fish)
+        return TextGenerator.pressure_one(instance.date, instance.fish)
 
-    def get_wind_desc(self, instance):
+    def get_moon_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_wind_desc(instance.date, instance.fish)
-
-    def get_pressure_fish(self, instance):
-        if not TextGenerator.check_stage(instance.city, instance.areal):
-            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
-            TextGenerator.set_data(data)
-            TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_pressure_fish(instance.fish)
-
-    def get_pressure_desc(self, instance):
-        if not TextGenerator.check_stage(instance.city, instance.areal):
-            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
-            TextGenerator.set_data(data)
-            TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_pressure_desc(instance.date, instance.fish)
-
-    def get_moon_desc(self, instance):
-        if not TextGenerator.check_stage(instance.city, instance.areal):
-            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
-            TextGenerator.set_data(data)
-            TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_moon_desc(instance.date, instance.fish)
+        return TextGenerator.moon_one(instance.date, instance.fish)
 
 
 class PredictiontenSerializer(serializers.ModelSerializer):
@@ -108,13 +84,10 @@ class PredictiontenSerializer(serializers.ModelSerializer):
     temperature_fish = serializers.SerializerMethodField()
     temperature_desc = serializers.SerializerMethodField()
     phenomenon_warning = serializers.SerializerMethodField()
-    prediction_brief = serializers.SerializerMethodField()
-    prediction_desc = serializers.SerializerMethodField()
-    wind_fish = serializers.SerializerMethodField()
-    wind_desc = serializers.SerializerMethodField()
-    pressure_fish = serializers.SerializerMethodField()
-    pressure_desc = serializers.SerializerMethodField()
-    moon_desc = serializers.SerializerMethodField()
+    prediction_text = serializers.SerializerMethodField()
+    wind_text = serializers.SerializerMethodField()
+    pressure_text = serializers.SerializerMethodField()
+    moon_text = serializers.SerializerMethodField()
 
     class Meta:
         model = Predictionten
@@ -148,53 +121,32 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_phenomenon_warning(instance.areal, instance.fish)
+        return TextGenerator.get_tenday_phenomenon_warning(instance.fish)
 
-    def get_prediction_desc(self, instance):
+    def get_prediction_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_prediction_desc(instance.date, instance.fish)
+        return TextGenerator.prediction_ten(instance.date, instance.fish)
 
-    def get_prediсtion_brief(self, instance):
+    def get_wind_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_prediction_brief(instance.date, instance.fish)
+        return TextGenerator.wind_ten(instance.date, instance.fish)
 
-    def get_wind_fish(self, instance):
+    def get_pressure_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_wind_fish(instance.fish)
+        return TextGenerator.pressure_ten(instance.date, instance.fish)
 
-    def get_wind_desc(self, instance):
+    def get_moon_text(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_wind_desc(instance.date, instance.fish)
-
-    def get_pressure_fish(self, instance):
-        if not TextGenerator.check_stage(instance.city, instance.areal):
-            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
-            TextGenerator.set_data(data)
-            TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_pressure_fish(instance.fish)
-
-    def get_pressure_desc(self, instance):
-        if not TextGenerator.check_stage(instance.city, instance.areal):
-            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
-            TextGenerator.set_data(data)
-            TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_pressure_desc(instance.date, instance.fish)
-
-    def get_moon_desc(self, instance):
-        if not TextGenerator.check_stage(instance.city, instance.areal):
-            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
-            TextGenerator.set_data(data)
-            TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_moon_desc(instance.date, instance.fish)
+        return TextGenerator.moon_ten(instance.date, instance.fish)

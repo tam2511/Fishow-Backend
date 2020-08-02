@@ -26,10 +26,6 @@ class TextGenerator:
     def set_data(data):
         TextGenerator.data = data
 
-    '''
-    Температура
-    '''
-
     @staticmethod
     def get_day_temperature_brief(fish):
         return TemperatureTextGenerator.get_day_brief(fish)
@@ -54,86 +50,42 @@ class TextGenerator:
     def get_tenday_temperature_desc(date, fish):
         return TemperatureTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
 
-    '''
-    Погодные явления
-    '''
+    @staticmethod
+    def get_day_phenomenon_warning(fish):
+        return PhenomenonTextGenerator.get_warning(fish)
 
     @staticmethod
-    def get_day_phenomenon_warning(areal, fish):
-        return PhenomenonTextGenerator.get_warning(areal, fish)
+    def get_tenday_phenomenon_warning(fish):
+        return PhenomenonTextGenerator.get_warning(fish)
 
     @staticmethod
-    def get_tenday_phenomenon_warning(areal, fish):
-        return PhenomenonTextGenerator.get_warning(areal, fish)
-
-    '''
-    Прогноз
-    '''
+    def prediction_one(date, fish):
+        return PredictTextGenerator.day_text_generate(TextGenerator.data, date, fish)
 
     @staticmethod
-    def get_day_prediction_brief(date, fish):
-        return PredictTextGenerator.get_day_brief(date, fish)
+    def prediction_ten(date, fish):
+        return PredictTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
 
     @staticmethod
-    def get_tenday_prediction_brief(date, fish):
-        return PredictTextGenerator.get_tenday_brief(date, fish)
+    def wind_one(date, fish):
+        return WindTextGenerator.day_text_generate(TextGenerator.data, date, fish)
 
     @staticmethod
-    def get_day_prediction_desc(date, fish):
-        return PredictTextGenerator.get_day_desc(TextGenerator.data, date, fish)
+    def wind_ten(date, fish):
+        return WindTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
 
     @staticmethod
-    def get_tenday_prediction_desc(date, fish):
-        return PredictTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
-
-    '''
-    Ветер
-    '''
+    def pressure_one(date, fish):
+        return PressureTextGenerator.day_text_generate(TextGenerator.data, date, fish)
 
     @staticmethod
-    def get_day_wind_fish(fish):
-        return WindTextGenerator.get_day_fish(fish)
+    def pressure_ten(date, fish):
+        return PressureTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
 
     @staticmethod
-    def get_tenday_wind_fish(fish):
-        return WindTextGenerator.get_tenday_fish(fish)
+    def moon_one(date, fish):
+        return MoonTextGenerator.day_text_generate(TextGenerator.data, date, fish)
 
     @staticmethod
-    def get_day_wind_desc(date, fish):
-        return WindTextGenerator.get_day_desc(TextGenerator.data, date, fish)
-
-    @staticmethod
-    def get_tenday_wind_desc(date, fish):
-        return WindTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
-
-    '''
-    Давление
-    '''
-
-    @staticmethod
-    def get_day_pressure_fish(fish):
-        return PressureTextGenerator.get_day_fish(fish)
-
-    @staticmethod
-    def get_day_pressure_desc(date, fish):
-        return PressureTextGenerator.get_day_desc(TextGenerator.data, date, fish)
-
-    @staticmethod
-    def get_tenday_pressure_fish(fish):
-        return PressureTextGenerator.get_tenday_fish(fish)
-
-    @staticmethod
-    def get_tenday_pressure_desc(date, fish):
-        return PressureTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
-
-    '''
-    Луна
-    '''
-
-    @staticmethod
-    def get_day_moon_desc(date, fish):
-        return MoonTextGenerator.get_day_desc(TextGenerator.data, date, fish)
-
-    @staticmethod
-    def get_tenday_moon_desc(date, fish):
-        return MoonTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
+    def moon_ten(date, fish):
+        return MoonTextGenerator.ten_day_text_generate(TextGenerator.data, date, fish)
