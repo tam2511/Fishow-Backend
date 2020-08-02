@@ -1,7 +1,47 @@
 from rest_framework import serializers
-from report.models import Report #, Comment
+from report.models import Report, Comment_r, Fishing
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+    created_at = serializers.SerializerMethodField()
+    likes_count = serializers.SerializerMethodField()
+    dislikes_count = serializers.SerializerMethodField()
+    user_has_votedUp = serializers.SerializerMethodField()
+    user_has_votedDown = serializers.SerializerMethodField()
+    comments_slug = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Comment_r
+        exclude = ['report', 'votersUp','votersDown', 'updated_at']
+
+    def get_created_at(self, instance):
+        return instance.created_at.strftime("%B %d, %Y")
+
+    def get_likes_count(self, instance):
+        return instance.votersUp.count()
+
+    def get_dislikes_count(self, instance):
+        return instance.votersDown.count()
+
+    def get_user_has_votedUp(self, instance):
+        request = self.context.get("request")
+        if not request.user.is_anonymous:
+            return instance.votersUp.filter(pk=request.user.pk).exists()
+        else:
+            return False
+
+    def get_user_has_votedDown(self, instance):
+        request = self.context.get("request")
+        if not request.user.is_anonymous:
+            return instance.votersDown.filter(pk=request.user.pk).exists()
+        else:
+            return False
+
+    def get_comments_slug(self, instance):
+        return instance.report.slug
 
 class ReportSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
@@ -57,3 +97,9 @@ class ReportSerializer(serializers.ModelSerializer):
 
     def get_user_views(self, instance):
         return instance.views.count()
+
+class FishingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Fishing
+        fields = '__all__'

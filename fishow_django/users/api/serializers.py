@@ -43,6 +43,21 @@ class PasswordResetSerializer(serializers.Serializer):
 
 class UserDisplaySerializer(serializers.ModelSerializer):
 
+    rang = serializers.SerializerMethodField()
+
     class Meta:
         model = CustomUser
-        fields = ["username"]
+        fields = ['username','email', 'count_blogs', 'count_comments', 'count_report', 'social_rating', 'fishing_rating', 'rang']
+
+    def get_rang(self, instance):
+            rang_koef = int(instance.social_rating) + int(instance.fishing_rating)
+            if rang_koef<1000:
+                return str('Новичок')
+            elif rang_koef<10000:
+                return str('Любитель')
+            elif rang_koef<100000:
+                return str('Полупрофессионал')
+            elif rang_koef<1000000:
+                return str('Профессионал')
+            else:
+                return str('Мастер')

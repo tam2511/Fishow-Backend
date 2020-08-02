@@ -37,21 +37,21 @@ class Fishing(models.Model):
     def __str__(self):
         return self.content
 
-#
-# class Comment(models.Model):
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#     body = models.TextField()
-#     report = models.ForeignKey(Report,
-#                              on_delete=models.CASCADE,
-#                              related_name='comments')
-#     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-#                                on_delete=models.CASCADE)
-#     votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
-#                                     related_name='votesUp')
-#     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
-#                                     related_name='votesDown')
-#
-#     def __str__(self):
-#         return self.author.username
+
+class Comment_r(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    body = models.TextField()
+    report = models.ForeignKey(Report,
+                             on_delete=models.CASCADE,
+                             related_name='comments_r')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               on_delete=models.CASCADE)
+    votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                    related_name='votesUp_r')
+    votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                    related_name='votesDown_r')
+
+    def __str__(self):
+        return self.author.username
 # # Create your models here.
