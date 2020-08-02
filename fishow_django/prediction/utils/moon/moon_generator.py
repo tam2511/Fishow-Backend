@@ -1,48 +1,54 @@
-from ..helper.extra import *
-from ..helper.date import *
-from ..helper.text import *
+import datetime
+import numpy as np
+
+from .moon_helper import *
+from ..helper.text import cases
+from ..helper.date import parse_date, get_dates_tex
+
 
 class MoonTextGenerator:
-    template_text_one = '''Лунные фазы можно назвать важнейшим показателем при построении прогноза клева. Для {} этот показатель очень важен. '''
-
-    template_text_ten = '''Лунные фазы можно назвать важнейшим показателем при построении прогноза клева. Для {} этот показатель очень важен. '''
-
-    template_text_fork_one = '''Фаза луны влияет на клев всегда, на прогноз нашей модели она повлияла {}.'''
-
-    template_text_fork_ten = '''Фаза луны влияет на клев всегда, на прогноз нашей модели она повлияла {}.'''
 
     @staticmethod
-    def day_text_generate(data, date, fish):
-        '''
-        Генерация текста для одного дня для блока температура на основе 1-3 дневного прогноза.
-        :param data: Список строк из базы данных для фиксированной местности
-        :param date: Текущая дата
-        :param fish: Текущий вид рыбы
-        :return: Текст
-        '''
-        influence_time_moon_direction = get_influence_days(data, date, fish, 'moon_direction')
-        influence_time_moon = get_influence_days(data, date, fish, 'moon')
-        influence_time = sorted(influence_time_moon + influence_time_moon_direction)
-        text_builder = MoonTextGenerator.template_text_one.format(cases[fish]['r'])
-        if len(influence_time) > 0:
-            text_builder += MoonTextGenerator.template_text_fork_one.format(
-                influence_text_generate(influence_time))
-        return text_builder
+    def get_day_desc(data, date, fish):
+        filtred_data = sorted([(_.moon_direction, _.moon, _.time) for _ in data if _.date == date and _.fish == fish],
+                              key=lambda x: x[1])
+        moon_direction = filtred_data[0][0]
+        moon = filtred_data[0][1]
+        moon_stage = stage_flag(moon_direction, moon)
+        if moon_stage == 'bad':
+            return bad_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+        if moon_stage == 'good':
+            return good_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+        if moon_stage == 'neutral':
+            return neutral_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
 
     @staticmethod
-    def ten_day_text_generate(data, date, fish):
-        '''
-        Генерация текста для девяти суток для блока температура на основе десяти дневного прогноза.
-        :param data: Список строк из базы данных для фиксированной местности
-        :param date: Текущая дата
-        :param fish: Текущий вид рыбы
-        :return: Текст
-        '''
-        influence_days_moon_direction = get_influence_days(data, date, fish, 'moon_direction')
-        influence_days_moon = get_influence_days(data, date, fish, 'moon')
-        influence_days = sorted(influence_days_moon + influence_days_moon_direction)
-        text_builder = MoonTextGenerator.template_text_ten.format(cases[fish]['r'])
-        if len(influence_days) > 0:
-            text_builder += MoonTextGenerator.template_text_fork_ten.format(
-                influence_tendays_text_generate(influence_days))
-        return text_builder
+    def get_tenday_desc(data, date, fish):
+        observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
+        filtred_data = {observe_date: [(_.moon_direction, _.moon, _.time) for _ in data if
+                                       _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+        moon_directions = [filtred_data[d][0][0] for d in filtred_data]
+        moons = [filtred_data[d][0][1] for d in filtred_data]
+        moon_stages = [stage_flag(moon_directions[i], moons[i]) for i in range(len(moons))]
+        bad_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'bad']
+        good_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'good']
+        neutral_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'neutral']
+        if len(bad_dates) > 0 and len(good_dates) > 0 and len(neutral_dates) > 0:
+            return bad_neutral_good_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
+                                                     get_dates_tex(neutral_dates), get_dates_tex(good_dates),
+                                                     cases[fish]['r'])
+        if len(bad_dates) > 0 and len(good_dates) > 0 and len(neutral_dates) == 0:
+            return bad_good_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
+                                             get_dates_tex(good_dates))
+        if len(bad_dates) > 0 and len(good_dates) == 0 and len(neutral_dates) > 0:
+            return bad_neutral_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
+                                                get_dates_tex(neutral_dates))
+        if len(bad_dates) > 0 and len(good_dates) == 0 and len(neutral_dates) == 0:
+            return bad_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'])
+        if len(bad_dates) == 0 and len(good_dates) > 0 and len(neutral_dates) > 0:
+            return neutral_good_desc_text.format(get_dates_tex(neutral_dates), get_dates_tex(good_dates),
+                                                 cases[fish]['r'])
+        if len(bad_dates) == 0 and len(good_dates) > 0 and len(neutral_dates) == 0:
+            return good_desc_text.format(get_dates_tex(good_dates), cases[fish]['r'])
+        if len(bad_dates) == 0 and len(good_dates) == 0 and len(neutral_dates) > 0:
+            return neutral_desc_text.format(get_dates_tex(neutral_dates), cases[fish]['r'])

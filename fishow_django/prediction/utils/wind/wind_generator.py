@@ -1,51 +1,47 @@
-from ..helper.extra import *
-from ..helper.date import *
-from ..helper.text import *
+import datetime
+import numpy as np
+from collections import Counter
+
+from .wind_helper import *
+from ..helper.text import cases
+from ..helper.date import parse_date
 
 
 class WindTextGenerator:
-    template_text_one = '''Направление и скорость ветра могу существенно повлиять на клев {}. '''
-
-    template_text_ten = '''Направление и скорость ветра могу существенно повлиять на клев {}. '''
-
-    template_text_fork_one = '''Изменения в направлении и силе воздушных потоков, по нашим прогнозам могут повлиять на клев {}.'''
-
-    template_text_fork_ten = '''Изменения в направлении и силе воздушных потоков, по нашим прогнозам могут повлиять на клев {}.'''
 
     @staticmethod
-    def day_text_generate(data, date, fish):
-        '''
-        Генерация текста для одного дня для блока воздух на основе 1-3 дневного прогноза.
-        :param data: Список строк из базы данных для фиксированной местности
-        :param date: Текущая дата
-        :param fish: Текущий вид рыбы
-        :return: Текст
-        '''
-        influence_time_wind = get_influence_time(data, date, fish, 'wind')
-        influence_time_wind_direction = get_influence_time(data, date, fish, 'wind_direction')
-        influence_time_gust = get_influence_time(data, date, fish, 'gust')
-        influence_time = sorted(influence_time_wind + influence_time_wind_direction + influence_time_gust)
-        text_builder = WindTextGenerator.template_text_one.format(cases[fish]['r'])
-        if len(influence_time) > 0:
-            text_builder += WindTextGenerator.template_text_fork_one.format(
-                influence_text_generate(influence_time))
-        return text_builder
+    def get_day_fish(fish):
+        fish_case = cases[fish]
+        return pos_neg_fish.format(fish_case['r'])
 
     @staticmethod
-    def ten_day_text_generate(data, date, fish):
-        '''
-        Генерация текста для девяти суток для блока температура на основе десяти дневного прогноза.
-        :param data: Список строк из базы данных для фиксированной местности
-        :param date: Текущая дата
-        :param fish: Текущий вид рыбы
-        :return: Текст
-        '''
-        influence_days_wind = get_influence_days(data, date, fish, 'wind')
-        influence_days_wind_direction = get_influence_days(data, date, fish, 'wind_direction')
-        influence_days_gust = get_influence_days(data, date, fish, 'gust')
-        influence_days = sorted(influence_days_wind + influence_days_wind_direction + influence_days_gust)
-        text_builder = WindTextGenerator.template_text_ten.format(cases[fish]['r'])
-        if len(influence_days) > 0:
-            text_builder += WindTextGenerator.template_text_fork_ten.format(
-                influence_tendays_text_generate(influence_days))
-        return text_builder
+    def get_tenday_fish(fish):
+        fish_case = cases[fish]
+        return pos_neg_fish.format(fish_case['r'])
+
+    @staticmethod
+    def get_day_desc(data, date, fish):
+        filtred_data = sorted([(_.wind, _.wind_direction, _.time) for _ in data if _.date == date and _.fish == fish],
+                              key=lambda x: x[1])
+        winds = [_[0] for _ in filtred_data]
+        mean_wind = np.mean(winds)
+        wind_directions = [_[1] for _ in filtred_data]
+        freq_direction = Counter(wind_directions).most_common(1)[0][0]
+        if mean_wind > 5:
+            return hard_wind_desc.format(mean_wind, wind_cases[freq_direction])
+        elif mean_wind < 2:
+            return low_wind_desc.format(wind_cases[freq_direction])
+        else:
+            return mean_wind_desc.format(mean_wind, wind_cases[freq_direction])
+
+    @staticmethod
+    def get_tenday_desc(data, date, fish):
+        observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
+        filtred_data = {observe_date: [(_.wind, _.time) for _ in data if
+                                       _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+        mean_temps = [np.mean([_[0] for _ in filtred_data[d]]) for d in filtred_data]
+        min_temp = min(mean_temps)
+        max_temp = max(mean_temps)
+        min_date = parse_date(observe_dates[mean_temps.index(min_temp)])
+        max_date = parse_date(observe_dates[mean_temps.index(max_temp)])
+        return ten_minmax_desc.format(min_date, min_temp, max_date, max_temp)

@@ -1,59 +1,71 @@
-from ..helper.extra import *
-from ..helper.date import *
-from ..helper.text import *
-LOWER_BOUND = 0.3
-UPPER_BOUND = 0.7
+import datetime
+import numpy as np
+
+from .prediction_helper import *
+from ..helper.text import cases
+from ..helper.date import parse_date, get_dates_tex
 
 
 class PredictTextGenerator:
-    template_text_one = '''Наша модель прогноза обучается и предсказывает для каждого вида рыб по-своему, в частности,
-     для {}.'''
-
-    template_text_ten = ''''Наша модель прогноза обучается и предсказывает для каждого вида рыб по-своему, в частности,
-     для {}.'''
-
-    template_text_negative_fork_one = '''Плохо будет клевать {}.'''
-
-    template_text_positive_fork_one = '''Хорошо будет клевать {}.'''
-
-    template_text_negative_fork_ten = '''Плохо будет клевать {}.'''
-
-    template_text_positive_fork_ten = '''Хорошо будет клевать {}.'''
 
     @staticmethod
-    def day_text_generate(data, date, fish):
-        '''
-        Генерация текста для одного дня для блока температура на основе 1-3 дневного прогноза.
-        :param data: Список строк из базы данных для фиксированной местности
-        :param date: Текущая дата
-        :param fish: Текущий вид рыбы
-        :return: Текст
-        '''
-        influence_low, influence_up = get_influence_time_prob(data, date, fish, LOWER_BOUND, UPPER_BOUND)
-        text_builder = PredictTextGenerator.template_text_one.format(cases[fish]['r'])
-        if len(influence_low) > 0:
-            text_builder += PredictTextGenerator.template_text_negative_fork_one.format(
-                influence_text_generate(influence_low))
-        if len(influence_up) > 0:
-            text_builder += PredictTextGenerator.template_text_positive_fork_one.format(
-                influence_text_generate(influence_up))
-        return text_builder
+    def get_day_brief(date, fish):
+        return brief_text.format(cases[fish]['r'], date)
 
     @staticmethod
-    def ten_day_text_generate(data, date, fish):
-        '''
-        Генерация текста для девяти суток для блока температура на основе десяти дневного прогноза.
-        :param data: Список строк из базы данных для фиксированной местности
-        :param date: Текущая дата
-        :param fish: Текущий вид рыбы
-        :return: Текст
-        '''
-        influence_low, influence_up = get_influence_days_prob(data, date, fish, LOWER_BOUND, UPPER_BOUND)
-        text_builder = PredictTextGenerator.template_text_ten.format(cases[fish]['r'])
-        if len(influence_low) > 0:
-            text_builder += PredictTextGenerator.template_text_negative_fork_one.format(
-                influence_text_generate(influence_low))
-        if len(influence_up) > 0:
-            text_builder += PredictTextGenerator.template_text_positive_fork_one.format(
-                influence_text_generate(influence_up))
-        return text_builder
+    def get_tenday_brief(date, fish):
+        observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
+        return brief_text.format(cases[fish]['r'], get_dates_tex(observe_dates))
+
+    @staticmethod
+    def get_day_desc(data, date, fish):
+        filtred_data = sorted([(_.prob, _.time) for _ in data if _.date == date and _.fish == fish],
+                              key=lambda x: x[0])
+        min_prob = filtred_data[0][0]
+        max_prob = filtred_data[-1][0]
+        min_times = [_[1] for _ in filtred_data if _[0] == min_prob]
+        max_times = [_[1] for _ in filtred_data if _[0] == max_prob]
+        min_times = get_day_times(min_times)
+        max_times = get_day_times(max_times)
+        min_prob = '{} %'.format(int(min_prob * 100))
+        max_prob = '{} %'.format(int(max_prob * 100))
+        return minmax_day_text.format(parse_date(date), cases[fish]['r'], max_times, max_prob, min_times, min_prob)
+
+    @staticmethod
+    def get_tenday_desc(data, date, fish):
+        observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
+        filtred_data = {observe_date: [(_.prob, _.time) for _ in data if
+                                       _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+        min_prob = 1
+        max_prob = 0
+        min_dates = []
+        max_dates = []
+        for d in filtred_data:
+            for prob, time in filtred_data[d]:
+                if prob < min_prob:
+                    min_prob = prob
+                    min_dates = [(d, time)]
+                if prob == min_prob:
+                    min_dates.append((d, time))
+                if prob > max_prob:
+                    max_prob = prob
+                    max_dates = [(d, time)]
+                if prob == max_prob:
+                    max_dates.append((d, time))
+        min_group_by_date = {}
+        max_group_by_date = {}
+        for d, time in min_dates:
+            if not d in min_group_by_date:
+                min_group_by_date[d] = [time]
+            else:
+                min_group_by_date[d].append(time)
+        for d, time in max_dates:
+            if not d in max_group_by_date:
+                max_group_by_date[d] = [time]
+            else:
+                max_group_by_date[d].append(time)
+        min_times = ', '.join([get_day_date_times(d, min_group_by_date[d]) for d in min_group_by_date])
+        max_times = ', '.join([get_day_date_times(d, max_group_by_date[d]) for d in max_group_by_date])
+        min_prob = '{} %'.format(int(min_prob * 100))
+        max_prob = '{} %'.format(int(max_prob * 100))
+        return minmax_tenday_text.format(max_times, cases[fish]['r'], max_prob, min_times, min_prob)
