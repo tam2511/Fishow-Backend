@@ -22,9 +22,9 @@ class TemperatureTextGenerator:
         if fish_case['temperature+'] and fish_case['temperature-']:
             return pos_neg_fish.format(fish_case['d'], fish_case['temperature+'], fish_case['temperature-'])
         elif fish_case['temperature+'] and not fish_case['temperature-']:
-            return pos_fish.format(fish_case['r'], fish_case['temperature+'])
+            return pos_fish.format(fish_case['temperature+'], fish_case['r'])
         elif fish_case['temperature-'] and not fish_case['temperature+']:
-            return neg_fish.format(fish_case['r'], fish_case['temperature-'])
+            return neg_fish.format(fish_case['temperature-'], fish_case['r'])
         else:
             return none_fish.format(fish_case['r'])
 
@@ -34,9 +34,9 @@ class TemperatureTextGenerator:
         if fish_case['temperature+'] and fish_case['temperature-']:
             return pos_neg_fish.format(fish_case['d'], fish_case['temperature+'], fish_case['temperature-'])
         elif fish_case['temperature+'] and not fish_case['temperature-']:
-            return pos_fish.format(fish_case['r'], fish_case['temperature+'])
+            return pos_fish.format(fish_case['temperature+'], fish_case['r'])
         elif fish_case['temperature-'] and not fish_case['temperature+']:
-            return neg_fish.format(fish_case['r'], fish_case['temperature-'])
+            return neg_fish.format(fish_case['temperature-'], fish_case['r'])
         else:
             return none_fish.format(fish_case['r'])
 
@@ -47,8 +47,9 @@ class TemperatureTextGenerator:
         temps = [_[0] for _ in filtred_data]
         min_temp = min(temps)
         max_temp = max(temps)
-        return minmax_desc.format(max_temp, min_temp)
+        return minmax_desc.format(min_temp, max_temp)
 
+    @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {observe_date: [(_.temperature, _.time) for _ in data if
