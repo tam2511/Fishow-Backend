@@ -21,9 +21,7 @@
         </div>
       </div>
       <div class="body">
-        <div class="">
-          Сред. температура воздуха: {{ readyData[0].temperature_mean }}
-        </div>
+        <div class="">Сред. температура воздуха: {{ temperature }}°C</div>
       </div>
       <div class="progressbar-footer">
         <div class="progressbar-main">
@@ -65,6 +63,9 @@ export default {
 
       return [year, month, day].join('-')
     },
+    temperature() {
+      return Math.floor(this.readyData[0].temperature_mean)
+    },
     ...mapState('prediction', ['predictions']),
   },
   created() {
@@ -87,6 +88,9 @@ export default {
 .media-right {
   flex-grow: 1;
   text-align: right;
+}
+.media-left {
+  text-transform: capitalize;
 }
 .media {
   padding: 1.25rem;
@@ -114,6 +118,10 @@ div.box {
   width: 50%;
   height: 100%;
   background-color: #c8e5bc;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 10px;
 }
 .placeholder {
   opacity: 0;
