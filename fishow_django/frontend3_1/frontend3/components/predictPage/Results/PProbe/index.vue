@@ -1,9 +1,8 @@
 <template>
   <div class="prediction-box box">
     <p class="title">Прогноз клева</p>
-    <p class="content">
-      {{ readyData.prediction_text }}
-    </p>
+    <p class="content" v-html="readyData.prediction_brief"></p>
+    <p class="content" v-html="readyData.prediction_desc"></p>
     <slot></slot>
   </div>
 </template>

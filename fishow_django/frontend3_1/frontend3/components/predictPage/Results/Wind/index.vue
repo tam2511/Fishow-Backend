@@ -1,7 +1,8 @@
 <template lang="pug">
   .wind-box.box
     p.title Ветер, м/с
-    p.content {{ readyData.wind_text }}
+    p.content(v-html="readyData.wind_fish")
+    p.content(v-html="readyData.wind_desc")
     .columns
       WindOneDay.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
     p.title.has-text-weight-light Порывы, м/с

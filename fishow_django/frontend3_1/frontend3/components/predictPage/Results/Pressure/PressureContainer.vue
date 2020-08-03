@@ -1,7 +1,8 @@
 <template lang="pug">
   .pressure-box.box
     p.title Давление
-    p.content {{ readyData.pressure_text }}
+    p.content(v-html="readyData.pressure_fish")
+    p.content(v-html="readyData.pressure_desc")
     .columns
     slot
 </template>

@@ -92,4 +92,7 @@ div.container {
 .strong {
   font-weight: 800;
 }
+.moon-box strong {
+  color: white !important;
+}
 </style>

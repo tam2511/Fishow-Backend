@@ -157,7 +157,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.get_tenday_prediction_desc(instance.date, instance.fish)
 
-    def get_prediсtion_brief(self, instance):
+    def get_prediction_brief(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
