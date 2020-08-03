@@ -25,7 +25,7 @@ export default {
 
 <style scoped lang="scss">
 .moon-box {
-  background-color: rgba(0, 0, 0, 0.89);
+  background: rgba(0, 0, 0, 0.89) !important;
   color: #fff;
 
   padding-bottom: 50px;

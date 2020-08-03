@@ -4,7 +4,11 @@
       p.content(v-html="readyData.temperature_brief")
       .columns
         TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
-      slot
+      p.title.has-text-weight-light Влажность, %
+      .columns(style="margin-bottom: 1rem")
+        .column(v-for="day in readyData" :key="day.idc" :day="day")
+          div(style="text-align:center") {{ Math.floor(day.humidity_mean * 100) }}%
+
       p.content(v-html="readyData.temperature_fish")
       p.content(v-html="readyData.temperature_desc")
       p.content(v-html="readyData.phenomenon_warning")
@@ -21,6 +25,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.temperature-box {
+  background-color: #5292e30d;
+}
+.columns {
+  background-color: white;
+  margin: 0 -1.3rem;
+}
+.title {
+  margin-top: 1.5rem;
+}
 @media screen and (max-width: 768px) {
   div.columns {
     display: flex;
@@ -29,5 +43,12 @@ export default {
   p.content {
     text-align: justify;
   }
+}
+.temperature-box {
+}
+.title.has-text-weight-light {
+  margin: 0 -1.3rem;
+  background-color: white;
+  padding: 1rem;
 }
 </style>

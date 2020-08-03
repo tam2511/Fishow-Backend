@@ -4,7 +4,7 @@
     FishowPredictionHeader
       DaysPicker(:days="date")
     FishSelectPrediction(:areal="areal" :city="city" :date="date")
-    .box.result-container(v-if='readyData')
+    .result-container(v-if='readyData')
       PProbe(
         :readyData="readyData"
       )
@@ -113,8 +113,7 @@ export default {
     display: none;
   }
 }
-.box.result-container > .box {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
+.result-container > .box {
+  background: radial-gradient(circle, #eff2ff 0%, #cac7c8 100%);
 }
 </style>
