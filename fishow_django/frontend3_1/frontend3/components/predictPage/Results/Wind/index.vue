@@ -1,7 +1,8 @@
 <template lang="pug">
   .wind-box.box
     p.title Ветер, м/с
-    p.content {{ readyData.wind_text }}
+    p.content(v-html="readyData.wind_fish")
+    p.content(v-html="readyData.wind_desc")
     .columns
       WindOneDay.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
     p.title.has-text-weight-light Порывы, м/с
@@ -39,5 +40,17 @@ export default {
   .gust-column {
     padding: 0;
   }
+}
+.wind-box {
+  background: radial-gradient(
+    circle,
+    rgb(239, 242, 255) 0%,
+    rgb(202, 199, 200) 100%
+  );
+}
+div.columns {
+  background-color: white;
+  margin: 0 -1.3rem;
+  margin-bottom: 1.5rem;
 }
 </style>

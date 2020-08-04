@@ -190,10 +190,10 @@ export default {
     position: relative;
   }
   &_area {
-    color: #4fbb26;
+    color: #1a5105;
     &:after {
       @extend %legend-flag;
-      background-color: #4fbb26;
+      background-color: #1a5105;
     }
   }
   &_min {

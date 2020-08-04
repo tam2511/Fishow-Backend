@@ -81,15 +81,18 @@ div.container {
   }
 }
 .blue {
-  color: #00b3ee;
+  color: #09438e;
 }
 .red {
-  color: red;
+  color: #8a0000;
 }
 .green {
   color: green;
 }
 .strong {
   font-weight: 800;
+}
+.moon-box strong {
+  color: white !important;
 }
 </style>

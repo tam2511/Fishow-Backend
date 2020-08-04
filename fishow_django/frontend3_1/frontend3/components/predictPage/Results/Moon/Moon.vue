@@ -1,7 +1,7 @@
 <template lang="pug">
   .moon-box.box
     p.title Луна
-    p.content {{ readyData.moon_text }}
+    p.content(v-html="readyData.moon_desc")
     .columns
       MoonOne.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
 </template>
@@ -25,7 +25,7 @@ export default {
 
 <style scoped lang="scss">
 .moon-box {
-  background-color: rgba(0, 0, 0, 0.89);
+  background: rgba(0, 0, 0, 0.89) !important;
   color: #fff;
 
   padding-bottom: 50px;
