@@ -4,10 +4,10 @@
       p.content(v-html="readyData.temperature_brief")
       .columns
         TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
-      p.title.has-text-weight-light Влажность, %
+      p.title.has-text-weight-light.is-4 Влажность, %
       .columns(style="margin-bottom: 1rem")
         .column(v-for="day in readyData" :key="day.idc" :day="day")
-          div(style="text-align:center") {{ Math.floor(day.humidity_mean * 100) }}%
+          Humidity(:day="day")
 
       p.content(v-html="readyData.temperature_fish")
       p.content(v-html="readyData.temperature_desc")
@@ -17,9 +17,10 @@
 <script>
 import TempOneDay from '@/components/predictPage/Results/Temperature/OneDay/index'
 import readyData from '~/assets/mixins/prediction/readyData'
+import Humidity from '~/components/predictPage/Results/Temperature/OneDay/humidity'
 
 export default {
-  components: { TempOneDay },
+  components: { Humidity, TempOneDay },
   mixins: [readyData],
 }
 </script>

@@ -8,6 +8,7 @@
       </div>
       <VueApexCharts
         width="100%"
+        height="300px"
         type="area"
         :options="chartOptions"
         :series="series"
@@ -105,21 +106,16 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: 0,
+          min: JSON.parse(this.probMin).sort()[0],
           max: 1,
           labels: {
             formatter(value) {
-              return Math.round(value * 100)
+              return Math.round(value * 100) + '%'
             },
           },
         },
         legend: {
-          // position: 'top',
           show: false,
-          // horizontalAlign: 'right',
-          // floating: false,
-          // offsetY: -25,
-          // offsetX: -5,
         },
         responsive: [
           {

@@ -5,6 +5,7 @@
     :viewBox="'0 0 55 ' + radius * 2"
     fill="none"
     :class="{ up: up, down: !up }"
+    :style="color"
     xmlns="http://www.w3.org/2000/svg"
   >
     <rect width="55" :height="radius * 2" />
@@ -43,16 +44,23 @@ export default {
     width() {
       return this.radius * 1.5
     },
+    color() {
+      const up = `fill: rgba(222, ${this.radius * 10}, 11, ${
+        this.radius / 50
+      });`
+      const down = `fill: rgba(166, 177, 208, ${this.radius / 20});`
+      return this.up ? up : down
+    },
   },
 }
 </script>
 
 <style scoped>
 .up {
-  fill: #b0e2e5;
+  fill: rgba(222, 194, 11, 0.97);
 }
 .down {
-  fill: #a6cad0;
+  fill: rgba(166, 177, 208, 0.97);
 }
 /*'#17b1bd', '#172a3b'*/
 </style>
