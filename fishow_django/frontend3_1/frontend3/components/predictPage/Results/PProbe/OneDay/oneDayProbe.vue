@@ -161,6 +161,15 @@ export default {
           data: JSON.parse(this.probMin),
         },
       ]
+      this.chartOptions.yaxis = {
+        min: JSON.parse(this.probMin).sort()[0],
+        max: 1,
+        labels: {
+          formatter(value) {
+            return Math.round(value * 100) + '%'
+          },
+        },
+      }
     },
   },
 }

@@ -2,9 +2,7 @@
   <div class="box fish">
     <div class="columns">
       <div class="column is-two-thirds">
-        <p class="content">
-          <span v-html="rawHtml"></span>
-        </p>
+        <p class="content"></p>
       </div>
       <div class="column">
         <b-field>
@@ -147,5 +145,8 @@ export default {
   &:hover {
     background-color: #30bab5;
   }
+}
+.box.fish {
+  background: radial-gradient(circle, #eff2ff 0%, #cac7c8 100%);
 }
 </style>

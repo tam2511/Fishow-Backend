@@ -40,4 +40,9 @@ export default {
     min-height: 200px;
   }
 }
+div.column {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+}
 </style>
