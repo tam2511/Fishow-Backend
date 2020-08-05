@@ -5,7 +5,7 @@
         <slot></slot>
       </div>
       <div class="column">
-        <p class="title">Прогноз клева на {{ niceDays }}</p>
+        <p class="title">Прогноз клева на {{ day }}</p>
         <span>
           Планируйте и наслаждайтесь рыбалкой в {{ $route.params.city }}
         </span>
@@ -43,6 +43,13 @@ export default {
       const day = this.$route.params.date.split('-')
       const result = whatMonth[day[1]]
       this.niceDays = day[2] + ' ' + result
+    },
+  },
+  computed: {
+    day() {
+      return this.niceDays[0] === '0'
+        ? this.niceDays.split('0')[1]
+        : this.niceDays
     },
   },
 }
