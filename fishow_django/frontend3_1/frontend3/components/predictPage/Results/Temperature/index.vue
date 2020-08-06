@@ -1,26 +1,39 @@
 <template lang="pug">
-    .temperature-box.box
-      p.title Погодные условия
-      p.content(v-html="readyData.temperature_brief")
-      .columns
-        TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
-      p.title.has-text-weight-light.is-4 Влажность, %
-      .columns(style="margin-bottom: 1rem")
-        .column(v-for="day in readyData" :key="day.idc" :day="day")
-          Humidity(:day="day")
+  .temperature-box.box
+    p.title Погодные условия
+    p.content(v-html="readyData.temperature_brief")
+    .columns.bg-white
+      TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
+    p.title.has-text-weight-light.is-4 Влажность, %
+    .columns.bg-white(style="margin-bottom: 1rem")
+      .column(v-for="day in readyData" :key="day.idc" :day="day")
+        Humidity(:day="day")
+    .columns
+      .column
+        Thermo
+      .column.text-justify
+        p.content(v-html="readyData.temperature_fish")
+        p.content(v-html="readyData.temperature_desc")
+    .columns.report
+      .column.is-three-quarters
+        p.content(v-html="readyData.phenomenon_warning")
+      .column.report-icon
+        b-icon(pack="fas"
+          icon="exclamation-triangle"
+          size="is-large"
+          type="is-primary")
 
-      p.content(v-html="readyData.temperature_fish")
-      p.content(v-html="readyData.temperature_desc")
-      p.content(v-html="readyData.phenomenon_warning")
 </template>
 
 <script>
 import TempOneDay from '@/components/predictPage/Results/Temperature/OneDay/index'
+
 import readyData from '~/assets/mixins/prediction/readyData'
 import Humidity from '~/components/predictPage/Results/Temperature/OneDay/humidity'
+import Thermo from '~/components/predictPage/Results/Temperature/thermo'
 
 export default {
-  components: { Humidity, TempOneDay },
+  components: { Humidity, TempOneDay, Thermo },
   mixins: [readyData],
 }
 </script>
@@ -29,10 +42,18 @@ export default {
 .temperature-box {
   background-color: #5292e30d;
 }
-.columns {
+.columns.bg-white {
   background-color: white;
   margin: 0 -1.3rem;
 }
+.text-justify {
+  text-align: justify;
+}
+.report {
+  background-color: #cbe8f791;
+  text-align: justify;
+}
+
 .title {
   margin-top: 1.5rem;
 }

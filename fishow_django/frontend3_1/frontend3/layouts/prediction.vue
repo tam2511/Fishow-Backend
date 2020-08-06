@@ -98,4 +98,17 @@ div.container {
 .moon-box strong {
   color: white !important;
 }
+.report-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    height: 6rem;
+    width: 6rem;
+    i {
+      font-size: 6rem;
+      color: #a29fa6;
+    }
+  }
+}
 </style>
