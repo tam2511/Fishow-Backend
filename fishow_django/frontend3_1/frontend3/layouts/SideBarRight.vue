@@ -12,7 +12,7 @@
             <div class="tile is-vertical is-4">
               <div>
                 <article class="tile is-parent is-vertical">
-                  <p class="title">Популярные блоги</p>
+                  <p class="title is-4">Популярные блоги</p>
                   <div class="tile is-child">
                     <HotPostMinimal
                       v-for="blog in minPost"
@@ -22,19 +22,19 @@
                   </div>
                 </article>
                 <article class="tile is-parent is-vertical">
-                  <p class="title">Прогнозы</p>
+                  <p class="title is-4">Прогнозы</p>
                   <div class="tile is-child">
                     <MiniPrediction />
                   </div>
                 </article>
                 <article class="tile is-parent is-vertical">
-                  <p class="title">Статистика</p>
+                  <p class="title is-4">Статистика</p>
                   <div class="tile is-child box">
                     <UserRate />
                   </div>
                 </article>
                 <article class="tile is-parent is-vertical">
-                  <p class="title">Последние комментарии</p>
+                  <p class="title is-4">Последние комментарии</p>
                   <div class="tile is-child box"></div>
                 </article>
               </div>
