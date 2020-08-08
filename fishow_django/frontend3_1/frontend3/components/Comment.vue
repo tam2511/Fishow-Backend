@@ -175,12 +175,8 @@ export default {
       this.userDisLikedComment = false
       await this.$axios.$delete(`/comments/${this.comment.id}/dislike/`)
     },
-    triggerDeleteComment() {
-      // emit an event to delete an answer instance
-      this.$emit('deleteComment', this.comment)
-    },
     removeComment() {
-      this.$emit('deleteComment')
+      this.$emit('deleteComment', this.comment)
     },
   },
 }

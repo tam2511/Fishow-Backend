@@ -41,13 +41,10 @@ export default {
   },
   methods: {
     async deleteComment(comment) {
-      // delete a given answer from the answers array and make a delete request to the REST API
       const endpoint = `/comments/${comment.id}/`
       try {
-        const response = await this.$axios.$delete(endpoint)
-        console.log(response)
-        // this.$delete(this.comments, this.comments.indexOf(comment))
-        // this.userHasAnswered = false
+        await this.$axios.delete(endpoint)
+        this.getData()
       } catch (err) {
         console.log(err)
       }
