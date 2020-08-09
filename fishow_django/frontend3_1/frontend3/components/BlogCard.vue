@@ -115,7 +115,6 @@ export default {
       required: true,
     },
   },
-  transitions: 'bounce',
   data() {
     return {
       result: {},
@@ -136,11 +135,15 @@ export default {
   },
   methods: {
     toggleLike() {
+      console.log('toggle like')
       if (this.userLikedBlog) {
+        console.log('already liked = dislike')
         this.unLikeBlog()
       } else if (this.userDisLikedBlog) {
+        console.log('have dislike > remove dislike')
         this.undislikeBlog()
       } else {
+        console.log('like blog')
         this.likeBlog()
       }
     },

@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import LoginModal from '@/components/Header/LoginModal'
 import RegModal from '@/components/Header/RegModal'
 import UserRate from '@/components/Sidebar/UserRate'
@@ -69,6 +69,7 @@ export default {
     TheFooter,
     // TheLogin,
   },
+  middleware: 'auth',
   data() {
     return {
       theme: '',
@@ -77,6 +78,12 @@ export default {
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
     ...mapState('blogs', ['minPost']),
+  },
+  mounted() {
+    this.getLastBlogs()
+  },
+  methods: {
+    ...mapActions('blogs', { getLastBlogs: 'lastBLogs' }),
   },
 }
 </script>
@@ -101,5 +108,8 @@ a {
 }
 .nav {
   max-width: 1200px;
+}
+.tile.is-parent.is-vertical.space-left0 {
+  padding-left: 0;
 }
 </style>

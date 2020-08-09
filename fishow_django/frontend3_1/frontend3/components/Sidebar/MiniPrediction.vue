@@ -35,7 +35,34 @@
         <div class="progressbar-values"></div>
       </div>
     </div>
-    <div v-else class="if-lostdata"></div>
+    <div v-else class="if-lostdata">
+      <section>
+        <div class="media">
+          <div class="media-left">
+            <b-skeleton width="100px" :animated="animated"></b-skeleton>
+          </div>
+          <div class="media-right">
+            <ul>
+              <li>
+                <b-skeleton width="80px" :animated="animated"></b-skeleton>
+              </li>
+              <li>
+                <b-skeleton width="100px" :animated="animated"></b-skeleton>
+              </li>
+              <li>
+                <b-skeleton width="150px" :animated="animated"></b-skeleton>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="body">
+          <b-skeleton width="80%" :animated="animated"></b-skeleton>
+        </div>
+        <div class="progressbar-footer">
+          <b-skeleton :animated="animated"></b-skeleton>
+        </div>
+      </section>
+    </div>
     <nuxt-link to="/PredictionPage">
       <div class="placeholder">
         Посмотреть другие прогнозы
@@ -48,6 +75,11 @@
 import { mapActions, mapState } from 'vuex'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 export default {
+  data() {
+    return {
+      animated: true,
+    }
+  },
   computed: {
     readyData() {
       return convertDataFromServer(this.predictions)
@@ -147,5 +179,8 @@ div.box {
 }
 .if-lostdata {
   height: 200px;
+}
+li {
+  padding-top: 5px;
 }
 </style>
