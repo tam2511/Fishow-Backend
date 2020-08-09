@@ -1,6 +1,5 @@
 <template>
   <div class="tile is-vertical is-8">
-    <p class="title is-4">Последние записи</p>
     <div class="tile is-parent is-vertical space-left0">
       <article class="tile is-child">
         <BlogCard :blog="blog" />

@@ -1,5 +1,5 @@
 import confserver from './confserver'
-
+import appleIcons from './icons'
 export default {
   server: {
     port: 3000,
@@ -11,7 +11,6 @@ export default {
    */
   middleware: 'auth',
   head: {
-    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,11 +18,15 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
+        content:
+          'Fishow.ru - сервис прогноза клева и ваша социальная рыболовная сеть',
       },
+      { name: 'msapplication-TileColor', content: '#ffffff' },
+      { name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
+      { name: 'theme-color', content: '#ffffff' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon2.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href:
@@ -33,6 +36,7 @@ export default {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
       },
+      ...appleIcons,
     ],
   },
   /*
@@ -82,8 +86,9 @@ export default {
     ],
     '@nuxtjs/robots',
   ],
+  /* buefy options */
   buefy: {
-    /* buefy options */
+    // isPrimary: '#000',
   },
   // yandexMetrika: {
   //   id: 64900765,
@@ -126,7 +131,7 @@ export default {
   auth: {
     plugins: [{ src: '~/plugins/axios', ssr: true }, '~/plugins/auth.js'],
     fetchUserOnLogin: true,
-    watchLoggedIn: false,
+    watchLoggedIn: true,
     strategies: {
       local: {
         endpoints: {

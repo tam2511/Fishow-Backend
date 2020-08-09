@@ -28,10 +28,15 @@ export default {
   methods: {
     ...mapActions('blogs', { getBlogs: 'getBlogs' }),
   },
-  head() {
-    return {
-      title: 'Fishow - Главная',
-    }
+  head: {
+    title: 'Fishow - Главная',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Home page description',
+      },
+    ],
   },
 }
 </script>

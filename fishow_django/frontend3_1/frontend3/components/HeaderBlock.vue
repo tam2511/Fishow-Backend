@@ -18,7 +18,6 @@
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
-
     <template slot="end">
       <b-navbar-item tag="div">
         <div v-if="!$auth.user" class="buttons">
