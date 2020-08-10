@@ -82,6 +82,11 @@
                 <i class="fas fa-reply" aria-hidden="true"></i>
               </span>
             </a>
+            <a class="level-item" aria-label="trash" @click="removeComment">
+              <span class="icon is-small">
+                <i class="fas fa-trash" aria-hidden="true"></i>
+              </span>
+            </a>
             <a
               :class="{
                 'level-item': !userLikedComment,
@@ -111,10 +116,6 @@ export default {
       type: Object,
       required: true,
     },
-    // requestUser: {
-    //   type: String,
-    //   required: true,
-    // },
     slug: {
       type: String,
       required: true,
@@ -174,8 +175,7 @@ export default {
       this.userDisLikedComment = false
       await this.$axios.$delete(`/comments/${this.comment.id}/dislike/`)
     },
-    triggerDeleteComment() {
-      // emit an event to delete an answer instance
+    removeComment() {
       this.$emit('deleteComment', this.comment)
     },
   },

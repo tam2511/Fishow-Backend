@@ -1,5 +1,5 @@
 import confserver from './confserver'
-
+import appleIcons from './icons'
 export default {
   server: {
     port: 3000,
@@ -11,19 +11,34 @@ export default {
    */
   middleware: 'auth',
   head: {
-    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
+      {
+        property: 'og:title',
+        content:
+          'Fishow - сервис прогноза клева и ваша социальная рыболовная сеть',
+      },
+      { property: 'og:image', content: '/ms-icon-144x144.png' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'yandex-verification', content: 'cb7a2c560ce5c37b' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
+        content:
+          'Fishow.ru - сервис прогноза клева и ваша социальная рыболовная сеть',
+      },
+      { name: 'msapplication-TileColor', content: '#ffffff' },
+      { name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
+      { name: 'theme-color', content: '#ffffff' },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content:
+          'рыбалка, прогноз, отчеты о рыбалке, отчеты, прогноз на рыбалку, блоги о рыбалке, новости о рыбалке, ловля рыбы, клёв, хищные рыбы',
       },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon2.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href:
@@ -33,6 +48,7 @@ export default {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
       },
+      ...appleIcons,
     ],
   },
   /*
@@ -68,6 +84,7 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/sitemap',
     'nuxt-vue-multiselect',
     [
       '@nuxtjs/yandex-metrika',
@@ -82,8 +99,24 @@ export default {
     ],
     '@nuxtjs/robots',
   ],
+  sitemap: {
+    hostname: 'http://fishow.ru',
+    gzip: true,
+    exclude: ['/secret', '/admin/**'],
+    // routes: [
+    //   '/page/1',
+    //   '/page/2',
+    //   {
+    //     url: '/page/3',
+    //     changefreq: 'daily',
+    //     priority: 1,
+    //     lastmod: '2017-06-30T13:30:00.000Z',
+    //   },
+    // ],
+  },
+  /* buefy options */
   buefy: {
-    /* buefy options */
+    // isPrimary: '#000',
   },
   // yandexMetrika: {
   //   id: 64900765,
@@ -126,7 +159,7 @@ export default {
   auth: {
     plugins: [{ src: '~/plugins/axios', ssr: true }, '~/plugins/auth.js'],
     fetchUserOnLogin: true,
-    watchLoggedIn: false,
+    watchLoggedIn: true,
     strategies: {
       local: {
         endpoints: {
@@ -151,6 +184,23 @@ export default {
         tokenName: 'Authorization',
         // globalToken: true,
         // autoFetchUser: true
+      },
+      social: {
+        _scheme: 'oauth2',
+        response_type: 'code',
+        client_id: '1fbb5875a4d54eacb428597945516e2b',
+        client_secret: '80a0332f48ce47e5a2025c469601b9a2',
+        authorization_endpoint: 'https://oauth.yandex.ru/authorize?',
+        userinfo_endpoint: 'https://login.yandex.ru/info?',
+        scope: ['login:avatar', 'login:email', 'login:info', 'login:birthday'],
+        access_type: 'offline',
+        access_token_endpoint: 'https://oauth.yandex.ru/token?',
+        token_type: 'Bearer',
+        grant_type: 'authorization_code',
+        redirect_uri: 'http://fishow.ru/',
+        token_key: 'access_token',
+        force_confirm: 'yes',
+        state: '',
       },
     },
     redirect: false,

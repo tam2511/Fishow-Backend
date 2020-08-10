@@ -15,6 +15,7 @@
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.10.3",
     "@nuxtjs/robots": "^2.4.2",
+    "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/yandex-metrika": "^1.0.3",
     "apexcharts": "^3.19.3",
     "nuxt": "^2.12.2",

@@ -7,13 +7,13 @@
         </figure>
       </div>
       <div class="media-center">
-        <p class="title">{{ $auth.user }}</p>
+        <!--        <p class="title">{{ $auth.user }}</p>-->
+        <p class="title">{{ $auth.user.login }}</p>
+        <p class="title">{{ $auth.user.default_email }}</p>
       </div>
     </div>
     <div class="media">
-      <div class="media-center">
-        privert
-      </div>
+      <div class="media-center"></div>
     </div>
     <!--    <div class="row row-30">-->
     <!--      <div class="col-lg-8">-->

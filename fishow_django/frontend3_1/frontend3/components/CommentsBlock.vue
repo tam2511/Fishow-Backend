@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title">Комментарии</p>
+    <p class="title is-4">Комментарии</p>
     <div class="tile is-child is-vertical box">
       <p v-if="(comments.length === 0)">Ваш комментарий будет первым</p>
       <Comment
@@ -12,30 +12,13 @@
         @deleteComment="deleteComment"
       />
     </div>
-    <p class="title">Оставить комментарий</p>
-    <create-comment />
-    <!--    <div class="tile is-child is-vertical box">-->
-    <!--      <div class="form-wrap">-->
-    <!--        <label for="comment-message"></label>-->
-    <!--        <textarea-->
-    <!--          id="comment-message"-->
-    <!--          v-model="commentBody"-->
-    <!--          class="textarea"-->
-    <!--          name="message"-->
-    <!--          placeholder="Ваш комментарий"-->
-    <!--        ></textarea>-->
-    <!--      </div>-->
-    <!--      <div v-if="error" class="alert-danger">{{ error }}</div>-->
-    <!--      <div class="buttons">-->
-    <!--        <b-button type="is-primary" @click="onSubmit">-->
-    <!--          Отправить-->
-    <!--        </b-button>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <p class="title is-4">Оставить комментарий</p>
+    <create-comment @update="getData" />
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import Comment from '@/components/Comment'
 import CreateComment from '~/components/CreateComment'
 
@@ -46,58 +29,36 @@ export default {
   },
   data() {
     return {
-      comments: [],
       commentBody: null,
       error: null,
     }
   },
-  created() {
-    this.getCommentData()
+  computed: {
+    ...mapState('comments', ['comments']),
+  },
+  mounted() {
+    this.getData()
   },
   methods: {
-    async getCommentData() {
-      const response = await this.$axios.$get(
-        `/blogs/${this.$route.params.slug}/comments/`
-      )
-      this.comments.push(...response.results)
-    },
-    async onSubmit() {
-      try {
-        const response = await this.$axios.$post(
-          `/blogs/${this.$route.params.slug}/comment/`,
-          { body: this.commentBody }
-        )
-        this.comments.push(response)
-        this.commentBody = ''
-      } catch (e) {
-        console.log('error = ', e)
-      }
-      // if (this.commentBody) {
-      //   const endpoint = `/api/blogs/${this.slug}/comment/`
-      //   apiService(endpoint, 'POST', { body: this.commentBody }).then(data => {
-      //     this.comments.push(data)
-      //   })
-      //   this.commentBody = null
-      //   if (this.error) {
-      //     this.error = null
-      //   }
-      // } else {
-      //   this.error = 'Вы не можете отправить пустой комментарий'
-      // }
-    },
     async deleteComment(comment) {
-      // delete a given answer from the answers array and make a delete request to the REST API
-      // const endpoint = `/api/comments/${comment.id}/`
-      // try {
-      //   await apiService(endpoint, 'DELETE')
-      //   this.$delete(this.comments, this.comments.indexOf(comment))
-      //   this.userHasAnswered = false
-      // } catch (err) {
-      //   console.log(err)
-      // }
+      const endpoint = `/comments/${comment.id}/`
+      try {
+        await this.$axios.delete(endpoint)
+        this.getData()
+      } catch (err) {
+        console.log(err)
+      }
     },
+    getData() {
+      this.getComment(this.$route.params.slug)
+    },
+    ...mapActions('comments', { getComment: 'getComments' }),
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.title {
+  padding-top: 1rem;
+}
+</style>

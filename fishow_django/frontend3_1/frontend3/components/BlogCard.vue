@@ -59,7 +59,6 @@
             </p>
           </div>
         </div>
-
         <div class="content">
           <div
             v-for="p in getResult"
@@ -83,6 +82,8 @@
               <img :src="p.url" alt="" />
             </figure>
           </div>
+        </div>
+        <div class="media card-footer">
           <div class="column is-one-quarter is-inline-block">
             <time datetime="2016-1-1">{{ blog.created_at }}</time>
           </div>
@@ -114,7 +115,6 @@ export default {
       required: true,
     },
   },
-  transitions: 'bounce',
   data() {
     return {
       result: {},
@@ -135,11 +135,15 @@ export default {
   },
   methods: {
     toggleLike() {
+      console.log('toggle like')
       if (this.userLikedBlog) {
+        console.log('already liked = dislike')
         this.unLikeBlog()
       } else if (this.userDisLikedBlog) {
+        console.log('have dislike > remove dislike')
         this.undislikeBlog()
       } else {
+        console.log('like blog')
         this.likeBlog()
       }
     },
@@ -197,11 +201,6 @@ export default {
 .like {
   display: flex;
   flex-flow: column;
-  .button {
-    background: none;
-    color: black;
-    border: none;
-  }
 }
 .flex {
   display: flex;
@@ -216,5 +215,7 @@ export default {
   figure {
     margin: 0 20px;
   }
+}
+.card-footer {
 }
 </style>
