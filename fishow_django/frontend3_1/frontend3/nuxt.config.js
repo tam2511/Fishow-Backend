@@ -84,6 +84,7 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/sitemap',
     'nuxt-vue-multiselect',
     [
       '@nuxtjs/yandex-metrika',
@@ -98,6 +99,21 @@ export default {
     ],
     '@nuxtjs/robots',
   ],
+  sitemap: {
+    hostname: 'http://fishow.ru',
+    gzip: true,
+    exclude: ['/secret', '/admin/**'],
+    // routes: [
+    //   '/page/1',
+    //   '/page/2',
+    //   {
+    //     url: '/page/3',
+    //     changefreq: 'daily',
+    //     priority: 1,
+    //     lastmod: '2017-06-30T13:30:00.000Z',
+    //   },
+    // ],
+  },
   /* buefy options */
   buefy: {
     // isPrimary: '#000',
