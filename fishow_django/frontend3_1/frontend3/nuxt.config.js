@@ -197,7 +197,7 @@ export default {
         access_token_endpoint: 'https://oauth.yandex.ru/token?',
         token_type: 'Bearer',
         grant_type: 'authorization_code',
-        redirect_uri: 'http://192.168.0.103:3000/',
+        redirect_uri: 'http://fishow.ru/',
         token_key: 'access_token',
         force_confirm: 'yes',
         state: '',

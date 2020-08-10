@@ -66,9 +66,6 @@ export default {
       toggleReg: 'TOGGLE_REG',
     }),
   },
-  mounted() {
-    console.log(this.$auth.user)
-  },
 }
 </script>
 
