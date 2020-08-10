@@ -27,10 +27,13 @@
           <a class="button is-light" @click="toggleLogin">
             Войти
           </a>
+          <a class="button is-light" @click="toggleLoginYandex">
+            Войти через Яндекс
+          </a>
         </div>
         <div v-else class="buttons">
           <nuxt-link to="/UserPage" class="button ip-primary">
-            {{ $auth.user }}</nuxt-link
+            {{ $auth.user.login }}</nuxt-link
           >
           <a class="button is-light" @click="logout">
             Выйти
@@ -55,10 +58,16 @@ export default {
         console.log('e = ', e)
       }
     },
+    toggleLoginYandex() {
+      this.$auth.loginWith('social')
+    },
     ...mapMutations('login', {
       toggleLogin: 'TOGGLE_LOGIN',
       toggleReg: 'TOGGLE_REG',
     }),
+  },
+  mounted() {
+    console.log(this.$auth.user)
   },
 }
 </script>
