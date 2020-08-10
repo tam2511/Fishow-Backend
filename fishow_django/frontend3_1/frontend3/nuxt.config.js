@@ -13,6 +13,12 @@ export default {
   head: {
     meta: [
       { charset: 'utf-8' },
+      {
+        property: 'og:title',
+        content:
+          'Fishow - сервис прогноза клева и ваша социальная рыболовная сеть',
+      },
+      { property: 'og:image', content: '/ms-icon-144x144.png' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'yandex-verification', content: 'cb7a2c560ce5c37b' },
       {
