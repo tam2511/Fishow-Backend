@@ -1,8 +1,8 @@
 <template lang="pug">
-  div
-    FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
+  div.main-content
     FishowPredictionHeader
       DaysPicker(:days="date")
+      FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
     FishSelectPrediction(:areal="areal" :city="city" :date="date")
     .result-container(v-if='readyData')
       PProbe(
@@ -115,5 +115,8 @@ export default {
 }
 .result-container > .box {
   background: radial-gradient(circle, #eff2ff 0%, #cac7c8 100%);
+}
+.main-content {
+  margin-top: 1rem;
 }
 </style>

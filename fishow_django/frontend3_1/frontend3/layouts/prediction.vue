@@ -107,7 +107,7 @@ div.container {
     width: 6rem;
     i {
       font-size: 6rem;
-      color: #a29fa6;
+      color: #fff;
     }
   }
 }
