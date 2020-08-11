@@ -34,7 +34,7 @@
           </div>
           <div class="card-content">
             <div class="content">
-              <p class="title is-6">{{ props.list.title }}</p>
+              <h6 class="title is-6">{{ props.list.title }}</h6>
             </div>
           </div>
         </div>
@@ -148,5 +148,21 @@ export default {
 }
 .box.fish {
   background: radial-gradient(circle, #eff2ff 0%, #cac7c8 100%);
+}
+div.card-content {
+  padding: 1px;
+  background-color: #5b714685;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.title.is-6 {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 20px;
+  margin: 10px;
+  font-weight: initial;
+  color: #fff;
 }
 </style>
