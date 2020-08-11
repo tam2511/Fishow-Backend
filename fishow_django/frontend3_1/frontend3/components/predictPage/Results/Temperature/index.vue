@@ -1,6 +1,6 @@
 <template lang="pug">
   .temperature-box.box
-    p.title Погодные условия
+    h3.title Погодные условия
     p.content(v-html="readyData.temperature_brief")
     .columns.bg-white
       TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
@@ -39,12 +39,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.temperature-box {
-  background-color: #5292e30d;
-}
 .columns.bg-white {
-  background-color: white;
-  margin: 0 -1.3rem;
 }
 .text-justify {
   text-align: justify;
@@ -69,8 +64,8 @@ export default {
 .temperature-box {
 }
 .title.has-text-weight-light {
-  margin: 0 -1.3rem;
-  background-color: white;
-  padding: 1rem;
+  /*margin: 0 -1.3rem*/
+  /*background-color: white;*/
+  /*padding: 1rem;*/
 }
 </style>

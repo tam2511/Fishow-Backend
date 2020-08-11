@@ -1,6 +1,6 @@
 <template lang="pug">
   .moon-box.box
-    p.title Луна
+    h3.title Луна
     p.content(v-html="readyData.moon_desc")
     .columns
       MoonOne.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")

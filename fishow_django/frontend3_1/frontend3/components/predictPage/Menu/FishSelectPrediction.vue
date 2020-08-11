@@ -32,7 +32,7 @@
               <a> <img :src="props.list.image" /></a>
             </figure>
           </div>
-          <div class="card-content">
+          <div class="card-content content_fish-name">
             <div class="content">
               <h6 class="title is-6">{{ props.list.title }}</h6>
             </div>
@@ -146,23 +146,20 @@ export default {
     background-color: #30bab5;
   }
 }
-.box.fish {
-  background: radial-gradient(circle, #eff2ff 0%, #cac7c8 100%);
-}
-div.card-content {
+.content_fish-name {
   padding: 1px;
   background-color: #5b714685;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-}
-.title.is-6 {
-  text-transform: capitalize;
-  text-align: center;
-  font-size: 20px;
-  margin: 10px;
-  font-weight: initial;
-  color: #fff;
+  .title.is-6 {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 20px;
+    margin: 10px;
+    font-weight: initial;
+    color: #fff;
+  }
 }
 </style>

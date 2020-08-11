@@ -41,13 +41,6 @@ export default {
     padding: 0;
   }
 }
-.wind-box {
-  background: radial-gradient(
-    circle,
-    rgb(239, 242, 255) 0%,
-    rgb(202, 199, 200) 100%
-  );
-}
 div.columns {
   background-color: white;
   margin: 0 -1.3rem;

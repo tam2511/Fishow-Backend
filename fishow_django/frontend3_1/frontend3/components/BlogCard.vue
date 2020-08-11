@@ -51,12 +51,12 @@
             </div>
           </div>
           <div class="media-content">
-            <p class="title">
+            <h1 class="title">
               <nuxt-link
                 :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
                 >{{ blog.title }}
               </nuxt-link>
-            </p>
+            </h1>
           </div>
         </div>
         <div class="content">

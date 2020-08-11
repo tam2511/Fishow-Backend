@@ -5,9 +5,10 @@
         <slot></slot>
       </div>
       <div class="column">
-        <p class="title">Прогноз клева на {{ day }}</p>
+        <h1 class="title">Прогноз клева на {{ day }}</h1>
         <span>
-          Планируйте и наслаждайтесь рыбалкой в {{ $route.params.city }}
+          Наслаждайтесь спланированной рыбалкой в {{ $route.params.city }} и
+          отличным клевом
         </span>
       </div>
     </div>
