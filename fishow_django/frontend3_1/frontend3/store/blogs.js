@@ -27,7 +27,7 @@ export const actions = {
     return BlogsService.getBlogs().then((response) => {
       commit('SET_BLOGS', response.data.results)
       commit('SET_NEXT', response.data.next)
-      dispatch('likeBlog', response.data.results)
+      dispatch('lastBLogs', response.data.results)
     })
   },
   getBlog({ commit }, slug) {
@@ -35,10 +35,7 @@ export const actions = {
       commit('SET_BLOG', response.data)
     })
   },
-  likeBlog({ commit }, blogs) {
-    commit(
-      'SET_MIN',
-      blogs.filter((blog, index) => index < 3)
-    )
+  lastBLogs({ commit }, blogs) {
+    commit('SET_MIN', blogs && blogs.filter((blog, index) => index < 3))
   },
 }

@@ -40,13 +40,26 @@ export default {
   },
   methods: {
     async getUserList() {
+      // console.log('this.auth_type = ', this.$auth)
       try {
         if (this.$auth.user) {
-          const responce = await this.$axios.get('/user_all/')
-          this.userList.push(...responce.data)
+          if (this.$auth.$state.strategy !== 'social') {
+            const response = await this.$axios.get('/user_all/')
+            this.userList.push(...response.data)
+          } else {
+            // const token = this.$auth.$storage.$_token.social.split('Bearer ')[1]
+            // console.log('token = ', token)
+            // const response = await this.$axios.get({
+            //   url: 'https://login.yandex.ru/info?',
+            //   headers: {
+            //     Authorization: 'OAuth ' + token,
+            //   },
+            // })
+            // console.log('response  111 = ', response)
+          }
         }
       } catch (e) {
-        console.log('error userlist = ', e.responce)
+        // console.log('error userlist = ', e.response)
       }
     },
   },

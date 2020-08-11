@@ -27,3 +27,5 @@ package-lock.json
 =======
 /fishow_django/frontend2/webpack-stats.json
 >>>>>>> fix
+/fishow_django/media/
+/assets/db/

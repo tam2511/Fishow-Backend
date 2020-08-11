@@ -18,7 +18,6 @@
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
-
     <template slot="end">
       <b-navbar-item tag="div">
         <div v-if="!$auth.user" class="buttons">
@@ -28,10 +27,13 @@
           <a class="button is-light" @click="toggleLogin">
             Войти
           </a>
+          <a class="button is-light" @click="toggleLoginYandex">
+            Войти через Яндекс
+          </a>
         </div>
         <div v-else class="buttons">
           <nuxt-link to="/UserPage" class="button ip-primary">
-            {{ $auth.user }}</nuxt-link
+            {{ $auth.user.login }}</nuxt-link
           >
           <a class="button is-light" @click="logout">
             Выйти
@@ -55,6 +57,9 @@ export default {
       } catch (e) {
         console.log('e = ', e)
       }
+    },
+    toggleLoginYandex() {
+      this.$auth.loginWith('social')
     },
     ...mapMutations('login', {
       toggleLogin: 'TOGGLE_LOGIN',
