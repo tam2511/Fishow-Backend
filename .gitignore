@@ -18,7 +18,7 @@ tam2511.beget.tech.error.log.20200401
 tam2511.beget.tech.error.log.20200402
 tam2511.beget.tech.error.log.20200403
 tmp/
-fishow_django/fishow_django/settings.py
+#fishow_django/fishow_django/settings.py
 fishow_django/db.sqlite3
 package-lock.json
 
