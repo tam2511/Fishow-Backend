@@ -74,12 +74,8 @@ if create_db:
 if migrate_db:
     print('Start migrate database {}...'.format(config['database_name']))
     try:
-        os.system('cd ../fishow_django')
-        os.system('{} manage.py migrate --run-syncdb'.format(python_version))
-        os.system('cd ../assets')
-        os.system('cd ../fishow_django')
-        os.system('python3 manage.py migrate')
-        os.system('cd ../assets')
+        os.system('{} ../fishow_django/manage.py migrate --run-syncdb'.format(python_version))
+        os.system('{} ../fishow_django/manage.py migrate'.format(python_version))
         print('OK: database is migrated.')
     except Exception as e:
         print(e)

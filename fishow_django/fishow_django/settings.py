@@ -25,7 +25,7 @@ SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-with open("config.json", 'r') as json_f:
+with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
     config_database = load(json_f)
 
 
@@ -114,7 +114,7 @@ WSGI_APPLICATION = 'fishow_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-with open("config.json", 'r') as json_f:
+with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
     config_database = load(json_f)
 
 DATABASES = {
