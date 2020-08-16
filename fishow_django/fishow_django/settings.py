@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from json import load
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,11 @@ SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','localhost','213.139.208.107','127.0.0.1']
+with open("config.json", 'r') as json_f:
+    config_database = load(json_f)
+
+
+ALLOWED_HOSTS = config_database['allowed_hosts']
 
 # Application definition
 
@@ -108,8 +113,6 @@ WSGI_APPLICATION = 'fishow_django.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-from json import load
 
 with open("config.json", 'r') as json_f:
     config_database = load(json_f)

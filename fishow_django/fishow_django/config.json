@@ -1,5 +1,6 @@
 {
   "database_name": "tam2511_fishow",
   "password": "081099ASDasd",
-  "user": "tam2511_fishow"
+  "user": "tam2511_fishow",
+  "allowed_hosts": ["0.0.0.0","localhost","213.139.208.107","127.0.0.1"]
 }
