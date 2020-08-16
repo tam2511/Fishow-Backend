@@ -2,6 +2,9 @@ import os
 
 import argparse
 import pymysql
+import pandas as pd
+from .mysql_utils import MysqlConnector
+from tqdm import tqdm
 
 from json import load
 
@@ -33,12 +36,16 @@ parser.add_argument('--mdb', type=str2bool, metavar='migrate_db', nargs=1,
 parser.add_argument('--pv', type=str, metavar='python_version', nargs=1,
                     help='python version, default: python3',
                     default='python3')
+parser.add_argument('--fp', type=str2bool, metavar='fill_prediction', nargs=1,
+                    help='if True prediction table will be migrated, else if False prediction table will not be migrated, default: False',
+                    default=False)
 
 args = parser.parse_args()
 config_path = args.cp[0] if isinstance(args.cp, list) else args.cp
 delete_db = args.ddb[0] if isinstance(args.ddb, list) else args.ddb
 create_db = args.cdb[0] if isinstance(args.cdb, list) else args.cdb
 migrate_db = args.mdb[0] if isinstance(args.mdb, list) else args.mdb
+fill_prediction = args.fp[0] if isinstance(args.fp, list) else args.fp
 python_version = args.pv[0] if isinstance(args.pv, list) else args.pv
 
 with open(config_path, 'r') as f:
@@ -77,5 +84,30 @@ if migrate_db:
         os.system('{} ../fishow_django/manage.py migrate --run-syncdb'.format(python_version))
         os.system('{} ../fishow_django/manage.py migrate'.format(python_version))
         print('OK: database is migrated.')
+    except Exception as e:
+        print(e)
+
+# FILL PREDICTION TABLES
+if fill_prediction:
+    print('Start migrate prediction table...')
+    try:
+        connector = MysqlConnector(database=config['database_name'], password=config['password'], host="localhost",
+                                   username=config['user'])
+        dt = pd.read_csv("damir_ten.csv", sep=';')
+        data = list(dt.T.to_dict().values())
+        # connector.truncate_table('prediction_predictionten')
+        for row in tqdm(data):
+            if pd.isnull(row['wind_direction']):
+                row['wind_direction'] = '-'
+            connector.insert_row('prediction_predictionten', row)
+
+        dt = pd.read_csv("damir_one.csv", sep=';')
+        data = list(dt.T.to_dict().values())
+        # connector.truncate_table('prediction_prediction')
+        for row in tqdm(data):
+            if pd.isnull(row['wind_direction']):
+                row['wind_direction'] = '-'
+            connector.insert_row('prediction_prediction', row)
+        print('OK: tables are migrated.')
     except Exception as e:
         print(e)
