@@ -3,8 +3,9 @@ import os
 import argparse
 import pymysql
 import pandas as pd
-from .mysql_utils import MysqlConnector
+from mysql_utils import MysqlConnector
 from tqdm import tqdm
+
 
 from json import load
 
@@ -70,7 +71,7 @@ if create_db:
     try:
         con = pymysql.connect('localhost', config['user'], config['password'])
         cur = con.cursor()
-        query = ('CREATE DATABASE {};'.format(config['database_name']))
+        query = ('CREATE DATABASE {} CHARACTER SET \'cp1251\';'.format(config['database_name']))
         cur.execute(query)
         print('OK: database is creating.')
     except Exception as e:
@@ -90,24 +91,24 @@ if migrate_db:
 # FILL PREDICTION TABLES
 if fill_prediction:
     print('Start migrate prediction table...')
-    try:
-        connector = MysqlConnector(database=config['database_name'], password=config['password'], host="localhost",
-                                   username=config['user'])
-        dt = pd.read_csv("damir_ten.csv", sep=';')
-        data = list(dt.T.to_dict().values())
-        # connector.truncate_table('prediction_predictionten')
-        for row in tqdm(data):
-            if pd.isnull(row['wind_direction']):
-                row['wind_direction'] = '-'
-            connector.insert_row('prediction_predictionten', row)
+    # try:
+    connector = MysqlConnector(database=config['database_name'], password=config['password'], host="localhost",
+                               username=config['user'])
+    dt = pd.read_csv("damir_ten.csv", encoding="utf-8", sep=';')
+    data = list(dt.T.to_dict().values())
+    # connector.truncate_table('prediction_predictionten')
+    for row in tqdm(data):
+        if pd.isnull(row['wind_direction']):
+            row['wind_direction'] = '-'
+        connector.insert_row('prediction_predictionten', row)
 
-        dt = pd.read_csv("damir_one.csv", sep=';')
-        data = list(dt.T.to_dict().values())
-        # connector.truncate_table('prediction_prediction')
-        for row in tqdm(data):
-            if pd.isnull(row['wind_direction']):
-                row['wind_direction'] = '-'
-            connector.insert_row('prediction_prediction', row)
-        print('OK: tables are migrated.')
-    except Exception as e:
-        print(e)
+    dt = pd.read_csv("damir_one.csv", encoding="utf-8", sep=';')
+    data = list(dt.T.to_dict().values())
+    # connector.truncate_table('prediction_prediction')
+    for row in tqdm(data):
+        if pd.isnull(row['wind_direction']):
+            row['wind_direction'] = '-'
+        connector.insert_row('prediction_prediction', row)
+    print('OK: tables are migrated.')
+    # except Exception as e:
+    #     print(e)

@@ -18,7 +18,6 @@ def serialize_key(key):
 class MysqlConnector:
     def __init__(self, username, password, host, database):
         self.connector = pymysql.connect(host, username, password, database)
-        print(self.connector)
 
     def escape_name(self, s):
         return '`{}`'.format(s.replace('`', '``'))
