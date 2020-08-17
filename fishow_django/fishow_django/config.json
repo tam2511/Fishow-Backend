@@ -1,6 +1,6 @@
 {
   "slava": [],
-  "debug": "True",
+  "debug": 1,
   "database_name": "tam2511_fishow",
   "password": "081099",
   "user": "tam2511_fishow",
@@ -10,7 +10,7 @@
   "url_front": "http://127.0.0.1:3000/",
 
   "sanya": [{
-      "debug": "True",
+      "debug": 1,
       "database_name": "tam2511_fishow",
       "password": "081099ASDasd",
       "user": "tam2511_fishow",
@@ -32,7 +32,7 @@
   }],
 
   "damir": [{
-      "debug": "True",
+      "debug": 1,
       "database_name": "tam2511_fishow",
       "password": "081099ASDasd",
       "user": "tam2511_fishow",
@@ -55,7 +55,7 @@
 
   "server":
   [{
-      "debug": "False",
+      "debug": 0,
       "database_name": "tam2511_fishow",
       "password": "081099ASDasd",
       "user": "tam2511_fishow",
