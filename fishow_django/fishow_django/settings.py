@@ -23,11 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
     config_database = load(json_f)
 
+DEBUG = config_database['debug']
 
 ALLOWED_HOSTS = config_database['allowed_hosts']
 
@@ -78,13 +79,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://0.0.0.0:3000',
-    'http://localhost:3000',
-    'http://192.168.0.102:3000',
-    'http://213.139.208.107:3000',
-    'http://109.63.168.229:3000',
-]
+CORS_ORIGIN_WHITELIST = config_database['cors_origin_whitelist']
 
 ROOT_URLCONF = 'fishow_django.urls'
 
@@ -114,8 +109,8 @@ WSGI_APPLICATION = 'fishow_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
-    config_database = load(json_f)
+# with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
+#     config_database = load(json_f)
 
 DATABASES = {
     'default': {
@@ -162,13 +157,13 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 ACCOUNT_ADAPTER = 'users.views.DefaultAccountAdapterCustom' # new
-URL_FRONT = 'http://192.168.0.102:3000/' # new
+URL_FRONT = config_database['url_front'] # new
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/theoffice/projects/fishow_rest_vue/static/'
+STATIC_ROOT = config_database['static_root']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
