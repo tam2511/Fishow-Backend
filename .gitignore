@@ -11,6 +11,7 @@ fishow_django/fishow_django/__pycache__/
 fishow_django/static/
 fishow_django/users/__pycache__/
 fishow_django/users/api/__pycache__/
+fishow_django/fishow_django/config.json
 passenger_wsgi.py
 public_html
 tam2511.beget.tech.error.log
@@ -29,3 +30,5 @@ package-lock.json
 >>>>>>> fix
 /fishow_django/media/
 /assets/db/
+
+/fishow_django/fishow_django/config.json
