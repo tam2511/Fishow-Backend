@@ -49,15 +49,19 @@ class PressureTextGenerator:
         mean_temps = [np.mean([_[0] for _ in filtred_data[d]]) for d in filtred_data]
         min_temps = [min([_[0] for _ in filtred_data[d]]) for d in filtred_data]
         max_temps = [max([_[0] for _ in filtred_data[d]]) for d in filtred_data]
-        text_builder = ''
         low_date = hard_dates(mean_temps, observe_dates, 'low')
         up_date = hard_dates(mean_temps, observe_dates, 'up')
         if low_date:
-            text_builder += hard_low_desc.format(low_date)
+            low = hard_low_desc.format(low_date)
+        else:
+            low = hard_low_desc_no.format(observe_dates)
         if up_date:
-            text_builder += hard_up_desc.format(up_date)
+            up = hard_up_desc.format(up_date)
+        else:
+            up = hard_up_desc_no.format(observe_dates)
         min_temp = min(min_temps)
         max_temp = max(max_temps)
         min_date = parse_date(observe_dates[min_temps.index(min_temp)])
         max_date = parse_date(observe_dates[max_temps.index(max_temp)])
-        return text_builder + ten_minmax_desc.format(min_date, min_temp, max_date, max_temp)
+        return {'low_text': low, 'up_text': up, 'max': max_temp, 'min': min_temp, 'min_date': min_date,
+                'max_date': max_date}
