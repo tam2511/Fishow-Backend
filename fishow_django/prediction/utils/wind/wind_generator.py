@@ -49,7 +49,7 @@ class WindTextGenerator:
     @staticmethod
     def get_wind_roza(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        filtred_data = {observe_date: [_.wind for _ in data if
+        filtred_data = {observe_date: [_.wind_direction for _ in data if
                                        _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
         winds = sum([filtred_data[d] for d in filtred_data], [])
         return dict(Counter(winds))
