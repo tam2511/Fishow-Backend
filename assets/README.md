@@ -10,6 +10,7 @@
  
 Если нужно записать данные в файл в папке *./assets* дожны лежать два файла *damir10.csv*, *damirone.py*.
  А так же в этой папке должен присутствовать файл *mysql_utils.py*.
+
  
 Интерфейс программы выглядит следующим образом:
 
@@ -52,3 +53,5 @@ python3 drop_and_create_db.py --ddb True --cdb True --mdb True
 ```
 python3 drop_and_create_db.py --ddb True --cdb True --mdb True -cp your_config_path/config.json --pv python3 --fp True
 ```
+
+ Ссылка на скачивание данных для прогноза: https://yadi.sk/d/jLDolpAKGWqr6Q
