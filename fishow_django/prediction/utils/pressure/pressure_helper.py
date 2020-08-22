@@ -16,7 +16,11 @@ desc block
 
 hard_low_desc = '''<strong>{}</strong> ожидается резкий <span class="blue strong">спад</span> атмосферного давления. '''
 
-hard_up_desc = '''<strong>{}</strong> прогнозируется резкое <span class="red strong">рост</span> атмосферного давления. '''
+hard_low_desc_no = '''<strong>{}</strong> резких <span class="blue strong">спадов</span> атмосферного давления не ожидается. '''
+
+hard_up_desc = '''<strong>{}</strong> прогнозируется резкий <span class="red strong">рост</span> атмосферного давления. '''
+
+hard_up_desc_no = '''За период <strong>{}</strong> резкого <span class="blue strong">роста</span> атмосферного давления не прогнозируется. '''
 
 minmax_desc = '''Минимальное значение атмосферного давления в течение - <span class="blue strong">{}</span>, максимальное - <span class="red strong">{}</span>. '''
 

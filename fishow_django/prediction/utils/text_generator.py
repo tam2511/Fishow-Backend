@@ -4,6 +4,7 @@ from .prediction.prediction_generator import PredictTextGenerator
 from .wind.wind_generator import WindTextGenerator
 from .pressure.pressure_generator import PressureTextGenerator
 from .moon.moon_generator import MoonTextGenerator
+from .uv_index.uv_index_generator import UVIndexTextGenerator
 
 class TextGenerator:
     '''
@@ -106,6 +107,10 @@ class TextGenerator:
     def get_tenday_wind_desc(date, fish):
         return WindTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
 
+    @staticmethod
+    def get_tenday_wind_roza(date, fish):
+        return WindTextGenerator.get_wind_roza(TextGenerator.data, date, fish)
+
     '''
     Давление
     '''
@@ -137,3 +142,11 @@ class TextGenerator:
     @staticmethod
     def get_tenday_moon_desc(date, fish):
         return MoonTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
+
+    '''
+    Ультрафиолетовый индекс
+    '''
+
+    @staticmethod
+    def get_tenday_uv_index_desc(date, fish):
+        return UVIndexTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)

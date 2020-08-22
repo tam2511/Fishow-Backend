@@ -7,6 +7,7 @@ from rest_auth.registration.views import VerifyEmailView, RegisterView
 from rest_auth.views import PasswordResetConfirmView,PasswordResetView
 from django.views.generic import TemplateView
 from rest_framework.authtoken import views
+from django.views.static import serve
 
 from core.views import IndexTemplateView
 from users.forms import CustomUserForm
@@ -54,6 +55,8 @@ urlpatterns = [
          name='account_confirm_email'),
     re_path(r'^account-confirm-email/$', VerifyEmailView.as_view(),
              name='account_email_verification_sent'),
+
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT, }),
 
     re_path(r"^.*$", IndexTemplateView.as_view(), name='entry-point')
 ]

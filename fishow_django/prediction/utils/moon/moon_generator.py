@@ -33,22 +33,48 @@ class MoonTextGenerator:
         bad_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'bad']
         good_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'good']
         neutral_dates = [observe_dates[i] for i in range(len(moon_stages)) if moon_stages[i] == 'neutral']
+
         if len(bad_dates) > 0 and len(good_dates) > 0 and len(neutral_dates) > 0:
-            return bad_neutral_good_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
-                                                     get_dates_tex(neutral_dates), get_dates_tex(good_dates),
-                                                     cases[fish]['r'])
+            return {
+                'bad': bad_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r']),
+                'neutral': neutral_desc_text.format(get_dates_tex(neutral_dates), cases[fish]['r']),
+                'good': good_desc_text.format(get_dates_tex(good_dates), cases[fish]['r'])
+            }
+
         if len(bad_dates) > 0 and len(good_dates) > 0 and len(neutral_dates) == 0:
-            return bad_good_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
-                                             get_dates_tex(good_dates))
+            return {
+                'bad': bad_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r']),
+                'neutral': neutral_desc_text_extra.format(cases[fish]['r']),
+                'good': good_desc_text.format(get_dates_tex(good_dates), cases[fish]['r'])
+            }
+
         if len(bad_dates) > 0 and len(good_dates) == 0 and len(neutral_dates) > 0:
-            return bad_neutral_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'],
-                                                get_dates_tex(neutral_dates))
+            return {
+                'bad': bad_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r']),
+                'neutral': neutral_desc_text.format(get_dates_tex(neutral_dates), cases[fish]['r']),
+                'good': good_desc_text_extra.format(cases[fish]['r'])
+            }
         if len(bad_dates) > 0 and len(good_dates) == 0 and len(neutral_dates) == 0:
-            return bad_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r'])
+            return {
+                'bad': bad_desc_text.format(get_dates_tex(bad_dates), cases[fish]['r']),
+                'neutral': neutral_desc_text_extra.format(cases[fish]['r']),
+                'good': good_desc_text_extra.format(cases[fish]['r'])
+            }
         if len(bad_dates) == 0 and len(good_dates) > 0 and len(neutral_dates) > 0:
-            return neutral_good_desc_text.format(get_dates_tex(neutral_dates), get_dates_tex(good_dates),
-                                                 cases[fish]['r'])
+            return {
+                'bad': bad_desc_text_extra.format(cases[fish]['r']),
+                'neutral': neutral_desc_text.format(get_dates_tex(neutral_dates), cases[fish]['r']),
+                'good': good_desc_text.format(get_dates_tex(good_dates), cases[fish]['r'])
+            }
         if len(bad_dates) == 0 and len(good_dates) > 0 and len(neutral_dates) == 0:
-            return good_desc_text.format(get_dates_tex(good_dates), cases[fish]['r'])
+            return {
+                'bad': bad_desc_text_extra.format(cases[fish]['r']),
+                'neutral': neutral_desc_text_extra.format(cases[fish]['r']),
+                'good': good_desc_text.format(get_dates_tex(good_dates), cases[fish]['r'])
+            }
         if len(bad_dates) == 0 and len(good_dates) == 0 and len(neutral_dates) > 0:
-            return neutral_desc_text.format(get_dates_tex(neutral_dates), cases[fish]['r'])
+            return {
+                'bad': bad_desc_text_extra.format(cases[fish]['r']),
+                'neutral': neutral_desc_text.format(get_dates_tex(neutral_dates), cases[fish]['r']),
+                'good': good_desc_text_extra.format(cases[fish]['r'])
+            }

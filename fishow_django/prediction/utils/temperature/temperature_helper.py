@@ -27,6 +27,9 @@ hard_low_desc = '''<strong>{}</strong> ожидается резкое <span cla
 
 hard_up_desc = '''<strong>{}</strong> прогнозируется резкое <span class="red strong">повышение</span> температуры воздуха. '''
 
+hard_no_desc = '''За период <strong>{}</strong> резких перепадов температуры не ожидается. '''
+
+
 minmax_desc = '''Минимальная температура воздуха в течение дня - <span class="blue strong">{}</span>, максимальная - <span class="red strong">{}</span>. '''
 
 ten_minmax_desc = '''<strong>{}</strong> прогнозируется минимальная температура воздуха - <span class="blue strong">{}</span>, а <strong>{}</strong> ожидается максимальная - <span class="red strong">{}</span>. '''
