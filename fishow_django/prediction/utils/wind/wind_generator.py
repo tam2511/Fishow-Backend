@@ -52,5 +52,9 @@ class WindTextGenerator:
         filtred_data = {observe_date: [_.wind_direction for _ in data if
                                        _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
         winds = sum([filtred_data[d] for d in filtred_data], [])
-        return dict(Counter(winds))
-
+        null_roza = {'З': 0, 'СЗ': 0, 'ЮЗ': 0, 'В': 0, 'СВ': 0, 'ЮВ': 0, 'Ю': 0, 'С': 0, }
+        roza =  dict(Counter(winds))
+        for key in null_roza:
+            if key in roza:
+                null_roza[key] = roza[key]
+        return null_roza
