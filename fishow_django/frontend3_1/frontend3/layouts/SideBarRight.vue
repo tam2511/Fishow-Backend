@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--    <TheHeader />-->
     <HeaderBlock />
     <LoginModal v-if="showStateLogin" />
     <RegModal v-if="showStateReg" />
@@ -14,11 +13,16 @@
                 <article class="tile is-parent is-vertical">
                   <p class="title is-4">Популярные блоги</p>
                   <div class="tile is-child">
-                    <HotPostMinimal
-                      v-for="blog in minPost"
-                      :key="blog.id"
-                      :blog="blog"
-                    />
+                    <div v-if="minPost.length > 0">
+                      <HotPostMinimal
+                        v-for="blog in minPost"
+                        :key="blog.id"
+                        :blog="blog"
+                      />
+                    </div>
+                    <div v-else>
+                      <SkeletonHotPost />
+                    </div>
                   </div>
                 </article>
                 <article class="tile is-parent is-vertical">
@@ -43,7 +47,6 @@
         </div>
       </section>
     </transition>
-    <!--    <theLogin />-->
     <TheFooter />
   </div>
 </template>
@@ -56,10 +59,11 @@ import MiniPrediction from '@/components/Sidebar/MiniPrediction'
 import HeaderBlock from '@/components/HeaderBlock'
 import HotPostMinimal from '~/components/Sidebar/HotPostMinimal'
 import TheFooter from '~/components/TheFooter'
+import SkeletonHotPost from '~/components/Sidebar/skeleton/SkeletonHotPost'
 
 export default {
   components: {
-    // TheHeader,
+    SkeletonHotPost,
     HeaderBlock,
     LoginModal,
     RegModal,
@@ -67,7 +71,6 @@ export default {
     MiniPrediction,
     HotPostMinimal,
     TheFooter,
-    // TheLogin,
   },
   middleware: 'auth',
   data() {

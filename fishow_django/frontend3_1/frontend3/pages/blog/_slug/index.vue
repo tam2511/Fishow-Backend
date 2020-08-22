@@ -2,7 +2,10 @@
   <div class="tile is-vertical is-8">
     <div class="tile is-parent is-vertical space-left0">
       <article class="tile is-child">
-        <BlogCard :blog="blog" />
+        <BlogCard v-if="blog" :blog="blog" />
+        <div v-else>
+          <SkeletonBlogCard />
+        </div>
         <CommentsBlock />
       </article>
     </div>
@@ -12,14 +15,16 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 
-import BlogCard from '@/components/BlogCard'
 import CommentsBlock from '@/components/CommentsBlock'
+import SkeletonBlogCard from '@/components/Skeleton/SkeletonBlogCard'
+import BlogCard from '~/components/BlogCard'
 
 export default {
   layout: 'SideBarRight',
   components: {
     BlogCard,
     CommentsBlock,
+    SkeletonBlogCard,
   },
   computed: {
     ...mapState('blogs', ['blog']),
@@ -33,7 +38,7 @@ export default {
 
   head() {
     return {
-      title: 'Fishow - ' + this.blog.title,
+      title: this.blog.title + ' | Fishow',
     }
   },
 }

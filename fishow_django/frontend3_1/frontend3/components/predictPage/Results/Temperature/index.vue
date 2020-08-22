@@ -14,15 +14,7 @@
       .column.text-justify
         p.content(v-html="readyData.temperature_fish")
         p.content(v-html="readyData.temperature_desc")
-    .columns.report
-      .column.is-three-quarters
-        p.content(v-html="readyData.phenomenon_warning")
-      .column.report-icon
-        b-icon(pack="fas"
-          icon="exclamation-triangle"
-          size="is-large"
-          type="is-primary")
-
+    report(:message="readyData.phenomenon_warning")
 </template>
 
 <script>
@@ -31,9 +23,10 @@ import TempOneDay from '@/components/predictPage/Results/Temperature/OneDay/inde
 import readyData from '~/assets/mixins/prediction/readyData'
 import Humidity from '~/components/predictPage/Results/Temperature/OneDay/humidity'
 import Thermo from '~/components/predictPage/Results/Temperature/thermo'
+import Report from '~/components/predictPage/helpers/report'
 
 export default {
-  components: { Humidity, TempOneDay, Thermo },
+  components: { Report, Humidity, TempOneDay, Thermo },
   mixins: [readyData],
 }
 </script>
@@ -42,10 +35,6 @@ export default {
 .columns.bg-white {
 }
 .text-justify {
-  text-align: justify;
-}
-.report {
-  background-color: #cbe8f791;
   text-align: justify;
 }
 

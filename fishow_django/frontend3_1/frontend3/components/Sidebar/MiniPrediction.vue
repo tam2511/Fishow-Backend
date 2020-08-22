@@ -36,32 +36,7 @@
       </div>
     </div>
     <div v-else class="if-lostdata">
-      <section>
-        <div class="media">
-          <div class="media-left">
-            <b-skeleton width="100px" :animated="animated"></b-skeleton>
-          </div>
-          <div class="media-right">
-            <ul>
-              <li>
-                <b-skeleton width="80px" :animated="animated"></b-skeleton>
-              </li>
-              <li>
-                <b-skeleton width="100px" :animated="animated"></b-skeleton>
-              </li>
-              <li>
-                <b-skeleton width="150px" :animated="animated"></b-skeleton>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="body">
-          <b-skeleton width="80%" :animated="animated"></b-skeleton>
-        </div>
-        <div class="progressbar-footer">
-          <b-skeleton :animated="animated"></b-skeleton>
-        </div>
-      </section>
+      <SkeletonPrediction />
     </div>
     <nuxt-link to="/PredictionPage">
       <div class="placeholder">
@@ -74,11 +49,10 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
+import SkeletonPrediction from '@/components/Sidebar/skeleton/SkeletonPrediction'
 export default {
-  data() {
-    return {
-      animated: true,
-    }
+  components: {
+    SkeletonPrediction,
   },
   computed: {
     readyData() {
@@ -116,71 +90,68 @@ export default {
 }
 </script>
 
-<style scoped>
-.media-right {
-  flex-grow: 1;
-  text-align: right;
-}
-.media-left {
-  text-transform: capitalize;
-}
-.media {
-  padding: 1.25rem;
-}
-.footer {
-  background: #363636;
-  border-radius: 6px;
-}
-div.box {
-  padding: 0;
+<style lang="scss">
+.miniPrediction {
   position: relative;
-}
-.body {
-  padding: 0 1.25rem;
-}
-.progressbar-footer {
-  padding: 2rem;
-  border-radius: 6px;
-}
-.progressbar-main {
-  background-color: #ababab;
-  height: 44px;
-}
-.progressbar-value {
-  width: 50%;
-  height: 100%;
-  background-color: #c8e5bc;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 10px;
-}
-.placeholder {
-  opacity: 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.3s;
-  font-size: 20px;
-}
-.placeholder a {
-  color: white;
-}
-.placeholder:hover {
-  background-color: rgba(15, 21, 119, 0.73);
-  color: white;
-  opacity: 1;
-  cursor: pointer;
-}
-.if-lostdata {
-  height: 200px;
-}
-li {
-  padding-top: 5px;
+  .media-right {
+    flex-grow: 1;
+    text-align: right;
+  }
+  .media-left {
+    text-transform: capitalize;
+  }
+  .media {
+    padding: 1.25rem;
+  }
+  .footer {
+    background: #363636;
+    border-radius: 6px;
+  }
+  div.box {
+    padding: 0;
+    position: relative;
+  }
+  .body {
+    padding: 0 1.25rem;
+  }
+  .progressbar-footer {
+    padding: 1.25rem;
+    border-radius: 6px;
+  }
+  .progressbar-main {
+    background-color: #ababab;
+    height: 44px;
+  }
+  .progressbar-value {
+    width: 50%;
+    height: 100%;
+    background-color: #c8e5bc;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 10px;
+  }
+  .placeholder {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    font-size: 20px;
+  }
+  .placeholder a {
+    color: white;
+  }
+  .placeholder:hover {
+    background-color: rgba(15, 21, 119, 0.73);
+    color: white;
+    opacity: 1;
+    cursor: pointer;
+  }
 }
 </style>

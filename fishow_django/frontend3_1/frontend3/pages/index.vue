@@ -22,19 +22,20 @@ export default {
   computed: {
     ...mapState('blogs', ['blogs']),
   },
-  mounted() {
+  created() {
     this.getBlogs()
   },
   methods: {
     ...mapActions('blogs', { getBlogs: 'getBlogs' }),
   },
   head: {
-    title: 'Fishow - Главная',
+    title: 'Прогноз клева рыбы, общение и новости | Fishow',
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: 'Home page description',
+        content:
+          'Прогноз клева рыбы. Рыболовный прогноз клёва рибы с учетом температуры води и воздуха, атмосферного давления, фаз луны и уровня воды, лучший прогноз на рыбалку.',
       },
     ],
   },

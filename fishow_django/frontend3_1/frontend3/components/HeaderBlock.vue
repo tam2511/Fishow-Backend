@@ -1,12 +1,12 @@
 <template>
-  <b-navbar :fixed-top="true">
+  <b-navbar :fixed-top="true" :shadow="true">
     <template slot="brand">
-      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
+      <b-navbar-item tag="a" to="#">
         Fishow
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
+      <b-navbar-item tag="nuxt-link" :to="{ name: 'index' }">
         Главная
       </b-navbar-item>
       <b-navbar-item tag="nuxt-link" :to="{ path: '/PredictionPage' }">
@@ -33,7 +33,7 @@
         </div>
         <div v-else class="buttons">
           <nuxt-link to="/UserPage" class="button ip-primary">
-            {{ $auth.user.login }}</nuxt-link
+            {{ $auth.user.login || $auth.user }}</nuxt-link
           >
           <a class="button is-light" @click="logout">
             Выйти
@@ -69,4 +69,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.nuxt-link-active {
+  background-color: #fafafa;
+  color: #7957d5;
+}
+</style>

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--    <TheHeader />-->
     <div class="columns">
       <div class="column is-three-quarters">
         <div class="container">
@@ -26,13 +25,11 @@ import TheFooter from '~/components/TheFooter'
 import SideBar from '~/components/predictPage/Menu/SideBar'
 export default {
   components: {
-    // TheHeader,
     SideBar,
     HeaderBlock,
     LoginModal,
     RegModal,
     TheFooter,
-    // TheLogin,
   },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),

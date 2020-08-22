@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--    <TheHeader />-->
     <HeaderBlock />
     <LoginModal v-if="showStateLogin" />
     <RegModal v-if="showStateReg" />
@@ -11,7 +10,6 @@
         </div>
       </section>
     </transition>
-    <!--    <theLogin />-->
     <TheFooter />
   </div>
 </template>
@@ -24,12 +22,10 @@ import TheFooter from '~/components/TheFooter'
 
 export default {
   components: {
-    // TheHeader,
     HeaderBlock,
     LoginModal,
     RegModal,
     TheFooter,
-    // TheLogin,
   },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
@@ -49,5 +45,8 @@ a {
   &:hover {
     color: rgba(0, 0, 0, 0.55);
   }
+}
+.errors {
+  color: #b10909;
 }
 </style>
