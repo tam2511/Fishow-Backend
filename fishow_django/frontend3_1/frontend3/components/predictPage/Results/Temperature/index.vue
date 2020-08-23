@@ -4,16 +4,15 @@
     p.content(v-html="readyData.temperature_brief")
     .columns.bg-white
       TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
-    p.title.has-text-weight-light.is-4 Влажность, %
     .columns.bg-white(style="margin-bottom: 1rem")
       .column(v-for="day in readyData" :key="day.idc" :day="day")
         Humidity(:day="day")
     .columns
       .column
-        Thermo
+        Thermo(:day="readyData.temperature_desc.day" :night="readyData.temperature_desc.night")
       .column.text-justify
         p.content(v-html="readyData.temperature_fish")
-        p.content(v-html="readyData.temperature_desc")
+        p.content(v-html="readyData.temperature_desc.desc")
     report(:message="readyData.phenomenon_warning")
 </template>
 

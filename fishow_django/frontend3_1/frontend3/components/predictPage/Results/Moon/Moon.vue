@@ -1,9 +1,16 @@
 <template lang="pug">
   .moon-box.box
     h3.title Луна
-    p.content(v-html="readyData.moon_desc")
-    .columns
+    .columns.moons
       MoonOne.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
+    .columns
+      .column
+        figure.image
+          img(src="/image 92.png" alt="a random image" ratio="6by4")
+      .column.moon_desc
+        p(v-html="readyData.moon_desc.bad")
+        p(v-html="readyData.moon_desc.neutral")
+        p(v-html="readyData.moon_desc.good")
 </template>
 
 <script>
@@ -25,13 +32,16 @@ export default {
 
 <style scoped lang="scss">
 .moon-box {
-  background: rgba(0, 0, 0, 0.89) !important;
-  color: #fff;
+  /*background: rgba(0, 0, 0, 0.89) !important;*/
+  /*color: #fff;*/
 
   padding-bottom: 50px;
 }
+.moons {
+  padding-bottom: 50px;
+}
 .title {
-  color: #fff;
+  /*color: #fff;*/
 }
 @media screen and (max-width: 768px) {
   div.columns {
@@ -44,5 +54,8 @@ div.column {
   display: flex;
   align-items: center;
   flex-flow: column;
+}
+.moon_desc {
+  justify-content: center;
 }
 </style>

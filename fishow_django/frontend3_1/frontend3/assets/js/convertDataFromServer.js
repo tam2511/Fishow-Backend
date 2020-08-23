@@ -46,7 +46,7 @@ export const convertDataFromServer = (data) => {
   for (let i = 0; i < length; i++) {
     const day = {}
     keys.forEach((item) => {
-      if (typeof newData[item] === 'object') {
+      if (typeof newData[item] === 'object' && newData[item][i]) {
         day[item] = newData[item][i]
       }
     })
@@ -54,6 +54,9 @@ export const convertDataFromServer = (data) => {
   }
   keys.forEach((item) => {
     if (typeof newData[item] === 'string') {
+      days[item] = newData[item]
+    }
+    if (typeof newData[item] === 'object' && !newData[item].length) {
       days[item] = newData[item]
     }
   })

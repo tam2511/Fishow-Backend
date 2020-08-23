@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="columns">
+    <div class="columns section">
       <div class="column is-three-quarters">
         <div class="container">
           <HeaderBlock class="header" />
@@ -39,6 +39,9 @@ export default {
 <style lang="scss">
 body {
   background-color: #eee;
+}
+#app > .section {
+  padding-top: 0;
 }
 section.section {
   background-color: #edeff4;
@@ -92,9 +95,9 @@ div.container {
 .strong {
   font-weight: 800;
 }
-.moon-box strong {
-  color: white !important;
-}
+/*.moon-box strong {*/
+/*  color: white !important;*/
+/*}*/
 .report-icon {
   display: flex;
   justify-content: center;

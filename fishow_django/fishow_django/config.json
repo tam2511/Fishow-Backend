@@ -1,21 +1,22 @@
 {
-      "debug": 1,
-      "database_name": "tam2511_fishow",
-      "password": "081099ASDasd",
-      "user": "tam2511_fishow",
-      "allowed_hosts": [
-        "0.0.0.0",
-        "localhost",
-        "213.139.208.107",
-        "127.0.0.1"
-      ],
-      "static_root": "/home/theoffice/projects/fishow_rest_vue/static/",
-      "cors_origin_whitelist": [
-        "http://0.0.0.0:3000",
-        "http://localhost:3000",
-        "http://192.168.0.102:3000",
-        "http://213.139.208.107:3000",
-        "http://109.63.168.229:3000"
-      ],
-      "url_front": "http://192.168.0.102:3000/"
-    }
+  "debug": 1,
+  "database_name": "tam2511_fishow",
+  "password": "081099ASDasd",
+  "user": "tam2511_fishow",
+  "allowed_hosts": [
+    "0.0.0.0",
+    "localhost",
+    "213.139.208.107",
+    "127.0.0.1"
+  ],
+  "static_root": "/home/theoffice/projects/fishow_rest_vue/static/",
+  "cors_origin_whitelist": [
+    "http://0.0.0.0:3000",
+    "http://localhost:3000",
+    "http://192.168.0.102:3000",
+    "http://192.168.0.103:3000",
+    "http://213.139.208.107:3000",
+    "http://109.63.168.229:3000"
+  ],
+  "url_front": "http://192.168.0.103:3000/"
+}

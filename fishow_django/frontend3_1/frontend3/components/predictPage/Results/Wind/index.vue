@@ -1,13 +1,16 @@
 <template lang="pug">
   .wind-box.box
     p.title Ветер, м/с
-    p.content(v-html="readyData.wind_fish")
     p.content(v-html="readyData.wind_desc")
     .columns
       WindOneDay.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
     p.title.has-text-weight-light Порывы, м/с
     .columns
       WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.date + index" :day="day" :gustOnly="true")
+    .columns
+      .column
+        p.content(v-html="readyData.wind_fish")
+      .column
     slot
 </template>
 
@@ -40,10 +43,5 @@ export default {
   .gust-column {
     padding: 0;
   }
-}
-div.columns {
-  background-color: white;
-  margin: 0 -1.3rem;
-  margin-bottom: 1.5rem;
 }
 </style>

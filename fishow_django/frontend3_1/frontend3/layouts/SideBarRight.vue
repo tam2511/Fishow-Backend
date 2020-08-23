@@ -13,7 +13,7 @@
                 <article class="tile is-parent is-vertical">
                   <p class="title is-4">Популярные блоги</p>
                   <div class="tile is-child">
-                    <div v-if="minPost.length > 0">
+                    <div v-if="minPost">
                       <HotPostMinimal
                         v-for="blog in minPost"
                         :key="blog.id"
