@@ -41,9 +41,9 @@ export default {
 .breadcrumb {
   margin-top: 1rem;
   text-transform: capitalize;
-  background-color: rgba(0, 0, 0, 0.25098);
+  /*background-color: rgba(0, 0, 0, 0.25098);*/
 }
 .breadcrumb a {
-  color: #fff;
+  color: #000000;
 }
 </style>

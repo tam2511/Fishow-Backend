@@ -1,17 +1,17 @@
 <template>
   <div id="app">
+    <HeaderBlock />
     <div class="columns section">
       <div class="column is-three-quarters">
         <div class="container">
-          <HeaderBlock class="header" />
           <nuxt />
-          <TheFooter />
         </div>
       </div>
       <div class="column pSideBar">
         <SideBar />
       </div>
     </div>
+    <TheFooter />
     <LoginModal v-if="showStateLogin" />
     <RegModal v-if="showStateReg" />
   </div>
@@ -71,8 +71,8 @@ a {
   }
 }
 .header {
-  padding: 0 20px;
-  border-radius: 5px;
+  /*padding: 0 20px;*/
+  /*border-radius: 5px;*/
   @media screen and (max-width: 450px) {
     width: 100%;
   }
