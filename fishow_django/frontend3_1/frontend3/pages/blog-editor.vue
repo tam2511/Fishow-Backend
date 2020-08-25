@@ -152,10 +152,10 @@ export default {
     }
   },
   methods: {
-    error() {
+    error(text) {
       const notif = this.$buefy.notification.open({
         duration: 5000,
-        message: 'Нужно заполнить поля',
+        message: text,
         position: 'is-bottom-right',
         type: 'is-danger',
         hasIcon: true,
@@ -208,10 +208,10 @@ export default {
     },
     async onSubmit() {
       try {
-        if (!this.blog_title) return this.error()
+        if (!this.blog_title) return this.error('Нужно заполнить поля')
         this.convertTags()
         this.convertBody()
-        if (!this.blog_body) return this.error()
+        if (!this.blog_body) return this.error('Нужно заполнить поля')
         const blog = {
           title: this.blog_title,
           content: this.blog_body,
@@ -228,6 +228,14 @@ export default {
         if (e.response && e.response.data && e.response.data.tags) {
           this.blog_tags = [{ name: 'Текст', code: 'текст' }]
           this.errorTags = 'Слишком много тэгов'
+        }
+        if (e.response && e.response.data && e.response.data.content) {
+          if (
+            e.response.data.content[0] ===
+            'Ensure this field has no more than 5000 characters.'
+          ) {
+            this.error('Максимум 5000 символов')
+          }
         }
       }
     },

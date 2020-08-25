@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-12 fishow-content">
     <div class="form-wrap">
-      <div class="fishow-blog_image__close-button" @click="destroyMe">x</div>
+      <button-delete @destoy="destroyMe" />
       <textarea
         :id="counter"
         v-model="urlVideo"
@@ -22,8 +22,10 @@
 </template>
 
 <script>
+import ButtonDelete from '~/components/blog/buttonDelete'
 export default {
   name: 'VideoField',
+  components: { ButtonDelete },
   props: {
     counter: {
       type: Number,
