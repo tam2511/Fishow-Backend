@@ -148,9 +148,9 @@ export default {
       }
     },
     async likeBlog() {
-      console.log('before like = ', this.likesCounter)
+      // console.log('before like = ', this.likesCounter)
       this.likesCounter += 1
-      console.log('after like = ', this.likesCounter)
+      // console.log('after like = ', this.likesCounter)
       this.userLikedBlog = true
       await this.$axios.$post(`/blogs/${this.blog.id}/like/`)
     },

@@ -55,7 +55,7 @@ export default {
       try {
         await this.$auth.logout()
       } catch (e) {
-        console.log('e = ', e)
+        // console.log('e = ', e)
       }
     },
     toggleLoginYandex() {

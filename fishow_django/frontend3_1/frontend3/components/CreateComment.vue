@@ -49,7 +49,7 @@ export default {
         this.$emit('update')
         this.commentBody = ''
       } catch (e) {
-        console.log('error = ', e)
+        // console.log('error = ', e)
       }
     },
     ...mapActions('comments', { writeComments: 'writeComments' }),

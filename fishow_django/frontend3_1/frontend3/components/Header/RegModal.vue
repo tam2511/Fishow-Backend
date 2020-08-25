@@ -121,7 +121,7 @@ export default {
         this.toggle()
         this.success()
       } catch (e) {
-        console.log('error = ', e.response)
+        // console.log('error = ', e.response)
         if (e.response.data.email) {
           this.error.email = this.message(e.response.data.email[0])
         }
