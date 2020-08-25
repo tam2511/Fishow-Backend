@@ -18,10 +18,11 @@ export default {
       if (this.day.humidity_mean < 0.4) {
         varStyle = 'color: #000;'
       }
-      return `${varStyle} background-color: rgba(30, 50, 120, ${this.day.humidity_mean});`
+      return `${varStyle} background-color: rgba(68, 137, 196, ${this.day.humidity_mean});`
     },
   },
 }
+// rgba(176, 228, 232, 1)
 </script>
 
 <style scoped>

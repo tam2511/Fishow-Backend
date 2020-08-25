@@ -36,7 +36,7 @@ export default {
 @import '~bulma/sass/utilities/_all';
 
 // Set your colors
-$primary: #74d1d5;
+$primary: #b0e4e8;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099ff;
 $twitter-invert: findColorInvert($twitter);
@@ -108,5 +108,8 @@ a {
 }
 .errors {
   color: #b10909;
+}
+#app > section.section {
+  padding-top: 20px;
 }
 </style>

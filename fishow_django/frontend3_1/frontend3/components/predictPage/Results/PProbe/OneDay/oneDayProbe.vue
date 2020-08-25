@@ -9,7 +9,7 @@
       <VueApexCharts
         width="100%"
         height="300px"
-        type="area"
+        type="line"
         :options="chartOptions"
         :series="series"
       ></VueApexCharts>
@@ -65,7 +65,7 @@ export default {
             show: false,
           },
         },
-        colors: ['#17b1bd', '#172a3b'],
+        colors: ['#8ebbbf', '#172a3b'],
         dataLabels: {
           enabled: true,
           formatter(value) {
@@ -106,7 +106,7 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: JSON.parse(this.probMin).sort()[0],
+          min: JSON.parse(this.probMin).sort()[0] - 0.2,
           max: 1,
           labels: {
             formatter(value) {
@@ -161,15 +161,6 @@ export default {
           data: JSON.parse(this.probMin),
         },
       ]
-      this.chartOptions.yaxis = {
-        min: JSON.parse(this.probMin).sort()[0],
-        max: 1,
-        labels: {
-          formatter(value) {
-            return Math.round(value * 100) + '%'
-          },
-        },
-      }
     },
   },
 }
@@ -209,10 +200,10 @@ export default {
     }
   }
   &_max {
-    color: #17b1bd;
+    color: #51686a;
     &:after {
       @extend %legend-flag;
-      background-color: #17b1bd;
+      background-color: #b0e4e8;
     }
   }
 

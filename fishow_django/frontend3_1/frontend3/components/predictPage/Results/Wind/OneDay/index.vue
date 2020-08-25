@@ -68,9 +68,9 @@ export default {
     colorWind() {
       let result = 'null'
       const colors = [
-        [1, 'rgba(0,33,244,0.05)'],
-        [2, 'rgba(0,33,244,0.10)'],
-        [3, 'rgba(0,33,244,0.15)'],
+        [1, 'rgba(176,228,232,0.3)'],
+        [2, 'rgba(176,228,232,0.5)'],
+        [3, 'rgba(176,228,232,0.7)'],
         [4, 'rgba(247,255,0,0.64)'],
         [5, '#ffe800'],
         [6, '#ffa700'],
@@ -88,7 +88,7 @@ export default {
     colorGust() {
       let result = 'null'
       const colors = [
-        [5, 'rgba(0,33,244,0.19)'],
+        [5, 'rgba(176,228,232,0.45)'],
         [6, 'rgba(247,255,0,0.64)'],
         [7, '#ffe800'],
         [8, '#ffa700'],

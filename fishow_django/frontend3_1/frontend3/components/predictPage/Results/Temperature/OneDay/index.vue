@@ -49,7 +49,7 @@ export default {
   background-color: #dea40b;
 }
 .temperature-min {
-  background-color: #00b3ee;
+  background-color: #b0e4e8;
   width: 100%;
 }
 .chart {

@@ -48,7 +48,7 @@ export default {
       const up = `fill: rgba(222, ${this.radius * 10}, 11, ${
         this.radius / 50
       });`
-      const down = `fill: rgba(166, 177, 208, ${this.radius / 20});`
+      const down = `fill: rgba(176, 228, 232, ${this.radius / 20});`
       return this.up ? up : down
     },
   },
@@ -60,7 +60,7 @@ export default {
   fill: rgba(222, 194, 11, 0.97);
 }
 .down {
-  fill: rgba(166, 177, 208, 0.97);
+  fill: rgba(176, 228, 232, 0.97);
 }
 /*'#17b1bd', '#172a3b'*/
 </style>

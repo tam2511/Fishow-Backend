@@ -80,7 +80,7 @@ a {
 div.container {
   /*padding-left: 20px;*/
   @media screen and (max-width: 450px) {
-    padding-right: 20px;
+    padding-right: 0;
   }
 }
 .blue {

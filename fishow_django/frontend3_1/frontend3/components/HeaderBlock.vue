@@ -85,6 +85,7 @@ export default {
     /*top: 0;*/
     left: 0;
     color: #fff;
+    cursor: initial;
     animation: waves 2s ease-in-out infinite forwards;
   }
 }
@@ -141,9 +142,9 @@ a.navbar-item:hover {
   display: grid;
   place-items: center;
   z-index: 1;
-  cursor: pointer;
+  cursor: initial;
   position: relative;
-  background: #9ac;
+  background: #b0e4e8;
   padding: 7px;
 }
 </style>
