@@ -64,7 +64,7 @@ export default {
             show: false,
           },
         },
-        colors: ['#17b1bd', '#172a3b'],
+        colors: ['#b0e4e8', '#172a3b'],
         dataLabels: {
           enabled: true,
           formatter(value) {
@@ -154,10 +154,10 @@ export default {
     position: relative;
   }
   &_max {
-    color: #17b1bd;
+    color: #b0e4e8;
     &:after {
       @extend %legend-flag;
-      background-color: #17b1bd;
+      background-color: #b0e4e8;
     }
   }
   &_min {

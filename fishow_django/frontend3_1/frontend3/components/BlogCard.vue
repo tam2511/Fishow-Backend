@@ -16,7 +16,6 @@
                 <p class="title is-4">{{ blog.author }}</p>
               </div>
             </div>
-            <!--            <p class="subtitle is-6">@{{ blog.author }}</p>-->
           </div>
           <div class="media-right">
             <b-tag class="blog-category" type="is-primary" size="is-medium">{{
@@ -27,10 +26,6 @@
         <div class="media">
           <div class="media-left">
             <div class="like">
-              <!--              <button class="up" @click="toggleLike">-->
-              <!--                <i class="fas fa-chevron-up"></i>-->
-              <!--                -->
-              <!--              </button>-->
               <b-button
                 outlined
                 :disabled="!$auth.user"
@@ -51,12 +46,12 @@
             </div>
           </div>
           <div class="media-content">
-            <p class="title">
+            <h2 class="title">
               <nuxt-link
                 :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
                 >{{ blog.title }}
               </nuxt-link>
-            </p>
+            </h2>
           </div>
         </div>
         <div class="content">
@@ -118,10 +113,10 @@ export default {
   data() {
     return {
       result: {},
-      userLikedBlog: this.blog.user_has_votedUp,
-      userDisLikedBlog: this.blog.user_has_votedDown,
-      likesCounter: this.blog.likes_count,
-      dislikesCounter: this.blog.dislikes_count,
+      userLikedBlog: this.blog && this.blog.user_has_votedUp,
+      userDisLikedBlog: this.blog && this.blog.user_has_votedDown,
+      likesCounter: this.blog && this.blog.likes_count,
+      dislikesCounter: this.blog && this.blog.dislikes_count,
     }
   },
   computed: {
@@ -135,15 +130,11 @@ export default {
   },
   methods: {
     toggleLike() {
-      console.log('toggle like')
       if (this.userLikedBlog) {
-        console.log('already liked = dislike')
         this.unLikeBlog()
       } else if (this.userDisLikedBlog) {
-        console.log('have dislike > remove dislike')
         this.undislikeBlog()
       } else {
-        console.log('like blog')
         this.likeBlog()
       }
     },
@@ -157,7 +148,9 @@ export default {
       }
     },
     async likeBlog() {
+      // console.log('before like = ', this.likesCounter)
       this.likesCounter += 1
+      // console.log('after like = ', this.likesCounter)
       this.userLikedBlog = true
       await this.$axios.$post(`/blogs/${this.blog.id}/like/`)
     },
@@ -215,7 +208,5 @@ export default {
   figure {
     margin: 0 20px;
   }
-}
-.card-footer {
 }
 </style>

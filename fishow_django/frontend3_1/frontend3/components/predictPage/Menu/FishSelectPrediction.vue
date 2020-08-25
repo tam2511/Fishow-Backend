@@ -2,9 +2,7 @@
   <div class="box fish">
     <div class="columns">
       <div class="column is-two-thirds">
-        <p class="content">
-          <span v-html="rawHtml"></span>
-        </p>
+        <p class="content"></p>
       </div>
       <div class="column">
         <b-field>
@@ -34,9 +32,9 @@
               <a> <img :src="props.list.image" /></a>
             </figure>
           </div>
-          <div class="card-content">
+          <div class="card-content content_fish-name">
             <div class="content">
-              <p class="title is-6">{{ props.list.title }}</p>
+              <h6 class="title is-6">{{ props.list.title }}</h6>
             </div>
           </div>
         </div>
@@ -146,6 +144,22 @@ export default {
   }
   &:hover {
     background-color: #30bab5;
+  }
+}
+.content_fish-name {
+  padding: 1px;
+  background-color: #5b714685;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  .title.is-6 {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 20px;
+    margin: 10px;
+    font-weight: initial;
+    color: #fff;
   }
 }
 </style>

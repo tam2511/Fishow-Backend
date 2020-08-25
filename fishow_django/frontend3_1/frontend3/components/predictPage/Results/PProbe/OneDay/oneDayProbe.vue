@@ -8,7 +8,8 @@
       </div>
       <VueApexCharts
         width="100%"
-        type="area"
+        height="300px"
+        type="line"
         :options="chartOptions"
         :series="series"
       ></VueApexCharts>
@@ -64,7 +65,7 @@ export default {
             show: false,
           },
         },
-        colors: ['#17b1bd', '#172a3b'],
+        colors: ['#8ebbbf', '#172a3b'],
         dataLabels: {
           enabled: true,
           formatter(value) {
@@ -105,21 +106,16 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: 0,
+          min: JSON.parse(this.probMin).sort()[0] - 0.2,
           max: 1,
           labels: {
             formatter(value) {
-              return Math.round(value * 100)
+              return Math.round(value * 100) + '%'
             },
           },
         },
         legend: {
-          // position: 'top',
           show: false,
-          // horizontalAlign: 'right',
-          // floating: false,
-          // offsetY: -25,
-          // offsetX: -5,
         },
         responsive: [
           {
@@ -204,10 +200,10 @@ export default {
     }
   }
   &_max {
-    color: #17b1bd;
+    color: #51686a;
     &:after {
       @extend %legend-flag;
-      background-color: #17b1bd;
+      background-color: #b0e4e8;
     }
   }
 

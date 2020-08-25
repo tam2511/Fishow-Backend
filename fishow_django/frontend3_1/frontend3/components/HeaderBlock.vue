@@ -1,12 +1,12 @@
 <template>
-  <b-navbar :fixed-top="true">
+  <b-navbar :fixed-top="true" :shadow="true" class="navbar-brand-container">
     <template slot="brand">
-      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
-        Fishow
+      <b-navbar-item tag="a" to="#" class="logo" data-word="FISHOW">
+        FISHOW
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item tag="nuxt-link" :to="{ path: '/' }">
+      <b-navbar-item tag="nuxt-link" :to="{ name: 'index' }">
         Главная
       </b-navbar-item>
       <b-navbar-item tag="nuxt-link" :to="{ path: '/PredictionPage' }">
@@ -33,7 +33,7 @@
         </div>
         <div v-else class="buttons">
           <nuxt-link to="/UserPage" class="button ip-primary">
-            {{ $auth.user.login }}</nuxt-link
+            {{ $auth.user.login || $auth.user }}</nuxt-link
           >
           <a class="button is-light" @click="logout">
             Выйти
@@ -55,7 +55,7 @@ export default {
       try {
         await this.$auth.logout()
       } catch (e) {
-        console.log('e = ', e)
+        // console.log('e = ', e)
       }
     },
     toggleLoginYandex() {
@@ -69,4 +69,82 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.nuxt-link-active {
+  background-color: #fafafa;
+  color: #7957d5;
+}
+.logo {
+  padding: 0 !important;
+  color: transparent !important;
+  -webkit-text-stroke: 1px #fff;
+  position: relative;
+  &:after {
+    content: attr(data-word);
+    position: absolute;
+    /*top: 0;*/
+    left: 0;
+    color: #fff;
+    cursor: initial;
+    animation: waves 2s ease-in-out infinite forwards;
+  }
+}
+a.navbar-item:hover {
+  color: white;
+}
+@keyframes waves {
+  0%,
+  100% {
+    clip-path: polygon(
+      0 66%,
+      11% 59%,
+      18% 51%,
+      26% 46%,
+      35% 41%,
+      48% 44%,
+      55% 54%,
+      63% 63%,
+      76% 60%,
+      82% 50%,
+      92% 48%,
+      100% 53%,
+      100% 100%,
+      0% 100%
+    );
+  }
+  50% {
+    clip-path: polygon(
+      0 66%,
+      8% 74%,
+      17% 77%,
+      28% 70%,
+      35% 57%,
+      48% 44%,
+      56% 39%,
+      69% 41%,
+      75% 47%,
+      84% 60%,
+      92% 61%,
+      100% 53%,
+      100% 100%,
+      0% 100%
+    );
+  }
+}
+.navbar-brand {
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 200ms;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  cursor: initial;
+  position: relative;
+  background: #b0e4e8;
+  padding: 7px;
+}
+</style>
