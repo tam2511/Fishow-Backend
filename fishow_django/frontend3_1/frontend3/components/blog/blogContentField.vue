@@ -1,15 +1,8 @@
 <template>
   <div class="field">
-    <label class="label">Message</label>
+    <label class="label">Текст</label>
     <div class="control">
-      <div class="field">
-        <button class="button is-danger is-outlined" @click="destroyMe">
-          <span>Delete</span>
-          <span class="icon is-small">
-            <i class="fas fa-times"></i>
-          </span>
-        </button>
-      </div>
+      <button-delete @destoy="destroyMe" />
 
       <textarea
         :id="counter"
@@ -24,7 +17,9 @@
 </template>
 
 <script>
+import ButtonDelete from '~/components/blog/buttonDelete'
 export default {
+  components: { ButtonDelete },
   props: {
     counter: {
       type: String,
