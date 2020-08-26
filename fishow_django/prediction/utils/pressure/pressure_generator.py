@@ -54,11 +54,11 @@ class PressureTextGenerator:
         if low_date:
             low = hard_low_desc.format(low_date)
         else:
-            low = hard_low_desc_no.format(observe_dates)
+            low = hard_low_desc_no.format(get_dates_by_intervals(observe_dates, [[0, -1]]))
         if up_date:
             up = hard_up_desc.format(up_date)
         else:
-            up = hard_up_desc_no.format(observe_dates)
+            up = hard_up_desc_no.format(get_dates_by_intervals(observe_dates, [[0, -1]]))
         min_temp = min(min_temps)
         max_temp = max(max_temps)
         min_date = parse_date(observe_dates[min_temps.index(min_temp)])
