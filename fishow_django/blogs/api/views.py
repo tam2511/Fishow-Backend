@@ -241,6 +241,13 @@ class ImageView(APIView):
         serializer = ImageSerializer(all_images, many=True)
         return Response(serializer.data)
 
+    def delete(self, request, pk):
+            """Remove request.user from the voters queryset of an comment instance."""
+            image = get_object_or_404(Image, pk=pk)
+            image.delete()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+
     def post(self, request, *args, **kwargs):
         # converts querydict to original dict
         images = dict((request.data).lists())['image']
