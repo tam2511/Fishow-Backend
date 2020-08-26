@@ -24,6 +24,7 @@
           :tempMin="predictions['pressure_min']"
         )
       Moon(:readyData="readyData" :days="days")
+      Uvindexfull(:readyData="readyData" :days="days")
     EmptyPrediction(v-else)
 </template>
 
@@ -56,8 +57,10 @@ import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
 import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
 import urlData from '~/assets/mixins/prediction/urlData'
+import Uvindexfull from '~/components/predictPage/Results/UVindex/uvindexfull'
 export default {
   components: {
+    Uvindexfull,
     PressureChart,
     OneDayProbe,
     ChartTemperature,

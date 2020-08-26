@@ -11,15 +11,17 @@
       .column
         p.content(v-html="readyData.wind_fish")
       .column
+        roza(:windRoza="readyData.wind_roza")
     slot
 </template>
 
 <script>
 import WindOneDay from '@/components/predictPage/Results/Wind/OneDay/index'
 import readyData from '~/assets/mixins/prediction/readyData'
+import Roza from '~/components/predictPage/Results/Wind/roza'
 
 export default {
-  components: { WindOneDay },
+  components: { Roza, WindOneDay },
   mixins: [readyData],
   props: {
     days: {

@@ -1,8 +1,29 @@
-<template><div></div> </template>
+<template>
+  <div>
+    <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
+  </div>
+</template>
 
 <script>
+import helper from '~/assets/js/helper'
+import convertFromObjectToDate from '~/assets/js/convertFromObjectToDate'
+import DayBlock from '~/components/predictPage/helpers/dayBlock'
 export default {
-  name: 'UvindexOneDay',
+  components: { DayBlock },
+  props: {
+    day: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    normDay() {
+      return helper(this.day)
+    },
+    dayCalendar() {
+      return convertFromObjectToDate(this.day)
+    },
+  },
 }
 </script>
 
