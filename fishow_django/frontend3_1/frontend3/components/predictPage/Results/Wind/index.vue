@@ -7,10 +7,10 @@
     p.title.has-text-weight-light Порывы, м/с
     .columns
       WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.date + index" :day="day" :gustOnly="true")
-    .columns
+    .columns.roza-columns
       .column
         p.content(v-html="readyData.wind_fish")
-      .column
+      .column.roza
         roza(:windRoza="readyData.wind_roza")
     slot
 </template>
@@ -44,6 +44,12 @@ export default {
   }
   .gust-column {
     padding: 0;
+  }
+  .roza-columns {
+    flex-flow: column;
+  }
+  .roza {
+    min-width: 300px;
   }
 }
 </style>

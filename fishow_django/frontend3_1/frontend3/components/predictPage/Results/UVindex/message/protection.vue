@@ -1,11 +1,14 @@
 <template>
   <div class="columns uv-table">
     <div class="column" v-for="item in messages" :key="item.icons">
-      <icon-protection
-        v-for="icons in item.icons"
-        :key="icons"
-        :value="icons"
-      />
+      <div class="icons">
+        <icon-protection
+          v-for="icons in item.icons"
+          :key="icons"
+          :value="icons"
+        />
+      </div>
+
       <div class="message">{{ item.message }}</div>
       <div class="status">{{ item.status }}</div>
     </div>
@@ -53,5 +56,10 @@ export default {
 }
 .uv-table {
   padding-top: 30px;
+}
+.icons {
+  display: flex;
+  padding-bottom: 6px;
+  justify-content: center;
 }
 </style>

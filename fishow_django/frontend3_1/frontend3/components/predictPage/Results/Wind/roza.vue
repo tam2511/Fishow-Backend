@@ -44,9 +44,6 @@ export default {
           height: 350,
           type: 'radar',
         },
-        title: {
-          text: 'Basic Radar Chart',
-        },
         xaxis: {
           categories: ['С', 'СВ', 'В', 'ЮВ', 'Ю', 'ЮЗ', 'З', 'СЗ'],
         },

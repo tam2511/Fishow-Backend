@@ -67,4 +67,12 @@ export default {
 .uv-table {
   padding-top: 30px;
 }
+@media screen and (max-width: 768px) {
+  div.columns {
+    display: flex;
+  }
+  .uvindex-box.box {
+    overflow: auto;
+  }
+}
 </style>

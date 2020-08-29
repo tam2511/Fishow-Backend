@@ -52,7 +52,9 @@ export default {
   align-items: center;
 }
 .uv-line_item {
-  padding: 0.5rem 1rem;
+  padding: 0.1rem 1.7rem;
   background-color: #00b3ee;
+
+  margin-top: 11px;
 }
 </style>

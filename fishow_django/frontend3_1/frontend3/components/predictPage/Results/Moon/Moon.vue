@@ -3,8 +3,8 @@
     h3.title Луна
     .columns.moons
       MoonOne.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
-    .columns
-      .column
+    .columns.moon-columns
+      .column.moon-pic
         figure.image
           img(src="/image 92.png" alt="a random image" ratio="6by4")
       .column.moon_desc
@@ -48,6 +48,12 @@ export default {
     display: flex;
     overflow: scroll;
     min-height: 200px;
+  }
+  .moon-columns {
+    flex-flow: column;
+  }
+  .moon-pic {
+    min-width: 300px;
   }
 }
 div.column {
