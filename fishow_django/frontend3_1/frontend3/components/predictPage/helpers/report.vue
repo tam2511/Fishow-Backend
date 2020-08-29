@@ -28,4 +28,10 @@ export default {
   align-items: center;
   min-height: 120px;
 }
+@media screen and (max-width: 768px) {
+  .report {
+    min-height: 300px;
+    flex-flow: column;
+  }
+}
 </style>

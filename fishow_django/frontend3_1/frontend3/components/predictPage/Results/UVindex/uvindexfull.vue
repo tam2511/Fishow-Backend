@@ -57,6 +57,7 @@ export default {
   min-width: 40px;
   margin: auto 0;
   text-align: center;
+  margin-right: 10px;
 }
 .column {
   text-align: center;

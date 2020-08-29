@@ -64,6 +64,11 @@ export default {
           label: 'Луна',
           click: 'moon',
         },
+        {
+          icon: 'sun',
+          label: 'Солнечная активность',
+          click: 'uvindex',
+        },
       ],
     }
   },
