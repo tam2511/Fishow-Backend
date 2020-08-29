@@ -58,9 +58,9 @@ export default {
 
 <style scoped>
 .card {
-  min-height: 200px;
+  min-height: 250px;
 
-  background: url('/background_header.png') no-repeat center;
+  background: url('/prediction_background.jpg') no-repeat center;
   background-size: cover;
 }
 .title,

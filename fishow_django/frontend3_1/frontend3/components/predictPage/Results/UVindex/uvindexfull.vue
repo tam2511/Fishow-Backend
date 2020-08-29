@@ -1,8 +1,8 @@
 <template>
   <div class="uvindex-box box">
     <h3 class="title">Солнечная активность</h3>
-
     <div class="columns">
+      <div class="column max-width"></div>
       <uvindex-one-day
         v-for="(day, index) in readyData"
         :key="day.date + index"
@@ -22,6 +22,7 @@
         </div>
       </div>
     </div>
+    <protection />
   </div>
 </template>
 
@@ -29,8 +30,9 @@
 import readyData from '~/assets/mixins/prediction/readyData'
 import UvLine from '~/components/predictPage/Results/UVindex/uv-line'
 import UvindexOneDay from '~/components/predictPage/Results/UVindex/uvindexOneDay'
+import Protection from '~/components/predictPage/Results/UVindex/message/protection'
 export default {
-  components: { UvindexOneDay, UvLine },
+  components: { UvindexOneDay, UvLine, Protection },
   mixins: [readyData],
   props: {
     days: {
@@ -55,5 +57,14 @@ export default {
   min-width: 40px;
   margin: auto 0;
   text-align: center;
+}
+.column {
+  text-align: center;
+}
+.max-width {
+  max-width: 45px;
+}
+.uv-table {
+  padding-top: 30px;
 }
 </style>

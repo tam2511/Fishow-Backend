@@ -162,4 +162,10 @@ export default {
     color: #fff;
   }
 }
+.box.fish {
+  span.select,
+  span.select > select {
+    width: 100%;
+  }
+}
 </style>
