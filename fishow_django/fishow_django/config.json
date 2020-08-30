@@ -6,7 +6,7 @@
   "user": "tam2511_fishow",
   "allowed_hosts": [],
   "static_root":  "/Users/vd/WebstormProjects/fishow_rest_vue/static/",
-  "cors_origin_whitelist": ["http://127.0.0.1:3000","http://192.168.43.181:3000","http://localhost:8000"],
+  "cors_origin_whitelist": ["http://127.0.0.1:3000","http://192.168.43.181:3000","http://localhost:8000","http://localhost:3000"],
   "url_front": "http://127.0.0.1:3000/",
 
   "sanya": [{

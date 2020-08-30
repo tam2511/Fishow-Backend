@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny
 from users.models import CustomUser
 from blogs.models import Blog
 from django.contrib.auth import get_user_model
+from rest_framework.generics import get_object_or_404
 
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLoginView
@@ -15,11 +16,22 @@ from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from rest_auth.registration.views import SocialConnectView
 from rest_auth.social_serializers import TwitterConnectSerializer
+from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
 
+#@list_route(methods['get'],url_path='(?P<username\w+>)')
 class CurrentUserAPIView(APIView):
+    #permission_classes = [IsAuthorOrReadOnly]
 
     def get(self, request):
         serializer = UserDisplaySerializer(request.user)
+        return Response(serializer.data)
+
+class SelectUserAPIView(APIView):
+    permission_classes = [IsAuthorOrReadOnly, DjangoObjectPermissionsOrAnonReadOnly]
+
+    def get(self, request, username):
+        user=get_object_or_404(CustomUser, username=username)
+        serializer = UserDisplaySerializer(user)
         return Response(serializer.data)
 
 class UserList(APIView):
