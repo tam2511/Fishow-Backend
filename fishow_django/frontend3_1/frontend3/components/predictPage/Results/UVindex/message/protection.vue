@@ -4,7 +4,7 @@
       <div class="icons">
         <icon-protection
           v-for="icons in item.icons"
-          :key="icons"
+          :key="icons.id"
           :value="icons"
         />
       </div>

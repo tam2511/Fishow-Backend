@@ -35,9 +35,6 @@ export default {
         10: '#ea3400',
         11: '#b046ef',
       }
-      console.log(colors)
-      console.log(colors[value])
-      console.log(value)
       return 'background-color: ' + colors[value]
     },
   },
