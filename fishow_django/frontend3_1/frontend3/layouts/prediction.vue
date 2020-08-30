@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <!--    <TheHeader />-->
-    <div class="columns">
+    <HeaderBlock />
+    <div class="columns section">
       <div class="column is-three-quarters">
         <div class="container">
-          <HeaderBlock class="header" />
           <nuxt />
-          <TheFooter />
         </div>
       </div>
       <div class="column pSideBar">
         <SideBar />
       </div>
     </div>
+    <TheFooter />
     <LoginModal v-if="showStateLogin" />
     <RegModal v-if="showStateReg" />
   </div>
@@ -26,13 +25,11 @@ import TheFooter from '~/components/TheFooter'
 import SideBar from '~/components/predictPage/Menu/SideBar'
 export default {
   components: {
-    // TheHeader,
     SideBar,
     HeaderBlock,
     LoginModal,
     RegModal,
     TheFooter,
-    // TheLogin,
   },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
@@ -43,11 +40,17 @@ export default {
 body {
   background-color: #eee;
 }
+#app > .section {
+  padding-top: 0;
+}
 section.section {
   background-color: #edeff4;
   @media (max-width: 450px) {
     padding: 10px;
   }
+}
+.results-container .columns {
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
 a {
   color: #0d0a0a;
@@ -68,8 +71,8 @@ a {
   }
 }
 .header {
-  padding: 0 20px;
-  border-radius: 5px;
+  /*padding: 0 20px;*/
+  /*border-radius: 5px;*/
   @media screen and (max-width: 450px) {
     width: 100%;
   }
@@ -77,7 +80,7 @@ a {
 div.container {
   /*padding-left: 20px;*/
   @media screen and (max-width: 450px) {
-    padding-right: 20px;
+    padding-right: 0;
   }
 }
 .blue {
@@ -92,7 +95,20 @@ div.container {
 .strong {
   font-weight: 800;
 }
-.moon-box strong {
-  color: white !important;
+/*.moon-box strong {*/
+/*  color: white !important;*/
+/*}*/
+.report-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    height: 6rem;
+    width: 6rem;
+    i {
+      font-size: 6rem;
+      color: #fff;
+    }
+  }
 }
 </style>

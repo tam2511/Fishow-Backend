@@ -48,3 +48,8 @@ def get_day_times(times):
     else:
         temp_text = ', '.format([text_map[_] for _ in times_keys[:-1]]) + ' и {}'.format(text_map[times_keys[-1]])
         return '{}'.format(temp_text)
+
+def get_time_text(date, time):
+    date_text = parse_date(date)
+    time_text = text_map[time_map[time]]
+    return '{}, {}'.format(date_text, time_text)

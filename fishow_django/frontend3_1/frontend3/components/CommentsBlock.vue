@@ -46,7 +46,7 @@ export default {
         await this.$axios.delete(endpoint)
         this.getData()
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     },
     getData() {

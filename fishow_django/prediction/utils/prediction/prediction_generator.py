@@ -38,34 +38,16 @@ class PredictTextGenerator:
                                        _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
         min_prob = 1
         max_prob = 0
-        min_dates = []
-        max_dates = []
         for d in filtred_data:
             for prob, time in filtred_data[d]:
                 if prob < min_prob:
                     min_prob = prob
-                    min_dates = [(d, time)]
-                if prob == min_prob:
-                    min_dates.append((d, time))
+                    min_date = (d, time)
                 if prob > max_prob:
                     max_prob = prob
-                    max_dates = [(d, time)]
-                if prob == max_prob:
-                    max_dates.append((d, time))
-        min_group_by_date = {}
-        max_group_by_date = {}
-        for d, time in min_dates:
-            if not d in min_group_by_date:
-                min_group_by_date[d] = [time]
-            else:
-                min_group_by_date[d].append(time)
-        for d, time in max_dates:
-            if not d in max_group_by_date:
-                max_group_by_date[d] = [time]
-            else:
-                max_group_by_date[d].append(time)
-        min_times = ', '.join([get_day_date_times(d, min_group_by_date[d]) for d in min_group_by_date])
-        max_times = ', '.join([get_day_date_times(d, max_group_by_date[d]) for d in max_group_by_date])
+                    max_date = (d, time)
+
         min_prob = '{} %'.format(int(min_prob * 100))
         max_prob = '{} %'.format(int(max_prob * 100))
-        return minmax_tenday_text.format(max_times, cases[fish]['r'], max_prob, min_times, min_prob)
+        return {'min': min_prob, 'max': max_prob, 'min_date': get_time_text(*min_date),
+                'max_date': get_time_text(*max_date)}

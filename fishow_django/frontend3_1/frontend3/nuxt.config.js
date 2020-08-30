@@ -116,7 +116,7 @@ export default {
   },
   /* buefy options */
   buefy: {
-    // isPrimary: '#000',
+    css: false,
   },
   // yandexMetrika: {
   //   id: 64900765,

@@ -3,7 +3,7 @@
     <FPBreadCrumbs :areal="areal" :city="city" :fish="fish" :date="date" />
     <div class="columns is-2">
       <div v-for="predict in prediction" :key="predict.id" class="column">
-        <div class="box card" мн>
+        <div class="box card">
           <div class="card-content">
             {{ predict.date }}
           </div>

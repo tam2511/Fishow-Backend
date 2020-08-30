@@ -1,63 +1,5 @@
-<!--<template>-->
-<!--  <div class="container">-->
-<!--    <div class="row row-50" :style="$auth.loggedIn ? '' : 'filter:blur(5px)'">-->
-<!--      <div v-if="blog_category !== 'Отчет'" class="col-lg-7 col-xl-8">-->
-<!--        <article class="heading-component">-->
-<!--          <div class="heading-component-inner">-->
-<!--            <h5 class="heading-component-title">Написать блог</h5>-->
-<!--          </div>-->
-<!--        </article>-->
-
-<!--      </div>-->
-<!--      &lt;!&ndash;      <div class="col-lg-7 col-xl-8">&ndash;&gt;-->
-<!--      <div v-else class="col-lg-7 col-xl-8">-->
-<!--        <article class="heading-component">-->
-<!--          <div class="heading-component-inner">-->
-<!--            <h5 class="heading-component-title">Добавить отчет</h5>-->
-<!--          </div>-->
-<!--        </article>-->
-<!--      </div>-->
-<!--      <div class="col-lg-5 col-xl-4">-->
-<!--        <div>-->
-<!--          <label class="typo__label">Выберите категорию:</label>-->
-<!--          <multiselect-->
-<!--            v-model="blog_category"-->
-<!--            :options="optionsCategory"-->
-<!--            :searchable="false"-->
-<!--            :close-on-select="true"-->
-<!--            :show-labels="false"-->
-<!--            placeholder="Pick a value"-->
-<!--          ></multiselect>-->
-<!--        </div>-->
-<!--        <label class="typo__label">Теги:</label>-->
-<!--        <multiselect-->
-<!--          v-model="blog_tags"-->
-<!--          tag-placeholder="Add this as new tag"-->
-<!--          placeholder="Найдите или добавьте свой тег"-->
-<!--          label="name"-->
-<!--          track-by="code"-->
-<!--          :options="options"-->
-<!--          :multiple="true"-->
-<!--          :taggable="true"-->
-<!--          @tag="addTag"-->
-<!--        >-->
-<!--        </multiselect>-->
-<!--        <br />-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div v-if="!$auth.loggedIn" class="warning-overlay">-->
-<!--      <warning-->
-<!--        class="warning-popin"-->
-<!--        title="Оповещение"-->
-<!--        body="Для возможности создания блога вам необходимо авторизоваться"-->
-<!--        button="Войти"-->
-<!--        redirect="/login"-->
-<!--      />-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</template>-->
 <template>
-  <div class="tile">
+  <div class="tile container">
     <div class="tile is-vertical is-8">
       <p class="title">Написать блог</p>
       <div class="tile is-parent is-vertical box">
@@ -148,9 +90,13 @@
             :options="options"
             :multiple="true"
             :taggable="true"
+            @input="clearError"
             @tag="addTag"
           >
           </multiselect>
+          <div v-if="errorTags" class="errors">
+            {{ errorTags }}
+          </div>
         </div>
       </div>
     </div>
@@ -195,11 +141,6 @@ export default {
       blog_body: '',
       blog_title: null,
       blog_category: 'Блоги',
-      //     deafultTags: ['Удочки', 'Шутки', 'Ночь', 'История', 'Деньги'],
-
-      //     error: null,
-
-      //     valueCategory: '',
       blog_tags: [{ name: 'Текст', code: 'текст' }],
       options: [
         { name: 'Видео', code: 'ви' },
@@ -207,58 +148,22 @@ export default {
         { name: 'Текст', code: 'текст' },
       ],
       optionsCategory: ['Новости', 'Блоги', 'Статьи', 'Отчет'],
-      //     descriptors: {
-      //       prop1: {
-      //         type: 'string',
-      //         label: 'Место рыбалки',
-      //         required: true,
-      //         message: 'Обязательно укажите место рыбалки'
-      //       },
-      //       prop2: {
-      //         type: 'object',
-      //         label: 'object label',
-      //         fields: {
-      //           prop1: { type: 'email', required: true },
-      //           prop2: { type: 'number', required: true },
-      //           prop3: [
-      //             {
-      //               type: 'string',
-      //               required: true,
-      //               message: 'object label.prop3 is required'
-      //             },
-      //             {
-      //               pattern: /test/,
-      //               message: 'object label.prop3 should include test'
-      //             }
-      //           ],
-      //           prop4: {
-      //             type: 'enum',
-      //             enum: [0, 1],
-      //             label: 'Рыба',
-      //             placeholder: 'sadsad',
-      //             options: [
-      //               // { label: 'Лев', value: 0, disabled: true },
-      //               { label: 'Лев', value: 0 },
-      //               { label: 'Тигр', value: 1 }
-      //             ]
-      //           },
-      //           prop5: { type: 'boolean', required: true }
-      //         }
-      //       }
-      //     },
-      //     data: {}
+      errorTags: '',
     }
   },
-  // computed: {
-  //   loading() {
-  //     return this.username !== null
-  //   },
-  //   ...mapState('user', ['username'])
-  // },
-  // created() {
-  //   // document.title = 'Fishow - Создание блога'
-  // },
   methods: {
+    error(text) {
+      const notif = this.$buefy.notification.open({
+        duration: 5000,
+        message: text,
+        position: 'is-bottom-right',
+        type: 'is-danger',
+        hasIcon: true,
+      })
+      notif.$on('close', () => {
+        // this.$buefy.notification.open('Custom notification closed!')
+      })
+    },
     addTag(newTag) {
       const tag = {
         name: newTag,
@@ -266,6 +171,9 @@ export default {
       }
       this.options.push(tag)
       this.blog_tags.push(tag)
+    },
+    clearError() {
+      if (this.errorTags) this.errorTags = null
     },
     convertBody() {
       const result = []
@@ -289,43 +197,6 @@ export default {
     convertTags() {
       this.blog_tags = JSON.stringify(this.blog_tags)
     },
-    // async submitRecipe() {
-    //   const config = {
-    //     headers: { 'content-type': 'multipart/form-data' },
-    //   }
-    //   const formData = new FormData()
-    //   /* eslint-disable */
-    //   for (let data in this.recipe) {
-    //     formData.append(data, this.recipe[data])
-    //   }
-    //   try {
-    //     const response = await this.$axios.$post('/blogs/', formData, config)
-    //     console.log('response = ', response)
-    //     this.$router.push('/blogs/')
-    //   } catch (e) {
-    //     console.log(e)
-    //   }
-    // },
-    async onSubmit() {
-      try {
-        this.convertTags()
-        this.convertBody()
-        const blog = {
-          title: this.blog_title,
-          content: this.blog_body,
-          category: this.blog_category,
-          tags: this.blog_tags,
-        }
-        const response = await this.$axios.$post('/blogs/', blog)
-        console.log('responce')
-        this.$router.push({
-          name: 'blog-slug',
-          params: { slug: response.slug },
-        })
-      } catch (e) {
-        console.log('error = ', e.responce)
-      }
-    },
     addImage() {
       this.articles.push('imageField')
     },
@@ -334,6 +205,39 @@ export default {
     },
     addVideo() {
       this.articles.push('videoField')
+    },
+    async onSubmit() {
+      try {
+        if (!this.blog_title) return this.error('Нужно заполнить поля')
+        this.convertTags()
+        this.convertBody()
+        if (!this.blog_body) return this.error('Нужно заполнить поля')
+        const blog = {
+          title: this.blog_title,
+          content: this.blog_body,
+          category: this.blog_category,
+          tags: this.blog_tags,
+        }
+        const response = await this.$axios.$post('/blogs/', blog)
+        this.$router.push({
+          name: 'blog-slug',
+          params: { slug: response.slug },
+        })
+      } catch (e) {
+        console.log('error = ', e.response)
+        if (e.response && e.response.data && e.response.data.tags) {
+          this.blog_tags = [{ name: 'Текст', code: 'текст' }]
+          this.errorTags = 'Слишком много тэгов'
+        }
+        if (e.response && e.response.data && e.response.data.content) {
+          if (
+            e.response.data.content[0] ===
+            'Ensure this field has no more than 5000 characters.'
+          ) {
+            this.error('Максимум 5000 символов')
+          }
+        }
+      }
     },
   },
   // async beforeRouteEnter(to, from, next) {
@@ -349,4 +253,8 @@ export default {
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tile.is-vertical.is-8 {
+  padding-right: 20px;
+}
+</style>

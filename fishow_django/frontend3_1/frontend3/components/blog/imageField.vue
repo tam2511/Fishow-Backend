@@ -1,32 +1,29 @@
 <template>
-  <div class="col-md-12 fishow-content">
-    <div class="form-wrap">
-      <div class="field">
-        <button class="button is-danger is-outlined" @click="destroyMe">
-          <span>Delete</span>
-          <span class="icon is-small">
-            <i class="fas fa-times"></i>
-          </span>
-        </button>
-      </div>
-      <textarea
-        :id="counter"
-        v-model="image"
-        name="image"
-        class="textarea"
-        placeholder="Например: https://peach.blender.org/wp-content/uploads/bbb-splash.png?x10518"
-        cols="30"
-        rows="4"
-      >
-      </textarea>
-      <img :src="image" width="500" height="500" alt="uploaded image" />
-    </div>
+  <div>
+    <button-delete @destoy="destroyMe" />
+    <b-field class="file is-primary" :class="{ 'has-name': !!file }">
+      <b-upload v-model="file" expanded @input="sendImage" class="file-label">
+        <span class="file-cta">
+          <b-icon class="file-icon" icon="upload"></b-icon>
+          <span class="file-label">Нажмите что бы загрузить</span>
+        </span>
+        <span v-if="file" class="file-name">
+          {{ file.name }}
+        </span>
+      </b-upload>
+    </b-field>
+    <textarea :id="counter" v-model="image" name="image" style="display: none;">
+    </textarea>
+    <figure class="image">
+      <img :src="image" alt="" />
+    </figure>
   </div>
 </template>
 
 <script>
+import ButtonDelete from '~/components/blog/buttonDelete'
 export default {
-  name: 'ImageField',
+  components: { ButtonDelete },
   props: {
     counter: {
       type: String,
@@ -35,15 +32,29 @@ export default {
   },
   data() {
     return {
-      image: '',
+      file2: null,
+      file: null,
+      image: null,
     }
   },
   methods: {
     destroyMe() {
       this.$el.remove()
     },
+    sendImage() {
+      const formData = new FormData()
+      formData.append('image', this.file)
+      this.$axios
+        .post('/image/', formData, {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        })
+        .then((res) => {
+          if (res.data && res.data.image) {
+            this.image = res.data.image
+          }
+        })
+    },
   },
 }
 </script>
-
-<style scoped lang="scss"></style>
