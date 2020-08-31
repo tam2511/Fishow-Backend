@@ -60,9 +60,7 @@
             :key="p.id"
             :class="p.type + '_container'"
           >
-            <div v-if="p.type === 'text'" class="post-corporate-text">
-              <p>{{ p.body }}</p>
-            </div>
+            <p v-if="p.type === 'text'" class="post-text">{{ p.body }}</p>
             <iframe
               v-if="p.type === 'video'"
               width="560"
@@ -208,5 +206,8 @@ export default {
   figure {
     margin: 0 20px;
   }
+}
+.post-text {
+  padding: 1rem 0;
 }
 </style>
