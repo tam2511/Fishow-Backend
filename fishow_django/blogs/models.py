@@ -4,7 +4,7 @@ from django.conf import settings
 
 class Blog(models.Model):
     title = models.CharField(max_length=100)
-    content = models.CharField(max_length=5000)
+    content = models.TextField()
     category = models.CharField(max_length=100)
     tags = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)

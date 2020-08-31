@@ -45,6 +45,10 @@ class CommentLikeAPIView(APIView):
         user.social_rating=int(user.social_rating)-1
         user.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.count_like=int(user.count_like)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
 
@@ -60,6 +64,10 @@ class CommentLikeAPIView(APIView):
 
         user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)+1
+        user.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.count_like=int(user.count_like)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -85,6 +93,10 @@ class CommentDisLikeAPIView(APIView):
         user.social_rating=int(user.social_rating)+1
         user.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.count_dislike=int(user.count_dislike)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(comment, context=serializer_context)
 
@@ -100,6 +112,10 @@ class CommentDisLikeAPIView(APIView):
 
         user=CustomUser.objects.get(username=comment.author)
         user.social_rating=int(user.social_rating)-1
+        user.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.count_dislike=int(user.count_dislike)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -163,6 +179,10 @@ class BlogLikeAPIView(APIView):
         user.social_rating=int(user.social_rating)-1
         user.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.count_like=int(user.count_like)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
 
@@ -178,6 +198,10 @@ class BlogLikeAPIView(APIView):
 
         user=CustomUser.objects.get(username=blog.author)
         user.social_rating=int(user.social_rating)+1
+        user.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.count_like=int(user.count_like)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -203,6 +227,10 @@ class BlogDisLikeAPIView(APIView):
         user.social_rating=int(user.social_rating)+1
         user.save()
 
+        user=CustomUser.objects.get(username=request.user)
+        user.count_dislike=int(user.count_dislike)-1
+        user.save()
+
         serializer_context = {"request": request}
         serializer = self.serializer_class(blog, context=serializer_context)
 
@@ -218,6 +246,10 @@ class BlogDisLikeAPIView(APIView):
 
         user=CustomUser.objects.get(username=blog.author)
         user.social_rating=int(user.social_rating)-1
+        user.save()
+
+        user=CustomUser.objects.get(username=request.user)
+        user.count_dislike=int(user.count_dislike)+1
         user.save()
 
         serializer_context = {"request": request}
@@ -240,6 +272,13 @@ class ImageView(APIView):
         all_images = Image.objects.all()
         serializer = ImageSerializer(all_images, many=True)
         return Response(serializer.data)
+
+    def delete(self, request, pk):
+            """Remove request.user from the voters queryset of an comment instance."""
+            image = get_object_or_404(Image, pk=pk)
+            image.delete()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     def post(self, request, *args, **kwargs):
         # converts querydict to original dict
