@@ -27,9 +27,9 @@
           <a class="button is-light" @click="toggleLogin">
             Войти
           </a>
-          <a class="button is-light" @click="toggleLoginYandex">
-            Войти через Яндекс
-          </a>
+          <!--          <a class="button is-light" @click="toggleLoginYandex">-->
+          <!--            Войти через Яндекс-->
+          <!--          </a>-->
         </div>
         <div v-else class="buttons">
           <nuxt-link to="/UserPage" class="button ip-primary">

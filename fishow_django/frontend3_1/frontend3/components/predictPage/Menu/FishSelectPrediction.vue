@@ -163,6 +163,9 @@ export default {
   }
 }
 .box.fish {
+  background: none;
+  border: none;
+  box-shadow: none;
   span.select,
   span.select > select {
     width: 100%;

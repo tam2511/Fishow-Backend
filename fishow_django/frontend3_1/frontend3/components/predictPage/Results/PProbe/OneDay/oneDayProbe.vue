@@ -1,11 +1,6 @@
 <template>
   <client-only>
     <div>
-      <div class="legend">
-        <span class="legend_max">Максимальная суточная вероятность клёва</span>
-        <span class="legend_min">Минимальная суточная вероятность клёва</span>
-        <span class="legend_area">Высокий шанс клева рыбы</span>
-      </div>
       <VueApexCharts
         width="100%"
         height="300px"

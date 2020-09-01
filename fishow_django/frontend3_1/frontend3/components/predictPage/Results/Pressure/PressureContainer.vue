@@ -8,14 +8,20 @@
         p(v-html="readyData.pressure_desc.up_text")
       .column
         p(v-html="readyData.pressure_desc.low_text")
-      .column
-        p(v-html="readyData.pressure_desc.min_date")
-        p(v-html="readyData.pressure_desc.min")
-        span мм рт.ст.
-      .column
-        p(v-html="readyData.pressure_desc.max_date")
-        p(v-html="readyData.pressure_desc.max")
-        span мм рт.ст.
+      .column.container-minmax
+        div
+          div(data-value="min") MIN
+          p(v-html="readyData.pressure_desc.min_date")
+        div
+          p(v-html="readyData.pressure_desc.min")
+          span мм рт.ст.
+      .column.container-minmax
+        div
+          div(data-value="max") MAX
+          p(v-html="readyData.pressure_desc.max_date")
+        div
+          p(v-html="readyData.pressure_desc.max")
+          span мм рт.ст.
 
 
     report(:message="message")
@@ -39,4 +45,17 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.container-minmax {
+  display: flex;
+}
+[data-value] {
+  font-size: 4vh;
+}
+[data-value='min'] {
+  color: #64888a;
+}
+[data-value='max'] {
+  color: #77866c;
+}
+</style>
