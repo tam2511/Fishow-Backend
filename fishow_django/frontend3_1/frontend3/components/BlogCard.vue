@@ -210,4 +210,7 @@ export default {
 .post-text {
   padding: 1rem 0;
 }
+[src*='svg'] {
+  max-height: 50px;
+}
 </style>

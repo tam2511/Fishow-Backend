@@ -144,7 +144,7 @@ a.navbar-item:hover {
   z-index: 1;
   cursor: initial;
   position: relative;
-  background: #b0e4e8;
+  background: #168c95;
   padding: 7px;
 }
 </style>

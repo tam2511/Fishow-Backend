@@ -2,7 +2,11 @@
   <div class="tile is-vertical is-8">
     <h4 class="title is-4">Последние записи</h4>
     <div class="tile is-parent is-vertical space-left0">
-      <article v-for="blog in blogs" :key="blog.id" class="tile is-child">
+      <article
+        v-for="blog in blogs"
+        :key="blog.id"
+        class="tile is-child blog-page"
+      >
         <BlogCard :blog="blog" />
       </article>
     </div>

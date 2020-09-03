@@ -26,7 +26,26 @@
           @click="doScroll(menu.click)"
         ></b-menu-item>
       </b-menu-list>
+      <b-menu-list v-if="predictions" label="Опции">
+        <b-menu-item
+          icon="fish"
+          pack="fa"
+          label="Поделиться прогнозом"
+          @click="copyToClip"
+        >
+        </b-menu-item>
+      </b-menu-list>
     </b-menu>
+    <b-message
+      v-if="link"
+      id="message-link"
+      title="Ваша ссылка скопирована"
+      type="is-success"
+      aria-close-label="Close message"
+      @close="link = null"
+    >
+      {{ link }}
+    </b-message>
   </div>
 </template>
 
@@ -38,6 +57,7 @@ export default {
       drawer: true,
       mini: true,
       isActive: false,
+      link: null,
       menuPrognos: [
         {
           icon: 'percent',
@@ -82,6 +102,29 @@ export default {
         left: 0,
         behavior: 'smooth',
       })
+    },
+    copyToClip() {
+      const fish = this.predictions.fish
+      const date = this.predictions.date
+      const city = this.predictions.city
+      const areal = this.predictions.areal
+      this.link = `http://fishow.ru/PredictionPage/${areal}/${date}/${city}/${fish}`
+      const copyElem = document.createElement('textarea')
+      copyElem.value = this.link
+      copyElem.style.position = 'absolute'
+      copyElem.style.left = '-9999px'
+      document.body.appendChild(copyElem)
+      copyElem.focus()
+      copyElem.select()
+      copyElem.setSelectionRange(0, 9999)
+      try {
+        const successful = document.execCommand('copy')
+        const msg = successful ? 'successful' : 'unsuccessful'
+        console.log('Fallback: Copying text command was ' + msg)
+      } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err)
+      }
+      copyElem.remove()
     },
     doScroll(value) {
       let item
