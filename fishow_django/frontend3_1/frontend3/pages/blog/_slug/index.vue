@@ -2,6 +2,7 @@
   <div class="tile is-vertical is-8">
     <div class="tile is-parent is-vertical space-left0">
       <article class="tile is-child">
+        <!--        <pre class="language-json"><code>{{ blog  }}</code></pre>-->
         <BlogCard v-if="blog" :blog="blog" />
         <div v-else>
           <SkeletonBlogCard />

@@ -119,18 +119,18 @@ a {
   max-height: 400px;
   overflow: hidden;
   position: relative;
-  &:after {
-    content: '';
-    background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0) 25%
-    );
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
+  /*&:after {*/
+  /*  content: '';*/
+  /*  background: linear-gradient(*/
+  /*    0deg,*/
+  /*    rgba(255, 255, 255, 1) 0%,*/
+  /*    rgba(255, 255, 255, 0) 25%*/
+  /*  );*/
+  /*  position: absolute;*/
+  /*  left: 0;*/
+  /*  top: 0;*/
+  /*  width: 100%;*/
+  /*  height: 100%;*/
+  /*}*/
 }
 </style>

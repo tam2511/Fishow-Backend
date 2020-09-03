@@ -7,6 +7,7 @@
         :key="blog.id"
         class="tile is-child blog-page"
       >
+        <!--        <pre class="language-json"><code>{{ blog  }}</code></pre>-->
         <BlogCard :blog="blog" />
       </article>
     </div>
