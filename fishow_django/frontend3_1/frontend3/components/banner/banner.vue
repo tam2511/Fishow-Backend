@@ -25,14 +25,14 @@ export default {
   },
   created() {
     if (process.browser) {
-      // if (
-      //   !sessionStorage.getItem('banner_showed') &&
-      //   !localStorage.getItem('banner_closed')
-      // ) {
-      this.active = true
-      console.log('this.active = true')
-      //   sessionStorage.setItem('banner_showed', true)
-      // }
+      if (
+        !sessionStorage.getItem('banner_showed') &&
+        !localStorage.getItem('banner_closed')
+      ) {
+        this.active = true
+        console.log('this.active = true')
+        sessionStorage.setItem('banner_showed', true)
+      }
     }
   },
   methods: {

@@ -56,13 +56,14 @@ export default {
     min-width: 300px;
   }
 }
-div.column {
+.moons div.column {
   display: flex;
   align-items: center;
   flex-flow: column;
 }
 .moon_desc {
-  list-style: none;
+  display: flex;
+  flex-flow: column;
   justify-content: center;
   @media screen and (max-width: 450px) {
     width: 90%;
