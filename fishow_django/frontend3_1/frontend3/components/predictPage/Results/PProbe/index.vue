@@ -44,6 +44,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/legend';
+
 .minmax_container {
   display: flex;
   font-size: 4vh;
@@ -59,48 +61,6 @@ export default {
 [data-value='max'] {
   color: #77866c;
 }
-%legend-flag {
-  content: '';
-  height: 10px;
-  width: 10px;
-  display: block;
-  position: absolute;
-  left: -15px;
-  top: 7px;
-}
-.legend {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-end;
 
-  color: rgba(128, 128, 128, 0.8);
-  span {
-    position: relative;
-  }
-  &_area {
-    color: #1a5105;
-    &:after {
-      @extend %legend-flag;
-      background-color: #1a5105;
-    }
-  }
-  &_min {
-    color: #172a3b;
-    &:after {
-      @extend %legend-flag;
-      background-color: #172a3b;
-    }
-  }
-  &_max {
-    color: #51686a;
-    &:after {
-      @extend %legend-flag;
-      background-color: #b0e4e8;
-    }
-  }
-
-  @media screen and (max-width: 450px) {
-    font-size: 10px;
-  }
-}
+@include legend;
 </style>

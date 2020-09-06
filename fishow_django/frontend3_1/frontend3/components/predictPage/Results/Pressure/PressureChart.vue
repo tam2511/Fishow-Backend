@@ -135,40 +135,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-%legend-flag {
-  content: '';
-  height: 10px;
-  width: 10px;
-  display: block;
-  position: absolute;
-  left: -15px;
-  top: 7px;
-}
-.legend {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-end;
-  font-size: 14px;
-  color: rgba(128, 128, 128, 0.8);
-  span {
-    position: relative;
-  }
-  &_max {
-    color: #73a2a5;
-    &:after {
-      @extend %legend-flag;
-      background-color: #73a2a5;
-    }
-  }
-  &_min {
-    color: #172a3b;
-    &:after {
-      @extend %legend-flag;
-      background-color: #172a3b;
-    }
-  }
-  @media screen and (max-width: 450px) {
-    font-size: 10px;
-  }
-}
+@import '@/assets/scss/legend';
+
+@include legend;
 </style>
