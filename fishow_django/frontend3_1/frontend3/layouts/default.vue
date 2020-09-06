@@ -33,10 +33,15 @@ export default {
 }
 </script>
 <style lang="scss">
+:root {
+  --color-type-primary: #018cac;
+}
+
 @import '~bulma/sass/utilities/_all';
 
 // Set your colors
-$primary: #b0e4e8;
+
+$primary: #018cac;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099ff;
 $twitter-invert: findColorInvert($twitter);

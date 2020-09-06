@@ -148,7 +148,7 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: flex-end;
-
+  font-size: 14px;
   color: rgba(128, 128, 128, 0.8);
   span {
     position: relative;

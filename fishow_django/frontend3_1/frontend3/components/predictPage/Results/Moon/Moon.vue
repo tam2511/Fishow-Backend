@@ -8,9 +8,9 @@
         figure.image
           img(src="/image 92.png" alt="a random image" ratio="6by4")
       .column.moon_desc
-        p(v-html="readyData.moon_desc.bad")
-        p(v-html="readyData.moon_desc.neutral")
-        p(v-html="readyData.moon_desc.good")
+        p(v-html="readyData.moon_desc.bad" data-status="bad")
+        p(v-html="readyData.moon_desc.neutral" data-status="neutral")
+        p(v-html="readyData.moon_desc.good" data-status="good")
 </template>
 
 <script>
@@ -62,6 +62,36 @@ div.column {
   flex-flow: column;
 }
 .moon_desc {
+  list-style: none;
   justify-content: center;
+  @media screen and (max-width: 450px) {
+    width: 90%;
+    margin-left: auto;
+  }
+  p {
+    position: relative;
+    padding: 5px 0;
+  }
+  p:before {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    content: '•';
+    font-size: 5rem;
+    line-height: 10px;
+    transform: translate(-50%, -50%);
+  }
+  [data-status='bad']:before {
+    color: darkred;
+  }
+  [data-status='good']:before {
+    color: #22a022;
+  }
+  [data-status='neutral']:before {
+    color: #b6b60a;
+  }
+}
+.image img {
+  margin: 0 auto;
 }
 </style>

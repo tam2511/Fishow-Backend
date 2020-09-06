@@ -88,7 +88,7 @@ export default {
     goToDay() {
       // console.log('select')
       this.$router.push({
-        name: 'PredictionPage-areal-date-city-fish',
+        name: 'prognoz-kleva-areal-date-city-fish',
         params: {
           areal: this.$route.params.areal,
           date: this.rightDate,

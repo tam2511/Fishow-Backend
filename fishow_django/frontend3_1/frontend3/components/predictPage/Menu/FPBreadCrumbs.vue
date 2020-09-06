@@ -8,10 +8,10 @@
               <a> Россия </a>
             </li>
             <li>
-              <nuxt-link to="/PredictionPage">{{ areal }}</nuxt-link>
+              <nuxt-link to="/prognoz-kleva">{{ areal }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/PredictionPage">{{ city }}</nuxt-link>
+              <nuxt-link to="/prognoz-kleva">{{ city }}</nuxt-link>
             </li>
           </ul>
         </nav>
@@ -58,5 +58,8 @@ export default {
 }
 .breadcrumb a {
   color: #000000;
+}
+.columns {
+  align-items: center;
 }
 </style>

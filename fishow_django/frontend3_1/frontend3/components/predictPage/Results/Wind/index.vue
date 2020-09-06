@@ -1,10 +1,10 @@
 <template lang="pug">
   .wind-box.box
-    p.title Ветер, м/с
+    h2.title Ветер, м/с
     p.content(v-html="readyData.wind_desc")
     .columns
       WindOneDay.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
-    p.title.has-text-weight-light Порывы, м/с
+    h2.title Порывы, м/с
     .columns
       WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.date + index" :day="day" :gustOnly="true")
     .columns.roza-columns

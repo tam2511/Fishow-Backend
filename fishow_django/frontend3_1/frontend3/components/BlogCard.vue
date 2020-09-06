@@ -34,7 +34,7 @@
                   icon-right="chevron-up"
                   @click="toggleLike"
                 />
-                <b-button type="is-primary">
+                <b-button type="is-primary likes_counter">
                   {{ rating + likesCounter + dislikesCounter }}
                 </b-button>
                 <b-button
@@ -92,7 +92,7 @@
                     :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
                   >
                     <b-tag type="is-light">Комментариев</b-tag>
-                    <b-tag type="is-info">{{ blog.comments_count }}</b-tag>
+                    <b-tag type="is-primary">{{ blog.comments_count }}</b-tag>
                   </nuxt-link>
                 </b-taglist>
               </div>
@@ -186,6 +186,9 @@ export default {
 }
 .media {
   align-items: center;
+  .flex figure {
+    margin-left: 0;
+  }
   .title {
     color: #adadad;
     font-weight: 300;
@@ -228,5 +231,8 @@ export default {
 }
 .title {
   color: #2aabd2;
+}
+.likes_counter {
+  max-width: 40px;
 }
 </style>

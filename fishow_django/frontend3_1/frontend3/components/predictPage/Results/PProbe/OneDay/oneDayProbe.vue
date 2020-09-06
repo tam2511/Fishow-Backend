@@ -101,7 +101,7 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: JSON.parse(this.probMin).sort()[0] - 0.2,
+          min: 0,
           max: 1,
           labels: {
             formatter(value) {

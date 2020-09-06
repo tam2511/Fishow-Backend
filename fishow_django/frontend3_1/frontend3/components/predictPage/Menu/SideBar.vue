@@ -108,7 +108,7 @@ export default {
       const date = this.predictions.date
       const city = this.predictions.city
       const areal = this.predictions.areal
-      this.link = `http://fishow.ru/PredictionPage/${areal}/${date}/${city}/${fish}`
+      this.link = `http://fishow.ru/prognoz-kleva/${areal}/${date}/${city}/${fish}`
       const copyElem = document.createElement('textarea')
       copyElem.value = this.link
       copyElem.style.position = 'absolute'

@@ -33,7 +33,7 @@
                 </article>
                 <article class="tile is-parent is-vertical">
                   <p class="title is-4">Статистика</p>
-                  <div class="tile is-child box">
+                  <div class="tile is-child card">
                     <UserRate />
                   </div>
                 </article>
@@ -48,6 +48,7 @@
       </section>
     </transition>
     <TheFooter />
+    <banner />
   </div>
 </template>
 <script>
@@ -60,6 +61,7 @@ import HeaderBlock from '@/components/HeaderBlock'
 import HotPostMinimal from '~/components/Sidebar/HotPostMinimal'
 import TheFooter from '~/components/TheFooter'
 import SkeletonHotPost from '~/components/Sidebar/skeleton/SkeletonHotPost'
+import banner from '~/components/banner/banner'
 
 export default {
   components: {
@@ -71,6 +73,7 @@ export default {
     MiniPrediction,
     HotPostMinimal,
     TheFooter,
+    banner,
   },
   middleware: 'auth',
   data() {

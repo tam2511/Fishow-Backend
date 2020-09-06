@@ -163,6 +163,7 @@ export default {
   }
 }
 .box.fish {
+  padding-top: 0;
   background: none;
   border: none;
   box-shadow: none;

@@ -9,7 +9,7 @@
       <b-navbar-item tag="nuxt-link" :to="{ name: 'index' }">
         Главная
       </b-navbar-item>
-      <b-navbar-item tag="nuxt-link" :to="{ path: '/PredictionPage' }">
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/prognoz-kleva' }">
         Прогноз
       </b-navbar-item>
       <b-navbar-dropdown label="Блоги">
@@ -71,8 +71,10 @@ export default {
 
 <style lang="scss">
 .nuxt-link-active {
-  background-color: #fafafa;
-  color: #7957d5;
+  color: var(--color-type-primary);
+  &:not([href*='blog']) {
+    background-color: #fafafa;
+  }
 }
 .logo {
   padding: 0 !important;
@@ -144,7 +146,7 @@ a.navbar-item:hover {
   z-index: 1;
   cursor: initial;
   position: relative;
-  background: #168c95;
+  background: var(--color-type-primary);
   padding: 7px;
 }
 </style>

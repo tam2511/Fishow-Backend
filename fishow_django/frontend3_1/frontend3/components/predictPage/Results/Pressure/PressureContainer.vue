@@ -63,6 +63,9 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.content {
+  font-size: 18px;
+}
 .right-box {
   padding: 0 1rem;
 }

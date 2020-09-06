@@ -22,7 +22,7 @@ export default {
 
 <style scoped>
 .report {
-  background-color: #b0e4e8;
+  background-color: #b0e4e882;
   text-align: justify;
   display: flex;
   align-items: center;

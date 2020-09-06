@@ -1,4 +1,4 @@
-import getData from '@/pages/PredictionPage/_areal/_date/_city/_fish/getData'
+import getData from '@/pages/prognoz-kleva/_areal/_date/_city/_fish/getData'
 
 export default {
   data() {

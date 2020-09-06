@@ -13,9 +13,9 @@
     </div>
     <div class="grid-uv">
       <div v-for="(uv, key) in readyData.uv_index_desc" :key="uv.id" class="">
-        {{ key === '6' ? 'Утро' : '' }}
-        {{ key === '12' ? 'День' : '' }}
-        {{ key === '18' ? 'Вечер' : '' }}
+        <span v-if="key === '6'">Утро</span>
+        <span v-if="key === '12'">День</span>
+        <span v-if="key === '18'">Вечер</span>
         <div class="grid-uv-child">
           <div class="uv-key">{{ key }}:00</div>
           <uv-line :line="uv" />
@@ -47,7 +47,8 @@ export default {
 </script>
 
 <style scoped>
-.grid-uv {
+.grid-uv span {
+  font-weight: 700;
 }
 .grid-uv-child {
   display: grid;
@@ -55,9 +56,8 @@ export default {
 }
 .uv-key {
   min-width: 40px;
-  margin: auto 0;
   text-align: center;
-  margin-right: 10px;
+  margin: auto 10px auto 0;
 }
 .column {
   text-align: center;
