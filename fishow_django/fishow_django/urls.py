@@ -8,6 +8,7 @@ from rest_auth.views import PasswordResetConfirmView,PasswordResetView
 from django.views.generic import TemplateView
 from rest_framework.authtoken import views
 from django.views.static import serve
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 from core.views import IndexTemplateView
 from users.forms import CustomUserForm
@@ -50,6 +51,13 @@ urlpatterns = [
 
     path('api/rest-auth/registration/',
          include('rest_auth.registration.urls')),
+
+#     path(r'api-token-auth/', obtain_jwt_token),
+#     path(r'api-token-refresh/', refresh_jwt_token),
+#     path(r'^api-token-verify/', verify_jwt_token),
+
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(),
          name='account_confirm_email'),
