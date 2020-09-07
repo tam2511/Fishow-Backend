@@ -33,7 +33,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@/assets/scss/mainSizes';
+@import '@/assets/scss/main';
 @import '~bulma/sass/utilities/_all';
 
 // Set your colors

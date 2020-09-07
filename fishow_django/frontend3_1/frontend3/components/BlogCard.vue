@@ -181,9 +181,6 @@ export default {
   background-color: #1e347b;
   font-size: 45px;
 }
-.image_container {
-  padding: 20px 0;
-}
 .media {
   align-items: center;
   .flex figure {
