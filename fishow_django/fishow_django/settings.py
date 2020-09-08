@@ -220,6 +220,7 @@ REST_FRAMEWORK = {
         #'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -229,7 +230,9 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 7
 }
 
-# REST_USE_JWT = True
+REST_USE_JWT = True
+
+JWT_AUTH_COOKIE = 'my-app-auth'
 # import datetime
 #
 # JWT_AUTH = {

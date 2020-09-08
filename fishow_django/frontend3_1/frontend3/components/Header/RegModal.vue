@@ -95,6 +95,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import errors from '~/components/Header/errors'
 export default {
   data() {
     return {
@@ -117,7 +118,7 @@ export default {
       try {
         const data = this.reg
         // console.log('data = ', data)
-        await this.$axios.$post('/rest-auth/registration/', data)
+        await this.$axios.$post('/dj-rest-auth/registration/', data)
         this.toggle()
         this.success()
       } catch (e) {
@@ -144,16 +145,7 @@ export default {
       })
     },
     message(data) {
-      switch (data) {
-        case 'This field may not be blank.':
-          return 'Это поле не может быть пустым'
-        case 'A user is already registered with this e-mail address.':
-          return 'Это электронная почта уже используется'
-        case 'This password is too short. It must contain at least 8 characters.':
-          return 'Пароль слишком короткий, необходимо минимум 8 символов'
-        case 'A user with that username already exists.':
-          return 'Пользователь с таким логином уже зарегистрирован'
-      }
+      return errors[data]
     },
     ...mapMutations('login', { toggle: 'TOGGLE_REG' }),
   },

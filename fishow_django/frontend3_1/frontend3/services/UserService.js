@@ -12,7 +12,7 @@ const apiClient = axios.create({
 
 export default {
   getUserData() {
-    return apiClient.get('/rest-auth/user/')
+    return apiClient.get('/dj-rest-auth/user/')
   },
   getAllUsers() {
     return apiClient.get('/user_all/')

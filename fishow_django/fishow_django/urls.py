@@ -56,8 +56,8 @@ urlpatterns = [
 #     path(r'api-token-refresh/', refresh_jwt_token),
 #     path(r'^api-token-verify/', verify_jwt_token),
 
-    path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(),
          name='account_confirm_email'),

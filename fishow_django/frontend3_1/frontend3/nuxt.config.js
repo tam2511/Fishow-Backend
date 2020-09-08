@@ -59,9 +59,6 @@ export default {
    ** Global CSS
    */
   css: [],
-  router: {
-    middleware: ['auth'],
-  },
   /*
    ** Plugins to load before mounting the App
    */
@@ -156,32 +153,35 @@ export default {
     name: 'fade',
     mode: 'out-in',
   },
+  router: {
+    middleware: ['loggedIn'],
+  },
   auth: {
     plugins: [{ src: '~/plugins/axios', ssr: true }, '~/plugins/auth.js'],
     fetchUserOnLogin: true,
     watchLoggedIn: true,
+    cookie: {
+      options: {
+        expires: 7,
+      },
+    },
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: '/rest-auth/login/',
+            url: '/dj-rest-auth/login/',
             method: 'post',
-            propertyName: 'key',
+            propertyName: false,
           },
-          registration: {
-            url: '/rest-auth/registration/',
-            method: 'post',
-            propertyName: 'key',
-          },
-          logout: { url: '/rest-auth/logout/', method: 'post' },
+          logout: { url: '/dj-rest-auth/logout/', method: 'post' },
           user: {
-            url: '/rest-auth/user/',
-            method: 'get',
-            propertyName: 'username',
+            url: '/dj-rest-auth/user/',
+            method: 'post',
+            propertyName: false,
           },
         },
-        tokenType: 'Token',
-        tokenName: 'Authorization',
+        // tokenType: 'Bearer',
+        // tokenName: 'Authorization',
         // globalToken: true,
         // autoFetchUser: true
       },
