@@ -70,7 +70,7 @@ class TemperatureTextGenerator:
         if up_date:
             text_builder += hard_up_desc.format(up_date)
         if text_builder == '':
-            text_builder += hard_no_desc.format(observe_dates)
+            text_builder += hard_no_desc.format(get_dates_by_intervals(observe_dates, [[0, -1]]))
         min_temp_night = np.min(min_temps_night)
         max_temp_night = np.max(max_temps_night)
         mean_temp_night = np.mean(mean_temps_night)
