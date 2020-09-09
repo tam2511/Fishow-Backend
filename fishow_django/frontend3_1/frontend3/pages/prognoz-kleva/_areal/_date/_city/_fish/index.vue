@@ -38,8 +38,6 @@ import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPredic
 import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
 import SideBar from '~/components/predictPage/Menu/SideBar'
 import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
-import PDataPicker from '@/components/predictPage/Menu/PDataPicker'
-
 // if empty
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 
@@ -71,7 +69,6 @@ export default {
     FishSelectPrediction,
     EmptyPrediction,
     PressureContainer,
-    PDataPicker,
     DaysPicker,
     FPBreadCrumbs,
     Wind,
@@ -100,7 +97,8 @@ export default {
   },
   head() {
     return {
-      title: 'Fishow - Прогноз',
+      title:
+        'Fishow - Прогноз клева на 9 дней, вероятность клева рыбы, погодные условия',
     }
   },
 }
