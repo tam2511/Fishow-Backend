@@ -36,7 +36,6 @@ import { mapState, mapActions } from 'vuex'
 import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
 import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
 import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
-import SideBar from '~/components/predictPage/Menu/SideBar'
 import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
 // if empty
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
@@ -63,7 +62,6 @@ export default {
     OneDayProbe,
     ChartTemperature,
     PProbe,
-    SideBar,
     Temperature,
     FishowPredictionHeader,
     FishSelectPrediction,

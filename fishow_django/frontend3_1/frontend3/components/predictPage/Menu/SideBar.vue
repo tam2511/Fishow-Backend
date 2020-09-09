@@ -15,7 +15,7 @@
           @click="doScroll('.fish')"
         />
       </b-menu-list>
-      <b-menu-list v-if="predictions" label="Прогноз">
+      <b-menu-list v-if="predictions || prediction" label="Прогноз">
         <b-menu-item
           v-for="menu in menuPrognos"
           :key="menu.title"
@@ -93,7 +93,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('prediction', ['predictions']),
+    ...mapState('prediction', ['predictions', 'prediction']),
   },
   methods: {
     scroll() {
