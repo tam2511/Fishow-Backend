@@ -4,7 +4,7 @@
     FishowPredictionHeader
       DaysPicker(:days="date")
     FishSelectPrediction(:areal="areal" :city="city" :date="date")
-    .result-container(v-if='prediction')
+    .result-container(v-if='prediction && prediction[0]')
       PProbe(
         :readyData="prediction[0]"
       )
