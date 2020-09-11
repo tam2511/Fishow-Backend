@@ -1,7 +1,7 @@
 import datetime
 import numpy as np
 
-from fishow_django.prediction.utils.prediction.prediction_helper import get_day_times
+from ..prediction.prediction_helper import get_day_times
 from .temperature_helper import *
 from ..helper.text import cases
 from ..helper.date import parse_date
