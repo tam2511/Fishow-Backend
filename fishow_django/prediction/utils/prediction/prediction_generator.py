@@ -3,19 +3,19 @@ import numpy as np
 
 from .prediction_helper import *
 from ..helper.text import cases
-from ..helper.date import parse_date, get_dates_tex
+from ..helper.date import parse_date, get_dates_text
 
 
 class PredictTextGenerator:
 
     @staticmethod
     def get_day_brief(date, fish):
-        return brief_text.format(cases[fish]['r'], date)
+        return brief_text.format(cases[fish]['r'], parse_date(date))
 
     @staticmethod
     def get_tenday_brief(date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        return brief_text.format(cases[fish]['r'], get_dates_tex(observe_dates))
+        return brief_text.format(cases[fish]['r'], get_dates_text(observe_dates))
 
     @staticmethod
     def get_day_desc(data, date, fish):
@@ -29,7 +29,8 @@ class PredictTextGenerator:
         max_times = get_day_times(max_times)
         min_prob = '{} %'.format(int(min_prob * 100))
         max_prob = '{} %'.format(int(max_prob * 100))
-        return minmax_day_text.format(parse_date(date), cases[fish]['r'], max_times, max_prob, min_times, min_prob)
+        return {'min': min_prob, 'max': max_prob, 'min_times': min_times,
+                'max_times': max_times}
 
     @staticmethod
     def get_tenday_desc(data, date, fish):

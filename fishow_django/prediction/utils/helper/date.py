@@ -25,7 +25,7 @@ def get_dates_by_intervals(dates, intervals):
     return ', '.join(dates_interval[:-1]) + 'и {}'.format(dates_interval[-1])
 
 
-def get_dates_tex(dates):
+def get_dates_text(dates):
     intervals = []
     if dates == None:
         return None
