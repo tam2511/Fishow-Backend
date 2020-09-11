@@ -1,6 +1,7 @@
 import datetime
 import numpy as np
 
+from fishow_django.prediction.utils.prediction.prediction_helper import get_day_times
 from .temperature_helper import *
 from ..helper.text import cases
 from ..helper.date import parse_date
@@ -45,9 +46,17 @@ class TemperatureTextGenerator:
         filtred_data = sorted([(_.temperature, _.time) for _ in data if _.date == date and _.fish == fish],
                               key=lambda x: x[1])
         temps = [_[0] for _ in filtred_data]
-        min_temp = min(temps)
-        max_temp = max(temps)
-        return minmax_desc.format(min_temp, max_temp)
+        min_temp = np.min(temps)
+        max_temp = np.max(temps)
+        min_times = [_[1] for _ in filtred_data if _[0] == min_temp]
+        max_times = [_[1] for _ in filtred_data if _[0] == max_temp]
+        min_times = get_day_times(min_times)
+        max_times = get_day_times(max_times)
+        mean_temp = np.mean(temps)
+        return {
+            'mean': mean_temp, 'min': min_temp, 'max': max_temp, 'min_times': min_times,
+            'max_time': max_times
+        }
 
     @staticmethod
     def get_tenday_desc(data, date, fish):
