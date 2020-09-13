@@ -8,7 +8,7 @@ async function refreshTokenF($auth, $axios, token, refreshToken) {
         refresh: refreshToken,
       })
       token = 'Bearer ' + response.data.access_token
-      console.log('refresh token = ', token)
+      // console.log('refresh token = ', token)
       refreshToken = response.data.refresh_token
 
       $auth.setToken(strategy, token)
@@ -26,14 +26,13 @@ export default async function ({ app }) {
   const { $axios, $auth } = app
 
   let token = $auth.getToken(strategy)
-  console.log('token = ', token)
+  // console.log('token = ', token)
   let refreshToken = $auth.getRefreshToken(strategy)
-  console.log('refreshToken = ', refreshToken)
-
+  // console.log('refreshToken = ', refreshToken)
   let refreshInterval = FALLBACK_INTERVAL
   if (token && refreshToken) {
     $axios.get('/dj-rest-auth/user/').then((resp) => {
-      console.log('resp.data = ', resp.data)
+      // console.log('resp.data = ', resp.data)
       $auth.setUser(resp.data)
     })
     const tokenParsed = decodeToken.call(this, token)

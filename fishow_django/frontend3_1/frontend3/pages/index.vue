@@ -15,8 +15,8 @@
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex'
-import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
+// import axios from 'axios'
 
 import BlogCard from '@/components/BlogCard'
 
@@ -25,20 +25,14 @@ export default {
   components: {
     BlogCard,
   },
-  asyncData({ params }) {
-    return axios.get('http://127.0.0.1:8000/api/blogs/').then((res) => {
-      console.log(res)
-      return { blogs: res.data.results }
-    })
-  },
   computed: {
-    // ...mapState('blogs', ['blogs']),
+    ...mapState('blogs', ['blogs']),
   },
   created() {
-    // this.getBlogs()
+    this.getBlogs()
   },
   methods: {
-    // ...mapActions('blogs', { getBlogs: 'getBlogs' }),
+    ...mapActions('blogs', { getBlogs: 'getBlogs' }),
   },
   head: {
     title: 'Прогноз клева рыбы, общение и новости | Fishow',

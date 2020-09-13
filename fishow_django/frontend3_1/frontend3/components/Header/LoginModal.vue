@@ -68,7 +68,6 @@
 
 <script>
 import { mapMutations } from 'vuex'
-const Cookie = process.client ? require('js-cookie') : undefined
 // import errors from '~/components/Header/errors'
 export default {
   data() {
@@ -91,9 +90,6 @@ export default {
           password: this.login.password,
         })
         .then((resp) => {
-          const cookie = `Baerer ${resp.data.access_token}`
-
-          Cookie.set('Authorization', cookie) // saving token in cookie for server rendering
           this.$auth.setToken('local', 'Bearer ' + resp.data.access_token)
           this.$auth.setRefreshToken('local', resp.data.refresh_token)
           // console.log('Bearer ' + resp.data.access_token)

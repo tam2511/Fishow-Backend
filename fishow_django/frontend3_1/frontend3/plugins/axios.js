@@ -3,11 +3,11 @@ export default function ({ $axios, redirect }) {
   $axios.onRequest((config, userEntity) => {
     config.xsrfCookieName = 'csrftoken'
     config.xsrfHeaderName = 'X-CSRFToken'
-    console.log('config = ', config)
+    // console.log('config = ', config)
   })
   $axios.onResponse((response) => {
     if (response.data) {
-      console.log('response.data = ', response.data)
+      // console.log('response.data = ', response.data)
       // document.cookie = 'sessionid=' + response.data.key
     }
   })
