@@ -14,28 +14,45 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
+// import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 import CommentsBlock from '@/components/CommentsBlock'
 import SkeletonBlogCard from '@/components/Skeleton/SkeletonBlogCard'
 import BlogCard from '~/components/BlogCard'
 
 export default {
-  layout: 'SideBarRight',
   components: {
     BlogCard,
     CommentsBlock,
     SkeletonBlogCard,
   },
-  computed: {
-    ...mapState('blogs', ['blog']),
+  asyncData({ params }) {
+    return axios
+      .get(`http://127.0.0.1:8000/api/blogs/${params.slug}/`, {
+        withCredentials: true,
+        headers: {
+          Authorization:
+            'Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk5OTk4MTM2LCJqdGkiOiI5YWE5ZTVhMTlmMDk0Mzk1YjdlNGFjYzEwZTM3YjZkYSIsInVzZXJfaWQiOjl9.qzCCmRoJ3HsdZkwBOO91CX667pDM83Bbp7AZ6xwnOyE',
+          sessionid: '11hsc6m10x5k39ogvjwy1asm4xtoo84g',
+          csrftoken:
+            'MqrNFfxs2k0cvg6dyEr1dU6ANIbNlKQgP6XKgkd93obND9ffIz6pFYeqKDUETtLo',
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        return { blog: res.data }
+      })
   },
-  mounted() {
-    this.getBlog(this.$route.params.slug)
-  },
-  methods: {
-    ...mapActions('blogs', { getBlog: 'getBlog' }),
-  },
+  layout: 'SideBarRight',
+  // computed: {
+  //   ...mapState('blogs', ['blog']),
+  // },
+  // mounted() {
+  //   this.getBlog(this.$route.params.slug)
+  // },
+  // methods: {
+  //   ...mapActions('blogs', { getBlog: 'getBlog' }),
+  // },
 
   head() {
     return {

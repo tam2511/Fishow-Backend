@@ -4,11 +4,11 @@ const FALLBACK_INTERVAL = 900 * 1000 * 0.75
 async function refreshTokenF($auth, $axios, token, refreshToken) {
   if (token && refreshToken) {
     try {
-      const response = await $axios.post('/dj-rest-auth/refresh_token/', {
-        token: refreshToken,
+      const response = await $axios.post('/dj-rest-auth/token/refresh/', {
+        refresh: refreshToken,
       })
-
       token = 'Bearer ' + response.data.access_token
+      console.log('refresh token = ', token)
       refreshToken = response.data.refresh_token
 
       $auth.setToken(strategy, token)
@@ -26,11 +26,14 @@ export default async function ({ app }) {
   const { $axios, $auth } = app
 
   let token = $auth.getToken(strategy)
+  console.log('token = ', token)
   let refreshToken = $auth.getRefreshToken(strategy)
+  console.log('refreshToken = ', refreshToken)
 
   let refreshInterval = FALLBACK_INTERVAL
   if (token && refreshToken) {
-    $axios.get('/users/me').then((resp) => {
+    $axios.get('/dj-rest-auth/user/').then((resp) => {
+      console.log('resp.data = ', resp.data)
       $auth.setUser(resp.data)
     })
     const tokenParsed = decodeToken.call(this, token)
@@ -54,6 +57,7 @@ export default async function ({ app }) {
   }, refreshInterval)
 }
 function decodeToken(str) {
+  // console.log('decode input ', str)
   str = str.split('.')[1]
 
   str = str.replace('/-/g', '+')
@@ -79,5 +83,6 @@ function decodeToken(str) {
   )
 
   str = JSON.parse(str)
+  // console.log('decode result = ', str)
   return str
 }

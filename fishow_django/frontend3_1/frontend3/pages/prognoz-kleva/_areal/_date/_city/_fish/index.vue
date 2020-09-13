@@ -112,9 +112,6 @@ export default {
     display: none;
   }
 }
-.result-container > .box {
-  /*background: radial-gradient(circle, #eff2ff 0%, #cac7c8 100%);*/
-}
 .main-content {
   margin-top: 1rem;
 }

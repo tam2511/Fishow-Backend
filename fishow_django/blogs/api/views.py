@@ -41,31 +41,31 @@ class CommentLikeAPIView(APIView):
         if user in [val for val in comment.votersUp.all()]:
             comment.votersUp.remove(user)
             comment.save()
-    
+
             user=CustomUser.objects.get(username=comment.author)
             user.social_rating=int(user.social_rating)-1
             user.save()
-    
+
             user=CustomUser.objects.get(username=request.user)
             user.count_like=int(user.count_like)-1
             user.save()
-    
+
             serializer_context = {"request": request}
             serializer = self.serializer_class(comment, context=serializer_context)
-    
+
             return Response(serializer.data, status=status.HTTP_200_OK)
-            
+
         else:
 
             serializer_context = {'message':'already_do_it'}
-            return Response(serializer_context)            
-            
+            return Response(serializer_context)
+
 
     def post(self, request, pk):
         """Add request.user to the voters queryset of an comment instance."""
         comment = get_object_or_404(Comment, pk=pk)
         user = request.user
-        
+
         if user not in [val for val in comment.votersUp.all()]:
 
             comment.votersUp.add(user)
@@ -99,28 +99,28 @@ class CommentDisLikeAPIView(APIView):
         """Remove request.user from the voters queryset of an comment instance."""
         comment = get_object_or_404(Comment, pk=pk)
         user = request.user
-        
+
         if user in [val for val in comment.votersDown.all()]:
             comment.votersDown.remove(user)
             comment.save()
-    
+
             user=CustomUser.objects.get(username=comment.author)
             user.social_rating=int(user.social_rating)+1
             user.save()
-    
+
             user=CustomUser.objects.get(username=request.user)
             user.count_dislike=int(user.count_dislike)-1
             user.save()
-    
+
             serializer_context = {"request": request}
             serializer = self.serializer_class(comment, context=serializer_context)
-    
+
             return Response(serializer.data, status=status.HTTP_200_OK)
-            
+
         else:
 
             serializer_context = {'message':'already_do_it'}
-            return Response(serializer_context)            
+            return Response(serializer_context)
 
     def post(self, request, pk):
         """Add request.user to the voters queryset of an comment instance."""
@@ -201,24 +201,24 @@ class BlogLikeAPIView(APIView):
         if user in [val for val in blog.votersUp.all()]:
             blog.votersUp.remove(user)
             blog.save()
-    
+
             user=CustomUser.objects.get(username=blog.author)
             user.social_rating=int(user.social_rating)-1
             user.save()
-    
+
             user=CustomUser.objects.get(username=request.user)
             user.count_like=int(user.count_like)-1
             user.save()
-    
+
             serializer_context = {"request": request}
             serializer = self.serializer_class(blog, context=serializer_context)
-    
+
             return Response(serializer.data, status=status.HTTP_200_OK)
-            
+
         else:
 
             serializer_context = {'message':'already_do_it'}
-            return Response(serializer_context)        
+            return Response(serializer_context)
 
     def post(self, request, pk):
         """Add request.user to the voters queryset of an comment instance."""
@@ -260,24 +260,24 @@ class BlogDisLikeAPIView(APIView):
         if user in [val for val in blog.votersDown.all()]:
             blog.votersDown.remove(user)
             blog.save()
-    
+
             user=CustomUser.objects.get(username=blog.author)
             user.social_rating=int(user.social_rating)+1
             user.save()
-    
+
             user=CustomUser.objects.get(username=request.user)
             user.count_dislike=int(user.count_dislike)-1
             user.save()
-    
+
             serializer_context = {"request": request}
             serializer = self.serializer_class(blog, context=serializer_context)
-    
+
             return Response(serializer.data, status=status.HTTP_200_OK)
-            
+
         else:
 
             serializer_context = {'message':'already_do_it'}
-            return Response(serializer_context)         
+            return Response(serializer_context)
 
     def post(self, request, pk):
         """Add request.user to the voters queryset of an comment instance."""
