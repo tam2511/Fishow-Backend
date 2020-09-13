@@ -107,6 +107,7 @@ export default {
             this.$router.push('/')
           })
           this.toggle()
+          window.location.reload()
         })
     },
     // async submit() {

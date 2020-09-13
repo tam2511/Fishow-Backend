@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <pre class="language-json"><code>{{ blog }}</code></pre>
-    <pre class="language-json"><code>{{ getResult }}</code></pre>
-    <pre class="language-json"><code>{{ rating }}</code></pre>
-    <div class="buttons">
-      <b-button type="is-primary" @click="likeBlog">ЛАЙК</b-button>
-      <b-button type="is-primary" @click="unLikeBlog">УДАЛИТЬ ЛАЙК</b-button>
-      <b-button type="is-primary" @click="dislikeBlog">ДИЗЛАЙК</b-button>
-      <b-button type="is-primary" @click="undislikeBlog"
-        >УДАЛИТЬ ДИЗЛАЙК</b-button
-      >
-    </div>
+    <!--    <pre class="language-json"><code>{{ blog }}</code></pre>-->
+    <!--    <pre class="language-json"><code>{{ getResult }}</code></pre>-->
+    <!--    <pre class="language-json"><code>{{ rating }}</code></pre>-->
+    <!--    <div class="buttons">-->
+    <!--      <b-button type="is-primary" @click="likeBlog">ЛАЙК</b-button>-->
+    <!--      <b-button type="is-primary" @click="unLikeBlog">УДАЛИТЬ ЛАЙК</b-button>-->
+    <!--      <b-button type="is-primary" @click="dislikeBlog">ДИЗЛАЙК</b-button>-->
+    <!--      <b-button type="is-primary" @click="undislikeBlog"-->
+    <!--        >УДАЛИТЬ ДИЗЛАЙК</b-button-->
+    <!--      >-->
+    <!--    </div>-->
     <div class="card">
       <div class="card-content">
         <div class="media">
@@ -39,7 +39,8 @@
             <div class="media-left">
               <div class="like">
                 <b-button
-                  outlined
+                  :outlined="!userLikedBlog"
+                  type="is-success is-light"
                   :disabled="!$auth.user"
                   icon-pack="fa"
                   icon-right="chevron-up"
@@ -49,7 +50,8 @@
                   {{ rating + likesCounter + dislikesCounter }}
                 </b-button>
                 <b-button
-                  outlined
+                  :outlined="!userDisLikedBlog"
+                  type="is-danger is-light"
                   :disabled="!$auth.user"
                   icon-pack="fa"
                   icon-right="chevron-down"
