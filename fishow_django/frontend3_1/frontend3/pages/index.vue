@@ -26,17 +26,10 @@ export default {
     BlogCard,
   },
   asyncData({ params }) {
-    return axios
-      .get('http://127.0.0.1:8000/api/blogs/', {
-        headers: {
-          Authorization:
-            'Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk5OTk4MTM2LCJqdGkiOiI5YWE5ZTVhMTlmMDk0Mzk1YjdlNGFjYzEwZTM3YjZkYSIsInVzZXJfaWQiOjl9.qzCCmRoJ3HsdZkwBOO91CX667pDM83Bbp7AZ6xwnOyE',
-        },
-      })
-      .then((res) => {
-        console.log(res)
-        return { blogs: res.data.results }
-      })
+    return axios.get('http://127.0.0.1:8000/api/blogs/').then((res) => {
+      console.log(res)
+      return { blogs: res.data.results }
+    })
   },
   computed: {
     // ...mapState('blogs', ['blogs']),

@@ -28,16 +28,7 @@ export default {
   },
   asyncData({ params }) {
     return axios
-      .get(`http://127.0.0.1:8000/api/blogs/${params.slug}/`, {
-        withCredentials: true,
-        headers: {
-          Authorization:
-            'Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTk5OTk4MTM2LCJqdGkiOiI5YWE5ZTVhMTlmMDk0Mzk1YjdlNGFjYzEwZTM3YjZkYSIsInVzZXJfaWQiOjl9.qzCCmRoJ3HsdZkwBOO91CX667pDM83Bbp7AZ6xwnOyE',
-          sessionid: '11hsc6m10x5k39ogvjwy1asm4xtoo84g',
-          csrftoken:
-            'MqrNFfxs2k0cvg6dyEr1dU6ANIbNlKQgP6XKgkd93obND9ffIz6pFYeqKDUETtLo',
-        },
-      })
+      .get(`http://127.0.0.1:8000/api/blogs/${params.slug}/`)
       .then((res) => {
         console.log(res.data)
         return { blog: res.data }
