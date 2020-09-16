@@ -1,5 +1,16 @@
 <template>
   <div class="container">
+    <!--    <pre class="language-json"><code>{{ blog }}</code></pre>-->
+    <!--    <pre class="language-json"><code>{{ getResult }}</code></pre>-->
+    <!--    <pre class="language-json"><code>{{ rating }}</code></pre>-->
+    <!--    <div class="buttons">-->
+    <!--      <b-button type="is-primary" @click="likeBlog">ЛАЙК</b-button>-->
+    <!--      <b-button type="is-primary" @click="unLikeBlog">УДАЛИТЬ ЛАЙК</b-button>-->
+    <!--      <b-button type="is-primary" @click="dislikeBlog">ДИЗЛАЙК</b-button>-->
+    <!--      <b-button type="is-primary" @click="undislikeBlog"-->
+    <!--        >УДАЛИТЬ ДИЗЛАЙК</b-button-->
+    <!--      >-->
+    <!--    </div>-->
     <div class="card">
       <div class="card-content">
         <div class="media">
@@ -28,7 +39,11 @@
             <div class="media-left">
               <div class="like">
                 <b-button
-                  outlined
+                  :outlined="!userLikedBlog"
+                  :type="{
+                    'is-success is-light': userLikedBlog,
+                    '': !userLikedBlog,
+                  }"
                   :disabled="!$auth.user"
                   icon-pack="fa"
                   icon-right="chevron-up"
@@ -38,7 +53,11 @@
                   {{ rating + likesCounter + dislikesCounter }}
                 </b-button>
                 <b-button
-                  outlined
+                  :outlined="!userDisLikedBlog"
+                  :type="{
+                    'is-danger is-light': userDisLikedBlog,
+                    '': !userDisLikedBlog,
+                  }"
                   :disabled="!$auth.user"
                   icon-pack="fa"
                   icon-right="chevron-down"
@@ -115,8 +134,8 @@ export default {
   data() {
     return {
       result: {},
-      userLikedBlog: this.blog.user_has_votedUp,
-      userDisLikedBlog: this.blog.user_has_votedDown,
+      userLikedBlog: this.blog && this.blog.user_has_votedUp,
+      userDisLikedBlog: this.blog && this.blog.user_has_votedDown,
       likesCounter: 0,
       dislikesCounter: 0,
     }
@@ -152,25 +171,25 @@ export default {
         this.dislikeBlog()
       }
     },
-    async likeBlog() {
+    likeBlog() {
       this.likesCounter += 1
       this.userLikedBlog = true
-      await this.$axios.$post(`/blogs/${this.blog.id}/like/`)
+      this.$axios.$post(`/blogs/${this.blog.id}/like/`)
     },
-    async unLikeBlog() {
+    unLikeBlog() {
       this.likesCounter -= 1
       this.userLikedBlog = false
-      await this.$axios.$delete(`/blogs/${this.blog.id}/like/`)
+      this.$axios.$delete(`/blogs/${this.blog.id}/like/`)
     },
-    async dislikeBlog() {
+    dislikeBlog() {
       this.dislikesCounter -= 1
       this.userDisLikedBlog = true
-      await this.$axios.$post(`/blogs/${this.blog.id}/dislike/`)
+      this.$axios.$post(`/blogs/${this.blog.id}/dislike/`)
     },
-    async undislikeBlog() {
+    undislikeBlog() {
       this.dislikesCounter += 1
       this.userDisLikedBlog = false
-      await this.$axios.$delete(`/blogs/${this.blog.id}/dislike/`)
+      this.$axios.$delete(`/blogs/${this.blog.id}/dislike/`)
     },
   },
 }

@@ -232,7 +232,7 @@ REST_FRAMEWORK = {
 
 REST_USE_JWT = True
 
-JWT_AUTH_COOKIE = 'my-app-auth'
+# JWT_AUTH_COOKIE = 'my-app-auth'
 # import datetime
 #
 # JWT_AUTH = {

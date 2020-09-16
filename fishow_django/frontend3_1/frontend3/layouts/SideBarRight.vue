@@ -52,7 +52,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import LoginModal from '@/components/Header/LoginModal'
 import RegModal from '@/components/Header/RegModal'
 import UserRate from '@/components/Sidebar/UserRate'
@@ -79,17 +79,16 @@ export default {
   data() {
     return {
       theme: '',
+      minPost: null,
     }
   },
+  // mounted() {
+  //   this.$axios.get('/blogs/').then((res) => {
+  //     this.minPost = res.data.results
+  //   })
+  // },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
-    ...mapState('blogs', ['minPost']),
-  },
-  mounted() {
-    this.getLastBlogs()
-  },
-  methods: {
-    ...mapActions('blogs', { getLastBlogs: 'lastBLogs' }),
   },
 }
 </script>
