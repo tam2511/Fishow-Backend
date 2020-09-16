@@ -7,7 +7,6 @@
         :key="blog.id"
         class="tile is-child blog-page"
       >
-        <!--        <pre class="language-json"><code>{{ blog  }}</code></pre>-->
         <BlogCard :blog="blog" />
       </article>
     </div>
@@ -15,9 +14,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-// import axios from 'axios'
-
 import BlogCard from '@/components/BlogCard'
 
 export default {
@@ -25,14 +21,15 @@ export default {
   components: {
     BlogCard,
   },
-  computed: {
-    ...mapState('blogs', ['blogs']),
+  data() {
+    return {
+      blogs: null,
+    }
   },
-  created() {
-    this.getBlogs()
-  },
-  methods: {
-    ...mapActions('blogs', { getBlogs: 'getBlogs' }),
+  mounted() {
+    this.$axios.get('/blogs/').then((res) => {
+      this.blogs = res.data.results
+    })
   },
   head: {
     title: 'Прогноз клева рыбы, общение и новости | Fishow',

@@ -159,7 +159,7 @@ export default {
           logout: { url: '/dj-rest-auth/logout/', method: 'post' },
           user: {
             url: '/dj-rest-auth/user/',
-            method: 'post',
+            method: 'get',
             propertyName: false,
           },
         },

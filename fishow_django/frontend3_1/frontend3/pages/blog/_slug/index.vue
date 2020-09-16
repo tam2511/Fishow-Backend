@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-// import axios from 'axios'
 import CommentsBlock from '@/components/CommentsBlock'
 import SkeletonBlogCard from '@/components/Skeleton/SkeletonBlogCard'
 import BlogCard from '~/components/BlogCard'
@@ -26,28 +24,20 @@ export default {
     CommentsBlock,
     SkeletonBlogCard,
   },
-  // asyncData({ params }) {
-  //   return axios
-  //     .get(`http://127.0.0.1:8000/api/blogs/${params.slug}/`)
-  //     .then((res) => {
-  //       console.log(res.data)
-  //       return { blog: res.data }
-  //     })
-  // },
   layout: 'SideBarRight',
-  computed: {
-    ...mapState('blogs', ['blog']),
+  data() {
+    return {
+      blog: null,
+    }
   },
   mounted() {
-    this.getBlog(this.$route.params.slug)
+    this.$axios.get(`/blogs/${this.$route.params.slug}/`).then((res) => {
+      this.blog = res.data
+    })
   },
-  methods: {
-    ...mapActions('blogs', { getBlog: 'getBlog' }),
-  },
-
   head() {
     return {
-      title: this.blog.title + ' | Fishow',
+      title: this.blog && this.blog.title + ' | Fishow',
     }
   },
 }

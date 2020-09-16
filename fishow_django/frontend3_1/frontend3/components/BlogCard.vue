@@ -40,7 +40,10 @@
               <div class="like">
                 <b-button
                   :outlined="!userLikedBlog"
-                  type="is-success is-light"
+                  :type="{
+                    'is-success is-light': userLikedBlog,
+                    '': !userLikedBlog,
+                  }"
                   :disabled="!$auth.user"
                   icon-pack="fa"
                   icon-right="chevron-up"
@@ -51,7 +54,10 @@
                 </b-button>
                 <b-button
                   :outlined="!userDisLikedBlog"
-                  type="is-danger is-light"
+                  :type="{
+                    'is-danger is-light': userDisLikedBlog,
+                    '': !userDisLikedBlog,
+                  }"
                   :disabled="!$auth.user"
                   icon-pack="fa"
                   icon-right="chevron-down"
