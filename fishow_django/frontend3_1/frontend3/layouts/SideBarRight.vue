@@ -82,11 +82,11 @@ export default {
       minPost: null,
     }
   },
-  // mounted() {
-  //   this.$axios.get('/blogs/').then((res) => {
-  //     this.minPost = res.data.results
-  //   })
-  // },
+  mounted() {
+    this.$axios.get('/blogs/').then((res) => {
+      this.minPost = res.data.results.slice(0, 3)
+    })
+  },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
   },
