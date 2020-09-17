@@ -1,43 +1,36 @@
 <template lang="pug">
     .container.prediciton-select
-      .main-component
-        article.heading-component
-          .heading-component-inner
-            h5.heading-component-title {{ value ? "Город " : "Область"}}
-            .buttons-nav(v-if='value')
-              .button.button-xs.button-primary(@click="value = false") Назад
-      .list-areals
-        .list-areals_item(v-for="(area, key) in json" :key="key" v-if="!value")
-          span.item-city(@click="value = key") {{ key }}
-        .list-areals_item(v-for="city in json[value]" :key="city" v-if="!value2")
-          nuxt-link.item-city(:to="{name: 'prognoz-kleva-areal-date-city-fish',params: { areal: value, city, date: rightDate, fish: 'щука'}}") {{ city }}
+      h1.title Прогноз в {{ value === false ? "России" : value }}
+      bread-crumbs-select(:areal="value" @clear="value = false")
+      .list-areals(v-if="json && !value")
+        div.columns(v-for="(city, key2) in json" :key="key2")
+          .column
+            h2.title {{ key2 }}
+          .column.list-areals_item.is-full
+            .item-city(v-for="(area, key) in city"
+              :key="key" v-if="!value" @click="value = key")  {{ key }}
+      div(v-if="value")
+        div.columns(v-for="(city2, key) in json[value[0]][value]" :key="key")
+          .column
+            h2.title {{ key }}
+          .column.list-areals_item.is-full
+            nuxt-link.item-city(
+              v-for="(area, key3) in city2"
+              :key="key3"
+              :to="{name: 'prognoz-kleva-areal-date-city-fish',params: { areal: value, city: area, date: rightDate, fish: 'щука'}}") {{ area }}
 </template>
 
 <script>
-import data from '~/pages/prognoz-kleva/data'
+import convert from '~/pages/prognoz-kleva/convert'
+import breadCrumbsSelect from '@/components/predictPage/breadCrumbsSelect'
 export default {
+  components: {
+    breadCrumbsSelect,
+  },
   data() {
     return {
       value: false,
       value2: false,
-      areal: ['Московская-область', 'Ленинградская область'],
-      cities: ['Москва', 'Санкт-Петербург'],
-      options: [
-        'Select option',
-        'options',
-        'selected',
-        'mulitple',
-        'label',
-        'searchable',
-        'clearOnSelect',
-        'hideSelected',
-        'maxHeight',
-        'allowEmpty',
-        'showLabels',
-        'onChange',
-        'touched',
-      ],
-      json: data,
     }
   },
   computed: {
@@ -52,6 +45,9 @@ export default {
 
       return [year, month, day].join('-')
     },
+    json() {
+      return convert()
+    },
   },
   head() {
     return {
@@ -62,6 +58,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.columns {
+  padding: 20px 0;
+  width: 100%;
+}
 .item-city {
   cursor: pointer;
   padding: 5px;

@@ -15,7 +15,7 @@ async function refreshTokenF($auth, $axios, token, refreshToken) {
       return decodeToken.call(this, token).exp
     } catch (error) {
       $auth.logout()
-      throw new Error('Error while refreshing token')
+      // throw new Error('Error while refreshing token')
     }
   }
 }

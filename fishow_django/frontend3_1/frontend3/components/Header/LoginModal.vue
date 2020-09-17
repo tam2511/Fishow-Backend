@@ -104,7 +104,6 @@ export default {
           this.$axios.get('/dj-rest-auth/user/').then((resp) => {
             // console.log('resp = ', resp)
             this.$auth.setUser(resp.data)
-            this.$router.push('/')
           })
           this.toggle()
           window.location.reload()
