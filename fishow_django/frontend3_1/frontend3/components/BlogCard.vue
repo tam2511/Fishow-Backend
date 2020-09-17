@@ -1,16 +1,5 @@
 <template>
   <div class="container">
-    <!--    <pre class="language-json"><code>{{ blog }}</code></pre>-->
-    <!--    <pre class="language-json"><code>{{ getResult }}</code></pre>-->
-    <!--    <pre class="language-json"><code>{{ rating }}</code></pre>-->
-    <!--    <div class="buttons">-->
-    <!--      <b-button type="is-primary" @click="likeBlog">ЛАЙК</b-button>-->
-    <!--      <b-button type="is-primary" @click="unLikeBlog">УДАЛИТЬ ЛАЙК</b-button>-->
-    <!--      <b-button type="is-primary" @click="dislikeBlog">ДИЗЛАЙК</b-button>-->
-    <!--      <b-button type="is-primary" @click="undislikeBlog"-->
-    <!--        >УДАЛИТЬ ДИЗЛАЙК</b-button-->
-    <!--      >-->
-    <!--    </div>-->
     <div class="card">
       <div class="card-content">
         <div class="media">
