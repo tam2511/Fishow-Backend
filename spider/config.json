@@ -1,0 +1,9 @@
+{
+  "gismeteo": {
+    "num_days": 3,
+    "driver_path": "C:\\Users\\Xiaomi\\PycharmProjects\\fishow_rest_vue\\spider\\phantomjs.exe",
+    "num_attempts": 3
+  }
+
+
+}
