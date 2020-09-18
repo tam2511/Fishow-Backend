@@ -33,7 +33,7 @@
         </div>
         <div v-else class="buttons">
           <nuxt-link to="/UserPage" class="button ip-primary">
-            {{ $auth.user.login || $auth.user }}</nuxt-link
+            {{ $auth.user.login || $auth.user.username }}</nuxt-link
           >
           <a class="button is-light" @click="logout">
             Выйти

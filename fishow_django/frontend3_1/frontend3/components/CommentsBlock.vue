@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="title is-4">Комментарии</p>
-    <div class="tile is-child is-vertical box">
+    <div class="tile is-child is-vertical box" v-if="comments">
       <p v-if="(comments.length === 0)">Ваш комментарий будет первым</p>
       <Comment
         v-for="(comment, index) in comments"
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import Comment from '@/components/Comment'
 import CreateComment from '~/components/CreateComment'
 
@@ -29,15 +28,16 @@ export default {
   },
   data() {
     return {
-      commentBody: null,
+      comments: null,
       error: null,
     }
   },
-  computed: {
-    ...mapState('comments', ['comments']),
-  },
   mounted() {
-    this.getData()
+    this.$axios
+      .get(`/blogs/${this.$route.params.slug}/comments/`)
+      .then((res) => {
+        this.comments = res.data.results
+      })
   },
   methods: {
     async deleteComment(comment) {
@@ -50,9 +50,12 @@ export default {
       }
     },
     getData() {
-      this.getComment(this.$route.params.slug)
+      this.$axios
+        .get(`/blogs/${this.$route.params.slug}/comments/`)
+        .then((res) => {
+          this.comments = res.data.results
+        })
     },
-    ...mapActions('comments', { getComment: 'getComments' }),
   },
 }
 </script>

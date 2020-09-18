@@ -14,32 +14,30 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
 import CommentsBlock from '@/components/CommentsBlock'
 import SkeletonBlogCard from '@/components/Skeleton/SkeletonBlogCard'
 import BlogCard from '~/components/BlogCard'
 
 export default {
-  layout: 'SideBarRight',
   components: {
     BlogCard,
     CommentsBlock,
     SkeletonBlogCard,
   },
-  computed: {
-    ...mapState('blogs', ['blog']),
+  layout: 'SideBarRight',
+  data() {
+    return {
+      blog: null,
+    }
   },
   mounted() {
-    this.getBlog(this.$route.params.slug)
+    this.$axios.get(`/blogs/${this.$route.params.slug}/`).then((res) => {
+      this.blog = res.data
+    })
   },
-  methods: {
-    ...mapActions('blogs', { getBlog: 'getBlog' }),
-  },
-
   head() {
     return {
-      title: this.blog.title + ' | Fishow',
+      title: this.blog && this.blog.title + ' | Fishow',
     }
   },
 }

@@ -224,7 +224,7 @@ export default {
           params: { slug: response.slug },
         })
       } catch (e) {
-        console.log('error = ', e.response)
+        // console.log('error = ', e.response)
         if (e.response && e.response.data && e.response.data.tags) {
           this.blog_tags = [{ name: 'Текст', code: 'текст' }]
           this.errorTags = 'Слишком много тэгов'
