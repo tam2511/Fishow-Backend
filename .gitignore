@@ -32,3 +32,4 @@ package-lock.json
 /assets/db/
 
 /fishow_django/fishow_django/config.json
+/spider/phantomjs.exe
