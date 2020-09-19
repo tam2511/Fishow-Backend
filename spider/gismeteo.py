@@ -117,13 +117,14 @@ class WeatherParser:
                 res.update(subres)
             except Exception as e:
                 self.logger.error('Error until parsing {}. Message: {}'.format(str(methods[i]), e))
+                raise ValueError
         return res
 
     def parse_urls(self, base_url):
         urls = [base_url, base_url + 'tomorrow/'] + [base_url + '{}-day/'.format(day) for day in
                                                      range(3, self.num_days + 1)]
         today = datetime.datetime.today()
-        dates = [(today + datetime.timedelta(days=i)).strftime('%Y.%m.%d') for i in range(self.num_days)]
+        dates = [today + datetime.timedelta(days=i) for i in range(self.num_days)]
         result = []
         for i, url in enumerate(urls):
             self.logger.info('Start parsing url: {}'.format(url))
@@ -141,21 +142,10 @@ class WeatherParser:
             if step == self.num_attempts:
                 return None
             self.logger.info('Url {} parsed. Elapsed time: {}'.format(url, time() - start_time))
-            res = self.parse_page_(driver)
+            try:
+                res = self.parse_page_(driver)
+            except Exception:
+                return None
             res.update({'date': dates[i]})
             result.append(res)
         return result
-
-
-def main():
-    import logging
-    logging.basicConfig(level=logging.INFO)
-    config_path = 'config.json'
-    url_base = 'https://www.gismeteo.ru/weather-mamayeva-235014/'
-    with WeatherParser(config_path=config_path, logger=logging) as parser:
-        result = parser.parse_urls(url_base)
-        print(result)
-
-
-if __name__ == '__main__':
-    main()
