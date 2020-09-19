@@ -15,10 +15,12 @@ class WeatherParser:
         self.logger = logger
         self.driver_path = self.config['gismeteo']['driver_path']
         self.num_attempts = self.config['gismeteo']['num_attempts']
+        self.timeout = self.config['gismeteo']['timeout']
+        self.max_wait = self.config['gismeteo']['max_wait']
 
     def __enter__(self):
         self.driver = webdriver.PhantomJS(executable_path=self.driver_path)
-        self.driver.implicitly_wait(5)
+        self.driver.implicitly_wait(self.max_wait)
 
         return self
 
@@ -129,6 +131,7 @@ class WeatherParser:
             step = 0
             while step < self.num_attempts:
                 try:
+                    sleep(self.timeout)
                     self.driver.get(url)
                     driver = self.driver.find_element_by_class_name('__frame_sm')
                     break
