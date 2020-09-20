@@ -75,15 +75,18 @@ def get_mean_data(data):
         'moon': row['moon'],
         'moon_direction': row['moon_direction']
     } for row in data]
-    mean_data = [{
-        'temperature': minmax_temperature(row),
-        'wind': minmax_wind(row),
-        'wind_direction': minmax_wind_direction(row),
-        'gust': minmax_gust(row),
-        'pressure': minmax_pressure(row),
-        'phenomenon': minmax_phenomenon(row),
-        'humidity': minmax_humidity(row),
-        'uv_index': minmax_uv_index(row),
-        'moon': row['moon'],
-        'moon_direction': row['moon_direction']
-    } for row in data]
+    mean_data = {
+        'temperature_min': [_['temperature']['min'] for _ in mean_data],
+        'temperature_max': [_['temperature']['max'] for _ in mean_data],
+        'wind_mean': [_['wind']['mean'] for _ in mean_data],
+        'wind_direction': [_['wind_direction']['mean'] for _ in mean_data],
+        'gust_max': [_['gust']['max'] for _ in mean_data],
+        'phenomenon': [_['phenomenon']['mean'] for _ in mean_data],
+        'pressure_min': [_['pressure']['min'] for _ in mean_data],
+        'pressure_max': [_['pressure']['max'] for _ in mean_data],
+        'humidity_mean': [_['humidity']['mean'] for _ in mean_data],
+        'uv_index_mean': [_['uv_index']['mean'] for _ in mean_data],
+        'moon': [_['moon'] for _ in mean_data],
+        'moon_direction': [_['moon_direction'] for _ in mean_data]
+    }
+    return mean_data
