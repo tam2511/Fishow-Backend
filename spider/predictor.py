@@ -1,5 +1,5 @@
 from joblib import load
-from spider.utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS
+from spider.utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS, FISHS, REGIONS
 
 
 class Model:
@@ -53,9 +53,12 @@ class Predictor:
             for j in range(8):
                 key_name = 'day_{}'.format(i * 8 + j)
                 vec.update({key_name: int(data[i]['date'].timetuple().tm_yday)})
-
-        # TODO: добавить вид рыбы и название региона в вектор
-
+                for fish in FISHS:
+                    key_name = '{}_{}'.format(fish, i * 8 + j)
+                    vec.update({key_name: int(data[i]['fish'] == fish)})
+                for region in REGIONS:
+                    key_name = '{}_{}'.format(region, i * 8 + j)
+                    vec.update({key_name: int(data[i]['areal'] == region)})
         vec = [vec[key] for key in sorted(vec)]
         prob = self.model(vec)
         return prob
