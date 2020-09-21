@@ -87,10 +87,10 @@ class WeatherParser:
         moon_desc = {'moon': None, 'moon_direction': None}
         if moon[0].find('растущ') > -1:
             moon_desc['moon_direction'] = 1
-            moon_desc['moon'] = int(moon[1].replace('%', '')) / 100
+            moon_desc['moon'] = int(moon[1].replace('%', ''))
         elif moon[0].find('стар') > -1:
             moon_desc['moon_direction'] = -1
-            moon_desc['moon'] = int(moon[1].replace('%', '')) / 100
+            moon_desc['moon'] = int(moon[1].replace('%', ''))
         else:
             moon_desc['moon_direction'] = 0
             moon_desc['moon'] = 0

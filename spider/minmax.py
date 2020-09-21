@@ -58,7 +58,7 @@ def minmax_humidity(data):
 def minmax_uv_index(data):
     uv_index = data['uv_index'].split(',')
     uv_index = list(map(int, uv_index))
-    mean_ = np.mean(uv_index)
+    mean_ = np.max(uv_index)
     return {'mean': mean_}
 
 

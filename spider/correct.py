@@ -18,18 +18,19 @@ def average_(left, right, key):
     if not left_value or not right_value:
         return None
     if key in DIGIT_KEYS:
-        average = np.array(list(map(int, right_value.split(',')))) - np.array(list(map(int, left_value.split(','))))
-        average = average / 2
+        average = np.array(list(map(int, right_value.split(',')))) + np.array(list(map(int, left_value.split(','))))
+        average = average // 2
         average = ','.join(map(str, average))
         return average
     elif key in CATEGORY_KEYS:
         return left_value
     elif key in MOON_KEYS:
-        left_moon = float(left['moon'])
-        right_moon = float(right['moon'])
+        left_moon = int(left['moon'])
+        right_moon = int(right['moon'])
         left_moon_direction = int(left['moon_direction'])
         right_moon_direction = int(right['moon_direction'])
         moon_average = left_moon * left_moon_direction + right_moon * right_moon_direction
+        moon_average = moon_average // 2
         if key == 'moon':
             return abs(moon_average)
         return 1 if moon_average >= 0 else -1
@@ -92,6 +93,16 @@ class Corrector:
                 continue
             average_data = average_(data[idx - 1], data[idx + 1], key)
             if not average_data:
-                self.correct_mysql_(data, key, idx)
+                if not self.mysql:
+                    raise DataError('Bad averaging data for key {}.'.format(key))
+                else:
+                    self.correct_mysql_(data, key, idx)
             else:
                 data[idx][key] = average_data
+
+    def correct(self, data):
+        keys = list(data[0].keys())
+        for key in keys:
+            if key == 'date' or key == 'city' or key == 'areal' or key == 'fish':
+                continue
+            self.correct_(data, key)
