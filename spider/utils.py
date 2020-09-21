@@ -1,5 +1,15 @@
 import json
 
+DIGIT_KEYS = {'temperature', 'wind', 'gust', 'pressure', 'humidity', 'uv_index'}
+CATEGORY_KEYS = {'phenomenon', 'wind_direction'}
+MOON_KEYS = {'moon', 'moon_direction'}
+SUN_KEYS = {'sun_up', 'sun_down'}
+
+PHENOMENONS = ['ясно', 'малооблачно', 'облачно', 'пасмурно', 'небольшой дождь', 'дождь', 'сильный дождь',
+               'небольшой снег', 'снег', 'снег с дождём', 'сильный снег', 'гроза', 'мокрый снег']
+
+WIND_DIRECTIONS = ['Ю', 'ЮЗ', 'З', 'СЗ', 'С', 'СВ', 'В', 'ЮВ']
+
 
 def read_config(config_path):
     with open(config_path, 'r', encoding='UTF-8') as config_file:

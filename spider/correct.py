@@ -1,11 +1,7 @@
 import datetime
 import numpy as np
 
-from spider.utils import read_config, average_time
-
-DIGIT_KEYS = {'temperature', 'wind', 'gust', 'pressure', 'humidity', 'uv_index'}
-MOON_KEYS = {'moon', 'moon_direction'}
-SUN_KEYS = {'sun_up', 'sun_down'}
+from spider.utils import read_config, average_time, DIGIT_KEYS, MOON_KEYS, SUN_KEYS, CATEGORY_KEYS
 
 
 class DataError(Exception):
@@ -26,7 +22,7 @@ def average_(left, right, key):
         average = average / 2
         average = ','.join(map(str, average))
         return average
-    elif key == 'phenomenon':
+    elif key in CATEGORY_KEYS:
         return left_value
     elif key in MOON_KEYS:
         left_moon = float(left['moon'])
