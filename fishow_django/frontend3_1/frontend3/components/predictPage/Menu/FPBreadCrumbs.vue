@@ -1,21 +1,34 @@
 <template>
-  <nav class="breadcrumb box" aria-label="breadcrumbs">
-    <ul>
-      <li>
-        <a> Россия </a>
-      </li>
-      <li>
-        <nuxt-link to="/PredictionPage">{{ areal }}</nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/PredictionPage">{{ city }}</nuxt-link>
-      </li>
-    </ul>
-  </nav>
+  <div class="breadcrumb box">
+    <div class="columns">
+      <div class="column">
+        <nav aria-label="breadcrumbs">
+          <ul>
+            <li>
+              <a> Россия </a>
+            </li>
+            <li>
+              <nuxt-link to="/prognoz-kleva">{{ areal }}</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/prognoz-kleva">{{ city }}</nuxt-link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="column">
+        <city-search />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import CitySearch from '@/components/predictPage/Menu/CitySearch'
 export default {
+  components: {
+    CitySearch,
+  },
   props: {
     areal: {
       type: String,
@@ -45,5 +58,8 @@ export default {
 }
 .breadcrumb a {
   color: #000000;
+}
+.columns {
+  align-items: center;
 }
 </style>

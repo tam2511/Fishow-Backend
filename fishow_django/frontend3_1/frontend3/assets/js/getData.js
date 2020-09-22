@@ -9,7 +9,8 @@ export default (fromData, days) => {
     const dd = someDate.getDate()
     const mm = someDate.getMonth() + 1
     const newmm = mm.length > 1 ? mm : '0' + mm
-    return dd + '/' + newmm
+    const before = dd < 10 ? '0' : ''
+    return before + dd + '/' + newmm
   }
   const result = []
   const iterator = (numberOfDays) => {

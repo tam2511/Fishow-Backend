@@ -2,6 +2,7 @@
   <div class="tile is-vertical is-8">
     <div class="tile is-parent is-vertical space-left0">
       <article class="tile is-child">
+        <!--        <pre class="language-json"><code>{{ blog  }}</code></pre>-->
         <BlogCard v-if="blog" :blog="blog" />
         <div v-else>
           <SkeletonBlogCard />
@@ -13,32 +14,30 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
 import CommentsBlock from '@/components/CommentsBlock'
 import SkeletonBlogCard from '@/components/Skeleton/SkeletonBlogCard'
 import BlogCard from '~/components/BlogCard'
 
 export default {
-  layout: 'SideBarRight',
   components: {
     BlogCard,
     CommentsBlock,
     SkeletonBlogCard,
   },
-  computed: {
-    ...mapState('blogs', ['blog']),
+  layout: 'SideBarRight',
+  data() {
+    return {
+      blog: null,
+    }
   },
   mounted() {
-    this.getBlog(this.$route.params.slug)
+    this.$axios.get(`/blogs/${this.$route.params.slug}/`).then((res) => {
+      this.blog = res.data
+    })
   },
-  methods: {
-    ...mapActions('blogs', { getBlog: 'getBlog' }),
-  },
-
   head() {
     return {
-      title: this.blog.title + ' | Fishow',
+      title: this.blog && this.blog.title + ' | Fishow',
     }
   },
 }

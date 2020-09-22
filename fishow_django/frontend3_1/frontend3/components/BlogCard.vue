@@ -23,59 +23,69 @@
             }}</b-tag>
           </div>
         </div>
-        <div class="media">
-          <div class="media-left">
-            <div class="like">
-              <b-button
-                outlined
-                :disabled="!$auth.user"
-                icon-pack="fa"
-                icon-right="chevron-up"
-                @click="toggleLike"
-              />
-              <b-button type="is-primary">{{
-                likesCounter - dislikesCounter
-              }}</b-button>
-              <b-button
-                outlined
-                :disabled="!$auth.user"
-                icon-pack="fa"
-                icon-right="chevron-down"
-                @click="toggleDislike"
-              />
+        <div class="content-container">
+          <div class="media">
+            <div class="media-left">
+              <div class="like">
+                <b-button
+                  :outlined="!userLikedBlog"
+                  :type="{
+                    'is-success is-light': userLikedBlog,
+                    '': !userLikedBlog,
+                  }"
+                  :disabled="!$auth.user"
+                  icon-pack="fa"
+                  icon-right="chevron-up"
+                  @click="toggleLike"
+                />
+                <b-button type="is-primary likes_counter">
+                  {{ rating + likesCounter + dislikesCounter }}
+                </b-button>
+                <b-button
+                  :outlined="!userDisLikedBlog"
+                  :type="{
+                    'is-danger is-light': userDisLikedBlog,
+                    '': !userDisLikedBlog,
+                  }"
+                  :disabled="!$auth.user"
+                  icon-pack="fa"
+                  icon-right="chevron-down"
+                  @click="toggleDislike"
+                />
+              </div>
             </div>
           </div>
-          <div class="media-content">
-            <h2 class="title">
-              <nuxt-link
-                :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
-                >{{ blog.title }}
-              </nuxt-link>
-            </h2>
-          </div>
-        </div>
-        <div class="content">
-          <div
-            v-for="p in getResult"
-            :key="p.id"
-            :class="p.type + '_container'"
-          >
-            <div v-if="p.type === 'text'" class="post-corporate-text">
-              <p>{{ p.body }}</p>
+          <div class="content">
+            <div class="media pre-header">
+              <div class="media-content">
+                <h2 class="title">
+                  <nuxt-link
+                    :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
+                    >{{ blog.title }}
+                  </nuxt-link>
+                </h2>
+              </div>
             </div>
-            <iframe
-              v-if="p.type === 'video'"
-              width="560"
-              height="315"
-              :src="p.url"
-              frameborder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              name="video"
-            ></iframe>
-            <figure v-if="p.type === 'image'" class="image is-fullwidth">
-              <img :src="p.url" alt="" />
-            </figure>
+            <div
+              v-for="p in getResult"
+              :key="p.id"
+              :class="p.type + '_container'"
+            >
+              <p v-if="p.type === 'text'" class="post-text">{{ p.body }}</p>
+              <iframe
+                v-if="p.type === 'video'"
+                width="560"
+                height="315"
+                :src="p.url"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                name="video"
+              ></iframe>
+              <figure v-if="p.type === 'image'" class="image is-fullwidth">
+                <img :src="p.url" alt="" />
+              </figure>
+            </div>
           </div>
         </div>
         <div class="media card-footer">
@@ -90,7 +100,7 @@
                     :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
                   >
                     <b-tag type="is-light">Комментариев</b-tag>
-                    <b-tag type="is-info">{{ blog.comments_count }}</b-tag>
+                    <b-tag type="is-primary">{{ blog.comments_count }}</b-tag>
                   </nuxt-link>
                 </b-taglist>
               </div>
@@ -115,8 +125,8 @@ export default {
       result: {},
       userLikedBlog: this.blog && this.blog.user_has_votedUp,
       userDisLikedBlog: this.blog && this.blog.user_has_votedDown,
-      likesCounter: this.blog && this.blog.likes_count,
-      dislikesCounter: this.blog && this.blog.dislikes_count,
+      likesCounter: 0,
+      dislikesCounter: 0,
     }
   },
   computed: {
@@ -126,6 +136,9 @@ export default {
       } catch (e) {
         return null
       }
+    },
+    rating() {
+      return this.blog.likes_count - this.blog.dislikes_count
     },
   },
   methods: {
@@ -147,27 +160,25 @@ export default {
         this.dislikeBlog()
       }
     },
-    async likeBlog() {
-      // console.log('before like = ', this.likesCounter)
+    likeBlog() {
       this.likesCounter += 1
-      // console.log('after like = ', this.likesCounter)
       this.userLikedBlog = true
-      await this.$axios.$post(`/blogs/${this.blog.id}/like/`)
+      this.$axios.$post(`/blogs/${this.blog.id}/like/`)
     },
-    async unLikeBlog() {
+    unLikeBlog() {
       this.likesCounter -= 1
       this.userLikedBlog = false
-      await this.$axios.$delete(`/blogs/${this.blog.id}/like/`)
+      this.$axios.$delete(`/blogs/${this.blog.id}/like/`)
     },
-    async dislikeBlog() {
-      this.dislikesCounter += 1
-      this.userDisLikedBlog = true
-      await this.$axios.$post(`/blogs/${this.blog.id}/dislike/`)
-    },
-    async undislikeBlog() {
+    dislikeBlog() {
       this.dislikesCounter -= 1
+      this.userDisLikedBlog = true
+      this.$axios.$post(`/blogs/${this.blog.id}/dislike/`)
+    },
+    undislikeBlog() {
+      this.dislikesCounter += 1
       this.userDisLikedBlog = false
-      await this.$axios.$delete(`/blogs/${this.blog.id}/dislike/`)
+      this.$axios.$delete(`/blogs/${this.blog.id}/dislike/`)
     },
   },
 }
@@ -178,11 +189,11 @@ export default {
   background-color: #1e347b;
   font-size: 45px;
 }
-.image_container {
-  padding: 20px 0;
-}
 .media {
   align-items: center;
+  .flex figure {
+    margin-left: 0;
+  }
   .title {
     color: #adadad;
     font-weight: 300;
@@ -208,5 +219,25 @@ export default {
   figure {
     margin: 0 20px;
   }
+}
+.post-text {
+  padding: 1rem 0;
+}
+[src*='svg'] {
+  max-height: 50px;
+}
+.content-container {
+  display: flex;
+  align-items: baseline;
+}
+.title,
+.card .pre-header {
+  margin: 0;
+}
+.title {
+  color: #2aabd2;
+}
+.likes_counter {
+  max-width: 40px;
 }
 </style>

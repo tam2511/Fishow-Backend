@@ -1,8 +1,27 @@
 <template>
   <div class="card box">
     <div class="columns">
-      <div class="column is-two-thirds">
+      <div class="column">
         <slot></slot>
+
+        <!--        {{ $route }}-->
+        <div class="buttons">
+          <b-button>
+            <nuxt-link
+              :to="{
+                name: 'prognoz-kleva-areal-date-city-fish',
+                params: {
+                  areal: $route.params.areal,
+                  city: $route.params.city,
+                  date: $route.params.date,
+                  fish: $route.params.fish,
+                },
+              }"
+            >
+              Прогноз на 9 дней
+            </nuxt-link>
+          </b-button>
+        </div>
       </div>
       <div class="column">
         <h1 class="title">Прогноз клева на {{ day }}</h1>
@@ -58,13 +77,19 @@ export default {
 
 <style scoped>
 .card {
-  min-height: 200px;
+  min-height: 250px;
 
-  background: url('/background_header.png') no-repeat center;
+  background: url('/prediction_background.jpg') no-repeat center;
   background-size: cover;
 }
 .title,
 .column span {
   color: #fff;
+}
+
+@media screen and (max-width: 1200px) {
+  .columns {
+    flex-flow: column;
+  }
 }
 </style>

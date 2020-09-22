@@ -29,5 +29,6 @@ export default {
 .humidity {
   text-align: center;
   color: white;
+  padding: 0.2rem 0.75rem;
 }
 </style>

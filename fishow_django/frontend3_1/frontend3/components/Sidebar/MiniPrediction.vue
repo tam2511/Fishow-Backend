@@ -1,5 +1,5 @@
 <template>
-  <div class="miniPrediction box">
+  <div class="miniPrediction card">
     <!--    {{ readyData }}-->
     <div v-if="readyData">
       <div class="media">
@@ -38,7 +38,7 @@
     <div v-else class="if-lostdata">
       <SkeletonPrediction />
     </div>
-    <nuxt-link to="/PredictionPage">
+    <nuxt-link to="/prognoz-kleva">
       <div class="placeholder">
         Посмотреть другие прогнозы
       </div>

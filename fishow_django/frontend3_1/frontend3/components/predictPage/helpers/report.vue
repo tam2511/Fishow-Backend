@@ -22,10 +22,16 @@ export default {
 
 <style scoped>
 .report {
-  background-color: #b0e4e8;
+  background-color: #b0e4e882;
   text-align: justify;
   display: flex;
   align-items: center;
   min-height: 120px;
+}
+@media screen and (max-width: 768px) {
+  .report {
+    min-height: 300px;
+    flex-flow: column;
+  }
 }
 </style>

@@ -9,7 +9,7 @@ export default {
   /*
    ** Headers of the page
    */
-  middleware: 'auth',
+  middleware: ['auth', 'loggedIn'],
   head: {
     meta: [
       { charset: 'utf-8' },
@@ -59,9 +59,6 @@ export default {
    ** Global CSS
    */
   css: [],
-  router: {
-    middleware: ['auth'],
-  },
   /*
    ** Plugins to load before mounting the App
    */
@@ -103,29 +100,12 @@ export default {
     hostname: 'http://fishow.ru',
     gzip: true,
     exclude: ['/secret', '/admin/**'],
-    // routes: [
-    //   '/page/1',
-    //   '/page/2',
-    //   {
-    //     url: '/page/3',
-    //     changefreq: 'daily',
-    //     priority: 1,
-    //     lastmod: '2017-06-30T13:30:00.000Z',
-    //   },
-    // ],
   },
   /* buefy options */
   buefy: {
     css: false,
   },
-  // yandexMetrika: {
-  //   id: 64900765,
-  //   webvisor: true,
-  //   clickmap: true,
-  //   // useCDN:false,
-  //   trackLinks: true,
-  //   accurateTrackBounce: true,
-  // },
+
   proxy: {
     '/api': {
       target: `http://${confserver.ip}:8000/api`,
@@ -156,34 +136,33 @@ export default {
     name: 'fade',
     mode: 'out-in',
   },
+  // router: {
+  //   middleware: ['loggedIn'],
+  // },
   auth: {
     plugins: [{ src: '~/plugins/axios', ssr: true }, '~/plugins/auth.js'],
     fetchUserOnLogin: true,
     watchLoggedIn: true,
+    cookie: {
+      options: {
+        expires: 7,
+      },
+    },
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: '/rest-auth/login/',
+            url: '/dj-rest-auth/login/',
             method: 'post',
-            propertyName: 'key',
+            propertyName: false,
           },
-          registration: {
-            url: '/rest-auth/registration/',
-            method: 'post',
-            propertyName: 'key',
-          },
-          logout: { url: '/rest-auth/logout/', method: 'post' },
+          logout: { url: '/dj-rest-auth/logout/', method: 'post' },
           user: {
-            url: '/rest-auth/user/',
+            url: '/dj-rest-auth/user/',
             method: 'get',
-            propertyName: 'username',
+            propertyName: false,
           },
         },
-        tokenType: 'Token',
-        tokenName: 'Authorization',
-        // globalToken: true,
-        // autoFetchUser: true
       },
       social: {
         _scheme: 'oauth2',

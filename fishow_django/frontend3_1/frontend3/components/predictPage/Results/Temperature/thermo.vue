@@ -1,12 +1,14 @@
 <template>
-  <client-only>
-    <!--    <fusioncharts-->
-    <!--      :type="type"-->
-    <!--      :width="width"-->
-    <!--      :height="height"-->
-    <!--      :data-format="dataFormat"-->
-    <!--      :data-source="dataSource"-->
-    <!--    ></fusioncharts>-->
+  <div>
+    <client-only>
+      <fusioncharts
+        :type="type"
+        :width="width"
+        :height="height"
+        :data-format="dataFormat"
+        :data-source="dataSource"
+      ></fusioncharts>
+    </client-only>
     <div class="columns">
       <div class="column">
         <span>Средняя {{ Math.floor(day.mean) }}&#8451;</span>
@@ -19,7 +21,7 @@
         <span>Мин {{ night.min }}&#8451; - {{ night.min_date }} августа</span>
       </div>
     </div>
-  </client-only>
+  </div>
 </template>
 
 <script>

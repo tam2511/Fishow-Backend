@@ -11,28 +11,11 @@
             fish: $route.params.fish,
           },
         }"
+        class="button"
       >
         {{ day }}
       </nuxt-link>
     </div>
-    <!--    <b-pagination-->
-    <!--      :total="total"-->
-    <!--      :current.sync="current"-->
-    <!--      :range-before="rangeBefore"-->
-    <!--      :range-after="rangeAfter"-->
-    <!--      :order="order"-->
-    <!--      :size="size"-->
-    <!--      :simple="isSimple"-->
-    <!--      :rounded="isRounded"-->
-    <!--      :per-page="perPage"-->
-    <!--      :icon-prev="prevIcon"-->
-    <!--      :icon-next="nextIcon"-->
-    <!--      aria-next-label="Next page"-->
-    <!--      aria-previous-label="Previous page"-->
-    <!--      aria-page-label="Page"-->
-    <!--      aria-current-label="Current page"-->
-    <!--    >-->
-    <!--    </b-pagination>-->
   </div>
 </template>
 
@@ -72,21 +55,34 @@ export default {
 .data-pick {
   display: flex;
   flex-flow: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+
+  padding: 15px 0;
+
+  overflow: auto;
 }
 .is-link {
   background-color: #204a6f85;
 }
 .tenDays a {
-  color: #fff;
-  padding: 10px;
-  background-color: #00000040;
+  color: #363636;
+
+  padding: 5px;
+  background-color: white;
   cursor: pointer;
   display: inline-block;
-  /*margin: 5px 5px;*/
+
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  margin: 5px 5px;
   /*border-radius: 5px;*/
+  @media screen and (max-width: 420px) {
+    padding: 20px;
+  }
+
   &:hover {
-    background-color: #00b3ee;
+    border-color: #b5b5b5;
+    color: #363636;
   }
 }
 </style>

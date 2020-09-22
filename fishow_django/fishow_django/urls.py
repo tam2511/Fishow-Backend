@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 from rest_framework.authtoken import views
 from django.views.static import serve
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from core.views import IndexTemplateView
 from users.forms import CustomUserForm
@@ -55,9 +56,13 @@ urlpatterns = [
 #     path(r'api-token-auth/', obtain_jwt_token),
 #     path(r'api-token-refresh/', refresh_jwt_token),
 #     path(r'^api-token-verify/', verify_jwt_token),
+    
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
-    path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(),
          name='account_confirm_email'),

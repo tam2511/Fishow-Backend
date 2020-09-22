@@ -143,47 +143,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-%legend-flag {
-  content: '';
-  height: 10px;
-  width: 10px;
-  display: block;
-  position: absolute;
-  left: -15px;
-  top: 7px;
-}
-.legend {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-end;
+@import '@/assets/scss/legend';
 
-  color: rgba(128, 128, 128, 0.8);
-  span {
-    position: relative;
-  }
-  &_max {
-    color: #b0e4e8;
-    &:after {
-      @extend %legend-flag;
-      background-color: #b0e4e8;
-    }
-  }
-  &_mean {
-    color: rgba(173, 121, 30, 1);
-    &:after {
-      @extend %legend-flag;
-      background-color: rgba(173, 121, 30, 0.29);
-    }
-  }
-  &_min {
-    color: #172a3b;
-    &:after {
-      @extend %legend-flag;
-      background-color: #172a3b;
-    }
-  }
-  @media screen and (max-width: 450px) {
-    font-size: 10px;
-  }
-}
+@include legend;
 </style>

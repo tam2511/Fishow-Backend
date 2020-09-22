@@ -24,6 +24,7 @@
           :tempMin="predictions['pressure_min']"
         )
       Moon(:readyData="readyData" :days="days")
+      Uvindexfull(:readyData="readyData" :days="days")
     EmptyPrediction(v-else)
 </template>
 
@@ -35,10 +36,7 @@ import { mapState, mapActions } from 'vuex'
 import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
 import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
 import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
-import SideBar from '~/components/predictPage/Menu/SideBar'
 import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
-import PDataPicker from '@/components/predictPage/Menu/PDataPicker'
-
 // if empty
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 
@@ -56,19 +54,19 @@ import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
 import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
 import urlData from '~/assets/mixins/prediction/urlData'
+import Uvindexfull from '~/components/predictPage/Results/UVindex/uvindexfull'
 export default {
   components: {
+    Uvindexfull,
     PressureChart,
     OneDayProbe,
     ChartTemperature,
     PProbe,
-    SideBar,
     Temperature,
     FishowPredictionHeader,
     FishSelectPrediction,
     EmptyPrediction,
     PressureContainer,
-    PDataPicker,
     DaysPicker,
     FPBreadCrumbs,
     Wind,
@@ -97,7 +95,8 @@ export default {
   },
   head() {
     return {
-      title: 'Fishow - Прогноз',
+      title:
+        'Fishow - Прогноз клева на 9 дней, вероятность клева рыбы, погодные условия',
     }
   },
 }
@@ -112,9 +111,6 @@ export default {
   @media screen and (max-width: 768px) {
     display: none;
   }
-}
-.result-container > .box {
-  /*background: radial-gradient(circle, #eff2ff 0%, #cac7c8 100%);*/
 }
 .main-content {
   margin-top: 1rem;

@@ -2,7 +2,11 @@
   <div class="tile is-vertical is-8">
     <h4 class="title is-4">Последние записи</h4>
     <div class="tile is-parent is-vertical space-left0">
-      <article v-for="blog in blogs" :key="blog.id" class="tile is-child">
+      <article
+        v-for="blog in blogs"
+        :key="blog.id"
+        class="tile is-child blog-page"
+      >
         <BlogCard :blog="blog" />
       </article>
     </div>
@@ -10,8 +14,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
 import BlogCard from '@/components/BlogCard'
 
 export default {
@@ -19,14 +21,15 @@ export default {
   components: {
     BlogCard,
   },
-  computed: {
-    ...mapState('blogs', ['blogs']),
+  data() {
+    return {
+      blogs: null,
+    }
   },
-  created() {
-    this.getBlogs()
-  },
-  methods: {
-    ...mapActions('blogs', { getBlogs: 'getBlogs' }),
+  mounted() {
+    this.$axios.get('/blogs/').then((res) => {
+      this.blogs = res.data.results
+    })
   },
   head: {
     title: 'Прогноз клева рыбы, общение и новости | Fishow',

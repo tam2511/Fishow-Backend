@@ -162,4 +162,14 @@ export default {
     color: #fff;
   }
 }
+.box.fish {
+  padding-top: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  span.select,
+  span.select > select {
+    width: 100%;
+  }
+}
 </style>

@@ -2,12 +2,13 @@
   .temperature-box.box
     h3.title Погодные условия
     p.content(v-html="readyData.temperature_brief")
-    .columns.bg-white
-      TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
-    .columns.bg-white(style="margin-bottom: 1rem")
-      .column(v-for="day in readyData" :key="day.idc" :day="day")
-        Humidity(:day="day")
-    .columns
+    .columns-container
+      .columns.bg-white
+        TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
+      .columns.bg-white(style="margin-bottom: 1rem")
+        .column(v-for="day in readyData" :key="day.idc" :day="day")
+          Humidity(:day="day")
+    .columns.temp-desc
       .column
         Thermo(:day="readyData.temperature_desc.day" :night="readyData.temperature_desc.night")
       .column.text-justify
@@ -41,12 +42,19 @@ export default {
   margin-top: 1.5rem;
 }
 @media screen and (max-width: 768px) {
+  div.columns-container {
+    display: flex;
+    flex-flow: column;
+    overflow: scroll;
+  }
   div.columns {
     display: flex;
-    overflow: scroll;
   }
   p.content {
     text-align: justify;
+  }
+  .temp-desc {
+    flex-flow: column;
   }
 }
 .temperature-box {

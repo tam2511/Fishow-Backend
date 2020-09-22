@@ -33,7 +33,7 @@
                 </article>
                 <article class="tile is-parent is-vertical">
                   <p class="title is-4">Статистика</p>
-                  <div class="tile is-child box">
+                  <div class="tile is-child card">
                     <UserRate />
                   </div>
                 </article>
@@ -48,10 +48,11 @@
       </section>
     </transition>
     <TheFooter />
+    <banner />
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import LoginModal from '@/components/Header/LoginModal'
 import RegModal from '@/components/Header/RegModal'
 import UserRate from '@/components/Sidebar/UserRate'
@@ -60,6 +61,7 @@ import HeaderBlock from '@/components/HeaderBlock'
 import HotPostMinimal from '~/components/Sidebar/HotPostMinimal'
 import TheFooter from '~/components/TheFooter'
 import SkeletonHotPost from '~/components/Sidebar/skeleton/SkeletonHotPost'
+import banner from '~/components/banner/banner'
 
 export default {
   components: {
@@ -71,22 +73,22 @@ export default {
     MiniPrediction,
     HotPostMinimal,
     TheFooter,
+    banner,
   },
   middleware: 'auth',
   data() {
     return {
       theme: '',
+      minPost: null,
     }
+  },
+  mounted() {
+    this.$axios.get('/blogs/').then((res) => {
+      this.minPost = res.data.results.slice(0, 3)
+    })
   },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
-    ...mapState('blogs', ['minPost']),
-  },
-  mounted() {
-    this.getLastBlogs()
-  },
-  methods: {
-    ...mapActions('blogs', { getLastBlogs: 'lastBLogs' }),
   },
 }
 </script>
@@ -114,5 +116,23 @@ a {
 }
 .tile.is-parent.is-vertical.space-left0 {
   padding-left: 0;
+}
+.blog-page .content {
+  max-height: 400px;
+  overflow: hidden;
+  position: relative;
+  /*&:after {*/
+  /*  content: '';*/
+  /*  background: linear-gradient(*/
+  /*    0deg,*/
+  /*    rgba(255, 255, 255, 1) 0%,*/
+  /*    rgba(255, 255, 255, 0) 25%*/
+  /*  );*/
+  /*  position: absolute;*/
+  /*  left: 0;*/
+  /*  top: 0;*/
+  /*  width: 100%;*/
+  /*  height: 100%;*/
+  /*}*/
 }
 </style>

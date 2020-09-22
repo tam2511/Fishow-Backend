@@ -1,11 +1,6 @@
 <template>
   <client-only>
     <div>
-      <div class="legend">
-        <span class="legend_max">Максимальная суточная вероятность клёва</span>
-        <span class="legend_min">Минимальная суточная вероятность клёва</span>
-        <span class="legend_area">Высокий шанс клева рыбы</span>
-      </div>
       <VueApexCharts
         width="100%"
         height="300px"
@@ -106,7 +101,7 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: JSON.parse(this.probMin).sort()[0] - 0.2,
+          min: 0,
           max: 1,
           labels: {
             formatter(value) {
@@ -167,48 +162,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-%legend-flag {
-  content: '';
-  height: 10px;
-  width: 10px;
-  display: block;
-  position: absolute;
-  left: -15px;
-  top: 7px;
-}
-.legend {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-end;
+@import '@/assets/scss/legend';
 
-  color: rgba(128, 128, 128, 0.8);
-  span {
-    position: relative;
-  }
-  &_area {
-    color: #1a5105;
-    &:after {
-      @extend %legend-flag;
-      background-color: #1a5105;
-    }
-  }
-  &_min {
-    color: #172a3b;
-    &:after {
-      @extend %legend-flag;
-      background-color: #172a3b;
-    }
-  }
-  &_max {
-    color: #51686a;
-    &:after {
-      @extend %legend-flag;
-      background-color: #b0e4e8;
-    }
-  }
-
-  @media screen and (max-width: 450px) {
-    font-size: 10px;
-  }
-}
+@include legend;
 </style>
