@@ -70,7 +70,7 @@ export default {
   padding: 0 1rem;
 }
 [data-value] {
-  font-size: 3vw;
+  font-size: 3rem;
 }
 [data-value='min'] {
   color: #64888a;
