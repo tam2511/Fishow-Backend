@@ -19,7 +19,8 @@ class Client:
         self.client_log = logging.getLogger('client')
         self.client_log.propagate = False
         self.predictor = Predictor(self.config['model_path'], self.predict_log,
-                                   num_rows=self.config['prediction']['num_days'] * self.config['gismeteo']['num_hours'])
+                                   num_rows=self.config['prediction']['num_days'] * self.config['gismeteo'][
+                                       'num_hours'])
 
     def predict_(self, data):
         num_extra_dates = self.config['prediction']['num_days'] - len(data)
@@ -52,8 +53,6 @@ class Client:
                 mean_data = get_mean_data(data[1:self.config['gismeteo']['num_days']])
                 self.write_predictions_(self.config['database']['mean_prediction_table'], mean_data)
 
-
-
     def write_predictions_(self, table_name, data):
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],
                                password=self.config['database']['password'],
@@ -70,4 +69,7 @@ class Client:
             mysql.close()
 
     def start(self):
-        pass
+        urls = self.config['urls']
+        for areal in urls:
+            for city in urls[areal]:
+                self.handle_(city=city, areal=areal)
