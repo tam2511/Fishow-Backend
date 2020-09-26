@@ -8,9 +8,162 @@
     "max_wait": 5
   },
   "prediction": {
+    "model_path": "",
     "num_days": 3,
     "num_hours": 8
+  },
+  "database": {
+    "username": "tam2511_fishow",
+    "host": "localhost",
+    "password": "081099ASDasd!",
+    "database": "tam2511_fishow",
+    "prediction_table": "prediction_prediction",
+    "mean_prediction_table": "prediction_predictionten"
+  },
+  "urls": {
+    "Алтайский край": {
+      "Барнаул": "https://www.gismeteo.ru/weather-barnaul-4720/",
+      "Бийск": "https://www.gismeteo.ru/weather-bysk-4731/",
+      "Рубцовск": "https://www.gismeteo.ru/weather-rubtsovsk-5176/"
+    },
+    "Амурская область": {
+      "Белогорск": "https://www.gismeteo.ru/weather-belogorsk-4849/",
+      "Благовещенск": "https://www.gismeteo.ru/weather-blagoveshchensk-4848/",
+      "Свободный": "https://www.gismeteo.ru/weather-svobodny-4846/",
+      "Тында": "https://www.gismeteo.ru/weather-tynda-4758/"
+    },
+    "Архангельская область": {
+      "Архангельск": "https://www.gismeteo.ru/weather-arkhangelsk-3915/",
+      "Котлас": "https://www.gismeteo.ru/weather-kotlas-3941/",
+      "Северодвинск": "https://www.gismeteo.ru/weather-severodvinsk-3914/"
+    },
+    "Астраханская область": {
+      "Астрахань": "https://www.gismeteo.ru/weather-astrakhan-5130/",
+      "Ахтубинск": "https://www.gismeteo.ru/weather-akhtubinsk-5090/"
+    },
+    "Белгородская область": {
+      "Белгород": "https://www.gismeteo.ru/weather-belgorod-5039/",
+      "Старый Оскол": "https://www.gismeteo.ru/weather-stary-oskol-5024/"
+    },
+    "Брянская область": {
+      "Брянск": "https://www.gismeteo.ru/weather-bryansk-4258/",
+      "Клинцы": "https://www.gismeteo.ru/weather-klintsy-4272/"
+    },
+    "Владимирская область": {
+      "Владимир": "https://www.gismeteo.ru/weather-vladimir-4350/",
+      "Ковров": "https://www.gismeteo.ru/weather-kovrov-11948/",
+      "Муром": "https://www.gismeteo.ru/weather-murom-4354/"
+    },
+    "Волгоградская область": {
+      "Волгоград": "https://www.gismeteo.ru/weather-volgograd-5089/",
+      "Волжский": "https://www.gismeteo.ru/weather-volzhsky-11934/",
+      "Камышин": "https://www.gismeteo.ru/weather-kamyshin-5064/",
+      "Михайловка": "https://www.gismeteo.ru/weather-mikhaylovka-11941/"
+    },
+    "Вологодская область": {
+      "Великий устюг": "https://www.gismeteo.ru/weather-veliky-ustyug-3951/",
+      "Вологда": "https://www.gismeteo.ru/weather-vologda-4278/",
+      "Череповец": "https://www.gismeteo.ru/weather-cherepovets-4285/"
+    },
+    "Воронежская область": {
+      "Воронеж": "https://www.gismeteo.ru/weather-voronezh-5026/",
+      "Лиски": "https://www.gismeteo.ru/weather-liski-5041/"
+    },
+    "Еврейская автономная область": {
+      "Биробиджан": "https://www.gismeteo.ru/weather-birobidzhan-4860/",
+      "Облучье": "https://www.gismeteo.ru/weather-obluche-4858/"
+    },
+    "Забайкальский край": {
+      "Краснокаменск": "https://www.gismeteo.ru/weather-krasnokamensk-4833/",
+      "Чита": "https://www.gismeteo.ru/weather-chita-4797/"
+    },
+    "Ивановская область": {
+      "Иваново": "https://www.gismeteo.ru/weather-ivanovo-4318/",
+      "Кинешма": "https://www.gismeteo.ru/weather-kineshma-4317/",
+      "Шуя": "https://www.gismeteo.ru/weather-shuya-4333/"
+    },
+    "Иркутская область": {
+      "Ангарск": "https://www.gismeteo.ru/weather-angarsk-4792/",
+      "Братск": "https://www.gismeteo.ru/weather-bratsk-4746/",
+      "Иркутск": "https://www.gismeteo.ru/weather-irkutsk-4787/",
+      "Усть-Илимск": "https://www.gismeteo.ru/weather-ust-ilimsk-4740/"
+    },
+    "Кабардино-Балкарская республика": {
+      "Азау": "https://www.gismeteo.ru/weather-azau-322055/",
+      "Майский": "https://www.gismeteo.ru/weather-maysky-12520/",
+      "Нальчик": "https://www.gismeteo.ru/weather-nalchik-5250/",
+      "Эльбрус": "https://www.gismeteo.ru/weather-elbrus-11337/"
+    },
+    "Калининградская область": {
+      "Калининград": "https://www.gismeteo.ru/weather-kaliningrad-4225/"
+    },
+    "Калужская область": {
+      "Калуга": "https://www.gismeteo.ru/weather-kaluga-4387/",
+      "Обнинск": "https://www.gismeteo.ru/weather-obninsk-11449/"
+    },
+    "Камчатский край": {
+      "Елизово": "https://www.gismeteo.ru/weather-yelizovo-4908/",
+      "Петропаловск-Камчатский": "https://www.gismeteo.ru/weather-petropavlovsk-kamchatsky-4907/"
+    },
+    "Карачаево-Черкесская республика": {
+      "Архыз": "https://www.gismeteo.ru/weather-arkhyz-10920/",
+      "Домбай": "https://www.gismeteo.ru/weather-dombay-5248/",
+      "Черкесск": "https://www.gismeteo.ru/weather-cherkessk-5224/"
+    },
+    "Кемеровская область": {
+      "Белово": "https://www.gismeteo.ru/weather-belovo-4707/",
+      "Кемерово": "https://www.gismeteo.ru/weather-kemerovo-4693/",
+      "Новокузнецк": "https://www.gismeteo.ru/weather-novokuznetsk-4721/"
+    },
+    "Кировская область": {
+      "Киров": "https://www.gismeteo.ru/weather-kirov-4292/"
+    },
+    "Костромская область": {
+      "Кострома": "https://www.gismeteo.ru/weather-kostroma-4314/",
+      "Шарья": "https://www.gismeteo.ru/weather-sharya-4304/"
+    },
+    "Краснодарский край": {
+      "Краснодар": "https://www.gismeteo.ru/weather-krasnodar-5136/",
+      "Новороссийск": "https://www.gismeteo.ru/weather-novorossysk-5214/",
+      "Сочи": "https://www.gismeteo.ru/weather-sochi-5233/"
+    },
+    "Красноярский край": {
+      "Ачинск": "https://www.gismeteo.ru/weather-achinsk-4655/",
+      "Красноярск": "https://www.gismeteo.ru/weather-krasnoyarsk-4674/",
+      "Норильск": "https://www.gismeteo.ru/weather-norilsk-3957/"
+    },
+    "Курганская область": {
+      "Курган": "https://www.gismeteo.ru/weather-kurgan-4569/",
+      "Шадринск": "https://www.gismeteo.ru/weather-shadrinsk-4542/"
+    },
+    "Курская область": {
+      "Железногорск": "https://www.gismeteo.ru/weather-zheleznogorsk-5006/",
+      "Курск": "https://www.gismeteo.ru/weather-kursk-5010/"
+    },
+    "Ленинградская область": {
+      "Всеволжск": "https://www.gismeteo.ru/weather-vsevolozhsk-11425/",
+      "Выборг": "https://www.gismeteo.ru/weather-vyborg-3942/",
+      "Луга": "https://www.gismeteo.ru/weather-luga-11762/",
+      "Санкт-Петербург": "https://www.gismeteo.ru/weather-sankt-peterburg-4079/",
+      "Сосновый Бор": "https://www.gismeteo.ru/weather-sosnovy-bor-11409/"
+    },
+    "Липецкая область": {
+      "Елец": "https://www.gismeteo.ru/weather-yelets-4436/",
+      "Липецк": "https://www.gismeteo.ru/weather-lipetsk-4437/"
+    },
+    "Магаданская область": {
+      "Магадан": "https://www.gismeteo.ru/weather-magadan-4063/"
+    },
+    "Московская область": {
+      "Балашиха": "https://www.gismeteo.ru/weather-balashikha-11447/",
+      "Дмитров": "https://www.gismeteo.ru/weather-dmitrov-4330/",
+      "Дубна": "https://www.gismeteo.ru/weather-dubna-11959/",
+      "Королев": "https://www.gismeteo.ru/weather-korolev-11404/",
+      "Москва": "https://www.gismeteo.ru/weather-moscow-4368/",
+      "Одинцово": "https://www.gismeteo.ru/weather-odintsovo-11938/",
+      "Подольск": "https://www.gismeteo.ru/weather-podolsk-11955/",
+      "Сергиев Посад": "https://www.gismeteo.ru/weather-sergiyev-posad-11958/",
+      "Щелково": "https://www.gismeteo.ru/weather-shchelkovo-11584/"
+    }
   }
-
-
 }

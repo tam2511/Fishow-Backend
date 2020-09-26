@@ -19,7 +19,7 @@ class Client:
         self.predict_log = logging.getLogger('predict')
         self.client_log = logging.getLogger('client')
         self.client_log.propagate = False
-        self.predictor = Predictor(model_path=self.config['model_path'], logger=self.predict_log,
+        self.predictor = Predictor(model_path=self.config['prediction']['model_path'], logger=self.predict_log,
                                    num_days=self.config['prediction']['num_days'],
                                    num_hours=self.config['gismeteo']['num_hours'])
 
