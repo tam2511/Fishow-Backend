@@ -77,7 +77,6 @@
             <p>{{ blog.author }}</p>
             <time datetime="2016-1-1">{{ blog.created_at }}</time>
           </div>
-
           <div>
             <b-field grouped group-multiline>
               <div class="control">
@@ -235,7 +234,9 @@ export default {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
-
+  & > div > * {
+    margin: 0 10px;
+  }
   padding-top: 10px;
   .field.is-grouped.is-grouped-multiline > .control:last-child {
     margin: 0;
