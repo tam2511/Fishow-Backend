@@ -1,3 +1,5 @@
+from joblib import load
+
 from spider.utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS, FISHS, REGIONS, CATEGORY_KEYS
 
 
@@ -16,7 +18,7 @@ class Model:
 class Predictor:
     def __init__(self, model_path, logger, num_hours=8, num_days=3):
         self.logger = logger
-        # self.model = load(model_path)
+        self.model = load(model_path)
         self.num_hours = num_hours
         self.num_days = num_days
 
@@ -89,7 +91,6 @@ class Predictor:
                     vec.update({fish_: int(fish_ == fish)})
                 vec.update(region_vec)
                 vec = [vec[key] for key in sorted(vec)]
-                # prob = self.model(vec)
-                prob = i
-                probs[fish].append(prob)
+                prob = self.model(vec)
+                probs[fish].append(prob * 100)
         return probs

@@ -62,7 +62,11 @@ def minmax_uv_index(data):
     return {'mean': mean_}
 
 def minmax_prob(data):
-    pass
+    prob = data['prob'].split(',')
+    prob = list(map(int, prob))
+    min_ = np.min(prob)
+    max_ = np.max(prob)
+    return {'max': max_, 'min': min_}
 
 
 def get_mean_data(data):
@@ -76,7 +80,8 @@ def get_mean_data(data):
         'humidity': minmax_humidity(row),
         'uv_index': minmax_uv_index(row),
         'moon': row['moon'],
-        'moon_direction': row['moon_direction']
+        'moon_direction': row['moon_direction'],
+        'prob': minmax_prob(row)
     } for row in data]
     mean_data = {
         'temperature_min': [_['temperature']['min'] for _ in mean_data],
@@ -90,6 +95,12 @@ def get_mean_data(data):
         'humidity_mean': [_['humidity']['mean'] for _ in mean_data],
         'uv_index_mean': [_['uv_index']['mean'] for _ in mean_data],
         'moon': [_['moon'] for _ in mean_data],
-        'moon_direction': [_['moon_direction'] for _ in mean_data]
+        'moon_direction': [_['moon_direction'] for _ in mean_data],
+        'prob_min': [_['prob']['min'] for _ in mean_data],
+        'prob_max': [_['prob']['min'] for _ in mean_data],
     }
+    mean_data.update({'date': data[0]['date']})
+    mean_data.update({'city': data[0]['city']})
+    mean_data.update({'areal': data[0]['areal']})
+    mean_data.update({'fish': data[0]['fish']})
     return mean_data
