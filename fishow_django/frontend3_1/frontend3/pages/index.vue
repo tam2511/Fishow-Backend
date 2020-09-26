@@ -20,12 +20,13 @@
         v-for="blog in blogs"
         :key="blog.id"
         class="tile is-child blog-page"
-        :class="{
-          'hidden-blog':
-            (blog.user_has_votedUp || blog.user_has_votedDown) && isSwitched,
-        }"
       >
-        <BlogCard :blog="blog" />
+        <BlogCard
+          v-if="
+            !((blog.user_has_votedUp || blog.user_has_votedDown) && isSwitched)
+          "
+          :blog="blog"
+        />
       </article>
     </div>
   </div>
@@ -101,9 +102,6 @@ export default {
   .space-left0 {
     padding-right: 0;
   }
-}
-.hidden-blog {
-  display: none;
 }
 .media {
   align-items: center;
