@@ -1,5 +1,4 @@
-from joblib import load
-from spider.utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS, FISHS, REGIONS
+from spider.utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS, FISHS, REGIONS, CATEGORY_KEYS
 
 
 class Model:
@@ -15,50 +14,82 @@ class Model:
 
 
 class Predictor:
-    def __init__(self, model_path, logger, num_rows=3 * 8):
+    def __init__(self, model_path, logger, num_hours=8, num_days=3):
         self.logger = logger
-        self.model = load(model_path)
-        self.num_rows = num_rows
+        # self.model = load(model_path)
+        self.num_hours = num_hours
+        self.num_days = num_days
 
     def preprocess_(self, data):
-        vec = {}
-        for i in range(len(data)):
+        all_data = {}
+        for d in data:
             for key in DIGIT_KEYS:
-                splitted = data[i][key].split(',')
-                assert len(data) * len(splitted) == 8
-                for j in range(8):
-                    key_name = '{}_{}'.format(key, i * 8 + j)
-                    vec.update({key_name: int(splitted[j])})
+                temp = list(map(int, d[key].split(',')))
+                if key in all_data:
+                    all_data[key] = all_data[key] + temp
+                else:
+                    all_data[key] = temp
             for key in MOON_KEYS:
-                for j in range(8):
-                    key_name = '{}_{}'.format(key, i * 8 + j)
-                    vec.update({key_name: int(data[i][key])})
-            phenomenons_ = [_.split(',') for _ in data[i]['phenomenon'].split('.')]
-            assert len(data) * len(phenomenons_) == 8
-            for phenomenon in PHENOMENONS:
-                for j in range(8):
-                    key_name = '{}_{}'.format(phenomenon, i * 8 + j)
-                    vec.update({key_name: int(phenomenon in phenomenons_[j])})
-            wind_directions_ = data[i]['wind_directions'].split(',')
-            assert len(data) * len(wind_directions_) == 8
-            for wind_direction in WIND_DIRECTIONS:
-                for j in range(8):
-                    key_name = '{}_{}'.format(wind_direction, i * 8 + j)
-                    vec.update({key_name: int(wind_direction == wind_directions_[j])})
+                temp = [d[key] for _ in range(self.num_hours)]
+                if key in all_data:
+                    all_data[key] = all_data[key] + temp
+                else:
+                    all_data[key] = temp
+            for key in CATEGORY_KEYS:
+                if key in all_data:
+                    all_data[key] = all_data[key] + d[key].split(',')
+                else:
+                    all_data[key] = d[key].split(',')
+            temp = [d['date'].timetuple().tm_yday for _ in range(self.num_hours)]
+            if 'days' in all_data:
+                all_data['days'] = all_data['days'] + temp
+            else:
+                all_data['days'] = temp
+
+        return all_data
+
+    def preprocess_batch_(self, data):
+        vec = {}
+        for key in data:
+            if key in DIGIT_KEYS | MOON_KEYS | {'days'}:
+                for i in range(len(data[key])):
+                    key_name = '{}_{}'.format(key, i)
+                    vec.update({key_name: data[key][i]})
+            elif key == 'phenomenon':
+                phenomenons_ = [_.split('.') for _ in data[key]]
+                for phenomenon in PHENOMENONS:
+                    for i in range(len(phenomenons_)):
+                        key_name = '{}_{}'.format(phenomenon, i)
+                        vec.update({key_name: int(phenomenon in phenomenons_[i])})
+            elif key == 'wind_direction':
+                for wind_direction in WIND_DIRECTIONS:
+                    for i in range(len(data[key])):
+                        key_name = '{}_{}'.format(wind_direction, i)
+                        vec.update({key_name: int(wind_direction == data[key][i])})
         return vec
 
+    def slice_(self, data, left_bound, righ_bound):
+        slice_data = {
+            key: data[key][left_bound: righ_bound] for key in data
+        }
+        return slice_data
+
     def __call__(self, data):
-        vec = self.preprocess_(data)
-        for i in range(len(data)):
-            for j in range(8):
-                key_name = 'day_{}'.format(i * 8 + j)
-                vec.update({key_name: int(data[i]['date'].timetuple().tm_yday)})
-                for fish in FISHS:
-                    key_name = '{}_{}'.format(fish, i * 8 + j)
-                    vec.update({key_name: int(data[i]['fish'] == fish)})
-                for region in REGIONS:
-                    key_name = '{}_{}'.format(region, i * 8 + j)
-                    vec.update({key_name: int(data[i]['areal'] == region)})
-        vec = [vec[key] for key in sorted(vec)]
-        prob = self.model(vec)
-        return prob
+        all_data = self.preprocess_(data)
+        len_data = len(all_data['moon'])
+        probs = {fish: [] for fish in FISHS}
+        region_vec = {}
+        for region in REGIONS:
+            region_vec.update({region: int(data[0]['areal'] == region)})
+        for fish in FISHS:
+            for i in range(self.num_hours * self.num_days, len_data + 1):
+                slice_data = self.slice_(all_data, i - self.num_hours * self.num_days, i)
+                vec = self.preprocess_batch_(slice_data)
+                for fish_ in FISHS:
+                    vec.update({fish_: int(fish_ == fish)})
+                vec.update(region_vec)
+                vec = [vec[key] for key in sorted(vec)]
+                # prob = self.model(vec)
+                prob = i
+                probs[fish].append(prob)
+        return probs

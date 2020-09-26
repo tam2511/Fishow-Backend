@@ -1,4 +1,5 @@
 import json
+import logging
 
 DIGIT_KEYS = {'temperature', 'wind', 'gust', 'pressure', 'humidity', 'uv_index'}
 CATEGORY_KEYS = {'phenomenon', 'wind_direction'}
@@ -13,6 +14,16 @@ WIND_DIRECTIONS = ['Ю', 'ЮЗ', 'З', 'СЗ', 'С', 'СВ', 'В', 'ЮВ']
 FISHS = ['щука', 'судак', 'окунь', 'берш', 'речная форель', 'озерная форель', 'елец', 'чехонь', 'сом', 'голавль', 'язь',
          'карп', 'жерех', 'лещ', 'карась', 'линь', 'пескарь', 'ротан', 'плотва', 'красноперка', 'налим', 'густера',
          'амур', 'ерш', 'сазан', 'подуст', 'толстолобик', 'вобла']
+
+FISH_MAP = {'pike': 'щука', 'sudak': 'судак', 'okun': 'окунь', 'bersh': 'берш',
+            'forel reka': 'речная форель', 'forel ozero': 'озерная форель', 'elec': 'елец', 'chexon': 'чехонь',
+            'som': 'сом', 'golavl': 'голавль', 'iaz': 'язь', 'carp': 'карп', 'shereh': 'жерех',
+            'lesh': 'лещ', 'caras': 'карась', 'lin': 'линь', 'peskar': 'пескарь', 'rotan': 'ротан',
+            'plotva': 'плотва', 'kranoperka': 'красноперка', 'nalim': 'налим', 'gustera': 'густера',
+            'amur': 'амур', 'ersh': 'ерш', 'sazan': 'сазан', 'podust': 'подуст', 'tolstolob': 'толстолобик',
+            'vobla': 'вобла'}
+
+FISH_UNMAP = {FISH_MAP[key]: key for key in FISH_MAP}
 
 REGIONS = ['Алтайский край', 'Амурская область', 'Архангельская область', 'Астраханская область',
            'Белгородская область', 'Брянская область', 'Владимирская область', 'Волгоградская область',
@@ -36,3 +47,14 @@ def average_time(left_time, right_time):
     mean_time = (time2 - time1) // 2 + time1
     mean_time = ':'.join(map(str, [mean_time // 60, mean_time % 60]))
     return mean_time
+
+def setup_logger(logger_name, log_file, level=logging.INFO):
+    logger = logging.getLogger(logger_name)
+    formatter = logging.Formatter('%(asctime)s : %(message)s')
+    file_handler = logging.FileHandler(log_file, mode='w')
+    file_handler.setFormatter(formatter)
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(formatter)
+    logger.setLevel(level)
+    logger.addHandler(file_handler)
+    logger.addHandler(stream_handler)

@@ -1,5 +1,38 @@
-[INFO  - 2020-09-21T09:31:08.633Z] GhostDriver - Main - running on port 64664
-[INFO  - 2020-09-21T09:31:11.647Z] Session [2fd12cc0-fbed-11ea-9cd6-83db1bbe9a7c] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
-[INFO  - 2020-09-21T09:31:11.647Z] Session [2fd12cc0-fbed-11ea-9cd6-83db1bbe9a7c] - page.customHeaders:  - {}
-[INFO  - 2020-09-21T09:31:11.648Z] Session [2fd12cc0-fbed-11ea-9cd6-83db1bbe9a7c] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2020-09-21T09:31:11.648Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 2fd12cc0-fbed-11ea-9cd6-83db1bbe9a7c
+[INFO  - 2020-09-26T08:37:23.196Z] GhostDriver - Main - running on port 58551
+[INFO  - 2020-09-26T08:37:24.355Z] Session [8045ecb0-ffd3-11ea-b789-272ee1ccae5e] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2020-09-26T08:37:24.355Z] Session [8045ecb0-ffd3-11ea-b789-272ee1ccae5e] - page.customHeaders:  - {}
+[INFO  - 2020-09-26T08:37:24.356Z] Session [8045ecb0-ffd3-11ea-b789-272ee1ccae5e] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"windows-10-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2020-09-26T08:37:24.356Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 8045ecb0-ffd3-11ea-b789-272ee1ccae5e
+[ERROR - 2020-09-26T08:37:29.103Z] Session [8045ecb0-ffd3-11ea-b789-272ee1ccae5e] - page.onError - msg: ReferenceError: Can't find variable: AdobeAn
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-09-26T08:37:29.103Z] Session [8045ecb0-ffd3-11ea-b789-272ee1ccae5e] - page.onError - stack:
+  init (https://yastatic.net/safeframe-bundles/0.55/1-1-0/render.html:33)
+  onload (https://yastatic.net/safeframe-bundles/0.55/1-1-0/render.html:27)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-09-26T08:37:34.043Z] Session [8045ecb0-ffd3-11ea-b789-272ee1ccae5e] - page.onError - msg: TypeError: undefined is not an object (evaluating 'f.getContext')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-09-26T08:37:34.043Z] Session [8045ecb0-ffd3-11ea-b789-272ee1ccae5e] - page.onError - stack:
+  _parseData (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  a (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  handleComplete (https://yastatic.net/safeframe-bundles/0.55/1-1-0/render.html:50)
+  (anonymous function) (https://yastatic.net/safeframe-bundles/0.55/1-1-0/render.html:35)
+  _dispatchEvent (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  dispatchEvent (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  _sendComplete (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:15)
+  _loadNext (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:15)
+  _handleError (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:15)
+  (anonymous function) (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  _dispatchEvent (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  dispatchEvent (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  _sendError (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:15)
+  handleEvent (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:15)
+  (anonymous function) (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  _dispatchEvent (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  dispatchEvent (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:12)
+  _handleError (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:15)
+  (anonymous function) (https://storage.mds.yandex.net/get-bstor/3913304/d76c8454-8c57-4ffe-9be1-7d79074fcf7d.js:16)
+
+  phantomjs://platform/console++.js:263 in error

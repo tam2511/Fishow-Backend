@@ -62,3 +62,6 @@ class MysqlConnector:
         with self.connector:
             cur = self.connector.cursor()
             cur.execute(query)
+
+    def close(self):
+        self.connector.close()

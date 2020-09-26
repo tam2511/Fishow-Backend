@@ -9,8 +9,8 @@ from spider.utils import read_config
 
 
 class WeatherParser:
-    def __init__(self, config_path, logger):
-        self.config = read_config(config_path)
+    def __init__(self, config, logger):
+        self.config = config
         self.num_days = self.config['gismeteo']['num_days']
         self.logger = logger
         self.driver_path = self.config['gismeteo']['driver_path']
@@ -58,8 +58,8 @@ class WeatherParser:
         for i in range(len(phenomenon)):
             for j in range(len(phenomenon[i])):
                 phenomenon[i][j] = phenomenon[i][j].strip()
-            phenomenon[i] = ','.join(phenomenon[i])
-        phenomenon = '.'.join(phenomenon)
+            phenomenon[i] = '.'.join(phenomenon[i])
+        phenomenon = ','.join(phenomenon)
         return {'phenomenon': phenomenon}
 
     def pressure_(self, driver):
@@ -75,7 +75,7 @@ class WeatherParser:
     def uv_index_(self, driver):
         UV_index = driver.find_element_by_class_name('widget__row_uvb').find_elements_by_class_name(
             'widget__value')
-        UV_index = [_.text for _ in UV_index]
+        UV_index = [_.text.replace('—', '0') for _ in UV_index]
         if len(UV_index) == 0:
             UV_index = ['0', '0', '0', '1', '2', '1', '0', '0']
         UV_index = ','.join(UV_index)

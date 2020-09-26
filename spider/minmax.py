@@ -34,7 +34,7 @@ def minmax_gust(data):
 
 
 def minmax_phenomenon(data):
-    phenomenon = data['phenomenon'].split('.')
+    phenomenon = data['phenomenon'].split(',')
     mean_ = Counter(phenomenon).most_common(1)[0][0]
     return {'mean': mean_}
 
@@ -60,6 +60,9 @@ def minmax_uv_index(data):
     uv_index = list(map(int, uv_index))
     mean_ = np.max(uv_index)
     return {'mean': mean_}
+
+def minmax_prob(data):
+    pass
 
 
 def get_mean_data(data):
