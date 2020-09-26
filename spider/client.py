@@ -10,6 +10,7 @@ from spider.utils import read_config, setup_logger, FISHS
 
 class Client:
     def __int__(self, config_path):
+        self.config_path = config_path
         self.config = read_config(config_path)
         setup_logger('gismeteo', self.config['log']['gismeteo'])
         setup_logger('predict', self.config['log']['predict'])
@@ -18,9 +19,9 @@ class Client:
         self.predict_log = logging.getLogger('predict')
         self.client_log = logging.getLogger('client')
         self.client_log.propagate = False
-        self.predictor = Predictor(self.config['model_path'], self.predict_log,
-                                   num_rows=self.config['prediction']['num_days'] * self.config['gismeteo'][
-                                       'num_hours'])
+        self.predictor = Predictor(model_path=self.config['model_path'], logger=self.predict_log,
+                                   num_days=self.config['prediction']['num_days'],
+                                   num_hours=self.config['gismeteo']['num_hours'])
 
     def predict_(self, data):
         num_extra_dates = self.config['prediction']['num_days'] - len(data)
@@ -69,7 +70,24 @@ class Client:
             mysql.close()
 
     def start(self):
-        urls = self.config['urls']
-        for areal in urls:
-            for city in urls[areal]:
-                self.handle_(city=city, areal=areal)
+        while True:
+            flag_start = False
+            urls = self.config['urls']
+            for areal in urls:
+                for city in urls[areal]:
+                    if flag_start:
+                        with open(self.config['current_city'], 'w') as c_f:
+                            c_f.write("{},{}".format(areal, city))
+                    else:
+                        with open(self.config['current_city'], 'r') as c_f:
+                            self.current_city = c_f.readline().strip().split(',')
+                        if not city == self.current_city[1] or not areal == self.current_city[0]:
+                            self.client_log.info(
+                                "Passing {} Current areal: {}, city: {}.".format(city, self.current_city[0],
+                                                                                 self.current_city[1]))
+                            continue
+                        else:
+                            flag_start = True
+                    self.client_log.info("Start handle areal {} and city {}".format(areal, city))
+                    self.handle_(city=city, areal=areal)
+            self.config = read_config(self.config_path)
