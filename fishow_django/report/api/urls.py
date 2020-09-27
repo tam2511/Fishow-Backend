@@ -38,4 +38,10 @@ urlpatterns = [
          qv.ReportDisLikeAPIView.as_view(),
          name="report-dislike"),
 
+    path("user/saved/report/", qv.ReportUserSaved.as_view(), name="saved-user"),
+    path("user/liked/report/", qv.ReportUserLiked.as_view(), name="liked-user"),
+    path("user/created/report/", qv.ReportUserLiked.as_view(), name="liked-user"),
+    path("user/liked/report/comment/", qv.ReportUserLiked.as_view(), name="liked-user"),
+    path("user/created/report/comment/", qv.ReportUserLiked.as_view(), name="liked-user"),
+
 ]

@@ -36,6 +36,20 @@ class ReportView(viewsets.ModelViewSet):
                                 report.save()
                     return obj
 
+class ReportUserSaved(APIView):
+    #queryset = Report.objects.filter(votersUp=self.user).order_by("-created_at")
+    serializer_class = ReportSerializer
+    permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return Report.objects.filter(votersUp=self.request.user).order_by("-created_at")
+
+class ReportUserLiked(APIView):
+    #queryset = Report.objects.all(votersUp=self.user).order_by("-created_at")
+    serializer_class = ReportSerializer
+    permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return Report.objects.filter(votersUp=self.request.user).order_by("-created_at")
+
 class ReportLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an comment instance."""
     serializer_class = ReportSerializer

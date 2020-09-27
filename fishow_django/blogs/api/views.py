@@ -307,6 +307,19 @@ class BlogDisLikeAPIView(APIView):
 # class PredictionView(APIView):
 #     serializer_class = CommentSerializer
 #     permission_classes = [IsAuthenticated]
+class BlogUserSaved(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Blog.objects.filter(votersUp=self.request.user).order_by("-created_at")
+
+class BlogUserLiked(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Blog.objects.filter(votersUp=self.user).order_by("-created_at")
 
 class ImageViewSet(viewsets.ModelViewSet):
     serializer_class = ImageSerializer

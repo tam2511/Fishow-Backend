@@ -37,4 +37,10 @@ urlpatterns = [
          qv.BlogDisLikeAPIView.as_view(),
          name="blog-dislike"),
 
+    path("user/saved/blogs/", qv.BlogUserSaved.as_view(), name="saved-user"),
+    path("user/liked/blogs/", qv.BlogUserLiked.as_view(), name="liked-user"),
+    path("user/created/blogs/", qv.BlogUserLiked.as_view(), name="liked-user"),
+    path("user/liked/blogs/comment/", qv.BlogUserLiked.as_view(), name="liked-user"),
+    path("user/created/blogs/comment/", qv.BlogUserLiked.as_view(), name="liked-user"),
+
 ]
