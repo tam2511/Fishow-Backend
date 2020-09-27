@@ -43,17 +43,21 @@ class Predictor:
                 else:
                     all_data[key] = d[key].split(',')
             temp = [d['date'].timetuple().tm_yday for _ in range(self.num_hours)]
-            if 'days' in all_data:
-                all_data['days'] = all_data['days'] + temp
+            if 'day' in all_data:
+                all_data['day'] = all_data['day'] + temp
             else:
-                all_data['days'] = temp
+                all_data['day'] = temp
+            if 'time' in all_data:
+                all_data['time'] = all_data['time'] + list(range(0, self.num_hours * 3, 3))
+            else:
+                all_data['time'] = temp
 
         return all_data
 
     def preprocess_batch_(self, data):
         vec = {}
         for key in data:
-            if key in DIGIT_KEYS | MOON_KEYS | {'days'}:
+            if key in DIGIT_KEYS | MOON_KEYS | {'day', 'time'}:
                 for i in range(len(data[key])):
                     key_name = '{}_{}'.format(key, i)
                     vec.update({key_name: data[key][i]})

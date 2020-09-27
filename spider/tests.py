@@ -22,15 +22,15 @@ def main():
         for idx, res in enumerate(result):
             result[idx]['areal'] = 'Московская область'
             print('{}: {}'.format(idx, res))
-        mean_result = get_mean_data(result)
-        print(mean_result)
+
 
         predictor = Predictor('', None, num_days=3, num_hours=8)
 
         probs = predictor(result)
 
         print(probs)
-
+        mean_result = get_mean_data(result)
+        print(mean_result)
 
 if __name__ == '__main__':
     main()
