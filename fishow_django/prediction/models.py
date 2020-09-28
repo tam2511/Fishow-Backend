@@ -34,7 +34,7 @@ from django.conf import settings
     pressure = models.TextField() # "730,744,751,719,734,745,725,732" - максимум 32 символа
     humidity = models.TextField() # "30,44,51,19,34,45,25,32" - максимум 24 символа
     uv_index = models.TextField() # "3,4,5,1,3,4,2,3" - максимум 24 символа
-    moon = models.FloatField() # 0.12
+    moon = models.IntegerField() # 12
     moon_direction = models.IntegerField() # -1
     date = models.DateField() # 2020.07.15
     areal = models.TextField() # Московская область
