@@ -108,8 +108,6 @@ a {
 }
 .tile.is-parent.is-vertical {
   flex-grow: initial;
-  /*@media sc
-  */
 }
 .nav {
   max-width: 1200px;
@@ -118,21 +116,8 @@ a {
   padding-left: 0;
 }
 .blog-page .content {
-  max-height: 400px;
+  max-height: 800px;
   overflow: hidden;
   position: relative;
-  /*&:after {*/
-  /*  content: '';*/
-  /*  background: linear-gradient(*/
-  /*    0deg,*/
-  /*    rgba(255, 255, 255, 1) 0%,*/
-  /*    rgba(255, 255, 255, 0) 25%*/
-  /*  );*/
-  /*  position: absolute;*/
-  /*  left: 0;*/
-  /*  top: 0;*/
-  /*  width: 100%;*/
-  /*  height: 100%;*/
-  /*}*/
 }
 </style>
