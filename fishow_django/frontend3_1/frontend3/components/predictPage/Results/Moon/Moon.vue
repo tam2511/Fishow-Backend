@@ -32,16 +32,10 @@ export default {
 
 <style scoped lang="scss">
 .moon-box {
-  /*background: rgba(0, 0, 0, 0.89) !important;*/
-  /*color: #fff;*/
-
   padding-bottom: 50px;
 }
 .moons {
   padding-bottom: 50px;
-}
-.title {
-  /*color: #fff;*/
 }
 @media screen and (max-width: 768px) {
   div.columns {
@@ -94,5 +88,9 @@ export default {
 }
 .image img {
   margin: 0 auto;
+}
+.moon-pic {
+  margin-right: 40px;
+  max-width: 400px;
 }
 </style>

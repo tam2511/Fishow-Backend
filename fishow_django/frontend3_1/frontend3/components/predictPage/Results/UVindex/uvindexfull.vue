@@ -68,6 +68,17 @@ export default {
 .uv-table {
   padding-top: 30px;
 }
+.uvindex-box.box::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 30px;
+  width: 30px;
+  display: block;
+  background-color: #00b3ee;
+}
+
 @media screen and (max-width: 768px) {
   div.columns {
     display: flex;
