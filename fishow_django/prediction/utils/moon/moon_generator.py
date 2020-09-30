@@ -10,8 +10,7 @@ class MoonTextGenerator:
 
     @staticmethod
     def get_day_desc(data, date, fish):
-        filtred_data = sorted([(_.moon_direction, _.moon, _.time) for _ in data if _.date == date and _.fish == fish],
-                              key=lambda x: x[1])
+        filtred_data = [(_.moon_direction, _.moon) for _ in data if _.date == date and _.fish == fish]
         moon_direction = filtred_data[0][0]
         moon = filtred_data[0][1]
         moon_stage = stage_flag(moon_direction, moon)
@@ -25,7 +24,7 @@ class MoonTextGenerator:
     @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        filtred_data = {observe_date: [(_.moon_direction, _.moon, _.time) for _ in data if
+        filtred_data = {observe_date: [(_.moon_direction, _.moon) for _ in data if
                                        _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
         moon_directions = [filtred_data[d][0][0] for d in filtred_data]
         moons = [filtred_data[d][0][1] for d in filtred_data]

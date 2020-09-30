@@ -1,13 +1,16 @@
 import datetime
 
+from ..helper.extra import deserialize
+
 
 class UVIndexTextGenerator:
 
     @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        filtred_data = {observe_date: sorted([(_.uv_index, _.time) for _ in data if
-                                              _.date == observe_date and _.fish == fish], key=lambda x: x[1]) for
+        filtred_data = {observe_date: sorted(
+            sum([deserialize(_.uv_index) for _ in data if _.date == observe_date and _.fish == fish], []),
+            key=lambda x: x[1]) for
                         observe_date in observe_dates}
         # uv_index_0 = [filtred_data[d][0][0] for d in filtred_data]
         # uv_index_3 = [filtred_data[d][1][0] for d in filtred_data]

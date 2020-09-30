@@ -1,9 +1,9 @@
 import datetime
-import numpy as np
 
 from .prediction_helper import *
 from ..helper.text import cases
 from ..helper.date import parse_date, get_dates_tex
+from ..helper.extra import deserialize
 
 
 class PredictTextGenerator:
@@ -19,8 +19,7 @@ class PredictTextGenerator:
 
     @staticmethod
     def get_day_desc(data, date, fish):
-        filtred_data = sorted([(_.prob, _.time) for _ in data if _.date == date and _.fish == fish],
-                              key=lambda x: x[0])
+        filtred_data = sum([deserialize(_.prob) for _ in data if _.date == date and _.fish == fish], [])
         min_prob = filtred_data[0][0]
         max_prob = filtred_data[-1][0]
         min_times = [_[1] for _ in filtred_data if _[0] == min_prob]
@@ -34,8 +33,9 @@ class PredictTextGenerator:
     @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        filtred_data = {observe_date: [(_.prob, _.time) for _ in data if
-                                       _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+        filtred_data = {
+            observe_date: sum([deserialize(_.prob) for _ in data if _.date == observe_date and _.fish == fish], []) for
+            observe_date in observe_dates}
         min_prob = 1
         max_prob = 0
         for d in filtred_data:
