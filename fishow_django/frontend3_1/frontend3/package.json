@@ -25,7 +25,8 @@
     "nuxt-buefy": "^0.3.31",
     "nuxt-vue-multiselect": "^1.0.4",
     "vue-apexcharts": "^1.5.3",
-    "vue-fusioncharts": "^3.0.4"
+    "vue-fusioncharts": "^3.0.4",
+    "vue-infinite-scroll": "^2.0.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

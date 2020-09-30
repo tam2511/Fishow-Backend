@@ -104,30 +104,6 @@ export default {
           // offsetY: -25,
           // offsetX: -5,
         },
-        responsive: [
-          {
-            breakpoint: 768,
-            options: {
-              chart: {
-                height: 350,
-                type: 'bar',
-              },
-              yaxis: {
-                labels: {
-                  show: false,
-                },
-              },
-              plotOptions: {
-                bar: {
-                  horizontal: false,
-                },
-              },
-              legend: {
-                position: 'bottom',
-              },
-            },
-          },
-        ],
       },
     }
   },

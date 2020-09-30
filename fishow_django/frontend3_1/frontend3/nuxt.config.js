@@ -62,7 +62,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/axios'],
+  plugins: ['~/plugins/axios', '@/plugins/vue-infinite-scroll.client.js'],
   /*
    ** Nuxt.js dev-modules
    */

@@ -2,27 +2,6 @@
   <div class="container">
     <div class="card">
       <div class="card-content">
-        <div class="media">
-          <div class="media-content">
-            <div class="flex">
-              <div class="is-flex">
-                <figure class="image is-32x32">
-                  <img
-                    src="https://bulma.io/images/placeholders/96x96.png"
-                    alt="Placeholder image"
-                  />
-                </figure>
-
-                <p class="title is-4">{{ blog.author }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="media-right">
-            <b-tag class="blog-category" type="is-primary" size="is-medium">{{
-              blog.category
-            }}</b-tag>
-          </div>
-        </div>
         <div class="content-container">
           <div class="media">
             <div class="media-left">
@@ -77,7 +56,6 @@
                 width="560"
                 height="315"
                 :src="p.url"
-                frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
                 name="video"
@@ -89,10 +67,17 @@
           </div>
         </div>
         <div class="media card-footer">
-          <div class="column is-one-quarter is-inline-block">
+          <div class="is-flex blog-author">
+            <figure class="image is-16x16">
+              <img
+                src="https://bulma.io/images/placeholders/96x96.png"
+                alt="Placeholder image"
+              />
+            </figure>
+            <p>{{ blog.author }}</p>
             <time datetime="2016-1-1">{{ blog.created_at }}</time>
           </div>
-          <div class="is-inline-block">
+          <div>
             <b-field grouped group-multiline>
               <div class="control">
                 <b-taglist attached>
@@ -105,6 +90,9 @@
                 </b-taglist>
               </div>
             </b-field>
+            <b-tag class="blog-category" type="is-primary">{{
+              blog.category
+            }}</b-tag>
           </div>
         </div>
       </div>
@@ -187,7 +175,6 @@ export default {
 <style scoped lang="scss">
 .blog-category {
   background-color: #1e347b;
-  font-size: 45px;
 }
 .media {
   align-items: center;
@@ -239,5 +226,26 @@ export default {
 }
 .likes_counter {
   max-width: 40px;
+}
+.blog-author {
+  align-items: center;
+}
+.media.card-footer {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  & > div > * {
+    margin: 0 10px;
+  }
+  padding-top: 10px;
+  .field.is-grouped.is-grouped-multiline > .control:last-child {
+    margin: 0;
+  }
+  & > * {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 </style>

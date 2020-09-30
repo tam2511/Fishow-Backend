@@ -1,7 +1,12 @@
 <template>
   <b-navbar :fixed-top="true" :shadow="true" class="navbar-brand-container">
     <template slot="brand">
-      <b-navbar-item tag="a" to="#" class="logo" data-word="FISHOW">
+      <b-navbar-item
+        tag="nuxt-link"
+        :to="{ name: 'index' }"
+        class="logo"
+        data-word="FISHOW"
+      >
         FISHOW
       </b-navbar-item>
     </template>
@@ -72,9 +77,6 @@ export default {
 <style lang="scss">
 .nuxt-link-active {
   color: var(--color-type-primary);
-  &:not([href*='blog']) {
-    background-color: #fafafa;
-  }
 }
 .logo {
   padding: 0 !important;

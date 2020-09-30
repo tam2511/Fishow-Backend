@@ -12,7 +12,8 @@ async function refreshTokenF($auth, $axios, token, refreshToken) {
       $auth.setToken(strategy, token)
       $auth.setRefreshToken(strategy, refreshToken)
       $axios.setToken(token)
-      return decodeToken.call(this, token).exp
+      const decode = decodeToken.call(this, token).exp
+      return decode
     } catch (error) {
       $auth.logout()
       // throw new Error('Error while refreshing token')
@@ -22,7 +23,6 @@ async function refreshTokenF($auth, $axios, token, refreshToken) {
 
 export default async function ({ app }) {
   const { $axios, $auth } = app
-
   let token = $auth.getToken(strategy)
   let refreshToken = $auth.getRefreshToken(strategy)
   let refreshInterval = FALLBACK_INTERVAL
@@ -33,9 +33,6 @@ export default async function ({ app }) {
     })
     const tokenParsed = decodeToken.call(this, token)
     refreshInterval = (tokenParsed.exp * 1000 - Date.now()) * 0.75
-    $axios.setHeader({
-      Authorization: token,
-    })
     if (refreshInterval < 10000 && refreshInterval > 0) {
       refreshInterval = 10000
     }
