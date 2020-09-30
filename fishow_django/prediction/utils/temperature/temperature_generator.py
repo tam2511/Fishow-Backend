@@ -54,7 +54,7 @@ class TemperatureTextGenerator:
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {
-            observe_date: sum([deserialize(_.temperature) for _ in data if _.date == date and _.fish == fish], []) for
+            observe_date: sum([deserialize(_.temperature) for _ in data if _.date == observe_date and _.fish == fish], []) for
             observe_date in observe_dates}
         night_winds = [[_[0] for _ in filtred_data[d] if _[1] in [0, 3]] for d in filtred_data]
         day_winds = [[_[0] for _ in filtred_data[d] if _[1] in [12, 15, 18]] for d in filtred_data]

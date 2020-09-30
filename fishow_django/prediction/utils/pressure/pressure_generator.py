@@ -46,7 +46,7 @@ class PressureTextGenerator:
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {
-            observe_date: sum([deserialize(_.pressure) for _ in data if _.date == date and _.fish == fish], []) for
+            observe_date: sum([deserialize(_.pressure) for _ in data if _.date == observe_date and _.fish == fish], []) for
             observe_date in observe_dates}
         mean_temps = [np.mean([_[0] for _ in filtred_data[d]]) for d in filtred_data]
         min_temps = [min([_[0] for _ in filtred_data[d]]) for d in filtred_data]
