@@ -17,17 +17,15 @@
       class="tile is-parent is-vertical space-left0"
     >
       <article
-        v-for="blog in blogs"
+        v-for="blog in notRatedBlogs"
         :key="blog.id"
         class="tile is-child blog-page"
       >
-        <BlogCard
-          v-if="
-            !((blog.user_has_votedUp || blog.user_has_votedDown) && isSwitched)
-          "
-          :blog="blog"
-        />
+        <BlogCard :blog="blog" />
       </article>
+    </div>
+    <div v-if="!next">
+      <h2 class="title">Блоги закончились, поздравляю!</h2>
     </div>
   </div>
 </template>
@@ -49,6 +47,23 @@ export default {
       next: null,
       isSwitched: false,
     }
+  },
+  computed: {
+    notRatedBlogs() {
+      const result = []
+      if (this.blogs) {
+        const length = this.blogs.length
+        for (let i = 0; i < length; i++) {
+          if (
+            !this.blogs[i].user_has_votedUp &&
+            !this.blogs[i].user_has_votedDown
+          ) {
+            result.push(this.blogs[i])
+          }
+        }
+      }
+      return this.isSwitched ? result : this.blogs
+    },
   },
   mounted() {
     if (process.browser && localStorage.getItem('hidden-blogs')) {
