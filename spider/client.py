@@ -40,21 +40,21 @@ class Client:
 
     def handle_(self, city, areal):
         base_url = self.config['urls'][areal][city]
-        with WeatherParser(config=self.config, logger=self.gismeteo_log) as parser:
-            data = parser.parse_urls(base_url=base_url)
+        parser = WeatherParser(config=self.config, logger=self.gismeteo_log)
+        data = parser.parse_urls(base_url=base_url)
+        for i in range(len(data)):
+            data[i]['city'] = city
+            data[i]['areal'] = areal
+        probs = self.predict_(data)
+        for fish in probs:
             for i in range(len(data)):
-                data[i]['city'] = city
-                data[i]['areal'] = areal
-            probs = self.predict_(data)
-            for fish in probs:
-                for i in range(len(data)):
-                    data[i]['fish'] = fish
-                    data[i]['prob'] = ','.join(list(map(str, probs[fish][i: i + self.config['gismeteo']['num_hours']])))
-                self.write_predictions_(self.config['database']['prediction_table'], data)
-                mean_data = get_mean_data(data[:self.config['gismeteo']['num_days'] - 1])
-                self.write_predictions_(self.config['database']['mean_prediction_table'], [mean_data])
-                mean_data = get_mean_data(data[1:self.config['gismeteo']['num_days']])
-                self.write_predictions_(self.config['database']['mean_prediction_table'], [mean_data])
+                data[i]['fish'] = fish
+                data[i]['prob'] = ','.join(list(map(str, probs[fish][i: i + self.config['gismeteo']['num_hours']])))
+            self.write_predictions_(self.config['database']['prediction_table'], data)
+            mean_data = get_mean_data(data[:self.config['gismeteo']['num_days'] - 1])
+            self.write_predictions_(self.config['database']['mean_prediction_table'], [mean_data])
+            mean_data = get_mean_data(data[1:self.config['gismeteo']['num_days']])
+            self.write_predictions_(self.config['database']['mean_prediction_table'], [mean_data])
 
     def write_predictions_(self, table_name, data):
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],

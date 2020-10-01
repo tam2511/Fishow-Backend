@@ -18,14 +18,13 @@ class WeatherParser:
         self.timeout = self.config['gismeteo']['timeout']
         self.max_wait = self.config['gismeteo']['max_wait']
 
-    def __enter__(self):
+    def init(self):
         self.driver = webdriver.PhantomJS(executable_path=self.driver_path)
         self.driver.implicitly_wait(self.max_wait)
 
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def close(self):
         self.driver.close()
+        del self.driver
 
     def temperature_(self, driver):
         temps = driver.find_elements_by_class_name('unit_temperature_c')[-8:]
@@ -133,25 +132,24 @@ class WeatherParser:
             while step < self.num_attempts:
                 try:
                     sleep(self.timeout)
+                    self.init()
                     self.driver.get(url)
                     driver = self.driver.find_element_by_class_name('__frame_sm')
                     break
                 except Exception as e:
                     self.logger.error("Exception request for url {} on step {} : {}".format(url, step, e))
                     step += 1
-                    self.dirver.close()
             if step == self.num_attempts:
+                self.close()
                 return None
             self.logger.info('Url {} parsed. Elapsed time: {}'.format(url, time() - start_time))
             try:
                 res = self.parse_page_(driver)
             except Exception:
-                self.driver.close()
+                self.close()
                 return None
-            self.driver.close()
-            del self.driver
+            self.close()
             res.update({'date': dates[i]})
             result.append(res)
-            self.driver = webdriver.PhantomJS(self.driver_path)
         return result
 
