@@ -1,7 +1,7 @@
 import datetime
 import numpy as np
 
-from spider.utils import read_config, average_time, DIGIT_KEYS, MOON_KEYS, SUN_KEYS, CATEGORY_KEYS
+from utils import read_config, average_time, DIGIT_KEYS, MOON_KEYS, SUN_KEYS, CATEGORY_KEYS
 
 
 class DataError(Exception):

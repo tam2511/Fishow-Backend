@@ -5,7 +5,7 @@ import selenium
 import datetime
 from time import sleep, time
 
-from spider.utils import read_config
+from utils import read_config
 
 
 class WeatherParser:
@@ -139,13 +139,19 @@ class WeatherParser:
                 except Exception as e:
                     self.logger.error("Exception request for url {} on step {} : {}".format(url, step, e))
                     step += 1
+                    self.dirver.close()
             if step == self.num_attempts:
                 return None
             self.logger.info('Url {} parsed. Elapsed time: {}'.format(url, time() - start_time))
             try:
                 res = self.parse_page_(driver)
             except Exception:
+                self.driver.close()
                 return None
+            self.driver.close()
+            del self.driver
             res.update({'date': dates[i]})
             result.append(res)
+            self.driver = webdriver.PhantomJS(self.driver_path)
         return result
+

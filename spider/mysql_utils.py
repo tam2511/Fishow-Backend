@@ -18,6 +18,7 @@ def serialize_key(key):
 class MysqlConnector:
     def __init__(self, username, password, host, database):
         self.connector = pymysql.connect(host, username, password, database)
+        self.connector.autocommit(True)
 
     def escape_name(self, s):
         return '`{}`'.format(s.replace('`', '``'))
@@ -28,9 +29,9 @@ class MysqlConnector:
         cols = ', '.join(map(self.escape_name, names))
         placeholders = ', '.join(['%({})s'.format(name) for name in names])
         query = 'INSERT INTO {} ({}) VALUES ({})'.format(table_name, cols, placeholders)
-        with self.connector:
-            cur = self.connector.cursor()
-            cur.execute(query, new_row)
+        cur = self.connector.cursor()
+        cur.execute(query, new_row)
+        cur.close()
 
     def select(self, table_name, where=None):
         if where:
@@ -47,10 +48,11 @@ class MysqlConnector:
             query = query[:-3]
         else:
             query = "SELECT * FROM {}".format(table_name)
-        with self.connector:
-            cur = self.connector.cursor(pymysql.cursors.DictCursor)
-            cur.execute(query)
-            return cur.fetchall()
+        cur = self.connector.cursor(pymysql.cursors.DictCursor)
+        cur.execute(query)
+        result = cur.fetchall()
+        cur.close()
+        return result
 
     def update(self, table_name, row):
         id = row['id']
@@ -59,9 +61,18 @@ class MysqlConnector:
         for key in data_row:
             query += "{} = {}, ".format(serialize_key(key), serialize_value(data_row[key]))
         query = query[:-2] + " WHERE id = {}".format(id)
-        with self.connector:
-            cur = self.connector.cursor()
-            cur.execute(query)
+        cur = self.connector.cursor()
+        cur.execute(query)
+        cur.close()
 
     def close(self):
         self.connector.close()
+
+    def __del__(self):
+        self.close()
+        
+if __name__ == '__main__':
+    mysql = MysqlConnector(host='localhost', username='tam2511_fishow',
+                               password='081099ASDasd!',
+                               database='tam2511_fishow')
+    print(mysql.select('prediction_prediction'))

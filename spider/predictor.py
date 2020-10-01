@@ -1,6 +1,6 @@
 from joblib import load
 
-from spider.utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS, FISHS, REGIONS, CATEGORY_KEYS
+from utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS, FISHS, REGIONS, CATEGORY_KEYS
 
 
 class Model:
@@ -10,9 +10,8 @@ class Model:
         self.std = std_layer
 
     def __call__(self, vector):
-        if self.mean and self.std:
-            vector = (vector - self.mean) / self.std
-        return self.model.predict_proba(vector)[0][1]
+        vector = (vector - self.mean) / self.std
+        return self.model.predict_proba(vector.reshape(1, -1))[0][1]
 
 
 class Predictor:
@@ -96,5 +95,5 @@ class Predictor:
                 vec.update(region_vec)
                 vec = [vec[key] for key in sorted(vec)]
                 prob = self.model(vec)
-                probs[fish].append(prob * 100)
+                probs[fish].append(int(prob * 100))
         return probs

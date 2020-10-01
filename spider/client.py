@@ -1,15 +1,16 @@
 import datetime
 import logging
+from time import sleep
 
-from spider.gismeteo import WeatherParser
-from spider.minmax import get_mean_data
-from spider.mysql_utils import MysqlConnector
-from spider.predictor import Predictor
-from spider.utils import read_config, setup_logger, FISHS
+from gismeteo import WeatherParser
+from minmax import get_mean_data
+from mysql_utils import MysqlConnector
+from predictor import Predictor, Model
+from utils import read_config, setup_logger, FISHS
 
 
 class Client:
-    def __int__(self, config_path):
+    def __init__(self, config_path):
         self.config_path = config_path
         self.config = read_config(config_path)
         setup_logger('gismeteo', self.config['log']['gismeteo'])
@@ -26,12 +27,13 @@ class Client:
     def predict_(self, data):
         num_extra_dates = self.config['prediction']['num_days'] - len(data)
         extra_dates = [data[0]['date'] - datetime.timedelta(days=i) for i in range(num_extra_dates)]
+        extra_dates = [_.strftime("%Y.%m.%d") for _ in extra_dates]
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],
                                password=self.config['database']['password'],
                                database=self.config['database']['database'])
-        response = mysql.select(table_name=self.config['database']['table_name1'],
+        response = mysql.select(table_name=self.config['database']['prediction_table'],
                                 where={'areal': data[0]['areal'], 'city': data[0]['city'],
-                                       'date': extra_dates, 'fish': data[0]['fish']})
+                                       'date': extra_dates, 'fish': 'щука'})
         response = sorted(response, key=lambda x: x['date'])
         predict_data = response + data
         return self.predictor(predict_data)
@@ -47,27 +49,30 @@ class Client:
             for fish in probs:
                 for i in range(len(data)):
                     data[i]['fish'] = fish
-                    data[i]['prob'] = ','.join(probs[fish][i: i + self.config['gismeteo']['num_hours']])
+                    data[i]['prob'] = ','.join(list(map(str, probs[fish][i: i + self.config['gismeteo']['num_hours']])))
                 self.write_predictions_(self.config['database']['prediction_table'], data)
                 mean_data = get_mean_data(data[:self.config['gismeteo']['num_days'] - 1])
-                self.write_predictions_(self.config['database']['mean_prediction_table'], mean_data)
+                self.write_predictions_(self.config['database']['mean_prediction_table'], [mean_data])
                 mean_data = get_mean_data(data[1:self.config['gismeteo']['num_days']])
-                self.write_predictions_(self.config['database']['mean_prediction_table'], mean_data)
+                self.write_predictions_(self.config['database']['mean_prediction_table'], [mean_data])
 
     def write_predictions_(self, table_name, data):
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],
                                password=self.config['database']['password'],
                                database=self.config['database']['database'])
         for row in data:
-            response = mysql.select(table_name=table_name, where={'areal': row['areal'], 'city': row['city'],
-                                                                  'date': row['date'], 'fish': row['fish']})
+            crow = row.copy()
+            crow['date'] = crow['date'].strftime('%Y.%m.%d')
+            response = mysql.select(table_name=table_name, where={'areal': crow['areal'], 'city': crow['city'],
+                                                                  'date': crow['date'], 'fish': crow['fish']})
             if len(response) > 0:
-                row['id'] = response[0]['id']
-                mysql.update(table_name=table_name, row=row)
-                del row['id']
+                crow['id'] = response[0]['id']
+                print('updating')
+                mysql.update(table_name=table_name, row=crow)
+                del crow['id']
             else:
-                mysql.insert_row(table_name=table_name, row=row)
-            mysql.close()
+                print('inserting')
+                mysql.insert_row(table_name=table_name, row=crow)
 
     def start(self):
         while True:
@@ -90,4 +95,11 @@ class Client:
                             flag_start = True
                     self.client_log.info("Start handle areal {} and city {}".format(areal, city))
                     self.handle_(city=city, areal=areal)
+                    sleep(7)
+            sleep(1000)
             self.config = read_config(self.config_path)
+            
+            
+if __name__ == '__main__':
+    c = Client('config.json')
+    c.start()
