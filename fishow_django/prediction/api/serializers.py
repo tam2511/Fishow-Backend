@@ -22,7 +22,7 @@ class PredictionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prediction
         fields = '__all__'
-        #fields = ['moon','moon_direction','date','areal','city','fish','sun_up','sun_down']
+        #fields = ['moon','moon_direction','date','areal','city','fish','sun_up','sun_down',]
         # exclude = ['time', 'temperature','wind', 'wind_direction','gust','phenomenon',
         # 'pressure','humidity','uv_index','moon','moon_direction','day','date','areal','city','prob','fish','features']
 
