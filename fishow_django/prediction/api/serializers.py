@@ -22,8 +22,36 @@ class PredictionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prediction
         fields = '__all__'
+        #fields = ['moon','moon_direction','date','areal','city','fish','sun_up','sun_down',]
         # exclude = ['time', 'temperature','wind', 'wind_direction','gust','phenomenon',
         # 'pressure','humidity','uv_index','moon','moon_direction','day','date','areal','city','prob','fish','features']
+
+    def get_temperature(self, instance):
+            return list(map(int, instance.temperature.replace('+','').split(',')))
+
+    def get_wind(self, instance):
+            return list(map(int, instance.wind.split(',')))
+
+    def get_gust(self, instance):
+            return list(map(int, instance.gust.split(',')))
+
+    def get_pressure(self, instance):
+            return list(map(int, instance.pressure.split(',')))
+
+    def get_humidity(self, instance):
+            return list(map(int, instance.humidity.split(',')))
+
+    def get_uv_index(self, instance):
+            return list(map(int, instance.uv_index.split(',')))
+
+    def get_prob(self, instance):
+            return list(map(int, instance.prob.split(',')))
+
+    def get_wind_direction(self, instance):
+            return instance.wind_direction.split(',')
+
+    def get_phenomenon(self, instance):
+                return instance.phenomenon.replace('.',':').replace(',','.').replace(':',',').split(',')
 
     def get_temperature_brief(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
