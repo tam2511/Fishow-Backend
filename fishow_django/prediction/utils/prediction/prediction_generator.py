@@ -22,14 +22,10 @@ class PredictTextGenerator:
         filtred_data = sum([deserialize(_.prob) for _ in data if _.date == date and _.fish == fish], [])
         min_prob = filtred_data[0][0]
         max_prob = filtred_data[-1][0]
-        min_times = [_[1] for _ in filtred_data if _[0] == min_prob]
-        max_times = [_[1] for _ in filtred_data if _[0] == max_prob]
-        min_times = get_date_time_text(date, get_day_times(min_times))
-        max_times = get_date_time_text(date, get_day_times(max_times))
         min_prob = '{} %'.format(min_prob)
         max_prob = '{} %'.format(max_prob)
-        return {'min': min_prob, 'max': max_prob, 'min_times': min_times,
-                'max_times': max_times}
+        return {'min': min_prob, 'max': max_prob, 'min_times': parse_date(date),
+                'max_times': parse_date(date)}
 
     @staticmethod
     def get_tenday_desc(data, date, fish):

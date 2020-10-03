@@ -49,14 +49,10 @@ class TemperatureTextGenerator:
         temps = [_[0] for _ in filtred_data]
         min_temp = np.min(temps)
         max_temp = np.max(temps)
-        min_times = [_[1] for _ in filtred_data if _[0] == min_temp]
-        max_times = [_[1] for _ in filtred_data if _[0] == max_temp]
-        min_times = get_date_time_text(date, get_day_times(min_times))
-        max_times = get_date_time_text(date, get_day_times(max_times))
         mean_temp = np.mean(temps)
         return {
-            'mean': mean_temp, 'min': min_temp, 'max': max_temp, 'min_times': min_times,
-            'max_time': max_times
+            'mean': mean_temp, 'min': min_temp, 'max': max_temp, 'min_times': parse_date(date),
+            'max_time': parse_date(date)
         }
 
     @staticmethod
