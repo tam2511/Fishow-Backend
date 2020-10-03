@@ -36,8 +36,8 @@ class PredictTextGenerator:
         filtred_data = {
             observe_date: sum([deserialize(_.prob) for _ in data if _.date == observe_date and _.fish == fish], []) for
             observe_date in observe_dates}
-        min_prob = 1
-        max_prob = 0
+        min_prob = 101
+        max_prob = -1
         for d in filtred_data:
             for prob, time in filtred_data[d]:
                 if prob < min_prob:
