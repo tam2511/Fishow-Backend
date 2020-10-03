@@ -20,6 +20,15 @@ class PredictionSerializer(serializers.ModelSerializer):
     moon_desc = serializers.SerializerMethodField()
     wind_roza = serializers.SerializerMethodField()
     uv_index_desc = serializers.SerializerMethodField()
+    temperature = serializers.SerializerMethodField()
+    wind = serializers.SerializerMethodField()
+    gust = serializers.SerializerMethodField()
+    pressure = serializers.SerializerMethodField()
+    humidity = serializers.SerializerMethodField()
+    uv_index = serializers.SerializerMethodField()
+    prob = serializers.SerializerMethodField()
+    wind_direction = serializers.SerializerMethodField()
+    phenomenon = serializers.SerializerMethodField()
 
     class Meta:
         model = Prediction
