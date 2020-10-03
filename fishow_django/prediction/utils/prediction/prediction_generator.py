@@ -24,10 +24,10 @@ class PredictTextGenerator:
         max_prob = filtred_data[-1][0]
         min_times = [_[1] for _ in filtred_data if _[0] == min_prob]
         max_times = [_[1] for _ in filtred_data if _[0] == max_prob]
-        min_times = get_day_times(min_times)
-        max_times = get_day_times(max_times)
-        min_prob = '{} %'.format(int(min_prob * 100))
-        max_prob = '{} %'.format(int(max_prob * 100))
+        min_times = get_date_time_text(date, get_day_times(min_times))
+        max_times = get_date_time_text(date, get_day_times(max_times))
+        min_prob = '{} %'.format(min_prob)
+        max_prob = '{} %'.format(max_prob)
         return {'min': min_prob, 'max': max_prob, 'min_times': min_times,
                 'max_times': max_times}
 
@@ -48,7 +48,7 @@ class PredictTextGenerator:
                     max_prob = prob
                     max_date = (d, time)
 
-        min_prob = '{} %'.format(int(min_prob * 100))
-        max_prob = '{} %'.format(int(max_prob * 100))
+        min_prob = '{} %'.format(min_prob)
+        max_prob = '{} %'.format(max_prob)
         return {'min': min_prob, 'max': max_prob, 'min_date': get_time_text(*min_date),
                 'max_date': get_time_text(*max_date)}

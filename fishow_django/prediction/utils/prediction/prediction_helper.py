@@ -53,3 +53,7 @@ def get_time_text(date, time):
     date_text = parse_date(date)
     time_text = text_map[time_map[time]]
     return '{}, {}'.format(date_text, time_text)
+
+def get_date_time_text(date, time):
+    date_text = parse_date(date)
+    return '{}, {}'.format(date_text, time)

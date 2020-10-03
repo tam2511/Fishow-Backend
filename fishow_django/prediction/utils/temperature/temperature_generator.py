@@ -1,7 +1,7 @@
 import datetime
 import numpy as np
 
-from ..prediction.prediction_helper import get_day_times
+from ..prediction.prediction_helper import get_day_times, get_date_time_text
 from .temperature_helper import *
 from ..helper.text import cases
 from ..helper.date import parse_date
@@ -51,8 +51,8 @@ class TemperatureTextGenerator:
         max_temp = np.max(temps)
         min_times = [_[1] for _ in filtred_data if _[0] == min_temp]
         max_times = [_[1] for _ in filtred_data if _[0] == max_temp]
-        min_times = get_day_times(min_times)
-        max_times = get_day_times(max_times)
+        min_times = get_date_time_text(date, get_day_times(min_times))
+        max_times = get_date_time_text(date, get_day_times(max_times))
         mean_temp = np.mean(temps)
         return {
             'mean': mean_temp, 'min': min_temp, 'max': max_temp, 'min_times': min_times,
