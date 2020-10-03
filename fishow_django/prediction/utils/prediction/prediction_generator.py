@@ -28,7 +28,8 @@ class PredictTextGenerator:
         max_times = get_day_times(max_times)
         min_prob = '{} %'.format(int(min_prob * 100))
         max_prob = '{} %'.format(int(max_prob * 100))
-        return minmax_day_text.format(parse_date(date), cases[fish]['r'], max_times, max_prob, min_times, min_prob)
+        return {'min': min_prob, 'max': max_prob, 'min_times': min_times,
+                'max_times': max_times}
 
     @staticmethod
     def get_tenday_desc(data, date, fish):

@@ -15,11 +15,11 @@ class MoonTextGenerator:
         moon = filtred_data[0][1]
         moon_stage = stage_flag(moon_direction, moon)
         if moon_stage == 'bad':
-            return bad_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+            return bad_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon), fish)
         if moon_stage == 'good':
-            return good_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+            return good_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon), fish)
         if moon_stage == 'neutral':
-            return neutral_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+            return neutral_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon), fish)
 
     @staticmethod
     def get_tenday_desc(data, date, fish):

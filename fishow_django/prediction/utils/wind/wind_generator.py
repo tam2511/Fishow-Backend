@@ -50,6 +50,16 @@ class WindTextGenerator:
         return ten_minmax_desc.format(min_date, min_temp, max_date, max_temp)
 
     @staticmethod
+    def get_day_wind_roza(data, date, fish):
+        winds = [_.wind_direction for _ in data if _.date == date and _.fish == fish]
+        null_roza = {'З': 0, 'СЗ': 0, 'ЮЗ': 0, 'В': 0, 'СВ': 0, 'ЮВ': 0, 'Ю': 0, 'С': 0, }
+        roza = dict(Counter(winds))
+        for key in null_roza:
+            if key in roza:
+                null_roza[key] = roza[key]
+        return null_roza
+
+    @staticmethod
     def get_wind_roza(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {observe_date: sum(
