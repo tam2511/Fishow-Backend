@@ -19,6 +19,7 @@ class PredictionSerializer(serializers.ModelSerializer):
     pressure_desc = serializers.SerializerMethodField()
     moon_desc = serializers.SerializerMethodField()
     wind_roza = serializers.SerializerMethodField()
+    uv_index_desc = serializers.SerializerMethodField()
 
     class Meta:
         model = Prediction
@@ -137,6 +138,13 @@ class PredictionSerializer(serializers.ModelSerializer):
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.get_day_moon_desc(instance.date, instance.fish)
+
+    def get_uv_index_desc(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_day_uv_index_desc(instance.date, instance.fish)
 
 
 class PredictiontenSerializer(serializers.ModelSerializer):

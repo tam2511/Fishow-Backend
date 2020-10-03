@@ -6,6 +6,21 @@ from ..helper.extra import deserialize
 class UVIndexTextGenerator:
 
     @staticmethod
+    def get_day_desc(data, date, fish):
+        filtred_data = sorted(sum([deserialize(_.uv_index) for _ in data if _.date == date and _.fish == fish], []),
+                              key=lambda x: x[1])
+        # uv_index_0 = [filtred_data[d][0][0] for d in filtred_data]
+        # uv_index_3 = [filtred_data[d][1][0] for d in filtred_data]
+        uv_index_6 = filtred_data[2][0]
+        uv_index_9 = filtred_data[3][0]
+        uv_index_12 = filtred_data[4][0]
+        uv_index_15 = filtred_data[5][0]
+        uv_index_18 = filtred_data[6][0]
+        uv_index_21 = filtred_data[7][0]
+        return {6: uv_index_6, 9: uv_index_9, 12: uv_index_12, 15: uv_index_15,
+                18: uv_index_18, 21: uv_index_21}
+
+    @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {observe_date: sorted(
