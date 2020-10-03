@@ -1,6 +1,7 @@
 import datetime
 import numpy as np
 
+from ..prediction.prediction_helper import get_date_time_text, get_day_times
 from .pressure_helper import *
 from ..helper.text import cases
 from ..helper.date import parse_date
@@ -40,7 +41,14 @@ class PressureTextGenerator:
         temps = [_[0] for _ in filtred_data]
         min_temp = min(temps)
         max_temp = max(temps)
-        return minmax_desc.format(min_temp, max_temp)
+        min_times = [_[1] for _ in filtred_data if _[0] == min_temp]
+        max_times = [_[1] for _ in filtred_data if _[0] == max_temp]
+        min_times = get_date_time_text(date, get_day_times(min_times))
+        max_times = get_date_time_text(date, get_day_times(max_times))
+        return {
+            'min': min_temp, 'max': max_temp, 'min_times': min_times,
+            'max_time': max_times
+        }
 
     @staticmethod
     def get_tenday_desc(data, date, fish):

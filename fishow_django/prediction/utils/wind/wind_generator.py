@@ -51,7 +51,7 @@ class WindTextGenerator:
 
     @staticmethod
     def get_day_wind_roza(data, date, fish):
-        winds = [_.wind_direction for _ in data if _.date == date and _.fish == fish]
+        winds = sum([_.wind_direction.split(',') for _ in data if _.date == date and _.fish == fish], [])
         null_roza = {'З': 0, 'СЗ': 0, 'ЮЗ': 0, 'В': 0, 'СВ': 0, 'ЮВ': 0, 'Ю': 0, 'С': 0, }
         roza = dict(Counter(winds))
         for key in null_roza:
