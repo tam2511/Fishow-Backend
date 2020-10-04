@@ -1,6 +1,6 @@
 <template>
   <div class="columns uv-table">
-    <div class="column" v-for="item in messages" :key="item.icons">
+    <div v-for="item in messages" :key="item.icons" class="column">
       <div class="icons">
         <icon-protection
           v-for="icons in item.icons"

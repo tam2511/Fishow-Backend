@@ -24,7 +24,16 @@
 
 <script>
 export default {
-  props: ['areal', 'city'],
+  props: {
+    areal: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+  },
   methods: {
     clear() {
       this.$emit('clear')

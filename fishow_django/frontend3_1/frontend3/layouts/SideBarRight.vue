@@ -82,13 +82,13 @@ export default {
       minPost: null,
     }
   },
+  computed: {
+    ...mapState('login', ['showStateLogin', 'showStateReg']),
+  },
   mounted() {
     this.$axios.get('/blogs/').then((res) => {
       this.minPost = res.data.results.slice(0, 3)
     })
-  },
-  computed: {
-    ...mapState('login', ['showStateLogin', 'showStateReg']),
   },
 }
 </script>
