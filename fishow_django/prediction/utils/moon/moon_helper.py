@@ -57,5 +57,5 @@ moon_intervals = {
 
 def stage_flag(moon_direction, moon):
     for left_right in moon_intervals[moon_direction]:
-        if moon > left_right[0] and moon <= left_right[1]:
+        if moon / 100 > left_right[0] and moon / 100 <= left_right[1]:
             return moon_intervals[moon_direction][left_right]
