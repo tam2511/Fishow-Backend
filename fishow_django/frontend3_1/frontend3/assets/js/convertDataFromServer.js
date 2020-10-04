@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const convertDataFromServer = (data) => {
   if (data === null || typeof data !== 'object') {
     return null
@@ -29,12 +30,11 @@ export const convertDataFromServer = (data) => {
   const keys = Object.keys(data)
   console.log('keys = ', keys)
   const newData = {}
-
   keys.forEach((item) => {
-    if (data[item] && data[item][0] === '[' && data[item][2] !== '[') {
+    if (data[item][0] === '[' && data[item][2] !== '[') {
       // if array
       newData[item] = data[item].substr(1, data[item].length - 2).split(', ')
-    } else if (data[item] && data[item][2] === '[') {
+    } else if (data[item][2] === '[') {
       // if phenomenon
       newData[item] = JSON.parse(data[item])
     } else {
@@ -42,9 +42,13 @@ export const convertDataFromServer = (data) => {
       newData[item] = data[item]
     }
   })
+  console.log('newData = ', newData);
   const length = newData.temperature_max.length
   const days = []
   const calendarDays = getData(data.date, 9)
+  console.log('calendarDays = ', calendarDays);
+  console.log('length = ', length);
+
   for (let i = 0; i < length; i++) {
     const day = {}
     keys.forEach((item) => {
@@ -54,6 +58,9 @@ export const convertDataFromServer = (data) => {
     })
     days.push(day)
   }
+  console.log('days = ', days);
+  return null
+
   keys.forEach((item) => {
     if (typeof newData[item] === 'string') {
       days[item] = newData[item]
