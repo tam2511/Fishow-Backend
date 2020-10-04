@@ -12,4 +12,4 @@ const current =
     ? server
     : dev
 
-export default current
+export default server

@@ -108,6 +108,10 @@ class TextGenerator:
         return WindTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
 
     @staticmethod
+    def get_day_wind_roza(date, fish):
+        return WindTextGenerator.get_day_wind_roza(TextGenerator.data, date, fish)
+
+    @staticmethod
     def get_tenday_wind_roza(date, fish):
         return WindTextGenerator.get_wind_roza(TextGenerator.data, date, fish)
 
@@ -146,6 +150,10 @@ class TextGenerator:
     '''
     Ультрафиолетовый индекс
     '''
+
+    @staticmethod
+    def get_day_uv_index_desc(date, fish):
+        return UVIndexTextGenerator.get_day_desc(TextGenerator.data, date, fish)
 
     @staticmethod
     def get_tenday_uv_index_desc(date, fish):

@@ -18,12 +18,51 @@ class PredictionSerializer(serializers.ModelSerializer):
     pressure_fish = serializers.SerializerMethodField()
     pressure_desc = serializers.SerializerMethodField()
     moon_desc = serializers.SerializerMethodField()
+    wind_roza = serializers.SerializerMethodField()
+    uv_index_desc = serializers.SerializerMethodField()
+    temperature = serializers.SerializerMethodField()
+    wind = serializers.SerializerMethodField()
+    gust = serializers.SerializerMethodField()
+    pressure = serializers.SerializerMethodField()
+    humidity = serializers.SerializerMethodField()
+    uv_index = serializers.SerializerMethodField()
+    prob = serializers.SerializerMethodField()
+    wind_direction = serializers.SerializerMethodField()
+    phenomenon = serializers.SerializerMethodField()
 
     class Meta:
         model = Prediction
         fields = '__all__'
+        # fields = ['moon','moon_direction','date','areal','city','fish','sun_up','sun_down',]
         # exclude = ['time', 'temperature','wind', 'wind_direction','gust','phenomenon',
         # 'pressure','humidity','uv_index','moon','moon_direction','day','date','areal','city','prob','fish','features']
+
+    def get_temperature(self, instance):
+        return list(map(int, instance.temperature.replace('+', '').split(',')))
+
+    def get_wind(self, instance):
+        return list(map(int, instance.wind.split(',')))
+
+    def get_gust(self, instance):
+        return list(map(int, instance.gust.split(',')))
+
+    def get_pressure(self, instance):
+        return list(map(int, instance.pressure.split(',')))
+
+    def get_humidity(self, instance):
+        return list(map(int, instance.humidity.split(',')))
+
+    def get_uv_index(self, instance):
+        return list(map(int, instance.uv_index.split(',')))
+
+    def get_prob(self, instance):
+        return list(map(int, instance.prob.split(',')))
+
+    def get_wind_direction(self, instance):
+        return instance.wind_direction.split(',')
+
+    def get_phenomenon(self, instance):
+        return [_.replace('.', ',') for _ in instance.phenomenon.split(',')]
 
     def get_temperature_brief(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
@@ -81,6 +120,13 @@ class PredictionSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.get_day_wind_desc(instance.date, instance.fish)
 
+    def get_wind_roza(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_day_wind_roza(instance.date, instance.fish)
+
     def get_pressure_fish(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
@@ -101,6 +147,13 @@ class PredictionSerializer(serializers.ModelSerializer):
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.get_day_moon_desc(instance.date, instance.fish)
+
+    def get_uv_index_desc(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_day_uv_index_desc(instance.date, instance.fish)
 
 
 class PredictiontenSerializer(serializers.ModelSerializer):
