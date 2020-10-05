@@ -2,6 +2,7 @@ export const convertDataFromServer = (data) => {
   if (data === null || typeof data !== 'object') {
     return null
   }
+  console.log('data = ', data)
   const getData = (fromData, days) => {
     const returnData = (a, b) => {
       const predictDate = a.split('-')
@@ -26,13 +27,14 @@ export const convertDataFromServer = (data) => {
   }
 
   const keys = Object.keys(data)
+  console.log('keys = ', keys)
   const newData = {}
 
   keys.forEach((item) => {
-    if (data[item][0] === '[' && data[item][2] !== '[') {
+    if (data[item] && data[item][0] === '[' && data[item][2] !== '[') {
       // if array
       newData[item] = data[item].substr(1, data[item].length - 2).split(', ')
-    } else if (data[item][2] === '[') {
+    } else if (data[item] && data[item][2] === '[') {
       // if phenomenon
       newData[item] = JSON.parse(data[item])
     } else {

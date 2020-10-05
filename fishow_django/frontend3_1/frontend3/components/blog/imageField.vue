@@ -2,7 +2,7 @@
   <div>
     <button-delete @destoy="destroyMe" />
     <b-field class="file is-primary" :class="{ 'has-name': !!file }">
-      <b-upload v-model="file" expanded @input="sendImage" class="file-label">
+      <b-upload v-model="file" expanded class="file-label" @input="sendImage">
         <span class="file-cta">
           <b-icon class="file-icon" icon="upload"></b-icon>
           <span class="file-label">Нажмите что бы загрузить</span>

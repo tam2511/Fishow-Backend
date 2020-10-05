@@ -41,6 +41,13 @@ export default {
       niceDays: null,
     }
   },
+  computed: {
+    day() {
+      return this.niceDays[0] === '0'
+        ? this.niceDays.split('0')[1]
+        : this.niceDays
+    },
+  },
   created() {
     this.convertDays()
   },
@@ -63,13 +70,6 @@ export default {
       const day = this.$route.params.date.split('-')
       const result = whatMonth[day[1]]
       this.niceDays = day[2] + ' ' + result
-    },
-  },
-  computed: {
-    day() {
-      return this.niceDays[0] === '0'
-        ? this.niceDays.split('0')[1]
-        : this.niceDays
     },
   },
 }

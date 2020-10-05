@@ -1,59 +1,3 @@
-<!--<template>-->
-<!--  <div class="post-comment">-->
-<!--    <div class="post-comment-aside">-->
-<!--      <img-->
-<!--        class="img-circle"-->
-<!--        src="/static/assets/images/user-6-69x69.jpg"-->
-<!--        alt=""-->
-<!--        width="69"-->
-<!--        height="69"-->
-<!--      />-->
-<!--    </div>-->
-<!--    <div class="post-comment-main">-->
-<!--      <div class="post-comment-header">-->
-<!--        <h5 class="author-name">{{ comment.author }}</h5>-->
-<!--        <time class="post-comment-time" datetime="2018">{{-->
-<!--          comment.created_at-->
-<!--        }}</time>-->
-<!--      </div>-->
-<!--      <div class="post-comment-text">-->
-<!--        <p>{{ comment.body }}</p>-->
-<!--      </div>-->
-
-<!--      <div class="post-comment-footer">-->
-<!--        <div class="comment-like">-->
-<!--          <button-->
-<!--            class="icon mdi"-->
-<!--            :class="{-->
-<!--              'mdi-thumb-up': userLikedComment,-->
-<!--              'mdi-thumb-up-outline': !userLikedComment,-->
-<!--            }"-->
-<!--            @click="toggleLike"-->
-<!--          ></button>-->
-<!--          <span class="comment-like-counter">{{-->
-<!--            likesCounter - dislikesCounter-->
-<!--          }}</span>-->
-<!--          <button-->
-<!--            class="icon mdi"-->
-<!--            :class="{-->
-<!--              'mdi-thumb-down': userDisLikedComment,-->
-<!--              'mdi-thumb-down-outline': !userDisLikedComment,-->
-<!--            }"-->
-<!--            @click="toggleDislike"-->
-<!--          ></button>-->
-<!--        </div>-->
-<!--        <div class="comment-reply">-->
-<!--          <a href="#">Ответить</a>-->
-<!--        </div>-->
-<!--        <div v-if="isCommentAuthor" class="comment-reply-parent">-->
-<!--          <div class="comment-reply">-->
-<!--            <button type="button" @click="triggerDeleteComment">Удалить</button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</template>-->
 <template>
   <div class="box">
     <article class="media">
@@ -90,18 +34,30 @@
             <a
               :class="{
                 'level-item': !userLikedComment,
-                'level-item active': userLikedComment,
+                'level-item active-up': userLikedComment,
               }"
               aria-label="like"
               @click="toggleLike"
             >
               <span class="icon is-small">
-                <i class="fas fa-heart" aria-hidden="true"></i>
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
               </span>
             </a>
-            <span>
+            <span class="level-item">
               {{ likesCounter - dislikesCounter }}
             </span>
+            <a
+              :class="{
+                'level-item': !userDisLikedComment,
+                'level-item active-down': userDisLikedComment,
+              }"
+              aria-label="dislike"
+              @click="toggleDislike"
+            >
+              <span class="icon is-small">
+                <i class="fas fa-thumbs-down" aria-hidden="true"></i>
+              </span>
+            </a>
           </div>
         </nav>
       </div>
@@ -182,10 +138,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .level-item {
-  .active {
+  &.active-up {
     color: darkcyan;
+  }
+  &.active-down {
+    color: brown;
   }
 }
 </style>
