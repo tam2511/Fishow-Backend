@@ -27,11 +27,11 @@ export default {
       type: Array,
       required: true,
     },
-    tempMax: {
+    pressureMax: {
       type: Array,
       required: true,
     },
-    tempMin: {
+    pressureMin: {
       type: Array,
       required: true,
     },
@@ -41,11 +41,11 @@ export default {
       series: [
         {
           name: 'Максимальное суточное давление',
-          data: this.tempMax,
+          data: this.pressureMax,
         },
         {
           name: 'Минимальное суточное давление',
-          data: this.tempMin,
+          data: this.pressureMin,
         },
       ],
       chartOptions: {
@@ -109,12 +109,12 @@ export default {
   },
   computed: {
     max() {
-      const cached = this.tempMin
+      const cached = this.pressureMax
       return cached.sort()[0] - 2
     },
     min() {
-      const cached = this.tempMax
-      return cached.sort()[this.tempMin.length]
+      const cached = this.pressureMin
+      return cached.sort()[this.pressureMin.length]
     },
   },
 }

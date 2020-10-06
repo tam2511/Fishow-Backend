@@ -8,7 +8,7 @@ export default (fromData, days) => {
     someDate.setDate(Number(predictDate[2]) + numberOfDaysToAdd)
     const dd = someDate.getDate()
     const mm = someDate.getMonth() + 1
-    const newmm = mm.length > 1 ? mm : '0' + mm
+    const newmm = mm.length > 1 ? mm : mm
     return dd + '/' + newmm
   }
   const result = []

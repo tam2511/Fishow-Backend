@@ -64,7 +64,7 @@ export default {
         dataLabels: {
           enabled: true,
           formatter(value) {
-            return Math.round(value * 100)
+            return Math.round(value)
           },
         },
         stroke: {
@@ -80,8 +80,8 @@ export default {
         annotations: {
           yaxis: [
             {
-              y: 1,
-              y2: 0.74,
+              y: 100,
+              y2: 74,
               borderColor: '#4fbb26',
               fillColor: 'rgba(109,180,61,0.83)',
               label: {
@@ -102,10 +102,10 @@ export default {
         },
         yaxis: {
           min: 0,
-          max: 1,
+          max: 100,
           labels: {
             formatter(value) {
-              return Math.round(value * 100) + '%'
+              return Math.round(value) + '%'
             },
           },
         },
