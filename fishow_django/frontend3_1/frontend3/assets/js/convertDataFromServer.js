@@ -26,52 +26,32 @@ export const convertDataFromServer = (data) => {
     iterator(days)
     return result
   }
-
   const keys = Object.keys(data)
-  console.log('keys = ', keys)
-  const newData = {}
-  keys.forEach((item) => {
-    if (data[item][0] === '[' && data[item][2] !== '[') {
-      // if array
-      newData[item] = data[item].substr(1, data[item].length - 2).split(', ')
-    } else if (data[item][2] === '[') {
-      // if phenomenon
-      newData[item] = JSON.parse(data[item])
-    } else {
-      // if just string
-      newData[item] = data[item]
-    }
-  })
-  console.log('newData = ', newData);
-  const length = newData.temperature_max.length
+  const length = data.temperature_max.length
   const days = []
   const calendarDays = getData(data.date, 9)
-  console.log('calendarDays = ', calendarDays);
-  console.log('length = ', length);
-
   for (let i = 0; i < length; i++) {
     const day = {}
     keys.forEach((item) => {
-      if (typeof newData[item] === 'object' && newData[item][i]) {
-        day[item] = newData[item][i]
+      if (typeof data[item] === 'object') {
+        day[item] = data[item][i]
       }
     })
     days.push(day)
   }
-  console.log('days = ', days);
-  return null
-
   keys.forEach((item) => {
-    if (typeof newData[item] === 'string') {
-      days[item] = newData[item]
+    if (typeof data[item] === 'string') {
+      days[item] = data[item]
     }
-    if (typeof newData[item] === 'object' && !newData[item].length) {
-      days[item] = newData[item]
+    if (typeof data[item] === 'object' && !data[item].length) {
+      days[item] = data[item]
     }
   })
   days.forEach((day, index) => {
     day.date = calendarDays[index]
   })
+
+  // return null
   return days
 }
 // convertDataFromServer(datafromserver);

@@ -24,11 +24,11 @@ export default {
       required: true,
     },
     probMin: {
-      type: String,
+      type: Array,
       required: true,
     },
     probMax: {
-      type: String,
+      type: Array,
       required: true,
     },
   },
@@ -37,11 +37,11 @@ export default {
       series: [
         {
           name: 'Максимальная суточная вероятность клёва',
-          data: JSON.parse(this.probMax),
+          data: this.probMax,
         },
         {
           name: 'Минимальная суточная вероятность клёва',
-          data: JSON.parse(this.probMin),
+          data: this.probMin,
         },
       ],
       chartOptions: {
@@ -149,11 +149,11 @@ export default {
       this.series = [
         {
           name: 'Максимальная суточная температура',
-          data: JSON.parse(this.probMax),
+          data: this.probMax,
         },
         {
           name: 'Минимальная суточная температура',
-          data: JSON.parse(this.probMin),
+          data: this.probMin,
         },
       ]
     },

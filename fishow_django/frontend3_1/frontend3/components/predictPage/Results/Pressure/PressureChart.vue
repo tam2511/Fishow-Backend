@@ -28,11 +28,11 @@ export default {
       required: true,
     },
     tempMax: {
-      type: String,
+      type: Array,
       required: true,
     },
     tempMin: {
-      type: String,
+      type: Array,
       required: true,
     },
   },
@@ -41,11 +41,11 @@ export default {
       series: [
         {
           name: 'Максимальное суточное давление',
-          data: JSON.parse(this.tempMax),
+          data: this.tempMax,
         },
         {
           name: 'Минимальное суточное давление',
-          data: JSON.parse(this.tempMin),
+          data: this.tempMin,
         },
       ],
       chartOptions: {
@@ -88,8 +88,8 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: JSON.parse(this.tempMin).sort()[0] - 2,
-          max: JSON.parse(this.tempMax).sort()[JSON.parse(this.tempMin).length],
+          min: this.max,
+          max: this.min,
           labels: {
             formatter(value) {
               return Math.round(value)
@@ -106,6 +106,16 @@ export default {
         },
       },
     }
+  },
+  computed: {
+    max() {
+      const cached = this.tempMin
+      return cached.sort()[0] - 2
+    },
+    min() {
+      const cached = this.tempMax
+      return cached.sort()[this.tempMin.length]
+    },
   },
 }
 </script>
