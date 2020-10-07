@@ -1,8 +1,6 @@
 <template>
   <div>
     <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
-    <!--    {{ day.moon }}-->
-    <!--    {{ day.moon_direction }}-->
     <figure class="image is-48x48">
       <img :src="moonPic" />
       <p class="content">{{ day.moon.toFixed() }}%</p>
@@ -14,7 +12,7 @@
 import convertFromObjectToDate from '~/assets/js/convertFromObjectToDate'
 import DayBlock from '~/components/predictPage/helpers/dayBlock'
 import helper from '~/assets/js/helper'
-// import { planet } from '~/assets/js/planet'
+
 export default {
   components: { DayBlock },
   props: {

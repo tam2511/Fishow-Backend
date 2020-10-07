@@ -5,7 +5,6 @@
       DaysPicker(:days="date")
     FishSelectPrediction(:areal="areal" :city="city" :date="date")
     .result-container(v-if='readyData')
-      div {{ days }}
       PProbe(
         :readyData="readyData"
       )
