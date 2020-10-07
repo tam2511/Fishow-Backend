@@ -20,8 +20,8 @@
       PressureContainer(:readyData="readyData")
         pressure-chart(
           :days="days"
-          :tempMax="predictions['pressure_max']"
-          :tempMin="predictions['pressure_min']"
+          :pressureMax="predictions['pressure_max']"
+          :pressureMin="predictions['pressure_min']"
         )
       Moon(:readyData="readyData" :days="days")
       Uvindexfull(:readyData="readyData" :days="days")
