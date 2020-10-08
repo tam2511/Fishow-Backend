@@ -8,23 +8,25 @@
       PProbe(
         :readyData="prediction[0]"
       )
-        div(v-for="predict in prediction" :key="predict.id" class="column")
-          .box.card {{ predict.prob }}
+        .box.card {{ prediction[0].prob }}f
       result-container(
         title="Погодные условия"
         type-of-result="temperature"
         :content="prediction[0].temperature_brief"
         )
+        .box.card {{ prediction[0].temperature }}
       result-container(
         title="Ветер, м/с"
         type-of-result="wind"
         :content="prediction[0].wind_fish"
         )
+        .box.card {{ prediction[0].wind }}
       result-container(
         title="Давление"
         type-of-result="pressure"
         :content="prediction[0].pressure_fish"
         )
+        .box.card {{ prediction[0].pressure }}
       result-container(title="Луна" type-of-result="moon")
       result-container(title="Солнечная активность" type-of-result="uvindex")
     EmptyPrediction(v-else)
@@ -59,6 +61,9 @@ export default {
   mixins: [urlData],
   layout: 'prediction',
   computed: {
+    // readyData() {
+    //   return convert(this.prediction)
+    // },
     dataForChart() {
       return transformForChart(this.prediction)
     },
