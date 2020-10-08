@@ -88,8 +88,8 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: this.max,
-          max: this.min,
+          min: 730,
+          max: this.max,
           labels: {
             formatter(value) {
               return Math.round(value)

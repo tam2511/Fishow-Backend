@@ -8,7 +8,10 @@
       PProbe(
         :readyData="prediction[0]"
       )
-        .box.card {{ prediction[0].prob }}f
+        OneDayProbe(
+          ref="pprobe"
+          :days="days"
+          :prob="prediction[0].prob")
       result-container(
         title="Погодные условия"
         type-of-result="temperature"
@@ -42,7 +45,7 @@ import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 import urlData from '~/assets/mixins/prediction/urlData'
 
 import PProbe from '~/components/predictPage/Results/PProbe/index'
-import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
+import OneDayProbe from '~/components/oneDay/probe/chart'
 
 import transformForChart from '~/pages/OnePrediction/_areal/_date/_city/_fish/transformForChart'
 import ResultContainer from '~/components/predictPage/Results/resultContainer'

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import getCalendarDay from '~/assets/js/getCalendarDay'
 export default {
   components: {
     VueApexCharts: () => import('vue-apexcharts'),
@@ -23,11 +22,7 @@ export default {
       type: Array,
       required: true,
     },
-    probMin: {
-      type: Array,
-      required: true,
-    },
-    probMax: {
+    prob: {
       type: Array,
       required: true,
     },
@@ -36,12 +31,8 @@ export default {
     return {
       series: [
         {
-          name: 'Максимальная суточная вероятность клёва',
-          data: this.probMax,
-        },
-        {
-          name: 'Минимальная суточная вероятность клёва',
-          data: this.probMin,
+          name: 'Cуточная вероятность клёва',
+          data: this.prob,
         },
       ],
       chartOptions: {
@@ -98,7 +89,7 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: getCalendarDay(this.days),
+          categories: [0, 3, 6, 9, 12, 15, 18, 21],
         },
         yaxis: {
           min: 0,
@@ -148,11 +139,7 @@ export default {
     updateData() {
       this.series = [
         {
-          name: 'Максимальная суточная вероятность клёва',
-          data: this.probMax,
-        },
-        {
-          name: 'Минимальная суточная вероятность клёва',
+          name: 'Cуточная вероятность клёва',
           data: this.probMin,
         },
       ]
