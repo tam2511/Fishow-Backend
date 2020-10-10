@@ -91,5 +91,11 @@ export default {
   .columns {
     flex-flow: column;
   }
+  .card {
+    min-height: 450px;
+  }
+}
+.column span {
+  font-weight: initial;
 }
 </style>

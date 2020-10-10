@@ -1,10 +1,7 @@
 <template>
   <div class="box fish">
-    <div class="columns">
-      <div class="column is-two-thirds">
-        <p class="content"></p>
-      </div>
-      <div class="column">
+    <div class="fish-select">
+      <div class="fish-select_item fish-select_item__right">
         <b-field>
           <b-select placeholder="Выберите рыбу">
             <option
@@ -170,6 +167,8 @@ export default {
   span.select,
   span.select > select {
     width: 100%;
+  }
+  .fish-select {
   }
 }
 </style>
