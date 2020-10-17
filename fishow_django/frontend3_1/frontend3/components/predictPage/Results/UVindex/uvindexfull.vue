@@ -4,7 +4,7 @@
     <div class="columns">
       <div class="column max-width"></div>
       <uvindex-one-day
-        v-for="(day, index) in readyData"
+        v-for="(day, index) in readyDataStorage"
         :key="day.date + index"
         class="column"
         :day="day"
@@ -12,7 +12,11 @@
       </uvindex-one-day>
     </div>
     <div class="grid-uv">
-      <div v-for="(uv, key) in readyData.uv_index_desc" :key="uv.id" class="">
+      <div
+        v-for="(uv, key) in readyDataStorage.uv_index_desc"
+        :key="uv.id"
+        class=""
+      >
         <span v-if="key === '6'">Утро</span>
         <span v-if="key === '12'">День</span>
         <span v-if="key === '18'">Вечер</span>
@@ -27,22 +31,14 @@
 </template>
 
 <script>
-import readyData from '~/assets/mixins/prediction/readyData'
+import readyDataStorage from '~/assets/mixins/prediction/readyDataStorage'
+
 import UvLine from '~/components/predictPage/Results/UVindex/uv-line'
 import UvindexOneDay from '~/components/predictPage/Results/UVindex/uvindexOneDay'
 import Protection from '~/components/predictPage/Results/UVindex/message/protection'
 export default {
   components: { UvindexOneDay, UvLine, Protection },
-  mixins: [readyData],
-  props: {
-    days: {
-      type: Array,
-      required: true,
-    },
-  },
-  methods: {
-    getNormalDates() {},
-  },
+  mixins: [readyDataStorage],
 }
 </script>
 

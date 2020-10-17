@@ -1,50 +1,40 @@
 <template lang="pug">
-  .wind-box.box
-    h2.title Ветер, м/с
-    p.content(v-html="readyData.wind_desc")
+  div
     .columns
       WindOneDay.column(
-        v-for="(day, index) in readyData",
+        v-for="(day, index) in readyDataStorage",
         :key="day.date + index",
         :day="day",
         )
     h2.title Порывы, м/с
     .columns
       WindOneDay.column.gust-column(
-        v-for="(day,index) in readyData",
+        v-for="(day,index) in readyDataStorage",
         :key="day.date + index",
         :day="day",
         :gustOnly="true"
         )
     .columns.roza-columns
       .column
-        p.content(v-html="readyData.wind_fish")
+        p.content(v-html="readyDataStorage.wind_fish")
       .column.roza
-        roza(:windRoza="readyData.wind_roza")
+        roza(:windRoza="readyDataStorage.wind_roza")
     slot
 </template>
 
 <script>
 import WindOneDay from '@/components/predictPage/Results/Wind/OneDay/index'
-import readyData from '~/assets/mixins/prediction/readyData'
+import readyDataStorage from '~/assets/mixins/prediction/readyDataStorage'
 import Roza from '~/components/predictPage/Results/Wind/roza'
 
 export default {
   components: { Roza, WindOneDay },
-  mixins: [readyData],
-  props: {
-    days: {
-      type: Array,
-      required: true,
-    },
-  },
+  mixins: [readyDataStorage],
 }
 </script>
 
 <style scoped lang="scss">
 @media screen and (max-width: 768px) {
-  div.column {
-  }
   div.columns {
     margin: 0 auto;
     display: inline-flex;

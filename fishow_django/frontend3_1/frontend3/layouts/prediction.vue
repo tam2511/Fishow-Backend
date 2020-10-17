@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <HeaderBlock />
-    <div class="columns section">
+    <div class="columns">
       <div class="column is-three-quarters">
         <div class="container">
           <nuxt />
@@ -55,21 +55,19 @@ a {
   right: 0;
   width: 25%;
   top: 55px;
-  height: 100%;
+  min-height: 500px;
+  height: calc(100% - 250px);
 
   @media screen and (max-width: 768px) {
     display: none;
   }
 }
 .header {
-  /*padding: 0 20px;*/
-  /*border-radius: 5px;*/
   @media screen and (max-width: 450px) {
     width: 100%;
   }
 }
 div.container {
-  /*padding-left: 20px;*/
   @media screen and (max-width: 450px) {
     padding-right: 0;
   }
@@ -104,5 +102,8 @@ div.container {
     padding-left: 0;
     padding-right: 0;
   }
+}
+.main-content {
+  padding-left: 20px;
 }
 </style>

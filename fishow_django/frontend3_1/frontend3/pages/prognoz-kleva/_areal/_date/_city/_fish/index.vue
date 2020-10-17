@@ -14,17 +14,23 @@
           :probMax="predictions['prob_max']"
           :probMin="predictions['prob_min']"
         )
-      Temperature(:readyData="readyData")
-      Wind(:readyData="readyData"
-        :days="days")
+
+      Temperature
+
+      result-container(
+        title="Ветер, м/с",
+        type-of-result="wind",
+        :content="readyData.wind_desc"
+      )
+        Wind
       PressureContainer(:readyData="readyData")
         pressure-chart(
           :days="days"
           :pressureMax="predictions['pressure_max']"
           :pressureMin="predictions['pressure_min']"
         )
-      Moon(:readyData="readyData" :days="days")
-      Uvindexfull(:readyData="readyData" :days="days")
+      Moon
+      Uvindexfull
     EmptyPrediction(v-else)
 </template>
 
@@ -55,8 +61,10 @@ import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayPr
 import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
 import urlData from '~/assets/mixins/prediction/urlData'
 import Uvindexfull from '~/components/predictPage/Results/UVindex/uvindexfull'
+import ResultContainer from '~/components/predictPage/Results/resultContainer'
 export default {
   components: {
+    ResultContainer,
     Uvindexfull,
     PressureChart,
     OneDayProbe,
@@ -76,7 +84,10 @@ export default {
   layout: 'prediction',
   computed: {
     readyData() {
-      return convertDataFromServer(this.predictions)
+      const data = convertDataFromServer(this.predictions)
+      this.setReady(data)
+      this.setDays(this.days)
+      return data
     },
     ...mapState('prediction', ['predictions']),
   },
@@ -91,7 +102,11 @@ export default {
     this.getPrediction(url)
   },
   methods: {
-    ...mapActions('prediction', { getPrediction: 'getPrediction' }),
+    ...mapActions('prediction', {
+      getPrediction: 'getPrediction',
+      setReady: 'setReady',
+      setDays: 'setDays',
+    }),
   },
   head() {
     return {

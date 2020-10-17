@@ -4,32 +4,31 @@
     FishowPredictionHeader
       DaysPicker(:days="date")
     FishSelectPrediction(:areal="areal" :city="city" :date="date")
-    .result-container(v-if='prediction && prediction[0]')
+    .result-container(v-if='prediction')
       PProbe(
-        :readyData="prediction[0]"
+        :readyData="readyData"
       )
         OneDayProbe(
           ref="pprobe"
-          :days="days"
-          :prob="prediction[0].prob")
+          :prob="prediction.prob")
       result-container(
         title="Погодные условия"
         type-of-result="temperature"
-        :content="prediction[0].temperature_brief"
+        :content="prediction.temperature_brief"
         )
-        .box.card {{ prediction[0].temperature }}
+        .box.card {{ prediction.temperature }}
       result-container(
         title="Ветер, м/с"
         type-of-result="wind"
-        :content="prediction[0].wind_fish"
+        :content="prediction.wind_fish"
         )
-        .box.card {{ prediction[0].wind }}
+        Wind
       result-container(
         title="Давление"
         type-of-result="pressure"
-        :content="prediction[0].pressure_fish"
+        :content="prediction.pressure_fish"
         )
-        .box.card {{ prediction[0].pressure }}
+        .box.card {{ prediction.pressure }}
       result-container(title="Луна" type-of-result="moon")
       result-container(title="Солнечная активность" type-of-result="uvindex")
     EmptyPrediction(v-else)
@@ -43,11 +42,12 @@ import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPredic
 import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 import urlData from '~/assets/mixins/prediction/urlData'
+import Wind from '@/components/predictPage/Results/Wind/index'
 
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import OneDayProbe from '~/components/oneDay/probe/chart'
+import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 
-import transformForChart from '~/pages/OnePrediction/_areal/_date/_city/_fish/transformForChart'
 import ResultContainer from '~/components/predictPage/Results/resultContainer'
 
 export default {
@@ -60,15 +60,16 @@ export default {
     FishowPredictionHeader,
     OneDayProbe,
     PProbe,
+    Wind,
   },
   mixins: [urlData],
   layout: 'prediction',
   computed: {
-    // readyData() {
-    //   return convert(this.prediction)
-    // },
-    dataForChart() {
-      return transformForChart(this.prediction)
+    readyData() {
+      const data = convertDataFromServer(this.prediction, true)
+      this.setReady(data)
+      this.setDays(this.days)
+      return data
     },
     ...mapState('prediction', ['prediction']),
   },
@@ -83,7 +84,11 @@ export default {
     this.getPredictionOne(url)
   },
   methods: {
-    ...mapActions('prediction', { getPredictionOne: 'getPredictionOne' }),
+    ...mapActions('prediction', {
+      getPredictionOne: 'getPredictionOne',
+      setReady: 'setReady',
+      setDays: 'setDays',
+    }),
   },
   head() {
     return {

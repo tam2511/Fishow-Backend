@@ -5,11 +5,19 @@ export const state = () => ({
   pageScroll: 0,
   predictions: null,
   prediction: null,
+  readyDataStorage: null,
+  days: null,
 })
 
 export const mutations = {
   SET_FISHID(state, id) {
     state.fishId = id
+  },
+  SET_READYDATA(state, data) {
+    state.readyDataStorage = data
+  },
+  SET_DAYS(state, data) {
+    state.days = data
   },
   SET_SCROLL(state, scroll) {
     state.pageScroll = scroll
@@ -29,6 +37,12 @@ export const actions = {
   setScroll({ commit }, value) {
     commit('SET_SCROLL', value)
   },
+  setReady({ commit }, data) {
+    commit('SET_READYDATA', data)
+  },
+  setDays({ commit }, days) {
+    commit('SET_DAYS', days)
+  },
   getPrediction({ commit, axios }, conf) {
     return PredictionService.getPredicitons(conf).then((response) => {
       commit('SET_PREDICTIONS', response.data.results[0])
@@ -37,7 +51,7 @@ export const actions = {
   getPredictionOne({ commit, axios }, conf) {
     return PredictionService.getPredicitons(conf).then((response) => {
       // console.log(response.data)
-      commit('SET_PREDICTION', response.data.results)
+      commit('SET_PREDICTION', response.data.results[0])
     })
   },
 }

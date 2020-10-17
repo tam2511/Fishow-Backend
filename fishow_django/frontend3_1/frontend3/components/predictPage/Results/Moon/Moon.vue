@@ -2,31 +2,25 @@
   .moon-box.box
     h3.title Луна
     .columns.moons
-      MoonOne.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
+      MoonOne.column(v-for="(day, index) in readyDataStorage" :key="day.date + index" :day="day")
     .columns.moon-columns
       .column.moon-pic
         figure.image
           img(src="/image 92.png" alt="a random image" ratio="6by4")
       .column.moon_desc
-        p(v-html="readyData.moon_desc.bad" data-status="bad")
-        p(v-html="readyData.moon_desc.neutral" data-status="neutral")
-        p(v-html="readyData.moon_desc.good" data-status="good")
+        p(v-html="readyDataStorage.moon_desc.bad" data-status="bad")
+        p(v-html="readyDataStorage.moon_desc.neutral" data-status="neutral")
+        p(v-html="readyDataStorage.moon_desc.good" data-status="good")
 </template>
 
 <script>
-import readyData from '~/assets/mixins/prediction/readyData'
+import readyDataStorage from '~/assets/mixins/prediction/readyDataStorage'
 import MoonOne from '~/components/predictPage/Results/Moon/OneDay/MoonOne'
 export default {
   components: {
     MoonOne,
   },
-  mixins: [readyData],
-  props: {
-    days: {
-      type: Array,
-      required: true,
-    },
-  },
+  mixins: [readyDataStorage],
 }
 </script>
 
