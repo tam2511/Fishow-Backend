@@ -40,15 +40,6 @@ export default {
 body {
   background-color: #eee;
 }
-#app > .section {
-  padding-top: 0;
-}
-section.section {
-  background-color: #edeff4;
-  @media (max-width: 450px) {
-    padding: 10px;
-  }
-}
 .results-container .columns {
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
@@ -95,9 +86,6 @@ div.container {
 .strong {
   font-weight: 800;
 }
-/*.moon-box strong {*/
-/*  color: white !important;*/
-/*}*/
 .report-icon {
   display: flex;
   justify-content: center;

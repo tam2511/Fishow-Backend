@@ -95,12 +95,6 @@ $link-focus-border: $primary;
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
-section.section {
-  background-color: #edeff4;
-  @media (max-width: 450px) {
-    padding: 10px;
-  }
-}
 a {
   color: #0d0a0a;
   transition: color 0.3s;
@@ -113,6 +107,9 @@ a {
 }
 #app > section.section {
   padding-top: 20px;
+  @media screen and (max-width: 450px) {
+    padding: 20px 0 0;
+  }
 }
 #app {
   overflow: hidden;

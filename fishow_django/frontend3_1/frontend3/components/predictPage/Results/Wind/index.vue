@@ -3,10 +3,19 @@
     h2.title Ветер, м/с
     p.content(v-html="readyData.wind_desc")
     .columns
-      WindOneDay.column(v-for="(day, index) in readyData" :key="day.date + index" :day="day")
+      WindOneDay.column(
+        v-for="(day, index) in readyData",
+        :key="day.date + index",
+        :day="day",
+        )
     h2.title Порывы, м/с
     .columns
-      WindOneDay.column.gust-column(v-for="(day,index) in readyData" :key="day.date + index" :day="day" :gustOnly="true")
+      WindOneDay.column.gust-column(
+        v-for="(day,index) in readyData",
+        :key="day.date + index",
+        :day="day",
+        :gustOnly="true"
+        )
     .columns.roza-columns
       .column
         p.content(v-html="readyData.wind_fish")

@@ -8,8 +8,27 @@
         <div class="container">
           <div class="tile">
             <nuxt />
-            <div class="tile is-vertical is-4">
+            <div class="tile is-vertical is-4 tile-sidebar">
               <div>
+                <article class="tile is-parent is-vertical">
+                  <p class="title is-4">Прогнозы</p>
+                  <div class="tile is-child">
+                    <MiniPrediction />
+                  </div>
+                </article>
+                <div class="buttons">
+                  <nuxt-link
+                    class="button is-primary is-fullwidth"
+                    :to="{ path: '/prognoz-kleva' }"
+                    >Прогноз</nuxt-link
+                  >
+                  <nuxt-link
+                    :to="{ path: '/blog-editor' }"
+                    class="button is-success is-fullwidth"
+                  >
+                    Создать пост
+                  </nuxt-link>
+                </div>
                 <article class="tile is-parent is-vertical">
                   <p class="title is-4">Популярные блоги</p>
                   <div class="tile is-child">
@@ -25,22 +44,17 @@
                     </div>
                   </div>
                 </article>
-                <article class="tile is-parent is-vertical">
-                  <p class="title is-4">Прогнозы</p>
-                  <div class="tile is-child">
-                    <MiniPrediction />
-                  </div>
-                </article>
-                <article class="tile is-parent is-vertical">
+
+                <article class="tile is-parent is-vertical" v-if="$auth.user">
                   <p class="title is-4">Статистика</p>
                   <div class="tile is-child card">
                     <UserRate />
                   </div>
                 </article>
-                <article class="tile is-parent is-vertical">
-                  <p class="title is-4">Последние комментарии</p>
-                  <div class="tile is-child box"></div>
-                </article>
+                <!--                <article class="tile is-parent is-vertical">-->
+                <!--                  <p class="title is-4">Последние комментарии</p>-->
+                <!--                  <div class="tile is-child box"></div>-->
+                <!--                </article>-->
               </div>
             </div>
           </div>
@@ -95,9 +109,6 @@ export default {
 <style lang="scss">
 .section {
   background-color: #edeff4;
-  @media (max-width: 450px) {
-    padding: 10px;
-  }
 }
 a {
   color: #0d0a0a;
@@ -119,5 +130,8 @@ a {
   max-height: 800px;
   overflow: hidden;
   position: relative;
+}
+.tile-sidebar .buttons {
+  padding: 12px;
 }
 </style>
