@@ -49,6 +49,11 @@ export default {
     normDay() {
       return this.day.wind_mean ? helper(this.day) : null
     },
+    dayCalendar() {
+      return this.day.wind_mean
+        ? convertFromObjectToDate(this.day)
+        : this.day.date
+    },
     wind() {
       return this.day.wind_direction
     },
@@ -109,11 +114,6 @@ export default {
         }
       }
       return 'background-color:' + result
-    },
-    dayCalendar() {
-      return this.day.wind_mean
-        ? convertFromObjectToDate(this.day)
-        : this.day.date
     },
   },
 }

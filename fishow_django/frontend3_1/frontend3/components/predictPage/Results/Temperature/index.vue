@@ -1,7 +1,5 @@
 <template lang="pug">
-  .temperature-box.box
-    h3.title Погодные условия
-    p.content(v-html="readyDataStorage.temperature_brief")
+  div
     .columns-container
       .columns.bg-white
         TempOneDay.column(v-for="day in readyDataStorage" :key="day.idc" :day="day")
@@ -11,12 +9,16 @@
     .columns.temp-desc
       .column
         Thermo(
+          v-if="readyDataStorage.temperature_desc.day"
           :day="readyDataStorage.temperature_desc.day"
           :night="readyDataStorage.temperature_desc.night"
           )
       .column.text-readyData
         p.content(v-html="readyDataStorage.temperature_fish")
-        p.content(v-html="readyDataStorage.temperature_desc.desc")
+        p.content(
+          v-if="readyDataStorage.temperature_desc.desc",
+          v-html="readyDataStorage.temperature_desc.desc"
+          )
     report(:message="readyDataStorage.phenomenon_warning")
 </template>
 

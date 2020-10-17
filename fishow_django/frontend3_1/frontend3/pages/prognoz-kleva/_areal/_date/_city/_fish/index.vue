@@ -15,20 +15,30 @@
           :probMin="predictions['prob_min']"
         )
 
-      Temperature
 
+      result-container(
+        title="Погодные условия"
+        type-of-result="temperature"
+        :content="readyData.temperature_brief"
+      )
+        Temperature
       result-container(
         title="Ветер, м/с",
         type-of-result="wind",
         :content="readyData.wind_desc"
       )
         Wind
-      PressureContainer(:readyData="readyData")
-        pressure-chart(
-          :days="days"
-          :pressureMax="predictions['pressure_max']"
-          :pressureMin="predictions['pressure_min']"
-        )
+      result-container(
+        title="Давление"
+        type-of-result="pressure"
+        :content="readyData.pressure_fish"
+      )
+        PressureContainer(:readyData="readyData")
+          pressure-chart(
+            :days="days"
+            :pressureMax="predictions['pressure_max']"
+            :pressureMin="predictions['pressure_min']"
+          )
       Moon
       Uvindexfull
     EmptyPrediction(v-else)

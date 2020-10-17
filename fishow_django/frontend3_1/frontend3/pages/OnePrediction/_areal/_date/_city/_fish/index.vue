@@ -14,9 +14,9 @@
       result-container(
         title="Погодные условия"
         type-of-result="temperature"
-        :content="prediction.temperature_brief"
-        )
-        .box.card {{ prediction.temperature }}
+        :content="readyData.temperature_brief"
+      )
+        Temperature
       result-container(
         title="Ветер, м/с"
         type-of-result="wind"
@@ -27,8 +27,14 @@
         title="Давление"
         type-of-result="pressure"
         :content="prediction.pressure_fish"
-        )
-        .box.card {{ prediction.pressure }}
+      )
+        PressureContainer(:readyData="readyData")
+          pressure-chart(
+            :days="days"
+            :pressureMax="prediction.pressure"
+            :pressureMin="prediction.pressure"
+            :one="true"
+          )
       result-container(title="Луна" type-of-result="moon")
       result-container(title="Солнечная активность" type-of-result="uvindex")
     EmptyPrediction(v-else)
@@ -43,6 +49,9 @@ import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
 import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
 import urlData from '~/assets/mixins/prediction/urlData'
 import Wind from '@/components/predictPage/Results/Wind/index'
+import Temperature from '~/components/predictPage/Results/Temperature/index'
+import PressureContainer from '~/components/predictPage/Results/Pressure/PressureContainer'
+import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
 
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import OneDayProbe from '~/components/oneDay/probe/chart'
@@ -60,6 +69,9 @@ export default {
     FishowPredictionHeader,
     OneDayProbe,
     PProbe,
+    PressureChart,
+    PressureContainer,
+    Temperature,
     Wind,
   },
   mixins: [urlData],
