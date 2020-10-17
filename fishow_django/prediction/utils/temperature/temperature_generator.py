@@ -52,7 +52,7 @@ class TemperatureTextGenerator:
         mean_temp = np.mean(temps)
         return {
             'mean': mean_temp, 'min': min_temp, 'max': max_temp, 'min_times': parse_date(date),
-            'max_time': parse_date(date)
+            'max_times': parse_date(date)
         }
 
     @staticmethod
