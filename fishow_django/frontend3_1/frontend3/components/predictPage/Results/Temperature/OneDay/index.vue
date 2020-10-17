@@ -6,8 +6,8 @@
     </figure>
     {{ day.temperature_max }}
     <div class="svg-container">
-      <temp-box :radius="day.temperature_max"></temp-box>
-      <temp-box :radius="day.temperature_min" :up="false"></temp-box>
+      <temp-box :radius="day.temperature_max + 10"></temp-box>
+      <temp-box :radius="day.temperature_min + 10" :up="false"></temp-box>
     </div>
     {{ day.temperature_min }}
     <!--    {{ day.phenomenon }}-->

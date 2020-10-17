@@ -77,6 +77,9 @@ export default {
   margin: 5px 5px;
   /*border-radius: 5px;*/
   @media screen and (max-width: 420px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
   }
 

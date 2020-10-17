@@ -62,4 +62,10 @@ export default {
 .columns {
   align-items: center;
 }
+@media screen and (max-width: 450px) {
+  .breadcrumb {
+    font-size: 12px;
+    margin: 0;
+  }
+}
 </style>

@@ -114,4 +114,7 @@ a {
 #app > section.section {
   padding-top: 20px;
 }
+#app {
+  overflow: hidden;
+}
 </style>

@@ -68,7 +68,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
-// import errors from '~/components/Header/errors'
+import errors from '~/components/Header/errors'
 export default {
   data() {
     return {
@@ -83,31 +83,42 @@ export default {
     }
   },
   methods: {
-    temlLogin() {
-      this.$axios
-        .post('/dj-rest-auth/login/', {
-          email: this.login.email,
-          password: this.login.password,
-        })
-        .then((resp) => {
-          this.$auth.setToken('local', 'Bearer ' + resp.data.access_token)
-          this.$auth.setRefreshToken('local', resp.data.refresh_token)
-          // console.log('Bearer ' + resp.data.access_token)
-          this.$axios.setHeader(
-            'Authorization',
-            'Bearer ' + resp.data.access_token
-          )
-          this.$auth.ctx.app.$axios.setHeader(
-            'Authorization',
-            'Bearer ' + resp.data.access_token
-          )
-          this.$axios.get('/dj-rest-auth/user/').then((resp) => {
-            // console.log('resp = ', resp)
-            this.$auth.setUser(resp.data)
+    async temlLogin() {
+      try {
+        await this.$axios
+          .post('/dj-rest-auth/login/', {
+            email: this.login.email,
+            password: this.login.password,
           })
-          this.toggle()
-          window.location.reload()
-        })
+          .then((resp) => {
+            this.$auth.setToken('local', 'Bearer ' + resp.data.access_token)
+            this.$auth.setRefreshToken('local', resp.data.refresh_token)
+            // console.log('Bearer ' + resp.data.access_token)
+            this.$axios.setHeader(
+              'Authorization',
+              'Bearer ' + resp.data.access_token
+            )
+            this.$auth.ctx.app.$axios.setHeader(
+              'Authorization',
+              'Bearer ' + resp.data.access_token
+            )
+            this.$axios.get('/dj-rest-auth/user/').then((resp) => {
+              // console.log('resp = ', resp)
+              this.$auth.setUser(resp.data)
+            })
+            this.toggle()
+            window.location.reload()
+          })
+      } catch (e) {
+        if (e.response.data.password) {
+          const response = e.response.data.password[0]
+          this.error.password = errors[response]
+        }
+        if (e.response.data.non_field_errors) {
+          const response = e.response.data.non_field_errors[0]
+          this.error.email = errors[response]
+        }
+      }
     },
     // async submit() {
     //   try {

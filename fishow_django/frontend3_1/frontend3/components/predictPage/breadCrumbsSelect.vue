@@ -26,12 +26,11 @@
 export default {
   props: {
     areal: {
-      type: String,
       required: true,
     },
     city: {
       type: String,
-      required: true,
+      default: '',
     },
   },
   methods: {

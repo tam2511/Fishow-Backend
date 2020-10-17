@@ -111,4 +111,10 @@ div.container {
     }
   }
 }
+@media screen and (max-width: 450px) {
+  .column.is-three-quarters {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 </style>
