@@ -3,7 +3,11 @@
     FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
     FishowPredictionHeader
       DaysPicker(:days="date")
-    FishSelectPrediction(:areal="areal" :city="city" :date="date")
+    FishSelectPrediction(
+      :areal="areal"
+      :city="city"
+      :date="date"
+      )
     .result-container(v-if='prediction')
       PProbe(
         :readyData="readyData"
@@ -94,7 +98,9 @@ export default {
   layout: 'prediction',
   computed: {
     readyData() {
+      console.log('this.prediction = ', this.prediction)
       const data = convertDataFromServer(this.prediction, true)
+      console.log('before set = ', data)
       this.setReady(data)
       this.setDays(this.days)
       return data
@@ -109,6 +115,8 @@ export default {
     const url = encodeURI(
       `/prediction/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
     )
+    console.log('url = ', url)
+    console.log('start get prediction one ')
     this.getPredictionOne(url)
   },
   methods: {

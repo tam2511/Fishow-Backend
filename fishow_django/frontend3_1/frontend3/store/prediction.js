@@ -7,6 +7,7 @@ export const state = () => ({
   prediction: null,
   readyDataStorage: null,
   days: null,
+  oneStatus: false,
 })
 
 export const mutations = {
