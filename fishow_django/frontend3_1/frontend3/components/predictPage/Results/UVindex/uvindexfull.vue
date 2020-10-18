@@ -1,5 +1,5 @@
 <template>
-  <div class="uvindex-box box">
+  <div v-if="!one" class="uvindex-box box">
     <h3 class="title">Солнечная активность</h3>
     <div class="columns">
       <div class="column max-width"></div>
@@ -28,6 +28,9 @@
     </div>
     <protection />
   </div>
+  <div v-else>
+    privet
+  </div>
 </template>
 
 <script>
@@ -39,6 +42,12 @@ import Protection from '~/components/predictPage/Results/UVindex/message/protect
 export default {
   components: { UvindexOneDay, UvLine, Protection },
   mixins: [readyDataStorage],
+  props: {
+    one: {
+      type: Boolean,
+      default: false,
+    },
+  },
 }
 </script>
 

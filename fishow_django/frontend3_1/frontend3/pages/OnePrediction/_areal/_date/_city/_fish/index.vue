@@ -1,32 +1,27 @@
 <template lang="pug">
-  div.main-content
-    FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
-    FishowPredictionHeader
-      DaysPicker(:days="date")
-    FishSelectPrediction(
-      :areal="areal"
-      :city="city"
-      :date="date"
-      )
+  div
     .result-container(v-if='prediction')
       PProbe(
         :readyData="readyData"
       )
-        OneDayProbe(
+        Chart(
           ref="pprobe"
           :prob="prediction.prob")
+
       result-container(
         title="Погодные условия"
         type-of-result="temperature"
         :content="readyData.temperature_brief"
       )
         Temperature
+
       result-container(
         title="Ветер, м/с"
         type-of-result="wind"
         :content="prediction.wind_fish"
         )
         Wind
+
       result-container(
         title="Давление"
         type-of-result="pressure"
@@ -39,6 +34,7 @@
             :pressureMin="prediction.pressure"
             :one="true"
           )
+
       result-container(
         title="Луна"
         type-of-result="moon"
@@ -51,53 +47,37 @@
           :sun-up="prediction.sun_up",
           :date="prediction.date"
         )
+
       result-container(
         title="Солнечная активность"
         type-of-result="uvindex"
         )
+        Uvindexfull(:one="true")
     EmptyPrediction(v-else)
 </template>
 
 <script>
+// vuex
 import { mapState, mapActions } from 'vuex'
-import FPBreadCrumbs from '~/components/predictPage/Menu/FPBreadCrumbs'
-import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
-import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
-import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
-import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
-import urlData from '~/assets/mixins/prediction/urlData'
-import Wind from '@/components/predictPage/Results/Wind/index'
-import Temperature from '~/components/predictPage/Results/Temperature/index'
-import PressureContainer from '~/components/predictPage/Results/Pressure/PressureContainer'
-import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
-
-import PProbe from '~/components/predictPage/Results/PProbe/index'
-import OneDayProbe from '~/components/oneDay/probe/chart'
-import OneMoon from '~/components/oneDay/moon/OneMoon'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
-
-import ResultContainer from '~/components/predictPage/Results/resultContainer'
+// mixins
+import urlData from '~/assets/mixins/prediction/urlData'
+import predictionTemp from '~/assets/mixins/prediction/predictionTemp'
+// results
+import Chart from '~/components/oneDay/probe/chart'
+import OneMoon from '~/components/oneDay/moon/OneMoon'
 
 export default {
   components: {
-    ResultContainer,
-    FPBreadCrumbs,
-    EmptyPrediction,
-    DaysPicker,
-    FishSelectPrediction,
-    FishowPredictionHeader,
-    OneDayProbe,
+    Chart,
     OneMoon,
-    PProbe,
-    PressureChart,
-    PressureContainer,
-    Temperature,
-    Wind,
   },
-  mixins: [urlData],
+  mixins: [urlData, predictionTemp],
   layout: 'prediction',
   computed: {
     readyData() {
+      const check = window.location.href.match(/OnePrediction/) ? 'one' : 'ten'
+      console.log(check)
       console.log('this.prediction = ', this.prediction)
       const data = convertDataFromServer(this.prediction, true)
       console.log('before set = ', data)
