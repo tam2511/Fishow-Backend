@@ -103,7 +103,9 @@ div.container {
     padding-right: 0;
   }
 }
-.main-content {
-  padding-left: 20px;
+@media screen and (min-width: 769px) {
+  .main-content {
+    padding-left: 20px;
+  }
 }
 </style>

@@ -35,8 +35,22 @@
             :pressureMin="prediction.pressure"
             :one="true"
           )
-      result-container(title="Луна" type-of-result="moon")
-      result-container(title="Солнечная активность" type-of-result="uvindex")
+      result-container(
+        title="Луна"
+        type-of-result="moon"
+        )
+        OneMoon(
+          :moon="prediction.moon",
+          :moon-desc="prediction.moon_desc",
+          :moon-dir="prediction.moon_direction",
+          :sun-down="prediction.sun_down",
+          :sun-up="prediction.sun_up",
+          :date="prediction.date"
+        )
+      result-container(
+        title="Солнечная активность"
+        type-of-result="uvindex"
+        )
     EmptyPrediction(v-else)
 </template>
 
@@ -55,6 +69,7 @@ import PressureChart from '~/components/predictPage/Results/Pressure/PressureCha
 
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import OneDayProbe from '~/components/oneDay/probe/chart'
+import OneMoon from '~/components/oneDay/moon/OneMoon'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 
 import ResultContainer from '~/components/predictPage/Results/resultContainer'
@@ -68,6 +83,7 @@ export default {
     FishSelectPrediction,
     FishowPredictionHeader,
     OneDayProbe,
+    OneMoon,
     PProbe,
     PressureChart,
     PressureContainer,
