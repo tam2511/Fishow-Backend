@@ -1,33 +1,38 @@
 <template lang="pug">
-  .temperature-box.box
-    h3.title Погодные условия
-    p.content(v-html="readyData.temperature_brief")
+  div
     .columns-container
       .columns.bg-white
-        TempOneDay.column(v-for="day in readyData" :key="day.idc" :day="day")
+        TempOneDay.column(v-for="day in readyDataStorage" :key="day.idc" :day="day")
       .columns.bg-white(style="margin-bottom: 1rem")
-        .column(v-for="day in readyData" :key="day.idc" :day="day")
+        .column(v-for="day in readyDataStorage" :key="day.idc" :day="day")
           Humidity(:day="day")
     .columns.temp-desc
       .column
-        Thermo(:day="readyData.temperature_desc.day" :night="readyData.temperature_desc.night")
-      .column.text-justify
-        p.content(v-html="readyData.temperature_fish")
-        p.content(v-html="readyData.temperature_desc.desc")
-    report(:message="readyData.phenomenon_warning")
+        Thermo(
+          v-if="readyDataStorage.temperature_desc.day"
+          :day="readyDataStorage.temperature_desc.day"
+          :night="readyDataStorage.temperature_desc.night"
+          )
+      .column.text-readyData
+        p.content(v-html="readyDataStorage.temperature_fish")
+        p.content(
+          v-if="readyDataStorage.temperature_desc.desc",
+          v-html="readyDataStorage.temperature_desc.desc"
+          )
+    report(:message="readyDataStorage.phenomenon_warning")
 </template>
 
 <script>
 import TempOneDay from '@/components/predictPage/Results/Temperature/OneDay/index'
 
-import readyData from '~/assets/mixins/prediction/readyData'
+import readyDataStorage from '~/assets/mixins/prediction/readyDataStorage'
 import Humidity from '~/components/predictPage/Results/Temperature/OneDay/humidity'
 import Thermo from '~/components/predictPage/Results/Temperature/thermo'
 import Report from '~/components/predictPage/helpers/report'
 
 export default {
   components: { Report, Humidity, TempOneDay, Thermo },
-  mixins: [readyData],
+  mixins: [readyDataStorage],
 }
 </script>
 

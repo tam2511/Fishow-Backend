@@ -1,7 +1,7 @@
 <template>
   <div class="block">
-    <p class="date-first">{{ dayCalendar }}</p>
-    <p class="date-second">{{ normDay }}</p>
+    <p v-if="dayCalendar" class="date-first">{{ dayCalendar }}</p>
+    <p v-if="normDay" class="date-second">{{ normDay }}</p>
   </div>
 </template>
 
@@ -10,11 +10,13 @@ export default {
   props: {
     dayCalendar: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
     },
     normDay: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
     },
   },
 }

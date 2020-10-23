@@ -1,9 +1,5 @@
 <template lang="pug">
-  div.main-content
-    FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
-    FishowPredictionHeader
-      DaysPicker(:days="date")
-    FishSelectPrediction(:areal="areal" :city="city" :date="date")
+  div
     .result-container(v-if='readyData')
       PProbe(
         :readyData="readyData"
@@ -14,69 +10,64 @@
           :probMax="predictions['prob_max']"
           :probMin="predictions['prob_min']"
         )
-      Temperature(:readyData="readyData")
-      Wind(:readyData="readyData"
-        :days="days")
-      PressureContainer(:readyData="readyData")
-        pressure-chart(
-          :days="days"
-          :pressureMax="predictions['pressure_max']"
-          :pressureMin="predictions['pressure_min']"
-        )
-      Moon(:readyData="readyData" :days="days")
-      Uvindexfull(:readyData="readyData" :days="days")
+
+      result-container(
+        title="Погодные условия"
+        type-of-result="temperature"
+        :content="readyData.temperature_brief"
+      )
+        Temperature
+
+      result-container(
+        title="Ветер, м/с",
+        type-of-result="wind",
+        :content="readyData.wind_desc"
+      )
+        Wind
+
+      result-container(
+        title="Давление"
+        type-of-result="pressure"
+        :content="readyData.pressure_fish"
+      )
+        PressureContainer(:readyData="readyData")
+          pressure-chart(
+            :days="days"
+            :pressureMax="predictions['pressure_max']"
+            :pressureMin="predictions['pressure_min']"
+          )
+
+      Moon
+      Uvindexfull
     EmptyPrediction(v-else)
 </template>
 
 <script>
 // vuex
 import { mapState, mapActions } from 'vuex'
-
-// menu items
-import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
-import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
-import FPBreadCrumbs from '@/components/predictPage/Menu/FPBreadCrumbs'
-import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
-// if empty
-import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
-
-// results
-import Wind from '@/components/predictPage/Results/Wind/index'
-import Temperature from '~/components/predictPage/Results/Temperature/index'
-import PProbe from '~/components/predictPage/Results/PProbe/index'
-import PressureContainer from '~/components/predictPage/Results/Pressure/PressureContainer'
-import Moon from '~/components/predictPage/Results/Moon/Moon'
-
-// helpers
-
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
+// mixins
+import urlData from '~/assets/mixins/prediction/urlData'
+import predictionTemp from '~/assets/mixins/prediction/predictionTemp'
+// results
+import Moon from '~/components/predictPage/Results/Moon/Moon'
 import ChartTemperature from '~/components/predictPage/chart/ChartTemperature'
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
-import PressureChart from '~/components/predictPage/Results/Pressure/PressureChart'
-import urlData from '~/assets/mixins/prediction/urlData'
-import Uvindexfull from '~/components/predictPage/Results/UVindex/uvindexfull'
+
 export default {
   components: {
-    Uvindexfull,
-    PressureChart,
     OneDayProbe,
     ChartTemperature,
-    PProbe,
-    Temperature,
-    FishowPredictionHeader,
-    FishSelectPrediction,
-    EmptyPrediction,
-    PressureContainer,
-    DaysPicker,
-    FPBreadCrumbs,
-    Wind,
     Moon,
   },
-  mixins: [urlData],
+  mixins: [urlData, predictionTemp],
   layout: 'prediction',
   computed: {
     readyData() {
-      return convertDataFromServer(this.predictions)
+      const data = convertDataFromServer(this.predictions)
+      this.setReady(data)
+      this.setDays(this.days)
+      return data
     },
     ...mapState('prediction', ['predictions']),
   },
@@ -91,7 +82,11 @@ export default {
     this.getPrediction(url)
   },
   methods: {
-    ...mapActions('prediction', { getPrediction: 'getPrediction' }),
+    ...mapActions('prediction', {
+      getPrediction: 'getPrediction',
+      setReady: 'setReady',
+      setDays: 'setDays',
+    }),
   },
   head() {
     return {

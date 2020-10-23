@@ -28,21 +28,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      total: 200,
-      current: 10,
-      perPage: 10,
-      rangeBefore: 2,
-      rangeAfter: 1,
-      order: 'is-centered',
-      size: '',
-      isSimple: false,
-      isRounded: false,
-      prevIcon: 'chevron-left',
-      nextIcon: 'chevron-right',
-    }
-  },
   computed: {
     tenDays() {
       return getData(this.days, 9)

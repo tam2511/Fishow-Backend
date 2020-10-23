@@ -1,5 +1,7 @@
 export default (fromData, days) => {
   const returnData = (a, b) => {
+    if (!a || !b) return null
+    console.log(a)
     const predictDate = a.split('-')
     const someDate = new Date()
     const numberOfDaysToAdd = b

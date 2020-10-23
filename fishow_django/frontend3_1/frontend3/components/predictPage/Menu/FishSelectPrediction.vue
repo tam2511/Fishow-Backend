@@ -119,14 +119,18 @@ export default {
       const url = encodeURI(
         `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
       )
-
+      console.log('click on fish')
       this.setFish(value)
+      this.one ? this.getPredictionOne(url) : this.getPrediction(url)
       this.getPrediction(url)
       // this.$refs.pprobe.updateData()
     },
     ...mapActions('prediction', {
       setFish: 'setFishId',
       getPrediction: 'getPrediction',
+      getPredictionOne: 'getPredictionOne',
+      setReady: 'setReady',
+      setDays: 'setDays',
     }),
   },
 }

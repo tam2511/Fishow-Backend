@@ -18,10 +18,6 @@ export default {
     VueApexCharts: () => import('vue-apexcharts'),
   },
   props: {
-    days: {
-      type: Array,
-      required: true,
-    },
     prob: {
       type: Array,
       required: true,
@@ -89,7 +85,16 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: [0, 3, 6, 9, 12, 15, 18, 21],
+          categories: [
+            '0:00',
+            '3:00',
+            '6:00',
+            '9:00',
+            '12:00',
+            '15:00',
+            '18:00',
+            '21:00',
+          ],
         },
         yaxis: {
           min: 0,

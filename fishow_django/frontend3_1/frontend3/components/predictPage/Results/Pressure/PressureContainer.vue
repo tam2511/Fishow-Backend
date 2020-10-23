@@ -1,7 +1,5 @@
 <template lang="pug">
-  .pressure-box.box
-    p.title Давление
-    p.content(v-html="readyData.pressure_fish")
+  div
     slot
     .columns
       .column.container-minmax

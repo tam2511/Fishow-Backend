@@ -18,6 +18,16 @@
 
 <script>
 import getCalendarDay from '~/assets/js/getCalendarDay'
+const time = [
+  '0:00',
+  '3:00',
+  '6:00',
+  '9:00',
+  '12:00',
+  '15:00',
+  '18:00',
+  '21:00',
+]
 export default {
   components: {
     VueApexCharts: () => import('vue-apexcharts'),
@@ -34,6 +44,10 @@ export default {
     pressureMin: {
       type: Array,
       required: true,
+    },
+    one: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -85,7 +99,7 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: getCalendarDay(this.days),
+          categories: this.one ? time : getCalendarDay(this.days),
         },
         yaxis: {
           min: 730,

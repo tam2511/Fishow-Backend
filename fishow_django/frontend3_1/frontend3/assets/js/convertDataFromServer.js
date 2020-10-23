@@ -1,9 +1,8 @@
 /* eslint-disable */
-export const convertDataFromServer = (data) => {
+export const convertDataFromServer = (data, type = null) => {
   if (data === null || typeof data !== 'object') {
     return null
   }
-  console.log('data = ', data)
   const getData = (fromData, days) => {
     const returnData = (a, b) => {
       const predictDate = a.split('-')
@@ -14,8 +13,7 @@ export const convertDataFromServer = (data) => {
       someDate.setDate(Number(predictDate[2]) + numberOfDaysToAdd)
       const dd = someDate.getDate()
       const mm = someDate.getMonth() + 1
-      const newmm = mm
-      return dd + '/' + newmm
+      return dd + '/' + mm
     }
     const result = []
     const iterator = (numberOfDays) => {
@@ -26,10 +24,14 @@ export const convertDataFromServer = (data) => {
     iterator(days)
     return result
   }
+  console.log('data = ', data);
   const keys = Object.keys(data)
-  const length = data.temperature_max.length
+  console.log(keys);
+  const length = data.temperature_max ? data.temperature_max.length : data.temperature.length
   const days = []
-  const calendarDays = getData(data.date, 9)
+  const time = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00'];
+  const calendarDays = type ? time : getData(data.date, 9);
+  console.log('calendarDays = ', calendarDays);
   for (let i = 0; i < length; i++) {
     const day = {}
     keys.forEach((item) => {
