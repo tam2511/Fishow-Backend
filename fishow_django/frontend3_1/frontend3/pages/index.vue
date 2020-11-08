@@ -32,6 +32,7 @@
 
 <script>
 import BlogCard from '@/components/BlogCard'
+import { mainPage } from '~/assets/descriptions'
 
 export default {
   layout: 'SideBarRight',
@@ -99,13 +100,12 @@ export default {
   },
 
   head: {
-    title: 'Прогноз клева рыбы, общение и новости | Fishow',
+    title: mainPage.title,
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content:
-          'Прогноз клева рыбы. Рыболовный прогноз клёва рибы с учетом температуры води и воздуха, атмосферного давления, фаз луны и уровня воды, лучший прогноз на рыбалку.',
+        content: mainPage.description,
       },
     ],
   },

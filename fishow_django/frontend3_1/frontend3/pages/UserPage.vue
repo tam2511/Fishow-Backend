@@ -46,6 +46,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { userPage } from '~/assets/descriptions'
 // import UserStat from '@/components/UserPage/UserStat'
 // import UserAwards from '@/components/UserPage/UserAwards'
 // import UserNews from '@/components/UserPage/UserNews'
@@ -73,6 +74,19 @@ export default {
         console.log('e = ', e)
       }
     },
+  },
+  head() {
+    return {
+      title: userPage.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: userPage.description,
+        },
+      ],
+    }
   },
 }
 </script>
