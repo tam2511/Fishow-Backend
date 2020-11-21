@@ -20,6 +20,12 @@
 import { mapActions } from 'vuex'
 import city from '@/components/predictPage/Menu/city'
 export default {
+  props: {
+    passive: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       value: '',
@@ -31,6 +37,7 @@ export default {
       return `${areal} - ${city}`
     },
     changePrediction() {
+      if (this.passive) return
       const fish = this.$route.params.fish
       const date = this.$route.params.date
       const city = this.value.city

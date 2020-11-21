@@ -13,11 +13,7 @@
             <button>Оставить отчет</button>
           </div>
           <div class="banner_picture">
-            <img
-              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.ronta.ru%2Fupload%2Fiblock%2F5d4%2F5d47768d6834a5c6e569fa5c7d605da1.png&f=1&nofb=1"
-              width="400px"
-              alt=""
-            />
+            <img src="/5ccef214ee61b_o_rybalke.png" width="400px" alt="" />
           </div>
         </div>
         <div class="banner-statistic">
@@ -31,7 +27,7 @@
           </div>
           <div class="banner-statistic__item">
             <div class="banner-statistic__title">Количество прогнозов</div>
-            <div class="banner-statistic__value">26 641</div>
+            <div class="banner-statistic__value">{{ predictions_counter }}</div>
           </div>
           <div class="banner-statistic__item">
             <div class="banner-statistic__title">Точность прогноза</div>
@@ -43,22 +39,22 @@
         <div class="prediction-title">
           <h2 class="title">Прогноз клева</h2>
         </div>
-        <div class="prediction-chart">
-          <!--          <PProbe :ready-data="readyData">-->
-          <!--            <one-day-probe-->
-          <!--              ref="pprobe"-->
-          <!--              :days="days"-->
-          <!--              :prob-max="predictions['prob_max']"-->
-          <!--              :prob-min="predictions['prob_min']"-->
-          <!--            ></one-day-probe>-->
-          <!--          </PProbe>-->
+        <div v-if="readyData" class="prediction-chart">
+          <PProbe :ready-data="readyData" :main-page="true">
+            <one-day-probe
+              ref="pprobe"
+              :days="days"
+              :prob-max="predictions && predictions['prob_max']"
+              :prob-min="predictions && predictions['prob_min']"
+            ></one-day-probe>
+          </PProbe>
         </div>
         <div class="prediction-select">
           <b-field label="Выберите место рыбалки">
-            <b-input value="Москва"></b-input>
+            <CitySearch />
           </b-field>
           <b-field label="Выберите рыбу">
-            <b-input value="Щука"></b-input>
+            <fish-select-prediction :passive="true" />
           </b-field>
           <button>Составить прогноз</button>
           <span>Подробнее > </span>
@@ -139,16 +135,23 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
-// import PProbe from '~/components/predictPage/Results/PProbe/index'
 import getData from '@/pages/prognoz-kleva/_areal/_date/_city/_fish/getData'
+import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
+import PProbe from '~/components/predictPage/Results/PProbe/index'
+import CitySearch from '~/components/predictPage/Menu/CitySearch'
+import FishSelectPrediction from '~/components/predictPage/Menu/FishSelectPrediction'
 
 export default {
   components: {
-    // PProbe,
+    FishSelectPrediction,
+    CitySearch,
+    PProbe,
+    OneDayProbe,
   },
   data() {
     return {
       days: getData('2020-10-02', 9),
+      predictions_counter: 26610,
     }
   },
   computed: {
@@ -173,6 +176,16 @@ export default {
       `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
     )
     this.getPrediction(url)
+    const getRandomTimerTime = () => {
+      return Math.floor(Math.random() * Math.floor(3000))
+    }
+    const timer = () => {
+      this.predictions_counter += Math.floor(Math.random() * Math.floor(20))
+      setTimeout(timer, getRandomTimerTime())
+    }
+
+    timer()
+    console.log('this.predictions = ', this.predictions)
   },
   methods: {
     ...mapActions('prediction', {
@@ -184,7 +197,10 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.section {
+  background-color: #fff;
+}
 .site-news {
   display: flex;
   flex-flow: column;
@@ -201,13 +217,30 @@ export default {
   &__header {
     color: #878b90;
   }
+  &__footer {
+    padding: 10px 0;
+  }
+  @media screen and (max-width: 768px) {
+    &__item-container {
+      width: 100%;
+    }
+    margin: 40px 10px;
+  }
 }
 .prediction-section {
   display: flex;
   flex-flow: row wrap;
   margin: 40px 0;
+  justify-content: space-between;
+  .prediction-box {
+    border: 1px solid rgba(206, 209, 213, 0.4);
+    box-sizing: border-box;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
   .prediction-title {
     width: 100%;
+    margin: 25px 0;
   }
   .prediction-chart {
     width: 70%;
@@ -217,8 +250,14 @@ export default {
     justify-content: center;
     align-items: center;
     flex-flow: column;
+
+    width: 270px;
+    .box.fish {
+      padding: 0;
+    }
     & > * {
       margin: 10px 0;
+      width: 100%;
     }
     button {
       width: 100%;
@@ -234,13 +273,24 @@ export default {
       text-align: center;
     }
   }
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+    .prediction-chart {
+      width: 100%;
+    }
+    .prediction-title {
+      margin: 25px 10px;
+    }
+  }
 }
 .actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 15px;
   row-gap: 15px;
-
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
   &__item {
     min-height: 220px;
     background-image: url('/Rectangle.png');
@@ -296,6 +346,12 @@ export default {
       color: #fff;
       text-align: center;
       margin-top: 50px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    &-wrapper {
+      width: 100%;
+      margin: 0 10px;
     }
   }
 }
