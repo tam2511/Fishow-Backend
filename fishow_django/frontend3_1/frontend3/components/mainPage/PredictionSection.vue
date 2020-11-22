@@ -3,7 +3,10 @@
     <div class="prediction-title">
       <h2 class="title">Прогноз клева</h2>
     </div>
-    <div v-if="readyData" class="prediction-chart">
+    <div v-if="readyData" :class="classOfChart">
+      <div v-if="predictions.template" class="template-message">
+        Данный прогноз временно недоступен
+      </div>
       <PProbe :ready-data="readyData" :main-page="true">
         <one-day-probe
           ref="pprobe"
@@ -14,14 +17,22 @@
       </PProbe>
     </div>
     <div class="prediction-select">
-      <b-field label="Выберите место рыбалки">
-        <CitySearch />
+      <b-field
+        label="Выберите место рыбалки"
+        :type="typeLocation"
+        :message="errorEmptySelect"
+      >
+        <CitySearch :passive="true" />
       </b-field>
       <b-field label="Выберите рыбу">
         <fish-select-prediction :passive="true" />
       </b-field>
-      <button>Составить прогноз</button>
-      <span>Подробнее > </span>
+      <button @click="createPrediction" class="button is-primary">
+        Составить прогноз
+      </button>
+      <nuxt-link class="button is-text" :to="{ path: '/prognoz-kleva' }"
+        >Подробнее</nuxt-link
+      >
     </div>
   </div>
 </template>
@@ -45,6 +56,8 @@ export default {
   data() {
     return {
       days: getData('2020-10-02', 9),
+      typeLocation: '',
+      errorEmptySelect: '',
     }
   },
   computed: {
@@ -54,7 +67,12 @@ export default {
       this.setDays(this.days)
       return data
     },
-    ...mapState('prediction', ['predictions']),
+    classOfChart() {
+      return this.predictions.template
+        ? ' prediction-chart template'
+        : 'prediction-chart'
+    },
+    ...mapState('prediction', ['predictions', 'fishId', 'location']),
   },
   created() {
     const fish = 'щука'
@@ -71,6 +89,29 @@ export default {
     this.getPrediction(url)
   },
   methods: {
+    createPrediction() {
+      if (!this.location) {
+        this.errorEmptySelect = 'Выберите место рыбалки'
+        this.typeLocation = 'is-danger'
+        return
+      }
+      this.errorEmptySelect = ''
+      this.typeLocation = ''
+
+      const fish = this.fishId || 'щука'
+      // const fish = this.$route.params.fish
+      const date = '2020-10-02'
+      // const date = this.$route.params.date
+      const city = (this.location && this.location[0]) || 'Москва'
+      // const city = this.$route.params.city
+      const areal = (this.location && this.location[1]) || 'Московская область'
+      // const areal = this.$route.params.areal
+
+      const url = encodeURI(
+        `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+      )
+      this.getPrediction(url)
+    },
     ...mapActions('prediction', {
       getPrediction: 'getPrediction',
       setReady: 'setReady',
@@ -81,6 +122,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.template-message {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+
+  font-size: 20px;
+}
 .prediction-section {
   display: flex;
   flex-flow: row wrap;
@@ -98,6 +147,14 @@ export default {
   }
   .prediction-chart {
     width: 70%;
+    &.template {
+      position: relative;
+    }
+    & > div:not(:first-child) {
+      filter: blur(3px);
+      opacity: 0.3;
+      pointer-events: none;
+    }
   }
   .prediction-select {
     display: flex;

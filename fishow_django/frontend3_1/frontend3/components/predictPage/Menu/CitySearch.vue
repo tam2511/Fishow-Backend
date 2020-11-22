@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!--    {{ list }}-->
-    <!--    <label class="typo__label">Select with search</label>-->
     <multiselect
       v-model="value"
       :options="options"
@@ -11,8 +9,6 @@
       track-by="city"
       @input="changePrediction"
     ></multiselect>
-    <!--    {{ value }}-->
-    <!--    <pre class="language-json"><code>{{ value  }}</code></pre>-->
   </div>
 </template>
 
@@ -34,9 +30,10 @@ export default {
   },
   methods: {
     nameWithLang({ areal, city }) {
-      return `${areal} - ${city}`
+      return `${city} - ${areal}`
     },
     changePrediction() {
+      this.setLocation([this.value.city, this.value.areal])
       if (this.passive) return
       const fish = this.$route.params.fish
       const date = this.$route.params.date
@@ -50,6 +47,7 @@ export default {
     },
     ...mapActions('prediction', {
       getPrediction: 'getPrediction',
+      setLocation: 'setLocation',
     }),
   },
 }

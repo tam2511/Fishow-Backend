@@ -120,7 +120,10 @@ export default {
   },
   methods: {
     info(value) {
-      if (this.passive) return
+      if (this.passive) {
+        this.setFish(this.fishList[value].title)
+        return
+      }
       const fish = this.fishList[value].title
       const date = this.date
       const city = this.city
