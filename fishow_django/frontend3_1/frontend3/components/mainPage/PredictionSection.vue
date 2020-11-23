@@ -27,6 +27,7 @@
       <b-field label="Выберите рыбу">
         <fish-select-prediction :passive="true" />
       </b-field>
+      <!--      <div>position: {{ position }}</div>-->
       <button @click="createPrediction" class="button is-primary">
         Составить прогноз
       </button>
@@ -58,6 +59,7 @@ export default {
       days: getData('2020-10-02', 9),
       typeLocation: '',
       errorEmptySelect: '',
+      position: null,
     }
   },
   computed: {
@@ -88,7 +90,35 @@ export default {
     )
     this.getPrediction(url)
   },
+  // mounted() {
+  //   this.getPosition()
+  // },
   methods: {
+    getPosition() {
+      const positionCB = (position) => {
+        this.position = [position.coords.latitude, position.coords.longitude]
+      }
+      if (navigator && navigator.geolocation) {
+        console.log('start search position')
+        navigator.geolocation.getCurrentPosition(positionCB, this.showError)
+      }
+    },
+    showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          this.position = 'User denied the request for Geolocation.'
+          break
+        case error.POSITION_UNAVAILABLE:
+          this.position = 'Location information is unavailable.'
+          break
+        case error.TIMEOUT:
+          this.position = 'The request to get user location timed out.'
+          break
+        case error.UNKNOWN_ERROR:
+          this.position = 'An unknown error occurred.'
+          break
+      }
+    },
     createPrediction() {
       if (!this.location) {
         this.errorEmptySelect = 'Выберите место рыбалки'

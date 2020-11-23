@@ -1,39 +1,52 @@
 <template>
   <div class="actions-grid">
-    <div class="actions-grid__item">
-      <div class="grid__item_title">Создать свою статью</div>
-      <div class="grid__item_body">
-        Опишите свои впечатления о рыбалке и поделитесь опытом!
-      </div>
-    </div>
-    <div class="actions-grid__item">
-      <div class="grid__item_title">Отчеты о рыбалке</div>
-      <div class="grid__item_body">
-        Опишите свои впечатления о рыбалке и поделитесь опытом!
-      </div>
-    </div>
-    <div class="actions-grid__item">
-      <div class="grid__item_title">Статьи и блоги других авторов</div>
-      <div class="grid__item_body">
-        Читайте интересные истории товарищей по рыбалке
-      </div>
-    </div>
-    <div class="actions-grid__item">
-      <div class="grid__item_title">База знаний рыбалова</div>
-      <div class="grid__item_body">
-        Крупнейшее вики рыбаловного сообщества
-      </div>
-    </div>
+    <nuxt-link
+      v-for="(item, index) in gridItems"
+      :key="index"
+      class="actions-grid__item"
+      :to="item.url"
+    >
+      <div class="grid__item_title">{{ item.title }}</div>
+      <div class="grid__item_body">{{ item.body }}</div>
+    </nuxt-link>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ActionsGrid',
+  data() {
+    return {
+      gridItems: [
+        {
+          title: 'Создать свою статью',
+          body: 'Опишите свои впечатления о рыбалке и поделитесь опытом!',
+          url: { path: '/blog-editor' },
+        },
+        {
+          title: 'Отчеты о рыбалке',
+          body: 'Опишите свои впечатления о рыбалке и поделитесь опытом!',
+          url: { path: '/blog-editor' },
+        },
+        {
+          title: 'Статьи и блоги других авторов',
+          body: 'Читайте интересные истории товарищей по рыбалке',
+          url: { path: '/blogs' },
+        },
+        {
+          title: 'База знаний рыбалова',
+          body: 'Крупнейшее вики рыбаловного сообщества',
+          url: { path: '/wiki' },
+        },
+      ],
+    }
+  },
 }
 </script>
 
 <style scoped lang="scss">
+.nuxt-link-active {
+  color: #0d0a0a;
+}
 .actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
