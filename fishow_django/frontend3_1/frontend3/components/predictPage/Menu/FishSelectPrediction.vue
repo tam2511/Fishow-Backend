@@ -17,6 +17,7 @@
       </div>
     </div>
     <b-carousel-list
+      v-if="!passive"
       id="experience"
       v-model="fishId"
       :data="fishList"
@@ -46,15 +47,22 @@ export default {
   props: {
     areal: {
       type: String,
-      required: true,
+      required: false,
+      default: 'Московская область',
     },
     city: {
       type: String,
-      required: true,
+      required: false,
+      default: 'Москва',
     },
     date: {
       type: String,
-      required: true,
+      required: false,
+      default: '2020-10-02',
+    },
+    passive: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -112,6 +120,10 @@ export default {
   },
   methods: {
     info(value) {
+      if (this.passive) {
+        this.setFish(this.fishList[value].title)
+        return
+      }
       const fish = this.fishList[value].title
       const date = this.date
       const city = this.city
