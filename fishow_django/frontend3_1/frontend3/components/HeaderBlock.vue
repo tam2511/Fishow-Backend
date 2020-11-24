@@ -17,6 +17,9 @@
       <b-navbar-item tag="nuxt-link" :to="{ path: '/prognoz-kleva' }">
         Прогноз
       </b-navbar-item>
+      <b-navbar-item tag="nuxt-link" :to="{ path: '/blogs' }">
+        Блоги
+      </b-navbar-item>
     </template>
     <template slot="end">
       <b-navbar-item tag="div">

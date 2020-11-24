@@ -46,6 +46,7 @@
 // vuex
 import { mapState, mapActions } from 'vuex'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
+import { predictionTen } from '~/assets/descriptions'
 // mixins
 import urlData from '~/assets/mixins/prediction/urlData'
 import predictionTemp from '~/assets/mixins/prediction/predictionTemp'
@@ -90,8 +91,15 @@ export default {
   },
   head() {
     return {
-      title:
-        'Fishow - Прогноз клева на 9 дней, вероятность клева рыбы, погодные условия',
+      title: predictionTen.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: predictionTen.description,
+        },
+      ],
     }
   },
 }
