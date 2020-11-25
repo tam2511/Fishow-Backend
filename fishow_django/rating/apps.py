@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class ReportConfig(AppConfig):
-    name = 'report'
+    name = 'rating'
 
     def ready(self):
-        import report.signals
+        import rating.signals

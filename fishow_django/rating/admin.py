@@ -1,8 +1,7 @@
 from django.contrib import admin
-from report.models import Report, Comment_r, Fishing
+from rating.models import Rating_region, Rating_waterplace
 
 
-admin.site.register(Report)
-admin.site.register(Comment_r)
-admin.site.register(Fishing)
+admin.site.register(Rating_region)
+admin.site.register(Rating_waterplace)
 # Register your models here.
