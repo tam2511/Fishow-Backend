@@ -20,7 +20,7 @@ class Rating_region(models.Model):
     fishing_activity_sep = models.CharField(max_length=500)
     fishing_activity_oct = models.CharField(max_length=500)
     fishing_activity_nov = models.CharField(max_length=500)
-    fishing_activity_nov = models.CharField(max_length=500)
+    fishing_activity_dec = models.CharField(max_length=500)
 # Название региона (строка)
 # Рыба (строка)
 # Список водоемов (OnetoMany ForeignKey)
@@ -41,7 +41,19 @@ class Rating_waterplace(models.Model):
     site = models.CharField(max_length=500)
     fishing_frequency = models.CharField(max_length=500)
     last_fishing = models.DateTimeField()
-    reports
+    water_view
+    fishing_average_jan = models.CharField(max_length=500)
+    fishing_average_feb = models.CharField(max_length=500)
+    fishing_average_mar = models.CharField(max_length=500)
+    fishing_average_apr = models.CharField(max_length=500)
+    fishing_average_may = models.CharField(max_length=500)
+    fishing_average_jun = models.CharField(max_length=500)
+    fishing_average_jul = models.CharField(max_length=500)
+    fishing_average_aug = models.CharField(max_length=500)
+    fishing_average_sep = models.CharField(max_length=500)
+    fishing_average_oct = models.CharField(max_length=500)
+    fishing_average_nov = models.CharField(max_length=500)
+    fishing_average_dec = models.CharField(max_length=500)
 
 #     Название водоема (строка)
 #     Ближайшие города к водоему (ManytoMany ForeignKey)
@@ -63,56 +75,23 @@ class Rating_waterplace(models.Model):
         return self.content
 
 
-class Report(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.CharField(max_length=5000)
-    category = models.CharField(max_length=100)
-    tags = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    moderator_like = models.NullBooleanField(null=True, default=False)
-    slug = models.SlugField(max_length=255, unique=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                               on_delete=models.CASCADE,
-                               related_name="Reports")
-    votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                      related_name='votesUpReport')
-    votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                        related_name='votesDownReport')
-    views = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                          related_name='viewsReport')
-
-    areal = models.TextField()
-    city = models.TextField()
-
-    def __str__(self):
-        return self.content
-
-class Fishing(models.Model):
-    fish = models.TextField()
-    estimation = models.TextField()
-    type = models.TextField()
-
-    report = models.ForeignKey(Report, on_delete=models.CASCADE, related_name='fishing')
-
-    def __str__(self):
-        return self.content
 
 
-class Comment_r(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    body = models.TextField()
-    report = models.ForeignKey(Report,
-                             on_delete=models.CASCADE,
-                             related_name='comments_r')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                               on_delete=models.CASCADE)
-    votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesUp_r')
-    votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesDown_r')
 
-    def __str__(self):
-        return self.author.username
+# class Comment_rating_water(models.Model):
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     body = models.TextField()
+#     report = models.ForeignKey(Report,
+#                              on_delete=models.CASCADE,
+#                              related_name='comments_r')
+#     author = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                                on_delete=models.CASCADE)
+#     votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
+#                                     related_name='votesUp_r')
+#     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
+#                                     related_name='votesDown_r')
+#
+#     def __str__(self):
+#         return self.author.username
 # # Create your models here.
