@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
 
 from rating.api.serializers import Rating_regionSerializer,Rating_waterplaceSerializer
-from report.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
-from report.models import Report, Comment_r, Fishing
+from rating.api.permissions DjangoObjectPermissionsOrAnonReadOnly
+from rating.models import Rating_region, Rating_waterplace
 
 from users.models import CustomUser
 
@@ -15,12 +15,12 @@ from django.contrib.auth.decorators import login_required
 
 
 class Rating_waterplaceAPIView(APIView):
-        queryset = Fishing.objects.all()
+        queryset = Rating_waterplace.objects.all()
         serializer_class = Rating_waterplace
 
 
 class Rating_regionAPIView(APIView):
-        queryset = Fishing.objects.all()
+        queryset = Rating_region.objects.all()
         serializer_class = Rating_regionSerializer
 
 
