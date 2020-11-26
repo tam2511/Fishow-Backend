@@ -17,41 +17,41 @@
 **API**
 
 1. BLOGS,COMMENTS,IMAGE
-Blogs/
-images/
-blogs/<slug:slug>/comments/
-blogs/<slug:slug>/comment/
-comments/<int:pk>/
-comments/<int:pk>/like/
-comments/<int:pk>/dislike/
-blogs/<int:pk>/like/
-blogs/<int:pk>/dislike/
+* Blogs/
+* images/
+* blogs/<slug:slug>/comments/
+* blogs/<slug:slug>/comment/
+* comments/<int:pk>/
+* comments/<int:pk>/like/
+* comments/<int:pk>/dislike/
+* blogs/<int:pk>/like/
+* blogs/<int:pk>/dislike/
 
 2. USER
-user/
-user_all/
-user/saved/blogs/
-user/liked/blogs/
-user/created/blogs/
-user/liked/blogs/comment/
-user/created/blogs/comment/
-user/saved/report/
-user/liked/report/
-user/created/report/
-user/liked/report/comment/
-user/created/report/comment/
-user_select/(?P<username>.*)/
+* user/
+* user_all/
+* user/saved/blogs/
+* user/liked/blogs/
+* user/created/blogs/
+* user/liked/blogs/comment/
+* user/created/blogs/comment/
+* user/saved/report/
+* user/liked/report/
+* user/created/report/
+* user/liked/report/comment/
+* user/created/report/comment/
+* user_select/(?P<username>.*)/
 
 3. REPORT
-Report/
-fishing/
-report/<slug:slug>/comments/
-report/<slug:slug>/comment/
-comments/<int:pk>/
-comments/<int:pk>/like/
-comments/<int:pk>/dislike/
-report/<int:pk>/like/
-report/<int:pk>/dislike/
+* Report/
+* fishing/
+* report/<slug:slug>/comments/
+* report/<slug:slug>/comment/
+* comments/<int:pk>/
+* comments/<int:pk>/like/
+* comments/<int:pk>/dislike/
+* report/<int:pk>/like/
+* report/<int:pk>/dislike/
 
 **Frontend** 
 
