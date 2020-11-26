@@ -108,7 +108,7 @@ export default {
 </script>
 <style lang="scss">
 .section {
-  background-color: #edeff4;
+  /*background-color: #edeff4;*/
 }
 a {
   color: #0d0a0a;

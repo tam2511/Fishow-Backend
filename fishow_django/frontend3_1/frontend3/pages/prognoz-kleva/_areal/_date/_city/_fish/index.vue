@@ -1,6 +1,7 @@
 <template lang="pug">
   div
-    .result-container(v-if='readyData')
+    EmptyPrediction(v-if="predictions && predictions.template")
+    div(v-if='readyData' :class="templateClass")
       PProbe(
         :readyData="readyData"
       )
@@ -39,7 +40,6 @@
 
       Moon
       Uvindexfull
-    EmptyPrediction(v-else)
 </template>
 
 <script>
@@ -64,6 +64,11 @@ export default {
   mixins: [urlData, predictionTemp],
   layout: 'prediction',
   computed: {
+    templateClass() {
+      return this.predictions.template
+        ? ' result-container template'
+        : 'result-container'
+    },
     readyData() {
       const data = convertDataFromServer(this.predictions)
       this.setReady(data)
@@ -120,5 +125,19 @@ export default {
 }
 .box {
   font-weight: 300;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+.template > .box {
+  position: relative;
+  pointer-events: none;
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.66);
+  }
 }
 </style>

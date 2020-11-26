@@ -47,6 +47,17 @@ import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayPr
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import CitySearch from '~/components/predictPage/Menu/CitySearch'
 import FishSelectPrediction from '~/components/predictPage/Menu/FishSelectPrediction'
+const getDataValue = () => {
+  const d = new Date()
+  let month = '' + (d.getMonth() + 1)
+  let day = '' + d.getDate()
+  const year = d.getFullYear()
+
+  if (month.length < 2) month = '0' + month
+  if (day.length < 2) day = '0' + day
+
+  return [year, month, day].join('-')
+}
 export default {
   components: {
     FishSelectPrediction,
@@ -56,7 +67,7 @@ export default {
   },
   data() {
     return {
-      days: getData('2020-10-02', 9),
+      days: getData(getDataValue(), 9),
       typeLocation: '',
       errorEmptySelect: '',
       position: null,
@@ -79,7 +90,7 @@ export default {
   created() {
     const fish = 'щука'
     // const fish = this.$route.params.fish
-    const date = '2020-10-02'
+    const date = getDataValue()
     // const date = this.$route.params.date
     const city = 'Белово'
     // const city = this.$route.params.city
@@ -157,7 +168,7 @@ export default {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
-
+  z-index: 2;
   font-size: 20px;
 }
 .prediction-section {
@@ -174,6 +185,9 @@ export default {
   .prediction-title {
     width: 100%;
     margin: 25px 0;
+    h2 {
+      font-weight: 500;
+    }
   }
   .prediction-chart {
     width: 70%;
@@ -182,8 +196,17 @@ export default {
     }
     & > div:not(:first-child) {
       filter: blur(3px);
-      opacity: 0.3;
+      position: relative;
       pointer-events: none;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(238, 238, 238, 0.3);
+      }
     }
   }
   .prediction-select {
@@ -193,6 +216,10 @@ export default {
     flex-flow: column;
 
     width: 270px;
+
+    label {
+      font-weight: 300;
+    }
     .box.fish {
       padding: 0;
     }
@@ -203,8 +230,8 @@ export default {
     button {
       width: 100%;
 
-      background: #018cac;
-      border: 2px solid #018cac;
+      background: var(--main-color);
+      border: 2px solid var(--main-color);
       box-sizing: border-box;
       border-radius: 4px;
       padding: 10px 30px;
