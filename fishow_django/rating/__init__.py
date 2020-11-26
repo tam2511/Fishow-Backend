@@ -1,1 +1,1 @@
-default_app_config = "report.apps.ReportConfig"
+default_app_config = "rating.apps.ReportConfig"
