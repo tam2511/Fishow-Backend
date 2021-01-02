@@ -195,7 +195,7 @@ class BlogLikeAPIView(APIView):
 
     def delete(self, request, pk):
         """Remove request.user from the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
 
         if user in [val for val in blog.votersUp.all()]:
@@ -222,7 +222,7 @@ class BlogLikeAPIView(APIView):
 
     def post(self, request, pk):
         """Add request.user to the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
 #         send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, [request.user.email])
         if user not in [val for val in blog.votersUp.all()]:
@@ -255,7 +255,7 @@ class BlogDisLikeAPIView(APIView):
 
     def delete(self, request, pk):
         """Remove request.user from the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
         if user in [val for val in blog.votersDown.all()]:
             blog.votersDown.remove(user)
@@ -281,7 +281,7 @@ class BlogDisLikeAPIView(APIView):
 
     def post(self, request, pk):
         """Add request.user to the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
         if user not in [val for val in blog.votersDown.all()]:
             blog.votersDown.add(user)
@@ -308,19 +308,86 @@ class BlogDisLikeAPIView(APIView):
 #     serializer_class = CommentSerializer
 #     permission_classes = [IsAuthenticated]
 
+class BlogSaveAPIView(APIView):
+    """Allow users to add/remove a like to/from an comment instance."""
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, pk):
+        """Remove request.user from the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, slug=slug)
+        user = request.user
+
+        if user in [val for val in blog.saved.all()]:
+            blog.saved.remove(user)
+            blog.save()
+
+            serializer_context = {"request": request}
+            serializer = self.serializer_class(blog, context=serializer_context)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            serializer_context = {'message':'already_do_it'}
+            return Response(serializer_context)
+
+    def post(self, request, pk):
+        """Add request.user to the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, slug=slug)
+        user = request.user
+#         send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, [request.user.email])
+        if user not in [val for val in blog.saved.all()]:
+
+            blog.saved.add(user)
+            blog.save()
+
+            serializer_context = {"request": request}
+            serializer = self.serializer_class(blog, context=serializer_context)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            serializer_context = {'message':'already_do_it'}
+            return Response(serializer_context)
+
+
 class BlogUserSaved(generics.ListAPIView):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Blog.objects.filter(votersUp=self.request.user).order_by("-created_at")
+        return Blog.objects.filter(saved=self.request.user).order_by("-created_at")
+
+class BlogUserCreated(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Blog.objects.filter(author=self.request.user).order_by("-created_at")
 
 class BlogUserLiked(generics.ListAPIView):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Blog.objects.filter(votersUp=self.user).order_by("-created_at")
+        return Blog.objects.filter(votersUp=self.request.user).order_by("-created_at")
+
+class BlogCommentUserLiked(generics.ListAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Comment.objects.filter(votersUp=self.request.user).order_by("-created_at")
+
+class BlogCommentUserCreated(generics.ListAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Comment.objects.filter(author=self.request.user).order_by("-created_at")
+
 
 class ImageViewSet(viewsets.ModelViewSet):
     serializer_class = ImageSerializer
