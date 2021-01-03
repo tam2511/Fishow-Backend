@@ -26,6 +26,7 @@
 export default {
   props: {
     areal: {
+      type: [String, Boolean],
       required: true,
     },
     city: {
