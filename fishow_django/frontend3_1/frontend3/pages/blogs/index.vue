@@ -35,10 +35,10 @@ import BlogCard from '@/components/BlogCard'
 import { mainPage } from '~/assets/descriptions'
 
 export default {
-  layout: 'SideBarRight',
   components: {
     BlogCard,
   },
+  layout: 'SideBarRight',
   data() {
     return {
       blogs: null,
@@ -48,6 +48,17 @@ export default {
       next: null,
       isSwitched: false,
     }
+  },
+
+  head: {
+    title: mainPage.title,
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: mainPage.description,
+      },
+    ],
   },
   computed: {
     notRatedBlogs() {
@@ -97,17 +108,6 @@ export default {
     showBlog() {
       localStorage.setItem('hidden-blogs', this.isSwitched)
     },
-  },
-
-  head: {
-    title: mainPage.title,
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: mainPage.description,
-      },
-    ],
   },
 }
 </script>

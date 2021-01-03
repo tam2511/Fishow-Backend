@@ -76,6 +76,19 @@ export default {
   },
   mixins: [urlData, predictionTemp],
   layout: 'prediction',
+  head() {
+    return {
+      title: predictionOne.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: predictionOne.description,
+        },
+      ],
+    }
+  },
   computed: {
     readyData() {
       const data = convertDataFromServer(this.prediction, true)
@@ -101,19 +114,6 @@ export default {
       setReady: 'setReady',
       setDays: 'setDays',
     }),
-  },
-  head() {
-    return {
-      title: predictionOne.title,
-      meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        {
-          hid: 'description',
-          name: 'description',
-          content: predictionOne.description,
-        },
-      ],
-    }
   },
 }
 </script>

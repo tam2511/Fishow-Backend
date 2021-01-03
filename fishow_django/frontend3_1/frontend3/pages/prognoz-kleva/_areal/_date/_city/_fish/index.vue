@@ -63,6 +63,19 @@ export default {
   },
   mixins: [urlData, predictionTemp],
   layout: 'prediction',
+  head() {
+    return {
+      title: predictionTen.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: predictionTen.description,
+        },
+      ],
+    }
+  },
   computed: {
     templateClass() {
       return this.predictions.template
@@ -93,19 +106,6 @@ export default {
       setReady: 'setReady',
       setDays: 'setDays',
     }),
-  },
-  head() {
-    return {
-      title: predictionTen.title,
-      meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        {
-          hid: 'description',
-          name: 'description',
-          content: predictionTen.description,
-        },
-      ],
-    }
   },
 }
 </script>

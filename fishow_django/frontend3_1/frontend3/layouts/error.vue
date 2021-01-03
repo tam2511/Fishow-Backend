@@ -8,13 +8,13 @@
 
 <script>
 export default {
+  layout: 'emptyPage',
   props: {
     error: {
       type: Object,
       required: true,
     },
-  },
-  layout: 'emptyPage', // you can set a custom layout for the error page
+  }, // you can set a custom layout for the error page
 }
 </script>
 

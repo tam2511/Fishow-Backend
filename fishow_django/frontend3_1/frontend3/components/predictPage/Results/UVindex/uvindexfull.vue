@@ -30,9 +30,7 @@
   </div>
   <div v-else class="unvidex-container">
     <div class="uvindex-date">
-      <div class="uvindex-date__item">
-        Сб 11 июля
-      </div>
+      <div class="uvindex-date__item">Сб 11 июля</div>
     </div>
     <div class="uvindex-main">
       <div class="uvindex-main__item">
@@ -59,9 +57,7 @@
       <div class="uvindex-main__item"></div>
       <div class="uvindex-main__item"></div>
     </div>
-    <div class="uvindex_desc">
-      21 августа бла бла бла
-    </div>
+    <div class="uvindex_desc">21 августа бла бла бла</div>
   </div>
 </template>
 

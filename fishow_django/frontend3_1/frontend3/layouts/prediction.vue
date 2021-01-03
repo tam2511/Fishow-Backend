@@ -28,18 +28,18 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-import urlData from '~/assets/mixins/prediction/urlData'
-
 import LoginModal from '@/components/Header/LoginModal'
 import RegModal from '@/components/Header/RegModal'
 import HeaderBlock from '@/components/HeaderBlock'
+import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
+import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
+import urlData from '~/assets/mixins/prediction/urlData'
+
 import TheFooter from '~/components/TheFooter'
 import SideBar from '~/components/predictPage/Menu/SideBar'
 
 import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
 import FPBreadCrumbs from '~/components/predictPage/Menu/FPBreadCrumbs'
-import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
-import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
 export default {
   components: {
     SideBar,

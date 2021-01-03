@@ -26,12 +26,8 @@
         <template slot="end">
           <b-navbar-item tag="div">
             <div v-if="!$auth.user" class="buttons">
-              <a class="button is-primary" @click="toggleReg">
-                Регистрация
-              </a>
-              <a class="button is-light" @click="toggleLogin">
-                Войти
-              </a>
+              <a class="button is-primary" @click="toggleReg"> Регистрация </a>
+              <a class="button is-light" @click="toggleLogin"> Войти </a>
               <!--          <a class="button is-light" @click="toggleLoginYandex">-->
               <!--            Войти через Яндекс-->
               <!--          </a>-->
@@ -40,9 +36,7 @@
               <nuxt-link to="/UserPage" class="button ip-primary">
                 {{ $auth.user.login || $auth.user.username }}</nuxt-link
               >
-              <a class="button is-light" @click="logout">
-                Выйти
-              </a>
+              <a class="button is-light" @click="logout"> Выйти </a>
             </div>
           </b-navbar-item>
         </template>
@@ -51,12 +45,8 @@
     <div v-else class="mobile">
       <nav class="navbar-mobile">
         <div v-if="loginMode" class="navbar-mobile_wrapper">
-          <div class="navbar-mobile_button">
-            Вход
-          </div>
-          <div class="navbar-mobile_button">
-            Регистрация
-          </div>
+          <div class="navbar-mobile_button">Вход</div>
+          <div class="navbar-mobile_button">Регистрация</div>
           <div class="navbar-mobile_button navbar-mobile_button__close">
             <span @click="testMod">
               <navbar-icon type="Close"></navbar-icon>

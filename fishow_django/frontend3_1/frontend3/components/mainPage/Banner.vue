@@ -2,9 +2,7 @@
   <div class="head-banner">
     <div class="banner-body">
       <div class="banner_title-wrapper">
-        <h1 class="banner_title">
-          Вместе мы улучшаем качество прогноза клева
-        </h1>
+        <h1 class="banner_title">Вместе мы улучшаем качество прогноза клева</h1>
         <h3 class="banner_title">
           Ваши отчеты помогают спрогнозировать результаты рыбалки
         </h3>

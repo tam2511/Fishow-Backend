@@ -12,7 +12,7 @@
         </span>
       </b-upload>
     </b-field>
-    <textarea :id="counter" v-model="image" name="image" style="display: none;">
+    <textarea :id="counter" v-model="image" name="image" style="display: none">
     </textarea>
     <figure class="image">
       <img :src="image" alt="" />

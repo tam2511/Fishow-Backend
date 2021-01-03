@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import convert from '~/pages/prognoz-kleva/convert'
 import breadCrumbsSelect from '@/components/predictPage/breadCrumbsSelect'
+import convert from '~/pages/prognoz-kleva/convert'
 export default {
   components: {
     breadCrumbsSelect,
@@ -31,6 +31,11 @@ export default {
     return {
       value: false,
       value2: false,
+    }
+  },
+  head() {
+    return {
+      title: 'Fishow - Прогноз',
     }
   },
   computed: {
@@ -48,11 +53,6 @@ export default {
     json() {
       return convert()
     },
-  },
-  head() {
-    return {
-      title: 'Fishow - Прогноз',
-    }
   },
 }
 </script>

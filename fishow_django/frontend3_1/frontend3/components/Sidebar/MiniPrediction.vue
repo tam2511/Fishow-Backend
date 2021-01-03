@@ -39,9 +39,7 @@
       <SkeletonPrediction />
     </div>
     <nuxt-link to="/prognoz-kleva">
-      <div class="placeholder">
-        Посмотреть другие прогнозы
-      </div>
+      <div class="placeholder">Посмотреть другие прогнозы</div>
     </nuxt-link>
   </div>
 </template>

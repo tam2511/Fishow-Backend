@@ -12,9 +12,7 @@
       </div>
       <div class="site-news__item-container">
         <div class="site-news__header">30 октября 2020</div>
-        <div class="site-news__body">
-          Открыт новый Рыбхоз “Рыбные пальчики”
-        </div>
+        <div class="site-news__body">Открыт новый Рыбхоз “Рыбные пальчики”</div>
       </div>
       <div class="site-news__item-container">
         <div class="site-news__header">29 октября 2020</div>

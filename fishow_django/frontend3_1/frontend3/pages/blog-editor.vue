@@ -114,11 +114,11 @@
 <script>
 // import { mapState } from 'vuex'
 import Warning from '@/components/Warning'
-import { blogEditor } from '~/assets/descriptions'
 // import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
 import videoField from '@/components/blog/videoField'
+import { blogEditor } from '~/assets/descriptions'
 
 export default {
   components: {
@@ -142,6 +142,29 @@ export default {
       ],
       optionsCategory: ['Новости', 'Блоги', 'Статьи', 'Отчет'],
       errorTags: '',
+    }
+  },
+  // async beforeRouteEnter(to, from, next) {
+  // if the component will be used to update a question, then get the question's data from the REST API
+  // if (to.params.slug !== undefined) {
+  // const endpoint = `/api/blogs/${to.params.slug}/`
+  // const data = await apiService(endpoint)
+  // return next(vm => (vm.blog_body = data.content))
+  // } else {
+  //   return next()
+  // }
+  // }
+  head() {
+    return {
+      title: blogEditor.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: blogEditor.description,
+        },
+      ],
     }
   },
   methods: {
@@ -232,29 +255,6 @@ export default {
         }
       }
     },
-  },
-  // async beforeRouteEnter(to, from, next) {
-  // if the component will be used to update a question, then get the question's data from the REST API
-  // if (to.params.slug !== undefined) {
-  // const endpoint = `/api/blogs/${to.params.slug}/`
-  // const data = await apiService(endpoint)
-  // return next(vm => (vm.blog_body = data.content))
-  // } else {
-  //   return next()
-  // }
-  // }
-  head() {
-    return {
-      title: blogEditor.title,
-      meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        {
-          hid: 'description',
-          name: 'description',
-          content: blogEditor.description,
-        },
-      ],
-    }
   },
 }
 </script>

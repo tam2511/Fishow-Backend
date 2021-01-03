@@ -60,6 +60,19 @@ export default {
       default: 0,
     },
   },
+  head() {
+    return {
+      title: userPage.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: userPage.description,
+        },
+      ],
+    }
+  },
   computed: {
     ...mapState('user', ['user']),
   },
@@ -74,19 +87,6 @@ export default {
         console.log('e = ', e)
       }
     },
-  },
-  head() {
-    return {
-      title: userPage.title,
-      meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        {
-          hid: 'description',
-          name: 'description',
-          content: userPage.description,
-        },
-      ],
-    }
   },
 }
 </script>

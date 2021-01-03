@@ -1,7 +1,5 @@
 <template>
-  <div>
-    oneday
-  </div>
+  <div>oneday</div>
 </template>
 
 <script>

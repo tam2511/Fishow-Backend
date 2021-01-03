@@ -96,8 +96,8 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: this.tempMin.sort()[0] - 2,
-          max: this.tempMax.sort()[this.tempMin.length],
+          min: this.yaxisMin,
+          max: this.yaxisMax,
           labels: {
             formatter(value) {
               return Math.round(value)
@@ -138,6 +138,16 @@ export default {
         ],
       },
     }
+  },
+  computed: {
+    yaxisMin() {
+      const temp = this.tempMin
+      return temp.sort()[0] - 2
+    },
+    yaxisMax() {
+      const temp = this.tempMax
+      return temp.sort()[this.tempMin.length]
+    },
   },
 }
 </script>

@@ -1,9 +1,7 @@
 <template>
   <div class="card">
     <div class="card-content">
-      <h2 class="title">
-        Попробуйте найти другой прогноз :(
-      </h2>
+      <h2 class="title">Попробуйте найти другой прогноз :(</h2>
       <p>Данный прогноз не найден или временно недоступен</p>
     </div>
   </div>
