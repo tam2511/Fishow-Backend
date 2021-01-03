@@ -1,4 +1,8 @@
-<template> </template>
+<template>
+  <div>
+    oneday
+  </div>
+</template>
 
 <script>
 export default {

@@ -28,7 +28,7 @@
         <fish-select-prediction :passive="true" />
       </b-field>
       <!--      <div>position: {{ position }}</div>-->
-      <button @click="createPrediction" class="button is-primary">
+      <button class="button is-primary" @click="createPrediction">
         Составить прогноз
       </button>
       <nuxt-link class="button is-text" :to="{ path: '/prognoz-kleva' }"

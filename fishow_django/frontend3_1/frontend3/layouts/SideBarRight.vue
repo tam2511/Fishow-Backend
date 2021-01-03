@@ -45,7 +45,7 @@
                   </div>
                 </article>
 
-                <article class="tile is-parent is-vertical" v-if="$auth.user">
+                <article v-if="$auth.user" class="tile is-parent is-vertical">
                   <p class="title is-4">Статистика</p>
                   <div class="tile is-child card">
                     <UserRate />
