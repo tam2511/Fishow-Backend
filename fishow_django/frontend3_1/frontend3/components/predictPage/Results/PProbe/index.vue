@@ -1,7 +1,9 @@
 <template>
   <div class="prediction-box box">
-    <p class="title">Прогноз клева</p>
-    <p class="content" v-html="readyData.prediction_brief"></p>
+    <div v-if="!mainPage">
+      <p class="title">Прогноз клева</p>
+      <p class="content" v-html="readyData.prediction_brief"></p>
+    </div>
     <div class="columns">
       <div class="column">
         <div class="columns minmax_columns">
@@ -40,6 +42,12 @@ import readyData from '~/assets/mixins/prediction/readyData'
 
 export default {
   mixins: [readyData],
+  props: {
+    mainPage: {
+      type: Boolean,
+      default: false,
+    },
+  },
 }
 </script>
 
@@ -48,7 +56,7 @@ export default {
 
 .minmax_container {
   display: flex;
-  font-size: 4vh;
+  font-size: 2rem;
   align-items: center;
   white-space: nowrap;
   p {

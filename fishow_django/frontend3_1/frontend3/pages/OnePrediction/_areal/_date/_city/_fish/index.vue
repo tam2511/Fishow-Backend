@@ -60,6 +60,8 @@
 // vuex
 import { mapState, mapActions } from 'vuex'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
+
+import { predictionOne } from '~/assets/descriptions'
 // mixins
 import urlData from '~/assets/mixins/prediction/urlData'
 import predictionTemp from '~/assets/mixins/prediction/predictionTemp'
@@ -76,11 +78,7 @@ export default {
   layout: 'prediction',
   computed: {
     readyData() {
-      const check = window.location.href.match(/OnePrediction/) ? 'one' : 'ten'
-      console.log(check)
-      console.log('this.prediction = ', this.prediction)
       const data = convertDataFromServer(this.prediction, true)
-      console.log('before set = ', data)
       this.setReady(data)
       this.setDays(this.days)
       return data
@@ -95,8 +93,6 @@ export default {
     const url = encodeURI(
       `/prediction/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
     )
-    console.log('url = ', url)
-    console.log('start get prediction one ')
     this.getPredictionOne(url)
   },
   methods: {
@@ -108,8 +104,15 @@ export default {
   },
   head() {
     return {
-      title:
-        'Fishow - Прогноз клева рыбы на один день, вероятность клева, прогноз рыбалки на день',
+      title: predictionOne.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: predictionOne.description,
+        },
+      ],
     }
   },
 }

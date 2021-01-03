@@ -114,6 +114,7 @@
 <script>
 // import { mapState } from 'vuex'
 import Warning from '@/components/Warning'
+import { blogEditor } from '~/assets/descriptions'
 // import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
@@ -127,14 +128,6 @@ export default {
     imageField,
     videoField,
   },
-  // props: {
-  //   slug: {
-  //     type: String,
-  //     required: false,
-  //     default: null
-  //   }
-  // },
-
   data() {
     return {
       articles: ['BlogContentField'],
@@ -250,6 +243,19 @@ export default {
   //   return next()
   // }
   // }
+  head() {
+    return {
+      title: blogEditor.title,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: 'description',
+          name: 'description',
+          content: blogEditor.description,
+        },
+      ],
+    }
+  },
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
