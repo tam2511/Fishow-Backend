@@ -57,10 +57,11 @@ export default {
   }
   &__item {
     min-height: 220px;
-    background-image: url('/Rectangle.png');
+    background-image: url('/placeholder.png');
+    background-color: #fff;
     background-position: right;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 200px;
     padding: 20px;
 
     border: 1px solid rgba(206, 209, 213, 0.4);
@@ -78,9 +79,11 @@ export default {
   font-size: 19px;
   line-height: 32px;
   width: 50%;
+  font-weight: 400;
 }
 .grid__item_body {
   text-align: left;
   width: 70%;
+  font-weight: 300;
 }
 </style>

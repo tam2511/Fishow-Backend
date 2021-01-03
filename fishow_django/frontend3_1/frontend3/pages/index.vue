@@ -28,8 +28,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.section {
-  background-color: #fff;
-}
-</style>
+<style lang="scss" scoped></style>

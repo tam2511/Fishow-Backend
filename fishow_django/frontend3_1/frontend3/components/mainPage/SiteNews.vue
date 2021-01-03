@@ -40,6 +40,11 @@ export default {
   display: flex;
   flex-flow: column;
   margin: 40px 0;
+  &__title {
+    h2 {
+      font-weight: 500;
+    }
+  }
   &__container {
     display: flex;
     flex-flow: row wrap;

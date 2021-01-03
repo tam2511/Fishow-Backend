@@ -33,11 +33,12 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '@/assets/scss/main';
 @import '~bulma/sass/utilities/_all';
 
 // Set your colors
 :root {
+  --color-type-primary: #018cac;
+  --size-typo-legend: 14px;
   --main-color: #018cac;
 }
 $primary: #018cac;
@@ -97,6 +98,8 @@ $link-focus-border: $primary;
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 a {
   color: #0d0a0a;
   transition: color 0.3s;
@@ -108,12 +111,19 @@ a {
   color: #b10909;
 }
 #app > section.section {
-  padding-top: 20px;
-  @media screen and (max-width: 450px) {
-    padding: 20px 0 0;
-  }
+  padding-top: 10px;
+  /*@media screen and (max-width: 450px) {*/
+  /*  padding: 20px 0 0;*/
+  /*}*/
 }
 #app {
   overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+.card {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.prediction-section label {
+  font-weight: 400;
 }
 </style>

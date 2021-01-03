@@ -13,7 +13,7 @@
         </nuxt-link>
       </div>
       <div class="banner_picture">
-        <img src="/5ccef214ee61b_o_rybalke.png" width="400px" alt="" />
+        <img src="/placeholder.png" width="400px" alt="" />
       </div>
     </div>
     <div class="banner-statistic">
@@ -70,10 +70,6 @@ export default {
   width: 100%;
 }
 .banner_title {
-  font-family: Open Sans, fantasy;
-  font-style: normal;
-  font-weight: normal;
-
   &-wrapper {
     width: 50%;
     max-height: 500px;
@@ -81,8 +77,8 @@ export default {
       margin: 10px 0;
     }
     .button {
-      background: #018cac;
-      border: 2px solid #018cac;
+      background: var(--main-color);
+      border: 2px solid var(--main-color);
       box-sizing: border-box;
       border-radius: 4px;
       padding: 10px 30px;

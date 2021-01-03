@@ -25,7 +25,7 @@
       </article>
     </div>
     <div v-if="!next">
-      <h2 class="title">Блоги закончились, поздравляю!</h2>
+      <h2 class="title title-blogs-end">Блоги закончились, поздравляю!</h2>
     </div>
   </div>
 </template>
@@ -113,6 +113,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title-blogs-end {
+  color: #247d21;
+  font-size: 1rem;
+  padding: 1rem;
+  background: #fff;
+}
 @media screen and (max-width: 700px) {
   .space-left0 {
     padding-right: 0;
