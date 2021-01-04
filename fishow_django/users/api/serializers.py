@@ -78,7 +78,7 @@ class UserDisplaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['username','email', 'count_blogs', 'count_comments', 'count_report', 'social_rating', 'fishing_rating', 'rang', 'count_like', 'count_dislike', 'time_from_creations', 'sort_list_date', 'sort_list_pop', 'sort_list_hot']
+        fields = ['username','email', 'count_blogs', 'count_comments', 'count_report', 'social_rating', 'fishing_rating', 'rang', 'count_like', 'count_dislike', 'time_from_creations', 'sort_list_date', 'sort_list_pop', 'sort_list_hot','subscriptions']
 
     def get_rang(self, instance):
             rang_koef = int(instance.social_rating) + int(instance.fishing_rating)

@@ -27,7 +27,8 @@ class CurrentUserAPIView(APIView):
         return Response(serializer.data)
 
 class SelectUserAPIView(APIView):
-    permission_classes = [IsAuthorOrReadOnly, DjangoObjectPermissionsOrAnonReadOnly]
+    #permission_classes = [IsAuthorOrReadOnly, DjangoObjectPermissionsOrAnonReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, username):
         user=get_object_or_404(CustomUser, username=username)
@@ -60,6 +61,82 @@ class UserList(APIView):
             else: return
         return Response(users)
 
+
+class SubscriptSelectUserAPIView(APIView):
+
+    serializer_class = UserDisplaySerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, username):
+        """Remove request.user from the voters queryset of an comment instance."""
+        select_user = get_object_or_404(CustomUser, username=username)
+        user = request.user
+
+        if select_user in [val for val in user.subscriptions.all()]:
+            user.subscriptions.remove(select_user)
+            user.save()
+
+            serializer_context = {"request": request}
+            serializer = UserDisplaySerializer(user)
+            #serializer = self.serializer_class(user, context=serializer_context)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            serializer_context = {'message':'already_do_it'}
+            return Response(serializer_context)
+
+    def post(self, request, username):
+        """Add request.user to the voters queryset of an comment instance."""
+        select_user = get_object_or_404(CustomUser, username=username)
+        user = request.user
+        if select_user not in [val for val in user.subscriptions.all()]:
+
+            user.subscriptions.add(select_user)
+            user.save()
+
+            serializer_context = {"request": request}
+            serializer = UserDisplaySerializer(user)
+            #serializer = self.serializer_class(user, context=serializer_context)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            serializer_context = {'message':'already_do_it'}
+            return Response(serializer_context)
+
+
+
+# class SubscriptSelectUserAPIView(APIView):
+#     #permission_classes = [IsAuthorOrReadOnly, DjangoObjectPermissionsOrAnonReadOnly]
+#     #permission_classes = [IsAuthenticated]
+#     permission_classes = [AllowAny]
+#
+#     def get(self, request, username):
+#         user=get_object_or_404(CustomUser, username=username)
+#         serializer = UserDisplaySerializer(user)
+#         return Response(serializer.data)
+#
+#     def post(self, request, username):
+#         select_user = get_object_or_404(CustomUser, username=username)
+#         user = request.user
+#         if select_user not in [val for val in user.subscriptions.all()]:
+#
+#             user.subscriptions.add(select_user)
+#             user.save()
+#
+#             serializer_context = {"request": request}
+#             serializer = UserDisplaySerializer(user)
+#             #serializer = self.serializer_class(user, context=serializer_context)
+#
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+#
+#         else:
+#
+#             serializer_context = {'message':'already_do_it'}
+#             return Response(serializer_context)
 
 # class UserList(APIView):
 #         queryset = get_user_model().objects.all().order_by('social_rating')

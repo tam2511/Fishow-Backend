@@ -179,7 +179,7 @@ class BlogViewSet(viewsets.ModelViewSet):
             obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
             print(self.request.user)
             if self.request.user.is_authenticated:
-                    blog=get_object_or_404(Blog, pk=obj.id)
+                    blog=get_object_or_404(Blog, slug = self.kwargs.get("slug"))
                     user = self.request.user
                     print(user)
                     if user not in blog.views.all():
@@ -193,7 +193,7 @@ class BlogLikeAPIView(APIView):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def delete(self, request, slug):
         """Remove request.user from the voters queryset of an comment instance."""
         blog = get_object_or_404(Blog, slug=slug)
         user = request.user
@@ -220,7 +220,7 @@ class BlogLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
-    def post(self, request, pk):
+    def post(self, request, slug):
         """Add request.user to the voters queryset of an comment instance."""
         blog = get_object_or_404(Blog, slug=slug)
         user = request.user
@@ -253,7 +253,7 @@ class BlogDisLikeAPIView(APIView):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def delete(self, request, slug):
         """Remove request.user from the voters queryset of an comment instance."""
         blog = get_object_or_404(Blog, slug=slug)
         user = request.user
@@ -279,7 +279,7 @@ class BlogDisLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
-    def post(self, request, pk):
+    def post(self, request, slug):
         """Add request.user to the voters queryset of an comment instance."""
         blog = get_object_or_404(Blog, slug=slug)
         user = request.user
@@ -313,7 +313,7 @@ class BlogSaveAPIView(APIView):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def delete(self, request, slug):
         """Remove request.user from the voters queryset of an comment instance."""
         blog = get_object_or_404(Blog, slug=slug)
         user = request.user
@@ -332,7 +332,7 @@ class BlogSaveAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
-    def post(self, request, pk):
+    def post(self, request, slug):
         """Add request.user to the voters queryset of an comment instance."""
         blog = get_object_or_404(Blog, slug=slug)
         user = request.user

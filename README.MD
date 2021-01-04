@@ -44,6 +44,10 @@
 * user/liked/report/comment/
 * user/created/report/comment/
 * user_select/(?P<username>.*)/
+* user_select/(?P<username>.*)/subscript/
+
+* rest-auth/login/
+* rest-auth/registration/
 
 3. REPORT
 * Report/
