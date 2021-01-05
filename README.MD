@@ -16,6 +16,8 @@
 
 **API**
 
+127.0.0.1/api/...
+
 1. BLOGS,COMMENTS,IMAGE
 * Blogs/
 * images/
@@ -24,8 +26,9 @@
 * comments/<int:pk>/
 * comments/<int:pk>/like/
 * comments/<int:pk>/dislike/
-* blogs/<int:pk>/like/
-* blogs/<int:pk>/dislike/
+* blogs/<slug:slug>/like/
+* blogs/<slug:slug>/dislike/
+* blogs/<slug:slug>/save/
 
 2. USER
 * user/
@@ -41,6 +44,10 @@
 * user/liked/report/comment/
 * user/created/report/comment/
 * user_select/(?P<username>.*)/
+* user_select/(?P<username>.*)/subscript/
+
+* rest-auth/login/
+* rest-auth/registration/
 
 3. REPORT
 * Report/

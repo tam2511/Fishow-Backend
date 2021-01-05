@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.conf import settings
 
 
 class CustomUser(AbstractUser):
@@ -13,4 +14,5 @@ class CustomUser(AbstractUser):
     count_report = models.IntegerField(default=0)
     count_like = models.IntegerField(default=0)
     count_dislike = models.IntegerField(default=0)
-
+    subscriptions = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                              related_name='user_subscriptions')
