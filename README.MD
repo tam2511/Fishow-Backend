@@ -19,7 +19,7 @@
 127.0.0.1/api/...
 
 1. BLOGS,COMMENTS,IMAGE
-* Blogs/
+* blogs/
 * images/
 * blogs/<slug:slug>/comments/
 * blogs/<slug:slug>/comment/
@@ -50,15 +50,24 @@
 * rest-auth/registration/
 
 3. REPORT
-* Report/
-* fishing/
+* report/
 * report/<slug:slug>/comments/
 * report/<slug:slug>/comment/
 * comments/<int:pk>/
 * comments/<int:pk>/like/
 * comments/<int:pk>/dislike/
-* report/<int:pk>/like/
-* report/<int:pk>/dislike/
+* report/<slug:slug>/like/
+* report/<slug:slug>/dislike/
+
+4. NEWS
+* news/
+* news/<slug:slug>/comments/
+* news/<slug:slug>/comment/
+* comments/<int:pk>/
+* comments/<int:pk>/like/
+* comments/<int:pk>/dislike/
+* news/<slug:slug>/like/
+* news/<slug:slug>/dislike/
 
 **Frontend** 
 
