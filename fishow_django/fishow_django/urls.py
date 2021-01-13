@@ -44,6 +44,9 @@ urlpatterns = [
     path('api/',
          include('report.api.urls')),
 
+    path('api/',
+         include('news.api.urls')),
+
     path('api-auth/',
          include('rest_framework.urls')),
 

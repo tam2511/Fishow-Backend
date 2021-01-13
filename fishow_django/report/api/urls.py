@@ -8,8 +8,6 @@ router.register(r"report", qv.ReportView)
 urlpatterns = [
     path("", include(router.urls)),
 
-    path("fishing/", qv.FishingView.as_view(), name='fishing'),
-
     path("report/<slug:slug>/comments/",
          qv.CommentListAPIView.as_view(),
          name="comment_r-list"),
@@ -30,11 +28,11 @@ urlpatterns = [
          qv.CommentDisLikeAPIView.as_view(),
          name="comment_r-dislike"),
 
-    path("report/<int:pk>/like/",
+    path("report/<slug:slug>/like/",
          qv.ReportLikeAPIView.as_view(),
          name="report-like"),
 
-    path("report/<int:pk>/dislike/",
+    path("report/<slug:slug>/dislike/",
          qv.ReportDisLikeAPIView.as_view(),
          name="report-dislike"),
 

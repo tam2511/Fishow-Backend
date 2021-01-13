@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from report.models import Report, Comment_r
+from news.models import News, Comment_n
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 
@@ -14,8 +14,8 @@ class CommentSerializer(serializers.ModelSerializer):
     comments_slug = serializers.SerializerMethodField()
 
     class Meta:
-        model = Comment_r
-        exclude = ['report', 'votersUp','votersDown', 'updated_at']
+        model = Comment_n
+        exclude = ['news', 'votersUp','votersDown', 'updated_at']
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%B %d, %Y")
@@ -41,9 +41,9 @@ class CommentSerializer(serializers.ModelSerializer):
             return False
 
     def get_comments_slug(self, instance):
-        return instance.report.slug
+        return instance.news.slug
 
-class ReportSerializer(serializers.ModelSerializer):
+class NewsSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
@@ -57,7 +57,7 @@ class ReportSerializer(serializers.ModelSerializer):
     user_views = serializers.SerializerMethodField()
 
     class Meta:
-        model = Report
+        model = News
         exclude = ['updated_at', 'votersUp','votersDown','views']
 
     def get_created_at(self, instance):
