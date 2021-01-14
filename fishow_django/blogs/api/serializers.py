@@ -50,6 +50,7 @@ class BlogSerializer(serializers.ModelSerializer):
     dislikes_count = serializers.SerializerMethodField()
     user_has_votedUp = serializers.SerializerMethodField()
     user_has_votedDown = serializers.SerializerMethodField()
+    user_saved = serializers.SerializerMethodField()
     slug = serializers.SlugField(read_only=True)
     comments_count = serializers.SerializerMethodField()
     user_has_commented = serializers.SerializerMethodField()
@@ -58,7 +59,7 @@ class BlogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blog
-        exclude = ['updated_at', 'votersUp','votersDown','views']
+        exclude = ['updated_at', 'votersUp','votersDown','saved','views']
 
 #     def get_created_at(self, instance):
 #         return instance.created_at.strftime("%B %d, %Y")
@@ -86,6 +87,13 @@ class BlogSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         if not request.user.is_anonymous:
             return instance.votersDown.filter(pk=request.user.pk).exists()
+        else:
+            return False
+
+    def get_user_saved(self, instance):
+        request = self.context.get("request")
+        if not request.user.is_anonymous:
+            return instance.saved.filter(pk=request.user.pk).exists()
         else:
             return False
 

@@ -63,6 +63,9 @@ class NewsSerializer(serializers.ModelSerializer):
     def get_created_at(self, instance):
         return instance.created_at.strftime("%d.%m.%y %H:%M")
 
+    def get_comments_count(self, instance):
+            return instance.comments_n.count()
+
     def get_likes_count(self, instance):
         return instance.votersUp.count()
 

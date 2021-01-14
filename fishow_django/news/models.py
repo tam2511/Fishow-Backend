@@ -4,9 +4,7 @@ from django.conf import settings
 
 class News(models.Model):
     title = models.CharField(max_length=100)
-    date_start = models.DateTimeField(null=True)
-    date_end = models.DateTimeField(null=True)
-    fishing = models.TextField()
+    content = models.TextField()
     category = models.CharField(max_length=100)
     tags = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -23,9 +21,6 @@ class News(models.Model):
     views = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                           related_name='viewsNews')
 
-    areal = models.TextField()
-    city = models.TextField()
-    remark = models.TextField()
 
     def __str__(self):
         return self.content

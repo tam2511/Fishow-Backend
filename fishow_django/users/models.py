@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     count_blogs = models.IntegerField(default=0)
     count_comments = models.IntegerField(default=0)
     count_report = models.IntegerField(default=0)
+    count_news = models.IntegerField(default=0)
     count_like = models.IntegerField(default=0)
     count_dislike = models.IntegerField(default=0)
     subscriptions = models.ManyToManyField(settings.AUTH_USER_MODEL,
