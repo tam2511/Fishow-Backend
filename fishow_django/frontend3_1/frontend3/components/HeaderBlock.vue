@@ -13,14 +13,13 @@
           </b-navbar-item>
         </template>
         <template slot="start">
-          <b-navbar-item tag="nuxt-link" :to="{ name: 'index' }">
-            Главная
-          </b-navbar-item>
-          <b-navbar-item tag="nuxt-link" :to="{ path: '/prognoz-kleva' }">
-            Прогноз
-          </b-navbar-item>
-          <b-navbar-item tag="nuxt-link" :to="{ path: '/blogs' }">
-            Блоги
+          <b-navbar-item
+            v-for="item in desktopButtons"
+            :key="item._uid"
+            tag="nuxt-link"
+            :to="item.url"
+          >
+            {{ item.title }}
           </b-navbar-item>
         </template>
         <template slot="end">
@@ -78,6 +77,28 @@ export default {
   components: { NavbarIcon },
   data() {
     return {
+      desktopButtons: [
+        {
+          title: 'Главная',
+          url: { name: 'index' },
+          type: 'Home',
+        },
+        {
+          title: 'Прогноз',
+          url: { path: '/prognoz-kleva' },
+          type: 'Prediction',
+        },
+        {
+          title: 'Блоги',
+          url: { path: '/blogs' },
+          type: 'Blogs',
+        },
+        {
+          title: 'Новости',
+          url: { path: '/news' },
+          type: 'News',
+        },
+      ],
       navMobButtons: [
         {
           title: '',
