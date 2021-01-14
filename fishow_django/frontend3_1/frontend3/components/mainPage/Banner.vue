@@ -10,27 +10,21 @@
           Оставить отчет
         </nuxt-link>
       </div>
-      <div class="banner_picture">
-        <img src="/placeholder.png" width="400px" alt="" />
-      </div>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated tada"
+        leave-active-class="animated bounceOutRight"
+      >
+        <div class="banner_picture">
+          <img src="/placeholder.png" width="400px" alt="" />
+        </div>
+      </transition>
     </div>
-    <div class="banner-statistic">
-      <div class="banner-statistic__item">
-        <div class="banner-statistic__title">Точность прогноза</div>
-        <div class="banner-statistic__value">75%</div>
-      </div>
-      <div class="banner-statistic__item">
-        <div class="banner-statistic__title">Статей и блогов</div>
-        <div class="banner-statistic__value">26 641</div>
-      </div>
-      <div class="banner-statistic__item">
-        <div class="banner-statistic__title">Количество прогнозов</div>
-        <div class="banner-statistic__value">{{ predictions_counter }}</div>
-      </div>
-      <div class="banner-statistic__item">
-        <div class="banner-statistic__title">Точность прогноза</div>
-        <div class="banner-statistic__value">75%</div>
-      </div>
+
+    <div class="banner-statistic"></div>
+    <div v-for="item in banners" :key="item.id" class="banner-statistic__item">
+      <div class="banner-statistic__title">{{ item.title }}</div>
+      <div class="banner-statistic__value">{{ item.counter }}</div>
     </div>
   </div>
 </template>
@@ -39,20 +33,31 @@
 export default {
   data() {
     return {
-      predictions_counter: 26610,
+      banners: {
+        predictionCounter: {
+          id: 0,
+          title: 'Точность прогноза',
+          counter: 0,
+        },
+        blogsCounter: {
+          id: 1,
+          title: 'Статей и блогов',
+          counter: 0,
+        },
+        reportsCounter: {
+          id: 2,
+          title: 'Количество прогнозов',
+          counter: 0,
+        },
+        userCounter: {
+          id: 3,
+          title: 'К нам присоединилось',
+          counter: 0,
+        },
+      },
     }
   },
-  mounted() {
-    const getRandomTimerTime = () => {
-      return Math.floor(Math.random() * Math.floor(3000))
-    }
-    const timer = () => {
-      this.predictions_counter += Math.floor(Math.random() * Math.floor(20))
-      setTimeout(timer, getRandomTimerTime())
-    }
-
-    timer()
-  },
+  mounted() {},
 }
 </script>
 
