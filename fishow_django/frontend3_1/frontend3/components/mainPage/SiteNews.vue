@@ -9,9 +9,13 @@
         :key="index"
         class="site-news__item-container"
       >
-        <div class="site-news__header">{{ item.date }}</div>
+        <div class="site-news__header">{{ item.created_at }}</div>
         <div class="site-news__body">
-          {{ item.title }}
+          <nuxt-link
+            :to="{ name: 'news-slug', params: { slug: item.slug } }"
+            class="site-news__link"
+            >{{ item.title }}
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -36,7 +40,7 @@ export default {
     async getNews() {
       const response = await this.$axios.get('/news/')
 
-      this.news = response.data.results
+      this.news = response.data.results.slice(0, 3)
     },
   },
 }
@@ -47,6 +51,12 @@ export default {
   display: flex;
   flex-flow: column;
   margin: 40px 0;
+  &__link {
+    color: var(--color-type-primary);
+    &:hover {
+      color: var(--color-type-hover);
+    }
+  }
   &__title {
     h2 {
       font-weight: 500;

@@ -219,7 +219,16 @@ export default {
           category: this.blog_category,
           tags: this.blog_tags,
         }
-        const response = await this.$axios.$post('/blogs/', blog)
+        console.log('this.blog ', blog)
+        const postURL = {
+          Новости: '/news/',
+          Блоги: '/blogs/',
+          Отчет: '/report/',
+        }
+        const response = await this.$axios.$post(
+          postURL[this.blog_category],
+          blog
+        )
         console.log('response = ', response)
         this.$router.push({
           name: 'blog-slug',
