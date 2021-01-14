@@ -4,20 +4,14 @@
       <h2 class="title">Новости</h2>
     </div>
     <div class="site-news__container">
-      <div class="site-news__item-container">
-        <div class="site-news__header">30 октября 2020</div>
+      <div
+        v-for="(item, index) in news"
+        :key="index"
+        class="site-news__item-container"
+      >
+        <div class="site-news__header">{{ item.date }}</div>
         <div class="site-news__body">
-          Рыбхоз “Двенди” выпустл на волю 300 кг форели
-        </div>
-      </div>
-      <div class="site-news__item-container">
-        <div class="site-news__header">30 октября 2020</div>
-        <div class="site-news__body">Открыт новый Рыбхоз “Рыбные пальчики”</div>
-      </div>
-      <div class="site-news__item-container">
-        <div class="site-news__header">29 октября 2020</div>
-        <div class="site-news__body">
-          Компания “Шимана” выпустила новую линейку спинингов
+          {{ item.title }}
         </div>
       </div>
     </div>
@@ -30,6 +24,21 @@
 <script>
 export default {
   name: 'SiteNews',
+  data() {
+    return {
+      news: null,
+    }
+  },
+  mounted() {
+    this.getNews()
+  },
+  methods: {
+    async getNews() {
+      const response = await this.$axios.get('/news/')
+
+      this.news = response.data.results
+    },
+  },
 }
 </script>
 

@@ -112,9 +112,7 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import Warning from '@/components/Warning'
-// import TextField from '@/components/blog/textField'
 import imageField from '@/components/blog/imageField'
 import BlogContentField from '@/components/blog/blogContentField'
 import videoField from '@/components/blog/videoField'
@@ -144,21 +142,10 @@ export default {
       errorTags: '',
     }
   },
-  // async beforeRouteEnter(to, from, next) {
-  // if the component will be used to update a question, then get the question's data from the REST API
-  // if (to.params.slug !== undefined) {
-  // const endpoint = `/api/blogs/${to.params.slug}/`
-  // const data = await apiService(endpoint)
-  // return next(vm => (vm.blog_body = data.content))
-  // } else {
-  //   return next()
-  // }
-  // }
   head() {
     return {
       title: blogEditor.title,
       meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
           hid: 'description',
           name: 'description',
@@ -169,15 +156,13 @@ export default {
   },
   methods: {
     error(text) {
+      // eslint-disable-next-line no-unused-vars
       const notif = this.$buefy.notification.open({
         duration: 5000,
         message: text,
         position: 'is-bottom-right',
         type: 'is-danger',
         hasIcon: true,
-      })
-      notif.$on('close', () => {
-        // this.$buefy.notification.open('Custom notification closed!')
       })
     },
     addTag(newTag) {
@@ -235,6 +220,7 @@ export default {
           tags: this.blog_tags,
         }
         const response = await this.$axios.$post('/blogs/', blog)
+        console.log('response = ', response)
         this.$router.push({
           name: 'blog-slug',
           params: { slug: response.slug },
