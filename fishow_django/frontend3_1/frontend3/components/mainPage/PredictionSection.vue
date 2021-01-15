@@ -31,7 +31,7 @@
       <button class="button is-primary" @click="createPrediction">
         Составить прогноз
       </button>
-      <nuxt-link class="button is-text" :to="{ path: '/prognoz-kleva' }"
+      <nuxt-link class="button" outlined :to="{ path: '/prognoz-kleva' }"
         >Подробнее</nuxt-link
       >
     </div>
@@ -110,7 +110,7 @@ export default {
         this.position = [position.coords.latitude, position.coords.longitude]
       }
       if (navigator && navigator.geolocation) {
-        console.log('start search position')
+        // console.log('start search position')
         navigator.geolocation.getCurrentPosition(positionCB, this.showError)
       }
     },

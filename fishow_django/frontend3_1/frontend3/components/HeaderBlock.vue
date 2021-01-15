@@ -13,14 +13,13 @@
           </b-navbar-item>
         </template>
         <template slot="start">
-          <b-navbar-item tag="nuxt-link" :to="{ name: 'index' }">
-            Главная
-          </b-navbar-item>
-          <b-navbar-item tag="nuxt-link" :to="{ path: '/prognoz-kleva' }">
-            Прогноз
-          </b-navbar-item>
-          <b-navbar-item tag="nuxt-link" :to="{ path: '/blogs' }">
-            Блоги
+          <b-navbar-item
+            v-for="item in desktopButtons"
+            :key="item._uid"
+            tag="nuxt-link"
+            :to="item.url"
+          >
+            {{ item.title }}
           </b-navbar-item>
         </template>
         <template slot="end">
@@ -28,9 +27,6 @@
             <div v-if="!$auth.user" class="buttons">
               <a class="button is-primary" @click="toggleReg"> Регистрация </a>
               <a class="button is-light" @click="toggleLogin"> Войти </a>
-              <!--          <a class="button is-light" @click="toggleLoginYandex">-->
-              <!--            Войти через Яндекс-->
-              <!--          </a>-->
             </div>
             <div v-else class="buttons">
               <nuxt-link to="/UserPage" class="button ip-primary">
@@ -81,6 +77,28 @@ export default {
   components: { NavbarIcon },
   data() {
     return {
+      desktopButtons: [
+        {
+          title: 'Главная',
+          url: { name: 'index' },
+          type: 'Home',
+        },
+        {
+          title: 'Прогноз',
+          url: { path: '/prognoz-kleva' },
+          type: 'Prediction',
+        },
+        {
+          title: 'Блоги',
+          url: { path: '/blogs' },
+          type: 'Blogs',
+        },
+        {
+          title: 'Новости',
+          url: { path: '/news' },
+          type: 'News',
+        },
+      ],
       navMobButtons: [
         {
           title: '',
@@ -112,14 +130,12 @@ export default {
       if (typeof navigator === 'object') {
         result = navigator && /mobile/i.test(navigator.userAgent)
       }
-      console.log('result = ', result)
       return result
     },
     ...mapState('user', ['user']),
   },
   methods: {
     testMod() {
-      console.log('test')
       this.loginMode = !this.loginMode
     },
     async logout() {
@@ -153,13 +169,6 @@ export default {
     transition: 0.3s;
   }
   .nuxt-link-exact-active {
-    svg {
-      /*border-radius: 9px;*/
-      /*width: 45px;*/
-      /*height: 45px;*/
-      /*position: absolute;*/
-      /*background-color: #fff;*/
-    }
     path {
       fill: #000;
     }
@@ -181,18 +190,13 @@ export default {
     justify-content: space-around;
   }
 }
-nav.navbar {
-  background: none;
-}
 .logo {
   padding: 0 !important;
   color: #898989 !important;
-  /*-webkit-text-stroke: 1px #fff;*/
   position: relative;
   &:after {
     content: attr(data-word);
     position: absolute;
-    /*top: 0;*/
     left: 0;
     color: #74c4d3;
     cursor: initial;

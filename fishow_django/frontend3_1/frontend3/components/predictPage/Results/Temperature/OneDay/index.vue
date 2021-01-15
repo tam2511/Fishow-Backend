@@ -31,9 +31,9 @@ export default {
   },
   computed: {
     image() {
-      console.log('this.day.phenomenon = ', this.day.phenomenon)
+      // console.log('this.day.phenomenon = ', this.day.phenomenon)
       const image = pogoda[this.day.phenomenon]
-      console.log('image = ', image)
+      // console.log('image = ', image)
       return image
     },
     max() {

@@ -4,20 +4,18 @@
       <h2 class="title">Новости</h2>
     </div>
     <div class="site-news__container">
-      <div class="site-news__item-container">
-        <div class="site-news__header">30 октября 2020</div>
+      <div
+        v-for="(item, index) in news"
+        :key="index"
+        class="site-news__item-container"
+      >
+        <div class="site-news__header">{{ item.created_at }}</div>
         <div class="site-news__body">
-          Рыбхоз “Двенди” выпустл на волю 300 кг форели
-        </div>
-      </div>
-      <div class="site-news__item-container">
-        <div class="site-news__header">30 октября 2020</div>
-        <div class="site-news__body">Открыт новый Рыбхоз “Рыбные пальчики”</div>
-      </div>
-      <div class="site-news__item-container">
-        <div class="site-news__header">29 октября 2020</div>
-        <div class="site-news__body">
-          Компания “Шимана” выпустила новую линейку спинингов
+          <nuxt-link
+            :to="{ name: 'news-slug', params: { slug: item.slug } }"
+            class="site-news__link"
+            >{{ item.title }}
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -30,6 +28,21 @@
 <script>
 export default {
   name: 'SiteNews',
+  data() {
+    return {
+      news: null,
+    }
+  },
+  mounted() {
+    this.getNews()
+  },
+  methods: {
+    async getNews() {
+      const response = await this.$axios.get('/news/')
+
+      this.news = response.data.results.slice(0, 3)
+    },
+  },
 }
 </script>
 
@@ -38,6 +51,12 @@ export default {
   display: flex;
   flex-flow: column;
   margin: 40px 0;
+  &__link {
+    color: var(--color-type-primary);
+    &:hover {
+      color: var(--color-type-hover);
+    }
+  }
   &__title {
     h2 {
       font-weight: 500;

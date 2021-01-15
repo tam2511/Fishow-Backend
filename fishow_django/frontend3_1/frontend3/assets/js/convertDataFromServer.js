@@ -24,14 +24,14 @@ export const convertDataFromServer = (data, type = null) => {
     iterator(days)
     return result
   }
-  console.log('data = ', data);
+  // console.log('data = ', data);
   const keys = Object.keys(data)
-  console.log(keys);
+  // console.log(keys);
   const length = data.temperature_max ? data.temperature_max.length : data.temperature.length
   const days = []
   const time = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00'];
   const calendarDays = type ? time : getData(data.date, 9);
-  console.log('calendarDays = ', calendarDays);
+  // console.log('calendarDays = ', calendarDays);
   for (let i = 0; i < length; i++) {
     const day = {}
     keys.forEach((item) => {
