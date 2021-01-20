@@ -38,6 +38,7 @@ export default {
 // Set your colors
 :root {
   --color-type-primary: #018cac;
+  --color-type-hover: #003d4b;
   --size-typo-legend: 14px;
   --main-color: #018cac;
 }
@@ -100,6 +101,7 @@ $link-focus-border: $primary;
 @import '~buefy/src/scss/buefy';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
 a {
   color: #0d0a0a;
   transition: color 0.3s;

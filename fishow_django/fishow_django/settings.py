@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'prediction',
     'report', # new
     'rating',
+    'news',
     'django_filters'
 ]
 

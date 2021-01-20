@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-content">
         <div class="content-container">
-          <div class="media">
+          <div v-if="liked" class="media">
             <div class="media-left">
               <div class="like">
                 <b-button
@@ -106,6 +106,12 @@ export default {
     blog: {
       type: Object,
       required: true,
+    },
+    liked: {
+      type: Boolean,
+      default() {
+        return true
+      },
     },
   },
   data() {

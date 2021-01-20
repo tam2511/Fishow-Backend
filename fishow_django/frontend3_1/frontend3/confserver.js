@@ -1,5 +1,6 @@
 // const os = require('os')
 
+// eslint-disable-next-line no-unused-vars
 const server = {
   ip: '45.90.35.152',
 }
@@ -13,4 +14,4 @@ const dev = {
 //     ? server
 //     : dev
 
-export default server
+export default dev

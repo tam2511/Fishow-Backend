@@ -122,7 +122,7 @@ export const mutations = {
     state.pageScroll = scroll
   },
   SET_PREDICTIONS(state, predictions) {
-    console.log('predicitons = ', predictions)
+    // console.log('predicitons = ', predictions)
     if (typeof predictions === 'undefined') {
       state.predictions = defaultPred
     } else {

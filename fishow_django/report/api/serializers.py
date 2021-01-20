@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from report.models import Report, Comment_r, Fishing
+from report.models import Report, Comment_r
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 
@@ -51,6 +51,7 @@ class ReportSerializer(serializers.ModelSerializer):
     user_has_votedUp = serializers.SerializerMethodField()
     user_has_votedDown = serializers.SerializerMethodField()
     slug = serializers.SlugField(read_only=True)
+    comments_count = serializers.SerializerMethodField()
     user_has_commented = serializers.SerializerMethodField()
     time_from_creations = serializers.SerializerMethodField()
     user_views = serializers.SerializerMethodField()
@@ -61,6 +62,9 @@ class ReportSerializer(serializers.ModelSerializer):
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%d.%m.%y %H:%M")
+
+    def get_comments_count(self, instance):
+            return instance.comments_r.count()
 
     def get_likes_count(self, instance):
         return instance.votersUp.count()
@@ -97,9 +101,3 @@ class ReportSerializer(serializers.ModelSerializer):
 
     def get_user_views(self, instance):
         return instance.views.count()
-
-class FishingSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Fishing
-        fields = '__all__'
