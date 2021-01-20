@@ -1,22 +1,26 @@
 {
   "debug": 1,
   "database_name": "tam2511_fishow",
-  "password": "081099ASDasd",
+  "password": "081099ASDasd!",
   "user": "tam2511_fishow",
   "allowed_hosts": [
+    "45.90.35.152",
+    "fishow.ru:3000",
+    "fishow.ru",
+    "45.90.35.152:3000",
     "0.0.0.0",
-    "localhost",
-    "213.139.208.107",
-    "127.0.0.1"
+    "www.fishow.ru",
+    "45.90.35.152:8000",
+    "45.90.35.152:3000"
   ],
-  "static_root": "/Users/vd/WebstormProjects/fishow_rest_vue/static/",
+  "static_root": "/root/Fishow/fishow_rest_vue/static/",
   "cors_origin_whitelist": [
     "http://0.0.0.0:3000",
-    "http://localhost:3000",
-    "http://192.168.0.102:3000",
-    "http://192.168.0.103:3000",
-    "http://213.139.208.107:3000",
-    "http://109.63.168.229:3000"
+    "http://fishow.ru:3000",
+    "http://fishow.ru",
+    "http://www.fishow.ru",
+    "http://45.90.35.152:8000",
+    "http://45.90.35.152:3000"
   ],
-  "url_front": "http://192.168.0.103:3000/"
+  "url_front": "http://45.90.35.152:3000/"
 }

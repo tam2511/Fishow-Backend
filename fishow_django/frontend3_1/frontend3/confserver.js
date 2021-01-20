@@ -1,7 +1,7 @@
 // const os = require('os')
 
 const server = {
-  ip: '213.139.208.107',
+  ip: '45.90.35.152',
 }
 // eslint-disable-next-line no-unused-vars
 const dev = {
