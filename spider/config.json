@@ -14,7 +14,7 @@
     "max_wait": 5
   },
   "prediction": {
-    "model_path": "/usr/local/bin/spider/models/model_1.joblib",
+    "model_path": "/usr/local/bin/spider/models/catboost_0.2.model",
     "num_days": 3,
     "num_hours": 8
   },
