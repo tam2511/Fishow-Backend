@@ -5,7 +5,7 @@ from time import sleep
 from gismeteo import WeatherParser
 from minmax import get_mean_data
 from mysql_utils import MysqlConnector
-from predictor import Predictor, Model
+from predictor import Predictor
 from utils import read_config, setup_logger, FISHS
 
 

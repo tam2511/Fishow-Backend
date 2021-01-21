@@ -1,6 +1,6 @@
 import json
 import logging
-
+ALONE_KEYS = {'time', 'day', 'month', 'humidity', 'uv_index', 'moon', 'moon_direction'}
 DIGIT_KEYS = {'temperature', 'wind', 'gust', 'pressure', 'humidity', 'uv_index'}
 CATEGORY_KEYS = {'phenomenon', 'wind_direction'}
 MOON_KEYS = {'moon', 'moon_direction'}
@@ -12,7 +12,7 @@ PHENOMENONS = ['ясно', 'малооблачно', 'облачно', 'пасм
 WIND_DIRECTIONS = ['Ю', 'ЮЗ', 'З', 'СЗ', 'С', 'СВ', 'В', 'ЮВ']
 FISHS = ['щука', 'судак', 'окунь', 'берш', 'речная форель', 'озерная форель', 'елец', 'чехонь', 'сом', 'голавль', 'язь',
          'карп', 'жерех', 'лещ', 'карась', 'линь', 'пескарь', 'ротан', 'плотва', 'красноперка', 'налим', 'густера',
-         'амур', 'ерш', 'сазан', 'подуст', 'толстолобик', 'вобла']
+         'амур', 'ерш', 'сазан', 'подуст', 'толстолобик', 'вобла', 'хариус']
 
 FISH_MAP = {'pike': 'щука', 'sudak': 'судак', 'okun': 'окунь', 'bersh': 'берш',
             'forel reka': 'речная форель', 'forel ozero': 'озерная форель', 'elec': 'елец', 'chexon': 'чехонь',
@@ -20,7 +20,7 @@ FISH_MAP = {'pike': 'щука', 'sudak': 'судак', 'okun': 'окунь', 'be
             'lesh': 'лещ', 'caras': 'карась', 'lin': 'линь', 'peskar': 'пескарь', 'rotan': 'ротан',
             'plotva': 'плотва', 'kranoperka': 'красноперка', 'nalim': 'налим', 'gustera': 'густера',
             'amur': 'амур', 'ersh': 'ерш', 'sazan': 'сазан', 'podust': 'подуст', 'tolstolob': 'толстолобик',
-            'vobla': 'вобла'}
+            'vobla': 'вобла', 'harius': 'хариус'}
 
 FISH_UNMAP = {FISH_MAP[key]: key for key in FISH_MAP}
 
