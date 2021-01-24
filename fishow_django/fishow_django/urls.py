@@ -39,6 +39,9 @@ urlpatterns = [
          include('blogs.api.urls')),
 
     path('api/',
+         include('space.api.urls')),
+
+    path('api/',
          include('prediction.api.urls')),
 
     path('api/',
