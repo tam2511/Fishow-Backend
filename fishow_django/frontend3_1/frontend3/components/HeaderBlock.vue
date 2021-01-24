@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isDeviceDesktop === false" class="desktop">
+    <div v-show="isDeviceDesktop" class="desktop">
       <b-navbar :fixed-top="true" class="navbar-brand-container">
         <template slot="brand">
           <b-navbar-item
@@ -38,7 +38,7 @@
         </template>
       </b-navbar>
     </div>
-    <div v-else class="mobile">
+    <div v-show="!isDeviceDesktop" class="mobile">
       <nav class="navbar-mobile">
         <div v-if="loginMode" class="navbar-mobile_wrapper">
           <div class="navbar-mobile_button">Вход</div>
@@ -130,7 +130,7 @@ export default {
       if (typeof navigator === 'object') {
         result = navigator && /mobile/i.test(navigator.userAgent)
       }
-      return result
+      return !result
     },
     ...mapState('user', ['user']),
   },

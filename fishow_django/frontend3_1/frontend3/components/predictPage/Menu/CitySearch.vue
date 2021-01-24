@@ -1,7 +1,7 @@
 <template>
   <div>
     <multiselect
-      v-model="value"
+      v-model="selected"
       :options="options"
       :custom-label="nameWithLang"
       placeholder="Выберите город"
@@ -17,6 +17,15 @@ import { mapActions } from 'vuex'
 import city from '@/components/predictPage/Menu/city'
 export default {
   props: {
+    value: {
+      type: Object,
+      default() {
+        return {
+          city: '',
+          areal: '',
+        }
+      },
+    },
     passive: {
       type: Boolean,
       default: false,
@@ -24,9 +33,17 @@ export default {
   },
   data() {
     return {
-      value: '',
+      selected: {},
       options: city,
     }
+  },
+  watch: {
+    value(val) {
+      this.selected = val
+    },
+    selected(val) {
+      this.$emit('input', val)
+    },
   },
   methods: {
     nameWithLang({ areal, city }) {

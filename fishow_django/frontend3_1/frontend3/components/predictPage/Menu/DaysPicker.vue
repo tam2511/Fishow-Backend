@@ -6,7 +6,7 @@
           name: 'OnePrediction-areal-date-city-fish',
           params: {
             areal: $route.params.areal,
-            date: '2020-' + day.split('/')[1] + '-' + day.split('/')[0],
+            date: '2021-' + day.split('/')[1] + '-' + day.split('/')[0],
             city: $route.params.city,
             fish: $route.params.fish,
           },

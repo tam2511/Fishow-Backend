@@ -2,8 +2,7 @@
   <div class="tile is-vertical is-8">
     <div class="tile is-parent is-vertical space-left0">
       <article class="tile is-child">
-        <!--        <pre class="language-json"><code>{{ blog  }}</code></pre>-->
-        <BlogCard v-if="blog" :blog="blog" />
+        <CardItem v-if="news" :liked="false" :item="news" />
         <div v-else>
           <SkeletonBlogCard />
         </div>
@@ -16,23 +15,23 @@
 <script>
 import CommentsBlock from '@/components/CommentsBlock'
 import SkeletonBlogCard from '@/components/Skeleton/SkeletonBlogCard'
-import BlogCard from '~/components/BlogCard'
+import CardItem from '~/components/Card/CardItem'
 
 export default {
   components: {
-    BlogCard,
+    CardItem,
     CommentsBlock,
     SkeletonBlogCard,
   },
   layout: 'SideBarRight',
   data() {
     return {
-      blog: null,
+      news: null,
     }
   },
   mounted() {
     this.$axios.get(`/news/${this.$route.params.slug}/`).then((res) => {
-      this.blog = res.data
+      this.news = res.data
     })
   },
   head() {

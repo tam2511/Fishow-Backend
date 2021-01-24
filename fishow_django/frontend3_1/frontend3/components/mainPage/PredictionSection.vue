@@ -17,12 +17,13 @@
       </PProbe>
     </div>
     <div class="prediction-select">
+      isLocation = {{ isLocation }}
       <b-field
         label="Выберите место рыбалки"
         :type="typeLocation"
         :message="errorEmptySelect"
       >
-        <CitySearch :passive="true" />
+        <CitySearch v-model="isLocation" :passive="true" />
       </b-field>
       <b-field label="Выберите рыбу">
         <fish-select-prediction :passive="true" />
@@ -69,6 +70,10 @@ export default {
     return {
       days: getData(getDataValue(), 9),
       typeLocation: '',
+      isLocation: {
+        areal: 'Кемеровская область',
+        city: 'Белово',
+      },
       errorEmptySelect: '',
       position: null,
     }
@@ -101,9 +106,6 @@ export default {
     )
     this.getPrediction(url)
   },
-  // mounted() {
-  //   this.getPosition()
-  // },
   methods: {
     getPosition() {
       const positionCB = (position) => {
@@ -141,7 +143,7 @@ export default {
 
       const fish = this.fishId || 'щука'
       // const fish = this.$route.params.fish
-      const date = '2020-10-02'
+      const date = getDataValue()
       // const date = this.$route.params.date
       const city = (this.location && this.location[0]) || 'Москва'
       // const city = this.$route.params.city
