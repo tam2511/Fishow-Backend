@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="isDeviceDesktop" class="desktop">
-      <b-navbar :fixed-top="true" class="navbar-brand-container">
+      <b-navbar class="navbar-brand-container">
         <template slot="brand">
           <b-navbar-item
             tag="nuxt-link"
@@ -259,5 +259,13 @@ a.navbar-item:hover {
   cursor: initial;
   position: relative;
   padding: 7px;
+}
+.desktop {
+  box-shadow: 0 4px 56px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+}
+.navbar-brand-container {
+  max-width: 1344px;
+  margin: 0 auto;
 }
 </style>
