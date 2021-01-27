@@ -25,7 +25,6 @@
     "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.4.4",
     "nuxt-vue-multiselect": "^1.0.4",
-    "vue": "^2.6.12",
     "vue-apexcharts": "^1.6.0",
     "vue-fusioncharts": "^3.0.4",
     "vue-infinite-scroll": "^2.0.2"

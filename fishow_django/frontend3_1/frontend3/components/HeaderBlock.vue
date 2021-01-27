@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="isDeviceDesktop === false" class="desktop">
-      <b-navbar :fixed-top="true" class="navbar-brand-container">
+    <div v-show="isDeviceDesktop" class="desktop">
+      <b-navbar class="navbar-brand-container">
         <template slot="brand">
           <b-navbar-item
             tag="nuxt-link"
@@ -38,7 +38,7 @@
         </template>
       </b-navbar>
     </div>
-    <div v-else class="mobile">
+    <div v-show="!isDeviceDesktop" class="mobile">
       <nav class="navbar-mobile">
         <div v-if="loginMode" class="navbar-mobile_wrapper">
           <div class="navbar-mobile_button">Вход</div>
@@ -130,7 +130,7 @@ export default {
       if (typeof navigator === 'object') {
         result = navigator && /mobile/i.test(navigator.userAgent)
       }
-      return result
+      return !result
     },
     ...mapState('user', ['user']),
   },
@@ -259,5 +259,13 @@ a.navbar-item:hover {
   cursor: initial;
   position: relative;
   padding: 7px;
+}
+.desktop {
+  box-shadow: 0 4px 56px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+}
+.navbar-brand-container {
+  max-width: 1344px;
+  margin: 0 auto;
 }
 </style>

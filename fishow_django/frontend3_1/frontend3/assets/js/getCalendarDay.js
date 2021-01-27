@@ -22,7 +22,9 @@ export default (days) => {
   days.forEach((item) => {
     if (!item) return
     const arrayFromItem = item && item.split('/')
-    result.push(arrayFromItem[0] + ' ' + whatMonth[arrayFromItem[1]])
+    const month =
+      arrayFromItem[1].length < 2 ? '0' + arrayFromItem[1] : arrayFromItem[1]
+    result.push(arrayFromItem[0] + ' ' + whatMonth[month])
   })
   return result
 }
