@@ -1,0 +1,107 @@
+[
+  {
+    "name": "blog-editor",
+    "path": "/blog-editor",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/blog-editor.vue",
+    "chunkName": "pages/blog-editor",
+    "url": "/blog-editor",
+    "_name": "_45720d75"
+  },
+  {
+    "name": "blogs",
+    "path": "/blogs",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/blogs/index.vue",
+    "chunkName": "pages/blogs/index",
+    "url": "/blogs",
+    "_name": "_02197fd1"
+  },
+  {
+    "name": "news",
+    "path": "/news",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/news/index.vue",
+    "chunkName": "pages/news/index",
+    "url": "/news",
+    "_name": "_87413eae"
+  },
+  {
+    "name": "prognoz-kleva",
+    "path": "/prognoz-kleva",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/prognoz-kleva/index.vue",
+    "chunkName": "pages/prognoz-kleva/index",
+    "url": "/prognoz-kleva",
+    "_name": "_acefcefe"
+  },
+  {
+    "name": "UserPage",
+    "path": "/UserPage",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/UserPage.vue",
+    "chunkName": "pages/UserPage",
+    "url": "/UserPage",
+    "_name": "_50bd4826"
+  },
+  {
+    "name": "prognoz-kleva-convert",
+    "path": "/prognoz-kleva/convert",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/prognoz-kleva/convert.js",
+    "chunkName": "pages/prognoz-kleva/convert",
+    "url": "/prognoz-kleva/convert",
+    "_name": "_5126afa6"
+  },
+  {
+    "name": "account-confirm-email-key",
+    "path": "/account-confirm-email/:key?",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/account-confirm-email/_key.vue",
+    "chunkName": "pages/account-confirm-email/_key",
+    "_name": "_bf92e7da"
+  },
+  {
+    "name": "blog-slug",
+    "path": "/blog/:slug",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/blog/_slug/index.vue",
+    "chunkName": "pages/blog/_slug/index",
+    "_name": "_4d18c01a"
+  },
+  {
+    "name": "news-slug",
+    "path": "/news/:slug",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/news/_slug/index.vue",
+    "chunkName": "pages/news/_slug/index",
+    "_name": "_01e67924"
+  },
+  {
+    "name": "OnePrediction-areal-date-city-fish",
+    "path": "/OnePrediction/:areal?/:date?/:city?/:fish",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/OnePrediction/_areal/_date/_city/_fish/index.vue",
+    "chunkName": "pages/OnePrediction/_areal/_date/_city/_fish/index",
+    "_name": "_7e2a6351"
+  },
+  {
+    "name": "prognoz-kleva-areal-date-city-fish",
+    "path": "/prognoz-kleva/:areal?/:date/:city?/:fish",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/prognoz-kleva/_areal/_date/_city/_fish/index.vue",
+    "chunkName": "pages/prognoz-kleva/_areal/_date/_city/_fish/index",
+    "_name": "_0e524c85"
+  },
+  {
+    "name": "OnePrediction-areal-date-city-fish-transformForChart",
+    "path": "/OnePrediction/:areal?/:date?/:city?/:fish?/transformForChart",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/OnePrediction/_areal/_date/_city/_fish/transformForChart.js",
+    "chunkName": "pages/OnePrediction/_areal/_date/_city/_fish/transformForChart",
+    "_name": "_400c9eef"
+  },
+  {
+    "name": "prognoz-kleva-areal-date-city-fish-getData",
+    "path": "/prognoz-kleva/:areal?/:date/:city?/:fish?/getData",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/prognoz-kleva/_areal/_date/_city/_fish/getData.js",
+    "chunkName": "pages/prognoz-kleva/_areal/_date/_city/_fish/getData",
+    "_name": "_25f2071c"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/theoffice/Projects/fishow_rest_vue/fishow_django/frontend3_1/frontend3/pages/index.vue",
+    "chunkName": "pages/index",
+    "url": "/",
+    "_name": "_cd91b1e2"
+  }
+]
