@@ -57,8 +57,7 @@ export default {
     },
     date: {
       type: String,
-      required: false,
-      default: '2020-10-02',
+      required: true,
     },
     passive: {
       type: Boolean,
@@ -67,6 +66,7 @@ export default {
   },
   data() {
     return {
+      selectedFish: null,
       first: 5,
       data: 0,
       fishList: [
@@ -116,6 +116,11 @@ export default {
     },
     ...mapState('prediction', ['fishId']),
   },
+  watch: {
+    fishId(val) {
+      this.selectedFish = val
+    },
+  },
   methods: {
     info(value) {
       if (this.passive) {
@@ -129,10 +134,13 @@ export default {
       const url = encodeURI(
         `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
       )
-      // console.log('click on fish')
       this.setFish(value)
-      this.one ? this.getPredictionOne(url) : this.getPrediction(url)
-      this.getPrediction(url)
+      if (this.one) {
+        this.getPredictionOne(url)
+      } else {
+        this.getPrediction(url)
+      }
+      // this.getPrediction(url)
       // this.$refs.pprobe.updateData()
     },
     ...mapActions('prediction', {

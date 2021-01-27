@@ -230,8 +230,10 @@ export default {
           blog
         )
         console.log('response = ', response)
+        const nextRoutSlug =
+          this.blog_category === 'Новости' ? 'news-slug' : 'blog-slug'
         this.$router.push({
-          name: 'blog-slug',
+          name: nextRoutSlug,
           params: { slug: response.slug },
         })
       } catch (e) {

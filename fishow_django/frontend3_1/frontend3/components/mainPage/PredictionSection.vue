@@ -25,7 +25,7 @@
         <CitySearch :passive="true" />
       </b-field>
       <b-field label="Выберите рыбу">
-        <fish-select-prediction :passive="true" />
+        <fish-select-prediction :date="date" :passive="true" />
       </b-field>
       <!--      <div>position: {{ position }}</div>-->
       <button class="button is-primary" @click="createPrediction">
@@ -68,6 +68,7 @@ export default {
   data() {
     return {
       days: getData(getDataValue(), 9),
+      date: getDataValue(),
       typeLocation: '',
       errorEmptySelect: '',
       position: null,
@@ -101,9 +102,6 @@ export default {
     )
     this.getPrediction(url)
   },
-  // mounted() {
-  //   this.getPosition()
-  // },
   methods: {
     getPosition() {
       const positionCB = (position) => {
@@ -141,7 +139,7 @@ export default {
 
       const fish = this.fishId || 'щука'
       // const fish = this.$route.params.fish
-      const date = '2020-10-02'
+      const date = getDataValue()
       // const date = this.$route.params.date
       const city = (this.location && this.location[0]) || 'Москва'
       // const city = this.$route.params.city
