@@ -1,7 +1,7 @@
 {
   "debug": 1,
   "database_name": "tam2511_fishow",
-  "password": "081099ASDasd!",
+  "password": "081099ASDasd",
   "user": "tam2511_fishow",
   "allowed_hosts": [
     "45.90.35.152",
