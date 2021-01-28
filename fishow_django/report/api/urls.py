@@ -36,4 +36,6 @@ urlpatterns = [
          qv.ReportDisLikeAPIView.as_view(),
          name="report-dislike"),
 
+    path("count/report/", qv.Report_count.as_view(), name='report_count'),
+
 ]

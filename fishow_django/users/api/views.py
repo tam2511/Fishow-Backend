@@ -1,3 +1,4 @@
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from users.api.serializers import UserDisplaySerializer
@@ -34,6 +35,14 @@ class SelectUserAPIView(APIView):
         user=get_object_or_404(CustomUser, username=username)
         serializer = UserDisplaySerializer(user)
         return Response(serializer.data)
+
+
+class User_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_user':CustomUser.objects.count()})
+        return Response(stats)
 
 class UserList(APIView):
 

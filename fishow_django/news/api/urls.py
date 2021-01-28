@@ -36,4 +36,6 @@ urlpatterns = [
          qv.NewsDisLikeAPIView.as_view(),
          name="news-dislike"),
 
+    path("count/news/", qv.News_count.as_view(), name="news_count"),
+
 ]

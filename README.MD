@@ -30,6 +30,7 @@
 * blogs/<slug>/like/
 * blogs/<slug>/dislike/
 * blogs/<slug>/save/
+* count/blogs/
 
 2. USER
 * user/
@@ -46,6 +47,7 @@
 * user/created/report/comment/
 * user_select/<username>/
 * user_select/<username>/subscript/
+* count/user/
 
 * rest-auth/login/
 * rest-auth/registration/
@@ -60,6 +62,7 @@
 * comments/<int>/dislike/
 * report/<slug>/like/
 * report/<slug>/dislike/
+* count/reports/
 
 4. NEWS
 * news/
@@ -71,6 +74,7 @@
 * comments/<int>/dislike/
 * news/<slug>/like/
 * news/<slug>/dislike/
+* count/news/
 
 5. SPACE
 * region/
@@ -79,6 +83,11 @@
 * waterplace_cost/<slug>
 * waterplace_nature/
 * waterplace_nature/<slug>
+
+* count/waterplace_cost/
+* count/waterplace_nature/
+* count/region/
+
 
 **Frontend** 
 

@@ -25,10 +25,10 @@ class Report(models.Model):
 
     areal = models.TextField()
     city = models.TextField()
-    remark = models.TextField()
+    remark = models.TextField(null=True)
 
     def __str__(self):
-        return self.content
+        return self.slug
 
 
 

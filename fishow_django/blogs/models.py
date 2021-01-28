@@ -24,7 +24,9 @@ class Blog(models.Model):
                                           related_name='viewsBlog')
 
     def __str__(self):
-        return self.content
+        return self.slug
+
+
 
 
 class Comment(models.Model):

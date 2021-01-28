@@ -9,6 +9,7 @@ router.register(r"waterplace_nature", qv.Waterplace_nature)
 
 urlpatterns = [
     path("", include(router.urls)),
-
-
+    path("count/waterplace_cost/", qv.Waterplace_cost_count.as_view(), name="waterplace_cost_count"),
+    path("count/waterplace_nature/", qv.Waterplace_nature_count.as_view(), name="waterplace_nature_count"),
+    path("count/region/", qv.Region_count.as_view(), name="region_count"),
 ]
