@@ -20,15 +20,16 @@
 
 1. BLOGS,COMMENTS,IMAGE
 * blogs/
+* blogs/<slug>/
 * images/
-* blogs/<slug:slug>/comments/
-* blogs/<slug:slug>/comment/
-* comments/<int:pk>/
-* comments/<int:pk>/like/
-* comments/<int:pk>/dislike/
-* blogs/<slug:slug>/like/
-* blogs/<slug:slug>/dislike/
-* blogs/<slug:slug>/save/
+* blogs/<slug>/comments/
+* blogs/<slug>/comment/
+* comments/<int>/
+* comments/<int>/like/
+* comments/<int>/dislike/
+* blogs/<slug>/like/
+* blogs/<slug>/dislike/
+* blogs/<slug>/save/
 
 2. USER
 * user/
@@ -43,31 +44,41 @@
 * user/created/report/
 * user/liked/report/comment/
 * user/created/report/comment/
-* user_select/(?P<username>.*)/
-* user_select/(?P<username>.*)/subscript/
+* user_select/<username>/
+* user_select/<username>/subscript/
 
 * rest-auth/login/
 * rest-auth/registration/
 
 3. REPORT
 * report/
-* report/<slug:slug>/comments/
-* report/<slug:slug>/comment/
-* comments/<int:pk>/
-* comments/<int:pk>/like/
-* comments/<int:pk>/dislike/
-* report/<slug:slug>/like/
-* report/<slug:slug>/dislike/
+* report/<slug>/
+* report/<slug>/comments/
+* report/<slug>/comment/
+* comments/<int>/
+* comments/<int>/like/
+* comments/<int>/dislike/
+* report/<slug>/like/
+* report/<slug>/dislike/
 
 4. NEWS
 * news/
-* news/<slug:slug>/comments/
-* news/<slug:slug>/comment/
-* comments/<int:pk>/
-* comments/<int:pk>/like/
-* comments/<int:pk>/dislike/
-* news/<slug:slug>/like/
-* news/<slug:slug>/dislike/
+* news/<slug>/
+* news/<slug>/comments/
+* news/<slug>/comment/
+* comments/<int>/
+* comments/<int>/like/
+* comments/<int>/dislike/
+* news/<slug>/like/
+* news/<slug>/dislike/
+
+5. SPACE
+* region/
+* region/<slug>
+* waterplace_cost/
+* waterplace_cost/<slug>
+* waterplace_nature/
+* waterplace_nature/<slug>
 
 **Frontend** 
 
