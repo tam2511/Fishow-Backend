@@ -67,7 +67,6 @@ export default {
     return {
       title: predictionTen.title,
       meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
         {
           hid: 'description',
           name: 'description',
@@ -91,6 +90,8 @@ export default {
     ...mapState('prediction', ['predictions']),
   },
   created() {
+    this.isPredictionTen(true)
+
     const fish = this.$route.params.fish
     const date = this.$route.params.date
     const city = this.$route.params.city
@@ -102,6 +103,7 @@ export default {
   },
   methods: {
     ...mapActions('prediction', {
+      isPredictionTen: 'setPredicitonType',
       getPrediction: 'getPrediction',
       setReady: 'setReady',
       setDays: 'setDays',

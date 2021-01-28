@@ -32,12 +32,14 @@
 
 <script>
 import BlogCard from '@/components/BlogCard'
+import catchError from '~/assets/mixins/catchError'
 import { mainPage } from '~/assets/descriptions'
 
 export default {
   components: {
     BlogCard,
   },
+  mixins: [catchError],
   layout: 'SideBarRight',
   data() {
     return {
@@ -81,26 +83,36 @@ export default {
     if (process.browser && localStorage.getItem('hidden-blogs')) {
       this.isSwitched = JSON.parse(localStorage.getItem('hidden-blogs'))
     }
-    this.$axios.get('/blogs/').then((res) => {
-      this.blogs = res.data.results
-      this.next = res.data.next
-    })
+    this.getBlogs()
   },
   methods: {
+    async getBlogs() {
+      try {
+        const response = await this.$axios.get('/blogs/')
+
+        this.blogs = response.data.results
+        this.next = response.data.next
+      } catch (e) {
+        this.showErrorNotification()
+      }
+    },
     loadMore() {
       this.busy = true
 
-      setTimeout(() => {
+      setTimeout(async () => {
         if (this.next) {
           const url = this.next.split('api/')[1]
-          this.$axios.get(`/${url}`).then((res) => {
-            this.blogs.push(...res.data.results)
-            if (res.data.next) {
-              this.next = res.data.next
+          try {
+            const response = await this.$axios.get(`/${url}`)
+            this.blogs.push(...response.data.results)
+            if (response.data.next) {
+              this.next = response.data.next
             } else {
               this.next = null
             }
-          })
+          } catch (e) {
+            this.showErrorNotification()
+          }
         }
         this.busy = false
       }, 1000)

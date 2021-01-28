@@ -52,7 +52,7 @@
 
 <script>
 import breadCrumbsSelect from '@/components/predictPage/breadCrumbsSelect'
-import convert from '~/pages/prognoz-kleva/convert'
+import convert from '~/assets/js/convert'
 import { predictionSelect } from '~/assets/descriptions'
 import rightDate from '~/assets/mixins/prediction/rightDate'
 

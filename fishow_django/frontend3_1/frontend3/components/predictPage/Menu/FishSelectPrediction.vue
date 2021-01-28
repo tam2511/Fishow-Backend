@@ -114,7 +114,7 @@ export default {
     fish() {
       return this.fishList[this.data].title
     },
-    ...mapState('prediction', ['fishId']),
+    ...mapState('prediction', ['fishId', 'multiPrediction']),
   },
   watch: {
     fishId(val) {
@@ -131,17 +131,25 @@ export default {
       const date = this.date
       const city = this.city
       const areal = this.areal
-      const url = encodeURI(
-        `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
-      )
-      this.setFish(value)
-      if (this.one) {
-        this.getPredictionOne(url)
+      let url
+      if (this.multiPrediction) {
+        url = encodeURI(
+          `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+        )
       } else {
-        this.getPrediction(url)
+        url = encodeURI(
+          `/prediction/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+        )
       }
-      // this.getPrediction(url)
-      // this.$refs.pprobe.updateData()
+
+      this.setFish(value)
+      if (this.multiPrediction) {
+        console.log('получить для 9 дней')
+        this.getPrediction(url)
+      } else {
+        console.log('получить для одного дня')
+        this.getPredictionOne(url)
+      }
     },
     ...mapActions('prediction', {
       setFish: 'setFishId',

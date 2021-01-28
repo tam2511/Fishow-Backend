@@ -1,7 +1,6 @@
 <template>
   <div>
     <multiselect
-      v-model="selected"
       :options="options"
       :custom-label="nameWithLang"
       placeholder="Выберите город"
@@ -13,7 +12,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import city from '@/components/predictPage/Menu/city'
 export default {
   props: {
@@ -33,9 +32,11 @@ export default {
   },
   data() {
     return {
-      selected: null,
       options: city,
     }
+  },
+  computed: {
+    ...mapState('prediction', ['multiPrediction']),
   },
   watch: {
     value(val) {
@@ -49,21 +50,35 @@ export default {
     nameWithLang({ areal, city }) {
       return `${city} - ${areal}`
     },
-    changePrediction() {
-      this.setLocation([this.value.city, this.value.areal])
+    changePrediction(value) {
+      this.setLocation([value.city, value.areal])
       if (this.passive) return
       const fish = this.$route.params.fish
       const date = this.$route.params.date
-      const city = this.value.city
+      const city = value.city
       this.$route.params.city = city
-      const areal = this.value.areal
-      const url = encodeURI(
-        `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
-      )
-      this.getPrediction(url)
+      const areal = value.areal
+      let url
+      if (this.multiPrediction) {
+        url = encodeURI(
+          `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+        )
+      } else {
+        url = encodeURI(
+          `/prediction/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+        )
+      }
+      if (this.multiPrediction) {
+        console.log('получить для 9 дней')
+        this.getPrediction(url)
+      } else {
+        console.log('получить для одного дня url = ', url)
+        this.getPredictionOne(url)
+      }
     },
     ...mapActions('prediction', {
       getPrediction: 'getPrediction',
+      getPredictionOne: 'getPredictionOne',
       setLocation: 'setLocation',
     }),
   },

@@ -30,14 +30,29 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get(`/news/${this.$route.params.slug}/`).then((res) => {
-      this.news = res.data
-    })
+    this.getNews()
   },
   head() {
     return {
-      title: this.blog && this.blog.title + ' | Fishow',
+      title: this.news && this.news.title + ' | Fishow',
     }
+  },
+  methods: {
+    async getNews() {
+      try {
+        const response = await this.$axios.get(
+          `/news/${this.$route.params.slug}/`
+        )
+        this.news = response.data
+      } catch (e) {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: 'Что то пошло не так при загрузке новости',
+          type: 'is-danger',
+        })
+        this.$router.push({ name: 'index' })
+      }
+    },
   },
 }
 </script>

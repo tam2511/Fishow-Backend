@@ -12,28 +12,28 @@
       class="tile is-parent is-vertical space-left0"
     >
       <article
-        v-for="blog in news"
-        :key="blog.id"
+        v-for="news in newsList"
+        :key="news.id"
         class="tile is-child blog-page"
       >
-        <BlogCard :liked="false" :blog="blog" />
+        <CardItem :liked="false" :item="news" />
       </article>
     </div>
   </div>
 </template>
 
 <script>
-import BlogCard from '@/components/BlogCard'
 import { mainPage } from '~/assets/descriptions'
+import CardItem from '~/components/Card/CardItem'
 
 export default {
   components: {
-    BlogCard,
+    CardItem,
   },
   layout: 'SideBarRight',
   data() {
     return {
-      news: null,
+      newsList: null,
       data: [],
       count: 0,
       busy: false,
@@ -55,18 +55,18 @@ export default {
   computed: {
     notRatedNews() {
       const result = []
-      if (this.news) {
-        const length = this.news.length
+      if (this.newsList) {
+        const length = this.newsList.length
         for (let i = 0; i < length; i++) {
           if (
-            !this.news[i].user_has_votedUp &&
-            !this.news[i].user_has_votedDown
+            !this.newsList[i].user_has_votedUp &&
+            !this.newsList[i].user_has_votedDown
           ) {
-            result.push(this.news[i])
+            result.push(this.newsList[i])
           }
         }
       }
-      return this.isSwitched ? result : this.news
+      return this.isSwitched ? result : this.newsList
     },
   },
   mounted() {
@@ -74,7 +74,7 @@ export default {
       this.isSwitched = JSON.parse(localStorage.getItem('hidden-news'))
     }
     this.$axios.get('/news/').then((res) => {
-      this.news = res.data.results
+      this.newsList = res.data.results
       this.next = res.data.next
     })
   },
@@ -86,7 +86,7 @@ export default {
         if (this.next) {
           const url = this.next.split('api/')[1]
           this.$axios.get(`/${url}`).then((res) => {
-            this.news.push(...res.data.results)
+            this.newsList.push(...res.data.results)
             if (res.data.next) {
               this.next = res.data.next
             } else {
