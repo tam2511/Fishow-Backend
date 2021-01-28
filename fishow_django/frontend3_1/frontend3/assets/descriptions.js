@@ -21,3 +21,8 @@ export const userPage = {
   title: 'Fishow - Cоздание и редактирование блога',
   description: '',
 }
+
+export const predictionSelect = {
+  title: 'Fishow - Выбор места рыбалки',
+  description: '',
+}

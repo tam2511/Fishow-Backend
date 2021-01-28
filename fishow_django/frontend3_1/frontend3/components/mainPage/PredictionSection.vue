@@ -25,7 +25,7 @@
         <CitySearch :passive="true" />
       </b-field>
       <b-field label="Выберите рыбу">
-        <fish-select-prediction :date="date" :passive="true" />
+        <fish-select-prediction :date="rightDate" :passive="true" />
       </b-field>
       <!--      <div>position: {{ position }}</div>-->
       <button class="button is-primary" @click="createPrediction">
@@ -41,23 +41,13 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
-import getData from '@/pages/prognoz-kleva/_areal/_date/_city/_fish/getData'
+import getData from '@/assets/js/getData2'
 
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import CitySearch from '~/components/predictPage/Menu/CitySearch'
 import FishSelectPrediction from '~/components/predictPage/Menu/FishSelectPrediction'
-const getDataValue = () => {
-  const d = new Date()
-  let month = '' + (d.getMonth() + 1)
-  let day = '' + d.getDate()
-  const year = d.getFullYear()
-
-  if (month.length < 2) month = '0' + month
-  if (day.length < 2) day = '0' + day
-
-  return [year, month, day].join('-')
-}
+import rightDate from '~/assets/mixins/prediction/rightDate'
 export default {
   components: {
     FishSelectPrediction,
@@ -65,16 +55,18 @@ export default {
     PProbe,
     OneDayProbe,
   },
+  mixins: [rightDate],
   data() {
     return {
-      days: getData(getDataValue(), 9),
-      date: getDataValue(),
       typeLocation: '',
       errorEmptySelect: '',
       position: null,
     }
   },
   computed: {
+    days() {
+      return getData(this.rightDate, 9)
+    },
     readyData() {
       const data = convertDataFromServer(this.predictions)
       this.setReady(data)
@@ -91,7 +83,7 @@ export default {
   created() {
     const fish = 'щука'
     // const fish = this.$route.params.fish
-    const date = getDataValue()
+    const date = this.rightDate
     // const date = this.$route.params.date
     const city = 'Белово'
     // const city = this.$route.params.city
@@ -103,31 +95,6 @@ export default {
     this.getPrediction(url)
   },
   methods: {
-    getPosition() {
-      const positionCB = (position) => {
-        this.position = [position.coords.latitude, position.coords.longitude]
-      }
-      if (navigator && navigator.geolocation) {
-        // console.log('start search position')
-        navigator.geolocation.getCurrentPosition(positionCB, this.showError)
-      }
-    },
-    showError(error) {
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          this.position = 'User denied the request for Geolocation.'
-          break
-        case error.POSITION_UNAVAILABLE:
-          this.position = 'Location information is unavailable.'
-          break
-        case error.TIMEOUT:
-          this.position = 'The request to get user location timed out.'
-          break
-        case error.UNKNOWN_ERROR:
-          this.position = 'An unknown error occurred.'
-          break
-      }
-    },
     createPrediction() {
       if (!this.location) {
         this.errorEmptySelect = 'Выберите место рыбалки'
@@ -139,7 +106,7 @@ export default {
 
       const fish = this.fishId || 'щука'
       // const fish = this.$route.params.fish
-      const date = getDataValue()
+      const date = this.rightDate
       // const date = this.$route.params.date
       const city = (this.location && this.location[0]) || 'Москва'
       // const city = this.$route.params.city

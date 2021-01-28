@@ -136,16 +136,18 @@ export default {
     }
   },
   watch: {
-    probMin() {
+    prob() {
+      console.log('prob changed')
       this.updateData()
     },
   },
   methods: {
     updateData() {
+      console.log('update data')
       this.series = [
         {
           name: 'Cуточная вероятность клёва',
-          data: this.probMin,
+          data: this.prob,
         },
       ]
     },

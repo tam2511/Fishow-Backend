@@ -3,7 +3,7 @@
     <div class="media pre-header">
       <div class="media-content">
         <h2 class="title">
-          <nuxt-link :to="{ name: '-slug', params: { slug: item.slug } }"
+          <nuxt-link :to="{ name: 'news-slug', params: { slug: item.slug } }"
             >{{ item.title }}
           </nuxt-link>
         </h2>
@@ -28,8 +28,10 @@
 </template>
 
 <script>
+import catchError from '~/assets/mixins/catchError'
 export default {
   name: 'CardContent',
+  mixins: [catchError],
   props: {
     item: {
       type: Object,
@@ -41,11 +43,10 @@ export default {
       try {
         return JSON.parse(this.item.content).blocks[0]
       } catch (e) {
+        this.showErrorNotification()
         return null
       }
     },
   },
 }
 </script>
-
-<style scoped></style>

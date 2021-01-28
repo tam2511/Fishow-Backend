@@ -106,32 +106,4 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-.section {
-  /*background-color: #edeff4;*/
-}
-a {
-  color: #0d0a0a;
-  transition: color 0.3s;
-  &:hover {
-    color: rgba(0, 0, 0, 0.55);
-  }
-}
-.tile.is-parent.is-vertical {
-  flex-grow: initial;
-}
-.nav {
-  max-width: 1200px;
-}
-.tile.is-parent.is-vertical.space-left0 {
-  padding-left: 0;
-}
-.blog-page .content {
-  max-height: 800px;
-  overflow: hidden;
-  position: relative;
-}
-.tile-sidebar .buttons {
-  padding: 12px;
-}
-</style>
+<style lang="scss"></style>

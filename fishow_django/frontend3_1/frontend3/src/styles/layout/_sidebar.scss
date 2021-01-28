@@ -1,0 +1,27 @@
+.column.pSideBar {
+  position: fixed;
+  right: 0;
+  width: 25%;
+  top: 55px;
+  min-height: 500px;
+  height: calc(100% - 250px);
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.tile.is-parent.is-vertical {
+  flex-grow: initial;
+}
+.tile.is-parent.is-vertical.space-left0 {
+  padding-left: 0;
+}
+.blog-page .content {
+  max-height: 800px;
+  overflow: hidden;
+  position: relative;
+}
+.tile-sidebar .buttons {
+  padding: 12px;
+}

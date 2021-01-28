@@ -104,13 +104,16 @@ export const state = () => ({
   prediction: null,
   readyDataStorage: null,
   days: null,
-  oneStatus: false,
+  multiPrediction: true,
   location: null,
 })
 
 export const mutations = {
   SET_FISHID(state, id) {
     state.fishId = id
+  },
+  SET_PREDICTIONTYPE(state, type) {
+    state.multiPrediction = type
   },
   SET_READYDATA(state, data) {
     state.readyDataStorage = data
@@ -122,7 +125,6 @@ export const mutations = {
     state.pageScroll = scroll
   },
   SET_PREDICTIONS(state, predictions) {
-    // console.log('predicitons = ', predictions)
     if (typeof predictions === 'undefined') {
       state.predictions = defaultPred
     } else {
@@ -138,6 +140,9 @@ export const mutations = {
 }
 
 export const actions = {
+  setPredicitonType({ commit }, type) {
+    commit('SET_PREDICTIONTYPE', type)
+  },
   setFishId({ commit }, id) {
     commit('SET_FISHID', id)
   },
@@ -160,7 +165,6 @@ export const actions = {
   },
   getPredictionOne({ commit, axios }, conf) {
     return PredictionService.getPredicitons(conf).then((response) => {
-      // console.log(response.data)
       commit('SET_PREDICTION', response.data.results[0])
     })
   },

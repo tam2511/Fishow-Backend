@@ -146,6 +146,7 @@ export default {
   },
   methods: {
     updateData() {
+      console.log('update data multi')
       this.series = [
         {
           name: 'Максимальная суточная вероятность клёва',

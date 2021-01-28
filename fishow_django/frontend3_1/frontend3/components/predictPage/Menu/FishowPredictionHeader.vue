@@ -26,8 +26,7 @@
       <div class="column">
         <h1 class="title">Прогноз клева на {{ day }}</h1>
         <span>
-          Наслаждайтесь спланированной рыбалкой в {{ $route.params.city }} и
-          отличным клевом
+          Наслаждайтесь спланированной рыбалкой в {{ city }} и отличным клевом
         </span>
       </div>
     </div>
@@ -35,6 +34,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -42,13 +42,25 @@ export default {
     }
   },
   computed: {
+    city() {
+      let result = null
+      if (this.multiPrediction) {
+        if (this.predictions && this.predictions.city) {
+          result = this.predictions.city
+        } else if (this.prediction && this.prediction.city) {
+          result = this.prediction.city
+        }
+      }
+      return result
+    },
     day() {
-      return this.niceDays[0] === '0'
+      return this.niceDays && this.niceDays[0] === '0'
         ? this.niceDays.split('0')[1]
         : this.niceDays
     },
+    ...mapState('prediction', ['multiPrediction', 'prediction', 'predictions']),
   },
-  created() {
+  mounted() {
     this.convertDays()
   },
   methods: {
