@@ -9,5 +9,3 @@ export default {
   name: 'EmptyPage',
 }
 </script>
-
-<style></style>

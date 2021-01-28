@@ -14,12 +14,6 @@ export default {
       type: Object,
       required: true,
     },
-  }, // you can set a custom layout for the error page
+  },
 }
 </script>
-
-<style>
-/*.container {*/
-/*  background-color: #0d0a0a;*/
-/*}*/
-</style>

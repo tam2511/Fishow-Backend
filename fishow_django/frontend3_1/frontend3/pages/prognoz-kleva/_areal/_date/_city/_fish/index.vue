@@ -123,10 +123,6 @@ export default {
 .main-content {
   margin-top: 1rem;
 }
-.box {
-  font-weight: 300;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-}
 .template > .box {
   position: relative;
   pointer-events: none;

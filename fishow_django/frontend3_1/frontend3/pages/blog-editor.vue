@@ -256,8 +256,3 @@ export default {
 }
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style lang="scss" scoped>
-.tile.is-vertical.is-8 {
-  padding-right: 20px;
-}
-</style>
