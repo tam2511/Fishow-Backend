@@ -6,9 +6,9 @@ from blogs.api.serializers import BlogSerializerSlug
 
 class Waterplace_natureSerializer(serializers.ModelSerializer):
     slug = serializers.StringRelatedField(many=True)
-    blogs = serializers.StringRelatedField(many=True)
-    reports = serializers.StringRelatedField(many=True)
-    news = serializers.StringRelatedField(many=True)
+#     blogs = serializers.StringRelatedField(many=True)
+#     reports = serializers.StringRelatedField(many=True)
+#     news = serializers.StringRelatedField(many=True)
     class Meta:
         model = Waterplace_nature
         fields = '__all__'
