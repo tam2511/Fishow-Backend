@@ -113,6 +113,13 @@ class BlogSerializer(serializers.ModelSerializer):
     def get_user_views(self, instance):
         return instance.views.count()
 
+class BlogSerializerSlug(serializers.ModelSerializer):
+    slug = serializers.SlugField()
+
+    class Meta:
+        model = Blog
+        fields = ['slug']
+
 class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:

@@ -1,6 +1,6 @@
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
@@ -32,8 +32,6 @@ class Waterplace_cost(viewsets.ModelViewSet):
                     queryset = self.get_queryset()
                     obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
                     print(self.request.user)
-                    if self.request.user.is_authenticated:
-                        waterplace_cost=get_object_or_404(Waterplace_cost, slug = self.kwargs.get("slug"))
                     return obj
 
 class Waterplace_nature(viewsets.ModelViewSet):
@@ -46,8 +44,6 @@ class Waterplace_nature(viewsets.ModelViewSet):
                     queryset = self.get_queryset()
                     obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
                     print(self.request.user)
-                    if self.request.user.is_authenticated:
-                        waterplace_nature=get_object_or_404(Waterplace_nature, slug = self.kwargs.get("slug"))
                     return obj
 
 
@@ -62,7 +58,26 @@ class Region(viewsets.ModelViewSet):
                     queryset = self.get_queryset()
                     obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
                     print(self.request.user)
-                    if self.request.user.is_authenticated:
-                        region=get_object_or_404(Region, slug = self.kwargs.get("slug"))
                     return obj
 
+
+class Waterplace_cost_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_waterplace_cost':Waterplace_cost.objects.count()})
+        return Response(stats)
+
+class Waterplace_nature_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_waterplace_nature':Waterplace_nature.objects.count()})
+        return Response(stats)
+
+class Region_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_region':Region.objects.count()})
+        return Response(stats)

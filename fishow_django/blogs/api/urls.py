@@ -41,6 +41,7 @@ urlpatterns = [
          qv.BlogSaveAPIView.as_view(),
          name="blog-save"),
 
+    path("count/blogs/", qv.Blogs_count.as_view(), name='blogs_count'),
     path("user/saved/blogs/", qv.BlogUserSaved.as_view(), name="saved-blogs-user"),
     path("user/liked/blogs/", qv.BlogUserLiked.as_view(), name="liked-blogs-user"),
     path("user/created/blogs/", qv.BlogUserCreated.as_view(), name="created-blogs-user"),

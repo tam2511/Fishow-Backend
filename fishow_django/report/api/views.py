@@ -1,6 +1,6 @@
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
@@ -96,6 +96,12 @@ class ReportLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
+class Report_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_report':Report.objects.count()})
+        return Response(stats)
 
 class ReportDisLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an comment instance."""

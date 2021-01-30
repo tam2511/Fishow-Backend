@@ -23,7 +23,7 @@ class News(models.Model):
 
 
     def __str__(self):
-        return self.content
+        return self.slug
 
 
 

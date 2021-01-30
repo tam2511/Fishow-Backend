@@ -1,6 +1,6 @@
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
@@ -32,3 +32,10 @@ class PredictiontenView(viewsets.ModelViewSet):
 
         def perform_create(self, serializer):
             serializer.save()
+
+class Prediction_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_prediction':Prediction.objects.count()})
+        return Response(stats)

@@ -1,6 +1,6 @@
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
@@ -301,6 +301,13 @@ class CommentRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
 
+
+class News_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_news':News.objects.count()})
+        return Response(stats)
 
 
 #         def get_object(self):
