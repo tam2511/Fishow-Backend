@@ -15,7 +15,7 @@ class Waterplace_nature(models.Model):
     reports = models.ManyToManyField(Report,related_name='wn_reports',blank=True)
     moderators = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    on_delete=models.CASCADE,
-                                   related_name="wn_moderators",blank=True)
+                                   related_name="wn_moderators",null=True, blank=True)
     #town = models.ForeignKey(Rating_Region,related_name='town_region')
     moderators_share = models.TextField(null=True)
     city_list = models.TextField(null=True)
@@ -38,7 +38,7 @@ class Waterplace_cost(models.Model):
     reports = models.ManyToManyField(Report,related_name='wc_reports',blank=True)
     moderators = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    on_delete=models.CASCADE,
-                                   related_name="wc_moderators",blank=True)
+                                   related_name="wc_moderators",null=True,blank=True)
     #town = models.ForeignKey(Rating_Region,related_name='town_region')
     moderators_share = models.TextField(null=True)
     city_list = models.TextField(null=True)
