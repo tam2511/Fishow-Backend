@@ -8,6 +8,7 @@ from report.models import Report
 class Waterplace_nature(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    type = models.TextField()
     fish = models.TextField()
     news = models.ManyToManyField(News,related_name='wn_news',blank=True)
     blogs = models.ManyToManyField(Blog,related_name='wn_blogs',blank=True)
@@ -29,6 +30,7 @@ class Waterplace_nature(models.Model):
 class Waterplace_cost(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    type = models.TextField()
     fish = models.TextField()
     news = models.ManyToManyField(News,related_name='wc_news',blank=True)
     blogs = models.ManyToManyField(Blog,related_name='wc_blogs',blank=True)
