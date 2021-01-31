@@ -7,22 +7,22 @@ from report.models import Report
 
 class Waterplace_nature(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    type = models.TextField()
-    fish = models.TextField()
+    description = models.TextField(null=True)
+    type = models.TextField(null=True)
+    fish = models.TextField(null=True)
     news = models.ManyToManyField(News,related_name='wn_news',blank=True)
     blogs = models.ManyToManyField(Blog,related_name='wn_blogs',blank=True)
     reports = models.ManyToManyField(Report,related_name='wn_reports',blank=True)
     moderators = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    on_delete=models.CASCADE,
-                                   related_name="wn_moderators")
+                                   related_name="wn_moderators",blank=True)
     #town = models.ForeignKey(Rating_Region,related_name='town_region')
-    moderators_share = models.TextField()
-    city_list = models.TextField()
-    stat = models.TextField()
-    fish_rating = models.TextField()
-    region_list = models.TextField() #models
-    tour_base = models.TextField()
+    moderators_share = models.TextField(null=True)
+    city_list = models.TextField(null=True)
+    stat = models.TextField(null=True)
+    fish_rating = models.TextField(null=True)
+    region_list = models.TextField(null=True) #models
+    tour_base = models.TextField(null=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     def __str__(self):
@@ -30,27 +30,27 @@ class Waterplace_nature(models.Model):
 
 class Waterplace_cost(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    type = models.TextField()
-    fish = models.TextField()
+    description = models.TextField(null=True)
+    type = models.TextField(null=True)
+    fish = models.TextField(null=True)
     news = models.ManyToManyField(News,related_name='wc_news',blank=True)
     blogs = models.ManyToManyField(Blog,related_name='wc_blogs',blank=True)
     reports = models.ManyToManyField(Report,related_name='wc_reports',blank=True)
     moderators = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    on_delete=models.CASCADE,
-                                   related_name="wc_moderators")
+                                   related_name="wc_moderators",blank=True)
     #town = models.ForeignKey(Rating_Region,related_name='town_region')
-    moderators_share = models.TextField()
-    city_list = models.TextField()
-    stat = models.TextField()
-    fish_rating = models.TextField()
-    region_list = models.TextField() #models
-    tour_base = models.TextField()
-    price = models.TextField()
-    address = models.TextField()
-    coordinates = models.TextField()
+    moderators_share = models.TextField(null=True)
+    city_list = models.TextField(null=True)
+    stat = models.TextField(null=True)
+    fish_rating = models.TextField(null=True)
+    region_list = models.TextField(null=True) #models
+    tour_base = models.TextField(null=True)
+    price = models.TextField(null=True)
+    address = models.TextField(null=True)
+    coordinates = models.TextField(null=True)
     is_paid = models.NullBooleanField(null=True, default=False)
-    last_fishing = models.TextField()
+    last_fishing = models.TextField(null=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     def __str__(self):
@@ -58,11 +58,11 @@ class Waterplace_cost(models.Model):
 
 class Region(models.Model):
     name = models.CharField(max_length=100)
-    statistic_fishing = models.CharField(max_length=100)
-    tourbases = models.TextField()#models.ForeignKey(Tourbases)
-    descriptions = models.TextField()
+    statistic_fishing = models.CharField(null=True,max_length=100)
+    tourbases = models.TextField(null=True)#models.ForeignKey(Tourbases)
+    descriptions = models.TextField(null=True)
     representatives = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='representatives_people',blank=True)
-    sities = models.TextField()
+    sities = models.TextField(null=True)
     waterplace_cost = models.ManyToManyField(Waterplace_nature,related_name="cost",blank=True)
     waterplace_nature = models.ManyToManyField(Waterplace_nature,related_name="nature",blank=True)
     slug = models.SlugField(max_length=255, unique=True)
