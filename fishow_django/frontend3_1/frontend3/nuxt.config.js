@@ -45,6 +45,11 @@ export default {
       },
       {
         rel: 'stylesheet',
+        href:
+          'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',
+      },
+      {
+        rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
       },
       ...appleIcons,

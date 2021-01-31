@@ -53,8 +53,18 @@ export default {
     FishowPredictionHeader,
   },
   mixins: [urlData],
+  watch: {
+    error(val) {
+      this.$buefy.toast.open({
+        duration: 5000,
+        message: val,
+        type: 'is-danger',
+      })
+    },
+  },
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
+    ...mapState('prediction', ['error']),
   },
 }
 </script>

@@ -1,6 +1,7 @@
 import axios from 'axios'
-import confserver from '~/confserver'
+import { NotificationProgrammatic as Notification } from 'buefy'
 
+import confserver from '~/confserver'
 const apiClient = axios.create({
   baseURL: `http://${confserver.ip}:8000/api`,
   withCredentials: false,
@@ -11,10 +12,12 @@ const apiClient = axios.create({
 })
 
 export default {
-  getBlogComment(slug) {
-    return apiClient.get(`/blogs/${slug}/comments/`)
+  async getBlogComment(slug) {
+    Notification.open('Notify!')
+
+    return await apiClient.get(`/blogs/${slug}/comments/`)
   },
-  postBlogComment(slug, data) {
-    return apiClient.post(`/blogs/${slug}/comments/`, data)
+  async postBlogComment(slug, data) {
+    return await apiClient.post(`/blogs/${slug}/comments/`, data)
   },
 }

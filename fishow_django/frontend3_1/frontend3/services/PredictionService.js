@@ -11,7 +11,7 @@ const apiClient = axios.create({
 })
 
 export default {
-  getPredicitons(url) {
-    return apiClient.get(url)
+  async getPredicitons(url) {
+    return await apiClient.get(url)
   },
 }

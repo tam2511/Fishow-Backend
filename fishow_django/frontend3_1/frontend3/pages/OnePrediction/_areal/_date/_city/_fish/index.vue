@@ -107,7 +107,11 @@ export default {
     const url = encodeURI(
       `/prediction/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
     )
-    this.getPredictionOne(url)
+    try {
+      this.getPredictionOne(url)
+    } catch (e) {
+      console.error('sdasdasdasd ', e)
+    }
   },
   methods: {
     ...mapActions('prediction', {

@@ -1,5 +1,5 @@
 <template>
-  <div class="prediction-section">
+  <div class="prediction-section animate__animated animate__fadeIn">
     <div class="prediction-title">
       <h2 class="title">Прогноз клева</h2>
     </div>

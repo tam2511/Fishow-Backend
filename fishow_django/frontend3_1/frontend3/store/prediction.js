@@ -98,6 +98,7 @@ const defaultPred = {
   fish: 'щука',
 }
 export const state = () => ({
+  error: null,
   fishId: 0,
   pageScroll: 0,
   predictions: null,
@@ -137,6 +138,9 @@ export const mutations = {
   SET_LOCATION(state, location) {
     state.location = location
   },
+  SET_ERROR(state, error) {
+    state.error = error
+  },
 }
 
 export const actions = {
@@ -158,14 +162,24 @@ export const actions = {
   setLocation({ commit }, location) {
     commit('SET_LOCATION', location)
   },
-  getPrediction({ commit, axios }, conf) {
-    return PredictionService.getPredicitons(conf).then((response) => {
+  async getPrediction({ commit, axios }, conf) {
+    console.log('get prediction before')
+    try {
+      const response = await PredictionService.getPredicitons(conf)
       commit('SET_PREDICTIONS', response.data.results[0])
-    })
+    } catch (e) {
+      console.log('error')
+      commit('SET_ERROR', e)
+    }
   },
-  getPredictionOne({ commit, axios }, conf) {
-    return PredictionService.getPredicitons(conf).then((response) => {
-      commit('SET_PREDICTION', response.data.results[0])
-    })
+  async getPredictionOne({ commit, axios }, conf) {
+    try {
+      const response = await PredictionService.getPredicitons(conf)
+      commit('SET_PREDICTIONS', response.data.results[0])
+    } catch (e) {
+      // TODO: пока идет разработка можно выводить data, на проде уже другое сообщение
+      console.log('error = ', e)
+      commit('SET_ERROR', e.response.data)
+    }
   },
 }

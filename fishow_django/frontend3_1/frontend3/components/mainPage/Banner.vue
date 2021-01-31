@@ -6,7 +6,10 @@
         <h3 class="banner_title">
           Ваши отчеты помогают спрогнозировать результаты рыбалки
         </h3>
-        <nuxt-link :to="{ path: '/blog-editor' }" class="button is-primary">
+        <nuxt-link
+          :to="{ path: '/blog-editor' }"
+          class="button is-primary animate__animated animate__zoomIn"
+        >
           Оставить отчет
         </nuxt-link>
       </div>
