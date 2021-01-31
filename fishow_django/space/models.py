@@ -19,6 +19,7 @@ class Waterplace_nature(models.Model):
     #town = models.ForeignKey(Rating_Region,related_name='town_region')
     moderators_share = models.TextField()
     city_list = models.TextField()
+    stat = models.TextField()
     fish_rating = models.TextField()
     region_list = models.TextField() #models
     tour_base = models.TextField()
@@ -41,6 +42,7 @@ class Waterplace_cost(models.Model):
     #town = models.ForeignKey(Rating_Region,related_name='town_region')
     moderators_share = models.TextField()
     city_list = models.TextField()
+    stat = models.TextField()
     fish_rating = models.TextField()
     region_list = models.TextField() #models
     tour_base = models.TextField()
