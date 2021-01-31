@@ -6,7 +6,7 @@
           <card-header
             :liked="liked"
             :type="type"
-            :id-item="item.id"
+            :slug="item.slug"
             :user-dis-liked="userDisLiked"
             :user-liked="userLiked"
           />

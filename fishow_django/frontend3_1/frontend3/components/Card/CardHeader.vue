@@ -40,7 +40,7 @@ export default {
       type: String,
       required: true,
     },
-    idItem: {
+    slug: {
       type: [String, Number],
       default() {
         return ''
@@ -101,22 +101,22 @@ export default {
     like() {
       this.likesCounter += 1
       this.isUserLiked = true
-      this.$axios.$post(`/${this.type}/${this.idItem}/like/`)
+      this.$axios.$post(`/${this.type}/${this.slug}/like/`)
     },
     unLike() {
       this.likesCounter -= 1
       this.isUserLiked = false
-      this.$axios.$delete(`/${this.type}/${this.idItem}/like/`)
+      this.$axios.$delete(`/${this.type}/${this.slug}/like/`)
     },
     dislike() {
       this.dislikesCounter -= 1
       this.isUserDisLiked = true
-      this.$axios.$post(`/${this.type}/${this.idItem}/dislike/`)
+      this.$axios.$post(`/${this.type}/${this.slug}/dislike/`)
     },
     undislike() {
       this.dislikesCounter += 1
       this.isUserDisLiked = false
-      this.$axios.$delete(`/${this.type}/${this.idItem}/dislike/`)
+      this.$axios.$delete(`/${this.type}/${this.slug}/dislike/`)
     },
   },
 }
