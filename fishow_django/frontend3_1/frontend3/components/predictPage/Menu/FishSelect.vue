@@ -16,9 +16,17 @@
 import fishList from '~/assets/data/fishList'
 export default {
   name: 'FishSelect',
+  props: {
+    options: {
+      type: [Array, Object],
+      default() {
+        return fishList
+      },
+    },
+  },
   data() {
     return {
-      fishList,
+      fishList: this.options,
       selected: {
         image: '/fish_green/щука.jpg',
         title: 'щука',

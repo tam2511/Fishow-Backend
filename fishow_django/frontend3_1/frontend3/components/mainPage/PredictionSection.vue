@@ -25,7 +25,7 @@
         <CitySearch v-model="selectedLocation" :passive="true" />
       </b-field>
       <b-field label="Выберите рыбу">
-        <fish-select @select="selectFish" :fish-list="fishList" />
+        <fish-select :fish-list="fishList" @select="selectFish" />
       </b-field>
       <button class="button is-primary" @click="createPrediction">
         Составить прогноз
@@ -60,7 +60,7 @@ export default {
     return {
       fishList,
       selectedFish: null,
-      selectedLocation: { areal: 'Московская область', city: 'Москва' },
+      selectedLocation: null,
       typeLocation: '',
       errorEmptySelect: '',
       position: null,
