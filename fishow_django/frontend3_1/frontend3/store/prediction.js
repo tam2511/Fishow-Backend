@@ -105,7 +105,7 @@ export const state = () => ({
   readyDataStorage: null,
   days: null,
   multiPrediction: true,
-  location: null,
+  location: { areal: 'Московская область', city: 'Москва' },
 })
 
 export const mutations = {
@@ -120,9 +120,6 @@ export const mutations = {
   },
   SET_DAYS(state, data) {
     state.days = data
-  },
-  SET_SCROLL(state, scroll) {
-    state.pageScroll = scroll
   },
   SET_PREDICTIONS(state, predictions) {
     if (typeof predictions === 'undefined') {
@@ -145,9 +142,6 @@ export const actions = {
   },
   setFishId({ commit }, id) {
     commit('SET_FISHID', id)
-  },
-  setScroll({ commit }, value) {
-    commit('SET_SCROLL', value)
   },
   setReady({ commit }, data) {
     commit('SET_READYDATA', data)

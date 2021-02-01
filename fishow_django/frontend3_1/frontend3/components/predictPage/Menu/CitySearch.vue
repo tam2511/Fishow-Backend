@@ -1,13 +1,19 @@
 <template>
   <div>
     <multiselect
+      v-model="selected"
       :options="options"
       :custom-label="nameWithLang"
       placeholder="Выберите город"
       label="areal"
       track-by="city"
+      select-label=""
+      selected-label="выбрано"
+      deselect-label="удалить"
+      :allow-empty="false"
       @input="changePrediction"
-    ></multiselect>
+    >
+    </multiselect>
   </div>
 </template>
 
@@ -18,12 +24,7 @@ export default {
   props: {
     value: {
       type: Object,
-      default() {
-        return {
-          city: '',
-          areal: '',
-        }
-      },
+      required: true,
     },
     passive: {
       type: Boolean,
@@ -32,6 +33,7 @@ export default {
   },
   data() {
     return {
+      selected: this.value || null,
       options: city,
     }
   },
@@ -51,7 +53,11 @@ export default {
       return `${city} - ${areal}`
     },
     changePrediction(value) {
-      this.setLocation([value.city, value.areal])
+      this.selected = value
+      this.setLocation({
+        city: value.city,
+        areal: value.areal,
+      })
       if (this.passive) return
       const fish = this.$route.params.fish
       const date = this.$route.params.date
@@ -69,10 +75,8 @@ export default {
         )
       }
       if (this.multiPrediction) {
-        console.log('получить для 9 дней')
         this.getPrediction(url)
       } else {
-        console.log('получить для одного дня url = ', url)
         this.getPredictionOne(url)
       }
     },

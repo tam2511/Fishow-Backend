@@ -22,12 +22,11 @@
         :type="typeLocation"
         :message="errorEmptySelect"
       >
-        <CitySearch :passive="true" />
+        <CitySearch v-model="selectedLocation" :passive="true" />
       </b-field>
       <b-field label="Выберите рыбу">
-        <fish-select-prediction :date="rightDate" :passive="true" />
+        <fish-select @select="selectFish" :fish-list="fishList" />
       </b-field>
-      <!--      <div>position: {{ position }}</div>-->
       <button class="button is-primary" @click="createPrediction">
         Составить прогноз
       </button>
@@ -42,15 +41,16 @@
 import { mapState, mapActions } from 'vuex'
 import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
 import getData from '@/assets/js/getData2'
+import fishList from '~/assets/data/fishList'
 
 import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
 import PProbe from '~/components/predictPage/Results/PProbe/index'
 import CitySearch from '~/components/predictPage/Menu/CitySearch'
-import FishSelectPrediction from '~/components/predictPage/Menu/FishSelectPrediction'
 import rightDate from '~/assets/mixins/prediction/rightDate'
+import FishSelect from '~/components/predictPage/Menu/FishSelect'
 export default {
   components: {
-    FishSelectPrediction,
+    FishSelect,
     CitySearch,
     PProbe,
     OneDayProbe,
@@ -58,6 +58,9 @@ export default {
   mixins: [rightDate],
   data() {
     return {
+      fishList,
+      selectedFish: null,
+      selectedLocation: { areal: 'Московская область', city: 'Москва' },
       typeLocation: '',
       errorEmptySelect: '',
       position: null,
@@ -80,38 +83,21 @@ export default {
     },
     ...mapState('prediction', ['predictions', 'fishId', 'location']),
   },
-  created() {
-    const fish = 'щука'
-    // const fish = this.$route.params.fish
-    const date = this.rightDate
-    // const date = this.$route.params.date
-    const city = 'Белово'
-    // const city = this.$route.params.city
-    const areal = 'Кемеровская область'
-    // const areal = this.$route.params.areal
-    const url = encodeURI(
-      `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
-    )
-    this.getPrediction(url)
+  mounted() {
+    this.createPrediction()
   },
   methods: {
+    selectFish(val) {
+      this.selectedFish = val
+    },
     createPrediction() {
-      if (!this.location) {
-        this.errorEmptySelect = 'Выберите место рыбалки'
-        this.typeLocation = 'is-danger'
-        return
-      }
       this.errorEmptySelect = ''
       this.typeLocation = ''
 
-      const fish = this.fishId || 'щука'
-      // const fish = this.$route.params.fish
+      const fish = this.selectedFish || 'щука'
       const date = this.rightDate
-      // const date = this.$route.params.date
-      const city = (this.location && this.location[0]) || 'Москва'
-      // const city = this.$route.params.city
-      const areal = (this.location && this.location[1]) || 'Московская область'
-      // const areal = this.$route.params.areal
+      const city = this.location.city
+      const areal = this.location.areal
 
       const url = encodeURI(
         `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`

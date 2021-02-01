@@ -17,7 +17,7 @@
         </nav>
       </div>
       <div class="column">
-        <city-search />
+        <city-search v-model="selectedLocation" />
       </div>
     </div>
   </div>
@@ -46,6 +46,11 @@ export default {
       type: String,
       required: true,
     },
+  },
+  data() {
+    return {
+      selectedLocation: { areal: 'Московская область', city: 'Москва' },
+    }
   },
 }
 </script>
