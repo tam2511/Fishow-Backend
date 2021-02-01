@@ -58,7 +58,7 @@ class Waterplace_cost(models.Model):
 
 class Region(models.Model):
     name = models.CharField(max_length=100)
-    statistic_fishing = models.CharField(null=True,max_length=100)
+    stat = models.TextField(null=True)
     tourbases = models.TextField(null=True)#models.ForeignKey(Tourbases)
     descriptions = models.TextField(null=True)
     representatives = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='representatives_people',blank=True)
