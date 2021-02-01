@@ -84,19 +84,29 @@ export default {
           type: 'Home',
         },
         {
-          title: 'Прогноз',
+          title: 'Прогноз клёва',
           url: { path: '/prognoz-kleva' },
           type: 'Prediction',
         },
         {
-          title: 'Блоги',
-          url: { path: '/blogs' },
+          title: 'Водоемы',
+          url: { path: '/Water-place' },
+          type: 'Water-place',
+        },
+        {
+          title: 'Отчеты',
+          url: { path: '/Reports' },
+          type: 'Reports',
+        },
+        {
+          title: 'Статьи',
+          url: { path: '/Blogs' },
           type: 'Blogs',
         },
         {
-          title: 'Новости',
-          url: { path: '/news' },
-          type: 'News',
+          title: 'Вики',
+          url: { path: '/Wiki' },
+          type: 'Wiki',
         },
       ],
       navMobButtons: [
