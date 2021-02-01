@@ -22,10 +22,6 @@ import { mapState, mapActions } from 'vuex'
 import city from '@/components/predictPage/Menu/city'
 export default {
   props: {
-    value: {
-      type: Object,
-      required: true,
-    },
     passive: {
       type: Boolean,
       default: false,
@@ -33,7 +29,7 @@ export default {
   },
   data() {
     return {
-      selected: this.value || null,
+      selected: { areal: 'Московская область', city: 'Москва' },
       options: city,
     }
   },
@@ -41,10 +37,8 @@ export default {
     ...mapState('prediction', ['multiPrediction']),
   },
   watch: {
-    value(val) {
-      this.selected = val
-    },
     selected(val) {
+      this.selected = val
       this.$emit('input', val)
     },
   },
