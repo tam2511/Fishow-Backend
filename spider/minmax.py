@@ -97,7 +97,7 @@ def get_mean_data(data):
         'moon': ','.join([_['moon'] for _ in mean_data]),
         'moon_direction': ','.join([_['moon_direction'] for _ in mean_data]),
         'prob_min': ','.join([_['prob']['min'] for _ in mean_data]),
-        'prob_max': ','.join([_['prob']['min'] for _ in mean_data]),
+        'prob_max': ','.join([_['prob']['max'] for _ in mean_data]),
     }
     mean_data.update({'date': data[0]['date']})
     mean_data.update({'city': data[0]['city']})

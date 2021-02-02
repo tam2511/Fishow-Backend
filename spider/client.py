@@ -49,7 +49,9 @@ class Client:
         for fish in probs:
             for i in range(len(data)):
                 data[i]['fish'] = fish
-                data[i]['prob'] = ','.join(list(map(str, probs[fish][i: i + self.config['gismeteo']['num_hours']])))
+                left = i * self.config['gismeteo']['num_hours']
+                right = (i + 1) * self.config['gismeteo']['num_hours']
+                data[i]['prob'] = ','.join(list(map(str, probs[fish][left: right])))
             self.write_predictions_(self.config['database']['prediction_table'], data)
             mean_data = get_mean_data(data[:self.config['gismeteo']['num_days'] - 1])
             self.write_predictions_(self.config['database']['mean_prediction_table'], [mean_data])
@@ -67,11 +69,9 @@ class Client:
                                                                   'date': crow['date'], 'fish': crow['fish']})
             if len(response) > 0:
                 crow['id'] = response[0]['id']
-                print('updating')
                 mysql.update(table_name=table_name, row=crow)
                 del crow['id']
             else:
-                print('inserting')
                 mysql.insert_row(table_name=table_name, row=crow)
 
     def start(self):
@@ -98,7 +98,10 @@ class Client:
                     sleep(7)
             sleep(1000)
             self.config = read_config(self.config_path)
-            
+            with open(self.config['current_city'], 'w') as c_f:
+                areal = list(urls.keys())[0]
+                city = list(urls[areal].keys())[0]
+                c_f.write("{},{}".format(areal, city))
             
 if __name__ == '__main__':
     c = Client('config.json')

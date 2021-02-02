@@ -21,9 +21,14 @@ class WeatherParser:
     def init(self):
         self.driver = webdriver.PhantomJS(executable_path=self.driver_path)
         self.driver.implicitly_wait(self.max_wait)
+        self.driver.cookies_enabled = False
 
     def close(self):
+        self.driver.get("about:blank")
+        self.driver.delete_all_cookies()
+        # self.driver.execute_script('localStorage.clear();')
         self.driver.close()
+        self.driver.quit()
         del self.driver
 
     def temperature_(self, driver):
