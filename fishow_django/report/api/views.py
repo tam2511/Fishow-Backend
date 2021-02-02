@@ -10,7 +10,7 @@ from report.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrA
 from report.models import Report, Comment_r
 from rest_framework.parsers import MultiPartParser, FormParser
 from users.models import CustomUser
-
+from rest_framework import filters
 from django.contrib.auth.decorators import login_required
 
 
@@ -19,6 +19,8 @@ class ReportView(viewsets.ModelViewSet):
         lookup_field = "slug"
         serializer_class = ReportSerializer
         permission_classes = [IsAuthorOrReadOnly]
+        filter_backends = [filters.SearchFilter]
+        search_fields = ['title']
 
         def perform_create(self, serializer):
                     if not self.request.user.is_anonymous:

@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view, permission_classes
 from space.api.serializers import Waterplace_natureSerializer, Waterplace_costSerializer, RegionSerializer
 from space.api.permissions import DjangoObjectPermissionsOrAnonReadOnly
 from space.models import Region, Waterplace_cost, Waterplace_nature
-
+from rest_framework import filters
 from users.models import CustomUser
 
 from django.contrib.auth.decorators import login_required
@@ -26,7 +26,9 @@ class Waterplace_cost(viewsets.ModelViewSet):
         queryset = Waterplace_cost.objects.all()
         lookup_field = "slug"
         serializer_class = Waterplace_costSerializer
-        permission_classes = [IsAuthenticated]
+        permission_classes = [AllowAny]
+        filter_backends = [filters.SearchFilter]
+        search_fields = ['name']
 
         def get_object(self):
                     queryset = self.get_queryset()
@@ -38,7 +40,9 @@ class Waterplace_nature(viewsets.ModelViewSet):
         queryset = Waterplace_nature.objects.all()
         lookup_field = "slug"
         serializer_class = Waterplace_natureSerializer
-        permission_classes = [IsAuthenticated]
+        permission_classes = [AllowAny]
+        filter_backends = [filters.SearchFilter]
+        search_fields = ['name']
 
         def get_object(self):
                     queryset = self.get_queryset()
@@ -52,7 +56,9 @@ class Region(viewsets.ModelViewSet):
         queryset = Region.objects.all()
         lookup_field = "slug"
         serializer_class = RegionSerializer
-        permission_classes = [IsAuthenticated]
+        permission_classes = [AllowAny]
+        filter_backends = [filters.SearchFilter]
+        search_fields = ['name']
 
         def get_object(self):
                     queryset = self.get_queryset()

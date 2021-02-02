@@ -10,6 +10,7 @@ from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAn
 from blogs.models import Blog, Comment, Image
 from rest_framework.parsers import MultiPartParser, FormParser
 from users.models import CustomUser
+from rest_framework import filters
 
 from django.contrib.auth.decorators import login_required
 
@@ -170,6 +171,8 @@ class BlogViewSet(viewsets.ModelViewSet):
     lookup_field = "slug"
     serializer_class = BlogSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'content']
 
     def perform_create(self, serializer):
             if not self.request.user.is_anonymous:

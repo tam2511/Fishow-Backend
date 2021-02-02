@@ -20,6 +20,7 @@
 
 1. BLOGS,COMMENTS,IMAGE
 * blogs/
+* blogs/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
 * blogs/<slug>/
 * images/
 * blogs/<slug>/comments/
@@ -54,6 +55,7 @@
 
 3. REPORT
 * report/
+* report/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
 * report/<slug>/
 * report/<slug>/comments/
 * report/<slug>/comment/
@@ -66,6 +68,7 @@
 
 4. NEWS
 * news/
+* news/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
 * news/<slug>/
 * news/<slug>/comments/
 * news/<slug>/comment/
@@ -78,10 +81,13 @@
 
 5. SPACE
 * region/
+* region/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
 * region/<slug>
 * waterplace_cost/
+* waterplace_cost/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
 * waterplace_cost/<slug>
 * waterplace_nature/
+* waterplace_nature/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
 * waterplace_nature/<slug>
 
 * count/waterplace_cost/

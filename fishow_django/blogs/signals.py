@@ -1,8 +1,8 @@
 from django.db.models.signals import pre_save,pre_delete
 from django.core.signals import request_started,request_finished
 from django.dispatch import receiver
-from django.utils.text import slugify
-
+#from django.utils.text import slugify
+from pytils.translit import slugify
 from core.utils import generate_random_string
 from blogs.models import Blog,Comment
 
