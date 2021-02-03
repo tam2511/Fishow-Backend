@@ -6,6 +6,9 @@
       class="actions-grid__item"
       :to="item.url"
     >
+      <div class="grid__item_svg">
+        <img :src="item.svg" alt="" />
+      </div>
       <div class="grid__item_title">{{ item.title }}</div>
       <div class="grid__item_body">{{ item.body }}</div>
     </nuxt-link>
@@ -21,21 +24,25 @@ export default {
           title: 'Создать свою статью',
           body: 'Опишите свои впечатления о рыбалке и поделитесь опытом!',
           url: { path: '/blog-editor' },
+          svg: '/main-page/55.svg',
         },
         {
           title: 'Отчеты о рыбалке',
           body: 'Опишите свои впечатления о рыбалке и поделитесь опытом!',
           url: { path: '/blog-editor' },
+          svg: '/main-page/44.svg',
         },
         {
           title: 'Статьи и блоги других авторов',
           body: 'Читайте интересные истории товарищей по рыбалке',
           url: { path: '/blogs' },
+          svg: '/main-page/22.svg',
         },
         {
           title: 'База знаний рыбалова',
           body: 'Крупнейшее вики рыбаловного сообщества',
           url: { path: '/wiki' },
+          svg: '/main-page/33.svg',
         },
       ],
     }
@@ -56,8 +63,8 @@ export default {
     grid-template-columns: 1fr;
   }
   &__item {
-    min-height: 220px;
-    background-image: url('/placeholder.png');
+    position: relative;
+    min-height: 250px;
     background-color: #fff;
     background-position: right;
     background-repeat: no-repeat;
@@ -80,10 +87,24 @@ export default {
   line-height: 32px;
   width: 50%;
   font-weight: 400;
+  z-index: 6;
 }
 .grid__item_body {
   text-align: left;
   width: 70%;
   font-weight: 300;
+  z-index: 6;
+}
+.grid__item_svg {
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  img {
+    max-height: 250px;
+  }
 }
 </style>
