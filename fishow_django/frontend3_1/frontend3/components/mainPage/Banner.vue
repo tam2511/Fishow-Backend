@@ -20,7 +20,6 @@
         </div>
       </transition>
     </div>
-
     <div class="banner-statistic"></div>
     <div v-for="item in banners" :key="item.id" class="banner-statistic__item">
       <div class="banner-statistic__title">{{ item.title }}</div>
@@ -41,12 +40,12 @@ export default {
         },
         blogsCounter: {
           id: 1,
-          title: 'Статей и блогов',
+          title: 'Количество статей',
           counter: 0,
         },
         reportsCounter: {
           id: 2,
-          title: 'Количество прогнозов',
+          title: 'Количество отчетов',
           counter: 0,
         },
         userCounter: {
@@ -57,7 +56,52 @@ export default {
       },
     }
   },
-  mounted() {},
+  mounted() {
+    this.getUsers()
+    this.getBlogs()
+    this.getReports()
+  },
+  methods: {
+    async getUsers() {
+      try {
+        const { data } = await this.$axios.get('/count/user/')
+        this.banners.userCounter.counter = data[0].count_user
+      } catch (e) {
+        console.error('errro =', e)
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: 'Не удалось загрузить статистику по пользователям',
+          type: 'is-danger',
+        })
+      }
+    },
+    async getBlogs() {
+      try {
+        const { data } = await this.$axios.get('/count/blogs/')
+        this.banners.blogsCounter.counter = data[0].count_blogs
+      } catch (e) {
+        console.error('errro =', e)
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: 'Не удалось загрузить статистику по блогам.',
+          type: 'is-danger',
+        })
+      }
+    },
+    async getReports() {
+      try {
+        const { data } = await this.$axios.get('/count/report/')
+        this.banners.reportsCounter.counter = data[0].count_report
+      } catch (e) {
+        console.error('errro =', e)
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: 'Не удалось загрузить статистику по отчетам.',
+          type: 'is-danger',
+        })
+      }
+    },
+  },
 }
 </script>
 
