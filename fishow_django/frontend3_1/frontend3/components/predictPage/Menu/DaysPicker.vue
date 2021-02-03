@@ -8,7 +8,7 @@
             areal: $route.params.areal,
             date: '2021-' + day.split('/')[1] + '-' + day.split('/')[0],
             city: $route.params.city,
-            fish: prediction.fish,
+            fish,
           },
         }"
         class="button"
@@ -30,6 +30,9 @@ export default {
     },
   },
   computed: {
+    fish() {
+      return (this.prediction && this.prediction.fish) || 'щука'
+    },
     tenDays() {
       return getData(this.days, 9)
     },

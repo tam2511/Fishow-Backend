@@ -16,7 +16,7 @@
         leave-active-class="animated bounceOutRight"
       >
         <div class="banner_picture">
-          <img src="/placeholder.png" width="400px" alt="" />
+          <img src="/62.png" height="400" alt="" />
         </div>
       </transition>
     </div>
@@ -60,6 +60,11 @@ export default {
     this.getUsers()
     this.getBlogs()
     this.getReports()
+  },
+  computed: {
+    img() {
+      return require('~/static/main-page/66.svg')
+    },
   },
   methods: {
     async getUsers() {
@@ -167,5 +172,10 @@ h3.banner_title {
   &__item {
     margin: 0 10px;
   }
+}
+.banner_picture {
+  position: absolute;
+  right: 0;
+  top: -250px;
 }
 </style>
