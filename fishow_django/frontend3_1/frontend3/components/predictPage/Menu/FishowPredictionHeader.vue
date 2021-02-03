@@ -13,7 +13,7 @@
                 params: {
                   areal: $route.params.areal,
                   city: $route.params.city,
-                  date: $route.params.date,
+                  date: rightDate,
                   fish: $route.params.fish,
                 },
               }"
@@ -35,7 +35,9 @@
 
 <script>
 import { mapState } from 'vuex'
+import rightDate from '~/assets/mixins/prediction/rightDate'
 export default {
+  mixins: [rightDate],
   data() {
     return {
       niceDays: null,
@@ -47,9 +49,9 @@ export default {
       if (this.multiPrediction) {
         if (this.predictions && this.predictions.city) {
           result = this.predictions.city
-        } else if (this.prediction && this.prediction.city) {
-          result = this.prediction.city
         }
+      } else if (this.prediction && this.prediction.city) {
+        result = this.prediction.city
       }
       return result
     },
@@ -80,7 +82,8 @@ export default {
         12: 'Декабря',
       }
       const day = this.$route.params.date.split('-')
-      const result = whatMonth[day[1]]
+      const month = day[1].length < 2 ? '0' + day[1] : day[1]
+      const result = whatMonth[month]
       this.niceDays = day[2] + ' ' + result
     },
   },

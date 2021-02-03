@@ -7,6 +7,7 @@
       label="title"
       track-by="title"
       select-label=""
+      class="select-fish"
       @input="info"
     ></multiselect>
   </b-field>
@@ -42,4 +43,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss">
+.box.fish .select-fish {
+  max-width: 300px;
+  margin-left: auto;
+  margin-bottom: 25px;
+}
+</style>

@@ -8,10 +8,14 @@
               <a> Россия </a>
             </li>
             <li>
-              <nuxt-link to="/prognoz-kleva">{{ areal }}</nuxt-link>
+              <nuxt-link to="/prognoz-kleva">{{
+                selectedLocation.areal
+              }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/prognoz-kleva">{{ city }}</nuxt-link>
+              <nuxt-link to="/prognoz-kleva">{{
+                selectedLocation.city
+              }}</nuxt-link>
             </li>
           </ul>
         </nav>
@@ -29,28 +33,15 @@ export default {
   components: {
     CitySearch,
   },
-  props: {
-    areal: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: String,
-      required: true,
-    },
-    fish: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       selectedLocation: { areal: 'Московская область', city: 'Москва' },
     }
+  },
+  watch: {
+    selectedLocation(val) {
+      console.log('selectedLocation = ', val)
+    },
   },
 }
 </script>

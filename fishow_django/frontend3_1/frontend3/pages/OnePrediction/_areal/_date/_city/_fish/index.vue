@@ -28,11 +28,8 @@
         :content="prediction.pressure_fish"
       )
         PressureContainer(:readyData="readyData")
-          pressure-chart(
-            :days="days"
-            :pressureMax="prediction.pressure"
-            :pressureMin="prediction.pressure"
-            :one="true"
+          pressure-one-day(
+            :pressure-value="prediction.pressure"
           )
 
       result-container(
@@ -68,9 +65,11 @@ import predictionTemp from '~/assets/mixins/prediction/predictionTemp'
 // results
 import Chart from '~/components/oneDay/probe/chart'
 import OneMoon from '~/components/oneDay/moon/OneMoon'
+import PressureOneDay from '~/components/predictPage/Results/Pressure/OneDay/PressureOneDay'
 
 export default {
   components: {
+    PressureOneDay,
     Chart,
     OneMoon,
   },

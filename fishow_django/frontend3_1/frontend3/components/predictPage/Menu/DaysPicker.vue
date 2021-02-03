@@ -8,7 +8,7 @@
             areal: $route.params.areal,
             date: '2021-' + day.split('/')[1] + '-' + day.split('/')[0],
             city: $route.params.city,
-            fish: $route.params.fish,
+            fish: prediction.fish,
           },
         }"
         class="button"
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import getData from '~/assets/js/getData'
 export default {
   props: {
@@ -32,6 +33,7 @@ export default {
     tenDays() {
       return getData(this.days, 9)
     },
+    ...mapState('prediction', ['prediction']),
   },
 }
 </script>
