@@ -30,9 +30,7 @@
       <button class="button is-primary" @click="createPrediction">
         Составить прогноз
       </button>
-      <nuxt-link class="button" outlined :to="{ path: '/prognoz-kleva' }"
-        >Подробнее</nuxt-link
-      >
+      <nuxt-link class="button" outlined :to="route">Подробнее</nuxt-link>
     </div>
   </div>
 </template>
@@ -64,9 +62,21 @@ export default {
       typeLocation: '',
       errorEmptySelect: '',
       position: null,
+      url: {},
     }
   },
   computed: {
+    route() {
+      return {
+        name: 'prognoz-kleva-areal-date-city-fish',
+        params: {
+          areal: this.url.areal,
+          date: this.url.date,
+          city: this.url.city,
+          fish: this.url.fish,
+        },
+      }
+    },
     days() {
       return getData(this.rightDate, 9)
     },
@@ -83,6 +93,14 @@ export default {
     },
     ...mapState('prediction', ['predictions', 'fishId', 'location']),
   },
+  watch: {
+    selectedLocation() {
+      this.updateURL()
+    },
+    selectedFish() {
+      this.updateURL()
+    },
+  },
   mounted() {
     this.createPrediction()
   },
@@ -90,17 +108,22 @@ export default {
     selectFish(val) {
       this.selectedFish = val
     },
+    updateURL() {
+      this.url = {
+        fish: this.selectedFish || 'щука',
+        date: this.rightDate,
+        city: this.location.city,
+        areal: this.location.areal,
+      }
+    },
     createPrediction() {
       this.errorEmptySelect = ''
       this.typeLocation = ''
 
-      const fish = this.selectedFish || 'щука'
-      const date = this.rightDate
-      const city = this.location.city
-      const areal = this.location.areal
+      this.updateURL()
 
       const url = encodeURI(
-        `/predictionten/?areal=${areal}&date=${date}&city=${city}&fish=${fish}`
+        `/predictionten/?areal=${this.url.areal}&date=${this.url.date}&city=${this.url.city}&fish=${this.url.fish}`
       )
       this.getPrediction(url)
     },

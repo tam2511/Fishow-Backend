@@ -2,7 +2,7 @@
   div
     slot
     .columns
-      .column.container-minmax
+      .column.container-minmax(v-if="readyData.pressure_desc.up_text")
         b-icon(
           pack="fas"
           icon="chevron-up"
@@ -10,7 +10,7 @@
           type="is-primary"
         )
         p(v-html="readyData.pressure_desc.up_text" class="right-box")
-      .column.container-minmax
+      .column.container-minmax(v-if="readyData.pressure_desc.low_text")
         b-icon(
           pack="fas"
           icon="chevron-down"
