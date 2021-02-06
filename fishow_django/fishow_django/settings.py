@@ -22,15 +22,23 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 
+#SECRET_KEY = '***'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
 with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
     config_database = load(json_f)
 
-DEBUG = config_database['debug']
+DEBUG = False# config_database['debug']
 
 ALLOWED_HOSTS = config_database['allowed_hosts']
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 
 # Application definition
 
@@ -48,6 +56,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'corsheaders',
     'core',
+    'sslserver',
 
 
     'django.contrib.sites',
@@ -231,6 +240,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 8
 }
+
 
 REST_USE_JWT = True
 
