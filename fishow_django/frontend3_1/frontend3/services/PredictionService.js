@@ -2,7 +2,7 @@ import axios from 'axios'
 import confserver from '~/confserver'
 
 const apiClient = axios.create({
-  baseURL: `http://${confserver.ip}:8000/api`,
+  baseURL: `https://${confserver.ip}:8000/api`,
   withCredentials: false,
   headers: {
     Accept: 'application/json',

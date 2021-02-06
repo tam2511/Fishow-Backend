@@ -35,6 +35,10 @@ export default {
           name: 'description',
           content: mainPage.description,
         },
+        {
+          name: 'yandex-verification',
+          content: 'cb0c04b5c0271e26',
+        },
       ],
     }
   },

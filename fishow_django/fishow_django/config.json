@@ -15,19 +15,19 @@
   ],
   "static_root": "/root/Fishow/fishow_rest_vue/static/",
   "cors_origin_whitelist": [
-    "http://0.0.0.0:3000",
-    "http://fishow.ru:3000",
-    "http://fishow.ru",
-    "http://www.fishow.ru",
-    "http://45.90.35.152:8000",
-    "http://45.90.35.152:3000",
-    "http://localhost:3000",
-    "http://192.168.0.102:3000",
-    "http://192.168.1.68:3000",
-    "http://192.168.1.80:3000",
-    "http://192.168.0.103:3000",
-    "http://213.139.208.107:3000",
-    "http://109.63.168.229:3000"
+    "https://0.0.0.0:3000",
+    "https://fishow.ru:3000",
+    "https://fishow.ru",
+    "https://www.fishow.ru",
+    "https://45.90.35.152:8000",
+    "https://45.90.35.152:3000",
+    "https://localhost:3000",
+    "https://192.168.0.102:3000",
+    "https://192.168.1.68:3000",
+    "https://192.168.1.80:3000",
+    "https://192.168.0.103:3000",
+    "https://213.139.208.107:3000",
+    "https://109.63.168.229:3000"
   ],
-  "url_front": "http://45.90.35.152:3000/"
+  "url_front": "https://45.90.35.152:3000/"
 }

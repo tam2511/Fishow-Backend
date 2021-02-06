@@ -96,7 +96,7 @@ export default {
     '@nuxtjs/robots',
   ],
   sitemap: {
-    hostname: 'http://fishow.ru',
+    hostname: 'https://fishow.ru',
     gzip: true,
     exclude: ['/secret', '/admin/**'],
   },
@@ -107,7 +107,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: `http://${confserver.ip}:8000/api`,
+      target: `https://${confserver.ip}:8000/api`,
       pathRewrite: {
         '^/api': '/',
       },
@@ -119,7 +119,7 @@ export default {
    */
   axios: {
     withCredentials: true,
-    baseURL: `http://${confserver.ip}:8000/api`,
+    baseURL: `https://${confserver.ip}:8000/api`,
   },
   robots: [
     {
@@ -175,7 +175,7 @@ export default {
         access_token_endpoint: 'https://oauth.yandex.ru/token?',
         token_type: 'Bearer',
         grant_type: 'authorization_code',
-        redirect_uri: 'http://fishow.ru/',
+        redirect_uri: 'https://fishow.ru/',
         token_key: 'access_token',
         force_confirm: 'yes',
         state: '',
