@@ -69,7 +69,7 @@ export default {
           `/account-confirm-email/${this.key}/`,
           { key: this.key },
           {
-            baseURL: `http://${confserver.ip}:8000/`,
+            baseURL: `https://${confserver.ip}/`,
             withCredentials: false,
           }
         )
