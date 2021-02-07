@@ -6,10 +6,15 @@
   "allowed_hosts": [
     "45.90.35.152",
     "fishow.ru:3000",
-    "fishow.ru",
+		"fishow.ru:8000",
+		"www.fishow.ru:8000",
+		"fishow.ru:8000",
+		"www.back.fishow.ru:8000",
+    "back.fishow.ru",
     "45.90.35.152:3000",
     "0.0.0.0",
     "www.fishow.ru",
+	  "www.back.fishow.ru",
     "45.90.35.152:8000",
     "45.90.35.152:3000"
   ],
@@ -17,6 +22,7 @@
   "cors_origin_whitelist": [
     "https://0.0.0.0:3000",
     "https://fishow.ru:3000",
+		"https://fishow.ru:8000",
     "https://fishow.ru",
     "https://www.fishow.ru",
     "https://45.90.35.152:8000",

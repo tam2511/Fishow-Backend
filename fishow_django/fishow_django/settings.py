@@ -29,16 +29,9 @@ SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
     config_database = load(json_f)
 
-DEBUG = False# config_database['debug']
+DEBUG =  config_database['debug']
 
 ALLOWED_HOSTS = config_database['allowed_hosts']
-
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-#SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 
 # Application definition
 
@@ -288,3 +281,23 @@ REST_USE_JWT = True
 #        'STATS_FILE': os.path.join(BASE_DIR, 'frontend3_1/frontend3/assets', 'webpack-stats.json'),
 #    }
 #}
+
+###
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_SSL_REDIRECT = True
+#SESSION_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
+###
+
+
+#CSRF_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
+#SECURE_BROWSER_XSS_FILTER = True
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+#SECURE_SSL_REDIRECT = True
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
+USE_X_FORWARDED_HOST = True
+#SECURE_HSTS_SECONDS = 86400
+#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#SECURE_HSTS_PRELOAD = True
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
