@@ -10,15 +10,9 @@
           Оставить отчет
         </nuxt-link>
       </div>
-      <transition
-        name="custom-classes-transition"
-        enter-active-class="animated tada"
-        leave-active-class="animated bounceOutRight"
-      >
-        <div class="banner_picture">
-          <img src="/62.png" height="400" alt="" />
-        </div>
-      </transition>
+      <div class="banner_picture">
+        <img src="/61.png" height="400" alt="" />
+      </div>
     </div>
     <div class="banner-statistic"></div>
     <div v-for="item in banners" :key="item.id" class="banner-statistic__item">
@@ -113,6 +107,7 @@ export default {
 <style scoped lang="scss">
 .head-banner,
 .banner-body {
+  position: relative;
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;
@@ -120,6 +115,9 @@ export default {
 }
 .banner-body {
   width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 25px 25px 0;
 }
 .banner_title {
   &-wrapper {
@@ -176,6 +174,9 @@ h3.banner_title {
 .banner_picture {
   position: absolute;
   right: 0;
-  top: -250px;
+  bottom: 0;
+  @media screen and (max-width: 880px) {
+    display: none;
+  }
 }
 </style>
