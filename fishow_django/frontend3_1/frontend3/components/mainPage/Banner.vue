@@ -175,6 +175,7 @@ h3.banner_title {
   position: absolute;
   right: 0;
   bottom: 0;
+  pointer-events: none;
   @media screen and (max-width: 880px) {
     display: none;
   }
