@@ -5,7 +5,7 @@ export default {
   getHeaders() {
     return {
       headers: {
-        Authorization: `${localStorage.getItem('Authorization')}`,
+        Authorization: `${localStorage.getItem('auth._token.local')}`,
       },
     }
   },
@@ -32,5 +32,11 @@ export default {
   },
   getUser() {
     return this.get(`${API}/dj-rest-auth/user/`)
+  },
+  getRegions(params = '') {
+    return this.get(`${API}/region/${params}`)
+  },
+  getWaterPlacesNature(params = '') {
+    return this.get(`${API}/waterplace_nature/${params}`)
   },
 }

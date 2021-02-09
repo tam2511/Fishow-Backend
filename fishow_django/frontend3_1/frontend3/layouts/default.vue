@@ -32,6 +32,4 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-@import '@/src/styles/main';
-</style>
+<style lang="scss"></style>

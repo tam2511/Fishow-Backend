@@ -36,19 +36,7 @@ export default {
           'рыбалка, прогноз, отчеты о рыбалке, отчеты, прогноз на рыбалку, блоги о рыбалке, новости о рыбалке, ловля рыбы, клёв, хищные рыбы',
       },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
-      },
-      ...appleIcons,
-    ],
+    link: [...appleIcons],
   },
   /*
    ** Customize the progress-bar color
@@ -57,7 +45,6 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
   /*
    ** Plugins to load before mounting the App
    */
@@ -184,25 +171,43 @@ export default {
     redirect: false,
   },
   build: {
-    extractCSS: true,
-    /*
-     ** You can extend webpack config here
-     */
-    // entry: {
-    //   app: ['./app']
-    // },
-    // output: {
-    //   path: require('path').resolve('./assets/bundles/'),
-    //   filename: '[name]-[hash].js',
-    //   publicPath: 'http://localhost:3000/assets/bundles/'
-    // },
-    // publicPath: 'static/',
-    // plugins: [
-    //   new BundleTracker({
-    //     path: __dirname,
-    //     filename: '.nuxt/webpack-stats.json'
-    //   })
-    // ],
+    // parallel: true, // don't know, if it works, maybe
+    cache: true, // don't know, if it works, maybe
+    optimization: {
+      minimize: true,
+      runtimeChunk: true,
+      concatenateModules: true,
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 20,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
+    // hardSource: true, // don't know, if it works, maybe
+    // extractCSS: true,
+    optimizeCSS: true,
+
     extend(config, ctx) {},
   },
+  css: [
+    '../src/styles/main.scss',
+    '../assets/all.css',
+    '../assets/materialdesignicons.min.css',
+  ],
 }
