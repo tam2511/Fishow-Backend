@@ -24,7 +24,7 @@ export default {
     CommentsBlock,
     SkeletonBlogCard,
   },
-  layout: 'SideBarRight',
+  layout: 'sideBarRight',
   data() {
     return {
       blog: null,

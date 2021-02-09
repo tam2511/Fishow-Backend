@@ -40,7 +40,7 @@ export default {
     BlogCard,
   },
   mixins: [catchError],
-  layout: 'SideBarRight',
+  layout: 'sideBarRight',
   data() {
     return {
       blogs: null,

@@ -1,5 +1,5 @@
 const dev = {
-  ip: 'back.fishow.ru',
+  ip: 'https://back.fishow.ru/api',
 }
 
 export default dev

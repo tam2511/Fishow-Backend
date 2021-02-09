@@ -64,8 +64,20 @@ export default {
   mixins: [urlData, predictionTemp],
   layout: 'prediction',
   head() {
+    let city = this.$route.params.city
+    let fish = this.$route.params.fish
+    try {
+      const data = this.predictions
+      city = data.city
+      fish = data.fish
+    } catch (e) {
+      console.error('error header = ', e)
+    }
+
     return {
-      title: predictionTen.title,
+      title: `
+      ${city} - Прогноз клева на 9 дней для рыбы
+      ${fish} | Fishow.ru`,
       meta: [
         {
           hid: 'description',
