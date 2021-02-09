@@ -68,6 +68,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import Http from '~/services/Http'
 import errors from '~/components/Header/errors'
 export default {
   data() {
@@ -85,29 +86,25 @@ export default {
   methods: {
     async temlLogin() {
       try {
-        const resp = await this.$axios.post('/dj-rest-auth/login/', {
+        const payload = {
           email: this.login.email,
           password: this.login.password,
-        })
-
+        }
+        const resp = await Http.login(payload)
         this.$auth.setToken('local', 'Bearer ' + resp.data.access_token)
         this.$auth.setRefreshToken('local', resp.data.refresh_token)
-        // console.log('Bearer ' + resp.data.access_token)
-        this.$axios.setHeader(
-          'Authorization',
-          'Bearer ' + resp.data.access_token
-        )
+        this.$axios.setHeader()
         this.$auth.ctx.app.$axios.setHeader(
           'Authorization',
           'Bearer ' + resp.data.access_token
         )
         this.$axios.get('/dj-rest-auth/user/').then((resp) => {
-          // console.log('resp = ', resp)
           this.$auth.setUser(resp.data)
         })
         this.toggle()
         window.location.reload()
       } catch (e) {
+        console.error(e)
         if (e.response.data.password) {
           const response = e.response.data.password[0]
           this.error.password = errors[response]

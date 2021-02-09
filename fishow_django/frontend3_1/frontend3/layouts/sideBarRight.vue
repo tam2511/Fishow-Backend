@@ -51,10 +51,6 @@
                     <UserRate />
                   </div>
                 </article>
-                <!--                <article class="tile is-parent is-vertical">-->
-                <!--                  <p class="title is-4">Последние комментарии</p>-->
-                <!--                  <div class="tile is-child box"></div>-->
-                <!--                </article>-->
               </div>
             </div>
           </div>
@@ -99,10 +95,9 @@ export default {
   computed: {
     ...mapState('login', ['showStateLogin', 'showStateReg']),
   },
-  mounted() {
-    this.$axios.get('/blogs/').then((res) => {
-      this.minPost = res.data.results.slice(0, 3)
-    })
+  async mounted() {
+    const { data } = await this.$axios.get('/blogs/')
+    this.minPost = data.results.slice(0, 3)
   },
 }
 </script>

@@ -46,22 +46,24 @@
               </div>
             </div>
             <div
-              v-for="p in getResult"
-              :key="p.id"
-              :class="p.type + '_container'"
+              v-for="item in getResult"
+              :key="item.id"
+              :class="item.type + '_container'"
             >
-              <p v-if="p.type === 'text'" class="post-text">{{ p.body }}</p>
+              <p v-if="item.type === 'text'" class="post-text">
+                {{ item.body }}
+              </p>
               <iframe
-                v-if="p.type === 'video'"
+                v-if="item.type === 'video'"
                 width="560"
                 height="315"
-                :src="p.url"
+                :src="item.url"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
                 name="video"
               ></iframe>
-              <figure v-if="p.type === 'image'" class="image is-fullwidth">
-                <img :src="p.url" alt="" />
+              <figure v-if="item.type === 'image'" class="image is-fullwidth">
+                <img :src="item.url" alt="" />
               </figure>
             </div>
           </div>
@@ -215,6 +217,7 @@ export default {
 }
 .post-text {
   padding: 1rem 0;
+  white-space: pre-line;
 }
 [src*='svg'] {
   max-height: 50px;

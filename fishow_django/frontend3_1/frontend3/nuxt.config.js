@@ -107,7 +107,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: `https://${confserver.ip}/api`,
+      target: confserver.ip,
       pathRewrite: {
         '^/api': '/',
       },
@@ -119,7 +119,7 @@ export default {
    */
   axios: {
     withCredentials: true,
-    baseURL: `https://${confserver.ip}/api`,
+    baseURL: confserver.ip,
   },
   robots: [
     {
