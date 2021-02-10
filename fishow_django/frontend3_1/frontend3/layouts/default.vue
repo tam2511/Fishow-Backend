@@ -3,13 +3,9 @@
     <HeaderBlock />
     <LoginModal v-if="showStateLogin" />
     <RegModal v-if="showStateReg" />
-    <transition name="fade" mode="out-in">
-      <section class="section">
-        <div class="container">
-          <nuxt />
-        </div>
-      </section>
-    </transition>
+    <section class="section container">
+      <nuxt />
+    </section>
     <TheFooter />
   </div>
 </template>

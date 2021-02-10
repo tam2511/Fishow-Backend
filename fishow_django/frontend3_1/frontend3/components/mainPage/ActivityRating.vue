@@ -143,6 +143,7 @@ export default {
   }
   &-select {
     display: flex;
+    min-height: 110px;
     & > div {
       width: 50%;
       margin: 20px;

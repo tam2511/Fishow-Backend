@@ -1,13 +1,11 @@
 <template>
-  <section>
-    <div class="container">
-      <Banner />
-      <PredictionSection />
-      <ActionsGrid />
-      <SiteNews />
-      <ActivityRating />
-    </div>
-  </section>
+  <div>
+    <Banner />
+    <PredictionSection />
+    <ActionsGrid />
+    <SiteNews />
+    <ActivityRating />
+  </div>
 </template>
 
 <script>

@@ -32,16 +32,31 @@ export default {
       this.$emit('selected', val)
     },
   },
+  mounted() {
+    this.search('Волга', true)
+  },
   methods: {
-    search(val) {
-      this.$nextTick(() => {
+    search(val = 'Волга', once = false) {
+      this.$nextTick(async () => {
         this.isLoading = true
-        this.$axios
-          .get(`/waterplace_nature/?search=${val}`)
-          .then(({ data }) => {
-            this.waterPlaces = data.results
+        try {
+          await this.$axios
+            .get(`/waterplace_nature/?search=${val}`)
+            .then(({ data }) => {
+              this.waterPlaces = data.results
+              if (once) {
+                this.selected = this.waterPlaces[0]
+                this.isLoading = false
+              }
+            })
+        } catch (e) {
+          console.error(e)
+          this.$buefy.toast.open({
+            duration: 5000,
+            message: 'Что то пошло не так при загрузке водоёмов.',
+            type: 'is-danger',
           })
-        this.isLoading = false
+        }
       })
     },
   },

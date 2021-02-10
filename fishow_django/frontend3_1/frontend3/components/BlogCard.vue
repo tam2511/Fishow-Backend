@@ -125,6 +125,16 @@ export default {
       dislikesCounter: 0,
     }
   },
+  head() {
+    return {
+      script: [
+        {
+          innerHTML: this.createJsonBlog(this.blog),
+          type: 'application/ld+json',
+        },
+      ],
+    }
+  },
   computed: {
     getResult() {
       try {
@@ -137,7 +147,47 @@ export default {
       return this.blog.likes_count - this.blog.dislikes_count
     },
   },
+
   methods: {
+    createJsonBlog(data) {
+      const defaultURL = 'https://fishow.ru'
+      const image = defaultURL + '/favicon-96x96.png'
+      const url = defaultURL + this.$router.history.current.fullPath
+      const images = []
+      try {
+        const items = JSON.parse(this.blog.content).blocks[0]
+
+        items.forEach((item) => {
+          if (item.type === 'image') {
+            images.push(item.url)
+          }
+        })
+      } catch (e) {}
+      const blog = {
+        '@context': 'https://schema.org',
+        '@type': 'NewsArticle',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': url,
+        },
+        headline: data.title,
+        image: images,
+        datePublished: data.created_at,
+        author: {
+          '@type': 'Person',
+          name: data.author,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Fishow',
+          logo: {
+            '@type': 'ImageObject',
+            url: image,
+          },
+        },
+      }
+      return JSON.stringify(blog)
+    },
     toggleLike() {
       if (this.userLikedBlog) {
         this.unLikeBlog()

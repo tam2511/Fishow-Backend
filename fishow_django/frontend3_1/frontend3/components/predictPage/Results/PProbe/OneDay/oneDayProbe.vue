@@ -116,10 +116,6 @@ export default {
           {
             breakpoint: 768,
             options: {
-              chart: {
-                height: 350,
-                type: 'bar',
-              },
               yaxis: {
                 labels: {
                   show: false,

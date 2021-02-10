@@ -31,11 +31,7 @@ export default {
       series: [
         {
           name: 'Y',
-          data: this.value.y,
-        },
-        {
-          name: 'X',
-          data: this.value.x,
+          data: this.value.y.map((item) => item * 100),
         },
       ],
       chartOptions: {
@@ -54,11 +50,11 @@ export default {
             show: false,
           },
         },
-        colors: ['#000000', '#172a3b'],
+        colors: ['#018cac', '#172a3b'],
         dataLabels: {
           enabled: true,
           formatter(value) {
-            return Math.round(value)
+            return Math.floor(value)
           },
         },
         stroke: {
@@ -84,10 +80,10 @@ export default {
         },
         yaxis: {
           min: 0,
-          max: 1,
+          max: 100,
           labels: {
             formatter(value) {
-              return Math.round(value * 100)
+              return Math.floor(value)
             },
           },
         },
@@ -101,12 +97,8 @@ export default {
     value(val) {
       this.series = [
         {
-          name: 'Максимальная суточная температура',
-          data: val.x,
-        },
-        {
-          name: 'Среднесуточная температура',
-          data: val.y,
+          name: 'ачевсмысле',
+          data: val.y.map((item) => item * 100),
         },
       ]
     },

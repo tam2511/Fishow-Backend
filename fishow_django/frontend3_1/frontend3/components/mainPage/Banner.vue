@@ -115,6 +115,7 @@ export default {
 }
 .banner-body {
   width: 100%;
+  height: 300px;
   position: relative;
   overflow: hidden;
   border-radius: 0 25px 25px 0;
