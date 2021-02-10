@@ -181,33 +181,33 @@ export default {
   },
   build: {
     // parallel: true, // don't know, if it works, maybe
-    // cache: true, // don't know, if it works, maybe
-    // optimization: {
-    //   minimize: true,
-    //   runtimeChunk: true,
-    //   concatenateModules: true,
-    //   splitChunks: {
-    //     chunks: 'all',
-    //     minSize: 30000,
-    //     maxSize: 0,
-    //     minChunks: 1,
-    //     maxAsyncRequests: 20,
-    //     maxInitialRequests: 3,
-    //     automaticNameDelimiter: '~',
-    //     name: true,
-    //     cacheGroups: {
-    //       vendors: {
-    //         test: /[\\/]node_modules[\\/]/,
-    //         priority: -10,
-    //       },
-    //       default: {
-    //         minChunks: 2,
-    //         priority: -20,
-    //         reuseExistingChunk: true,
-    //       },
-    //     },
-    //   },
-    // },
+    cache: true, // don't know, if it works, maybe
+    optimization: {
+      minimize: true,
+      runtimeChunk: true,
+      concatenateModules: true,
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 20,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
     // hardSource: true, // don't know, if it works, maybe
     // extractCSS: true,
     optimizeCSS: true,
