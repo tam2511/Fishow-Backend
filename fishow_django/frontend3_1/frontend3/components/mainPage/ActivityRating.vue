@@ -129,12 +129,16 @@ export default {
   &-rating {
     display: flex;
     flex-flow: row;
+    flex-wrap: wrap;
     border-radius: 20px;
     border: 1px solid rgba(206, 209, 213, 0.4);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     & > div {
       width: 50%;
       padding: 20px;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
   }
   &-description {
@@ -151,6 +155,10 @@ export default {
   }
   &-container {
     border-right: 1px solid #e7e7e7;
+    @media screen and (max-width: 500px) {
+      border-right: none;
+      border-bottom: 1px solid #e7e7e7;
+    }
   }
   &-title {
     font-weight: 500;

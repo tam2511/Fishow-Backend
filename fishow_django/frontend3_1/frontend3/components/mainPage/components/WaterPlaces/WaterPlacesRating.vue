@@ -73,6 +73,9 @@ export default {
   & > div {
     width: 100%;
     margin: 20px;
+    @media screen and (max-width: 500px) {
+      margin: 0;
+    }
   }
 }
 </style>

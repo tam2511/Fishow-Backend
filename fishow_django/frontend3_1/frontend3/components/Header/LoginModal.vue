@@ -39,7 +39,7 @@
         <div class="field is-grouped">
           <div class="control">
             <button
-              class="button is-link"
+              class="button is-link is-success"
               @keypress.enter="temlLogin"
               @click="temlLogin"
             >
@@ -53,6 +53,15 @@
               @click="toggle"
             >
               Отмена
+            </button>
+          </div>
+          <div class="control">
+            <button
+              class="button is-primary"
+              @keypress.esc="toggle"
+              @click="toggleReg"
+            >
+              Регистрация
             </button>
           </div>
         </div>
@@ -115,7 +124,10 @@ export default {
         }
       }
     },
-    ...mapMutations('login', { toggle: 'TOGGLE_LOGIN' }),
+    ...mapMutations('login', {
+      toggle: 'TOGGLE_LOGIN',
+      toggleReg: 'TOGGLE_REG',
+    }),
   },
 }
 </script>

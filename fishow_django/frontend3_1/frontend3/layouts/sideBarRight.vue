@@ -3,60 +3,58 @@
     <HeaderBlock />
     <LoginModal v-if="showStateLogin" />
     <RegModal v-if="showStateReg" />
-    <transition name="fade" mode="out-in">
-      <section class="section">
-        <div class="container">
-          <div class="tile">
-            <nuxt />
-            <div class="tile is-vertical is-4 tile-sidebar">
-              <div>
-                <article class="tile is-parent is-vertical">
-                  <p class="title is-4">Прогнозы</p>
-                  <div class="tile is-child">
-                    <MiniPrediction />
-                  </div>
-                </article>
-                <div class="buttons">
-                  <nuxt-link
-                    class="button is-primary is-fullwidth"
-                    :to="{ path: '/prognoz-kleva' }"
-                    >Прогноз</nuxt-link
-                  >
-                  <nuxt-link
-                    :to="{ path: '/blog-editor' }"
-                    class="button is-success is-fullwidth"
-                  >
-                    Создать пост
-                  </nuxt-link>
+    <section class="section">
+      <div class="container">
+        <div class="tile">
+          <nuxt />
+          <div class="tile is-vertical is-4 tile-sidebar">
+            <div>
+              <article class="tile is-parent is-vertical">
+                <p class="title is-4">Прогнозы</p>
+                <div class="tile is-child">
+                  <MiniPrediction />
                 </div>
-                <article class="tile is-parent is-vertical">
-                  <p class="title is-4">Популярные блоги</p>
-                  <div class="tile is-child">
-                    <div v-if="minPost">
-                      <HotPostMinimal
-                        v-for="blog in minPost"
-                        :key="blog.id"
-                        :blog="blog"
-                      />
-                    </div>
-                    <div v-else>
-                      <SkeletonHotPost />
-                    </div>
-                  </div>
-                </article>
-
-                <article v-if="$auth.user" class="tile is-parent is-vertical">
-                  <p class="title is-4">Статистика</p>
-                  <div class="tile is-child card">
-                    <UserRate />
-                  </div>
-                </article>
+              </article>
+              <div class="buttons">
+                <nuxt-link
+                  class="button is-primary is-fullwidth"
+                  :to="{ path: '/prognoz-kleva' }"
+                  >Прогноз</nuxt-link
+                >
+                <nuxt-link
+                  :to="{ path: '/blog-editor' }"
+                  class="button is-success is-fullwidth"
+                >
+                  Создать пост
+                </nuxt-link>
               </div>
+              <article class="tile is-parent is-vertical">
+                <p class="title is-4">Популярные блоги</p>
+                <div class="tile is-child">
+                  <div v-if="minPost">
+                    <HotPostMinimal
+                      v-for="blog in minPost"
+                      :key="blog.id"
+                      :blog="blog"
+                    />
+                  </div>
+                  <div v-else>
+                    <SkeletonHotPost />
+                  </div>
+                </div>
+              </article>
+
+              <article v-if="$auth.user" class="tile is-parent is-vertical">
+                <p class="title is-4">Статистика</p>
+                <div class="tile is-child card">
+                  <UserRate />
+                </div>
+              </article>
             </div>
           </div>
         </div>
-      </section>
-    </transition>
+      </div>
+    </section>
     <TheFooter />
     <banner />
   </div>

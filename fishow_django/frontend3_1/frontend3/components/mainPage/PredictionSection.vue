@@ -150,6 +150,9 @@ export default {
   flex-flow: row wrap;
   margin: 40px 0;
   justify-content: space-between;
+  @media screen and (max-width: 500px) {
+    margin: 10px 0;
+  }
   .prediction-box {
     border: 1px solid rgba(206, 209, 213, 0.4);
     box-sizing: border-box;

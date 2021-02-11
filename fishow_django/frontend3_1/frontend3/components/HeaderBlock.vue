@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="isDeviceDesktop" class="desktop">
+    <div class="desktop">
       <b-navbar class="navbar-brand-container">
         <template slot="brand">
           <b-navbar-item
@@ -38,18 +38,9 @@
         </template>
       </b-navbar>
     </div>
-    <div v-show="!isDeviceDesktop" class="mobile">
+    <div class="mobile">
       <nav class="navbar-mobile">
-        <div v-if="loginMode" class="navbar-mobile_wrapper">
-          <div class="navbar-mobile_button">Вход</div>
-          <div class="navbar-mobile_button">Регистрация</div>
-          <div class="navbar-mobile_button navbar-mobile_button__close">
-            <span @click="testMod">
-              <navbar-icon type="Close"></navbar-icon>
-            </span>
-          </div>
-        </div>
-        <div v-else class="navbar-mobile_wrapper">
+        <div class="navbar-mobile_wrapper">
           <div
             v-for="(btn, index) in navMobButtons"
             :key="index"
@@ -135,18 +126,16 @@ export default {
     }
   },
   computed: {
-    isDeviceDesktop() {
-      let result = null
-      if (typeof navigator === 'object') {
-        result = navigator && /mobile/i.test(navigator.userAgent)
-      }
-      return !result
-    },
     ...mapState('user', ['user']),
   },
   methods: {
     testMod() {
-      this.loginMode = !this.loginMode
+      if (this.$auth.user) {
+        console.log('go to cabinet')
+        this.$router.push({ name: 'UserPage' })
+      } else {
+        this.toggleLogin()
+      }
     },
     async logout() {
       try {
@@ -273,6 +262,14 @@ a.navbar-item:hover {
 .desktop {
   box-shadow: 0 4px 56px rgba(0, 0, 0, 0.12);
   background-color: #fff;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}
+.mobile {
+  @media screen and (min-width: 500px) {
+    display: none;
+  }
 }
 .navbar-brand-container {
   max-width: 1344px;

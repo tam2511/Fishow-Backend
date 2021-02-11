@@ -4,7 +4,7 @@
       <p class="title">Прогноз клева</p>
       <p class="content" v-html="readyData.prediction_brief"></p>
     </div>
-    <div class="columns">
+    <div class="p">
       <div class="column">
         <div class="columns minmax_columns">
           <div class="column">
@@ -59,6 +59,9 @@ export default {
   font-size: 2rem;
   align-items: center;
   white-space: nowrap;
+  @media screen and (max-width: 500px) {
+    font-size: 1.5rem;
+  }
   p {
     padding: 0 1rem;
   }

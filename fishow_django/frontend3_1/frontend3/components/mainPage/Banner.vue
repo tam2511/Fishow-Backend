@@ -14,10 +14,15 @@
         <img src="/61.png" height="400" alt="" />
       </div>
     </div>
-    <div class="banner-statistic"></div>
-    <div v-for="item in banners" :key="item.id" class="banner-statistic__item">
-      <div class="banner-statistic__title">{{ item.title }}</div>
-      <div class="banner-statistic__value">{{ item.counter }}</div>
+    <div class="banner-statistic">
+      <div
+        v-for="item in banners"
+        :key="item.id"
+        class="banner-statistic__item"
+      >
+        <div class="banner-statistic__title">{{ item.title }}</div>
+        <div class="banner-statistic__value">{{ item.counter }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -54,11 +59,6 @@ export default {
     this.getUsers()
     this.getBlogs()
     this.getReports()
-  },
-  computed: {
-    img() {
-      return require('~/static/main-page/66.svg')
-    },
   },
   methods: {
     async getUsers() {
@@ -123,21 +123,15 @@ export default {
 .banner_title {
   &-wrapper {
     width: 50%;
-    max-height: 500px;
-    & > * {
-      margin: 10px 0;
-    }
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     .button {
-      background: var(--main-color);
-      border: 2px solid var(--main-color);
-      box-sizing: border-box;
-      border-radius: 4px;
       padding: 10px 30px;
-      font-size: 16px;
-      line-height: 26px;
-      color: #fff;
-      text-align: center;
-      margin-top: 50px;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
   }
   @media screen and (max-width: 768px) {
@@ -158,18 +152,25 @@ h3.banner_title {
 
 .banner-statistic {
   width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  margin: 40px 0;
-  &__title {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: stretch;
+  margin-top: 40px;
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
   &__value {
     font-size: 46px;
     line-height: 62px;
+    @media screen and (max-width: 500px) {
+      font-size: 30px;
+      line-height: 42px;
+    }
   }
   &__item {
     margin: 0 10px;
+    justify-self: center;
   }
 }
 .banner_picture {

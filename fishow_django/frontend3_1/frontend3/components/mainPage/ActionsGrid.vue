@@ -6,7 +6,7 @@
       class="actions-grid__item"
       :to="item.url"
     >
-      <div class="grid__item_svg">
+      <div class="grid__item_svg" :style="item.style">
         <img :src="item.svg" alt="" />
       </div>
       <div class="grid__item_title">{{ item.title }}</div>
@@ -43,6 +43,7 @@ export default {
           body: 'Крупнейшее вики рыбаловного сообщества',
           url: { path: '/wiki' },
           svg: '/main-page/33.svg',
+          style: 'margin-left: 100px',
         },
       ],
     }
@@ -80,6 +81,7 @@ export default {
     &:hover {
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.18);
     }
+    color: #000 !important;
   }
 }
 .grid__item_title {
