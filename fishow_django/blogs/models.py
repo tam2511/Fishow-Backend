@@ -26,6 +26,9 @@ class Blog(models.Model):
     def __str__(self):
         return self.slug
 
+    class Meta:
+        app_label = 'fishow_django'
+
 
 
 
@@ -45,6 +48,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.author.username
+
+    class Meta:
+        app_label = 'fishow_django'
 # Create your models here.
 class Image(models.Model):
     image = models.FileField()
+
+    class Meta:
+        app_label = 'fishow_django'
