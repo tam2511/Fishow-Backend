@@ -24,8 +24,6 @@ class MysqlConnector:
 
     def insert_row(self, table_name, row):
         new_row = {key: row[key] for key in row}
-        if isinstance(row['date'], str):
-            new_row['date'] = datetime.strptime(row['date'], '%Y-%m-%d')
         names = list(new_row)
         cols = ', '.join(map(self.escape_name, names))
         placeholders = ', '.join(['%({})s'.format(name) for name in names])
