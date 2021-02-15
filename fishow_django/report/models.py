@@ -30,6 +30,9 @@ class Report(models.Model):
     def __str__(self):
         return self.slug
 
+    class Meta:
+        app_label = 'fishow_django'
+
 
 
 class Comment_r(models.Model):
@@ -48,4 +51,7 @@ class Comment_r(models.Model):
 
     def __str__(self):
         return self.author.username
+
+    class Meta:
+        app_label = 'fishow_django'
 # # Create your models here.

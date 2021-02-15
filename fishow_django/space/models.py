@@ -28,6 +28,9 @@ class Waterplace_nature(models.Model):
     def __str__(self):
         return self.slug
 
+    class Meta:
+        app_label = 'fishow_django'
+
 class Waterplace_cost(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True)
@@ -56,6 +59,9 @@ class Waterplace_cost(models.Model):
     def __str__(self):
         return self.slug
 
+    class Meta:
+        app_label = 'fishow_django'
+
 class Region(models.Model):
     name = models.CharField(max_length=100)
     stat = models.TextField(null=True)
@@ -69,5 +75,8 @@ class Region(models.Model):
 
     def __str__(self):
         return self.slug
+
+    class Meta:
+        app_label = 'fishow_django'
 
 
