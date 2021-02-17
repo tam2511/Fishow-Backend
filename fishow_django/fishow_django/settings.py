@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     'users',
     'blogs',
     'prediction',
-    'report', # new
+    'report',
     'space',
     'news',
     'django_filters'

@@ -15,21 +15,16 @@ class Blog(models.Model):
                                on_delete=models.CASCADE,
                                related_name="blogs")
     saved = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                          related_name='savedBlog')
+                                   related_name='savedBlog')
     votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                       related_name='votesUpBlog')
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='votesDownBlog')
     views = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                          related_name='viewsBlog')
+                                   related_name='viewsBlog')
 
     def __str__(self):
         return self.slug
-
-    class Meta:
-        app_label = 'fishow_django'
-
-
 
 
 class Comment(models.Model):
@@ -42,18 +37,13 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
     votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesUp')
+                                      related_name='votesUp')
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesDown')
+                                        related_name='votesDown')
 
     def __str__(self):
         return self.author.username
 
-    class Meta:
-        app_label = 'fishow_django'
-# Create your models here.
+
 class Image(models.Model):
     image = models.FileField()
-
-    class Meta:
-        app_label = 'fishow_django'

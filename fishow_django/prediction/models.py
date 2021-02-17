@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 # Create your models here.
 # class Prediction(models.Model):
 #     time = models.IntegerField()
@@ -68,10 +69,8 @@ class Predictionten(models.Model):
     fish = models.TextField()
     prob_min = models.TextField()
     prob_max = models.TextField()
+
     # water_temperature = models.TextField()
 
     class Meta:
         app_label = 'fishow_django'
-
-#     def __str__(self):
-#             return self.content

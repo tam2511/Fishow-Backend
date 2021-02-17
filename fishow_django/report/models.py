@@ -21,7 +21,7 @@ class Report(models.Model):
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='votesDownReport')
     views = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                          related_name='viewsReport')
+                                   related_name='viewsReport')
 
     areal = models.TextField()
     city = models.TextField()
@@ -30,28 +30,20 @@ class Report(models.Model):
     def __str__(self):
         return self.slug
 
-    class Meta:
-        app_label = 'fishow_django'
-
-
 
 class Comment_r(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     body = models.TextField()
     report = models.ForeignKey(Report,
-                             on_delete=models.CASCADE,
-                             related_name='comments_r')
+                               on_delete=models.CASCADE,
+                               related_name='comments_r')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
     votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesUp_r')
+                                      related_name='votesUp_r')
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesDown_r')
+                                        related_name='votesDown_r')
 
     def __str__(self):
         return self.author.username
-
-    class Meta:
-        app_label = 'fishow_django'
-# # Create your models here.
