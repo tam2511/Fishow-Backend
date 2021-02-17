@@ -16,7 +16,4 @@ class CustomUser(AbstractUser):
     count_like = models.IntegerField(default=0)
     count_dislike = models.IntegerField(default=0)
     subscriptions = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                              related_name='user_subscriptions')
-
-    class Meta:
-        app_label = 'fishow_django'
+                                           related_name='user_subscriptions')
