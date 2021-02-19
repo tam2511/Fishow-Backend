@@ -33,7 +33,8 @@
 * blogs/<slug>/save/
 * count/blogs/
 
-2. USER
+2. USER (Апи касаемо юзера)
+
 * user/
 * user_all/
 * user/saved/blogs/
