@@ -11,11 +11,15 @@ export default async function ({ app }) {
     const refreshInterval = decodeToken.call(this, token).exp
     const timeLeft = (refreshInterval * 1000 - Date.now()) * 0.75
     if (timeLeft < 5) {
-      const response = await $axios.post('/dj-rest-auth/token/refresh/', {
-        refresh: refreshToken,
-      })
-      const token = 'Bearer ' + response.data.access
-      $auth.setToken(strategy, token)
+      try {
+        const response = await $axios.post('/dj-rest-auth/token/refresh/', {
+          refresh: refreshToken,
+        })
+        const token = 'Bearer ' + response.data.access
+        $auth.setToken(strategy, token)
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 }

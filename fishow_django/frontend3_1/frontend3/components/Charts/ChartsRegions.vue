@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <div>
+    <div v-if="value">
       <div class="legend">
         <span class="legend_max">X</span>
         <span class="legend_mean">Y</span>
@@ -31,7 +31,7 @@ export default {
       series: [
         {
           name: 'Y',
-          data: this.value.y.map((item) => item * 100),
+          data: this.convertData(this.value),
         },
       ],
       chartOptions: {
@@ -94,13 +94,25 @@ export default {
     }
   },
   watch: {
-    value(val) {
-      this.series = [
-        {
-          name: 'ачевсмысле',
-          data: val.y.map((item) => item * 100),
-        },
-      ]
+    value: {
+      immediate: true,
+      handler(val) {
+        this.series = [
+          {
+            name: 'ачевсмысле',
+            data: this.convertData(val),
+          },
+        ]
+      },
+    },
+  },
+  methods: {
+    convertData(data) {
+      if (data && data.y) {
+        return data.y.map((item) => item * 100)
+      } else {
+        return []
+      }
     },
   },
 }

@@ -18,6 +18,7 @@
             :key="item._uid"
             tag="nuxt-link"
             :to="item.url"
+            :class="getMenuClass(item.disabled)"
           >
             {{ item.title }}
           </b-navbar-item>
@@ -83,11 +84,13 @@ export default {
           title: 'Водоемы',
           url: { path: '/Water-place' },
           type: 'Water-place',
+          disabled: true,
         },
         {
           title: 'Отчеты',
           url: { path: '/Reports' },
           type: 'Reports',
+          disabled: true,
         },
         {
           title: 'Статьи',
@@ -98,6 +101,7 @@ export default {
           title: 'Вики',
           url: { path: '/Wiki' },
           type: 'Wiki',
+          disabled: true,
         },
       ],
       navMobButtons: [
@@ -129,6 +133,9 @@ export default {
     ...mapState('user', ['user']),
   },
   methods: {
+    getMenuClass(disabled) {
+      return disabled ? 'is-disabled' : ''
+    },
     testMod() {
       if (this.$auth.user) {
         console.log('go to cabinet')
@@ -274,5 +281,9 @@ a.navbar-item:hover {
 .navbar-brand-container {
   max-width: 1344px;
   margin: 0 auto;
+}
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>

@@ -56,7 +56,6 @@
       </div>
     </section>
     <TheFooter />
-    <banner />
   </div>
 </template>
 <script>
@@ -69,7 +68,6 @@ import HeaderBlock from '@/components/HeaderBlock'
 import HotPostMinimal from '~/components/Sidebar/HotPostMinimal'
 import TheFooter from '~/components/TheFooter'
 import SkeletonHotPost from '~/components/Sidebar/skeleton/SkeletonHotPost'
-import banner from '~/components/banner/banner'
 
 export default {
   components: {
@@ -81,7 +79,6 @@ export default {
     MiniPrediction,
     HotPostMinimal,
     TheFooter,
-    banner,
   },
   middleware: 'auth',
   data() {
