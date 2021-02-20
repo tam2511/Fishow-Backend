@@ -3,7 +3,6 @@
     <b-input
       :id="counter"
       v-model="model"
-      name="text"
       maxlength="200"
       type="textarea"
       placeholder="Введите текст"

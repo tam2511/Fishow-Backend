@@ -30,7 +30,7 @@
               <a class="button is-light" @click="toggleLogin"> Войти </a>
             </div>
             <div v-else class="buttons">
-              <nuxt-link to="/UserPage" class="button ip-primary">
+              <nuxt-link :to="{ name: 'user-page' }" class="button ip-primary">
                 {{ $auth.user.login || $auth.user.username }}</nuxt-link
               >
               <a class="button is-light" @click="logout"> Выйти </a>
@@ -88,13 +88,12 @@ export default {
         },
         {
           title: 'Отчеты',
-          url: { path: '/Reports' },
+          url: { path: '/reports' },
           type: 'Reports',
-          disabled: true,
         },
         {
           title: 'Статьи',
-          url: { path: '/Blogs' },
+          url: { path: '/blogs' },
           type: 'Blogs',
         },
         {

@@ -27,6 +27,12 @@
                 >
                   Создать пост
                 </nuxt-link>
+                <nuxt-link
+                  :to="{ path: '/report-editor' }"
+                  class="button is-danger is-fullwidth"
+                >
+                  Создать отчет
+                </nuxt-link>
               </div>
               <article class="tile is-parent is-vertical">
                 <p class="title is-4">Популярные блоги</p>
