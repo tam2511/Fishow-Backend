@@ -12,6 +12,10 @@ export const blogEditor = {
   title: 'Cоздание и редактирование блога | Fishow',
   description: '',
 }
+export const reportEditor = {
+  title: 'Cоздание и редактирование отчета о рыбалке | Fishow',
+  description: 'Отчет о рыбалке, создание отчета',
+}
 export const mainPage = {
   title: 'Прогноз клева рыбы, общение и новости | Fishow',
   description:

@@ -17,34 +17,34 @@
       class="tile is-parent is-vertical space-left0"
     >
       <article
-        v-for="blog in notRatedBlogs"
-        :key="blog.id"
+        v-for="report in notRatedReports"
+        :key="report.id"
         class="tile is-child blog-page"
       >
-        <BlogCard :blog="blog" />
+        <report-card :report="report" />
       </article>
     </div>
     <div v-if="!next">
-      <h2 class="title title-blogs-end">Блоги закончились, поздравляю!</h2>
+      <h2 class="title title-blogs-end">Отчеты закончились</h2>
     </div>
   </div>
 </template>
 
 <script>
-import BlogCard from '@/components/BlogCard'
+import ReportCard from '@/components/ReportCard'
 import catchError from '~/assets/mixins/catchError'
 import { mainPage } from '~/assets/descriptions'
 
 export default {
-  name: 'Blogs',
+  name: 'Reports',
   components: {
-    BlogCard,
+    ReportCard,
   },
   mixins: [catchError],
   layout: 'sideBarRight',
   data() {
     return {
-      blogs: null,
+      reports: null,
       data: [],
       count: 0,
       busy: false,
@@ -64,20 +64,20 @@ export default {
     ],
   },
   computed: {
-    notRatedBlogs() {
+    notRatedReports() {
       const result = []
-      if (this.blogs) {
-        const length = this.blogs.length
+      if (this.reports) {
+        const length = this.reports.length
         for (let i = 0; i < length; i++) {
           if (
-            !this.blogs[i].user_has_votedUp &&
-            !this.blogs[i].user_has_votedDown
+            !this.reports[i].user_has_votedUp &&
+            !this.reports[i].user_has_votedDown
           ) {
-            result.push(this.blogs[i])
+            result.push(this.reports[i])
           }
         }
       }
-      return this.isSwitched ? result : this.blogs
+      return this.isSwitched ? result : this.reports
     },
   },
   mounted() {
@@ -89,9 +89,9 @@ export default {
   methods: {
     async getBlogs() {
       try {
-        const response = await this.$axios.get('/blogs/')
+        const response = await this.$axios.get('/report/')
 
-        this.blogs = response.data.results
+        this.reports = response.data.results
         this.next = response.data.next
       } catch (e) {
         this.showErrorNotification()
@@ -105,7 +105,7 @@ export default {
           const url = this.next.split('api/')[1]
           try {
             const response = await this.$axios.get(`/${url}`)
-            this.blogs.push(...response.data.results)
+            this.reports.push(...response.data.results)
             if (response.data.next) {
               this.next = response.data.next
             } else {
