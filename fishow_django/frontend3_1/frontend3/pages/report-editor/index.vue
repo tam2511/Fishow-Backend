@@ -1,7 +1,7 @@
 <template>
   <div class="tile container">
     <div class="tile is-vertical is-12">
-      <h1 class="title">Написать статью</h1>
+      <h1 class="title">Написать отчет</h1>
       <div class="tile is-parent is-vertical box">
         <b-field>
           <b-input
@@ -9,8 +9,8 @@
             placeholder="Введите заголовок"
           ></b-input>
         </b-field>
-        <div class="columns">
-          <div class="column">
+        <div class="report-section">
+          <section>
             <b-field>
               <b-datepicker
                 v-model="report.date_start"
@@ -18,20 +18,9 @@
               >
               </b-datepicker>
             </b-field>
-            <b-field>
-              <b-input
-                v-model="report.areal"
-                placeholder="Укажите регион рыбалки"
-              ></b-input>
-            </b-field>
-            <b-field>
-              <b-input
-                v-model="report.remark"
-                placeholder="Укажите координаты места ловли"
-              ></b-input>
-            </b-field>
-          </div>
-          <div class="column">
+          </section>
+
+          <section>
             <b-field>
               <b-datepicker
                 v-model="report.date_end"
@@ -39,19 +28,43 @@
               >
               </b-datepicker>
             </b-field>
+          </section>
+
+          <section>
+            <b-field>
+              <b-input
+                v-model="report.areal"
+                placeholder="Укажите регион рыбалки"
+              ></b-input>
+            </b-field>
+          </section>
+
+          <section>
             <b-field>
               <b-input
                 v-model="report.fishing"
                 placeholder="Укажите водоем рыбалки"
               ></b-input>
             </b-field>
+          </section>
+
+          <section>
+            <b-field>
+              <b-input
+                v-model="report.remark"
+                placeholder="Укажите координаты места ловли"
+              ></b-input>
+            </b-field>
+          </section>
+
+          <section>
             <b-field>
               <b-input
                 v-model="report.city"
                 placeholder="Укажите ближайший город рыбалки"
               ></b-input>
             </b-field>
-          </div>
+          </section>
         </div>
         <multiselect
           v-model="report_tags"
@@ -229,7 +242,7 @@ export default {
         const response = await this.$axios.$post('/report/', report)
         console.log('response = ', response)
         this.$router.push({
-          name: 'reports-slug',
+          name: 'reports -slug',
           params: { slug: response.slug },
         })
       } catch (data) {
@@ -259,8 +272,42 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.report-section {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin-bottom: 0;
+  section {
+    width: 100%;
+    margin-bottom: 10px;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    @media screen and (min-width: 450px) {
+      width: 50%;
+      &:not(:nth-child(2n)) {
+        width: calc(50% - 10px);
+        margin-right: 10px;
+      }
+    }
+  }
+}
+.tile.is-parent {
+  background-color: #f6f6f6;
+}
 .is-vertical.box {
-  & > div:not(:last-child) {
+  @media screen and (max-width: 450px) {
+    .buttons {
+      justify-content: space-around;
+      .button {
+        white-space: initial;
+        padding: 10px 15px;
+        font-size: 15px;
+        height: 100%;
+      }
+    }
+  }
+  & > div:not(.report-section) {
     margin-bottom: 10px;
   }
   .column {
@@ -269,8 +316,22 @@ export default {
     &:not(:last-child) {
       margin-right: 10px;
     }
+    @media screen and (max-width: 450px) {
+      margin-bottom: 10px;
+
+      &:not(:last-child) {
+        margin-right: 0;
+      }
+    }
   }
   .columns {
+    margin: 0;
+  }
+}
+@media screen and (max-width: 450px) {
+  .title {
+    padding: 15px;
+    text-align: center;
     margin: 0;
   }
 }
