@@ -56,6 +56,7 @@ class BlogSerializer(serializers.ModelSerializer):
     user_has_commented = serializers.SerializerMethodField()
     time_from_creations = serializers.SerializerMethodField()
     user_views = serializers.SerializerMethodField()
+    is_author = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Blog
@@ -63,6 +64,13 @@ class BlogSerializer(serializers.ModelSerializer):
 
 #     def get_created_at(self, instance):
 #         return instance.created_at.strftime("%B %d, %Y")
+
+    def get_is_author(self, instance):
+        request = self.context.get("request")
+        if request.user == instance.author:
+            return True
+        else:
+            return False
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%d.%m.%y %H:%M")
