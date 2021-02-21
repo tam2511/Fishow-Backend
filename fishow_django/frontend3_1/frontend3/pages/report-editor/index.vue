@@ -15,6 +15,7 @@
               <b-datepicker
                 v-model="report.date_start"
                 placeholder="Начало рыбалки"
+                locale="ru-RU"
               >
               </b-datepicker>
             </b-field>
@@ -25,6 +26,7 @@
               <b-datepicker
                 v-model="report.date_end"
                 placeholder="Конец рыбалки"
+                locale="ru-RU"
               >
               </b-datepicker>
             </b-field>
