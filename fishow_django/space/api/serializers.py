@@ -15,7 +15,7 @@ class Waterplace_natureSerializer(serializers.ModelSerializer):
         model = Waterplace_nature
         fields = '__all__'
 
-    def get_region(self, instance):
+    def get_regions(self, instance):
         request = self.context.get("request")
         if Region.objects.filter(waterplace_nature=instance).exists():
             return Region.objects.filter(waterplace_nature=instance).values_list('slug',flat=True)
@@ -33,7 +33,7 @@ class Waterplace_costSerializer(serializers.ModelSerializer):
         model = Waterplace_cost
         fields = '__all__'
 
-    def get_region(self, instance):
+    def get_regions(self, instance):
         request = self.context.get("request")
         if Region.objects.filter(waterplace_nature=instance).exists():
             return Region.objects.filter(waterplace_nature=instance).values_list('slug',flat=True)
