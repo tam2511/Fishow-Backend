@@ -18,6 +18,7 @@
             :key="item._uid"
             tag="nuxt-link"
             :to="item.url"
+            :class="getMenuClass(item.disabled)"
           >
             {{ item.title }}
           </b-navbar-item>
@@ -29,7 +30,7 @@
               <a class="button is-light" @click="toggleLogin"> Войти </a>
             </div>
             <div v-else class="buttons">
-              <nuxt-link to="/UserPage" class="button ip-primary">
+              <nuxt-link :to="{ name: 'user-page' }" class="button ip-primary">
                 {{ $auth.user.login || $auth.user.username }}</nuxt-link
               >
               <a class="button is-light" @click="logout"> Выйти </a>
@@ -83,21 +84,23 @@ export default {
           title: 'Водоемы',
           url: { path: '/Water-place' },
           type: 'Water-place',
+          disabled: true,
         },
         {
           title: 'Отчеты',
-          url: { path: '/Reports' },
+          url: { path: '/reports' },
           type: 'Reports',
         },
         {
           title: 'Статьи',
-          url: { path: '/Blogs' },
+          url: { path: '/blogs' },
           type: 'Blogs',
         },
         {
           title: 'Вики',
           url: { path: '/Wiki' },
           type: 'Wiki',
+          disabled: true,
         },
       ],
       navMobButtons: [
@@ -129,6 +132,9 @@ export default {
     ...mapState('user', ['user']),
   },
   methods: {
+    getMenuClass(disabled) {
+      return disabled ? 'is-disabled' : ''
+    },
     testMod() {
       if (this.$auth.user) {
         console.log('go to cabinet')
@@ -274,5 +280,9 @@ a.navbar-item:hover {
 .navbar-brand-container {
   max-width: 1344px;
   margin: 0 auto;
+}
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>

@@ -19,12 +19,10 @@ class News(models.Model):
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='votesDownNews')
     views = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                          related_name='viewsNews')
-
+                                   related_name='viewsNews')
 
     def __str__(self):
         return self.slug
-
 
 
 class Comment_n(models.Model):
@@ -37,10 +35,9 @@ class Comment_n(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
     votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesUp_n')
+                                      related_name='votesUp_n')
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesDown_n')
+                                        related_name='votesDown_n')
 
     def __str__(self):
         return self.author.username
-# # Create your models here.
