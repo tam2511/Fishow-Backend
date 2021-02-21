@@ -7,8 +7,7 @@
       class="notification-editor"
       :closable="false"
     >
-      Прежде чем создавать новый блог вам необходимо авторизоваться или
-      зарегистрироваться.
+      Пожалуйста войдите в свой аккаунт или зарегистрируйтесь сперва.
     </b-notification>
   </div>
 </template>
@@ -52,6 +51,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(10, 10, 10, 0.86);
+  z-index: 2;
 }
 .notification-editor {
   position: fixed;

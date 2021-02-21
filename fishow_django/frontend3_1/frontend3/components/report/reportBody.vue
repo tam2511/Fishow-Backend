@@ -1,15 +1,10 @@
 <template>
   <section>
     <b-field horizontal label="Даты рыбалки">
+      <b-input name="name" :value="dateStart" expanded readonly></b-input>
       <b-input
         name="name"
-        :value="report.date_start"
-        expanded
-        readonly
-      ></b-input>
-      <b-input
-        name="name"
-        :value="report.date_end"
+        :value="dateEnd"
         placeholder="Name"
         expanded
         readonly
@@ -17,28 +12,76 @@
     </b-field>
 
     <b-field horizontal label="Регион рыбалки">
-      <b-input :value="report.areal" name="subject" expanded></b-input>
-    </b-field>
-
-    <b-field horizontal label="Ближайший город">
-      <b-input :value="report.city" name="subject" expanded></b-input>
+      <b-input :value="report.areal" name="subject" expanded readonly></b-input>
+      <b-input :value="report.city" name="subject" expanded readonly></b-input>
     </b-field>
 
     <b-field horizontal label="Remark">
-      <b-input :value="report.remark" name="subject" expanded></b-input>
+      <b-input
+        :value="report.remark"
+        name="subject"
+        expanded
+        readonly
+      ></b-input>
     </b-field>
 
     <b-field horizontal label="tags">
-      <b-input :value="report.targ" name="subject" expanded></b-input>
+      <b-input :value="report.targ" name="subject" expandedr eadonly></b-input>
     </b-field>
 
     <b-field horizontal label="Категория">
-      <b-input :value="report.category" name="subject" expanded></b-input>
+      <b-input
+        :value="report.category"
+        name="subject"
+        expanded
+        readonly
+      ></b-input>
     </b-field>
 
-    <b-field horizontal label="fishing">
-      <b-input :value="report.fishing" name="subject" expanded></b-input>
-    </b-field>
+    <div v-for="value in fishList" :key="value.id">
+      <section>
+        <h3>{{ value.body.name.title }}</h3>
+
+        <b-field label="Активность рыбы">
+          <b-input
+            :value="value.body.activity"
+            name="subject"
+            expanded
+            readonly
+          ></b-input>
+        </b-field>
+
+        <b-field label="Суммарный вес улова">
+          <b-input v-model="value.body.weight" expanded readonly> </b-input>
+        </b-field>
+
+        <b-field label="Число экземпляров">
+          <b-input v-model="value.body.count" expanded readonly> </b-input>
+        </b-field>
+
+        <b-field label="Перечислите способы ловли">
+          <b-input v-model="value.body.methods" expanded readonly> </b-input>
+        </b-field>
+
+        <b-field label="Укажите наиболее эффективные насадки">
+          <b-input v-model="value.body.moreEffectiveTips" expanded readonly>
+          </b-input>
+        </b-field>
+
+        <b-field label="Перечислите примерные часы активности рыбы">
+          <b-input v-model="value.body.activityHours" expanded readonly>
+          </b-input>
+        </b-field>
+
+        <b-field label="Укажите самые результативные горизонты ловли">
+          <b-input v-model="value.body.horizons" expanded readonly> </b-input>
+        </b-field>
+
+        <b-field label="На каких глубинах чаще всего клевало">
+          <b-input v-model="value.body.depths" expanded readonly> </b-input>
+        </b-field>
+      </section>
+    </div>
   </section>
 </template>
 
@@ -51,7 +94,52 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      date: {
+        start: '',
+        end: '',
+      },
+    }
+  },
+  computed: {
+    fishList() {
+      let result = []
+      try {
+        const body = JSON.parse(this.report.fishing)
+        result = body
+      } catch (e) {
+        console.error(e)
+      }
+      return result
+    },
+    dateEnd() {
+      return new Date(this.report.date_end).toLocaleDateString()
+    },
+    dateStart() {
+      return new Date(this.report.date_start).toLocaleDateString()
+    },
+  },
+  methods: {
+    convertDate(date) {
+      return new Date(date).toDateString()
+    },
+  },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+section {
+  padding: 15px;
+  .dates input {
+    pointer-events: none;
+  }
+}
+</style>
+<style lang="scss">
+section {
+  .dates input {
+    pointer-events: none;
+  }
+}
+</style>

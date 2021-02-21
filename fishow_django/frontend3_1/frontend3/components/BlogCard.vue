@@ -57,13 +57,13 @@
                 v-if="item.type === 'video'"
                 width="560"
                 height="315"
-                :src="item.url"
+                :src="item.body"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
                 name="video"
               ></iframe>
               <figure v-if="item.type === 'image'" class="image is-fullwidth">
-                <img :src="item.url" alt="" />
+                <img :src="item.body" alt="" />
               </figure>
             </div>
           </div>

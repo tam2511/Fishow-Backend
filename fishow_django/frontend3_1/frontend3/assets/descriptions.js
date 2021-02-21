@@ -30,3 +30,8 @@ export const predictionSelect = {
   title: 'Выбор места рыбалки | Fishow',
   description: '',
 }
+export const reportPage = {
+  title: 'Отчеты о рыбалке | Fishow',
+  description:
+    'Прогноз клева рыбы. Рыболовный прогноз клёва рыбы с учетом температуры воды и воздуха, атмосферного давления, фаз луны и уровня воды, лучший прогноз на рыбалку.',
+}

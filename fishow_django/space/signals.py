@@ -9,6 +9,13 @@ from space.models import Region, Waterplace_cost, Waterplace_nature
 from django.contrib.auth import get_user_model
 from users.models import CustomUser
 
+@receiver(pre_save, sender=Region)
+def add_slug_to_news1(sender, instance,*args,**kwargs):
+    if instance and not instance.slug:
+        slug = slugify(instance.name)
+        random_string = generate_random_string()
+        instance.slug = slug + '-' + random_string
+
 @receiver(pre_save, sender=Waterplace_nature)
 @receiver(pre_save, sender=Waterplace_cost)
 def add_slug_to_waterplace(sender, instance,*args,**kwargs):

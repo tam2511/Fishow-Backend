@@ -29,7 +29,7 @@ export default {
         {
           title: 'Отчеты о рыбалке',
           body: 'Опишите свои впечатления о рыбалке и поделитесь опытом!',
-          url: { path: '/blog-editor' },
+          url: { path: '/report-editor' },
           svg: '/main-page/44.svg',
         },
         {

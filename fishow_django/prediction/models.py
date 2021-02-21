@@ -45,8 +45,6 @@ class Prediction(models.Model):
     sun_up = models.TextField()  # "12:22" - максимум 5 символов
     sun_down = models.TextField()  # "21:32" - максимум 5 символов
 
-    class Meta:
-        app_label = 'fishow_django'
 
 
 class Predictionten(models.Model):
@@ -72,5 +70,3 @@ class Predictionten(models.Model):
 
     # water_temperature = models.TextField()
 
-    class Meta:
-        app_label = 'fishow_django'

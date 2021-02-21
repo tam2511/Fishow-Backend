@@ -32,7 +32,7 @@ export default {
   border: 0;
   cursor: pointer;
   background-color: rgb(224, 170, 170);
-  z-index: 1000;
+  z-index: 1;
   &:hover {
     background-color: rgb(246, 95, 95);
   }
