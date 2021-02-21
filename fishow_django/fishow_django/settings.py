@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'corsheaders',
     'core',
-    'sslserver',
+    #'sslserver',
 
 
     'django.contrib.sites',
