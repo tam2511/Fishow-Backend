@@ -1,6 +1,6 @@
 <template>
   <div class="tile container">
-    <div class="tile is-vertical is-12">
+    <div class="tile is-vertical is-7">
       <h1 class="title">Написать отчет</h1>
       <div class="tile is-parent is-vertical box">
         <b-field>
@@ -44,7 +44,7 @@
           <section>
             <b-field>
               <b-input
-                v-model="report.fishing"
+                v-model="report.waterPlace"
                 placeholder="Укажите водоем рыбалки"
               ></b-input>
             </b-field>
@@ -78,6 +78,20 @@
           @input="clearError"
           @tag="addTag"
         ></multiselect>
+        <!--        fishList = {{ fishList }}-->
+        <div v-for="fish in fishList" :key="fish.id">
+          <report-fish :value="fish" :name="fish.id" @input="writeFishData" />
+        </div>
+        <div class="buttons">
+          <button
+            class="button is-success is-fullwidth"
+            type="button"
+            @click="addFish"
+          >
+            Добавить рыбу
+          </button>
+        </div>
+
         <template v-for="(article, index) in articles">
           <component
             :is="article"
@@ -87,6 +101,7 @@
             @remove="removeElement"
           ></component>
         </template>
+
         <div class="buttons">
           <button
             v-for="button in buttons"
@@ -118,6 +133,32 @@
         </div>
       </div>
     </div>
+    <div v-if="dev" class="tile is-vertical is-5">
+      <div class="dev-info">
+        <div>
+          <div class="title">Report</div>
+          <div v-for="(item, key) in report" :key="key">
+            {{ key }}: {{ item }}
+          </div>
+        </div>
+        <hr />
+        <div>
+          <div class="title">Fish</div>
+
+          <div v-for="(item, key) in currentFish" :key="key">
+            {{ key }}: {{ item }}
+          </div>
+        </div>
+        <hr />
+        <div>
+          <div class="title">Fish list</div>
+
+          <div v-for="(item, key) in fishList" :key="key">
+            {{ key }}: {{ item }}
+          </div>
+        </div>
+      </div>
+    </div>
     <div v-if="!$auth.loggedIn" class="warning-overlay">
       <warning
         title="Оповещение"
@@ -135,9 +176,11 @@ import imageField from '@/components/blog/imageField'
 import textField from '@/components/blog/textField'
 import videoField from '@/components/blog/videoField'
 import { reportEditor } from '~/assets/descriptions'
+import ReportFish from '~/components/report/reportFish'
 
 export default {
   components: {
+    ReportFish,
     Warning,
     textField,
     imageField,
@@ -145,8 +188,13 @@ export default {
   },
   data() {
     return {
+      counter: 0,
+      dev: false,
+      currentFish: {},
+      fishList: [],
       report: {
         title: '',
+        waterPlace: '',
         date_start: null,
         date_end: null,
         fishing: '',
@@ -191,7 +239,39 @@ export default {
       ],
     }
   },
+  mounted() {
+    if (process.browser) {
+      const dev = localStorage.getItem('dev')
+
+      this.dev = !!dev
+    }
+  },
   methods: {
+    writeFishData(val) {
+      const fish = this.fishList.find((item) => item.id === val.id)
+
+      fish.body = {
+        ...val,
+      }
+    },
+    addFish() {
+      const name = `fish${this.counter++}`
+
+      this.fishList.push({
+        id: name,
+        body: {
+          name: '',
+          activity: '',
+          weight: null,
+          count: null,
+          methods: '',
+          moreEffectiveTips: '',
+          activityHours: '',
+          horizons: '',
+          depths: '',
+        },
+      })
+    },
     removeElement(id) {
       this.report_body = this.report_body.filter((item) => {
         return item.name !== id
@@ -235,24 +315,20 @@ export default {
 
         const report = {
           ...this.report,
+          fishing: JSON.stringify(this.fishList),
           date_start: this.report.date_start.toISOString(),
           date_end: this.report.date_end.toISOString(),
           category: 'хз',
           tags,
         }
-        console.log(report)
+
         const response = await this.$axios.$post('/report/', report)
-        console.log('response = ', response)
+
         this.$router.push({
-          name: 'reports -slug',
+          name: 'reports-slug',
           params: { slug: response.slug },
         })
       } catch (data) {
-        // this.report = {
-        //   ...this.report,
-        //   date_start: null,
-        //   date_end: null,
-        // }
         if (data.response.data && data.response.data.fishing) {
           this.error('Поле fishing пустое')
         }
@@ -274,6 +350,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.dev-info {
+  padding: 20px;
+}
 .report-section {
   display: flex;
   flex-flow: row wrap;
