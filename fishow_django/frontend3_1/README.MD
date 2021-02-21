@@ -42,3 +42,7 @@ python3 manage.py collectstatic
 ~~~ 
 python3 manage.py runserver
 ~~~
+
+~~~
+python3 ../assets/drop_and_create_db.py --ddb True --cdb True --mdb True
+~~~
