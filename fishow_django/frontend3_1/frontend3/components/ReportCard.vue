@@ -216,6 +216,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card-content {
+  background-color: #f6f6f6;
+}
 .blog-category {
   background-color: #1e347b;
 }
@@ -276,8 +279,6 @@ export default {
 }
 .media.card-footer {
   display: flex;
-  flex-flow: row wrap;
-  align-items: center;
   & > div > * {
     margin: 0 10px;
   }
@@ -287,9 +288,6 @@ export default {
   }
   & > * {
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-around;
   }
 }
 </style>

@@ -108,3 +108,8 @@ footer {
   margin-bottom: 20px;
 }
 </style>
+<style>
+.column .label {
+  z-index: 1 !important;
+}
+</style>

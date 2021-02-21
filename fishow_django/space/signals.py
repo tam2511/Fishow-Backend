@@ -18,9 +18,16 @@ def add_slug_to_news1(sender, instance,*args,**kwargs):
 
 @receiver(pre_save, sender=Waterplace_nature)
 @receiver(pre_save, sender=Waterplace_cost)
-def add_slug_to_news(sender, instance,*args,**kwargs):
+def add_slug_to_waterplace(sender, instance,*args,**kwargs):
     if instance and not instance.slug:
         slug1 = slugify(instance.type)
         slug2 = slugify(instance.name)
         random_string = generate_random_string()
         instance.slug = slug1 + slug2 + '-' + random_string
+
+@receiver(pre_save, sender=Region)
+def add_slug_to_region(sender, instance,*args,**kwargs):
+    if instance and not instance.slug:
+        slug = slugify(instance.name)
+        random_string = generate_random_string()
+        instance.slug = slug + '-' + random_string

@@ -1,11 +1,11 @@
 <template>
   <div class="tile is-vertical is-8">
     <div class="media">
-      <div class="media-left"><h4 class="title is-4">Последние записи</h4></div>
+      <div class="media-left"><h4 class="title is-4">Последние отчеты</h4></div>
       <div class="media-right">
         <div class="field">
           <b-switch v-model="isSwitched" @input="showBlog">
-            Скрывать блоги
+            Скрывать отчеты
           </b-switch>
         </div>
       </div>
@@ -33,7 +33,7 @@
 <script>
 import ReportCard from '@/components/ReportCard'
 import catchError from '~/assets/mixins/catchError'
-import { mainPage } from '~/assets/descriptions'
+import { reportPage } from '~/assets/descriptions'
 
 export default {
   name: 'Reports',
@@ -54,12 +54,12 @@ export default {
   },
 
   head: {
-    title: mainPage.title,
+    title: reportPage.title,
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: mainPage.description,
+        content: reportPage.description,
       },
     ],
   },

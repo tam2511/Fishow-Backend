@@ -30,6 +30,11 @@ export default {
 </script>
 <style lang="scss">
 #app {
-  overflow-y: hidden;
+  overflow-x: hidden;
+  @media screen and (max-width: 500px) {
+    .section {
+      padding: 0;
+    }
+  }
 }
 </style>

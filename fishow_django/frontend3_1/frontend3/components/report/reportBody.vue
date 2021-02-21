@@ -1,15 +1,10 @@
 <template>
   <section>
     <b-field horizontal label="Даты рыбалки">
+      <b-input name="name" :value="dateStart" expanded readonly></b-input>
       <b-input
         name="name"
-        :value="report.date_start"
-        expanded
-        readonly
-      ></b-input>
-      <b-input
-        name="name"
-        :value="report.date_end"
+        :value="dateEnd"
         placeholder="Name"
         expanded
         readonly
@@ -18,9 +13,6 @@
 
     <b-field horizontal label="Регион рыбалки">
       <b-input :value="report.areal" name="subject" expanded></b-input>
-    </b-field>
-
-    <b-field horizontal label="Ближайший город">
       <b-input :value="report.city" name="subject" expanded></b-input>
     </b-field>
 
@@ -51,7 +43,42 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      date: {
+        start: '',
+        end: '',
+      },
+    }
+  },
+  computed: {
+    dateEnd() {
+      return new Date(this.report.date_end).toLocaleDateString()
+    },
+    dateStart() {
+      return new Date(this.report.date_start).toLocaleDateString()
+    },
+  },
+  methods: {
+    convertDate(date) {
+      return new Date(date).toDateString()
+    },
+  },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+section {
+  padding: 15px;
+  .dates input {
+    pointer-events: none;
+  }
+}
+</style>
+<style lang="scss">
+section {
+  .dates input {
+    pointer-events: none;
+  }
+}
+</style>

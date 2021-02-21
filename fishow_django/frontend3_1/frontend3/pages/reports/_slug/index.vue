@@ -3,7 +3,7 @@
     <div class="tile is-parent is-vertical space-left0">
       <article class="tile is-child">
         <!--        <pre class="language-json"><code>{{ blog  }}</code></pre>-->
-        <BlogCard v-if="report" :blog="report" />
+        <report-card v-if="report" :report="report" />
         <div v-else>
           <SkeletonBlogCard />
         </div>
@@ -16,11 +16,11 @@
 <script>
 import CommentsBlock from '@/components/CommentsBlock'
 import SkeletonBlogCard from '@/components/Skeleton/SkeletonBlogCard'
-import BlogCard from '~/components/BlogCard'
+import ReportCard from '~/components/ReportCard'
 
 export default {
   components: {
-    BlogCard,
+    ReportCard,
     CommentsBlock,
     SkeletonBlogCard,
   },
@@ -30,15 +30,15 @@ export default {
       report: null,
     }
   },
-  mounted() {
-    this.$axios.get(`/report/${this.$route.params.slug}/`).then((res) => {
-      this.report = res.data
-    })
-  },
   head() {
     return {
       title: this.report && this.report.title + ' | Fishow',
     }
+  },
+  async mounted() {
+    await this.$axios.get(`/report/${this.$route.params.slug}/`).then((res) => {
+      this.report = res.data
+    })
   },
 }
 </script>
