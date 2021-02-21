@@ -196,4 +196,15 @@ export default {
   },
 }
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.min.css" scoped></style>
+<style lang="scss" scoped>
+.warning-overlay {
+  z-index: 2;
+}
+@media screen and (max-width: 450px) {
+  .title {
+    padding: 15px;
+    text-align: center;
+    margin: 0;
+  }
+}
+</style>
