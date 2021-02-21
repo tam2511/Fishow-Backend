@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from blogs.models import Blog
 from news.models import News
-from report.models import Report
+#from report.models import Report
 
 
 class Waterplace_nature(models.Model):
@@ -12,7 +12,7 @@ class Waterplace_nature(models.Model):
     fish = models.TextField(null=True)
     news = models.ManyToManyField(News, related_name='wn_news', blank=True)
     blogs = models.ManyToManyField(Blog, related_name='wn_blogs', blank=True)
-    reports = models.ManyToManyField(Report, related_name='wn_reports', blank=True)
+    #reports = models.ManyToManyField(Report, related_name='wn_reports', blank=True)
     moderators = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    on_delete=models.CASCADE,
                                    related_name="wn_moderators", null=True, blank=True)
@@ -21,7 +21,7 @@ class Waterplace_nature(models.Model):
     city_list = models.TextField(null=True)
     stat = models.TextField(null=True)
     fish_rating = models.TextField(null=True)
-    region_list = models.TextField(null=True)  # models
+    #region_list = models.TextField(null=True)  # models
     tour_base = models.TextField(null=True)
     slug = models.SlugField(max_length=255, unique=True)
 
@@ -36,7 +36,7 @@ class Waterplace_cost(models.Model):
     fish = models.TextField(null=True)
     news = models.ManyToManyField(News, related_name='wc_news', blank=True)
     blogs = models.ManyToManyField(Blog, related_name='wc_blogs', blank=True)
-    reports = models.ManyToManyField(Report, related_name='wc_reports', blank=True)
+    #reports = models.ManyToManyField(Report, related_name='wc_reports', blank=True)
     moderators = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    on_delete=models.CASCADE,
                                    related_name="wc_moderators", null=True, blank=True)
@@ -45,7 +45,7 @@ class Waterplace_cost(models.Model):
     city_list = models.TextField(null=True)
     stat = models.TextField(null=True)
     fish_rating = models.TextField(null=True)
-    region_list = models.TextField(null=True)  # models
+    #region_list = models.TextField(null=True)  # models
     tour_base = models.TextField(null=True)
     price = models.TextField(null=True)
     address = models.TextField(null=True)
@@ -66,8 +66,8 @@ class Region(models.Model):
     representatives = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='representatives_people',
                                              blank=True)
     sities = models.TextField(null=True)
-    waterplace_cost = models.ManyToManyField(Waterplace_nature, related_name="cost", blank=True)
-    waterplace_nature = models.ManyToManyField(Waterplace_nature, related_name="nature", blank=True)
+    waterplace_cost = models.ManyToManyField(Waterplace_cost, related_name="region_w_cost", blank=True)
+    waterplace_nature = models.ManyToManyField(Waterplace_nature, related_name="region_w_nature", blank=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     def __str__(self):
