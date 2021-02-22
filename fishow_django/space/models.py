@@ -4,6 +4,20 @@ from blogs.models import Blog
 from news.models import News
 #from report.models import Report
 
+class Region(models.Model):
+    name = models.CharField(max_length=100)
+    stat = models.TextField(null=True)
+    tourbases = models.TextField(null=True)  # models.ForeignKey(Tourbases)
+    descriptions = models.TextField(null=True)
+    representatives = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='representatives_people',
+                                             blank=True)
+    sities = models.TextField(null=True)
+    #waterplace_cost = models.ManyToManyField(Waterplace_cost, related_name="region_w_cost", blank=True)
+    #waterplace_nature = models.ManyToManyField(Waterplace_nature, related_name="region_w_nature", blank=True)
+    slug = models.SlugField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.slug
 
 class Waterplace_nature(models.Model):
     name = models.CharField(max_length=100)
@@ -21,7 +35,7 @@ class Waterplace_nature(models.Model):
     city_list = models.TextField(null=True)
     stat = models.TextField(null=True)
     fish_rating = models.TextField(null=True)
-    #region_list = models.TextField(null=True)  # models
+    regions = models.ManyToManyField(Region, related_name="region_w_nature", blank=True)
     tour_base = models.TextField(null=True)
     slug = models.SlugField(max_length=255, unique=True)
 
@@ -45,29 +59,13 @@ class Waterplace_cost(models.Model):
     city_list = models.TextField(null=True)
     stat = models.TextField(null=True)
     fish_rating = models.TextField(null=True)
-    #region_list = models.TextField(null=True)  # models
+    regions = models.ManyToManyField(Region, related_name="region_w_cost", blank=True)
     tour_base = models.TextField(null=True)
     price = models.TextField(null=True)
     address = models.TextField(null=True)
     coordinates = models.TextField(null=True)
     is_paid = models.NullBooleanField(null=True, default=False)
     last_fishing = models.TextField(null=True)
-    slug = models.SlugField(max_length=255, unique=True)
-
-    def __str__(self):
-        return self.slug
-
-
-class Region(models.Model):
-    name = models.CharField(max_length=100)
-    stat = models.TextField(null=True)
-    tourbases = models.TextField(null=True)  # models.ForeignKey(Tourbases)
-    descriptions = models.TextField(null=True)
-    representatives = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='representatives_people',
-                                             blank=True)
-    sities = models.TextField(null=True)
-    waterplace_cost = models.ManyToManyField(Waterplace_cost, related_name="region_w_cost", blank=True)
-    waterplace_nature = models.ManyToManyField(Waterplace_nature, related_name="region_w_nature", blank=True)
     slug = models.SlugField(max_length=255, unique=True)
 
     def __str__(self):
