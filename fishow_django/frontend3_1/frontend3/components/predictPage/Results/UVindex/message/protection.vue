@@ -24,18 +24,18 @@ export default {
       messages: [
         {
           icons: ['1-2'],
-          message: 'no protection',
-          status: 'You can safely stay outide without sun protection measures',
+          message: 'слабая солнечная активность',
+          status: 'Вы можете спокойно оставаться на улице без средств защиты от солнца',
         },
         {
           icons: ['3-5', '6-7'],
-          message: 'protection required',
-          status: 'You can safely stay outide without sun protection measures',
+          message: 'средняя солнечная активность',
+          status: 'Нанесите солнцезащитный крем SPF 30+ и оставайтесь в тени около полудня, когда солнце наиболее опасно.',
         },
         {
           icons: ['8-10', '11+'],
-          message: 'extra protection',
-          status: 'You can safely stay outide without sun protection measures',
+          message: 'сильная солнечная активность',
+          status: 'Наденьте футболку, кепку и очки, нанесите солнцезащитный крем SPF 50+, оставайтесь в тени как можно дольше и не выходите на улицу в полдень.',
         },
       ],
     }
