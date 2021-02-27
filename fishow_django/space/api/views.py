@@ -10,9 +10,9 @@ from space.api.permissions import DjangoObjectPermissionsOrAnonReadOnly
 from space.models import Region, Waterplace_cost, Waterplace_nature
 from rest_framework import filters
 from users.models import CustomUser
-
+import json
 from django.contrib.auth.decorators import login_required
-
+from django.core import serializers
 
 # class Waterplace_costAPIView(APIView):
 #         queryset = Waterplace_cost.objects.all()
@@ -52,7 +52,7 @@ class Waterplace_nature(viewsets.ModelViewSet):
 
 
 
-class Region(viewsets.ModelViewSet):
+class RegionView(viewsets.ModelViewSet):
         queryset = Region.objects.all()
         lookup_field = "slug"
         serializer_class = RegionSerializer
@@ -87,3 +87,25 @@ class Region_count(APIView):
         stats=[]
         stats.append({'count_region':Region.objects.count()})
         return Response(stats)
+
+class Region_list(APIView):
+        permission_classes = [AllowAny]
+        def get(self, request, format=None):
+                regions = [{'region_name': region.name,'region_slug': region.slug} for region in Region.objects.all().order_by('name')]
+                return Response(regions)
+
+class SelectRegionAPIView(APIView):
+        permission_classes = [AllowAny]
+        def get(self, request, region):
+            sities_list = get_object_or_404(Region, slug=region)
+            #sities_list = Region.objects.get(slug=region)
+#             print(sities_list.sities)
+#             print(len("[\"\\u0410\\u0440\\u0445\\u0430\\u043d\\u0433\\u0435\\u043b\\u044c\\u0441\\u043a\", \"\\u041a\\u043e\\u0442\\u043b\\u0430\\u0441\", \"\\u0421\\u0435\\u0432\\u0435\\u0440\\u043e\\u0434\\u0432\\u0438\\u043d\\u0441\\u043a\"]"))
+#             print(len(sities_list.sities))
+#             print(type(sities_list.sities))
+#             #print(serializers.serialize("json", sities_list))
+#             print(json.loads("[\"\\u0411\\u0430\\u0440\\u043d\\u0430\\u0443\\u043b\", \"\\u0411\\u0438\\u0439\\u0441\\u043a\", \"\\u0420\\u0443\\u0431\\u0446\\u043e\\u0432\\u0441\\u043a\"]"))
+#             print(json.loads(sities_list.sities))
+#             #list=json.loads(sities_list.sities.encode('utf-8').decode('utf-8'))#.split(', '))
+#             #print(list)
+            return Response({'sities': sities_list.sities})
