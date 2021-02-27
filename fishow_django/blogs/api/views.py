@@ -445,14 +445,14 @@ def modify_input_for_multiple_files(image):
 
 class BlogFresh(generics.ListAPIView):
     serializer_class = BlogSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         return Blog.objects.all().order_by("-created_at")
 
 class BlogBest(generics.ListAPIView):
     serializer_class = BlogSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         return Blog.objects.annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
@@ -460,7 +460,7 @@ class BlogBest(generics.ListAPIView):
 
 class BlogHot(generics.ListAPIView):
     serializer_class = BlogSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
