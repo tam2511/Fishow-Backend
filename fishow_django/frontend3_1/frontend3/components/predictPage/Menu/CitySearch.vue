@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <multiselect
-      v-model="selected"
-      :options="options"
-      :custom-label="nameWithLang"
-      placeholder="Выберите город"
-      label="areal"
-      track-by="city"
-      select-label=""
-      selected-label="выбрано"
-      deselect-label="удалить"
-      :allow-empty="false"
-      @input="changePrediction"
-    >
-    </multiselect>
-  </div>
+  <multiselect
+    id="multiselect-city"
+    v-model="selected"
+    :options="options"
+    :custom-label="nameWithLang"
+    placeholder="Выберите город"
+    label="areal"
+    track-by="city"
+    select-label=""
+    :searchable="false"
+    selected-label="выбрано"
+    deselect-label="удалить"
+    :allow-empty="false"
+    @input="changePrediction"
+  >
+  </multiselect>
 </template>
 
 <script>

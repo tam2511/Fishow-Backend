@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
-  </div>
+  <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
 </template>
 
 <script>
@@ -26,5 +24,3 @@ export default {
   },
 }
 </script>
-
-<style scoped></style>

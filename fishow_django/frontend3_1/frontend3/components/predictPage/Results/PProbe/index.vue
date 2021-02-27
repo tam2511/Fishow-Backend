@@ -4,33 +4,27 @@
       <p class="title">Прогноз клева</p>
       <p class="content" v-html="readyData.prediction_brief"></p>
     </div>
-    <div class="p">
-      <div class="column">
-        <div class="columns minmax_columns">
-          <div class="column">
-            <div class="minmax_container">
-              <span class="minmax" data-value="min">MIN</span>
-              <p>{{ readyData.prediction_desc.min }}</p>
-            </div>
-            <p>{{ readyData.prediction_desc.min_date }}</p>
+    <div class="pprobe-header">
+      <div class="columns minmax_columns">
+        <div class="column">
+          <div class="minmax_container">
+            <span class="minmax" data-value="min">MIN</span>
+            <p>{{ readyData.prediction_desc.min }}</p>
           </div>
-          <div class="column">
-            <div class="minmax_container">
-              <span class="minmax" data-value="max">MAX</span>
-              <p>{{ readyData.prediction_desc.max }}</p>
-            </div>
-            <p>{{ readyData.prediction_desc.max_date }}</p>
+          <p>{{ readyData.prediction_desc.min_date }}</p>
+        </div>
+        <div class="column">
+          <div class="minmax_container">
+            <span class="minmax" data-value="max">MAX</span>
+            <p>{{ readyData.prediction_desc.max }}</p>
           </div>
+          <p>{{ readyData.prediction_desc.max_date }}</p>
         </div>
       </div>
-      <div class="column">
-        <div class="legend">
-          <span class="legend_max"
-            >Максимальная суточная вероятность клёва</span
-          >
-          <span class="legend_min">Минимальная суточная вероятность клёва</span>
-          <span class="legend_area">Высокий шанс клева рыбы</span>
-        </div>
+      <div class="legend">
+        <span class="legend_max">Максимальная суточная вероятность клёва</span>
+        <span class="legend_min">Минимальная суточная вероятность клёва</span>
+        <span class="legend_area">Высокий шанс клева рыбы</span>
       </div>
     </div>
     <!--    <p class="content" v-html="readyData.prediction_desc"></p>-->
@@ -72,6 +66,12 @@ export default {
 [data-value='max'] {
   color: #77866c;
 }
-
+.legend {
+  width: 45%;
+}
+.pprobe-header {
+  display: flex;
+  justify-content: space-between;
+}
 @include legend;
 </style>

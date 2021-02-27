@@ -69,11 +69,11 @@ export default {
       return this.isSwitched ? result : this.newsList
     },
   },
-  mounted() {
+  async mounted() {
     if (process.browser && localStorage.getItem('hidden-news')) {
       this.isSwitched = JSON.parse(localStorage.getItem('hidden-news'))
     }
-    this.$axios.get('/news/').then((res) => {
+    await this.$axios.get('/news/').then((res) => {
       this.newsList = res.data.results
       this.next = res.data.next
     })

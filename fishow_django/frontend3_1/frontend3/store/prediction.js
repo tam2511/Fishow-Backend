@@ -153,9 +153,16 @@ export const actions = {
     commit('SET_LOCATION', location)
   },
   getPrediction({ commit, axios }, conf) {
-    return PredictionService.getPredicitons(conf).then((response) => {
-      commit('SET_PREDICTIONS', response.data.results[0])
-    })
+    const key = conf
+    const cache = JSON.parse(sessionStorage.getItem(key))
+    if (cache) {
+      commit('SET_PREDICTIONS', cache)
+    } else {
+      return PredictionService.getPredicitons(conf).then((response) => {
+        commit('SET_PREDICTIONS', response.data.results[0])
+        sessionStorage.setItem(key, JSON.stringify(response.data.results[0]))
+      })
+    }
   },
   getPredictionOne({ commit, axios }, conf) {
     return PredictionService.getPredicitons(conf).then((response) => {
