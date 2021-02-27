@@ -33,6 +33,10 @@
 * blogs/<slug>/save/
 * count/blogs/
 
+* blogs_fresh/
+* blogs_best/
+* blogs_hot/
+
 2. USER (Апи касаемо юзера)
 
 * user/

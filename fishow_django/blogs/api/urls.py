@@ -48,4 +48,8 @@ urlpatterns = [
     path("user/liked/blogs/comment/", qv.BlogCommentUserLiked.as_view(), name="liked-blogs-comments-user"),
     path("user/created/blogs/comment/", qv.BlogCommentUserCreated.as_view(), name="created-blogs-comments-user"),
 
+    path("blogs_fresh/", qv.BlogFresh.as_view(), name="blogs-fresh"),
+    path("blogs_best/", qv.BlogBest.as_view(), name="blogs-best"),
+    path("blogs_hot/", qv.BlogHot.as_view(), name="blogs-hot"),
+
 ]
