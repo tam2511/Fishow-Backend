@@ -49,3 +49,9 @@ class Waterplace_costSerializer(serializers.ModelSerializer):
     class Meta:
         model = Waterplace_cost
         fields = '__all__'
+
+# class RegionListSerializer(serializers.ModelSerializer):
+#
+#     class Meta:
+#             model = Region
+#             fields = ['name','slug']
