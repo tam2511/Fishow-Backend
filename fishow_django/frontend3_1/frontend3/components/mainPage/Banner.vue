@@ -31,6 +31,7 @@
 export default {
   data() {
     return {
+      loading: false,
       banners: {
         predictionCounter: {
           id: 0,
@@ -55,12 +56,27 @@ export default {
       },
     }
   },
-  mounted() {
-    this.getUsers()
-    this.getBlogs()
-    this.getReports()
+  async created() {
+    if (process.browser) {
+      const cache = this.getCached()
+      if (cache) {
+        this.banners = cache
+      } else {
+        await this.getUsers()
+        await this.getBlogs()
+        await this.getReports()
+        this.cache()
+      }
+      this.loading = true
+    }
   },
   methods: {
+    getCached() {
+      return JSON.parse(localStorage.getItem('cache-stats'))
+    },
+    cache() {
+      localStorage.setItem('cache-stats', JSON.stringify(this.banners))
+    },
     async getUsers() {
       try {
         const { data } = await this.$axios.get('/count/user/')
@@ -156,6 +172,7 @@ h3.banner_title {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: stretch;
   margin-top: 40px;
+  position: relative;
   @media screen and (max-width: 500px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;

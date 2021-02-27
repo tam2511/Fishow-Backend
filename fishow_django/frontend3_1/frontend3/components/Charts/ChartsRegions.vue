@@ -108,8 +108,8 @@ export default {
   },
   methods: {
     convertData(data) {
-      if (data && data.y) {
-        return data.y.map((item) => item * 100)
+      if (data && data.y && data.y.values) {
+        return data.y.values
       } else {
         return []
       }

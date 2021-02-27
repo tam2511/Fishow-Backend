@@ -90,6 +90,13 @@ export default {
   methods: {
     async fetchRegions(params = '') {
       try {
+        const cache = sessionStorage.getItem('cache-regions')
+        if (cache) {
+          this.regions = JSON.parse(cache)
+          this.selectRegion(this.regions[this.regions.length - 1])
+          this.regionsDone = true
+          return
+        }
         const { data } = await Http.getRegions(params)
         this.regionsNext = data.next
         this.regions.push(...data.results)
@@ -100,6 +107,7 @@ export default {
         } else {
           this.selectRegion(this.regions[this.regions.length - 1])
           this.regionsDone = true
+          sessionStorage.setItem('cache-regions', JSON.stringify(this.regions))
         }
       } catch (e) {
         this.$buefy.toast.open({

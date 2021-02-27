@@ -18,6 +18,7 @@ export default async function ({ app }) {
         const token = 'Bearer ' + response.data.access
         $auth.setToken(strategy, token)
       } catch (e) {
+        $auth.logout()
         console.error(e)
       }
     }

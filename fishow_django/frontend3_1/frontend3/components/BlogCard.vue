@@ -1,102 +1,98 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <div class="card-content">
-        <div class="content-container">
-          <div v-if="liked" class="media">
-            <div class="media-left">
-              <div class="like">
-                <b-button
-                  :outlined="!userLikedBlog"
-                  :type="{
-                    'is-success is-light': userLikedBlog,
-                    '': !userLikedBlog,
-                  }"
-                  :disabled="!$auth.user"
-                  icon-pack="fa"
-                  icon-right="chevron-up"
-                  @click="toggleLike"
-                />
-                <b-button type="is-primary likes_counter">
-                  {{ rating + likesCounter + dislikesCounter }}
-                </b-button>
-                <b-button
-                  :outlined="!userDisLikedBlog"
-                  :type="{
-                    'is-danger is-light': userDisLikedBlog,
-                    '': !userDisLikedBlog,
-                  }"
-                  :disabled="!$auth.user"
-                  icon-pack="fa"
-                  icon-right="chevron-down"
-                  @click="toggleDislike"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <div class="media pre-header">
-              <div class="media-content">
-                <h2 class="title">
-                  <nuxt-link
-                    :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
-                    >{{ blog.title }}
-                  </nuxt-link>
-                </h2>
-              </div>
-            </div>
-            <div
-              v-for="item in getResult"
-              :key="item.id"
-              :class="item.type + '_container'"
-            >
-              <p v-if="item.type === 'text'" class="post-text">
-                {{ item.body }}
-              </p>
-              <iframe
-                v-if="item.type === 'video'"
-                width="560"
-                height="315"
-                :src="item.body"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                name="video"
-              ></iframe>
-              <figure v-if="item.type === 'image'" class="image is-fullwidth">
-                <img :src="item.body" alt="" />
-              </figure>
-            </div>
+  <div class="card">
+    <div class="content-container">
+      <div v-if="liked" class="media">
+        <div class="media-left">
+          <div class="like">
+            <b-button
+              :outlined="!userLikedBlog"
+              :type="{
+                'is-success is-light': userLikedBlog,
+                '': !userLikedBlog,
+              }"
+              :disabled="!$auth.user"
+              icon-pack="fa"
+              icon-right="chevron-up"
+              @click="toggleLike"
+            />
+            <b-button type="is-primary likes_counter">
+              {{ rating + likesCounter + dislikesCounter }}
+            </b-button>
+            <b-button
+              :outlined="!userDisLikedBlog"
+              :type="{
+                'is-danger is-light': userDisLikedBlog,
+                '': !userDisLikedBlog,
+              }"
+              :disabled="!$auth.user"
+              icon-pack="fa"
+              icon-right="chevron-down"
+              @click="toggleDislike"
+            />
           </div>
         </div>
-        <div class="media card-footer">
-          <div class="is-flex blog-author">
-            <figure class="image is-16x16">
-              <img
-                src="https://bulma.io/images/placeholders/96x96.png"
-                alt="Placeholder image"
-              />
-            </figure>
-            <p>{{ blog.author }}</p>
-            <time datetime="2016-1-1">{{ blog.created_at }}</time>
-          </div>
-          <div>
-            <b-field grouped group-multiline>
-              <div class="control">
-                <b-taglist attached>
-                  <nuxt-link
-                    :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
-                  >
-                    <b-tag type="is-light">Комментариев</b-tag>
-                    <b-tag type="is-primary">{{ blog.comments_count }}</b-tag>
-                  </nuxt-link>
-                </b-taglist>
-              </div>
-            </b-field>
-            <b-tag class="blog-category" type="is-primary">{{
-              blog.category
-            }}</b-tag>
+      </div>
+      <div class="content">
+        <div class="media pre-header">
+          <div class="media-content">
+            <h2 class="title">
+              <nuxt-link
+                :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
+                >{{ blog.title }}
+              </nuxt-link>
+            </h2>
           </div>
         </div>
+        <div
+          v-for="item in getResult"
+          :key="item.id"
+          :class="item.type + '_container'"
+        >
+          <p v-if="item.type === 'text'" class="post-text">
+            {{ item.body }}
+          </p>
+          <iframe
+            v-if="item.type === 'video'"
+            width="560"
+            height="315"
+            :src="item.body"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            name="video"
+          ></iframe>
+          <figure v-if="item.type === 'image'" class="image is-fullwidth">
+            <img :src="item.body" alt="" />
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="media card-footer">
+      <div class="is-flex blog-author">
+        <figure class="image is-16x16">
+          <img
+            src="https://bulma.io/images/placeholders/96x96.png"
+            alt="Placeholder image"
+          />
+        </figure>
+        <p>{{ blog.author }}</p>
+        <time datetime="2016-1-1">{{ blog.created_at }}</time>
+      </div>
+      <div>
+        <b-field grouped>
+          <div class="control">
+            <b-taglist attached>
+              <nuxt-link
+                :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
+              >
+                <b-tag type="is-light">Комментариев</b-tag>
+                <b-tag type="is-primary">{{ blog.comments_count }}</b-tag>
+              </nuxt-link>
+            </b-taglist>
+          </div>
+        </b-field>
+        <b-tag class="blog-category" type="is-primary">{{
+          blog.category
+        }}</b-tag>
       </div>
     </div>
   </div>
@@ -209,28 +205,31 @@ export default {
     likeBlog() {
       this.likesCounter += 1
       this.userLikedBlog = true
-      this.$axios.$post(`/blogs/${this.blog.id}/like/`)
+      this.$axios.$post(`/blogs/${this.blog.slug}/like/`)
     },
     unLikeBlog() {
       this.likesCounter -= 1
       this.userLikedBlog = false
-      this.$axios.$delete(`/blogs/${this.blog.id}/like/`)
+      this.$axios.$delete(`/blogs/${this.blog.slug}/like/`)
     },
     dislikeBlog() {
       this.dislikesCounter -= 1
       this.userDisLikedBlog = true
-      this.$axios.$post(`/blogs/${this.blog.id}/dislike/`)
+      this.$axios.$post(`/blogs/${this.blog.slug}/dislike/`)
     },
     undislikeBlog() {
       this.dislikesCounter += 1
       this.userDisLikedBlog = false
-      this.$axios.$delete(`/blogs/${this.blog.id}/dislike/`)
+      this.$axios.$delete(`/blogs/${this.blog.slug}/dislike/`)
     },
   },
 }
 </script>
 
 <style scoped lang="scss">
+.card {
+  padding: 20px;
+}
 .blog-category {
   background-color: #1e347b;
 }

@@ -28,6 +28,8 @@ export default {
   }
   &-second {
     color: #a8a8a8;
+    height: 24px;
+    white-space: nowrap;
   }
 }
 </style>
