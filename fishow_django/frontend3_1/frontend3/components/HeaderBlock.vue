@@ -175,13 +175,13 @@ export default {
   }
   .nuxt-link-exact-active {
     path {
-      fill: #000;
+      fill: var(--color-type-brand);
     }
   }
 }
 .navbar-mobile {
   height: 60px;
-  background: #f7f7f7;
+  background: var(--color-bg-acent);
   box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.08);
   position: fixed;
   bottom: 0;
