@@ -3,6 +3,7 @@ import logging
 from time import sleep
 from random import randint
 
+from archivator import Archivator
 from gismeteo import WeatherParser
 from minmax import get_mean_data
 from mysql_utils import MysqlConnector
@@ -24,9 +25,11 @@ class Client:
         self.predictor = Predictor(model_path=self.config['prediction']['model_path'], logger=self.predict_log,
                                    num_days=self.config['prediction']['num_days'],
                                    num_hours=self.config['gismeteo']['num_hours'])
+        self.archivator = Archivator(config=self.config, logger=self.client_log)
+
 
     def predict_(self, data):
-        num_extra_dates = len(data) - self.config['prediction']['num_days']
+        num_extra_dates = self.config['prediction']['num_days'] + 1
         extra_dates = [data[0]['date'] - datetime.timedelta(days=i + 1) for i in range(num_extra_dates)]
         extra_dates = [_.strftime("%Y.%m.%d") for _ in extra_dates]
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],
@@ -103,6 +106,7 @@ class Client:
                     sleep(20)
             sleep(10800)
             self.config = read_config(self.config_path)
+            self.archivator.archive()
             with open(self.config['current_city'], 'w') as c_f:
                 areal = list(urls.keys())[0]
                 city = list(urls[areal].keys())[0]
