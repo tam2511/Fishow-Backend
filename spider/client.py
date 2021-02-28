@@ -1,6 +1,7 @@
 import datetime
 import logging
 from time import sleep
+from random import randint
 
 from gismeteo import WeatherParser
 from minmax import get_mean_data
@@ -25,8 +26,8 @@ class Client:
                                    num_hours=self.config['gismeteo']['num_hours'])
 
     def predict_(self, data):
-        num_extra_dates = self.config['prediction']['num_days'] - len(data)
-        extra_dates = [data[0]['date'] - datetime.timedelta(days=i) for i in range(num_extra_dates)]
+        num_extra_dates = len(data) - self.config['prediction']['num_days']
+        extra_dates = [data[0]['date'] - datetime.timedelta(days=i + 1) for i in range(num_extra_dates)]
         extra_dates = [_.strftime("%Y.%m.%d") for _ in extra_dates]
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],
                                password=self.config['database']['password'],
@@ -47,6 +48,10 @@ class Client:
             data[i]['areal'] = areal
         probs = self.predict_(data)
         for fish in probs:
+            if not len(probs[fish]) == self.config['gismeteo']['num_hours'] * len(data):
+                extra_ = self.config['gismeteo']['num_hours'] * len(data) - len(probs[fish])
+                extra_ = [max(min(probs[fish][0], 100), 0) + randint(-10, 10) for _ in range(extra_)]
+                probs[fish] = extra_ + probs[fish]
             for i in range(len(data)):
                 data[i]['fish'] = fish
                 left = i * self.config['gismeteo']['num_hours']
@@ -95,14 +100,15 @@ class Client:
                             flag_start = True
                     self.client_log.info("Start handle areal {} and city {}".format(areal, city))
                     self.handle_(city=city, areal=areal)
-                    sleep(7)
-            sleep(1000)
+                    sleep(20)
+            sleep(10800)
             self.config = read_config(self.config_path)
             with open(self.config['current_city'], 'w') as c_f:
                 areal = list(urls.keys())[0]
                 city = list(urls[areal].keys())[0]
                 c_f.write("{},{}".format(areal, city))
-            
+
+
 if __name__ == '__main__':
     c = Client('config.json')
     c.start()

@@ -8,7 +8,7 @@
   "gismeteo": {
     "num_days": 10,
     "num_hours": 8,
-    "driver_path": "/mnt/c/Users/Xiaomi/PycharmProjects/fishow_rest_vue/spider/phantomjs",
+    "driver_path": "phantomjs",
     "num_attempts": 3,
     "timeout": 2,
     "max_wait": 5
@@ -171,7 +171,7 @@
       "Сергиев Посад": "https://www.gismeteo.ru/weather-sergiyev-posad-11958/",
       "Щелково": "https://www.gismeteo.ru/weather-shchelkovo-11584/"
     },
-    "Мурманская област": {
+    "Мурманская область": {
       "Апатиты": "https://www.gismeteo.ru/weather-apatity-3906/",
       "Кандалакша": "https://www.gismeteo.ru/weather-kandalaksha-3908/",
       "Мурманск": "https://www.gismeteo.ru/weather-murmansk-3903/",
@@ -202,7 +202,7 @@
       "Омск": "https://www.gismeteo.ru/weather-omsk-4578/",
       "Тара": "https://www.gismeteo.ru/weather-tara-4530/"
     },
-    "Оренбурская область": {
+    "Оренбургская область": {
       "Бугуруслан": "https://www.gismeteo.ru/weather-buguruslan-4605/",
       "Бузулук": "https://www.gismeteo.ru/weather-buzuluk-4619/",
       "Новотроицк": "https://www.gismeteo.ru/weather-novotroitsk-10950/",
