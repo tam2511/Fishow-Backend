@@ -58,4 +58,3 @@ while True:
 
     if i >= len(data):
         break
-
