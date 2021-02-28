@@ -54,6 +54,27 @@ class MysqlConnector:
         cur.close()
         return result
 
+    def delete(self, table_name, where=None):
+        if where:
+            query = "DELETE FROM {} WHERE".format(table_name)
+            for key in where:
+                if isinstance(where[key], list):
+                    if len(where[key]) > 0:
+                        query += " {} IN ({}".format(serialize_key(key), serialize_value(where[key][0]))
+                        for index in range(1, len(where[key])):
+                            query += ", {}".format(serialize_value(where[key][index]))
+                        query += ") AND"
+                else:
+                    query += " {} = {} AND".format(serialize_key(key), serialize_value(where[key]))
+            query = query[:-3]
+        else:
+            query = "DELETE * FROM {}".format(table_name)
+        cur = self.connector.cursor(pymysql.cursors.DictCursor)
+        cur.execute(query)
+        result = cur.fetchall()
+        cur.close()
+        return result
+
     def update(self, table_name, row):
         id = row['id']
         data_row = {key: row[key] for key in row if not key == 'date'}

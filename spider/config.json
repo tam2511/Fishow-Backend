@@ -24,7 +24,8 @@
     "password": "081099ASDasd!",
     "database": "tam2511_fishow",
     "prediction_table": "prediction_prediction",
-    "mean_prediction_table": "prediction_predictionten"
+    "mean_prediction_table": "prediction_predictionten",
+    "archives_path": "backup"
   },
   "urls": {
     "Алтайский край": {
