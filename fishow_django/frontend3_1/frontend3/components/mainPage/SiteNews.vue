@@ -52,7 +52,7 @@ export default {
   flex-flow: column;
   margin: 40px 0;
   &__link {
-    color: var(--color-type-primary);
+    color: var(--color-type-brand);
     &:hover {
       color: var(--color-type-hover);
     }

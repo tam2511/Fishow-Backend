@@ -30,15 +30,15 @@ export default {
       blog: null,
     }
   },
-  mounted() {
-    this.$axios.get(`/blogs/${this.$route.params.slug}/`).then((res) => {
-      this.blog = res.data
-    })
-  },
   head() {
     return {
       title: this.blog && this.blog.title + ' | Fishow',
     }
+  },
+  mounted() {
+    this.$axios.get(`/blogs/${this.$route.params.slug}/`).then((res) => {
+      this.blog = res.data
+    })
   },
 }
 </script>

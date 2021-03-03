@@ -1,10 +1,23 @@
 html {
-  --color-type-primary: #018cac;
+  --color-type-brand: #018cac;
+  --color-type-default: #242424;
+  --color-bg-default: #fafafa;
+  --color-bg-acent: #ffffff;
   --color-type-hover: #003d4b;
   --size-typo-legend: 14px;
   --main-color: #018cac;
 }
-
+@media (prefers-color-scheme: dark) {
+  html {
+    --color-type-default: #dbdbdb;
+    --color-type-brand: #018cac;
+    --color-bg-default: #181818;
+    --color-bg-acent: #020202;
+    --color-type-hover: #003d4b;
+    --size-typo-legend: 14px;
+    --main-color: #018cac;
+  }
+}
 
 @import '~bulma/sass/utilities/_all';
 
@@ -15,10 +28,15 @@ html {
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
+.footer,
 .card {
-  background-color: #fafafa;
+  background-color: var(--color-bg-default);
+  color: var(--color-type-default)
 }
-
+#app {
+  background-color: var(--color-bg-default);
+  color: var(--color-type-default);
+}
 
 
 

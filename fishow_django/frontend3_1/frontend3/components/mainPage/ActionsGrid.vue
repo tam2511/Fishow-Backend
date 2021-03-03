@@ -66,13 +66,12 @@ export default {
   &__item {
     position: relative;
     min-height: 250px;
-    background-color: #fff;
+    background-color: var(--color-bg-acent);
     background-position: right;
     background-repeat: no-repeat;
     background-size: 200px;
     padding: 20px;
 
-    border: 1px solid rgba(206, 209, 213, 0.4);
     box-sizing: border-box;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
@@ -81,7 +80,7 @@ export default {
     &:hover {
       box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.18);
     }
-    color: #000 !important;
+    color: var(--color-type-default) !important;
   }
 }
 .grid__item_title {
