@@ -8,7 +8,7 @@
       </div>
       <div class="activity-select">
         <div>
-          <h3>Ваш регион</h3>
+          <h3 class="activity-field-title">Ваш регион</h3>
           <regions-search
             v-if="regionsDone"
             v-model="selectedRegion"
@@ -17,7 +17,7 @@
           />
         </div>
         <div v-if="fish.length">
-          <h3>Рыба</h3>
+          <h3 class="activity-field-title">Рыба</h3>
           <fish-select :options="fish" @select="selectFish" />
         </div>
       </div>
@@ -28,7 +28,8 @@
     <div class="rating-container">
       <div class="activity-title">Рейтинг водоемов</div>
       <div class="activity-description">
-        Как много различных товаров и услуг оплачивают жители России?
+        На основе отчетов и оценках пользователей Вы можете наблюдать за
+        распределением общего улова в течении года
       </div>
       <water-places-rating />
       <div class="activity-chart"></div>
@@ -134,6 +135,9 @@ export default {
 
 <style lang="scss" scoped>
 .activity {
+  &-field-title {
+    padding-bottom: 10px;
+  }
   &-rating {
     display: flex;
     flex-flow: row;

@@ -2,22 +2,27 @@
   <div class="water-places-container">
     <div>
       <div>
-        <h3>Водоем</h3>
+        <h3 class="rating-title">Водоем</h3>
         <div>
           <water-places-search @selected="showSelected" />
         </div>
       </div>
-      <div>
-        <h3>Рейтинг водоема</h3>
-        <span v-if="waterPlace" class="rating">{{
-          waterPlace.fish_rating
-        }}</span>
-        Составлен по оценке пользователей
+      <div class="rating-container">
+        <h3 class="rating-title">Рейтинг водоема</h3>
+        <div>
+          <div class="rating-value">0</div>
+          <div>
+            <span v-if="waterPlace" class="rating">{{
+              waterPlace.fish_rating
+            }}</span>
+            Составлен по оценке пользователей
+          </div>
+        </div>
       </div>
     </div>
     <div>
       <div v-if="waterPlace">
-        <charts-regions :value="chartData" />
+        <charts-regions :value="chartData" chart-type="bar" />
       </div>
     </div>
   </div>
@@ -77,5 +82,32 @@ export default {
       margin: 0;
     }
   }
+}
+.rating-container {
+  display: flex;
+
+  flex-flow: wrap;
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.rating-title {
+  width: 100%;
+  padding-bottom: 10px;
+  color: #878b90;
+}
+.rating-value {
+  width: 40px;
+  height: 40px;
+  background-color: #44c77f;
+  display: flex;
+  justify-content: center;
+  font-size: 21px;
+  align-items: center;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: #fff;
 }
 </style>

@@ -1,16 +1,17 @@
 <template>
   <client-only>
-    <div v-if="value">
+    <div>
       <div class="legend">
-        <span class="legend_max">X</span>
-        <span class="legend_mean">Y</span>
+        <span class="legend_max">{{ value.Y.name }}</span>
+        <span class="legend_min">{{ value.X.name }}</span>
       </div>
-      <VueApexCharts
+      <vue-apex-charts
+        v-if="chartX"
         width="100%"
-        type="line"
+        :type="chartType"
         :options="chartOptions"
         :series="series"
-      ></VueApexCharts>
+      ></vue-apex-charts>
     </div>
   </client-only>
 </template>
@@ -25,13 +26,20 @@ export default {
       type: Object,
       required: true,
     },
+    chartType: {
+      type: String,
+      default() {
+        return 'area'
+      },
+    },
   },
   data() {
     return {
       series: [
         {
-          name: 'Y',
-          data: this.convertData(this.value),
+          type: 'column',
+          name: this.value.Y.name,
+          data: this.chartY,
         },
       ],
       chartOptions: {
@@ -71,7 +79,7 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: this.value.x,
+          categories: [],
           labels: {
             formatter(value) {
               return Math.round(value)
@@ -79,6 +87,7 @@ export default {
           },
         },
         yaxis: {
+          categories: this.value.X.name,
           min: 0,
           max: 100,
           labels: {
@@ -88,19 +97,30 @@ export default {
           },
         },
         legend: {
-          show: false,
+          position: 'top',
+          horizontalAlign: 'right',
+          show: true,
         },
       },
     }
   },
+  computed: {
+    chartY() {
+      return (this.value && this.value.Y && this.value.Y.values) || []
+    },
+    chartX() {
+      return (this.value && this.value.X && this.value.X.values) || []
+    },
+  },
   watch: {
     value: {
+      deep: true,
       immediate: true,
       handler(val) {
         this.series = [
           {
-            name: 'ачевсмысле',
-            data: this.convertData(val),
+            name: val.Y.name,
+            data: this.chartY,
           },
         ]
       },
@@ -108,10 +128,10 @@ export default {
   },
   methods: {
     convertData(data) {
-      if (data && data.y && data.y.values) {
-        return data.y.values
+      if (data && data.Y && data.Y.values) {
+        return data.Y.values
       } else {
-        return []
+        return null
       }
     },
   },
