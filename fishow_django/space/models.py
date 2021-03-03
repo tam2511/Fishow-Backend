@@ -38,6 +38,7 @@ class Waterplace_nature(models.Model):
     regions = models.ManyToManyField(Region, related_name="region_w_nature", blank=True)
     tour_base = models.TextField(null=True)
     slug = models.SlugField(max_length=255, unique=True)
+    rating = models.IntegerField(default=0,null=True)
 
     def __str__(self):
         return self.slug
@@ -67,6 +68,7 @@ class Waterplace_cost(models.Model):
     is_paid = models.NullBooleanField(null=True, default=False)
     last_fishing = models.TextField(null=True)
     slug = models.SlugField(max_length=255, unique=True)
+    rating = models.IntegerField(default=0,null=True)
 
     def __str__(self):
         return self.slug
