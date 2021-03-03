@@ -16,7 +16,7 @@
               @click="toggleLike"
             />
             <b-button type="is-primary likes_counter">
-              {{ rating + likesCounter + dislikesCounter }}
+              {{ rating }}
             </b-button>
             <b-button
               :outlined="!userDisLikedBlog"
@@ -33,12 +33,13 @@
         </div>
       </div>
       <div class="content">
+        <div class="like-line" :counter="rating"></div>
         <div class="media pre-header">
           <div class="media-content">
             <h2 class="title">
               <nuxt-link
                 :to="{ name: 'blog-slug', params: { slug: blog.slug } }"
-                >{{ blog.title }}
+                >{{ rating }} | {{ blog.title }}
               </nuxt-link>
             </h2>
           </div>
@@ -93,6 +94,10 @@
         <b-tag class="blog-category" type="is-primary">{{
           blog.category
         }}</b-tag>
+        <div class="block">
+          <b-icon icon="eye" size="is-small"></b-icon>
+          {{ blog.user_views }}
+        </div>
       </div>
     </div>
   </div>
@@ -108,7 +113,7 @@ export default {
     liked: {
       type: Boolean,
       default() {
-        return true
+        return false
       },
     },
   },
@@ -140,7 +145,12 @@ export default {
       }
     },
     rating() {
-      return this.blog.likes_count - this.blog.dislikes_count
+      return (
+        this.blog.likes_count -
+        this.blog.dislikes_count +
+        this.likesCounter +
+        this.dislikesCounter
+      )
     },
   },
 
@@ -304,6 +314,50 @@ export default {
     flex-flow: row wrap;
     align-items: center;
     justify-content: space-around;
+  }
+}
+.content {
+  position: relative;
+  width: 100%;
+  &:hover {
+    .like-line {
+      opacity: 1;
+    }
+  }
+}
+.like-counter {
+  opacity: 0;
+}
+.like-line {
+  transition: 0.5s;
+  height: 100%;
+  width: 20%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  clip-path: ellipse(20% 50% at 100% 50%);
+  background: linear-gradient(
+    271.4deg,
+    #a0ff55 -119.32%,
+    rgba(255, 255, 255, 0) 298.37%
+  );
+  opacity: 0;
+  cursor: pointer;
+  &:after {
+    content: attr(counter);
+    width: 30px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    right: 0;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  &:hover:after {
+    opacity: 1;
   }
 }
 </style>

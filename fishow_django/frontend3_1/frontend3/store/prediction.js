@@ -154,7 +154,12 @@ export const actions = {
   },
   getPrediction({ commit, axios }, conf) {
     const key = conf
-    const cache = JSON.parse(sessionStorage.getItem(key))
+    let cache = null
+    try {
+      cache = JSON.parse(sessionStorage.getItem(key))
+    } catch (e) {
+      // console.error(e)
+    }
     if (cache) {
       commit('SET_PREDICTIONS', cache)
     } else {
