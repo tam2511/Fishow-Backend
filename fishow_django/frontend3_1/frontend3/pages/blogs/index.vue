@@ -126,12 +126,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title-blogs-end {
-  color: #247d21;
-  font-size: 1rem;
-  padding: 1rem;
-  background: #fff;
-}
 @media screen and (max-width: 700px) {
   .space-left0 {
     padding-right: 0;

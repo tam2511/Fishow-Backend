@@ -104,12 +104,16 @@ export default {
   },
   computed: {
     fishList() {
+      if (!this.report.fishing) {
+        return []
+      }
       let result = []
+      console.log('fishing = ', this.report.fishing)
       try {
         const body = JSON.parse(this.report.fishing)
         result = body
       } catch (e) {
-        console.error(e)
+        console.error('error = ', e)
       }
       return result
     },

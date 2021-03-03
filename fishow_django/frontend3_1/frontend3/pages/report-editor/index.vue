@@ -374,7 +374,7 @@ export default {
   }
 }
 .tile.is-parent {
-  background-color: #f6f6f6;
+  background-color: var(--color-bg-brand);
 }
 .is-vertical.box {
   @media screen and (max-width: 450px) {

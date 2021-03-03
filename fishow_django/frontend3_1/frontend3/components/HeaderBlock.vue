@@ -267,7 +267,7 @@ a.navbar-item:hover {
 }
 .desktop {
   box-shadow: 0 4px 56px rgba(0, 0, 0, 0.12);
-  background-color: #fff;
+  background-color: var(--color-bg-brand);
   @media screen and (max-width: 500px) {
     display: none;
   }

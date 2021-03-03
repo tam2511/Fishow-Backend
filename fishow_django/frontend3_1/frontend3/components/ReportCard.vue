@@ -217,7 +217,7 @@ export default {
 
 <style scoped lang="scss">
 .card-content {
-  background-color: #f6f6f6;
+  background-color: var(--color-bg-brand);
 }
 .blog-category {
   background-color: #1e347b;

@@ -2,6 +2,7 @@ html {
   --color-type-brand: #018cac;
   --color-type-default: #242424;
   --color-bg-default: #fafafa;
+  --color-bg-brand: #f6f6f6;
   --color-bg-acent: #ffffff;
   --color-type-hover: #003d4b;
   --size-typo-legend: 14px;
@@ -12,6 +13,7 @@ html {
     --color-type-default: #dbdbdb;
     --color-type-brand: #018cac;
     --color-bg-default: #181818;
+    --color-bg-brand: #232323;
     --color-bg-acent: #020202;
     --color-type-hover: #003d4b;
     --size-typo-legend: 14px;
@@ -30,8 +32,9 @@ html {
 
 .footer,
 .card {
-  background-color: var(--color-bg-default);
-  color: var(--color-type-default)
+  background-color: var(--color-bg-brand);
+  border-color: var(--color-type-default);
+  color: var(--color-type-default);
 }
 #app {
   background-color: var(--color-bg-default);
@@ -78,4 +81,64 @@ html {
 }
 .multiselect__tags {
   white-space: nowrap;
+}
+.main-fish-info {
+  .select {
+    width: 100%;
+    & select {
+      width: 100%;
+    }
+  }
+}
+.multiselect .multiselect__tags {
+  background-color: var(--color-bg-brand);
+  color: var(--color-type-default);
+  border-color: var(--color-type-default);
+  &::placeholder {
+    color: var(--color-type-default);
+  }
+}
+.buttons {
+  .button {
+    background-color: var(--color-bg-acent);
+    color: var(--color-type-default);
+    border-color: var(--color-bg-default);
+  }
+}
+
+.field {
+  input,
+  textarea {
+    background-color: var(--color-bg-brand);
+    color: var(--color-type-default);
+    border-color: var(--color-type-default);
+    &::placeholder {
+      color: var(--color-type-default);
+    }
+  }
+  label {
+    color: var(--color-type-default);
+  }
+
+}
+.title-blogs-end {
+  color: var(--color-type-brand);
+  font-size: 1rem;
+  padding: 1rem;
+  background: var(--color-bg-brand);
+  margin-right: 12px;
+  border-radius: 5px;
+}
+
+.navbar {
+  background-color: var(--color-bg-brand);
+  color: var(--color-type-default);
+  a {
+    &:hover {
+      background-color: var(--color-bg-acent);
+    }
+  }
+  .navbar-item, .navbar-link {
+    color: var(--color-type-default);
+  }
 }

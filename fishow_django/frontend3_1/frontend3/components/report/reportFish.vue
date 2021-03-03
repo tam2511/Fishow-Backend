@@ -16,11 +16,12 @@
     <div class="main-fish-info">
       <section>
         <b-field>
-          <b-input
+          <b-select
             v-model="fishTemplate.activity"
             placeholder="Активность рыбы"
           >
-          </b-input>
+            <option v-for="n in 10" :key="n">{{ n }}</option>
+          </b-select>
         </b-field>
       </section>
 
@@ -28,7 +29,8 @@
         <b-field>
           <b-input
             v-model="fishTemplate.weight"
-            placeholder="Суммарный вес улова"
+            placeholder="Суммарный вес улова (кг)"
+            type="number"
           >
           </b-input>
         </b-field>
@@ -39,6 +41,7 @@
           <b-input
             v-model="fishTemplate.count"
             placeholder="Число экземпляров"
+            type="number"
           ></b-input>
         </b-field>
       </section>
