@@ -32,3 +32,9 @@ package-lock.json
 /assets/db/
 
 /fishow_django/fishow_django/config.json
+/spider/phantomjs.exe
+/spider/client.log
+/spider/current_city.pin
+/spider/gismeteo.log
+/spider/phantomjs
+/spider/predict.log
