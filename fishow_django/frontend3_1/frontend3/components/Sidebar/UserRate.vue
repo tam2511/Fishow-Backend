@@ -1,7 +1,6 @@
 <template>
   <section>
-    <b-table v-if="$auth.user" :data="userRating" :columns="columns"> </b-table>
-    <div v-else>Авторизуйтесь что бы увидеть список пользователей</div>
+    <b-table :data="userRating" :columns="columns"> </b-table>
   </section>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <div>
     <p class="title is-4">Комментарии</p>
-    <div class="tile is-child is-vertical box" v-if="comments">
-      <p v-if="(comments.length === 0)">Ваш комментарий будет первым</p>
+    <div v-if="comments" class="tile is-child is-vertical box">
+      <p v-if="comments.length === 0">Ваш комментарий будет первым</p>
       <Comment
         v-for="(comment, index) in comments"
         :key="index"

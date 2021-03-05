@@ -45,15 +45,20 @@ def hard_dates(pressures, dates, tag):
         return None
     intervals = []
     current = [-1, -1]
+    max_sub = 0
     for i in range(len(mask_subs)):
         if mask_subs[i]:
+            max_sub = max(max_sub, abs(subs[i]))
             if current[0] == -1:
                 current[0] = i
             current[1] = i + 1
         else:
             if not current[0] == -1:
-                intervals.append((current[0], current[1]))
+                intervals.append((subs[i], (current[0], current[1])))
             current[0] = -1
     if not current[0] == -1:
-        intervals.append((current[0], current[1]))
-    return get_dates_by_intervals(dates, intervals)
+        intervals.append((max_sub, (current[0], current[1])))
+    if len(intervals) == 0:
+        return None
+    top_interval = [max(intervals, key=lambda x: x[0])[1]]
+    return get_dates_by_intervals(dates, top_interval)

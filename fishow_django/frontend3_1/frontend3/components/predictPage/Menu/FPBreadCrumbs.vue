@@ -8,16 +8,20 @@
               <a> Россия </a>
             </li>
             <li>
-              <nuxt-link to="/prognoz-kleva">{{ areal }}</nuxt-link>
+              <nuxt-link to="/prognoz-kleva">{{
+                selectedLocation.areal
+              }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/prognoz-kleva">{{ city }}</nuxt-link>
+              <nuxt-link to="/prognoz-kleva">{{
+                selectedLocation.city
+              }}</nuxt-link>
             </li>
           </ul>
         </nav>
       </div>
       <div class="column">
-        <city-search />
+        <city-search v-model="selectedLocation" />
       </div>
     </div>
   </div>
@@ -29,22 +33,14 @@ export default {
   components: {
     CitySearch,
   },
-  props: {
-    areal: {
-      type: String,
-      required: true,
-    },
-    city: {
-      type: String,
-      required: true,
-    },
-    date: {
-      type: String,
-      required: true,
-    },
-    fish: {
-      type: String,
-      required: true,
+  data() {
+    return {
+      selectedLocation: { areal: 'Московская область', city: 'Москва' },
+    }
+  },
+  watch: {
+    selectedLocation(val) {
+      console.log('selectedLocation = ', val)
     },
   },
 }
@@ -61,5 +57,11 @@ export default {
 }
 .columns {
   align-items: center;
+}
+@media screen and (max-width: 450px) {
+  .breadcrumb {
+    font-size: 12px;
+    margin: 0;
+  }
 }
 </style>

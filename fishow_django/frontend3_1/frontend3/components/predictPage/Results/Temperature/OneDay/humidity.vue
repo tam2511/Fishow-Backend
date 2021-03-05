@@ -1,6 +1,6 @@
 <template>
   <div class="humidity" :style="color">
-    {{ Math.floor(day.humidity_mean * 100) }}%
+    {{ Math.floor(day.humidity_mean) || Math.floor(day.humidity) }}%
   </div>
 </template>
 
@@ -14,11 +14,14 @@ export default {
   },
   computed: {
     color() {
+      const day = this.day.humidity_mean
+        ? this.day.humidity_mean
+        : this.day.humidity
       let varStyle = ''
-      if (this.day.humidity_mean < 0.4) {
+      if (day < 40) {
         varStyle = 'color: #000;'
       }
-      return `${varStyle} background-color: rgba(68, 137, 196, ${this.day.humidity_mean});`
+      return `${varStyle} background-color: rgba(68, 137, 196, ${day});`
     },
   },
 }

@@ -1,9 +1,11 @@
 import datetime
 import numpy as np
 
+from ..prediction.prediction_helper import get_day_times, get_date_time_text
 from .temperature_helper import *
 from ..helper.text import cases
 from ..helper.date import parse_date
+from ..helper.extra import deserialize
 
 
 class TemperatureTextGenerator:
@@ -42,18 +44,23 @@ class TemperatureTextGenerator:
 
     @staticmethod
     def get_day_desc(data, date, fish):
-        filtred_data = sorted([(_.temperature, _.time) for _ in data if _.date == date and _.fish == fish],
+        filtred_data = sorted(sum([deserialize(_.temperature) for _ in data if _.date == date and _.fish == fish], []),
                               key=lambda x: x[1])
         temps = [_[0] for _ in filtred_data]
-        min_temp = min(temps)
-        max_temp = max(temps)
-        return minmax_desc.format(min_temp, max_temp)
+        min_temp = np.min(temps)
+        max_temp = np.max(temps)
+        mean_temp = np.mean(temps)
+        return {
+            'mean': mean_temp, 'min': min_temp, 'max': max_temp, 'min_times': parse_date(date),
+            'max_times': parse_date(date)
+        }
 
     @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        filtred_data = {observe_date: [(_.temperature, _.time) for _ in data if
-                                       _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+        filtred_data = {
+            observe_date: sum([deserialize(_.temperature) for _ in data if _.date == observe_date and _.fish == fish], []) for
+            observe_date in observe_dates}
         night_winds = [[_[0] for _ in filtred_data[d] if _[1] in [0, 3]] for d in filtred_data]
         day_winds = [[_[0] for _ in filtred_data[d] if _[1] in [12, 15, 18]] for d in filtred_data]
         mean_temps_night = [np.mean(_) for _ in night_winds]

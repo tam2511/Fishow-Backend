@@ -28,15 +28,15 @@ export default {
       required: true,
     },
     tempMax: {
-      type: String,
+      type: Array,
       required: true,
     },
     tempMean: {
-      type: String,
+      type: Array,
       required: true,
     },
     tempMin: {
-      type: String,
+      type: Array,
       required: true,
     },
   },
@@ -45,15 +45,15 @@ export default {
       series: [
         {
           name: 'Максимальная суточная температура',
-          data: JSON.parse(this.tempMax),
+          data: this.tempMax,
         },
         {
           name: 'Среднесуточная температура',
-          data: JSON.parse(this.tempMean),
+          data: this.tempMean,
         },
         {
           name: 'Минимальная суточная температура',
-          data: JSON.parse(this.tempMin),
+          data: this.tempMin,
         },
       ],
       chartOptions: {
@@ -96,8 +96,8 @@ export default {
           categories: getCalendarDay(this.days),
         },
         yaxis: {
-          min: JSON.parse(this.tempMin).sort()[0] - 2,
-          max: JSON.parse(this.tempMax).sort()[JSON.parse(this.tempMin).length],
+          min: this.yaxisMin,
+          max: this.yaxisMax,
           labels: {
             formatter(value) {
               return Math.round(value)
@@ -138,6 +138,16 @@ export default {
         ],
       },
     }
+  },
+  computed: {
+    yaxisMin() {
+      const temp = this.tempMin
+      return temp.sort()[0] - 2
+    },
+    yaxisMax() {
+      const temp = this.tempMax
+      return temp.sort()[this.tempMin.length]
+    },
   },
 }
 </script>

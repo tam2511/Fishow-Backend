@@ -2,13 +2,13 @@
   <div>
     <div v-if="gustOnly">
       <div class="block gust" :style="colorGust">
-        {{ day.gust_max }}
+        {{ day.gust_max || day.gust }}
       </div>
     </div>
     <div v-else>
       <day-block :norm-day="normDay" :day-calendar="dayCalendar" />
       <div class="block" :style="colorWind">
-        {{ Math.round(day.wind_mean) }}
+        {{ Math.round(day.wind_mean) || Math.round(day.wind) }}
       </div>
       <!--    {{ color }}-->
       <div class="block">
@@ -47,10 +47,15 @@ export default {
   },
   computed: {
     normDay() {
-      return helper(this.day)
+      return this.day.wind_mean ? helper(this.day) : null
+    },
+    dayCalendar() {
+      return this.day.wind_mean
+        ? convertFromObjectToDate(this.day)
+        : this.day.date
     },
     wind() {
-      return this.day.wind_direction.split("'")[1]
+      return this.day.wind_direction
     },
     direction() {
       const deg = {
@@ -68,6 +73,7 @@ export default {
     colorWind() {
       let result = 'null'
       const colors = [
+        [0, 'rgba(176,228,232,0.15)'],
         [1, 'rgba(176,228,232,0.3)'],
         [2, 'rgba(176,228,232,0.5)'],
         [3, 'rgba(176,228,232,0.7)'],
@@ -78,8 +84,9 @@ export default {
         [8, '#ff3500'],
         [9, '#ff1300'],
       ]
+      const wind = this.day.wind_mean ? this.day.wind_mean : this.day.wind
       for (let i = 0; i < colors.length; i++) {
-        if (this.day.wind_mean > colors[i][0]) {
+        if (wind > colors[i][0]) {
           result = colors[i][1]
         }
       }
@@ -88,6 +95,10 @@ export default {
     colorGust() {
       let result = 'null'
       const colors = [
+        [1, 'rgba(176,228,232,0.05)'],
+        [2, 'rgba(176,228,232,0.15)'],
+        [3, 'rgba(176,228,232,0.25)'],
+        [4, 'rgba(176,228,232,0.35)'],
         [5, 'rgba(176,228,232,0.45)'],
         [6, 'rgba(247,255,0,0.64)'],
         [7, '#ffe800'],
@@ -96,18 +107,15 @@ export default {
         [15, '#ff3500'],
         [20, '#ff1300'],
       ]
+      const gust = this.day.gust_max ? this.day.gust_max : this.day.gust
       for (let i = 0; i < colors.length; i++) {
-        if (this.day.gust_max > colors[i][0]) {
+        if (gust > colors[i][0]) {
           result = colors[i][1]
         }
       }
       return 'background-color:' + result
     },
-    dayCalendar() {
-      return convertFromObjectToDate(this.day)
-    },
   },
-  mounted() {},
 }
 </script>
 
@@ -121,12 +129,8 @@ export default {
   text-align: center;
 }
 .date {
-  &-fisrt {
-  }
   &-second {
     color: #a8a8a8;
   }
-}
-.gust {
 }
 </style>

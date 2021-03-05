@@ -24,11 +24,11 @@ export default {
       required: true,
     },
     probMin: {
-      type: String,
+      type: Array,
       required: true,
     },
     probMax: {
-      type: String,
+      type: Array,
       required: true,
     },
   },
@@ -37,11 +37,11 @@ export default {
       series: [
         {
           name: 'Максимальная суточная вероятность клёва',
-          data: JSON.parse(this.probMax),
+          data: this.probMax,
         },
         {
           name: 'Минимальная суточная вероятность клёва',
-          data: JSON.parse(this.probMin),
+          data: this.probMin,
         },
       ],
       chartOptions: {
@@ -64,7 +64,7 @@ export default {
         dataLabels: {
           enabled: true,
           formatter(value) {
-            return Math.round(value * 100)
+            return Math.round(value)
           },
         },
         stroke: {
@@ -80,8 +80,8 @@ export default {
         annotations: {
           yaxis: [
             {
-              y: 1,
-              y2: 0.74,
+              y: 100,
+              y2: 74,
               borderColor: '#4fbb26',
               fillColor: 'rgba(109,180,61,0.83)',
               label: {
@@ -102,10 +102,10 @@ export default {
         },
         yaxis: {
           min: 0,
-          max: 1,
+          max: 100,
           labels: {
             formatter(value) {
-              return Math.round(value * 100) + '%'
+              return Math.round(value) + '%'
             },
           },
         },
@@ -116,10 +116,6 @@ export default {
           {
             breakpoint: 768,
             options: {
-              chart: {
-                height: 350,
-                type: 'bar',
-              },
               yaxis: {
                 labels: {
                   show: false,
@@ -146,14 +142,15 @@ export default {
   },
   methods: {
     updateData() {
+      console.log('update data multi')
       this.series = [
         {
-          name: 'Максимальная суточная температура',
-          data: JSON.parse(this.probMax),
+          name: 'Максимальная суточная вероятность клёва',
+          data: this.probMax,
         },
         {
-          name: 'Минимальная суточная температура',
-          data: JSON.parse(this.probMin),
+          name: 'Минимальная суточная вероятность клёва',
+          data: this.probMin,
         },
       ]
     },

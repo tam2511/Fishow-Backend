@@ -1,15 +1,18 @@
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view, permission_classes
+import datetime
+from django.db.models import Count
 
 from blogs.api.serializers import BlogSerializer, CommentSerializer, ImageSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
 from blogs.models import Blog, Comment, Image
 from rest_framework.parsers import MultiPartParser, FormParser
 from users.models import CustomUser
+from rest_framework import filters
 
 from django.contrib.auth.decorators import login_required
 
@@ -170,6 +173,8 @@ class BlogViewSet(viewsets.ModelViewSet):
     lookup_field = "slug"
     serializer_class = BlogSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'content']
 
     def perform_create(self, serializer):
             if not self.request.user.is_anonymous:
@@ -179,7 +184,7 @@ class BlogViewSet(viewsets.ModelViewSet):
             obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
             print(self.request.user)
             if self.request.user.is_authenticated:
-                    blog=get_object_or_404(Blog, pk=obj.id)
+                    blog=get_object_or_404(Blog, slug = self.kwargs.get("slug"))
                     user = self.request.user
                     print(user)
                     if user not in blog.views.all():
@@ -193,9 +198,9 @@ class BlogLikeAPIView(APIView):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def delete(self, request, slug):
         """Remove request.user from the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
 
         if user in [val for val in blog.votersUp.all()]:
@@ -220,9 +225,9 @@ class BlogLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
-    def post(self, request, pk):
+    def post(self, request, slug):
         """Add request.user to the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
 #         send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, [request.user.email])
         if user not in [val for val in blog.votersUp.all()]:
@@ -253,9 +258,9 @@ class BlogDisLikeAPIView(APIView):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def delete(self, request, slug):
         """Remove request.user from the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
         if user in [val for val in blog.votersDown.all()]:
             blog.votersDown.remove(user)
@@ -279,9 +284,9 @@ class BlogDisLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
-    def post(self, request, pk):
+    def post(self, request, slug):
         """Add request.user to the voters queryset of an comment instance."""
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blog, slug=slug)
         user = request.user
         if user not in [val for val in blog.votersDown.all()]:
             blog.votersDown.add(user)
@@ -307,6 +312,93 @@ class BlogDisLikeAPIView(APIView):
 # class PredictionView(APIView):
 #     serializer_class = CommentSerializer
 #     permission_classes = [IsAuthenticated]
+
+class BlogSaveAPIView(APIView):
+    """Allow users to add/remove a like to/from an comment instance."""
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, slug):
+        """Remove request.user from the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, slug=slug)
+        user = request.user
+
+        if user in [val for val in blog.saved.all()]:
+            blog.saved.remove(user)
+            blog.save()
+
+            serializer_context = {"request": request}
+            serializer = self.serializer_class(blog, context=serializer_context)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            serializer_context = {'message':'already_do_it'}
+            return Response(serializer_context)
+
+    def post(self, request, slug):
+        """Add request.user to the voters queryset of an comment instance."""
+        blog = get_object_or_404(Blog, slug=slug)
+        user = request.user
+#         send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, [request.user.email])
+        if user not in [val for val in blog.saved.all()]:
+
+            blog.saved.add(user)
+            blog.save()
+
+            serializer_context = {"request": request}
+            serializer = self.serializer_class(blog, context=serializer_context)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+
+            serializer_context = {'message':'already_do_it'}
+            return Response(serializer_context)
+
+
+class BlogUserSaved(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Blog.objects.filter(saved=self.request.user).order_by("-created_at")
+
+class BlogUserCreated(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Blog.objects.filter(author=self.request.user).order_by("-created_at")
+
+class BlogUserLiked(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Blog.objects.filter(votersUp=self.request.user).order_by("-created_at")
+
+class BlogCommentUserLiked(generics.ListAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Comment.objects.filter(votersUp=self.request.user).order_by("-created_at")
+
+class BlogCommentUserCreated(generics.ListAPIView):
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Comment.objects.filter(author=self.request.user).order_by("-created_at")
+
+class Blogs_count(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request):
+        stats=[]
+        stats.append({'count_blogs':Blog.objects.count()})
+        return Response(stats)
 
 class ImageViewSet(viewsets.ModelViewSet):
     serializer_class = ImageSerializer
@@ -350,3 +442,25 @@ def modify_input_for_multiple_files(image):
     dict = {}
     dict['image'] = image
     return dict
+
+class BlogFresh(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Blog.objects.all().order_by("-created_at")
+
+class BlogBest(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Blog.objects.annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+
+
+class BlogHot(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')

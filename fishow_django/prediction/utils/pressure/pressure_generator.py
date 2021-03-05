@@ -1,9 +1,11 @@
 import datetime
 import numpy as np
 
+from ..prediction.prediction_helper import get_date_time_text, get_day_times
 from .pressure_helper import *
 from ..helper.text import cases
 from ..helper.date import parse_date
+from ..helper.extra import deserialize
 
 
 class PressureTextGenerator:
@@ -34,18 +36,22 @@ class PressureTextGenerator:
 
     @staticmethod
     def get_day_desc(data, date, fish):
-        filtred_data = sorted([(_.pressure, _.time) for _ in data if _.date == date and _.fish == fish],
+        filtred_data = sorted(sum([deserialize(_.pressure) for _ in data if _.date == date and _.fish == fish], []),
                               key=lambda x: x[1])
         temps = [_[0] for _ in filtred_data]
         min_temp = min(temps)
         max_temp = max(temps)
-        return minmax_desc.format(min_temp, max_temp)
+        return {
+            'min': min_temp, 'max': max_temp, 'min_times': parse_date(date),
+            'max_times': parse_date(date)
+        }
 
     @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        filtred_data = {observe_date: [(_.pressure, _.time) for _ in data if
-                                       _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
+        filtred_data = {
+            observe_date: sum([deserialize(_.pressure) for _ in data if _.date == observe_date and _.fish == fish], []) for
+            observe_date in observe_dates}
         mean_temps = [np.mean([_[0] for _ in filtred_data[d]]) for d in filtred_data]
         min_temps = [min([_[0] for _ in filtred_data[d]]) for d in filtred_data]
         max_temps = [max([_[0] for _ in filtred_data[d]]) for d in filtred_data]

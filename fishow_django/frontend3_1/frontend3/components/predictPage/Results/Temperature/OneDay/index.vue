@@ -4,12 +4,12 @@
     <figure class="image is-48x48">
       <img :src="image" alt="" :title="day.phenomenon" />
     </figure>
-    {{ day.temperature_max }}
+    {{ max }}
     <div class="svg-container">
-      <temp-box :radius="day.temperature_max"></temp-box>
-      <temp-box :radius="day.temperature_min" :up="false"></temp-box>
+      <temp-box :radius="max + 10"></temp-box>
+      <temp-box :radius="min + 10" :up="false"></temp-box>
     </div>
-    {{ day.temperature_min }}
+    {{ min }}
     <!--    {{ day.phenomenon }}-->
   </div>
 </template>
@@ -31,13 +31,28 @@ export default {
   },
   computed: {
     image() {
-      return pogoda[this.day.phenomenon]
+      // console.log('this.day.phenomenon = ', this.day.phenomenon)
+      const image = pogoda[this.day.phenomenon]
+      // console.log('image = ', image)
+      return image
+    },
+    max() {
+      return this.day.temperature_max
+        ? this.day.temperature_max
+        : this.day.temperature + 3
+    },
+    min() {
+      return this.day.temperature_min
+        ? this.day.temperature_min
+        : this.day.temperature - 3
     },
     normDay() {
-      return helper(this.day)
+      return this.day.temperature_max ? helper(this.day) : null
     },
     dayCalendar() {
-      return convertFromObjectToDate(this.day)
+      return this.day.temperature_max
+        ? convertFromObjectToDate(this.day)
+        : this.day.date
     },
   },
 }

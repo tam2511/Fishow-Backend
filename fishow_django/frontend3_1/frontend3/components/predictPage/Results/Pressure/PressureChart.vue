@@ -18,6 +18,16 @@
 
 <script>
 import getCalendarDay from '~/assets/js/getCalendarDay'
+const time = [
+  '0:00',
+  '3:00',
+  '6:00',
+  '9:00',
+  '12:00',
+  '15:00',
+  '18:00',
+  '21:00',
+]
 export default {
   components: {
     VueApexCharts: () => import('vue-apexcharts'),
@@ -27,13 +37,17 @@ export default {
       type: Array,
       required: true,
     },
-    tempMax: {
-      type: String,
+    pressureMax: {
+      type: Array,
       required: true,
     },
-    tempMin: {
-      type: String,
+    pressureMin: {
+      type: Array,
       required: true,
+    },
+    one: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -41,11 +55,11 @@ export default {
       series: [
         {
           name: 'Максимальное суточное давление',
-          data: JSON.parse(this.tempMax),
+          data: this.pressureMax,
         },
         {
           name: 'Минимальное суточное давление',
-          data: JSON.parse(this.tempMin),
+          data: this.pressureMin,
         },
       ],
       chartOptions: {
@@ -85,11 +99,11 @@ export default {
           size: 1,
         },
         xaxis: {
-          categories: getCalendarDay(this.days),
+          categories: this.one ? time : getCalendarDay(this.days),
         },
         yaxis: {
-          min: JSON.parse(this.tempMin).sort()[0] - 2,
-          max: JSON.parse(this.tempMax).sort()[JSON.parse(this.tempMin).length],
+          min: 730,
+          max: this.max,
           labels: {
             formatter(value) {
               return Math.round(value)
@@ -104,32 +118,18 @@ export default {
           // offsetY: -25,
           // offsetX: -5,
         },
-        responsive: [
-          {
-            breakpoint: 768,
-            options: {
-              chart: {
-                height: 350,
-                type: 'bar',
-              },
-              yaxis: {
-                labels: {
-                  show: false,
-                },
-              },
-              plotOptions: {
-                bar: {
-                  horizontal: false,
-                },
-              },
-              legend: {
-                position: 'bottom',
-              },
-            },
-          },
-        ],
       },
     }
+  },
+  computed: {
+    max() {
+      const cached = this.pressureMax
+      return cached.sort()[0] - 2
+    },
+    min() {
+      const cached = this.pressureMin
+      return cached.sort()[this.pressureMin.length]
+    },
   },
 }
 </script>

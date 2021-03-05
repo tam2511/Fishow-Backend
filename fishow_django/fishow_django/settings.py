@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from json import load
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,13 +23,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2)f3e=c7vska&acn%5m@k&lpd_4zxbe19ab!(0ndp4bxews)rj'
 
+#SECRET_KEY = '***'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
 with open(os.path.join(os.path.dirname(__file__), "config.json"), 'r') as json_f:
     config_database = load(json_f)
 
-DEBUG = config_database['debug']
+DEBUG =  config_database['debug']
 
 ALLOWED_HOSTS = config_database['allowed_hosts']
 
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'corsheaders',
     'core',
+    #'sslserver',
 
 
     'django.contrib.sites',
@@ -66,7 +69,9 @@ INSTALLED_APPS = [
     'users',
     'blogs',
     'prediction',
-    'report', # new
+    'report',
+    'space',
+    'news',
     'django_filters'
 ]
 
@@ -230,7 +235,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 8
 }
 
+
 REST_USE_JWT = True
+
+SIMPLE_JWT = {
+        'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+        'REFRESH_TOKEN_LIFETIME': timedelta(days=30)
+}
 
 # JWT_AUTH_COOKIE = 'my-app-auth'
 # import datetime
@@ -276,3 +287,23 @@ REST_USE_JWT = True
 #        'STATS_FILE': os.path.join(BASE_DIR, 'frontend3_1/frontend3/assets', 'webpack-stats.json'),
 #    }
 #}
+
+###
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_SSL_REDIRECT = True
+#SESSION_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
+###
+
+
+#CSRF_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
+#SECURE_BROWSER_XSS_FILTER = True
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+#SECURE_SSL_REDIRECT = True
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
+USE_X_FORWARDED_HOST = True
+#SECURE_HSTS_SECONDS = 86400
+#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#SECURE_HSTS_PRELOAD = True
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')

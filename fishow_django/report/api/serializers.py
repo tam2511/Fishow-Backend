@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from report.models import Report, Comment_r, Fishing
+from report.models import Report, Comment_r
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
+from space.models import *
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -46,11 +47,15 @@ class CommentSerializer(serializers.ModelSerializer):
 class ReportSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     created_at = serializers.SerializerMethodField()
+    waterplace_nature = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_nature.objects.all())
+    waterplace_cost = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_cost.objects.all())
+    region = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Region.objects.all())
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
     user_has_votedUp = serializers.SerializerMethodField()
     user_has_votedDown = serializers.SerializerMethodField()
     slug = serializers.SlugField(read_only=True)
+    comments_count = serializers.SerializerMethodField()
     user_has_commented = serializers.SerializerMethodField()
     time_from_creations = serializers.SerializerMethodField()
     user_views = serializers.SerializerMethodField()
@@ -61,6 +66,9 @@ class ReportSerializer(serializers.ModelSerializer):
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%d.%m.%y %H:%M")
+
+    def get_comments_count(self, instance):
+            return instance.comments_r.count()
 
     def get_likes_count(self, instance):
         return instance.votersUp.count()
@@ -97,9 +105,3 @@ class ReportSerializer(serializers.ModelSerializer):
 
     def get_user_views(self, instance):
         return instance.views.count()
-
-class FishingSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Fishing
-        fields = '__all__'

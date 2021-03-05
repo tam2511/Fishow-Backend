@@ -1,10 +1,8 @@
 <template lang="pug">
-  .pressure-box.box
-    p.title Давление
-    p.content(v-html="readyData.pressure_fish")
+  div
     slot
     .columns
-      .column.container-minmax
+      .column.container-minmax(v-if="readyData.pressure_desc.up_text")
         b-icon(
           pack="fas"
           icon="chevron-up"
@@ -12,7 +10,7 @@
           type="is-primary"
         )
         p(v-html="readyData.pressure_desc.up_text" class="right-box")
-      .column.container-minmax
+      .column.container-minmax(v-if="readyData.pressure_desc.low_text")
         b-icon(
           pack="fas"
           icon="chevron-down"
@@ -70,7 +68,7 @@ export default {
   padding: 0 1rem;
 }
 [data-value] {
-  font-size: 3vw;
+  font-size: 3rem;
 }
 [data-value='min'] {
   color: #64888a;

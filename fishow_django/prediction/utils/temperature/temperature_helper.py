@@ -1,4 +1,3 @@
-
 '''
 brief block
 '''
@@ -29,11 +28,9 @@ hard_up_desc = '''<strong>{}</strong> прогнозируется резкое 
 
 hard_no_desc = '''За период <strong>{}</strong> резких перепадов температуры не ожидается. '''
 
-
 minmax_desc = '''Минимальная температура воздуха в течение дня - <span class="blue strong">{}</span>, максимальная - <span class="red strong">{}</span>. '''
 
 ten_minmax_desc = '''<strong>{}</strong> прогнозируется минимальная температура воздуха - <span class="blue strong">{}</span>, а <strong>{}</strong> ожидается максимальная - <span class="red strong">{}</span>. '''
-
 
 '''
 utils
@@ -67,32 +64,40 @@ brief_dict = {
     'сазан': not_influence_text,
     'подуст': not_influence_text,
     'толстолобик': influence_text,
-    'вобла': not_influence_text
+    'вобла': not_influence_text,
+    'хариус': not_influence_text
 }
 
 from ..helper.date import get_dates_by_intervals
+
 
 def hard_dates(temperatures, dates, tag):
     subs = []
     for i in range(1, len(temperatures)):
         subs.append(temperatures[i] - temperatures[i - 1])
     if tag == 'low':
-        mask_subs = [1 if sub <= -3 else 0 for sub in subs]
+        mask_subs = [1 if sub <= -5 else 0 for sub in subs]
     elif tag == 'up':
-        mask_subs = [1 if sub >= 3 else 0 for sub in subs]
+        mask_subs = [1 if sub >= 5 else 0 for sub in subs]
     if sum(mask_subs) == 0:
         return None
     intervals = []
     current = [-1, -1]
+    max_sub = 0
     for i in range(len(mask_subs)):
         if mask_subs[i]:
+            max_sub = max(max_sub, abs(subs[i]))
             if current[0] == -1:
                 current[0] = i
             current[1] = i + 1
         else:
             if not current[0] == -1:
-                intervals.append((current[0], current[1]))
+                intervals.append((max_sub, (current[0], current[1])))
+                max_sub = 0
             current[0] = -1
     if not current[0] == -1:
-        intervals.append((current[0], current[1]))
-    return get_dates_by_intervals(dates, intervals)
+        intervals.append((max_sub, (current[0], current[1])))
+    if len(intervals) == 0:
+        return None
+    top_interval = [max(intervals, key=lambda x: x[0])[1]]
+    return get_dates_by_intervals(dates, top_interval)

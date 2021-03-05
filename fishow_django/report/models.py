@@ -1,11 +1,16 @@
 from django.db import models
 from django.conf import settings
+from space.models import Region, Waterplace_cost, Waterplace_nature
 
 
 class Report(models.Model):
     title = models.CharField(max_length=100)
-    content = models.CharField(max_length=5000)
+    date_start = models.DateTimeField(null=True)
+    date_end = models.DateTimeField(null=True)
+    content = models.TextField(null=True)
+    fishing_report = models.TextField(null=True)
     category = models.CharField(max_length=100)
+    coordinates = models.TextField(null=True)
     tags = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -19,23 +24,17 @@ class Report(models.Model):
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         related_name='votesDownReport')
     views = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                          related_name='viewsReport')
+                                   related_name='viewsReport')
 
-    areal = models.TextField()
-    city = models.TextField()
-
-    def __str__(self):
-        return self.content
-
-class Fishing(models.Model):
-    fish = models.TextField()
-    estimation = models.TextField()
-    type = models.TextField()
-
-    report = models.ForeignKey(Report, on_delete=models.CASCADE, related_name='fishing')
+    areal = models.TextField(null=True)
+    city = models.TextField(null=True)
+    remark = models.TextField(null=True)
+    region = models.ManyToManyField(Region, related_name="report_region", blank=True)
+    waterplace_cost = models.ManyToManyField(Waterplace_cost, related_name="report_wcost", blank=True)
+    waterplace_nature = models.ManyToManyField(Waterplace_nature, related_name="report_wnature", blank=True)
 
     def __str__(self):
-        return self.content
+        return self.slug
 
 
 class Comment_r(models.Model):
@@ -43,15 +42,14 @@ class Comment_r(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     body = models.TextField()
     report = models.ForeignKey(Report,
-                             on_delete=models.CASCADE,
-                             related_name='comments_r')
+                               on_delete=models.CASCADE,
+                               related_name='comments_r')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE)
     votersUp = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesUp_r')
+                                      related_name='votesUp_r')
     votersDown = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                    related_name='votesDown_r')
+                                        related_name='votesDown_r')
 
     def __str__(self):
         return self.author.username
-# # Create your models here.

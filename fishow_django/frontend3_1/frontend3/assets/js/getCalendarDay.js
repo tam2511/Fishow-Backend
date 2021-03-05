@@ -13,15 +13,18 @@ export default (days) => {
     '07': 'Июля',
     '08': 'Августа',
     '09': 'Сентября',
-    '10': 'Октября',
-    '11': 'Ноября',
-    '12': 'Декабря',
+    10: 'Октября',
+    11: 'Ноября',
+    12: 'Декабря',
   }
   const result = []
 
   days.forEach((item) => {
-    const arrayFromItem = item.split('/')
-    result.push(arrayFromItem[0] + ' ' + whatMonth[arrayFromItem[1]])
+    if (!item) return
+    const arrayFromItem = item && item.split('/')
+    const month =
+      arrayFromItem[1].length < 2 ? '0' + arrayFromItem[1] : arrayFromItem[1]
+    result.push(arrayFromItem[0] + ' ' + whatMonth[month])
   })
   return result
 }

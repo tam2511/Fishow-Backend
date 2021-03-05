@@ -1,4 +1,5 @@
-export const convertDataFromServer = (data) => {
+/* eslint-disable */
+export const convertDataFromServer = (data, type = null) => {
   if (data === null || typeof data !== 'object') {
     return null
   }
@@ -12,8 +13,7 @@ export const convertDataFromServer = (data) => {
       someDate.setDate(Number(predictDate[2]) + numberOfDaysToAdd)
       const dd = someDate.getDate()
       const mm = someDate.getMonth() + 1
-      const newmm = mm.length > 1 ? mm : '0' + mm
-      return dd + '/' + newmm
+      return dd + '/' + mm
     }
     const result = []
     const iterator = (numberOfDays) => {
@@ -24,45 +24,36 @@ export const convertDataFromServer = (data) => {
     iterator(days)
     return result
   }
-
+  // console.log('data = ', data);
   const keys = Object.keys(data)
-  const newData = {}
-
-  keys.forEach((item) => {
-    if (data[item][0] === '[' && data[item][2] !== '[') {
-      // if array
-      newData[item] = data[item].substr(1, data[item].length - 2).split(', ')
-    } else if (data[item][2] === '[') {
-      // if phenomenon
-      newData[item] = JSON.parse(data[item])
-    } else {
-      // if just string
-      newData[item] = data[item]
-    }
-  })
-  const length = newData.temperature_max.length
+  // console.log(keys);
+  const length = data.temperature_max ? data.temperature_max.length : data.temperature.length
   const days = []
-  const calendarDays = getData(data.date, 9)
+  const time = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00'];
+  const calendarDays = type ? time : getData(data.date, 9);
+  // console.log('calendarDays = ', calendarDays);
   for (let i = 0; i < length; i++) {
     const day = {}
     keys.forEach((item) => {
-      if (typeof newData[item] === 'object' && newData[item][i]) {
-        day[item] = newData[item][i]
+      if (typeof data[item] === 'object') {
+        day[item] = data[item][i]
       }
     })
     days.push(day)
   }
   keys.forEach((item) => {
-    if (typeof newData[item] === 'string') {
-      days[item] = newData[item]
+    if (typeof data[item] === 'string') {
+      days[item] = data[item]
     }
-    if (typeof newData[item] === 'object' && !newData[item].length) {
-      days[item] = newData[item]
+    if (typeof data[item] === 'object' && !data[item].length) {
+      days[item] = data[item]
     }
   })
   days.forEach((day, index) => {
     day.date = calendarDays[index]
   })
+
+  // return null
   return days
 }
 // convertDataFromServer(datafromserver);

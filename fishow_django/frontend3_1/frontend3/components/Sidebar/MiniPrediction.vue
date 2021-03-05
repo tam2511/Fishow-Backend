@@ -27,9 +27,9 @@
         <div class="progressbar-main">
           <div
             class="progressbar-value"
-            :style="'width:' + readyData[0].prob_max * 100 + '%'"
+            :style="'width:' + readyData[0].prob_max + '%'"
           >
-            {{ readyData[0].prob_max * 100 }}%
+            {{ readyData[0].prob_max }}%
           </div>
         </div>
         <div class="progressbar-values"></div>
@@ -39,9 +39,7 @@
       <SkeletonPrediction />
     </div>
     <nuxt-link to="/prognoz-kleva">
-      <div class="placeholder">
-        Посмотреть другие прогнозы
-      </div>
+      <div class="placeholder">Посмотреть другие прогнозы</div>
     </nuxt-link>
   </div>
 </template>
@@ -70,7 +68,7 @@ export default {
       return [year, month, day].join('-')
     },
     temperature() {
-      return Math.floor(this.readyData[0].temperature_mean)
+      return Math.floor(this.readyData[0].temperature_max)
     },
     ...mapState('prediction', ['predictions']),
   },

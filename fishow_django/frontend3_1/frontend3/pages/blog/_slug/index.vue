@@ -24,21 +24,21 @@ export default {
     CommentsBlock,
     SkeletonBlogCard,
   },
-  layout: 'SideBarRight',
+  layout: 'sideBarRight',
   data() {
     return {
       blog: null,
+    }
+  },
+  head() {
+    return {
+      title: this.blog && this.blog.title + ' | Fishow',
     }
   },
   mounted() {
     this.$axios.get(`/blogs/${this.$route.params.slug}/`).then((res) => {
       this.blog = res.data
     })
-  },
-  head() {
-    return {
-      title: this.blog && this.blog.title + ' | Fishow',
-    }
   },
 }
 </script>

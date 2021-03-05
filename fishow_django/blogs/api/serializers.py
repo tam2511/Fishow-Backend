@@ -50,18 +50,27 @@ class BlogSerializer(serializers.ModelSerializer):
     dislikes_count = serializers.SerializerMethodField()
     user_has_votedUp = serializers.SerializerMethodField()
     user_has_votedDown = serializers.SerializerMethodField()
+    user_saved = serializers.SerializerMethodField()
     slug = serializers.SlugField(read_only=True)
     comments_count = serializers.SerializerMethodField()
     user_has_commented = serializers.SerializerMethodField()
     time_from_creations = serializers.SerializerMethodField()
     user_views = serializers.SerializerMethodField()
+    is_author = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Blog
-        exclude = ['updated_at', 'votersUp','votersDown','views']
+        exclude = ['updated_at', 'votersUp','votersDown','saved','views']
 
 #     def get_created_at(self, instance):
 #         return instance.created_at.strftime("%B %d, %Y")
+
+    def get_is_author(self, instance):
+        request = self.context.get("request")
+        if request.user == instance.author:
+            return True
+        else:
+            return False
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%d.%m.%y %H:%M")
@@ -89,6 +98,13 @@ class BlogSerializer(serializers.ModelSerializer):
         else:
             return False
 
+    def get_user_saved(self, instance):
+        request = self.context.get("request")
+        if not request.user.is_anonymous:
+            return instance.saved.filter(pk=request.user.pk).exists()
+        else:
+            return False
+
     def get_user_has_commented(self, instance):
         request = self.context.get('request')
         if not request.user.is_anonymous:
@@ -104,6 +120,13 @@ class BlogSerializer(serializers.ModelSerializer):
 
     def get_user_views(self, instance):
         return instance.views.count()
+
+class BlogSerializerSlug(serializers.ModelSerializer):
+    slug = serializers.SlugField()
+
+    class Meta:
+        model = Blog
+        fields = ['slug']
 
 class ImageSerializer(serializers.ModelSerializer):
 

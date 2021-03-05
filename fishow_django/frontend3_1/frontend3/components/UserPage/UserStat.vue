@@ -9,7 +9,7 @@
             class="select select-minimal"
             data-placeholder="All Competitions"
             data-dropdown-class="select-minimal-dropdown"
-            style="min-width: 160px;"
+            style="min-width: 160px"
           >
             <option value="all" selected="">All Competitions</option>
             <option value="world">World Champions</option>

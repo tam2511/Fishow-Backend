@@ -5,7 +5,6 @@ export default {
     port: 3000,
     host: '0.0.0.0',
   },
-  mode: 'universal',
   /*
    ** Headers of the page
    */
@@ -16,7 +15,7 @@ export default {
       {
         property: 'og:title',
         content:
-          'Fishow - сервис прогноза клева и ваша социальная рыболовная сеть',
+          'Fishow - сервис прогноза клёва и ваша социальная рыболовная сеть',
       },
       { property: 'og:image', content: '/ms-icon-144x144.png' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -25,7 +24,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Fishow.ru - сервис прогноза клева и ваша социальная рыболовная сеть',
+          'Fishow.ru - сервис прогноза клёва и ваша социальная рыболовная сеть',
       },
       { name: 'msapplication-TileColor', content: '#ffffff' },
       { name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
@@ -34,22 +33,10 @@ export default {
         hid: 'keywords',
         name: 'keywords',
         content:
-          'рыбалка, прогноз, отчеты о рыбалке, отчеты, прогноз на рыбалку, блоги о рыбалке, новости о рыбалке, ловля рыбы, клёв, хищные рыбы',
+          'рыбалка,зимняя рыбалка,рыбалка в области,рыбалка видео,русская рыбалка,охота и рыбалка,прогноз,отчеты о рыбалке,отчеты,прогноз на рыбалку,блоги о рыбалке,новости о рыбалке,ловля рыбы,клёв,хищные рыбы,прогноз клева,рыбалка 2020,рыбалка форум,рыбалка зимой,рыбалка 2021,платная рыбалка,бесплатная рыбалка,рыба ловля,рыбак форум,клев прогноз',
       },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://cdn.materialdesignicons.com/5.3.45/css/materialdesignicons.min.css',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
-      },
-      ...appleIcons,
-    ],
+    link: [...appleIcons],
   },
   /*
    ** Customize the progress-bar color
@@ -58,11 +45,10 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/axios'],
+  plugins: ['~/plugins/axios', '@/plugins/vue-infinite-scroll.client.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -97,9 +83,18 @@ export default {
     '@nuxtjs/robots',
   ],
   sitemap: {
-    hostname: 'http://fishow.ru',
+    hostname: 'https://fishow.ru',
     gzip: true,
     exclude: ['/secret', '/admin/**'],
+    // routes: async () => {
+    //   let result = null
+    //   try {
+    //     const { data } = await axios.get('https://back.fishow.ru/api/blogs/')
+    //     const results = data.results
+    //     result = [...results.map((blog) => `/blog/${blog.slug}`)]
+    //   } catch (e) {}
+    //   return result
+    // },
   },
   /* buefy options */
   buefy: {
@@ -108,7 +103,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: `http://${confserver.ip}:8000/api`,
+      target: confserver.ip,
       pathRewrite: {
         '^/api': '/',
       },
@@ -120,7 +115,7 @@ export default {
    */
   axios: {
     withCredentials: true,
-    baseURL: `http://${confserver.ip}:8000/api`,
+    baseURL: confserver.ip,
   },
   robots: [
     {
@@ -176,7 +171,7 @@ export default {
         access_token_endpoint: 'https://oauth.yandex.ru/token?',
         token_type: 'Bearer',
         grant_type: 'authorization_code',
-        redirect_uri: 'http://fishow.ru/',
+        redirect_uri: 'https://fishow.ru/',
         token_key: 'access_token',
         force_confirm: 'yes',
         state: '',
@@ -185,25 +180,43 @@ export default {
     redirect: false,
   },
   build: {
-    extractCSS: true,
-    /*
-     ** You can extend webpack config here
-     */
-    // entry: {
-    //   app: ['./app']
-    // },
-    // output: {
-    //   path: require('path').resolve('./assets/bundles/'),
-    //   filename: '[name]-[hash].js',
-    //   publicPath: 'http://localhost:3000/assets/bundles/'
-    // },
-    // publicPath: 'static/',
-    // plugins: [
-    //   new BundleTracker({
-    //     path: __dirname,
-    //     filename: '.nuxt/webpack-stats.json'
-    //   })
-    // ],
+    // parallel: true, // don't know, if it works, maybe
+    cache: true, // don't know, if it works, maybe
+    optimization: {
+      minimize: true,
+      runtimeChunk: true,
+      concatenateModules: true,
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 20,
+        maxInitialRequests: 3,
+        automaticNameDelimiter: '~',
+        name: true,
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10,
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
+    // hardSource: true, // don't know, if it works, maybe
+    // extractCSS: true,
+    optimizeCSS: true,
+
     extend(config, ctx) {},
   },
+  css: [
+    '../src/styles/main.scss',
+    '../assets/all.css',
+    '../assets/materialdesignicons.min.css',
+  ],
 }

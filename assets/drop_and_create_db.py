@@ -94,7 +94,7 @@ if fill_prediction:
     # try:
     connector = MysqlConnector(database=config['database_name'], password=config['password'], host="localhost",
                                username=config['user'])
-    dt = pd.read_csv("damir_ten.csv", encoding="utf-8", sep=';')
+    dt = pd.read_csv("daa/predictionten.csv", encoding="utf-8", sep=';')
     data = list(dt.T.to_dict().values())
     # connector.truncate_table('prediction_predictionten')
     for row in tqdm(data):
@@ -102,7 +102,7 @@ if fill_prediction:
             row['wind_direction'] = '-'
         connector.insert_row('prediction_predictionten', row)
 
-    dt = pd.read_csv("damir_one.csv", encoding="utf-8", sep=';')
+    dt = pd.read_csv("daa/prediction.csv", encoding="utf-8", sep=';')
     data = list(dt.T.to_dict().values())
     # connector.truncate_table('prediction_prediction')
     for row in tqdm(data):

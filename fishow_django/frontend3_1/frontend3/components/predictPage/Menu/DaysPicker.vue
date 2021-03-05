@@ -6,9 +6,9 @@
           name: 'OnePrediction-areal-date-city-fish',
           params: {
             areal: $route.params.areal,
-            date: '2020-' + day.split('/')[1] + '-' + day.split('/')[0],
+            date: '2021-' + day.split('/')[1] + '-' + day.split('/')[0],
             city: $route.params.city,
-            fish: $route.params.fish,
+            fish,
           },
         }"
         class="button"
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import getData from '~/assets/js/getData'
 export default {
   props: {
@@ -28,25 +29,14 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      total: 200,
-      current: 10,
-      perPage: 10,
-      rangeBefore: 2,
-      rangeAfter: 1,
-      order: 'is-centered',
-      size: '',
-      isSimple: false,
-      isRounded: false,
-      prevIcon: 'chevron-left',
-      nextIcon: 'chevron-right',
-    }
-  },
   computed: {
+    fish() {
+      return (this.prediction && this.prediction.fish) || 'щука'
+    },
     tenDays() {
       return getData(this.days, 9)
     },
+    ...mapState('prediction', ['prediction']),
   },
 }
 </script>
@@ -77,6 +67,9 @@ export default {
   margin: 5px 5px;
   /*border-radius: 5px;*/
   @media screen and (max-width: 420px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
   }
 

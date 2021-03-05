@@ -1,48 +1,44 @@
 <template>
-  <div class="tile is-vertical is-8">
-    <h4 class="title is-4">Последние записи</h4>
-    <div class="tile is-parent is-vertical space-left0">
-      <article
-        v-for="blog in blogs"
-        :key="blog.id"
-        class="tile is-child blog-page"
-      >
-        <BlogCard :blog="blog" />
-      </article>
-    </div>
+  <div>
+    <Banner />
+    <PredictionSection />
+    <ActionsGrid />
+    <SiteNews />
+    <ActivityRating />
   </div>
 </template>
 
 <script>
-import BlogCard from '@/components/BlogCard'
+import Banner from '~/components/mainPage/Banner'
+import PredictionSection from '~/components/mainPage/PredictionSection'
+import ActionsGrid from '~/components/mainPage/ActionsGrid'
+import SiteNews from '~/components/mainPage/SiteNews'
+import ActivityRating from '~/components/mainPage/ActivityRating'
+import { mainPage } from '~/assets/descriptions'
 
 export default {
-  layout: 'SideBarRight',
   components: {
-    BlogCard,
+    ActivityRating,
+    SiteNews,
+    ActionsGrid,
+    PredictionSection,
+    Banner,
   },
-  data() {
+  head() {
     return {
-      blogs: null,
+      title: mainPage.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: mainPage.description,
+        },
+        {
+          name: 'yandex-verification',
+          content: 'cb0c04b5c0271e26',
+        },
+      ],
     }
-  },
-  mounted() {
-    this.$axios.get('/blogs/').then((res) => {
-      this.blogs = res.data.results
-    })
-  },
-  head: {
-    title: 'Прогноз клева рыбы, общение и новости | Fishow',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content:
-          'Прогноз клева рыбы. Рыболовный прогноз клёва рибы с учетом температуры води и воздуха, атмосферного давления, фаз луны и уровня воды, лучший прогноз на рыбалку.',
-      },
-    ],
   },
 }
 </script>
-
-<style lang="scss" scoped></style>

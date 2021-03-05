@@ -1,25 +1,25 @@
 <template>
-  <div class="container">
-    <h1 v-if="error.statusCode === 404">Page not found</h1>
-    <h1 v-else>An error occurred</h1>
-    <nuxt-link to="/">Home page</nuxt-link>
-  </div>
+  <div class="container"></div>
 </template>
 
 <script>
 export default {
+  layout: 'emptyPage',
   props: {
     error: {
       type: Object,
       required: true,
     },
   },
-  layout: 'emptyPage', // you can set a custom layout for the error page
+  mounted() {
+    this.$buefy.toast.open({
+      duration: 2000,
+      message: 'Такой страницы пока что нету.',
+      type: 'is-danger',
+    })
+    setTimeout(() => {
+      this.$router.push({ name: 'index' })
+    }, 1000)
+  },
 }
 </script>
-
-<style>
-/*.container {*/
-/*  background-color: #0d0a0a;*/
-/*}*/
-</style>

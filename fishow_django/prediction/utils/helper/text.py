@@ -167,4 +167,9 @@ cases = {
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
+    'хариус': {
+        'r': 'жереха', 'd': 'жереха', 'temperature+': red_strong('повышение'), 'temperature-': None,
+        'pressure+': None,
+        'pressure-': None
+    }
 }

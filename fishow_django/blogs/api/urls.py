@@ -29,12 +29,27 @@ urlpatterns = [
          qv.CommentDisLikeAPIView.as_view(),
          name="comment-dislike"),
 
-    path("blogs/<int:pk>/like/",
+    path("blogs/<slug:slug>/like/",
          qv.BlogLikeAPIView.as_view(),
          name="blog-like"),
 
-    path("blogs/<int:pk>/dislike/",
+    path("blogs/<slug:slug>/dislike/",
          qv.BlogDisLikeAPIView.as_view(),
          name="blog-dislike"),
+
+    path("blogs/<slug:slug>/save/",
+         qv.BlogSaveAPIView.as_view(),
+         name="blog-save"),
+
+    path("count/blogs/", qv.Blogs_count.as_view(), name='blogs_count'),
+    path("user/saved/blogs/", qv.BlogUserSaved.as_view(), name="saved-blogs-user"),
+    path("user/liked/blogs/", qv.BlogUserLiked.as_view(), name="liked-blogs-user"),
+    path("user/created/blogs/", qv.BlogUserCreated.as_view(), name="created-blogs-user"),
+    path("user/liked/blogs/comment/", qv.BlogCommentUserLiked.as_view(), name="liked-blogs-comments-user"),
+    path("user/created/blogs/comment/", qv.BlogCommentUserCreated.as_view(), name="created-blogs-comments-user"),
+
+    path("blogs_fresh/", qv.BlogFresh.as_view(), name="blogs-fresh"),
+    path("blogs_best/", qv.BlogBest.as_view(), name="blogs-best"),
+    path("blogs_hot/", qv.BlogHot.as_view(), name="blogs-hot"),
 
 ]

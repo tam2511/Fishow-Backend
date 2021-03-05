@@ -1,70 +1,104 @@
 <template lang="pug">
-  div.main-content
-    FPBreadCrumbs(:areal="areal" :city="city" :fish="fish" :date="date")
-    FishowPredictionHeader
-      DaysPicker(:days="date")
-    FishSelectPrediction(:areal="areal" :city="city" :date="date")
-    .result-container(v-if='prediction && prediction[0]')
+  div
+    .result-container(v-if='prediction')
       PProbe(
-        :readyData="prediction[0]"
+        :readyData="readyData"
       )
-        div(v-for="predict in prediction" :key="predict.id" class="column")
-          .box.card {{ predict.prob }}
+        Chart(
+          ref="pprobe"
+          :prob="prediction.prob")
+
       result-container(
         title="Погодные условия"
         type-of-result="temperature"
-        :content="prediction[0].temperature_brief"
-        )
+        :content="readyData.temperature_brief"
+      )
+        Temperature
+
       result-container(
         title="Ветер, м/с"
         type-of-result="wind"
-        :content="prediction[0].wind_fish"
+        :content="prediction.wind_fish"
         )
+        Wind
+
       result-container(
         title="Давление"
         type-of-result="pressure"
-        :content="prediction[0].pressure_fish"
+        :content="prediction.pressure_fish"
+      )
+        PressureContainer(:readyData="readyData")
+          pressure-one-day(
+            :pressure-value="prediction.pressure"
+          )
+
+      result-container(
+        title="Луна"
+        type-of-result="moon"
         )
-      result-container(title="Луна" type-of-result="moon")
-      result-container(title="Солнечная активность" type-of-result="uvindex")
+        OneMoon(
+          :moon="prediction.moon",
+          :moon-desc="prediction.moon_desc",
+          :moon-dir="prediction.moon_direction",
+          :sun-down="prediction.sun_down",
+          :sun-up="prediction.sun_up",
+          :date="prediction.date"
+        )
+
+      result-container(
+        title="Солнечная активность"
+        type-of-result="uvindex"
+        )
+        Uvindexfull(:one="true")
     EmptyPrediction(v-else)
 </template>
 
 <script>
+// vuex
 import { mapState, mapActions } from 'vuex'
-import FPBreadCrumbs from '~/components/predictPage/Menu/FPBreadCrumbs'
-import FishowPredictionHeader from '@/components/predictPage/Menu/FishowPredictionHeader'
-import FishSelectPrediction from '@/components/predictPage/Menu/FishSelectPrediction'
-import DaysPicker from '~/components/predictPage/Menu/DaysPicker'
-import EmptyPrediction from '@/components/predictPage/EmptyPrediction'
+import { convertDataFromServer } from '@/assets/js/convertDataFromServer'
+
+import { predictionOne } from '~/assets/descriptions'
+// mixins
 import urlData from '~/assets/mixins/prediction/urlData'
-
-import PProbe from '~/components/predictPage/Results/PProbe/index'
-import OneDayProbe from '~/components/predictPage/Results/PProbe/OneDay/oneDayProbe'
-
-import transformForChart from '~/pages/OnePrediction/_areal/_date/_city/_fish/transformForChart'
-import ResultContainer from '~/components/predictPage/Results/resultContainer'
+import predictionTemp from '~/assets/mixins/prediction/predictionTemp'
+// results
+import Chart from '~/components/oneDay/probe/chart'
+import OneMoon from '~/components/oneDay/moon/OneMoon'
+import PressureOneDay from '~/components/predictPage/Results/Pressure/OneDay/PressureOneDay'
 
 export default {
   components: {
-    ResultContainer,
-    FPBreadCrumbs,
-    EmptyPrediction,
-    DaysPicker,
-    FishSelectPrediction,
-    FishowPredictionHeader,
-    OneDayProbe,
-    PProbe,
+    PressureOneDay,
+    Chart,
+    OneMoon,
   },
-  mixins: [urlData],
+  mixins: [urlData, predictionTemp],
   layout: 'prediction',
+  head() {
+    return {
+      title: predictionOne.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: predictionOne.description,
+        },
+      ],
+    }
+  },
   computed: {
-    dataForChart() {
-      return transformForChart(this.prediction)
+    readyData() {
+      const data = convertDataFromServer(this.prediction, true)
+      this.setReady(data)
+      this.setDays(this.days)
+      return data
     },
     ...mapState('prediction', ['prediction']),
   },
   created() {
+    this.isPredictionTen(false)
+
     const fish = this.$route.params.fish
     const date = this.$route.params.date
     const city = this.$route.params.city
@@ -75,13 +109,12 @@ export default {
     this.getPredictionOne(url)
   },
   methods: {
-    ...mapActions('prediction', { getPredictionOne: 'getPredictionOne' }),
-  },
-  head() {
-    return {
-      title:
-        'Fishow - Прогноз клева рыбы на один день, вероятность клева, прогноз рыбалки на день',
-    }
+    ...mapActions('prediction', {
+      isPredictionTen: 'setPredicitonType',
+      getPredictionOne: 'getPredictionOne',
+      setReady: 'setReady',
+      setDays: 'setDays',
+    }),
   },
 }
 </script>

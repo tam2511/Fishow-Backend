@@ -1,56 +1,148 @@
 <template>
-  <b-navbar :fixed-top="true" :shadow="true" class="navbar-brand-container">
-    <template slot="brand">
-      <b-navbar-item tag="a" to="#" class="logo" data-word="FISHOW">
-        FISHOW
-      </b-navbar-item>
-    </template>
-    <template slot="start">
-      <b-navbar-item tag="nuxt-link" :to="{ name: 'index' }">
-        Главная
-      </b-navbar-item>
-      <b-navbar-item tag="nuxt-link" :to="{ path: '/prognoz-kleva' }">
-        Прогноз
-      </b-navbar-item>
-      <b-navbar-dropdown label="Блоги">
-        <b-navbar-item tag="nuxt-link" :to="{ path: '/blog-editor' }">
-          Создать блог
-        </b-navbar-item>
-      </b-navbar-dropdown>
-    </template>
-    <template slot="end">
-      <b-navbar-item tag="div">
-        <div v-if="!$auth.user" class="buttons">
-          <a class="button is-primary" @click="toggleReg">
-            <strong>Регистрация</strong>
-          </a>
-          <a class="button is-light" @click="toggleLogin">
-            Войти
-          </a>
-          <!--          <a class="button is-light" @click="toggleLoginYandex">-->
-          <!--            Войти через Яндекс-->
-          <!--          </a>-->
-        </div>
-        <div v-else class="buttons">
-          <nuxt-link to="/UserPage" class="button ip-primary">
-            {{ $auth.user.login || $auth.user.username }}</nuxt-link
+  <div>
+    <div class="desktop">
+      <b-navbar class="navbar-brand-container">
+        <template slot="brand">
+          <b-navbar-item
+            tag="nuxt-link"
+            :to="{ name: 'index' }"
+            class="logo"
+            data-word="FISHOW"
           >
-          <a class="button is-light" @click="logout">
-            Выйти
-          </a>
+            FISHOW
+          </b-navbar-item>
+        </template>
+        <template slot="start">
+          <b-navbar-item
+            v-for="item in desktopButtons"
+            :key="item._uid"
+            tag="nuxt-link"
+            :to="item.url"
+            :class="getMenuClass(item.disabled)"
+          >
+            {{ item.title }}
+          </b-navbar-item>
+        </template>
+        <template slot="end">
+          <b-navbar-item tag="div">
+            <div v-if="!$auth.user" class="buttons">
+              <a class="button is-primary" @click="toggleReg"> Регистрация </a>
+              <a class="button is-light" @click="toggleLogin"> Войти </a>
+            </div>
+            <div v-else class="buttons">
+              <nuxt-link :to="{ name: 'user-page' }" class="button ip-primary">
+                {{ $auth.user.login || $auth.user.username }}</nuxt-link
+              >
+              <a class="button is-light" @click="logout"> Выйти </a>
+            </div>
+          </b-navbar-item>
+        </template>
+      </b-navbar>
+    </div>
+    <div class="mobile">
+      <nav class="navbar-mobile">
+        <div class="navbar-mobile_wrapper">
+          <div
+            v-for="(btn, index) in navMobButtons"
+            :key="index"
+            class="navbar-mobile_button"
+          >
+            <nuxt-link :to="btn.url">
+              <navbar-icon :type="btn.type"></navbar-icon>
+            </nuxt-link>
+          </div>
+          <div class="navbar-mobile_button">
+            <span @click="testMod">
+              <navbar-icon type="Person"></navbar-icon>
+            </span>
+          </div>
         </div>
-      </b-navbar-item>
-    </template>
-  </b-navbar>
+      </nav>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import NavbarIcon from '~/components/Header/navbar/navbar-icon'
 export default {
+  components: { NavbarIcon },
+  data() {
+    return {
+      desktopButtons: [
+        {
+          title: 'Главная',
+          url: { name: 'index' },
+          type: 'Home',
+        },
+        {
+          title: 'Прогноз клёва',
+          url: { path: '/prognoz-kleva' },
+          type: 'Prediction',
+        },
+        {
+          title: 'Водоемы',
+          url: { path: '/Water-place' },
+          type: 'Water-place',
+          disabled: true,
+        },
+        {
+          title: 'Отчеты',
+          url: { path: '/reports' },
+          type: 'Reports',
+        },
+        {
+          title: 'Статьи',
+          url: { path: '/blogs' },
+          type: 'Blogs',
+        },
+        {
+          title: 'Вики',
+          url: { path: '/Wiki' },
+          type: 'Wiki',
+          disabled: true,
+        },
+      ],
+      navMobButtons: [
+        {
+          title: '',
+          url: { name: 'index' },
+          type: 'Home',
+        },
+        {
+          title: '',
+          url: { path: '/blogs' },
+          type: 'hot',
+        },
+        {
+          title: '',
+          url: { path: '/blog-editor' },
+          type: 'CreateBlog',
+        },
+        {
+          title: '',
+          url: { path: '/prognoz-kleva' },
+          type: 'Terrain',
+        },
+      ],
+      loginMode: false,
+    }
+  },
   computed: {
     ...mapState('user', ['user']),
   },
   methods: {
+    getMenuClass(disabled) {
+      return disabled ? 'is-disabled' : ''
+    },
+    testMod() {
+      if (this.$auth.user) {
+        console.log('go to cabinet')
+        this.$router.push({ name: 'UserPage' })
+      } else {
+        this.toggleLogin()
+      }
+    },
     async logout() {
       try {
         await this.$auth.logout()
@@ -70,23 +162,48 @@ export default {
 </script>
 
 <style lang="scss">
-.nuxt-link-active {
-  color: var(--color-type-primary);
-  &:not([href*='blog']) {
-    background-color: #fafafa;
+.navbar-mobile_button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  &__close {
+    position: absolute;
+    right: 25px;
+  }
+  svg {
+    transition: 0.3s;
+  }
+  .nuxt-link-exact-active {
+    path {
+      fill: var(--color-type-brand);
+    }
+  }
+}
+.navbar-mobile {
+  height: 60px;
+  background: var(--color-bg-acent);
+  box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  z-index: 100;
+
+  &_wrapper {
+    display: flex;
+    justify-content: space-around;
   }
 }
 .logo {
   padding: 0 !important;
-  color: transparent !important;
-  -webkit-text-stroke: 1px #fff;
+  color: #898989 !important;
   position: relative;
   &:after {
     content: attr(data-word);
     position: absolute;
-    /*top: 0;*/
     left: 0;
-    color: #fff;
+    color: #74c4d3;
     cursor: initial;
     animation: waves 2s ease-in-out infinite forwards;
   }
@@ -146,7 +263,26 @@ a.navbar-item:hover {
   z-index: 1;
   cursor: initial;
   position: relative;
-  background: var(--color-type-primary);
   padding: 7px;
+}
+.desktop {
+  box-shadow: 0 4px 56px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}
+.mobile {
+  @media screen and (min-width: 500px) {
+    display: none;
+  }
+}
+.navbar-brand-container {
+  max-width: 1344px;
+  margin: 0 auto;
+}
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>

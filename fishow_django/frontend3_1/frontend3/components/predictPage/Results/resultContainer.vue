@@ -24,8 +24,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.box {
-  min-height: 300px;
-}
-</style>
+<style scoped></style>

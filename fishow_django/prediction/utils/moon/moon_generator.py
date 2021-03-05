@@ -10,22 +10,21 @@ class MoonTextGenerator:
 
     @staticmethod
     def get_day_desc(data, date, fish):
-        filtred_data = sorted([(_.moon_direction, _.moon, _.time) for _ in data if _.date == date and _.fish == fish],
-                              key=lambda x: x[1])
+        filtred_data = [(_.moon_direction, _.moon) for _ in data if _.date == date and _.fish == fish]
         moon_direction = filtred_data[0][0]
         moon = filtred_data[0][1]
         moon_stage = stage_flag(moon_direction, moon)
         if moon_stage == 'bad':
-            return bad_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+            return bad_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon), fish)
         if moon_stage == 'good':
-            return good_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+            return good_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon), fish)
         if moon_stage == 'neutral':
-            return neutral_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon * 100), fish)
+            return neutral_day_desc_text.format(parse_date(date), moon_cases[moon_direction], int(moon), fish)
 
     @staticmethod
     def get_tenday_desc(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
-        filtred_data = {observe_date: [(_.moon_direction, _.moon, _.time) for _ in data if
+        filtred_data = {observe_date: [(_.moon_direction, _.moon) for _ in data if
                                        _.date == observe_date and _.fish == fish] for observe_date in observe_dates}
         moon_directions = [filtred_data[d][0][0] for d in filtred_data]
         moons = [filtred_data[d][0][1] for d in filtred_data]
