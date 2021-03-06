@@ -35,13 +35,13 @@ https://back.fishow.ru/api/...
 * blogs/***slug***/comments/
 
 Получить по id комментарий
-* comments/<int>/
+* comments/***int***/
 
 Лайкнуть по id комментарий (Method POST)
-* comments/<int>/like/
+* comments/***int***/like/
 
 Дизълайкнуть по id комментарий (Method POST)
-* comments/<int>/dislike/
+* comments/***int***/dislike/
 
 Лайкнуть по slug статью (Method POST)
 * blogs/***slug***/like/
@@ -143,13 +143,13 @@ https://back.fishow.ru/api/...
 * report/***slug***/comments/
 
 Получить по id комментарий
-* comments/<int>/
+* comments/***int***/
 
 Лайкнуть по id комментарий (Method POST)
-* comments/<int>/like/
+* comments/***int***/like/
 
 Дизълайкнуть по id комментарий (Method POST)
-* comments/<int>/dislike/
+* comments/***int***/dislike/
 
 Лайкнуть по slug статью (Method POST)
 * report/***slug***/like/
@@ -176,10 +176,79 @@ https://back.fishow.ru/api/...
 * news/***slug***/comments/
 
 Получить по id комментарий
-* comments/<int>/
+* comments/***int***/
 
 Лайкнуть по id комментарий (Method POST)
-* comments/<int>/like/
+* comments/***int***/like/
 
 Дизълайкнуть по id комментарий (Method POST)
-* comments/<int>/dislike/
+* comments/***int***/dislike/
+
+Лайкнуть по slug новость (Method POST)
+* news/***slug***/like/
+
+Дизълайкнуть по slug статью (Method POST)
+* news/***slug***/dislike/
+
+Вывести колличество новостей (Method GET)
+* count/news/
+
+5. SPACE
+Апи по по работе с водными ресурсами и регионами
+
+Вывести список Регионов (Method GET)
+* region/
+
+Получить список регионов в которых есть одновременно слово1 и слово2 (Method GET)
+* region/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
+
+Получить определенный регион, зная его slug (Method GET)
+* region/***slug***/
+
+Вывести список Платных водоемов (Method GET)
+* waterplace_cost/
+
+Получить список платных водоемов в которых есть одновременно слово1 и слово2 (Method GET)
+* waterplace_cost/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
+
+Получить определенный платный водоем, зная его slug (Method GET)
+* waterplace_cost/***slug***/
+
+Вывести список Платных водоемов (Method GET)
+* waterplace_nature/
+
+Получить список природных водоемов в которых есть одновременно слово1 и слово2 (Method GET)
+* waterplace_nature/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
+
+Получить определенный природный водоем, зная его slug (Method GET)
+* waterplace_nature/***slug***/
+
+Вывести колличество платных водоемов (Method GET)
+* count/waterplace_cost/
+
+Вывести колличество природных водоемов (Method GET)
+* count/waterplace_nature/
+
+Вывести колличество регионов (Method GET)
+* count/region/
+
+
+Frontend 
+
+go to folder "frontend"
+
+write npm install
+
+run it npm run serve
+
+RUN SERVER
+
+в папке fishow_django когда виртуальное окружение активно
+
+python manage.py runserver
+
+во втором терминале в папке frontend
+
+npm run serve
+
+адресс использовать джанговский, на маке возможно надо заменить на 0.0.0.0:8000
