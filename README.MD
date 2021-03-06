@@ -1,125 +1,185 @@
-`.\env\Scripts\activate`
+.\env\Scripts\activate
 
-`python manage.py runserver`
+python manage.py runserver
 
-**Backend**
+Backend
 
-1. `cd fishow_django`
+1. cd fishow_django
 
-2. `python -m venv env`
+2. python -m venv env
 
 3. Activate env
 
-4. `pip install -r requirements.txt`
+4. pip3 install -r requirements.txt
 
-~ `python3 manage.py migrate --run-syncdb`
+~ python3 manage.py migrate --run-syncdb
 
-**API**
+API
 
 127.0.0.1/api/...
+https://back.fishow.ru/api/...
 
-1. BLOGS,COMMENTS,IMAGE
+1. BLOGS,COMMENTS
+Апи по по работе со Статьями
+
+Получить список статей (Method GET)
 * blogs/
-* blogs/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
-* blogs/<slug>/
-* images/
-* blogs/<slug>/comments/
-* blogs/<slug>/comment/
+
+Получить список статей в которых есть одновременно слово1 и слово2 (Method GET)
+* blogs/?search=слово1+слово2
+
+Получить определенную статью, зная ее slug (Method GET)
+* blogs/***slug***/
+
+Получить список комментариев определенной статьи по slug (Method GET)
+* blogs/***slug***/comments/
+
+Получить по id комментарий
 * comments/<int>/
+
+Лайкнуть по id комментарий (Method POST)
 * comments/<int>/like/
+
+Дизълайкнуть по id комментарий (Method POST)
 * comments/<int>/dislike/
-* blogs/<slug>/like/
-* blogs/<slug>/dislike/
-* blogs/<slug>/save/
+
+Лайкнуть по slug статью (Method POST)
+* blogs/***slug***/like/
+
+Дизълайкнуть по slug статью (Method POST)
+* blogs/***slug***/dislike/
+
+Сохранить по slug статью (Method POST)
+* blogs/***slug***/save/
+
+Вывести колличество статей (Method GET)
 * count/blogs/
 
+Вывести список свежих статей (Method GET)
 * blogs_fresh/
+
+Вывести список лучших статей (Method GET)
 * blogs_best/
+
+Вывести список горячих статей (Method GET)
 * blogs_hot/
 
-2. USER (Апи касаемо юзера)
+2. IMAGE
+Апи по по работе с Картинками
 
+Вывести список картинок (Method GET)
+* images/
+
+Сохранить картинку (Method POST)
+* images/
+
+3. USER (Апи касаемо юзера)
+Апи по по работе с Юзерами
+
+Вывести информацию о себе (Method GET)
 * user/
+
+Вывести список пользователей (Method GET)
 * user_all/
+
+Вывести список своих сохраненных статей (Method GET)
 * user/saved/blogs/
+
+Вывести список своих понравившихся статей (Method GET)
 * user/liked/blogs/
+
+Вывести список своих созданных статей (Method GET)
 * user/created/blogs/
+
+- Вывести список своих понравившихся комментариев статей (Method GET)
 * user/liked/blogs/comment/
+
+- Вывести список своих созданных комментариев статей (Method GET)
 * user/created/blogs/comment/
+
+- Вывести список своих сохраненных отчетов (Method GET)
 * user/saved/report/
+
+- Вывести список своих понравившихся отчетов (Method GET)
 * user/liked/report/
+
+- Вывести список своих созданных отчетов (Method GET)
 * user/created/report/
+
+- Вывести список своих понравившихся комментариев отчетов (Method GET)
 * user/liked/report/comment/
+
+- Вывести список своих созданных комментариев отчетов (Method GET)
 * user/created/report/comment/
+
+Вывести информацию о юзере по логину (Method GET)
 * user_select/<username>/
+
+Подписаться на определенного юзера (Method POST)
 * user_select/<username>/subscript/
+
+Вывести колличество юзеров (Method GET)
 * count/user/
 
+Залогинется (Method POST)
 * rest-auth/login/
+
+Зарегистрироваться (Method POST)
 * rest-auth/registration/
 
 3. REPORT
+Апи по по работе с Отчетами
+
+Вывести список отчетов (Method GET)
 * report/
-* report/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
-* report/<slug>/
-* report/<slug>/comments/
-* report/<slug>/comment/
+
+Получить список отчетов в которых есть одновременно слово1 и слово2 (Method GET)
+* report/?search=слово1+слово2
+
+Получить определенный отчет, зная его slug (Method GET)
+* report/***slug***/
+
+Получить список комментариев определенного отчета по slug (Method GET)
+* report/***slug***/comments/
+
+Получить по id комментарий
 * comments/<int>/
+
+Лайкнуть по id комментарий (Method POST)
 * comments/<int>/like/
+
+Дизълайкнуть по id комментарий (Method POST)
 * comments/<int>/dislike/
-* report/<slug>/like/
-* report/<slug>/dislike/
+
+Лайкнуть по slug статью (Method POST)
+* report/***slug***/like/
+
+Дизълайкнуть по slug статью (Method POST)
+* report/***slug***/dislike/
+
+Вывести колличество отчетов (Method GET)
 * count/reports/
 
 4. NEWS
+Апи по по работе с Новостями
+
+Вывести список Новостей (Method GET)
 * news/
+
+Получить список новостей в которых есть одновременно слово1 и слово2 (Method GET)
 * news/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
-* news/<slug>/
-* news/<slug>/comments/
-* news/<slug>/comment/
+
+Получить определенную новость, зная ее slug (Method GET)
+* news/***slug***/
+
+Получить список комментариев определенной новости по slug (Method GET)
+* news/***slug***/comments/
+
+Получить по id комментарий
 * comments/<int>/
+
+Лайкнуть по id комментарий (Method POST)
 * comments/<int>/like/
+
+Дизълайкнуть по id комментарий (Method POST)
 * comments/<int>/dislike/
-* news/<slug>/like/
-* news/<slug>/dislike/
-* count/news/
-
-5. SPACE
-* region/
-* region/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
-* region/<slug>
-* waterplace_cost/
-* waterplace_cost/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
-* waterplace_cost/<slug>
-* waterplace_nature/
-* waterplace_nature/?search=слово1+слово2   (поиск таким образом, чтобы одновременно два слова были) 
-* waterplace_nature/<slug>
-
-* count/waterplace_cost/
-* count/waterplace_nature/
-* count/region/
-
-
-**Frontend** 
-
-go to folder `"frontend"`
-
-write `npm install`
-
-run it `npm run serve`
-
-**RUN SERVER**
-
-в папке fishow_django когда виртуальное окружение активно
-
-`python manage.py runserver`
-
-во втором терминале в папке frontend
-
-`npm run serve`
-
-адресс использовать джанговский, на маке возможно надо заменить на `0.0.0.0:8000`
-
-
-
-
