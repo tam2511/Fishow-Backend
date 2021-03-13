@@ -113,10 +113,16 @@ https://back.fishow.ru/api/...
 * user/created/report/comment/
 
 Вывести информацию о юзере по логину (Method GET)
-* user_select/<username>/
+* user_select/***username***/
+
+Вывести список созданных отчетов юзера по логину (Method GET)
+* user_select_reports/created_by/***username***/
+
+Вывести список созданных блогов юзера по логину (Method GET)
+* user_select_blogs/created_by/***username***/
 
 Подписаться на определенного юзера (Method POST)
-* user_select/<username>/subscript/
+* user_select/***username***/subscript/
 
 Вывести колличество юзеров (Method GET)
 * count/user/
@@ -232,6 +238,9 @@ https://back.fishow.ru/api/...
 Вывести колличество регионов (Method GET)
 * count/region/
 
+6. Иные Модели
+Апи по по работе с иными моделями
+* statistics_main_page/
 
 Frontend 
 
