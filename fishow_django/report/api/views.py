@@ -294,6 +294,14 @@ class CommentDisLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
+class ReportUserSelectCreated(generics.ListAPIView):
+    serializer_class = ReportSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        user = get_object_or_404(CustomUser, username=self.kwargs['username'])
+        return Report.objects.filter(author=user.id).order_by("-created_at")
+
 class CommentListAPIView(generics.ListAPIView):
     serializer_class = CommentSerializer
     permission_classes = [IsAuthorOrReadOnly]

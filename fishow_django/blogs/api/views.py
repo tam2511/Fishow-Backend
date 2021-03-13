@@ -1,5 +1,6 @@
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
+from django.shortcuts import get_list_or_404
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -371,6 +372,14 @@ class BlogUserCreated(generics.ListAPIView):
 
     def get_queryset(self):
         return Blog.objects.filter(author=self.request.user).order_by("-created_at")
+
+class BlogUserSelectCreated(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        user = get_object_or_404(CustomUser, username=self.kwargs['username'])
+        return Blog.objects.filter(author=user.id).order_by("-created_at")
 
 class BlogUserLiked(generics.ListAPIView):
     serializer_class = BlogSerializer

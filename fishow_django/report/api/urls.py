@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework.routers import DefaultRouter
 from report.api import views as qv
 
@@ -38,4 +38,5 @@ urlpatterns = [
 
     path("count/report/", qv.Report_count.as_view(), name='report_count'),
 
+    re_path('user_select_reports/created_by/(?P<username>.*)/', qv.ReportUserSelectCreated.as_view(), name="created-blogs-user-select"),
 ]
