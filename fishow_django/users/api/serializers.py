@@ -11,6 +11,10 @@ from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from django.db.models import F
 
+index_for_place_1 = 10
+index_for_place_2 = 50
+index_for_place_3 = 100
+
 
 class PasswordResetSerializer(serializers.Serializer):
     """
@@ -91,11 +95,37 @@ class UserDisplaySerializer(serializers.ModelSerializer):
             for i in range(0,len(list_sr)):
                 if instance.email == list_sr[i].email:
                     index_sr=i+1
+            place_sr=0
+            if index_sr!='None':
+                if index_sr<index_for_place_1:
+                    place_sr=1
+                elif index_sr<index_for_place_2:
+                    place_sr=2
+                elif index_sr<index_for_place_3:
+                    place_sr=3
+                else:
+                    place_sr=0
+            else:
+                 place_sr=0
+
             index_fr='None'
             for i in range(0,len(list_fr)):
                 if instance.email == list_fr[i].email:
                     index_fr=i+1
-            return {'social_rating' :{'index' :index_sr, 'rating' :glob_social_rating}, 'fishing_rating' :{'index' :index_fr, 'rating' :glob_fishing_rating}}
+            place_fr=0
+            if index_fr!='None':
+                if index_fr<10:
+                    place_fr=1
+                elif index_fr<50:
+                    place_fr=2
+                elif index_fr<100:
+                    place_fr=3
+                else:
+                    place_fr=0
+            else:
+                 place_fr=0
+
+            return {'social_rating' :{'index' :index_sr, 'rating' :glob_social_rating, 'place' :place_sr}, 'fishing_rating' :{'index' :index_fr, 'rating' :glob_fishing_rating, 'place' :place_fr}}
 
     def get_rang(self, instance):
             rang_koef = int(instance.social_rating) + int(instance.fishing_rating)
