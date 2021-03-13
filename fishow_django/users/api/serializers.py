@@ -11,9 +11,13 @@ from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from django.db.models import F
 
-index_for_place_1 = 10
-index_for_place_2 = 50
-index_for_place_3 = 100
+index_for_place_social_1 = 10
+index_for_place_social_2 = 50
+index_for_place_social_3 = 100
+
+index_for_place_fishing_1 = 10
+index_for_place_fishing_2 = 50
+index_for_place_fishing_3 = 100
 
 
 class PasswordResetSerializer(serializers.Serializer):
@@ -97,11 +101,11 @@ class UserDisplaySerializer(serializers.ModelSerializer):
                     index_sr=i+1
             place_sr=0
             if index_sr!='None':
-                if index_sr<index_for_place_1:
+                if index_sr<index_for_place_social_1:
                     place_sr=1
-                elif index_sr<index_for_place_2:
+                elif index_sr<index_for_place_social_2:
                     place_sr=2
-                elif index_sr<index_for_place_3:
+                elif index_sr<index_for_place_social_3:
                     place_sr=3
                 else:
                     place_sr=0
@@ -114,11 +118,11 @@ class UserDisplaySerializer(serializers.ModelSerializer):
                     index_fr=i+1
             place_fr=0
             if index_fr!='None':
-                if index_fr<10:
+                if index_fr<index_for_place_fishing_1:
                     place_fr=1
-                elif index_fr<50:
+                elif index_fr<index_for_place_fishing_2:
                     place_fr=2
-                elif index_fr<100:
+                elif index_fr<index_for_place_fishing_3:
                     place_fr=3
                 else:
                     place_fr=0
