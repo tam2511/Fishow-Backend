@@ -70,6 +70,21 @@ class UserList(APIView):
             else: break
         return Response(users)
 
+class UserTopSocialRating(APIView):
+
+    def get(self, request,n,k):
+        User = get_user_model()
+        users=[]
+        count=0
+        Users=User.objects.order_by('social_rating')
+        if len(Users)<int(n)+int(k)
+            return Response({'error':'users count lower parametrs'})
+        for user in Users:
+            if count<5:
+                users.append({'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating})
+                count=count+1
+            else: break
+        return Response(users)
 
 class SubscriptSelectUserAPIView(APIView):
 
