@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework.routers import DefaultRouter
 from blogs.api import views as qv
 
@@ -47,6 +47,8 @@ urlpatterns = [
     path("user/created/blogs/", qv.BlogUserCreated.as_view(), name="created-blogs-user"),
     path("user/liked/blogs/comment/", qv.BlogCommentUserLiked.as_view(), name="liked-blogs-comments-user"),
     path("user/created/blogs/comment/", qv.BlogCommentUserCreated.as_view(), name="created-blogs-comments-user"),
+
+    re_path('user_select_blogs/created_by/(?P<username>.*)/', qv.BlogUserSelectCreated.as_view(), name="created-blogs-user-select"),
 
     path("blogs_fresh/", qv.BlogFresh.as_view(), name="blogs-fresh"),
     path("blogs_best/", qv.BlogBest.as_view(), name="blogs-best"),

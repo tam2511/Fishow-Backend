@@ -29,7 +29,7 @@ class CurrentUserAPIView(APIView):
 
 class SelectUserAPIView(APIView):
     #permission_classes = [IsAuthorOrReadOnly, DjangoObjectPermissionsOrAnonReadOnly]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request, username):
         user=get_object_or_404(CustomUser, username=username)
@@ -67,7 +67,7 @@ class UserList(APIView):
             if count<5:
                 users.append({'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating, 'rang':get_rang(user)})
                 count=count+1
-            else: return
+            else: break
         return Response(users)
 
 
