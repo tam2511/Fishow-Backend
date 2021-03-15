@@ -7,6 +7,7 @@ from ..helper.text import cases
 from ..helper.date import parse_date
 from ..helper.extra import deserialize2, deserialize, deserialize0
 
+THRESHOLD = 0.7
 
 class WindTextGenerator:
 
@@ -60,11 +61,16 @@ class WindTextGenerator:
         return null_roza
 
     @staticmethod
+    def get_day_wind_roza_desc(data, date, fish, roza):
+        pass
+
+
+    @staticmethod
     def get_wind_roza(data, date, fish):
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {observe_date: sum(
             [deserialize0(_.wind_direction) for _ in data if _.date == observe_date and _.fish == fish], []) for
-                        observe_date in observe_dates}
+            observe_date in observe_dates}
         winds = sum([filtred_data[d] for d in filtred_data], [])
         null_roza = {'З': 0, 'СЗ': 0, 'ЮЗ': 0, 'В': 0, 'СВ': 0, 'ЮВ': 0, 'Ю': 0, 'С': 0, }
         roza = dict(Counter(winds))
@@ -72,3 +78,22 @@ class WindTextGenerator:
             if key in roza:
                 null_roza[key] = roza[key]
         return null_roza
+
+    @staticmethod
+    def get_tenday_wind_roza_desc(data, date, fish, roza):
+        date_start = date
+        date_end = date + datetime.timedelta(days=8)
+        roza_extra = {key: roza[key] for key in roza}
+        for key in roza_extra:
+            if len(key):
+                roza_extra[key[0]] += 1
+                roza_extra[key[1]] += 1
+            del roza_extra[key]
+        sum_ = sum(roza_extra.values())
+        roza_extra = [(k, v) for k, v in sorted(roza_extra.items(), key=lambda item: item[1], reverse=True)]
+        for i in range(len(roza_extra)):
+            sub_sum = sum(_[1] for _ in roza_extra[:i])
+            if sub_sum / sum_ >= THRESHOLD:
+                result = [_[0] for _ in roza_extra[:i]]
+        label = ','.join(sorted(result))
+        return roza_desc_tenday(label, date_start, date_end)
