@@ -64,8 +64,9 @@ class WindTextGenerator:
     @staticmethod
     def get_day_wind_roza_desc(data, date, fish, roza):
         date_start = date
+        roza_extra_ = {key: roza[key] for key in roza}
         roza_extra = {key: roza[key] for key in roza}
-        for key in roza_extra:
+        for key in roza_extra_:
             if len(key) == 2:
                 roza_extra[key[0]] += 1
                 roza_extra[key[1]] += 1
@@ -97,8 +98,9 @@ class WindTextGenerator:
     def get_tenday_wind_roza_desc(data, date, fish, roza):
         date_start = date
         date_end = date + datetime.timedelta(days=8)
+        roza_extra_ = {key: roza[key] for key in roza}
         roza_extra = {key: roza[key] for key in roza}
-        for key in roza_extra:
+        for key in roza_extra_:
             if len(key) == 2:
                 roza_extra[key[0]] += 1
                 roza_extra[key[1]] += 1
