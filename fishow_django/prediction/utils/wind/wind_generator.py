@@ -68,9 +68,9 @@ class WindTextGenerator:
         roza_extra = {key: roza[key] for key in roza}
         for key in roza_extra_:
             if len(key) == 2:
-                roza_extra[key[0]] += 1
-                roza_extra[key[1]] += 1
-            del roza_extra[key]
+                roza_extra[key[0]] += roza_extra_[key]
+                roza_extra[key[1]] += roza_extra_[key]
+                del roza_extra[key]
         sum_ = sum(roza_extra.values())
         roza_extra = [(k, v) for k, v in sorted(roza_extra.items(), key=lambda item: item[1], reverse=True)]
         for i in range(len(roza_extra)):
@@ -102,9 +102,9 @@ class WindTextGenerator:
         roza_extra = {key: roza[key] for key in roza}
         for key in roza_extra_:
             if len(key) == 2:
-                roza_extra[key[0]] += 1
-                roza_extra[key[1]] += 1
-            del roza_extra[key]
+                roza_extra[key[0]] += roza_extra_[key]
+                roza_extra[key[1]] += roza_extra_[key]
+                del roza_extra[key]
         sum_ = sum(roza_extra.values())
         roza_extra = [(k, v) for k, v in sorted(roza_extra.items(), key=lambda item: item[1], reverse=True)]
         for i in range(len(roza_extra)):
