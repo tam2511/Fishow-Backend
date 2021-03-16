@@ -115,6 +115,14 @@ class TextGenerator:
     def get_tenday_wind_roza(date, fish):
         return WindTextGenerator.get_wind_roza(TextGenerator.data, date, fish)
 
+    @staticmethod
+    def get_day_wind_roza_desc(date, fish, roza):
+        return WindTextGenerator.get_day_wind_roza_desc(TextGenerator.data, date, fish, roza)
+
+    @staticmethod
+    def get_tenday_wind_roza_desc(date, fish, roza):
+        return WindTextGenerator.get_tenday_wind_roza_desc(TextGenerator.data, date, fish, roza)
+
     '''
     Давление
     '''
