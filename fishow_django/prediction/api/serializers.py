@@ -133,8 +133,7 @@ class PredictionSerializer(serializers.ModelSerializer):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_day_wind_roza_desc(instance.date, instance.fish,
-                                                    self.get_wind_roza(self.get_wind_roza(instance)))
+        return TextGenerator.get_day_wind_roza_desc(instance.date, instance.fish, self.get_wind_roza(instance))
 
     def get_pressure_fish(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
@@ -311,8 +310,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
-        return TextGenerator.get_tenday_wind_roza_desc(instance.date, instance.fish,
-                                                    self.get_wind_roza(self.get_wind_roza(instance)))
+        return TextGenerator.get_tenday_wind_roza_desc(instance.date, instance.fish, self.get_wind_roza(instance))
 
     def get_pressure_fish(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
