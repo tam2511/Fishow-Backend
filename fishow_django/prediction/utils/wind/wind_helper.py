@@ -22,13 +22,21 @@ ten_minmax_desc = '''<strong>{}</strong> ожидается самая слаб�
 roza desc block
 '''
 
-roza_neutral = '''За период <strong>{}</strong> - <strong>{}</strong> не наблюдается выраженного глобального направления воздуха. В данном случае клев рыбы от направления ветра не сильно зависит.'''
-roza_good = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> направление ветра. Вероятность хорошего клева в данный период <span class="red strong">увеличивается</span>.'''
-roza_bad = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> направление ветра. Вероятность хорошего клева в данный период <span class="blue strong">уменьшается</span>.'''
-roza_good_good = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> и <span class="red strong">{}</span> направления ветра. Вероятность хорошего клева в данный период <span class="red strong">увеличивается</span>.'''
-roza_good_bad = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> и <span class="blue strong">{}</span> направления ветра. В дни, когда наблюдается <span class="red strong">{}</span> направление ветра вероятность клева <span class="red strong">выше</span>.'''
-roza_bad_good = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> и <span class="red strong">{}</span> направления ветра. В дни, когда наблюдается <span class="red strong">{}</span> направление ветра вероятность клева <span class="red strong">выше</span>.'''
-roza_bad_bad = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> и <span class="blue strong">{}</span> направления ветра. Вероятность хорошего клева в данный период <span class="blue strong">уменьшается</span>.'''
+roza_neutral_day = '''<strong>{}</strong> не наблюдается выраженного глобального направления воздуха. В данном случае клев рыбы от направления ветра не сильно зависит.'''
+roza_good_day = '''<strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> направление ветра. Вероятность хорошего клева в этот день <span class="red strong">увеличивается</span>.'''
+roza_bad_day = '''<strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> направление ветра. Вероятность хорошего клева в этот день <span class="blue strong">уменьшается</span>.'''
+roza_good_good_day = '''<strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> и <span class="red strong">{}</span> направления ветра. Вероятность хорошего клева в этот день <span class="red strong">увеличивается</span>.'''
+roza_good_bad_day = '''<strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> и <span class="blue strong">{}</span> направления ветра. В часы, когда наблюдается <span class="red strong">{}</span> направление ветра вероятность клева <span class="red strong">выше</span>.'''
+roza_bad_good_day = '''<strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> и <span class="red strong">{}</span> направления ветра. В часы, когда наблюдается <span class="red strong">{}</span> направление ветра вероятность клева <span class="red strong">выше</span>.'''
+roza_bad_bad_day = '''<strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> и <span class="blue strong">{}</span> направления ветра. Вероятность хорошего клева в этот день <span class="blue strong">уменьшается</span>.'''
+
+roza_neutral_tenday = '''За период <strong>{}</strong> - <strong>{}</strong> не наблюдается выраженного глобального направления воздуха. В данном случае клев рыбы от направления ветра не сильно зависит.'''
+roza_good_tenday = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> направление ветра. Вероятность хорошего клева в данный период <span class="red strong">увеличивается</span>.'''
+roza_bad_tenday = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> направление ветра. Вероятность хорошего клева в данный период <span class="blue strong">уменьшается</span>.'''
+roza_good_good_tenday = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> и <span class="red strong">{}</span> направления ветра. Вероятность хорошего клева в данный период <span class="red strong">увеличивается</span>.'''
+roza_good_bad_tenday = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="red strong">{}</span> и <span class="blue strong">{}</span> направления ветра. В дни, когда наблюдается <span class="red strong">{}</span> направление ветра вероятность клева <span class="red strong">выше</span>.'''
+roza_bad_good_tenday = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> и <span class="red strong">{}</span> направления ветра. В дни, когда наблюдается <span class="red strong">{}</span> направление ветра вероятность клева <span class="red strong">выше</span>.'''
+roza_bad_bad_tenday = '''За период <strong>{}</strong> - <strong>{}</strong> преимущeственно наблюдается <span class="blue strong">{}</span> и <span class="blue strong">{}</span> направления ветра. Вероятность хорошего клева в данный период <span class="blue strong">уменьшается</span>.'''
 
 '''
 utils
@@ -72,21 +80,40 @@ wind_mark = {
 }
 
 
+def roza_desc_day(label, date_start):
+    date_start = parse_date(date_start)
+    if not label in wind_reduce:
+        return roza_neutral_day.format(date_start)
+    mark = wind_mark[label]
+    if len(mark) == 1 and mark[0] == 0:
+        return roza_bad_day.format(date_start, wind_reduce[label][0])
+    elif len(mark) == 1 and mark[0] == 1:
+        return roza_good_day.format(date_start, wind_reduce[label][0])
+    elif mark[0] == 0 and mark[1] == 0:
+        return roza_bad_bad_day.format(date_start, *wind_reduce[label])
+    elif mark[0] == 0 and mark[1] == 1:
+        return roza_bad_good_day.format(date_start, *wind_reduce[label], wind_reduce[1])
+    elif mark[0] == 1 and mark[1] == 0:
+        return roza_good_bad_day.format(date_start, *wind_reduce[label], wind_reduce[0])
+    elif mark[0] == 1 and mark[1] == 1:
+        return roza_good_good_day.format(date_start, *wind_reduce[label])
+
+
 def roza_desc_tenday(label, date_start, date_end):
     date_start = parse_date(date_start)
     date_end = parse_date(date_end)
     if not label in wind_reduce:
-        return roza_neutral.format(date_start, date_end)
+        return roza_neutral_tenday.format(date_start, date_end)
     mark = wind_mark[label]
     if len(mark) == 1 and mark[0] == 0:
-        return roza_bad.format(date_start, date_end, wind_reduce[label][0])
+        return roza_bad_tenday.format(date_start, date_end, wind_reduce[label][0])
     elif len(mark) == 1 and mark[0] == 1:
-        return roza_good.format(date_start, date_end, wind_reduce[label][0])
+        return roza_good_tenday.format(date_start, date_end, wind_reduce[label][0])
     elif mark[0] == 0 and mark[1] == 0:
-        return roza_bad_bad.format(date_start, date_end, *wind_reduce[label])
+        return roza_bad_bad_tenday.format(date_start, date_end, *wind_reduce[label])
     elif mark[0] == 0 and mark[1] == 1:
-        return roza_bad_good.format(date_start, date_end, *wind_reduce[label], wind_reduce[1])
+        return roza_bad_good_tenday.format(date_start, date_end, *wind_reduce[label], wind_reduce[1])
     elif mark[0] == 1 and mark[1] == 0:
-        return roza_good_bad.format(date_start, date_end, *wind_reduce[label], wind_reduce[0])
+        return roza_good_bad_tenday.format(date_start, date_end, *wind_reduce[label], wind_reduce[0])
     elif mark[0] == 1 and mark[1] == 1:
-        return roza_good_good.format(date_start, date_end, *wind_reduce[label])
+        return roza_good_good_tenday.format(date_start, date_end, *wind_reduce[label])
