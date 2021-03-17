@@ -76,9 +76,22 @@ class UserTopSocialRating(APIView):
         User = get_user_model()
         users=[]
         Users=User.objects.order_by('social_rating')
-        if len(Users)<int(n)+int(k)
-            return Response({'error':'users count lower parametrs'})
-        Users_nk=Users[n+1:n+k]
+        if len(Users)<int(n)+int(k):
+            return Response({'error':'users count lower parameters'})
+        Users_nk=Users[n-1:n+k]
+        for user in Users_nk:
+             users.append({'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating})
+        return Response(users)
+
+class UserTopFishingRating(APIView):
+
+    def get(self, request,n,k):
+        User = get_user_model()
+        users=[]
+        Users=User.objects.order_by('fishing_rating')
+        if len(Users)<int(n)+int(k):
+            return Response({'error':'users count lower parameters'})
+        Users_nk=Users[n-1:n+k]
         for user in Users_nk:
              users.append({'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating})
         return Response(users)
