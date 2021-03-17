@@ -129,10 +129,17 @@ class BlogSerializerSlug(serializers.ModelSerializer):
         fields = ['slug']
 
 class ImageSerializer(serializers.ModelSerializer):
-    #image = serializers.SerializerMethodField()
+#     image = serializers.ImageField(use_url=False)
+#
+#     class Meta:
+#         model = Image
+#         fields = ['image']
+
+    image = serializers.SerializerMethodField()
     class Meta:
         model = Image
         fields = ['image']
 
-    #def get_image(self, instance):
-     #   return instance.image
+    def get_image(self, instance):
+        #print(instance.image)
+        return 'https://back.fishow.ru/media/'+instance.image.name
