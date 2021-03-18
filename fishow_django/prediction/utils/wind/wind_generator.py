@@ -100,6 +100,7 @@ class WindTextGenerator:
         date_end = date + datetime.timedelta(days=8)
         roza_extra_ = {key: roza[key] for key in roza}
         roza_extra = {key: roza[key] for key in roza}
+        print(roza_extra)
         for key in roza_extra_:
             if len(key) == 2:
                 roza_extra[key[0]] += roza_extra_[key]
