@@ -112,8 +112,8 @@ def roza_desc_tenday(label, date_start, date_end):
     elif mark[0] == 0 and mark[1] == 0:
         return roza_bad_bad_tenday.format(date_start, date_end, *wind_reduce[label])
     elif mark[0] == 0 and mark[1] == 1:
-        return roza_bad_good_tenday.format(date_start, date_end, *wind_reduce[label], wind_reduce[1])
+        return roza_bad_good_tenday.format(date_start, date_end, *wind_reduce[label], wind_reduce[label][1])
     elif mark[0] == 1 and mark[1] == 0:
-        return roza_good_bad_tenday.format(date_start, date_end, *wind_reduce[label], wind_reduce[0])
+        return roza_good_bad_tenday.format(date_start, date_end, *wind_reduce[label], wind_reduce[label][0])
     elif mark[0] == 1 and mark[1] == 1:
         return roza_good_good_tenday.format(date_start, date_end, *wind_reduce[label])
