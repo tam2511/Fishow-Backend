@@ -54,10 +54,10 @@ wind_cases = {
 }
 
 wind_reduce = {
-    'С': ('северное'),
-    'В': ('восточное'),
-    'Ю': ('южное'),
-    'З': ('западное'),
+    'С': ['северное'],
+    'В': ['восточное'],
+    'Ю': ['южное'],
+    'З': ['западное'],
     'В,С': ('восточное', 'северное'),
     'В,З': ('восточное', 'западное'),
     'В,Ю': ('восточное', 'южное'),
@@ -67,10 +67,10 @@ wind_reduce = {
 }
 
 wind_mark = {
-    'С': (0),
-    'В': (0),
-    'Ю': (1),
-    'З': (1),
+    'С': [0],
+    'В': [0],
+    'Ю': [1],
+    'З': [1],
     'В,С': (0, 0),
     'В,З': (0, 1),
     'В,Ю': (0, 1),
@@ -92,9 +92,9 @@ def roza_desc_day(label, date_start):
     elif mark[0] == 0 and mark[1] == 0:
         return roza_bad_bad_day.format(date_start, *wind_reduce[label])
     elif mark[0] == 0 and mark[1] == 1:
-        return roza_bad_good_day.format(date_start, *wind_reduce[label], wind_reduce[1])
+        return roza_bad_good_day.format(date_start, *wind_reduce[label], wind_reduce[label][1])
     elif mark[0] == 1 and mark[1] == 0:
-        return roza_good_bad_day.format(date_start, *wind_reduce[label], wind_reduce[0])
+        return roza_good_bad_day.format(date_start, *wind_reduce[label], wind_reduce[label][0])
     elif mark[0] == 1 and mark[1] == 1:
         return roza_good_good_day.format(date_start, *wind_reduce[label])
 
