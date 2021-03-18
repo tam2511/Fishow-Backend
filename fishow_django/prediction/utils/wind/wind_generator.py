@@ -77,6 +77,7 @@ class WindTextGenerator:
             sub_sum = sum(_[1] for _ in roza_extra[:i])
             if sub_sum / sum_ >= THRESHOLD:
                 result = [_[0] for _ in roza_extra[:i]]
+                break
         label = ','.join(sorted(result))
         return roza_desc_day(label, date_start)
 
@@ -100,7 +101,6 @@ class WindTextGenerator:
         date_end = date + datetime.timedelta(days=8)
         roza_extra_ = {key: roza[key] for key in roza}
         roza_extra = {key: roza[key] for key in roza}
-        print(roza_extra)
         for key in roza_extra_:
             if len(key) == 2:
                 roza_extra[key[0]] += roza_extra_[key]
@@ -108,13 +108,10 @@ class WindTextGenerator:
                 del roza_extra[key]
         sum_ = sum(roza_extra.values())
         roza_extra = [(k, v) for k, v in sorted(roza_extra.items(), key=lambda item: item[1], reverse=True)]
-        print(roza_extra)
-        print(sum_)
         for i in range(len(roza_extra)):
             sub_sum = sum(_[1] for _ in roza_extra[:i])
-            print(sub_sum)
-            print(sub_sum / sum_)
             if sub_sum / sum_ >= THRESHOLD:
                 result = [_[0] for _ in roza_extra[:i]]
+                break
         label = ','.join(sorted(result))
         return roza_desc_tenday(label, date_start, date_end)
