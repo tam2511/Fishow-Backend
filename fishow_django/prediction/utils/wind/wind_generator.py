@@ -7,7 +7,7 @@ from ..helper.text import cases
 from ..helper.date import parse_date
 from ..helper.extra import deserialize2, deserialize, deserialize0
 
-THRESHOLD = 0.7
+THRESHOLD = 0.5
 
 
 class WindTextGenerator:
