@@ -10,6 +10,7 @@ from image.models import Image
 
 class ImageSerializer(serializers.ModelSerializer):
      image = serializers.ImageField(use_url=False)
+     created_at = serializers.SerializerMethodField()
      image_url = serializers.SerializerMethodField()
      author = serializers.StringRelatedField(read_only=True)
      class Meta:
@@ -22,3 +23,6 @@ class ImageSerializer(serializers.ModelSerializer):
              request = self.context.get('request')
              image = 'https://back.fishow.ru/'+str(instance.image)
              return request.build_absolute_uri(image)
+
+     def get_created_at(self, instance):
+         return instance.created_at.strftime("%d.%m.%y %H:%M")

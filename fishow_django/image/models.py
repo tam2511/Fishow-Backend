@@ -19,8 +19,9 @@ def change_info_image(instance,filename):
 
 class Image(models.Model):
     image = models.FileField(null=True,upload_to=change_info_image)
-    type = models.TextField()
+    type = models.TextField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                    on_delete=models.CASCADE,
-                                   related_name="image_all")
+                                   related_name="image_all", null=True, blank=True)
 
