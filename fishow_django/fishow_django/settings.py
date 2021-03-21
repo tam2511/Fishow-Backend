@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'report',
     'space',
     'news',
+    'image',
     'other_models',
     'django_filters'
 ]

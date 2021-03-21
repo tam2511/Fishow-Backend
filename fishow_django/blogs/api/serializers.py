@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from blogs.models import Blog, Comment, Image
+from blogs.models import Blog, Comment
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 
@@ -127,19 +127,3 @@ class BlogSerializerSlug(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = ['slug']
-
-class ImageSerializer(serializers.ModelSerializer):
-#     image = serializers.ImageField(use_url=False)
-#
-#     class Meta:
-#         model = Image
-#         fields = ['image']
-
-    image = serializers.SerializerMethodField()
-    class Meta:
-        model = Image
-        fields = ['image']
-
-    def get_image(self, instance):
-        #print(instance.image)
-        return 'https://back.fishow.ru/media/'+instance.image.name

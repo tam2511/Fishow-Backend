@@ -8,9 +8,9 @@ from rest_framework.decorators import api_view, permission_classes
 import datetime
 from django.db.models import Count
 
-from blogs.api.serializers import BlogSerializer, CommentSerializer, ImageSerializer
+from blogs.api.serializers import BlogSerializer, CommentSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
-from blogs.models import Blog, Comment, Image
+from blogs.models import Blog, Comment
 from rest_framework.parsers import MultiPartParser, FormParser
 from users.models import CustomUser
 from rest_framework import filters
@@ -408,44 +408,6 @@ class Blogs_count(APIView):
         stats=[]
         stats.append({'count_blogs':Blog.objects.count()})
         return Response(stats)
-
-class ImageViewSet(viewsets.ModelViewSet):
-    serializer_class = ImageSerializer
-    queryset = Image.objects.all()
-
-class ImageView(APIView):
-    parser_classes = (MultiPartParser, FormParser)
-
-    def get(self, request):
-        all_images = Image.objects.all()
-        serializer = ImageSerializer(all_images, many=True)
-        return Response(serializer.data)
-
-    def delete(self, request, pk):
-            """Remove request.user from the voters queryset of an comment instance."""
-            image = get_object_or_404(Image, pk=pk)
-            image.delete()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-    def post(self, request, *args, **kwargs):
-        # converts querydict to original dict
-        images = dict((request.data).lists())['image']
-        flag = 1
-        arr = []
-        for img_name in images:
-            modified_data = modify_input_for_multiple_files(img_name)
-            file_serializer = ImageSerializer(data=modified_data)
-            if file_serializer.is_valid():
-                file_serializer.save()
-                arr.append(file_serializer.data)
-            else:
-                flag = 0
-
-        if flag == 1:
-            return Response(arr, status=status.HTTP_201_CREATED)
-        else:
-            return Response(arr, status=status.HTTP_400_BAD_REQUEST)
 
 def modify_input_for_multiple_files(image):
     dict = {}
