@@ -51,6 +51,9 @@ urlpatterns = [
          include('news.api.urls')),
 
     path('api/',
+         include('image.api.urls')),
+
+    path('api/',
          include('other_models.api.urls')),
 
     path('api-auth/',
