@@ -86,8 +86,21 @@ class MysqlConnector:
         cur.execute(query)
         cur.close()
 
-    def length(self, table_name):
-        query = "SELECT COUNT(*) FROM {}".format(table_name)
+    def length(self, table_name, where=None):
+        if where:
+            query = "SELECT COUNT(*) FROM {} WHERE".format(table_name)
+            for key in where:
+                if isinstance(where[key], list):
+                    if len(where[key]) > 0:
+                        query += " {} IN ({}".format(serialize_key(key), serialize_value(where[key][0]))
+                        for index in range(1, len(where[key])):
+                            query += ", {}".format(serialize_value(where[key][index]))
+                        query += ") AND"
+                else:
+                    query += " {} = {} AND".format(serialize_key(key), serialize_value(where[key]))
+            query = query[:-3]
+        else:
+            query = "SELECT COUNT(*) FROM {}".format(table_name)
         cur = self.connector.cursor()
         cur.execute(query)
         return cur.fetchone()[0]

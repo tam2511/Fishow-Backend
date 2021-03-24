@@ -31,12 +31,17 @@ class Client:
             })
             return
         data = self.mysql.select(self.config['database']['target_table'])[0]
+        if data['count_reports'] == str(report_count) and data['count_blogs'] == str(article_count) and data['counts_users'] == str(user_count):
+            self.log.info('Data did\'t changed.')
+            return
         data.update({
             'count_reports': str(report_count),
             'count_blogs': str(article_count),
             'counts_users': str(user_count),
         })
+        del data['updated_at']
         self.mysql.update(self.config['database']['target_table'], data)
+        self.log.info('Data did updated.')
 
     def start(self):
         while True:
@@ -45,5 +50,5 @@ class Client:
             self.config = read_config(self.config_path)
 
 if __name__ == '__main__':
-    c = Client('config.json')
+    c = Client('/usr/local/bin/db_bot/config.json')
     c.start()

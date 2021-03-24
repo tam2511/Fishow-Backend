@@ -1,7 +1,7 @@
 {
   "main_statistics": {
     "timeout": 60,
-    "log": "main_statistics.log"
+    "log": "/usr/local/bin/db_bot/main_statistics.log"
   },
   "database": {
     "username": "tam2511_fishow",
