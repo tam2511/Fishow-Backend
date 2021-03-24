@@ -57,6 +57,7 @@ class TemperatureTextGenerator:
 
     @staticmethod
     def get_tenday_desc(data, date, fish):
+        print(fish)
         observe_dates = [date + datetime.timedelta(days=day) for day in range(9)]
         filtred_data = {
             observe_date: sum([deserialize(_.temperature) for _ in data if _.date == observe_date and _.fish == fish], []) for

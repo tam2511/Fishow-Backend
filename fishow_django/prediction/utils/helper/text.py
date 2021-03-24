@@ -11,163 +11,163 @@ def blue_strong(text):
 
 
 cases = {
-    'щука': {
+    'Щука': {
         'r': 'щуки', 'd': 'щуку', 'temperature+': blue_strong('понижение'),
         'temperature-': 'резкое {}'.format(red_strong('повышение')),
         'pressure+': '{} и {}'.format(blue_strong('спад'), strong('стабильность')),
         'pressure-': 'резкий {}'.format('рост')
     },
-    'сом': {
+    'Сом': {
         'r': 'сома', 'd': 'сома', 'temperature+': None, 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'судак': {
+    'Судак': {
         'r': 'судака', 'd': 'судака', 'temperature+': None, 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'окунь': {
+    'Окунь': {
         'r': 'окуня', 'd': 'окуня', 'temperature+': red_strong('повышение'), 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'берш': {
+    'Берш': {
         'r': 'берша', 'd': 'берша', 'temperature+': None, 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'речная форель': {
+    'Речная форель': {
         'r': 'речной форели', 'd': 'ручную форель', 'temperature+': blue_strong('понижение'),
         'temperature-': 'резкое {}'.format(red_strong('повышение')),
         'pressure+': None,
         'pressure-': None
     },
-    'озерная форель': {
+    'Озерная форель': {
         'r': 'озерной форели', 'd': 'озерную форель', 'temperature+': blue_strong('понижение'),
         'temperature-': 'резкое {}'.format(red_strong('повышение')),
         'pressure+': None,
         'pressure-': None
     },
-    'елец': {
+    'Елец': {
         'r': 'ельца', 'd': 'ельца', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'чехонь': {
+    'Чехонь': {
         'r': 'чехони', 'd': 'чехонь', 'temperature+': red_strong('повышение'), 'temperature-': None,
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'голавль': {
+    'Голавль': {
         'r': 'голавля', 'd': 'голавля', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'язь': {
+    'Язь': {
         'r': 'язя', 'd': 'язя', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'карп': {
+    'Карп': {
         'r': 'карпа', 'd': 'карпа', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'жерех': {
+    'Жерех': {
         'r': 'жереха', 'd': 'жереха', 'temperature+': red_strong('повышение'), 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'лещ': {
+    'Лещ': {
         'r': 'леща', 'd': 'леща', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'карась': {
+    'Карась': {
         'r': 'карася', 'd': 'карася', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'линь': {
+    'Линь': {
         'r': 'линя', 'd': 'линя', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'пескарь': {
+    'Пескарь': {
         'r': 'пескаря', 'd': 'пескаря', 'temperature+': red_strong('повышение'), 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'ротан': {
+    'Ротан': {
         'r': 'ротана', 'd': 'ротана', 'temperature+': None, 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'плотва': {
+    'Плотва': {
         'r': 'плотвы', 'd': 'плотву', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'красноперка': {
+    'Красноперка': {
         'r': 'красноперки', 'd': 'красноперку', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'налим': {
+    'Налим': {
         'r': 'налима', 'd': 'налима', 'temperature+': blue_strong('понижение'), 'temperature-': 'повышение',
         'pressure+': None,
         'pressure-': None
     },
-    'густера': {
+    'Густера': {
         'r': 'густеры', 'd': 'густеру', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'амур': {
+    'Амур': {
         'r': 'амура', 'd': 'амура', 'temperature+': red_strong('повышение'), 'temperature-': 'понижение',
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'ерш': {
+    'Ерш': {
         'r': 'ерша', 'd': 'ерша', 'temperature+': None, 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'сазан': {
+    'Сазан': {
         'r': 'сазана', 'd': 'сазана', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'подуст': {
+    'Подуст': {
         'r': 'подуста', 'd': 'подуста', 'temperature+': None, 'temperature-': None,
         'pressure+': None,
         'pressure-': None
     },
-    'толстолобик': {
+    'Толстолобик': {
         'r': 'толстолобика', 'd': 'толстолобика', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'вобла': {
+    'Вобла': {
         'r': 'воблы', 'd': 'воблу', 'temperature+': red_strong('повышение'),
         'temperature-': 'резкое {}'.format(blue_strong('понижение')),
         'pressure+': None,
         'pressure-': 'резкий {}'.format('спад')
     },
-    'хариус': {
+    'Хариус': {
         'r': 'жереха', 'd': 'жереха', 'temperature+': red_strong('повышение'), 'temperature-': None,
         'pressure+': None,
         'pressure-': None
