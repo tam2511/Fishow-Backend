@@ -37,7 +37,7 @@ class Client:
                                database=self.config['database']['database'])
         response = mysql.select(table_name=self.config['database']['prediction_table'],
                                 where={'areal': data[0]['areal'], 'city': data[0]['city'],
-                                       'date': extra_dates, 'fish': 'щука'})
+                                       'date': extra_dates, 'fish': 'Щука'})
         response = sorted(response, key=lambda x: x['date'])
         predict_data = response + data
         return self.predictor(predict_data)
