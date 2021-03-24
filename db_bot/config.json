@@ -1,0 +1,17 @@
+{
+  "main_statistics": {
+    "timeout": 60,
+    "log": "main_statistics.log"
+  },
+  "database": {
+    "username": "tam2511_fishow",
+    "host": "localhost",
+    "password": "081099ASDasd!",
+    "database": "tam2511_fishow",
+    "article_table": "blogs_blogs",
+    "report_table": "report_report",
+    "user_table": "users_costumuser",
+    "target_table": "other_models_statistics_main_page"
+  }
+
+}
