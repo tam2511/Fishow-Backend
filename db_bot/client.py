@@ -43,3 +43,7 @@ class Client:
             self.update_()
             sleep(self.config['main_statistics']['timeout'])
             self.config = read_config(self.config_path)
+
+if __name__ == '__main__':
+    c = Client('config.json')
+    c.start()

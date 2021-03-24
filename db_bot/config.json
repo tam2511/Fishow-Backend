@@ -8,9 +8,9 @@
     "host": "localhost",
     "password": "081099ASDasd!",
     "database": "tam2511_fishow",
-    "article_table": "blogs_blogs",
+    "article_table": "blogs_blog",
     "report_table": "report_report",
-    "user_table": "users_costumuser",
+    "user_table": "users_customuser",
     "target_table": "other_models_statistics_main_page"
   }
 
