@@ -67,6 +67,7 @@ class Predictionten(models.Model):
     fish = models.TextField()
     prob_min = models.TextField()
     prob_max = models.TextField()
+    prob_mean = models.TextField()
 
     # water_temperature = models.TextField()
 
