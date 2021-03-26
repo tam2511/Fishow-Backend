@@ -97,4 +97,3 @@ if __name__ == '__main__':
     mysql = MysqlConnector(host='localhost', username='tam2511_fishow',
                            password='081099ASDasd!',
                            database='tam2511_fishow')
-    print(mysql.select('prediction_prediction'))

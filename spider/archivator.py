@@ -26,7 +26,7 @@ class Archivator:
     def archive(self):
         today_str = datetime.date.today().strftime("%Y_%m_%d")
         shift = self.config['prediction']['num_days'] + 1
-        dates = [datetime.date.today() - datetime.timedelta(days=i + 1) for i in range(shift, shift + 5)]
+        dates = [datetime.date.today() - datetime.timedelta(days=i + 1) for i in range(shift, shift + 30)]
         dates = [_.strftime("%Y.%m.%d") for _ in dates]
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],
                                password=self.config['database']['password'],
@@ -36,6 +36,7 @@ class Archivator:
         response_ten = mysql.select(table_name=self.config['database']['mean_prediction_table'],
                                     where={'date': dates})
         if len(response_one) == 0 and len(response_ten) == 0:
+            self.logger.info('Not found data for archive')
             return
         file = zipfile.ZipFile(os.path.join(self.path, today_str + '.zip'), mode='w')
         try:

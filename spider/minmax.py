@@ -66,7 +66,8 @@ def minmax_prob(data):
     prob = list(map(int, prob))
     min_ = np.min(prob)
     max_ = np.max(prob)
-    return {'max': str(max_), 'min': str(min_)}
+    mean_ = np.mean(prob)
+    return {'max': str(max_), 'min': str(min_), 'mean': str(mean_)}
 
 
 def get_mean_data(data):
@@ -98,6 +99,7 @@ def get_mean_data(data):
         'moon_direction': ','.join([_['moon_direction'] for _ in mean_data]),
         'prob_min': ','.join([_['prob']['min'] for _ in mean_data]),
         'prob_max': ','.join([_['prob']['max'] for _ in mean_data]),
+        'prob_mean': ','.join([_['prob']['mean'] for _ in mean_data]),
     }
     mean_data.update({'date': data[0]['date']})
     mean_data.update({'city': data[0]['city']})

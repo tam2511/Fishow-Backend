@@ -104,9 +104,9 @@ class Client:
                     self.client_log.info("Start handle areal {} and city {}".format(areal, city))
                     self.handle_(city=city, areal=areal)
                     sleep(20)
+            self.archivator.archive()
             sleep(10800)
             self.config = read_config(self.config_path)
-            self.archivator.archive()
             with open(self.config['current_city'], 'w') as c_f:
                 areal = list(urls.keys())[0]
                 city = list(urls[areal].keys())[0]
@@ -114,5 +114,5 @@ class Client:
 
 
 if __name__ == '__main__':
-    c = Client('config.json')
+    c = Client('/usr/local/bin/spider/config.json')
     c.start()
