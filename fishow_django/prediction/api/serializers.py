@@ -242,6 +242,9 @@ class PredictiontenSerializer(serializers.ModelSerializer):
     def get_prob_max(self, instance):
         return list(map(int, instance.prob_max.split(',')))
 
+    def get_prob_mean(self, instance):
+        return list(map(int, instance.prob_mean.split(',')))
+
     def get_temperature_brief(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
             data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
