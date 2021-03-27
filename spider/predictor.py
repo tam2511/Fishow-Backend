@@ -65,7 +65,7 @@ class Predictor:
                         key_name = '{}_{}'.format(wind_direction, i)
                         vec.update({key_name: int(wind_direction == data[key][i])})
             elif key == 'month':
-                for month in range(1, 31):
+                for month in range(1, 13):
                     key_name = 'month_{}'.format(month)
                     vec.update({key_name: int(month == data[key][-1])})
             elif key == 'time':

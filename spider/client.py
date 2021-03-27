@@ -7,6 +7,7 @@ from archivator import Archivator
 from gismeteo import WeatherParser
 from minmax import get_mean_data
 from mysql_utils import MysqlConnector
+from correct import Corrector
 from predictor import Predictor
 from utils import read_config, setup_logger, FISHS
 
@@ -46,6 +47,10 @@ class Client:
         base_url = self.config['urls'][areal][city]
         parser = WeatherParser(config=self.config, logger=self.gismeteo_log)
         data = parser.parse_urls(base_url=base_url)
+        print(data)
+        corrector = Corrector(self.config_path)
+        corrector.correct(data=data)
+        print(data)
         for i in range(len(data)):
             data[i]['city'] = city
             data[i]['areal'] = areal

@@ -73,7 +73,14 @@ class WeatherParser:
 
     def humidity_(self, driver):
         humidity = driver.find_elements_by_class_name('w-humidity')
-        humidity = ','.join([_.text for _ in humidity])
+        humidity = [_.text for _ in humidity]
+        for i in range(len(humidity)):
+            if humidity[i] == '–':
+                if i == 0 or i == len(humidity) - 1:
+                    humidity[i] = '50'
+                else:
+                    humidity[i] = humidity[i-1]
+        humidity = ','.join(humidity)
         return {'humidity': humidity}
 
     def uv_index_(self, driver):

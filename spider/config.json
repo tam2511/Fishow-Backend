@@ -1,20 +1,20 @@
 {
     "log": {
-    "gismeteo": "gismeteo.log",
-    "predict": "predict.log",
-    "client": "client.log"
+    "gismeteo": "/usr/local/bin/spider/gismeteo.log",
+    "predict": "/usr/local/bin/spider/predict.log",
+    "client": "/usr/local/bin/spider/client.log"
   },
-  "current_city": "current_city.pin",
+  "current_city": "/usr/local/bin/spider/current_city.pin",
   "gismeteo": {
     "num_days": 10,
     "num_hours": 8,
-    "driver_path": "phantomjs",
+    "driver_path": "/usr/bin/phantomjs",
     "num_attempts": 3,
     "timeout": 2,
     "max_wait": 5
   },
   "prediction": {
-    "model_path": "models/catboost_0.2.model",
+    "model_path": "/usr/local/bin/spider/models/catboost_0.4.model",
     "num_days": 3,
     "num_hours": 8
   },
@@ -25,7 +25,7 @@
     "database": "tam2511_fishow",
     "prediction_table": "prediction_prediction",
     "mean_prediction_table": "prediction_predictionten",
-    "archives_path": "backup"
+    "archives_path": "/usr/local/bin/spider/backup"
   },
   "urls": {
     "Алтайский край": {
@@ -327,7 +327,7 @@
     "Республика Татарстан": {
       "Альметьевск": "https://www.gismeteo.ru/weather-almetevsk-11940/",
       "Казань": "https://www.gismeteo.ru/weather-kazan-4364/",
-      "Кабережные Челны": "https://www.gismeteo.ru/weather-naberezhnye-chelny-4534/",
+      "Набережные Челны": "https://www.gismeteo.ru/weather-naberezhnye-chelny-4534/",
       "Нижнекамск": "https://www.gismeteo.ru/weather-nizhnekamsk-11691/"
     },
     "Республика Тыва": {
