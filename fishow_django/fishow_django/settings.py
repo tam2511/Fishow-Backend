@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook', # new
 
-    'rest_auth',
+    #2021 'rest_auth',
     #'rest_auth.registration',
     'bootstrap4',
     'crispy_forms',
@@ -167,9 +167,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 ACCOUNT_ADAPTER = 'users.views.DefaultAccountAdapterCustom' # new
 URL_FRONT = config_database['url_front'] # new
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = config_database['static_root']

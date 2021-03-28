@@ -150,6 +150,16 @@ class UserDisplaySerializer(serializers.ModelSerializer):
             time_spend = timesince(created, now)
             return time_spend
 
+
+    def update(self, instance, validated_data):
+            instance.first_name = validated_data['first_name']
+            instance.last_name = validated_data['last_name']
+            instance.email = validated_data['email']
+            instance.username = validated_data['username']
+
+            instance.save()
+
+            return instance
 #     def get_sort_list_blog_date(self, object):
 #             data = Blog.objects.filter(author=object.id).order_by("-created_at").values('slug')
 #             return data

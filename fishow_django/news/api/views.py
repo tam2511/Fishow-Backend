@@ -28,6 +28,7 @@ class NewsView(viewsets.ModelViewSet):
         def get_object(self):
                     queryset = self.get_queryset()
                     obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
+                    self.check_object_permissions(self.request, obj)
                     print(self.request.user)
                     if self.request.user.is_authenticated:
                             news=get_object_or_404(News, slug = self.kwargs.get("slug"))

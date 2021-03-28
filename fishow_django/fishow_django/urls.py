@@ -3,8 +3,10 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django_registration.backends.one_step.views import RegistrationView
-from rest_auth.registration.views import VerifyEmailView, RegisterView
-from rest_auth.views import PasswordResetConfirmView,PasswordResetView
+#from rest_auth.registration.views import VerifyEmailView, RegisterView
+from dj_rest_auth.registration.views import RegisterView, VerifyEmailView
+from dj_rest_auth.views import PasswordResetView, PasswordResetConfirmView
+#from rest_auth.views import PasswordResetConfirmView,PasswordResetView
 from django.views.generic import TemplateView
 from rest_framework.authtoken import views
 from django.views.static import serve
@@ -59,27 +61,37 @@ urlpatterns = [
     path('api-auth/',
          include('rest_framework.urls')),
 
-    path('api/rest-auth/',
-         include("rest_auth.urls")),
+    #2021 path('api/rest-auth/',
+         #2021 include("rest_auth.urls")),
 
-    path('api/rest-auth/registration/',
-         include('rest_auth.registration.urls')),
+    #2021 path('api/rest-auth/registration/',
+         #2021 include('rest_auth.registration.urls')),
 
 #     path(r'api-token-auth/', obtain_jwt_token),
 #     path(r'api-token-refresh/', refresh_jwt_token),
 #     path(r'^api-token-verify/', verify_jwt_token),
     
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    #2021 path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    #2021 path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    #2021 path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     path('api/dj-rest-auth/', include('dj_rest_auth.urls')),
     path('api/dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
-    re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(),
-         name='account_confirm_email'),
-    re_path(r'^account-confirm-email/$', VerifyEmailView.as_view(),
-             name='account_email_verification_sent'),
+#    re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$', VerifyEmailView.as_view(),
+#         name='account_confirm_email'),
+#    re_path(r'^account-confirm-email/$', VerifyEmailView.as_view(),
+#             name='account_email_verification_sent'),
+
+    path('verify-email/',
+         VerifyEmailView.as_view(), name='rest_verify_email'),
+    path('account-confirm-email/',
+         VerifyEmailView.as_view(), name='account_email_verification_sent'),
+    re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$',
+         VerifyEmailView.as_view(), name='account_confirm_email'),
+    path('password-reset/', PasswordResetView.as_view()),
+    path('password-reset-confirm/<uidb64>/<token>/',
+             PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT, }),
 

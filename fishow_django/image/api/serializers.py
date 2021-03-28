@@ -21,7 +21,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
      def get_image_url(self, instance):
              request = self.context.get('request')
-             image = 'https://back.fishow.ru/'+str(instance.image)
+             image = 'https://back.fishow.ru/media/'+str(instance.image)
              return request.build_absolute_uri(image)
 
      def get_created_at(self, instance):

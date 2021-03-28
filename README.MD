@@ -138,10 +138,13 @@ n=5, k=0 это вывести 5
 * user_top_fishing_rating/***n***/***k***/
 
 Залогинется (Method POST)
-* rest-auth/login/
+* dj-rest-auth/login/
 
 Зарегистрироваться (Method POST)
-* rest-auth/registration/
+* dj-rest-auth/registration/
+
+Работа с токенами
+* dj-rest-auth/token/refresh/
 
 3. REPORT
 Апи по по работе с Отчетами

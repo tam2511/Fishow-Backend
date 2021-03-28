@@ -8,19 +8,20 @@ from blogs.models import Blog
 from django.contrib.auth import get_user_model
 from rest_framework.generics import get_object_or_404
 
-from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from rest_auth.registration.views import SocialLoginView
-
+#from rest_auth.registration.views import SocialLoginView
+from dj_rest_auth.registration.views import SocialLoginView
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from allauth.socialaccount.providers.github.views import GitHubOAuth2Adapter
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-from rest_auth.registration.views import SocialConnectView
-from rest_auth.social_serializers import TwitterConnectSerializer
+
+#from rest_auth.registration.views import SocialConnectView
+#from rest_auth.social_serializers import TwitterConnectSerializer
 from blogs.api.permissions import IsAuthorOrReadOnly,DjangoObjectPermissionsOrAnonReadOnly
 
 #@list_route(methods['get'],url_path='(?P<username\w+>)')
 class CurrentUserAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     #permission_classes = [IsAuthorOrReadOnly]
 
     def get(self, request):
@@ -44,38 +45,13 @@ class User_count(APIView):
         stats.append({'count_user':CustomUser.objects.count()})
         return Response(stats)
 
-class UserList(APIView):
-
-    def get(self, request):
-        def get_rang(user):
-            rang_koef = int(user.social_rating) + int(user.fishing_rating)
-            if rang_koef<1000:
-                return str('Новичок')
-            elif rang_koef<10000:
-                return str('Любитель')
-            elif rang_koef<100000:
-                return str('Полупрофессионал')
-            elif rang_koef<1000000:
-                return str('Профессионал')
-            else:
-                return str('Мастер')
-
-        User = get_user_model()
-        users=[]
-        count=0
-        for user in User.objects.order_by('social_rating'):
-            if count<5:
-                users.append({'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating, 'rang':get_rang(user)})
-                count=count+1
-            else: break
-        return Response(users)
-
 class UserTopSocialRating(APIView):
+    permission_classes = [AllowAny]
 
     def get(self, request,n,k):
         User = get_user_model()
         users=[]
-        Users=User.objects.order_by('social_rating')
+        Users=User.objects.order_by('-social_rating')
         if len(Users)<int(n)+int(k):
             return Response({'error':'users count lower parameters'})
         Users_nk=Users[n-1:n+k]
@@ -84,11 +60,12 @@ class UserTopSocialRating(APIView):
         return Response(users)
 
 class UserTopFishingRating(APIView):
+    permission_classes = [AllowAny]
 
     def get(self, request,n,k):
         User = get_user_model()
         users=[]
-        Users=User.objects.order_by('fishing_rating')
+        Users=User.objects.order_by('-fishing_rating')
         if len(Users)<int(n)+int(k):
             return Response({'error':'users count lower parameters'})
         Users_nk=Users[n-1:n+k]
@@ -141,7 +118,37 @@ class SubscriptSelectUserAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
+class UserList(APIView):
 
+    def get(self, request):
+        def get_rang(user):
+            rang_koef = int(user.social_rating) + int(user.fishing_rating)
+            if rang_koef<1000:
+                return str('Новичок')
+            elif rang_koef<10000:
+                return str('Любитель')
+            elif rang_koef<100000:
+                return str('Полупрофессионал')
+            elif rang_koef<1000000:
+                return str('Профессионал')
+            else:
+                return str('Мастер')
+
+        User = get_user_model()
+        users=[]
+        count=0
+        for user in User.objects.order_by('social_rating'):
+            if count<5:
+                users.append({'username':user.username,'email':user.email, 'social_rating':user.social_rating, 'fishing_rating':user.fishing_rating, 'rang':get_rang(user)})
+                count=count+1
+            else: break
+        return Response(users)
+
+# class UpdateProfileView(generics.UpdateAPIView):
+#
+#     queryset = get_user_model().objects.all()
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = UpdateUserSerializer
 
 # class SubscriptSelectUserAPIView(APIView):
 #     #permission_classes = [IsAuthorOrReadOnly, DjangoObjectPermissionsOrAnonReadOnly]
@@ -182,8 +189,8 @@ class FacebookLogin(SocialLoginView):
 
 
 
-class FacebookConnect(SocialConnectView):
-    adapter_class = FacebookOAuth2Adapter
+# class FacebookConnect(SocialConnectView):
+#     adapter_class = FacebookOAuth2Adapter
 
 
 
