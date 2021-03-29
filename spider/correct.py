@@ -45,7 +45,7 @@ class Corrector:
     def __init__(self, config_path):
         self.config = read_config(config_path)
         try:
-            from spider.mysql_utils import MysqlConnector
+            from mysql_utils import MysqlConnector
             self.mysql = MysqlConnector(host=self.config['database']['host'],
                                         username=self.config['database']['username'],
                                         password=self.config['database']['password'],
@@ -78,18 +78,18 @@ class Corrector:
                     'Last idx can\'t correct without nex idx for data {} and key {}'.format(current_data, key))
 
     def correct_(self, data, key):
-        if not data[0][key]:
+        if data[0][key] == None:
             if not self.mysql:
                 raise DataError('Don\'t find key {} for first day and mysql corrector.'.format(key))
             else:
                 self.correct_mysql_(data, key, 0)
-        if not data[-1][key]:
+        if data[-1][key] == None:
             if not self.mysql:
-                raise DataError('Don\'t find key {} for first day and mysql corrector.'.format(key))
+                raise DataError('Don\'t find key {} for last day and mysql corrector.'.format(key))
             else:
                 self.correct_mysql_(data, key, len(data) - 1)
         for idx in range(1, len(data) - 1):
-            if data[idx][key]:
+            if not data[idx][key] == None:
                 continue
             average_data = average_(data[idx - 1], data[idx + 1], key)
             if not average_data:
