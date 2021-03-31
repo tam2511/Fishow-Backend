@@ -1,5 +1,5 @@
 from joblib import load
-from catboost import CatBoostClassifier
+from catboost import CatBoostClassifier, CatBoostRegressor
 
 from utils import DIGIT_KEYS, MOON_KEYS, PHENOMENONS, WIND_DIRECTIONS, FISHS, REGIONS, CATEGORY_KEYS, ALONE_KEYS
 
@@ -102,6 +102,9 @@ class Predictor:
                     vec.update({fish_: int(fish_ == fish)})
                 # vec.update(region_vec)
                 vec = [vec[key] for key in sorted(vec)]
-                prob = self.model.predict_proba(vec)[1]
+                try:
+                    prob = self.model.predict_proba(vec)[1]
+                except AttributeError:
+                    prob = min(1.0, max(0.0, self.model.predict(vec)[1]))
                 probs[fish].append(int(prob * 100))
         return probs
