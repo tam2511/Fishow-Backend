@@ -105,6 +105,6 @@ class Predictor:
                 try:
                     prob = self.model.predict_proba(vec)[1]
                 except AttributeError:
-                    prob = min(1.0, max(0.0, self.model.predict(vec)[1]))
+                    prob = min(1.0, max(0.0, self.model.predict(vec)))
                 probs[fish].append(int(prob * 100))
         return probs
