@@ -3,10 +3,12 @@ from report.models import Report, Comment_r
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from space.models import *
+from users.api.serializers import ShortUserDisplaySerializer
+from space.api.serializers import ShortWaterplace_costSerializer,Waterplace_costSerializer
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -44,11 +46,18 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_comments_slug(self, instance):
         return instance.report.slug
 
+class MyListingField(serializers.RelatedField):
+
+    def to_representation(self, value):
+        temp = value.name + '  ' +value.slug
+        return temp
+
 class ReportSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     waterplace_nature = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_nature.objects.all())
     waterplace_cost = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_cost.objects.all())
+    #waterplace_cost = ShortWaterplace_costSerializer(many=True,queryset=Waterplace_cost.objects.all())
     region = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Region.objects.all())
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()

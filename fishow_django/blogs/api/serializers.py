@@ -2,10 +2,11 @@ from rest_framework import serializers
 from blogs.models import Blog, Comment
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
+from users.api.serializers import ShortUserDisplaySerializer
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -44,7 +45,7 @@ class CommentSerializer(serializers.ModelSerializer):
         return instance.blog.slug
 
 class BlogSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -61,9 +62,6 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         exclude = ['updated_at', 'votersUp','votersDown','saved','views']
-
-#     def get_created_at(self, instance):
-#         return instance.created_at.strftime("%B %d, %Y")
 
     def get_is_author(self, instance):
         request = self.context.get("request")

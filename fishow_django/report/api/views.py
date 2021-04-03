@@ -44,7 +44,7 @@ class ReportLikeAPIView(APIView):
     serializer_class = ReportSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def delete(self, request, slug):
         """Remove request.user from the voters queryset of an comment instance."""
         report = get_object_or_404(Report, slug=slug)
         user = request.user
@@ -71,7 +71,7 @@ class ReportLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
-    def post(self, request, pk):
+    def post(self, request, slug):
         """Add request.user to the voters queryset of an comment instance."""
         report = get_object_or_404(Report, slug=slug)
         user = request.user
@@ -111,7 +111,7 @@ class ReportDisLikeAPIView(APIView):
     serializer_class = ReportSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def delete(self, request, slug):
         """Remove request.user from the voters queryset of an comment instance."""
         report = get_object_or_404(Report, slug=slug)
         user = request.user
@@ -138,7 +138,7 @@ class ReportDisLikeAPIView(APIView):
             serializer_context = {'message':'already_do_it'}
             return Response(serializer_context)
 
-    def post(self, request, pk):
+    def post(self, request, slug):
         """Add request.user to the voters queryset of an comment instance."""
         report = get_object_or_404(Report, slug=slug)
         user = request.user
