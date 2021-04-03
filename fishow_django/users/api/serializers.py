@@ -75,6 +75,24 @@ class UserDisplaySerializer1(serializers.ModelSerializer):
                 return str('Мастер')
 
 
+class ShortUserDisplaySerializer(serializers.ModelSerializer):
+    avatar_url = serializers.SerializerMethodField()
+    #sort_list_blog_date = serializers.SerializerMethodField()
+    #sort_list_blog_pop = serializers.SerializerMethodField()
+    #sort_list_blog_hot = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CustomUser
+        #fields = ['username','avatar','avatar_url']
+        fields = ['username','avatar_url']
+
+    def get_avatar_url(self, instance):
+        if instance.avatar == None:
+            image = 'https://back.fishow.ru/media/'+str(instance.avatar)
+        else:
+            image = 'https://back.fishow.ru/media/users/2021/04/02/05/02/03/vl5za2.png'
+        request = self.context.get('request')
+        return request.build_absolute_uri(image)
 
 
 class UserDisplaySerializer(serializers.ModelSerializer):
@@ -150,6 +168,16 @@ class UserDisplaySerializer(serializers.ModelSerializer):
             time_spend = timesince(created, now)
             return time_spend
 
+
+    def update(self, instance, validated_data):
+            instance.first_name = validated_data['first_name']
+            instance.last_name = validated_data['last_name']
+            instance.email = validated_data['email']
+            instance.username = validated_data['username']
+
+            instance.save()
+
+            return instance
 #     def get_sort_list_blog_date(self, object):
 #             data = Blog.objects.filter(author=object.id).order_by("-created_at").values('slug')
 #             return data

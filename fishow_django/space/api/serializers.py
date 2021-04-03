@@ -38,6 +38,12 @@ class Waterplace_natureSerializer(serializers.ModelSerializer):
         model = Waterplace_nature
         fields = '__all__'
 
+class ShortWaterplace_costSerializer(serializers.ModelSerializer):
+    slug = serializers.SlugField(read_only=True)
+
+    class Meta:
+        model = Waterplace_cost
+        fields = ['slug','name']
 
 class Waterplace_costSerializer(serializers.ModelSerializer):
     slug = serializers.SlugField(read_only=True)

@@ -2,10 +2,10 @@ from rest_framework import serializers
 from news.models import News, Comment_n
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
-
+from users.api.serializers import ShortUserDisplaySerializer
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -44,7 +44,7 @@ class CommentSerializer(serializers.ModelSerializer):
         return instance.news.slug
 
 class NewsSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()

@@ -3,10 +3,12 @@ from report.models import Report, Comment_r
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from space.models import *
+from users.api.serializers import ShortUserDisplaySerializer
+from space.api.serializers import ShortWaterplace_costSerializer,Waterplace_costSerializer
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -44,11 +46,18 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_comments_slug(self, instance):
         return instance.report.slug
 
+class MyListingField(serializers.RelatedField):
+
+    def to_representation(self, value):
+        return 'name: %s , slug: %s' % (value.name, value.name)
+
 class ReportSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     waterplace_nature = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_nature.objects.all())
     waterplace_cost = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_cost.objects.all())
+    #waterplace_cost_wide = serializers.SerializerMethodField(read_only=True)
+    #waterplace_cost = ShortWaterplace_costSerializer(many=True)
     region = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Region.objects.all())
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -63,6 +72,19 @@ class ReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
         exclude = ['updated_at', 'votersUp','votersDown','views']
+
+#     def create(self, validated_data):
+#             wcs_data = validated_data.pop('waterplace_cost')
+#             report = Report.objects.create(**validated_data)
+#             for wc in wcs_data:
+#                 Waterplace_cost.objects.create(report=report, **track_data)
+#             return report
+
+#     def get_waterplace_cost_wide(self, instance):
+#         print(instance.waterplace_cost.count())
+#         print(ShortWaterplace_costSerializer.serialize(Waterplace_cost.objects.all()))
+#
+#         return ''#ShortWaterplace_costSerializer(instance.waterplace_cost)
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%d.%m.%y %H:%M")
