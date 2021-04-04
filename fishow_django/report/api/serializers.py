@@ -4,7 +4,7 @@ from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from space.models import *
 from users.api.serializers import ShortUserDisplaySerializer
-from space.api.serializers import ShortWaterplace_costSerializer,Waterplace_costSerializer
+from space.api.serializers import ShortWaterplace_costSerializer,ShortWaterplace_natureSerializer,ShortRegionSerializer
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -55,10 +55,11 @@ class ReportSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
     waterplace_nature = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_nature.objects.all())
+    waterplace_nature_info = serializers.SerializerMethodField(read_only=True)
     waterplace_cost = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_cost.objects.all())
-    #waterplace_cost_wide = serializers.SerializerMethodField(read_only=True)
-    #waterplace_cost = ShortWaterplace_costSerializer(many=True)
+    waterplace_cost_info = serializers.SerializerMethodField(read_only=True)
     region = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Region.objects.all())
+    region_info = serializers.SerializerMethodField(read_only=True)
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
     user_has_votedUp = serializers.SerializerMethodField()
@@ -80,11 +81,23 @@ class ReportSerializer(serializers.ModelSerializer):
 #                 Waterplace_cost.objects.create(report=report, **track_data)
 #             return report
 
-#     def get_waterplace_cost_wide(self, instance):
-#         print(instance.waterplace_cost.count())
-#         print(ShortWaterplace_costSerializer.serialize(Waterplace_cost.objects.all()))
-#
-#         return ''#ShortWaterplace_costSerializer(instance.waterplace_cost)
+    def get_waterplace_cost_info(self, instance):
+        list = []
+        for i in instance.waterplace_cost.all():
+             list.append(ShortWaterplace_costSerializer(Waterplace_cost.objects.filter(slug=i),many=True).data[0])
+        return list
+
+    def get_waterplace_nature_info(self, instance):
+        list = []
+        for i in instance.waterplace_nature.all():
+             list.append(ShortWaterplace_natureSerializer(Waterplace_nature.objects.filter(slug=i),many=True).data[0])
+        return list
+
+    def get_region_info(self, instance):
+        list = []
+        for i in instance.region.all():
+             list.append(ShortRegionSerializer(Region.objects.filter(slug=i),many=True).data[0])
+        return list
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%d.%m.%y %H:%M")
