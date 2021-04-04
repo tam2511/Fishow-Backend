@@ -17,6 +17,4 @@ class PhenomenonTextGenerator:
         observe_dates = [date - datetime.timedelta(days=day) for day in range(1, 3)]
         day_data = [(_.temperature, _.phenomenon) for _ in data if _.date == date and _.fish == fish][0]
         filtred_data = [(_.temperature, _.phenomenon) for _ in data if _.date in observe_dates and _.fish == fish]
-        print(day_data)
-        print(filtred_data)
         return {'desc': generate_desc(observe_dates, day_data, filtred_data)}

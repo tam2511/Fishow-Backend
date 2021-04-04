@@ -1,6 +1,7 @@
 '''
 brief block
 '''
+from ..helper.date import parse_date
 
 brief_text = '''Погодные явления оказывают влияние на клев <strong>{}</strong> по-разному в зависимости от времени года и климата соответствующего региона.  '''
 
@@ -138,8 +139,11 @@ def check_hot(day_temps, observe_temps):
 
 
 def generate_desc(observe_date, day_data, observe_data):
-    phenomenons_day = sum([_.split(',') for _ in day_data[1]], [])
-    phenomenons_observe = [sum([_.split(',') for _ in observe_data_[1]], []) for observe_data_ in observe_data]
+    observe_date = list(map(parse_date, observe_date))
+    if len(observe_data) < 2:
+        return neutral.format(observe_date[-1], observe_date[0])
+    phenomenons_day = day_data[1].split(',')
+    phenomenons_observe = sum([[observe_data_[1].split(',')] for observe_data_ in observe_data], [])
     if check_extra(phenomenons_day, phenomenons_observe, 'rain'):
         return extremal_raining.format(observe_date[-1], observe_date[0])
     if check_extra(phenomenons_day, phenomenons_observe, 'snow'):
@@ -148,9 +152,8 @@ def generate_desc(observe_date, day_data, observe_data):
         return dull_extremal.format(observe_date[-1], observe_date[0])
     if good_from_bad_check(phenomenons_day, phenomenons_observe):
         return good_from_bad.format(observe_date[-1], observe_date[0])
-    temps_day = sum([list(map(int, _.split(','))) for _ in day_data[0]], [])
-    temps_observe = [sum([list(map(int, _.split(','))) for _ in observe_data_[0]], []) for observe_data_ in
-                     observe_data]
+    temps_day = list(map(int, day_data[0].split(',')))
+    temps_observe = sum([[list(map(int, observe_data_[0].split(',')))] for observe_data_ in observe_data], [])
     if check_bad_from_hot(phenomenons_day, temps_observe, phenomenons_observe):
         return good_from_hot.format(observe_date[-1], observe_date[0])
     if check_hot(temps_day, temps_observe):
