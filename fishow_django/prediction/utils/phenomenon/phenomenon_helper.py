@@ -137,7 +137,7 @@ def check_hot(day_temps, observe_temps):
     return True
 
 
-def generate_desc(date, observe_date, day_data, observe_data):
+def generate_desc(observe_date, day_data, observe_data):
     phenomenons_day = sum([_.split(',') for _ in day_data[1]], [])
     phenomenons_observe = [sum([_.split(',') for _ in observe_data_[1]], []) for observe_data_ in observe_data]
     if check_extra(phenomenons_day, phenomenons_observe, 'rain'):
