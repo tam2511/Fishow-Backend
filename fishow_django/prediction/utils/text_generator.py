@@ -64,6 +64,10 @@ class TextGenerator:
         return PhenomenonTextGenerator.get_warning(areal, fish)
 
     @staticmethod
+    def get_day_phenomenon_desc(date, fish):
+        return PhenomenonTextGenerator.get_day_desc(TextGenerator.data, date, fish)
+
+    @staticmethod
     def get_tenday_phenomenon_warning(areal, fish):
         return PhenomenonTextGenerator.get_warning(areal, fish)
 

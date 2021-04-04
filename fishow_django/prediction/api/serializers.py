@@ -11,6 +11,7 @@ class PredictionSerializer(serializers.ModelSerializer):
     temperature_fish = serializers.SerializerMethodField()
     temperature_desc = serializers.SerializerMethodField()
     phenomenon_warning = serializers.SerializerMethodField()
+    phenomenon_desc = serializers.SerializerMethodField()
     prediction_brief = serializers.SerializerMethodField()
     prediction_desc = serializers.SerializerMethodField()
     wind_fish = serializers.SerializerMethodField()
@@ -64,6 +65,13 @@ class PredictionSerializer(serializers.ModelSerializer):
 
     def get_phenomenon(self, instance):
         return [_.replace('.', ',') for _ in instance.phenomenon.split(',')]
+
+    def get_phenomenon_desc(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_day_phenomenon_desc(instance.date, instance.fish)
 
     def get_temperature_brief(self, instance):
         if not TextGenerator.check_stage(instance.city, instance.areal):
