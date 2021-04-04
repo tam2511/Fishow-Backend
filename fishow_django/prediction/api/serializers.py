@@ -179,6 +179,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
     moon_direction = serializers.SerializerMethodField()
     prob_min = serializers.SerializerMethodField()
     prob_max = serializers.SerializerMethodField()
+    prob_mean = serializers.SerializerMethodField()
     temperature_brief = serializers.SerializerMethodField()
     temperature_fish = serializers.SerializerMethodField()
     temperature_desc = serializers.SerializerMethodField()
