@@ -26,7 +26,6 @@ class Report(models.Model):
     views = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                    related_name='viewsReport')
 
-    areal = models.TextField(null=True)
     city = models.TextField(null=True)
     remark = models.TextField(null=True)
     region = models.ManyToManyField(Region, related_name="report_region", blank=True)
