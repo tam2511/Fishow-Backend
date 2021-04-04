@@ -15,10 +15,6 @@ class PhenomenonTextGenerator:
     @staticmethod
     def get_day_desc(data, date, fish):
         observe_dates = [date - datetime.timedelta(days=day) for day in range(1, 3)]
-        day_data = [(_.temperature, _.phenomenon) for _ in data if _.date == date and _.fish == fish]
+        day_data = [(_.temperature, _.phenomenon) for _ in data if _.date == date and _.fish == fish][0]
         filtred_data = [(_.temperature, _.phenomenon) for _ in data if _.date in observe_dates and _.fish == fish]
-        print('day_data: {}'.format(day_data))
-        print('filtred_data: {}'.format(filtred_data))
-        return {}
-
-
+        return {'desc': generate_desc(date, observe_dates, day_data, filtred_data)}
