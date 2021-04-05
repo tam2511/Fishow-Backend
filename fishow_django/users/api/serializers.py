@@ -75,8 +75,20 @@ class UserDisplaySerializer1(serializers.ModelSerializer):
                 return str('Мастер')
 
 
+def default_image():
+        return settings.DEFAULT_PATH_TO_USER_IMAGE
+
+def size_image(image,size):#small,large
+        if size == 'original':
+            return settings.DEFAULT_PATH_TO_BACK_MEDIA+str(image)
+        else:
+            return settings.DEFAULT_PATH_TO_BACK_MEDIA+'thumbnails/'+str('.'.join(str(image).split('.')[:-1]))+'_'+size+'.'+str(str(image).split('.')[-1])
+
+
 class ShortUserDisplaySerializer(serializers.ModelSerializer):
     avatar_url = serializers.SerializerMethodField()
+    avatar_url_small = serializers.SerializerMethodField()
+    avatar_url_large = serializers.SerializerMethodField()
     #sort_list_blog_date = serializers.SerializerMethodField()
     #sort_list_blog_pop = serializers.SerializerMethodField()
     #sort_list_blog_hot = serializers.SerializerMethodField()
@@ -84,13 +96,30 @@ class ShortUserDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         #fields = ['username','avatar','avatar_url']
-        fields = ['username','avatar_url']
+        fields = ['username','avatar_url','avatar_url_small','avatar_url_large']
+
 
     def get_avatar_url(self, instance):
-        if instance.avatar == None:
-            image = 'https://back.fishow.ru/media/'+str(instance.avatar)
+        if instance.avatar == '':
+            image = size_image(default_image(),'original')
         else:
-            image = 'https://back.fishow.ru/media/users/2021/04/02/05/02/03/vl5za2.png'
+            image = size_image(instance.avatar,'original')
+        request = self.context.get('request')
+        return request.build_absolute_uri(image)
+
+    def get_avatar_url_small(self, instance):
+        if instance.avatar == '':
+            image = size_image(default_image(),'small')
+        else:
+            image = size_image(instance.avatar,'small')
+        request = self.context.get('request')
+        return request.build_absolute_uri(image)
+
+    def get_avatar_url_large(self, instance):
+        if instance.avatar == '':
+            image = size_image(default_image(),'large')
+        else:
+            image = size_image(instance.avatar,'large')
         request = self.context.get('request')
         return request.build_absolute_uri(image)
 

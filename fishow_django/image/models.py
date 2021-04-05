@@ -3,6 +3,7 @@ from django.conf import settings
 import datetime
 import os
 from core.utils import generate_random_string
+from thumbnails.fields import ImageField
 
 def change_info_image(instance,filename):
     if instance.type == 'blogs' or instance.type == 'news' or instance.type == 'reports' or instance.type == 'users' or instance.type == 'predictions' or instance.type == 'regions' or instance.type == 'waterplace_cost' or instance.type == 'waterplace_nature' or instance.type == 'comments':
@@ -18,7 +19,8 @@ def change_info_image(instance,filename):
         return os.path.join('trash', now+generate_random_string()+'.'+filename.split('.')[-1])
 
 class Image(models.Model):
-    image = models.FileField(null=True,upload_to=change_info_image)
+    #image = models.FileField(null=True,upload_to=change_info_image)
+    image = ImageField(pregenerated_sizes=["small", "large"], upload_to=change_info_image)
     type = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
