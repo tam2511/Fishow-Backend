@@ -31,10 +31,13 @@ class WindTextGenerator:
         mean_wind = np.mean(winds)
         wind_directions = [_[1] for _ in filtred_data]
         freq_direction = Counter(wind_directions).most_common(1)[0][0]
+
         if mean_wind > 5:
             return hard_wind_desc.format(mean_wind, wind_cases[freq_direction])
         elif mean_wind < 2:
-            return low_wind_desc.format(wind_cases[freq_direction])
+            if freq_direction in wind_cases:
+                return low_wind_desc.format(wind_cases[freq_direction])
+            return low_wind_desc1
         else:
             return mean_wind_desc.format(mean_wind, wind_cases[freq_direction])
 
