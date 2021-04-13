@@ -10,6 +10,9 @@ from rest_framework import serializers
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from django.db.models import F
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
+import json
 
 index_for_place_social_1 = 10
 index_for_place_social_2 = 50
@@ -220,4 +223,43 @@ class UserDisplaySerializer(serializers.ModelSerializer):
 #             return data
 
 
+class UserDisplaySerializerUpdate(serializers.ModelSerializer):
+    time_from_creations = serializers.SerializerMethodField(read_only=True)
+    #avatar_read_info = ShortUserDisplaySerializer(source='get_avatar_read_info',read_only=True)
+    avatar_read_info = serializers.SerializerMethodField(read_only=True)
 
+    class Meta:
+        model = CustomUser
+        fields = ['username','email', 'time_from_creations', 'i_follow', 'country', 'city', 'avatar', 'avatar_read_info','about', 'tags', 'achievement']
+
+    def get_time_from_creations(self, object):
+            created = object.date_joined
+            now = datetime.now(timezone.utc)
+            time_spend = timesince(created, now)
+            return time_spend
+
+    def get_avatar_read_info(self, object):
+            user = get_object_or_404(CustomUser, username=object.username)
+            #user = CustomUser.objects.filter(username=object.username)[0]
+            #serializer = ShortUserDisplaySerializer(user, many=True)
+            #print(serializer.data)
+            data = ShortUserDisplaySerializer(user,context=self.context).data
+            del data['username']
+            return data
+
+
+    def update(self, instance, validated_data):
+            instance.first_name = validated_data['first_name']
+            instance.last_name = validated_data['last_name']
+            instance.email = validated_data['email']
+            instance.username = validated_data['username']
+
+            instance.save()
+
+            return instance
+
+class UpdateUserSerializer(serializers.Serializer):
+
+    class Meta:
+        model = CustomUser
+        fields = ['username','email']#'__all__'
