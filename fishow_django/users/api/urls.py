@@ -10,7 +10,9 @@ urlpatterns = [
     path('user_top_social_rating/<int:n>/<int:k>/', UserTopSocialRating.as_view(), name='social-user'),
     path('user_top_fishing_rating/<int:n>/<int:k>/', UserTopFishingRating.as_view(), name='fishing-user'),
     path('dj-rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
-    re_path('update_user_info/(?P<username>.*)/',UpdateProfileView.as_view(), name='updateuseriinfo')
+    #re_path('update_user_info/(?P<username>.*)/',UpdateProfileView.as_view(), name='updateuseriinfo')
+    re_path('update_user_info/',UpdateProfileView.as_view(), name='updateuseriinfo')
+
 #    path('rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
 #    path('rest-auth/facebook/connect/', FacebookConnect.as_view(), name='fb_connect'),
 #    path('socialaccounts/',SocialAccountListView.as_view(),name='social_account_list'),

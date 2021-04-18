@@ -103,7 +103,7 @@ class ShortUserDisplaySerializer(serializers.ModelSerializer):
 
 
     def get_avatar_url(self, instance):
-        if instance.avatar == '':
+        if instance.avatar == '' or instance.avatar == None:
             image = size_image(default_image(),'original')
         else:
             image = size_image(instance.avatar,'original')
@@ -111,7 +111,7 @@ class ShortUserDisplaySerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(image)
 
     def get_avatar_url_small(self, instance):
-        if instance.avatar == '':
+        if instance.avatar == '' or instance.avatar == None:
             image = size_image(default_image(),'small')
         else:
             image = size_image(instance.avatar,'small')
@@ -119,7 +119,7 @@ class ShortUserDisplaySerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(image)
 
     def get_avatar_url_large(self, instance):
-        if instance.avatar == '':
+        if instance.avatar == '' or instance.avatar == None:
             image = size_image(default_image(),'large')
         else:
             image = size_image(instance.avatar,'large')
@@ -227,10 +227,14 @@ class UserDisplaySerializerUpdate(serializers.ModelSerializer):
     time_from_creations = serializers.SerializerMethodField(read_only=True)
     #avatar_read_info = ShortUserDisplaySerializer(source='get_avatar_read_info',read_only=True)
     avatar_read_info = serializers.SerializerMethodField(read_only=True)
+    i_follow = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = CustomUser
         fields = ['username','email', 'time_from_creations', 'i_follow', 'country', 'city', 'avatar', 'avatar_read_info','about', 'tags', 'achievement']
+
+    def get_i_follow(self, object):
+            return object.i_follow.all()
 
     def get_time_from_creations(self, object):
             created = object.date_joined
@@ -249,10 +253,16 @@ class UserDisplaySerializerUpdate(serializers.ModelSerializer):
 
 
     def update(self, instance, validated_data):
-            instance.first_name = validated_data['first_name']
-            instance.last_name = validated_data['last_name']
+            #instance.first_name = validated_data['first_name']
+            #instance.last_name = validated_data['last_name']
             instance.email = validated_data['email']
             instance.username = validated_data['username']
+            instance.country = validated_data['country']
+            instance.city = validated_data['city']
+            instance.avatar = validated_data['avatar']
+            instance.about = validated_data['about']
+            instance.tags = validated_data['tags']
+            instance.achievement = validated_data['achievement']
 
             instance.save()
 

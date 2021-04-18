@@ -4,6 +4,7 @@ from django.conf import settings
 
 
 class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
     country = models.TextField(null=True)
     city = models.TextField(null=True)
     avatar = models.TextField(null=True)
