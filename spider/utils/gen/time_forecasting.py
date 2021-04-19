@@ -2,6 +2,28 @@ from random import randint
 from numpy.random import choice
 from scipy.stats import binom
 
+times = [0, 3, 6, 9, 12, 15, 18, 21]
+
+def gen_forecast(forecast, time, fish):
+    if fish in ['Сом', 'Налим']:
+        if time == 21:
+            return forecast * 1.1
+        elif time == 6:
+            return forecast * 1.1
+        elif time in [0, 3]:
+            return forecast * 1.5
+        else:
+            return forecast * 0.7
+    if time in [6, 18]:
+        return forecast * 1.3
+    elif time == 9:
+        return forecast * 1.2
+    elif time == 12:
+        return forecast * 1.1
+    elif time == 15:
+        return forecast * 1.0
+    else:
+        return forecast * 0.7
 
 class DayGenerator:
     def __init__(self, dataframe):
