@@ -102,8 +102,11 @@ class WeatherParser:
         elif moon[0].find('стар') > -1:
             moon_desc['moon_direction'] = -1
             moon_desc['moon'] = int(moon[1].replace('%', ''))
+        elif moon[0].find('олнонул') > -1:
+            moon_desc['moon_direction'] = -1
+            moon_desc['moon'] = 100
         else:
-            moon_desc['moon_direction'] = 0
+            moon_desc['moon_direction'] = 1
             moon_desc['moon'] = 0
         return moon_desc
 
