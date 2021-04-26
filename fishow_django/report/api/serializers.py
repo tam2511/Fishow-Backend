@@ -53,6 +53,7 @@ class MyListingField(serializers.RelatedField):
 
 class ReportSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
+    coordinates = serializers.CharField(max_length=100, allow_blank=True)
     created_at = serializers.SerializerMethodField()
     waterplace_nature = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_nature.objects.all())
     waterplace_nature_info = serializers.SerializerMethodField(read_only=True)

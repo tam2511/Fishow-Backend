@@ -10,7 +10,7 @@ class Report(models.Model):
     content = models.JSONField(default={},null=True)#models.TextField(null=True)
     fishing_report = models.JSONField(default={},null=True)#models.TextField(null=True)
     category = models.CharField(max_length=100)
-    coordinates = models.TextField(null=True)
+    coordinates = models.CharField(max_length=100, null=True)
     tags = models.JSONField(default={},null=True)#models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
