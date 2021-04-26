@@ -4,9 +4,9 @@ from django.conf import settings
 
 class Blog(models.Model):
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = models.JSONField(default={},null=True)#models.TextField()
     category = models.CharField(max_length=100)
-    tags = models.CharField(max_length=100)
+    tags = models.JSONField(default={},null=True)#models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     moderator_like = models.NullBooleanField(null=True, default=False)
