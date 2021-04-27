@@ -17,7 +17,7 @@ def serialize_key(key):
 
 class MysqlConnector:
     def __init__(self, username, password, host, database):
-        self.connector = pymysql.connect(host, username, password, database)
+        self.connector = pymysql.connect(host=host, username=username, password=password, database=database)
         self.connector.autocommit(True)
 
     def escape_name(self, s):

@@ -1,5 +1,5 @@
 {
-    "log": {
+  "log": {
     "gismeteo": "/usr/local/bin/spider/gismeteo.log",
     "predict": "/usr/local/bin/spider/predict.log",
     "client": "/usr/local/bin/spider/client.log"
@@ -15,6 +15,7 @@
   },
   "prediction": {
     "model_path": "/usr/local/bin/spider/models/catboost_0.4.model",
+    "feature_path": "",
     "num_days": 3,
     "num_hours": 8
   },
