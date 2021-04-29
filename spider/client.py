@@ -10,6 +10,7 @@ from mysql_utils import MysqlConnector
 from correct import Corrector
 from predictor import Predictor
 from utils import read_config, setup_logger, FISHS
+from preprocessing import FeaturePreprocessing
 
 
 class Client:
@@ -27,6 +28,7 @@ class Client:
                                    num_days=self.config['prediction']['num_days'],
                                    num_hours=self.config['gismeteo']['num_hours'])
         self.archivator = Archivator(config=self.config, logger=self.client_log)
+        self.preprocessor = FeaturePreprocessing(self.config)
 
 
     def predict_(self, data):
@@ -41,16 +43,14 @@ class Client:
                                        'date': extra_dates, 'fish': 'Щука'})
         response = sorted(response, key=lambda x: x['date'])
         predict_data = response + data
-        return self.predictor(predict_data)
+        return self.predictor(self.preprocessor(predict_data))
 
     def handle_(self, city, areal):
         base_url = self.config['urls'][areal][city]
         parser = WeatherParser(config=self.config, logger=self.gismeteo_log)
         data = parser.parse_urls(base_url=base_url)
-        print(data)
         corrector = Corrector(self.config_path)
         corrector.correct(data=data)
-        print(data)
         for i in range(len(data)):
             data[i]['city'] = city
             data[i]['areal'] = areal
