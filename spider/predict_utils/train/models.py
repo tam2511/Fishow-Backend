@@ -104,9 +104,9 @@ class MainModel(nn.Module):
         self.lstm = LSTM(config['lstm_input'], config['lstm_hidden'], config['lstm_layers'], config['lstm_output'])
         self.fc = nn.Linear(config['fcn_output'] + config['lstm_output'], config['output'])
 
-    def forward(self, x, ):
-        fcn_output = self.fcn(x.view(x.size(0), -1))
-        embeddings = self.embedder(x.view(-1, x.shape[-1])).reshape(x.shape[0], x.shape[1], -1)[:, :-1, :]
+    def forward(self, x):
+        fcn_output = self.fcn(x.contiguous().view(x.size(0), -1))
+        embeddings = self.embedder(x.contiguous().view(-1, x.shape[-1])).reshape(x.shape[0], x.shape[1], -1)[:, :-1, :]
         #         print(embeddings.shape)
         lstm_output = self.lstm(embeddings)
         output = self.fc(torch.cat((fcn_output, lstm_output), dim=1))

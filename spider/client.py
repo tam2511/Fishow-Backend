@@ -30,9 +30,8 @@ class Client:
         self.archivator = Archivator(config=self.config, logger=self.client_log)
         self.preprocessor = FeaturePreprocessing(self.config)
 
-
     def predict_(self, data):
-        num_extra_dates = self.config['prediction']['num_days'] + 1
+        num_extra_dates = self.config['prediction']['num_days']
         extra_dates = [data[0]['date'] - datetime.timedelta(days=i + 1) for i in range(num_extra_dates)]
         extra_dates = [_.strftime("%Y.%m.%d") for _ in extra_dates]
         mysql = MysqlConnector(host=self.config['database']['host'], username=self.config['database']['username'],
