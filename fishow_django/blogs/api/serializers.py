@@ -46,6 +46,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class BlogSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
+    tags = serializers.StringRelatedField(many=True)
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()

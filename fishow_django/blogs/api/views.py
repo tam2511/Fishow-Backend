@@ -175,7 +175,7 @@ class BlogViewSet(viewsets.ModelViewSet):
     serializer_class = BlogSerializer
     permission_classes = [IsAuthorOrReadOnly]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'content']
+    search_fields = ['title', 'content', 'tags__name']
 
     def perform_create(self, serializer):
             if not self.request.user.is_anonymous:
@@ -184,15 +184,27 @@ class BlogViewSet(viewsets.ModelViewSet):
             queryset = self.get_queryset()
             obj=get_object_or_404(queryset,slug = self.kwargs.get("slug"))
             self.check_object_permissions(self.request, obj)
-            print(self.request.user)
+            #print(self.request.user)
             if self.request.user.is_authenticated:
                     blog=get_object_or_404(Blog, slug = self.kwargs.get("slug"))
                     user = self.request.user
                     print(user)
+                    #recom_content(user,blog)
                     if user not in blog.views.all():
                         blog.views.add(user)
                         blog.save()
+#                         user.tags=blog.tags
+#                         user.save()
+
             return obj
+
+def recom_content(user,object):
+    user_tags=user.tags
+    object_tags=object.tags
+    result={}
+    for i in object_tags:
+        result[i]
+        print('--')
 
 
 class BlogLikeAPIView(APIView):
@@ -417,14 +429,14 @@ def modify_input_for_multiple_files(image):
 
 class BlogFresh(generics.ListAPIView):
     serializer_class = BlogSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
         return Blog.objects.all().order_by("-created_at")
 
 class BlogBest(generics.ListAPIView):
     serializer_class = BlogSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
         return Blog.objects.annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
@@ -432,7 +444,20 @@ class BlogBest(generics.ListAPIView):
 
 class BlogHot(generics.ListAPIView):
     serializer_class = BlogSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
         return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+
+
+class BlogNonviewed(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthorOrReadOnly]
+
+    def get_queryset(self):
+        arr=[]
+        for i in Blog.objects.all().order_by('-created_at'):
+            if self.request.user not in [val for val in i.views.all()]:
+                print(i)
+                arr.append(i)
+        return arr#Blog.objects.filter(views = self.request.user).order_by('-created_at')

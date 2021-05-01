@@ -20,7 +20,7 @@ class NewsView(viewsets.ModelViewSet):
         serializer_class = NewsSerializer
         permission_classes = [IsAuthorOrReadOnly]
         filter_backends = [filters.SearchFilter]
-        search_fields = ['title', 'content']
+        search_fields = ['title', 'content', 'tags__name']
 
         def perform_create(self, serializer):
                     if not self.request.user.is_anonymous:

@@ -65,7 +65,7 @@ class Waterplace_cost(models.Model):
     price = models.TextField(null=True)
     address = models.TextField(null=True)
     coordinates = models.TextField(null=True)
-    is_paid = models.NullBooleanField(null=True, default=False)
+    is_paid = models.BooleanField(null=True, default=False)
     last_fishing = models.TextField(null=True)
     slug = models.SlugField(max_length=255, unique=True)
     rating = models.IntegerField(default=0,null=True)

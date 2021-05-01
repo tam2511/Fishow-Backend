@@ -64,6 +64,9 @@ https://back.fishow.ru/api/...
 Вывести список горячих статей (Method GET)
 * blogs_hot/
 
+Вывести список непросмотренных статей (Method GET)
+* blogs_nonviewed/
+
 2. IMAGE
 Апи по по работе с Картинками
 

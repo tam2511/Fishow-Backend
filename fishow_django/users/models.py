@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
     city = models.TextField(null=True)
     avatar = models.TextField(null=True)
     about = models.TextField(null=True)
-    tags = models.TextField(null=True)
+    tags = models.JSONField(default=dict,null=True)#models.TextField(null=True)
     achievement = models.TextField(null=True)
     social_rating = models.IntegerField(default=0)
     fishing_rating = models.IntegerField(default=0)
@@ -23,4 +23,9 @@ class CustomUser(AbstractUser):
     count_like = models.IntegerField(default=0)
     count_dislike = models.IntegerField(default=0)
     i_follow = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                              related_name='user_i_follow',null=True, blank=True)
+                                              related_name='user_i_follow', blank=True)
+# class LogUserViews(models.Model):
+#     viewed_at = models.DateTimeField(auto_now_add=True)
+#     type = models.TextField()
+#     slug = models.TextField()
+#     tags = models.JSONField(default={},null=True)

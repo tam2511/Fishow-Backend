@@ -20,7 +20,7 @@ class ReportView(viewsets.ModelViewSet):
         serializer_class = ReportSerializer
         permission_classes = [IsAuthorOrReadOnly]
         filter_backends = [filters.SearchFilter]
-        search_fields = ['title']
+        search_fields = ['title', 'tags__name']
 
         def perform_create(self, serializer):
                     if not self.request.user.is_anonymous:
@@ -37,6 +37,8 @@ class ReportView(viewsets.ModelViewSet):
                             if user not in report.views.all():
                                 report.views.add(user)
                                 report.save()
+                                user.tags=report.tags
+                                user.save()
                     return obj
 
 class ReportLikeAPIView(APIView):

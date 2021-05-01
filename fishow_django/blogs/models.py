@@ -1,15 +1,16 @@
 from django.db import models
 from django.conf import settings
+from other_models.models import Tags
 
 
 class Blog(models.Model):
     title = models.CharField(max_length=100)
-    content = models.JSONField(default={},null=True)#models.TextField()
+    content = models.JSONField(default=dict,null=True)#models.TextField()
     category = models.CharField(max_length=100)
-    tags = models.JSONField(default={},null=True)#models.CharField(max_length=100)
+    tags = models.ManyToManyField(Tags, related_name='b_tags', blank=True)#.JSONField(default={},null=True)#models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    moderator_like = models.NullBooleanField(null=True, default=False)
+    moderator_like = models.BooleanField(null=True, default=False)
     slug = models.SlugField(max_length=255, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
