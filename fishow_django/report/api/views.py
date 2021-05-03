@@ -39,7 +39,21 @@ class ReportView(viewsets.ModelViewSet):
                                 report.save()
                                 user.tags=report.tags
                                 user.save()
+                                recom_content(user,report)
                     return obj
+
+def recom_content(user,object):
+    user_tags=user.tags
+    object_tags=object.tags.all()
+    for i in object_tags:
+        i=str(i)
+        try:
+            user_tags[i]=int(user_tags[i])+1
+        except:
+            user_tags[i]=1
+    curr_user=get_object_or_404(CustomUser, username = user)
+    curr_user.tags=user_tags
+    curr_user.save()
 
 class ReportLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an comment instance."""

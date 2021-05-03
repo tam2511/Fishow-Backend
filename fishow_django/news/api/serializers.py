@@ -3,6 +3,7 @@ from news.models import News, Comment_n
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from users.api.serializers import ShortUserDisplaySerializer
+from other_models.models import Tags
 
 class CommentSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
@@ -46,6 +47,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class NewsSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
+    tags = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
     user_has_votedUp = serializers.SerializerMethodField()

@@ -140,6 +140,10 @@ n=5, k=0 это вывести 5
 * user_top_social_rating/***n***/***k***/
 * user_top_fishing_rating/***n***/***k***/
 
+
+Обновить информацию о пользователе (GET + PUT)
+* update_user_info/
+
 Залогинется (Method POST)
 * dj-rest-auth/login/
 
@@ -257,6 +261,17 @@ n=5, k=0 это вывести 5
 6. Иные Модели
 Апи по по работе с иными моделями
 * statistics_main_page/
+
+Список тегов (пополняемый) + поиск
+* tags/
+
+Список методов ловли (пополняемый) + поиск
+* fishing_method/
+
+Список наконечников (пополняемый) + поиск
+* nozzles/
+
+
 
 Frontend 
 

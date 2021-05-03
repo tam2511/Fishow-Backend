@@ -188,11 +188,11 @@ class BlogViewSet(viewsets.ModelViewSet):
             if self.request.user.is_authenticated:
                     blog=get_object_or_404(Blog, slug = self.kwargs.get("slug"))
                     user = self.request.user
-                    print(user)
-                    #recom_content(user,blog)
+                    #print(user)
                     if user not in blog.views.all():
                         blog.views.add(user)
                         blog.save()
+                        recom_content(user,blog)
 #                         user.tags=blog.tags
 #                         user.save()
 
@@ -200,11 +200,17 @@ class BlogViewSet(viewsets.ModelViewSet):
 
 def recom_content(user,object):
     user_tags=user.tags
-    object_tags=object.tags
-    result={}
+    object_tags=object.tags.all()
     for i in object_tags:
-        result[i]
-        print('--')
+        i=str(i)
+        try:
+            user_tags[i]=int(user_tags[i])+1
+        except:
+            user_tags[i]=1
+    curr_user=get_object_or_404(CustomUser, username = user)
+    curr_user.tags=user_tags
+    curr_user.save()
+
 
 
 class BlogLikeAPIView(APIView):
@@ -458,6 +464,6 @@ class BlogNonviewed(generics.ListAPIView):
         arr=[]
         for i in Blog.objects.all().order_by('-created_at'):
             if self.request.user not in [val for val in i.views.all()]:
-                print(i)
+                #print(i)
                 arr.append(i)
         return arr#Blog.objects.filter(views = self.request.user).order_by('-created_at')

@@ -5,7 +5,7 @@ from django.utils.timesince import timesince
 from space.models import *
 from users.api.serializers import ShortUserDisplaySerializer
 from space.api.serializers import ShortWaterplace_costSerializer,ShortWaterplace_natureSerializer,ShortRegionSerializer
-
+from other_models.models import Tags
 
 class CommentSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
@@ -55,6 +55,7 @@ class ReportSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
     coordinates = serializers.CharField(max_length=100, allow_blank=True)
     created_at = serializers.SerializerMethodField()
+    tags = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())
     waterplace_nature = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_nature.objects.all())
     waterplace_nature_info = serializers.SerializerMethodField(read_only=True)
     waterplace_cost = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_cost.objects.all())
