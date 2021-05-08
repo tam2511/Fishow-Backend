@@ -52,5 +52,5 @@ urlpatterns = [
     path("blogs_best/", qv.BlogBest.as_view(), name="blogs-best"),
     path("blogs_hot/", qv.BlogHot.as_view(), name="blogs-hot"),
     path("blogs_nonviewed/", qv.BlogNonviewed.as_view(), name="blogs-nonviewed"),
-    path("blogs_recommend/", qv.BlogNonviewed.as_view(), name="blogs-nonviewed"),
+    path("blogs_recommend/", qv.BlogRecommend.as_view(), name="blogs-recommend"),
 ]

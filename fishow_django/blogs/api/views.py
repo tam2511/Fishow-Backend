@@ -462,8 +462,45 @@ class BlogNonviewed(generics.ListAPIView):
 
     def get_queryset(self):
         arr=[]
+        user = self.request.user
         for i in Blog.objects.all().order_by('-created_at'):
-            if self.request.user not in [val for val in i.views.all()]:
+            if user not in [val for val in i.views.all()]:
                 #print(i)
                 arr.append(i)
         return arr#Blog.objects.filter(views = self.request.user).order_by('-created_at')
+
+class BlogRecommend(generics.ListAPIView):
+    serializer_class = BlogSerializer
+    permission_classes = [IsAuthorOrReadOnly]
+
+    def get_queryset(self):
+        arr=[]
+        blog_tags=[]
+        user = self.request.user
+        user_tags=user.tags
+        user_sort=dict(sorted(user_tags.items(), key=lambda item: item[1], reverse=True))
+        user_sort_tags=[i[0] for i in user_sort.items()]
+        print(user_sort)
+        print(user_sort_tags)
+        for i in Blog.objects.all().order_by('-created_at'):
+            if user not in [val for val in i.views.all()]:
+                arr.append(i)
+            blog_tags.append([str(k) for k in i.tags.all()])
+        print(blog_tags)
+        print('-')
+
+        return ''
+
+
+def recom_content_out(user,object):
+    user_tags=user.tags
+    object_tags=object.tags.all()
+    for i in object_tags:
+        i=str(i)
+        try:
+            user_tags[i]=int(user_tags[i])+1
+        except:
+            user_tags[i]=1
+    curr_user=get_object_or_404(CustomUser, username = user)
+    curr_user.tags=user_tags
+    curr_user.save()

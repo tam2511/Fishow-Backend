@@ -67,6 +67,9 @@ https://back.fishow.ru/api/...
 Вывести список непросмотренных статей (Method GET)
 * blogs_nonviewed/
 
+Вывести список рекомендуемых статей (Method GET)
+* blogs_recommend/
+
 2. IMAGE
 Апи по по работе с Картинками
 
