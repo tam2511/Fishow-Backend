@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from blogs.models import Blog, Comment
+from other_models.models import Tags
 from datetime import datetime,timezone
 from django.utils.timesince import timesince
 from users.api.serializers import ShortUserDisplaySerializer
@@ -46,6 +47,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class BlogSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
+    tags = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()

@@ -1,20 +1,21 @@
 from django.db import models
 from django.conf import settings
 from space.models import Region, Waterplace_cost, Waterplace_nature
+from other_models.models import Tags
 
 
 class Report(models.Model):
     title = models.CharField(max_length=100)
     date_start = models.DateTimeField(null=True)
     date_end = models.DateTimeField(null=True)
-    content = models.JSONField(default={},null=True)#models.TextField(null=True)
-    fishing_report = models.JSONField(default={},null=True)#models.TextField(null=True)
+    content = models.JSONField(default=dict,null=True)#models.TextField(null=True)
+    fishing_report = models.JSONField(default=dict,null=True)#models.TextField(null=True)
     category = models.CharField(max_length=100)
     coordinates = models.CharField(max_length=100, null=True)
-    tags = models.JSONField(default={},null=True)#models.CharField(max_length=100)
+    tags = models.ManyToManyField(Tags, related_name='r_tags', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    moderator_like = models.NullBooleanField(null=True, default=False)
+    moderator_like = models.BooleanField(null=True, default=False)
     slug = models.SlugField(max_length=255, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
