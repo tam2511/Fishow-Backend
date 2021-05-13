@@ -16,6 +16,7 @@ from users.models import CustomUser
 from rest_framework import filters
 
 from django.contrib.auth.decorators import login_required
+import numpy as np
 
 # from django.conf import settings
 # from django.core.mail import send_mail
@@ -474,33 +475,33 @@ class BlogRecommend(generics.ListAPIView):
     permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
-        arr=[]
-        blog_tags=[]
-        user = self.request.user
-        user_tags=user.tags
-        user_sort=dict(sorted(user_tags.items(), key=lambda item: item[1], reverse=True))
-        user_sort_tags=[i[0] for i in user_sort.items()]
-        print(user_sort)
-        print(user_sort_tags)
-        for i in Blog.objects.all().order_by('-created_at'):
-            if user not in [val for val in i.views.all()]:
-                arr.append(i)
-            blog_tags.append([str(k) for k in i.tags.all()])
-        print(blog_tags)
-        print('-')
-
-        return ''
-
-
-def recom_content_out(user,object):
-    user_tags=user.tags
-    object_tags=object.tags.all()
-    for i in object_tags:
-        i=str(i)
-        try:
-            user_tags[i]=int(user_tags[i])+1
-        except:
-            user_tags[i]=1
-    curr_user=get_object_or_404(CustomUser, username = user)
-    curr_user.tags=user_tags
-    curr_user.save()
+        if self.request.user.is_authenticated:
+            arrr=[]
+            user_sort_tags=[]
+            user_sort_values=[]
+            user = self.request.user
+            #user_tags=user.tags
+            #user_sort=dict(sorted(user_tags.items(), key=lambda item: item[1], reverse=True))
+            user_sort = user.tags
+            if len(user_sort) > 0:
+                for i in user_sort.items():
+                    user_sort_tags.append(i[0])#=[i[0] for i in user_sort.items()]
+                    user_sort_values.append(i[1])#=np.array([user_sort[x] for x in user_sort_tags])
+                user_sort_values=np.array(user_sort_values)
+                veclen_user_sort_values= np.sqrt(user_sort_values.dot(user_sort_values))
+                for i in Blog.objects.all().order_by('-created_at'):
+                    if user not in [val for val in i.views.all()]:
+                        blog_tags_curr = [str(k) for k in i.tags.all()]
+                        bim=[user_sort[x] for x in set(user_sort_tags + blog_tags_curr) if x in user_sort_tags and x in blog_tags_curr]
+                        bim = np.array(bim)
+                        bim_lenght = np.sqrt(bim.dot(bim))
+                        if bim_lenght/veclen_user_sort_values>0.75:
+                            arrr.append(i)
+                if len(arrr)>0:
+                    return arrr
+                else:
+                    return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+            else:
+                return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+        else:
+            return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
