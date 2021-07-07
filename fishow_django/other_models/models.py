@@ -10,7 +10,7 @@ class Statistics_main_page(models.Model):
     updated_at = models.DateTimeField(auto_now=True,null=True)
 
 class Tags(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(unique=True, max_length=100)
     #count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
