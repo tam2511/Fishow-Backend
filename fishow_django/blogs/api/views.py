@@ -453,7 +453,8 @@ class BlogHot(generics.ListAPIView):
     permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
-        return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+        return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+        #return Blog.objects.annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum','-created_at')
 
 
 class BlogNonviewed(generics.ListAPIView):
@@ -532,8 +533,8 @@ class BlogRecommend(generics.ListAPIView):
                 if len(arrr)>0:
                     return arrr
                 else:
-                    return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+                    return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
             else:
-                return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+                return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
         else:
-            return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=1)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+            return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
