@@ -11,7 +11,7 @@ class Region(models.Model):
     descriptions = models.TextField(null=True)
     representatives = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='representatives_people',
                                              blank=True)
-    sities = models.JSONField(default=dict,null=True)
+    cities = models.JSONField(default=dict,null=True)
     #waterplace_cost = models.ManyToManyField(Waterplace_cost, related_name="region_w_cost", blank=True)
     #waterplace_nature = models.ManyToManyField(Waterplace_nature, related_name="region_w_nature", blank=True)
     slug = models.SlugField(max_length=255, unique=True)
