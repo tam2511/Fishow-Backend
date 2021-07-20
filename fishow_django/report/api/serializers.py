@@ -59,11 +59,24 @@ class MyListingField(serializers.RelatedField):
     def to_representation(self, value):
         return 'name: %s , slug: %s' % (value.name, value.name)
 
+
+class CreatableSlugRelatedField(serializers.SlugRelatedField):
+    def to_internal_value(self, data):
+        try:
+            request = self.context.get("request")
+#             print(len(data))
+            return self.get_queryset().get(**{self.slug_field: data})
+        except ObjectDoesNotExist:
+            return Tags.objects.create(author=request.user,**{self.slug_field: data})
+            #return self.get_queryset().create(**{self.slug_field: data})  # to create the object
+        except (TypeError, ValueError):
+            self.fail('invalid')
+
 class ReportSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
     coordinates = serializers.CharField(max_length=100, allow_blank=True)
     created_at = serializers.SerializerMethodField()
-    tags = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())
+    tags = CreatableSlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())#serializers.SlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())
     waterplace_nature = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_nature.objects.all())
     waterplace_nature_info = serializers.SerializerMethodField(read_only=True)
     waterplace_cost = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='slug',queryset=Waterplace_cost.objects.all())

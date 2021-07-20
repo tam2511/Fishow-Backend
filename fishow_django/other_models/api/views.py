@@ -25,9 +25,9 @@ class TagsView(viewsets.ModelViewSet):
         filter_backends = [filters.SearchFilter]
         search_fields = ['name']
 
-#         def perform_create(self, serializer):
-#                     if not self.request.user.is_anonymous:
-#                         serializer.save(author=self.request.user)
+        def perform_create(self, serializer):
+                    if not self.request.user.is_anonymous:
+                        serializer.save(author=self.request.user)
 #
 #         def create(self, request, *args, **kwargs):
 #                  data=request.data

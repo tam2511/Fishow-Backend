@@ -44,10 +44,22 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_comments_slug(self, instance):
         return instance.news.slug
 
+class CreatableSlugRelatedField(serializers.SlugRelatedField):
+    def to_internal_value(self, data):
+        try:
+            request = self.context.get("request")
+#             print(len(data))
+            return self.get_queryset().get(**{self.slug_field: data})
+        except ObjectDoesNotExist:
+            return Tags.objects.create(author=request.user,**{self.slug_field: data})
+            #return self.get_queryset().create(**{self.slug_field: data})  # to create the object
+        except (TypeError, ValueError):
+            self.fail('invalid')
+
 class NewsSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
     created_at = serializers.SerializerMethodField()
-    tags = serializers.SlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())
+    tags = CreatableSlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())#serializers.SlugRelatedField(many=True,allow_null=True,slug_field='name',queryset=Tags.objects.all())
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
     user_has_votedUp = serializers.SerializerMethodField()
