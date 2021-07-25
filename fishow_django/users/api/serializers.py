@@ -272,6 +272,30 @@ class UserDisplaySerializerUpdate(serializers.ModelSerializer):
 
             return instance
 
+class UserADisplaySerializerUpdate(serializers.ModelSerializer):
+    avatar_read_info = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['avatar', 'avatar_read_info']
+
+    def get_avatar_read_info(self, object):
+            user = get_object_or_404(CustomUser, username=object.username)
+            #user = CustomUser.objects.filter(username=object.username)[0]
+            #serializer = ShortUserDisplaySerializer(user, many=True)
+            #print(serializer.data)
+            data = ShortUserDisplaySerializer(user,context=self.context).data
+            del data['username']
+            return data
+
+
+    def update(self, instance, validated_data):
+            instance.avatar = validated_data['avatar']
+
+            instance.save()
+
+            return instance
+
 class UpdateUserSerializer(serializers.Serializer):
 
     class Meta:

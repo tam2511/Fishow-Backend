@@ -1,5 +1,6 @@
 from django.urls import path,re_path
-from users.api.views import UpdateProfileView,CurrentUserAPIView,UserTopSocialRating,UserTopFishingRating,UserList,FacebookLogin,SelectUserAPIView,SubscriptSelectUserAPIView,User_count
+from users.api.views import UpdateProfileView,CurrentUserAPIView,UserTopSocialRating,UserTopFishingRating,UserList,FacebookLogin,SelectUserAPIView,SubscriptSelectUserAPIView,User_count,UpdateProfileAvatarView
+
 #from rest_auth.registration.views import (SocialAccountListView, SocialAccountDisconnectView)
 
 urlpatterns = [
@@ -11,7 +12,9 @@ urlpatterns = [
     path('user_top_fishing_rating/<int:n>/<int:k>/', UserTopFishingRating.as_view(), name='fishing-user'),
     path('dj-rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
     #re_path('update_user_info/(?P<username>.*)/',UpdateProfileView.as_view(), name='updateuseriinfo')
+    re_path('update_user_avatar_info/',UpdateProfileAvatarView.as_view(), name='update_useriinfo_avatar'),
     re_path('update_user_info/',UpdateProfileView.as_view(), name='updateuseriinfo')
+
 
 #    path('rest-auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
 #    path('rest-auth/facebook/connect/', FacebookConnect.as_view(), name='fb_connect'),
