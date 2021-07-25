@@ -131,7 +131,7 @@ class UserDisplaySerializer(serializers.ModelSerializer):
     global_rating = serializers.SerializerMethodField()
     rang = serializers.SerializerMethodField()
     time_from_creations = serializers.SerializerMethodField()
-    #avatar = serializers.SerializerMethodField()
+    avatar = serializers.SerializerMethodField()
     #sort_list_blog_date = serializers.SerializerMethodField()
     #sort_list_blog_pop = serializers.SerializerMethodField()
     #sort_list_blog_hot = serializers.SerializerMethodField()
@@ -140,13 +140,13 @@ class UserDisplaySerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['username','email','first_name','last_name', 'count_blogs', 'count_comments', 'count_report', 'count_news', 'social_rating', 'fishing_rating', 'rang', 'count_like', 'count_dislike', 'time_from_creations', 'global_rating','i_follow', 'country', 'city', 'avatar', 'about', 'tags', 'achievement']
 
-#     def get_avatar(self, instance):
-#             if instance.avatar == '' or instance.avatar == None:
-#                 image = size_image(default_image(),'original')
-#             else:
-#                 image = size_image(instance.avatar,'original')
-#             request = self.context.get('request')
-#             return request.build_absolute_uri(image)
+    def get_avatar(self, instance):
+            if instance.avatar == '' or instance.avatar == None:
+                image = size_image(default_image(),'original')
+            else:
+                image = size_image(instance.avatar,'original')
+            #request = self.context.get('request')
+            return image#request.build_absolute_uri(image)
 
     def get_global_rating(self, instance):
             glob_social_rating = int(instance.social_rating)
