@@ -33,12 +33,12 @@ class ReportView(viewsets.ModelViewSet):
                     if self.request.user.is_authenticated:
                             report=get_object_or_404(Report, slug = self.kwargs.get("slug"))
                             user = self.request.user
-                            print(user)
+                            #print(user)
                             if user not in report.views.all():
                                 report.views.add(user)
                                 report.save()
-                                user.tags=report.tags
-                                user.save()
+                                #user.tags=report.tags
+                                #user.save()
                                 recom_content(user,report)
                     return obj
 
