@@ -137,7 +137,7 @@ class UserDisplaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['username','email', 'count_blogs', 'count_comments', 'count_report', 'count_news', 'social_rating', 'fishing_rating', 'rang', 'count_like', 'count_dislike', 'time_from_creations', 'global_rating','i_follow', 'country', 'city', 'avatar', 'about', 'tags', 'achievement']
+        fields = ['username','email','first_name','last_name', 'count_blogs', 'count_comments', 'count_report', 'count_news', 'social_rating', 'fishing_rating', 'rang', 'count_like', 'count_dislike', 'time_from_creations', 'global_rating','i_follow', 'country', 'city', 'avatar', 'about', 'tags', 'achievement']
 
     def get_global_rating(self, instance):
             glob_social_rating = int(instance.social_rating)
@@ -232,7 +232,7 @@ class UserDisplaySerializerUpdate(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['username','email', 'time_from_creations', 'i_follow', 'country', 'city', 'avatar', 'avatar_read_info','about', 'tags', 'achievement']
+        fields = ['username','email','first_name','last_name', 'time_from_creations', 'i_follow', 'country', 'city', 'avatar', 'avatar_read_info','about', 'tags', 'achievement']
 
     def get_tags(self, object):
             return object.tags
@@ -261,6 +261,8 @@ class UserDisplaySerializerUpdate(serializers.ModelSerializer):
             #instance.last_name = validated_data['last_name']
             instance.email = validated_data['email']
             instance.username = validated_data['username']
+            instance.first_name = validated_data['first_name']
+            instance.last_name = validated_data['last_name']
             instance.country = validated_data['country']
             instance.city = validated_data['city']
             instance.avatar = validated_data['avatar']
