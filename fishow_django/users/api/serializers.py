@@ -225,6 +225,7 @@ class UserDisplaySerializer(serializers.ModelSerializer):
 
 class UserDisplaySerializerUpdate(serializers.ModelSerializer):
     time_from_creations = serializers.SerializerMethodField(read_only=True)
+    tags = serializers.SerializerMethodField(read_only=True)
     #avatar_read_info = ShortUserDisplaySerializer(source='get_avatar_read_info',read_only=True)
     avatar_read_info = serializers.SerializerMethodField(read_only=True)
     i_follow = serializers.SerializerMethodField(read_only=True)
@@ -232,6 +233,9 @@ class UserDisplaySerializerUpdate(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['username','email', 'time_from_creations', 'i_follow', 'country', 'city', 'avatar', 'avatar_read_info','about', 'tags', 'achievement']
+
+    def get_tags(self, object):
+            return object.tags
 
     def get_i_follow(self, object):
             return object.i_follow.all()
