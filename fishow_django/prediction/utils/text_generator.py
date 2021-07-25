@@ -5,6 +5,7 @@ from .wind.wind_generator import WindTextGenerator
 from .pressure.pressure_generator import PressureTextGenerator
 from .moon.moon_generator import MoonTextGenerator
 from .uv_index.uv_index_generator import UVIndexTextGenerator
+from .fish.fish_generator import FishTextGenerator
 
 class TextGenerator:
     '''
@@ -170,3 +171,14 @@ class TextGenerator:
     @staticmethod
     def get_tenday_uv_index_desc(date, fish):
         return UVIndexTextGenerator.get_tenday_desc(TextGenerator.data, date, fish)
+
+    '''
+    Описание рыбы
+    '''
+    @staticmethod
+    def get_day_fish_desc(date, fish):
+        return FishTextGenerator.get_day_desc(TextGenerator.data, date, fish)
+
+    @staticmethod
+    def get_tenday_fish_desc(date, fish):
+        return FishTextGenerator.get_day_desc(TextGenerator.data, date, fish)

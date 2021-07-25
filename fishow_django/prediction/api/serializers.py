@@ -31,6 +31,7 @@ class PredictionSerializer(serializers.ModelSerializer):
     prob = serializers.SerializerMethodField()
     wind_direction = serializers.SerializerMethodField()
     phenomenon = serializers.SerializerMethodField()
+    fish_describe = serializers.SerializerMethodField()
 
     class Meta:
         model = Prediction
@@ -171,6 +172,13 @@ class PredictionSerializer(serializers.ModelSerializer):
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.get_day_uv_index_desc(instance.date, instance.fish)
 
+    def get_fish_describe(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_day_fish_desc(instance.date, instance.fish)
+
 
 class PredictiontenSerializer(serializers.ModelSerializer):
     temperature_min = serializers.SerializerMethodField()
@@ -202,6 +210,7 @@ class PredictiontenSerializer(serializers.ModelSerializer):
     pressure_desc = serializers.SerializerMethodField()
     moon_desc = serializers.SerializerMethodField()
     uv_index_desc = serializers.SerializerMethodField()
+    fish_describe = serializers.SerializerMethodField()
 
     class Meta:
         model = Predictionten
@@ -351,3 +360,10 @@ class PredictiontenSerializer(serializers.ModelSerializer):
             TextGenerator.set_data(data)
             TextGenerator.update_stage(instance.city, instance.areal)
         return TextGenerator.get_tenday_uv_index_desc(instance.date, instance.fish)
+
+    def get_fish_describe(self, instance):
+        if not TextGenerator.check_stage(instance.city, instance.areal):
+            data = Prediction.objects.filter(city=instance.city, areal=instance.areal)
+            TextGenerator.set_data(data)
+            TextGenerator.update_stage(instance.city, instance.areal)
+        return TextGenerator.get_tenday_fish_desc(instance.date, instance.fish)
