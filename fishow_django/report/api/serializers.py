@@ -92,6 +92,7 @@ class ReportSerializer(serializers.ModelSerializer):
     user_has_commented = serializers.SerializerMethodField()
     time_from_creations = serializers.SerializerMethodField()
     user_views = serializers.SerializerMethodField()
+    is_author = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Report
@@ -103,6 +104,13 @@ class ReportSerializer(serializers.ModelSerializer):
 #             for wc in wcs_data:
 #                 Waterplace_cost.objects.create(report=report, **track_data)
 #             return report
+
+    def get_is_author(self, instance):
+            request = self.context.get("request")
+            if request.user == instance.author:
+                return True
+            else:
+                return False
 
     def get_waterplace_cost_info(self, instance):
         list = []
