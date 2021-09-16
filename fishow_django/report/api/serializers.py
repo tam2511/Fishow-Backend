@@ -6,6 +6,7 @@ from space.models import *
 from users.api.serializers import ShortUserDisplaySerializer
 from space.api.serializers import ShortWaterplace_costSerializer,ShortWaterplace_natureSerializer,ShortRegionSerializer
 from other_models.models import Tags
+from django.core.exceptions import ObjectDoesNotExist
 
 class CommentSerializer(serializers.ModelSerializer):
     author = ShortUserDisplaySerializer(read_only=True)
