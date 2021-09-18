@@ -12,15 +12,38 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from users.models import CustomUser
 from rest_framework import filters
 from django.contrib.auth.decorators import login_required
+import django_filters
+from django.db.models import Count
+
+class MultiValueCharFilter(django_filters.BaseCSVFilter, django_filters.CharFilter):
+    def filter(self, qs, value):
+        # value is either a list or an 'empty' value
+        values = value or []
+
+        for value in values:
+            qs = super(MultiValueCharFilter, self).filter(qs, value)
+
+        return qs.annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+
+
+class TagsFilter(django_filters.FilterSet):
+    tags = MultiValueCharFilter(field_name='tags__name', lookup_expr='contains')
+
+    class Meta:
+        model = Report
+        fields = ['tags']
 
 
 class ReportView(viewsets.ModelViewSet):
-        queryset = Report.objects.all().order_by("-created_at")
+        queryset = Report.objects.all().order_by("-created_at").distinct()
         lookup_field = "slug"
         serializer_class = ReportSerializer
         permission_classes = [IsAuthorOrReadOnly]
-        filter_backends = [filters.SearchFilter]
-        search_fields = ['title', 'tags__name']
+        #filter_backends = [filters.SearchFilter]
+        filter_backends = [django_filters.rest_framework.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
+        ordering_fields = ['created_at']
+        filterset_class = TagsFilter
+        search_fields = ['title']
 
         def perform_create(self, serializer):
                     if not self.request.user.is_anonymous:

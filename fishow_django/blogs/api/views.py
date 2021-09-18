@@ -234,7 +234,7 @@ class BlogViewSet(viewsets.ModelViewSet):
     #search_fields = ['tags__name']
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     #filterset_fields = ['tags__name']
-    #search_fields = ['title']
+    search_fields = ['title']
     ordering_fields = ['created_at']
     #filter_fields = {'tags__name': ["in"]}
     #filter_fields = {'tags__name': ["in"]}
