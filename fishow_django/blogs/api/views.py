@@ -14,6 +14,7 @@ from blogs.models import Blog, Comment
 from rest_framework.parsers import MultiPartParser, FormParser
 from users.models import CustomUser
 from rest_framework import filters
+import django_filters
 import numpy as np
 from django.contrib.auth.decorators import login_required
 
@@ -168,14 +169,76 @@ class CommentRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
 
+# class CharInFilter(django_filters.BaseInFilter, django_filters.CharFilter):
+#     pass
+#
+# class DataFilter(django_filters.FilterSet):
+#     keyword = CharInFilter(field_name='tags', lookup_expr='in')
+#
+#     class Meta:
+#         model = Blog
+#         fields = ['keyword']
+#
+# from django_filters import Filter
+# from django_filters.fields import Lookup
+#
+# class ListFilter( Filter ):
+#   def filter( self, qs, value ):
+#     return super( ListFilter, self ).filter( qs, Lookup( value.split( u"," ), "in") )
+#
+# class ProductFilterSet(django_filters.FilterSet):
+#     tags = ListFilter(name='tags__name')
+#
+#     class Meta:
+#         model = Blog
+#         fields = ['tags']
+
+# class ChoiceFilter(django_filters.FilterSet):
+#     tags__name = django_filters.MultipleChoiceFilter(
+#         field_name='title',
+#         lookup_expr='in',#'contains',
+#         conjoined=True,  # uses AND instead of OR
+#         #choices=['aa'],
+#     )
+#
+#     class Meta:
+#         model = Blog
+#         fields = ['tags__name']
+
+
+class MultiValueCharFilter(django_filters.BaseCSVFilter, django_filters.CharFilter):
+    def filter(self, qs, value):
+        # value is either a list or an 'empty' value
+        values = value or []
+
+        for value in values:
+            qs = super(MultiValueCharFilter, self).filter(qs, value)
+
+        return qs
+
+
+class TagsFilter(django_filters.FilterSet):
+    tags = MultiValueCharFilter(field_name='tags__name', lookup_expr='contains')
+
+    class Meta:
+        model = Blog
+        fields = ['tags']
+
 
 class BlogViewSet(viewsets.ModelViewSet):
-    queryset = Blog.objects.all().order_by("-created_at")
+    queryset = Blog.objects.all().order_by("-created_at").distinct()
     lookup_field = "slug"
     serializer_class = BlogSerializer
     permission_classes = [IsAuthorOrReadOnly]
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'content', 'tags__name']
+    #filter_backends = [filters.SearchFilter]
+    #search_fields = ['tags__name']
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
+    #filterset_fields = ['tags__name']
+    #search_fields = ['title']
+    ordering_fields = ['created_at']
+    #filter_fields = {'tags__name': ["in"]}
+    #filter_fields = {'tags__name': ["in"]}
+    filterset_class = TagsFilter
 
     def perform_create(self, serializer):
             if not self.request.user.is_anonymous:
@@ -453,7 +516,7 @@ class BlogHot(generics.ListAPIView):
     permission_classes = [IsAuthorOrReadOnly]
 
     def get_queryset(self):
-        return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+        return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=365)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
         #return Blog.objects.annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum','-created_at')
 
 
@@ -533,8 +596,8 @@ class BlogRecommend(generics.ListAPIView):
                 if len(arrr)>0:
                     return arrr
                 else:
-                    return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+                    return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=365)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
             else:
-                return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+                return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=365)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
         else:
-            return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=14)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
+            return Blog.objects.filter(created_at__gte = datetime.datetime.now() - datetime.timedelta(days=365)).annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
