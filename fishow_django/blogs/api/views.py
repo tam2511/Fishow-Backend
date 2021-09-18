@@ -214,7 +214,7 @@ class MultiValueCharFilter(django_filters.BaseCSVFilter, django_filters.CharFilt
         for value in values:
             qs = super(MultiValueCharFilter, self).filter(qs, value)
 
-        return qs
+        return qs.annotate(fieldsum=Count('votersUp') - Count('votersDown')).order_by('-fieldsum')
 
 
 class TagsFilter(django_filters.FilterSet):
